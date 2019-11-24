@@ -1,0 +1,13 @@
+{
+  "type": "postgres",
+  "host": "database",
+  "port": 5432,
+  "username": "cooperp",
+  "password": "cooperp",
+  "database": "cooperp",
+  "synchronize": false,
+  "logging": false,
+  "entities": ["src/Domain/**/*.entity.ts"],
+  "migrations": ["migrations/**/*.ts"],
+  "migrationsTableName": "migrations"
+}
