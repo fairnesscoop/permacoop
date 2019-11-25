@@ -1,12 +1,13 @@
 # :recycle: CoopERP :recycle:
 
-This project is based on the following technologies :
+CoopERP is an open-source ERP project made by a cooperative (Fairness) for cooperatives.
+
+## Technical stack
 
 - [Node.js](https://nodejs.org)
 - [Nestjs](https://nestjs.com/)
 - [Typescript](https://www.typescriptlang.org/)
-- [React](https://fr.reactjs.org/)
-- [Redux](https://redux.js.org/)
+- [React](https://fr.reactjs.org/) / [Redux](https://redux.js.org/)
 - [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 

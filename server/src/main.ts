@@ -13,11 +13,12 @@ async function bootstrap() {
   app.use(helmet());
   app.enableCors();
   app.setGlobalPrefix('api');
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({transform: true}));
 
   const options = new DocumentBuilder()
     .setTitle('CoopERP')
-    .setDescription('ERP building for cooperatives')
+    .setBasePath('api')
+    .setDescription('Open-source ERP for cooperatives')
     .setVersion('1.0.0')
     .addBearerAuth('Authorization', 'header')
     .build();

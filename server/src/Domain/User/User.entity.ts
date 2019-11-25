@@ -3,26 +3,26 @@ import {Entity, Column, PrimaryGeneratedColumn, Index} from 'typeorm';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  private id: string;
+  public id: string;
 
   @Column({type: 'varchar', nullable: false})
-  private firstName: string;
+  public firstName: string;
 
   @Column({type: 'varchar', nullable: false})
-  private lastName: string;
+  public lastName: string;
 
   @Column({type: 'varchar', unique: true, nullable: false})
-  private email: string;
+  public email: string;
 
   @Index('api-token')
   @Column({type: 'varchar', nullable: true})
-  private apiToken: string;
+  public apiToken: string;
 
   @Column({type: 'varchar', nullable: false})
-  private password: string;
+  public password: string;
 
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-  private createdAt: Date;
+  public createdAt: Date;
 
   constructor(user: Partial<User>) {
     Object.assign(this, user);
