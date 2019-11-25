@@ -3,13 +3,13 @@ import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 @Entity()
 export class Customer {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  private id: string;
 
   @Column({type: 'varchar', nullable: false})
-  name: string;
+  private name: string;
 
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-  createdAt: Date;
+  private createdAt: Date;
 
   constructor(customer: Partial<Customer>) {
     Object.assign(this, customer);

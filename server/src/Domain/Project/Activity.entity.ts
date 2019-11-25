@@ -5,22 +5,22 @@ import {User} from '../User/User.entity';
 @Entity()
 export class Activity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  private id: string;
 
   @Column({type: 'integer', nullable: false})
-  time: number;
+  private time: number;
 
   @Column({type: 'timestamp', nullable: false})
-  date: Date;
+  private date: Date;
 
   @Column({type: 'varchar', nullable: true})
-  summary: string;
+  private summary: string;
 
   @ManyToOne(type => Project, {nullable: false})
-  project: Project;
+  private project: Project;
 
   @ManyToOne(type => User, {nullable: false})
-  user: User;
+  private user: User;
 
   constructor(activity: Partial<Activity>) {
     Object.assign(this, activity);

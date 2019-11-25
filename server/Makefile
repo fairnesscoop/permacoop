@@ -8,3 +8,7 @@ ps:
 	docker-compose  -p cooperp ps
 logs:
 	docker-compose -p cooperp logs -f node
+bash:
+	docker-compose -p cooperp run node bash
+setup-db:
+	docker-compose -p cooperp run node npm run migration:migrate
