@@ -1,11 +1,12 @@
-import {RegisterCommand} from './RegisterCommand';
 import {CommandHandler} from '@nestjs/cqrs';
-import {Inject, BadRequestException} from '@nestjs/common';
+import {Inject} from '@nestjs/common';
+import {RegisterCommand} from './RegisterCommand';
 import {AuthenticatedView} from '../../View/Auth/AuthenticatedView';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
 import {User} from 'src/Domain/User/User.entity';
 import {CanRegisterSpecification} from 'src/Domain/User/Specification/CanRegisterSpecification';
+import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
 
 @CommandHandler(RegisterCommand)
 export class RegisterCommandHandler {
@@ -23,7 +24,7 @@ export class RegisterCommandHandler {
     const {firstName, lastName, email, password} = command;
 
     if (false === (await this.canRegisterSpecification.isSatisfiedBy(email))) {
-      throw new BadRequestException('user.already.exists');
+      throw new EmailAlreadyExistException();
     }
 
     const hashPassword = await this.encryptionAdapter.hash(password);

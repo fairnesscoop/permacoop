@@ -1,4 +1,10 @@
-import {Controller, Inject, Post, Body} from '@nestjs/common';
+import {
+  Controller,
+  Inject,
+  Post,
+  Body,
+  BadRequestException
+} from '@nestjs/common';
 import {ApiUseTags, ApiOperation} from '@nestjs/swagger';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 import {RegisterCommand} from 'src/Application/User/Command/Auth/RegisterCommand';
@@ -17,6 +23,10 @@ export class RegisterController {
   public async index(
     @Body() command: RegisterCommand
   ): Promise<AuthenticatedView> {
-    return this.commandBus.execute(command);
+    try {
+      return await this.commandBus.execute(command);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 }

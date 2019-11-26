@@ -1,10 +1,11 @@
-import {LoginCommand} from './LoginCommand';
 import {CommandHandler} from '@nestjs/cqrs';
-import {Inject, UnauthorizedException} from '@nestjs/common';
+import {Inject} from '@nestjs/common';
+import {LoginCommand} from './LoginCommand';
 import {AuthenticatedView} from '../../View/Auth/AuthenticatedView';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
 import {User} from 'src/Domain/User/User.entity';
+import {PasswordNotMatchException} from 'src/Domain/User/Exception/PasswordNotMatchException';
 
 @CommandHandler(LoginCommand)
 export class LoginCommandHandler {
@@ -25,7 +26,7 @@ export class LoginCommandHandler {
       !(user instanceof User) ||
       false === (await this.encryptionAdapter.compare(user.password, password))
     ) {
-      throw new UnauthorizedException();
+      throw new PasswordNotMatchException();
     }
 
     return new AuthenticatedView(

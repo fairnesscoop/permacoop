@@ -1,4 +1,10 @@
-import {Controller, Inject, Post, Body} from '@nestjs/common';
+import {
+  Controller,
+  Inject,
+  Post,
+  Body,
+  UnauthorizedException
+} from '@nestjs/common';
 import {ApiUseTags, ApiOperation} from '@nestjs/swagger';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 import {LoginCommand} from 'src/Application/User/Command/Auth/LoginCommand';
@@ -17,6 +23,10 @@ export class LoginController {
   public async index(
     @Body() command: LoginCommand
   ): Promise<AuthenticatedView> {
-    return await this.commandBus.execute(command);
+    try {
+      return await this.commandBus.execute(command);
+    } catch (e) {
+      throw new UnauthorizedException(e.message);
+    }
   }
 }
