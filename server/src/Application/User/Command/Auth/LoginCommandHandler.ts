@@ -6,6 +6,7 @@ import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
 import {User} from 'src/Domain/User/User.entity';
 import {PasswordNotMatchException} from 'src/Domain/User/Exception/PasswordNotMatchException';
+import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
 
 @CommandHandler(LoginCommand)
 export class LoginCommandHandler {
@@ -22,8 +23,11 @@ export class LoginCommandHandler {
     const {email, password} = command;
     const user = await this.userRepository.findOneByEmail(email);
 
+    if (!(user instanceof User)) {
+      throw new UserNotFoundException();
+    }
+
     if (
-      !(user instanceof User) ||
       false === (await this.encryptionAdapter.compare(user.password, password))
     ) {
       throw new PasswordNotMatchException();

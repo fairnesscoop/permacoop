@@ -7,6 +7,8 @@ CoopERP is an open-source ERP project made by a cooperative (Fairness) for coope
 - [Node.js](https://nodejs.org)
 - [Nestjs](https://nestjs.com/)
 - [Typescript](https://www.typescriptlang.org/)
+- [Ts-mockito](https://github.com/NagRock/ts-mockito)
+- [Jest](https://jestjs.io/)
 - [React](https://fr.reactjs.org/) / [Redux](https://redux.js.org/)
 - [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
@@ -38,4 +40,12 @@ These following commands will display all available helpers
 ```bash
 cd server && make help
 cd client && make help
+```
+
+## Tests
+
+Run the unit test suite with this following command:
+
+```bash
+cd server && make test
 ```

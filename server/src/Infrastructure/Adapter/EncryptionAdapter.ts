@@ -4,11 +4,11 @@ import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
 
 @Injectable()
 export class EncryptionAdapter implements IEncryptionAdapter {
-  public hash = async (payload: string): Promise<string> => {
-    return await argon2.hash(payload);
+  public hash = (payload: string): Promise<string> => {
+    return argon2.hash(payload);
   };
 
-  public compare = async (hash: string, payload: string): Promise<boolean> => {
-    return await argon2.verify(hash, payload);
+  public compare = (hash: string, payload: string): Promise<boolean> => {
+    return argon2.verify(hash, payload);
   };
 }
