@@ -16,3 +16,5 @@ setup-db: ## Setup the database. This command will launch migrations
 	docker-compose -p cooperp run node npm run migration:migrate
 test: ## Run test suite
 	docker-compose -p cooperp run node npm run test
+lint: ## Linter
+	docker-compose -p cooperp run node npm run lint

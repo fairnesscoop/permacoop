@@ -21,17 +21,17 @@ At the first launch, just execute the following command:
 make install
 ```
 
-The server and client will be started:
-
-- API documentation available on http://localhost:3000/api
-- Client avaible on http://localhost:3001
-
-For the next few times, you just have to run these following commands to start the application:
+Then, you just have to run these following commands to start the application:
 
 ```bash
 cd server && make start
 cd client && make start
 ```
+
+The server and client will be started:
+
+- API documentation available on http://localhost:3000/api
+- Client avaible on http://localhost:3001
 
 ## Helpers
 
