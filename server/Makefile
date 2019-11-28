@@ -6,6 +6,8 @@ build: ## Build docker containers
 	docker-compose -p cooperp build
 stop: ## Stop docker containers
 	docker-compose -p cooperp stop
+rm: ## Remove docker containers
+	docker-compose -p cooperp rm
 ps: ## List containers
 	docker-compose  -p cooperp ps
 logs: ## Display server logs
@@ -18,3 +20,5 @@ test: ## Run test suite
 	docker-compose -p cooperp run node npm run test
 lint: ## Linter
 	docker-compose -p cooperp run node npm run lint
+build-dist: ## Build dist
+	docker-compose -p cooperp run node npm run build
