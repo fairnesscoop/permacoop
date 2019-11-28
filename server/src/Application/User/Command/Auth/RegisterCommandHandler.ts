@@ -18,9 +18,7 @@ export class RegisterCommandHandler {
     private readonly canRegisterSpecification: CanRegisterSpecification
   ) {}
 
-  public execute = async (
-    command: RegisterCommand
-  ): Promise<AuthenticatedView> => {
+  public async execute(command: RegisterCommand): Promise<AuthenticatedView> {
     const {firstName, lastName, email, password} = command;
 
     if (false === (await this.canRegisterSpecification.isSatisfiedBy(email))) {
@@ -43,5 +41,5 @@ export class RegisterCommandHandler {
     );
 
     return new AuthenticatedView(firstName, lastName, email, apiToken);
-  };
+  }
 }

@@ -11,15 +11,15 @@ export class UserRepository implements IUserRepository {
     private readonly repository: Repository<User>
   ) {}
 
-  public findOneByApiToken = (apiToken: string): Promise<User | undefined> => {
+  public findOneByApiToken(apiToken: string): Promise<User | undefined> {
     return this.repository
       .createQueryBuilder('user')
       .select(['user.id', 'user.firstName', 'user.lastName', 'user.email'])
       .where('user.apiToken = :apiToken', {apiToken})
       .getOne();
-  };
+  }
 
-  public findOneByEmail = (email: string): Promise<User | undefined> => {
+  public findOneByEmail(email: string): Promise<User | undefined> {
     return this.repository
       .createQueryBuilder('user')
       .select([
@@ -31,9 +31,9 @@ export class UserRepository implements IUserRepository {
       ])
       .where('user.email = :email', {email})
       .getOne();
-  };
+  }
 
-  public save = (user: User): Promise<User> => {
+  public save(user: User): Promise<User> {
     return this.repository.save(user);
-  };
+  }
 }

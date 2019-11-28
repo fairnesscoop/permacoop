@@ -7,7 +7,7 @@ import {ICommand} from 'src/Application/ICommand';
 export class CommandBusAdapter implements ICommandBusAdapter {
   constructor(private readonly commandBus: CommandBus) {}
 
-  public execute = (command: ICommand): Promise<any> => {
+  public execute(command: ICommand): Promise<any> {
     return this.commandBus.execute(command);
-  };
+  }
 }

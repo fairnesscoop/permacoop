@@ -10,7 +10,7 @@ export class CanRegisterSpecification implements ISpecification {
     private readonly userRepository: IUserRepository
   ) {}
 
-  public isSatisfiedBy = async (email: string): Promise<boolean> => {
+  public async isSatisfiedBy(email: string): Promise<boolean> {
     return !((await this.userRepository.findOneByEmail(email)) instanceof User);
-  };
+  }
 }

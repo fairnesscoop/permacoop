@@ -17,9 +17,7 @@ export class LoginCommandHandler {
     private readonly encryptionAdapter: IEncryptionAdapter
   ) {}
 
-  public execute = async (
-    command: LoginCommand
-  ): Promise<AuthenticatedView> => {
+  public async execute(command: LoginCommand): Promise<AuthenticatedView> {
     const {email, password} = command;
     const user = await this.userRepository.findOneByEmail(email);
 
@@ -39,5 +37,5 @@ export class LoginCommandHandler {
       user.email,
       user.apiToken
     );
-  };
+  }
 }
