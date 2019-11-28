@@ -26,9 +26,7 @@ export class RegisterCommandHandler {
     }
 
     const hashPassword = await this.encryptionAdapter.hash(password);
-    const apiToken = await this.encryptionAdapter.hash(
-      email + Date.now().toString() + password
-    );
+    const apiToken = await this.encryptionAdapter.hash(email + password);
 
     await this.userRepository.save(
       new User({

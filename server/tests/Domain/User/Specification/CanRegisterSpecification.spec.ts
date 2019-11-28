@@ -14,15 +14,15 @@ describe('CanRegisterSpecification', () => {
     canRegister = new CanRegisterSpecification(instance(userRepository));
   });
 
-  it('testUserCanRegister', () => {
+  it('testUserCanRegister', async () => {
     when(userRepository.findOneByEmail(email)).thenResolve(null);
-    expect(canRegister.isSatisfiedBy(email)).resolves.toBe(true);
+    expect(await canRegister.isSatisfiedBy(email)).toBe(true);
     verify(userRepository.findOneByEmail(email)).once();
   });
 
-  it('testUserCannotRegister', () => {
+  it('testUserCannotRegister', async () => {
     when(userRepository.findOneByEmail(email)).thenResolve(new User({email}));
-    expect(canRegister.isSatisfiedBy(email)).resolves.toBe(false);
+    expect(await canRegister.isSatisfiedBy(email)).toBe(false);
     verify(userRepository.findOneByEmail(email)).once();
   });
 });

@@ -1,4 +1,4 @@
-import {mock, instance, when, verify} from 'ts-mockito';
+import {mock, instance, when, verify, anything} from 'ts-mockito';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
 import {LoginCommandHandler} from 'src/Application/User/Command/Auth/LoginCommandHandler';
 import {EncryptionAdapter} from 'src/Infrastructure/Adapter/EncryptionAdapter';
@@ -27,30 +27,34 @@ describe('LoginCommandHandler', () => {
     );
   });
 
-  it('testUserNotFound', () => {
+  it('testUserNotFound', async () => {
     when(userRepository.findOneByEmail(email)).thenResolve(null);
-    expect(commandHandler.execute(command)).rejects.toThrow(
-      UserNotFoundException
-    );
 
-    verify(userRepository.findOneByEmail(email)).once();
-    // verify(encryptionAdapter.compare(anything(), anything())).never();
+    try {
+      await commandHandler.execute(command);
+    } catch (e) {
+      expect(e instanceof UserNotFoundException).toBe(true);
+      verify(userRepository.findOneByEmail(email)).once();
+      verify(encryptionAdapter.compare(anything(), anything())).never();
+    }
   });
 
-  it('testPasswordNotMatch', () => {
+  it('testPasswordNotMatch', async () => {
+    when(encryptionAdapter.compare('hash', 'plainPassword')).thenResolve(false);
     when(userRepository.findOneByEmail(email)).thenResolve(
       new User({email, password: 'hash'})
     );
-    when(encryptionAdapter.compare('hash', 'plainPassword')).thenResolve(false);
 
-    const handler = commandHandler.execute(command);
-    expect(handler).rejects.toThrow(PasswordNotMatchException);
-
-    verify(userRepository.findOneByEmail(email)).once();
-    //verify(encryptionAdapter.compare('hash', 'plainPassword')).once();
+    try {
+      await commandHandler.execute(command);
+    } catch (e) {
+      expect(e instanceof PasswordNotMatchException).toBe(true);
+      verify(userRepository.findOneByEmail(email)).once();
+      verify(encryptionAdapter.compare('hash', 'plainPassword')).once();
+    }
   });
 
-  it('testLoginSuccess', () => {
+  it('testLoginSuccess', async () => {
     const user = new User({
       firstName: 'Mathieu',
       lastName: 'MARCHOIS',
@@ -62,11 +66,11 @@ describe('LoginCommandHandler', () => {
     when(userRepository.findOneByEmail(email)).thenResolve(user);
     when(encryptionAdapter.compare('hash', 'plainPassword')).thenResolve(true);
 
-    expect(commandHandler.execute(command)).resolves.toMatchObject(
+    expect(await commandHandler.execute(command)).toMatchObject(
       new AuthenticatedView('Mathieu', 'MARCHOIS', email, 'apiToken')
     );
 
     verify(userRepository.findOneByEmail(email)).once();
-    //verify(encryptionAdapter.compare('hash', 'plainPassword')).once();
+    verify(encryptionAdapter.compare('hash', 'plainPassword')).once();
   });
 });
