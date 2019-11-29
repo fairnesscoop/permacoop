@@ -1,6 +1,6 @@
 # :seedling: CoopERP :seedling:
 
-CoopERP is an eco-design and open-source ERP made by a cooperative (Fairness) for cooperatives.
+CoopERP is an eco-design and open-source ERP for cooperatives.
 
 ## Technical stack
 
@@ -11,6 +11,10 @@ CoopERP is an eco-design and open-source ERP made by a cooperative (Fairness) fo
 - [React](https://fr.reactjs.org/) / [Redux](https://redux.js.org/)
 - [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
+
+## Prerequisites
+
+You must have [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed on your system.
 
 ## Installation
 
@@ -48,3 +52,7 @@ Run the unit test suite with this following command:
 ```bash
 cd server && make test
 ```
+
+## Credits
+
+Created by [Fairness](https://fairness.coop)
