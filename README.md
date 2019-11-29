@@ -1,6 +1,6 @@
 # :seedling: CoopERP :seedling:
 
-CoopERP is an eco-design and open-source ERP for cooperatives.
+CoopERP is an eco-design and open-source ERP solution for cooperatives.
 
 ## Technical stack
 
