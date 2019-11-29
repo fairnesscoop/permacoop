@@ -1,11 +1,10 @@
 # :seedling: CoopERP :seedling:
 
-CoopERP is an open-source ERP project made by a cooperative (Fairness) for cooperatives.
+CoopERP is an eco-design and open-source ERP made by a cooperative (Fairness) for cooperatives.
 
 ## Technical stack
 
-- [Node.js](https://nodejs.org)
-- [Nestjs](https://nestjs.com/)
+- [Node.js](https://nodejs.org) / [Nestjs](https://nestjs.com/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Ts-mockito](https://github.com/NagRock/ts-mockito)
 - [Jest](https://jestjs.io/)
