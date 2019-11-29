@@ -14,4 +14,11 @@ export class TaskRepository implements ITaskRepository {
   public save(task: Task): Promise<Task> {
     return this.repository.save(task);
   }
+
+  public findOneByName(name: string): Promise<Task | undefined> {
+    return this.repository
+      .createQueryBuilder('task')
+      .where('LOWER(task.name) = LOWER(:name)', {name})
+      .getOne();
+  }
 }

@@ -6,7 +6,7 @@ import {LoginCommand} from 'src/Application/User/Command/Auth/LoginCommand';
 import {PasswordNotMatchException} from 'src/Domain/User/Exception/PasswordNotMatchException';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
 import {User} from 'src/Domain/User/User.entity';
-import {AuthenticatedView} from 'src/Application/User/View/Auth/AuthenticatedView';
+import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
 
 describe('LoginCommandHandler', () => {
   const email = 'mathieu@fairness.coop';

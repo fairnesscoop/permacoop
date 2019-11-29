@@ -8,11 +8,11 @@ import {
 import {ApiUseTags, ApiOperation} from '@nestjs/swagger';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 import {RegisterCommand} from 'src/Application/User/Command/Auth/RegisterCommand';
-import {AuthenticatedView} from 'src/Application/User/View/Auth/AuthenticatedView';
+import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
 
 @Controller('register')
 @ApiUseTags('Auth')
-export class RegisterController {
+export class RegisterAction {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter

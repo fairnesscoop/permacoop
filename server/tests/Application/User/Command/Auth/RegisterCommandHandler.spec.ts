@@ -5,7 +5,7 @@ import {RegisterCommand} from 'src/Application/User/Command/Auth/RegisterCommand
 import {RegisterCommandHandler} from 'src/Application/User/Command/Auth/RegisterCommandHandler';
 import {CanRegisterSpecification} from 'src/Domain/User/Specification/CanRegisterSpecification';
 import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
-import {AuthenticatedView} from 'src/Application/User/View/Auth/AuthenticatedView';
+import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
 import {User} from 'src/Domain/User/User.entity';
 
 describe('RegisterCommandHandler', () => {
