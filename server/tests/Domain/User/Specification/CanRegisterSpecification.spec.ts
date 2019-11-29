@@ -21,7 +21,9 @@ describe('CanRegisterSpecification', () => {
   });
 
   it('testUserCannotRegister', async () => {
-    when(userRepository.findOneByEmail(email)).thenResolve(new User({email}));
+    when(userRepository.findOneByEmail(email)).thenResolve(
+      new User('Mathieu', 'MARCHOIS', email, 'token', 'password')
+    );
     expect(await canRegister.isSatisfiedBy(email)).toBe(false);
     verify(userRepository.findOneByEmail(email)).once();
   });
