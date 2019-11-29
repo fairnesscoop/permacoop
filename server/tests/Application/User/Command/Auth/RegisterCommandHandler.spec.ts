@@ -60,8 +60,25 @@ describe('RegisterCommandHandler', () => {
   });
 
   it('testRegisterSuccess', async () => {
+    const createdUser: User = mock(User);
+
+    when(createdUser.getFirstName()).thenReturn('Mathieu');
+    when(createdUser.getLastName()).thenReturn('MARCHOIS');
+    when(createdUser.getEmail()).thenReturn('mathieu@fairness.coop');
+    when(createdUser.getApiToken()).thenReturn('hashToken');
     when(canRegisterSpecification.isSatisfiedBy(email)).thenResolve(true);
     when(encryptionAdapter.hash(command.password)).thenResolve('hashPassword');
+    when(
+      userRepository.save(
+        new User(
+          'Mathieu',
+          'MARCHOIS',
+          'mathieu@fairness.coop',
+          'hashToken',
+          'hashPassword'
+        )
+      )
+    ).thenResolve(instance(createdUser));
     when(encryptionAdapter.hash(email + command.password)).thenResolve(
       'hashToken'
     );

@@ -8,14 +8,16 @@ stop: ## Stop docker containers
 	docker-compose -p cooperp stop
 rm: ## Remove docker containers
 	docker-compose -p cooperp rm
-ps: ## List containers
-	docker-compose  -p cooperp ps
-logs: ## Display server logs
+ps: ## List docker containers
+	docker-compose -p cooperp ps
+logs: ## Display logs from node container
 	docker-compose -p cooperp logs -f node
-bash: ## Connect to the bash
-	docker-compose -p cooperp run node bash
-setup-db: ## Setup the database. This command will launch migrations
+connect-node: ## Connect to node container
+	docker-compose -p cooperp exec node bash
+init-db: ## Setup the database. This command will launch migrations
 	docker-compose -p cooperp run node npm run migration:migrate
+connect-db: ## Connect to the database
+	docker-compose -p cooperp exec database psql -h database
 test: ## Run test suite
 	docker-compose -p cooperp run node npm run test
 lint: ## Linter

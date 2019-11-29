@@ -24,6 +24,6 @@ export class CreateTaskCommandHandler {
 
     const task = await this.taskRepository.save(new Task(name));
 
-    return new TaskView(task.getId(), task.getId());
+    return new TaskView(task.getId(), task.getName());
   }
 }

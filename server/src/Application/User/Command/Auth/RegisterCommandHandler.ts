@@ -29,10 +29,15 @@ export class RegisterCommandHandler {
     const hashPassword = await this.encryptionAdapter.hash(password);
     const apiToken = await this.encryptionAdapter.hash(email + password);
 
-    await this.userRepository.save(
+    const user = await this.userRepository.save(
       new User(firstName, lastName, email, apiToken, hashPassword)
     );
 
-    return new AuthenticatedView(firstName, lastName, email, apiToken);
+    return new AuthenticatedView(
+      user.getFirstName(),
+      user.getLastName(),
+      user.getEmail(),
+      user.getApiToken()
+    );
   }
 }

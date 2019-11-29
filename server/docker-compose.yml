@@ -6,6 +6,9 @@ volumes:
 services:
   database:
     build: ./docker/postgres
+    environment:
+      PGUSER: cooperp
+      PGPASSWORD: cooperp
     ports:
       - '5432:5432'
     volumes:

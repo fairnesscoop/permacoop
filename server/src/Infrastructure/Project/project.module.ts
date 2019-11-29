@@ -7,7 +7,7 @@ import {Project} from 'src/Domain/Project/Project.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {CreateTaskCommandHandler} from 'src/Application/Project/Command/Task/CreateTaskCommandHandler';
 import {IsTaskAlreadyExist} from 'src/Domain/Project/Specification/IsTaskAlreadyExist';
-import {CreateTaskAction} from './Controller/Task/CreateTaskAction';
+import {CreateTaskAction} from './Action/Task/CreateTaskAction';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Task, Project, Customer])],

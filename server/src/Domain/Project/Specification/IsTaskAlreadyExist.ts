@@ -1,5 +1,5 @@
-import {ISpecification} from 'src/Domain/ISpecification';
 import {Injectable, Inject} from '@nestjs/common';
+import {ISpecification} from 'src/Domain/ISpecification';
 import {ITaskRepository} from '../Repository/ITaskRepository';
 import {Task} from '../Task.entity';
 
