@@ -3,12 +3,20 @@ import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 @Entity()
 export class Task {
   @PrimaryGeneratedColumn('uuid')
-  public id: string;
+  private id: string;
 
   @Column({type: 'varchar', nullable: false})
-  public name: string;
+  private name: string;
 
-  constructor(task: Partial<Task>) {
-    Object.assign(this, task);
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  public getId(): string {
+    return this.id;
+  }
+
+  public getName(): string {
+    return this.name;
   }
 }
