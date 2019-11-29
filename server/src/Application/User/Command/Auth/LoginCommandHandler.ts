@@ -26,16 +26,17 @@ export class LoginCommandHandler {
     }
 
     if (
-      false === (await this.encryptionAdapter.compare(user.password, password))
+      false ===
+      (await this.encryptionAdapter.compare(user.getPassword(), password))
     ) {
       throw new PasswordNotMatchException();
     }
 
     return new AuthenticatedView(
-      user.firstName,
-      user.lastName,
-      user.email,
-      user.apiToken
+      user.getFirstName(),
+      user.getLastName(),
+      user.getEmail(),
+      user.getApiToken()
     );
   }
 }

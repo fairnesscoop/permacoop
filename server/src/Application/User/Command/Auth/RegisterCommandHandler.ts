@@ -29,13 +29,7 @@ export class RegisterCommandHandler {
     const apiToken = await this.encryptionAdapter.hash(email + password);
 
     await this.userRepository.save(
-      new User({
-        firstName,
-        lastName,
-        email,
-        apiToken,
-        password: hashPassword
-      })
+      new User(firstName, lastName, email, apiToken, hashPassword)
     );
 
     return new AuthenticatedView(firstName, lastName, email, apiToken);
