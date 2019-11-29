@@ -1,6 +1,7 @@
 import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
 import {Project} from './Project.entity';
 import {User} from '../User/User.entity';
+import {Task} from './Task.entity';
 
 @Entity()
 export class Activity {
@@ -18,6 +19,9 @@ export class Activity {
 
   @ManyToOne(type => Project, {nullable: false})
   public project: Project;
+
+  @ManyToOne(type => Task, {nullable: false})
+  public task: Task;
 
   @ManyToOne(type => User, {nullable: false})
   public user: User;
