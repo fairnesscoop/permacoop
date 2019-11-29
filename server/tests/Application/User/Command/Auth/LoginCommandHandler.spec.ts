@@ -12,7 +12,7 @@ describe('LoginCommandHandler', () => {
   const email = 'mathieu@fairness.coop';
   const user = new User('Mathieu', 'MARCHOIS', email, 'apiToken', 'hash');
   const command = new LoginCommand();
-  command.email = email;
+  command.email = 'mathieu@FAIRNESS.coop';
   command.password = 'plainPassword';
 
   let userRepository: UserRepository;

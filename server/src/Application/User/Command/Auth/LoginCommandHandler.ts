@@ -18,7 +18,8 @@ export class LoginCommandHandler {
   ) {}
 
   public async execute(command: LoginCommand): Promise<AuthenticatedView> {
-    const {email, password} = command;
+    const {password} = command;
+    const email = command.email.toLowerCase();
     const user = await this.userRepository.findOneByEmail(email);
 
     if (!(user instanceof User)) {

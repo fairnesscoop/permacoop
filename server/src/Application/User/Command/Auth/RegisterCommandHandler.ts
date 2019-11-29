@@ -19,7 +19,8 @@ export class RegisterCommandHandler {
   ) {}
 
   public async execute(command: RegisterCommand): Promise<AuthenticatedView> {
-    const {firstName, lastName, email, password} = command;
+    const {firstName, lastName, password} = command;
+    const email = command.email.toLowerCase();
 
     if (false === (await this.canRegisterSpecification.isSatisfiedBy(email))) {
       throw new EmailAlreadyExistException();

@@ -11,7 +11,7 @@ import {User} from 'src/Domain/User/User.entity';
 describe('RegisterCommandHandler', () => {
   const email = 'mathieu@fairness.coop';
   const command = new RegisterCommand();
-  command.email = email;
+  command.email = 'mathieu@FAIRNESS.coop';
   command.firstName = 'Mathieu';
   command.lastName = 'MARCHOIS';
   command.password = 'plainPassword';
@@ -62,7 +62,7 @@ describe('RegisterCommandHandler', () => {
   it('testRegisterSuccess', async () => {
     when(canRegisterSpecification.isSatisfiedBy(email)).thenResolve(true);
     when(encryptionAdapter.hash(command.password)).thenResolve('hashPassword');
-    when(encryptionAdapter.hash(command.email + command.password)).thenResolve(
+    when(encryptionAdapter.hash(email + command.password)).thenResolve(
       'hashToken'
     );
 
