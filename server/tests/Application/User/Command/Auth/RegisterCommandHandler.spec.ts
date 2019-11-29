@@ -47,13 +47,13 @@ describe('RegisterCommandHandler', () => {
       ).never();
       verify(
         userRepository.save(
-          new User({
-            firstName: 'Mathieu',
-            lastName: 'MARCHOIS',
-            email: 'mathieu@fairness.coop',
-            apiToken: 'hashToken',
-            password: 'hashPassword'
-          })
+          new User(
+            'Mathieu',
+            'MARCHOIS',
+            'mathieu@fairness.coop',
+            'hashToken',
+            'hashPassword'
+          )
         )
       ).never();
     }

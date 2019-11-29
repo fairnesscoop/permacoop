@@ -10,6 +10,7 @@ import {AuthenticatedView} from 'src/Application/User/View/Auth/AuthenticatedVie
 
 describe('LoginCommandHandler', () => {
   const email = 'mathieu@fairness.coop';
+  const user = new User('Mathieu', 'MARCHOIS', email, 'apiToken', 'hash');
   const command = new LoginCommand();
   command.email = email;
   command.password = 'plainPassword';
@@ -41,9 +42,7 @@ describe('LoginCommandHandler', () => {
 
   it('testPasswordNotMatch', async () => {
     when(encryptionAdapter.compare('hash', 'plainPassword')).thenResolve(false);
-    when(userRepository.findOneByEmail(email)).thenResolve(
-      new User({email, password: 'hash'})
-    );
+    when(userRepository.findOneByEmail(email)).thenResolve(user);
 
     try {
       await commandHandler.execute(command);
@@ -55,14 +54,6 @@ describe('LoginCommandHandler', () => {
   });
 
   it('testLoginSuccess', async () => {
-    const user = new User({
-      firstName: 'Mathieu',
-      lastName: 'MARCHOIS',
-      email,
-      apiToken: 'apiToken',
-      password: 'hash'
-    });
-
     when(userRepository.findOneByEmail(email)).thenResolve(user);
     when(encryptionAdapter.compare('hash', 'plainPassword')).thenResolve(true);
 
