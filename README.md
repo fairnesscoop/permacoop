@@ -42,7 +42,24 @@ These following commands will display all available helpers
 
 ```bash
 cd server && make help
+build                          Build docker containers
+build-dist                     Build dist
+connect-db                     Connect to the database
+connect-node                   Connect to the node container
+lint                           Linter
+logs                           Display server logs
+ps                             List containers
+rm                             Remove docker containers
+setup-db                       Setup the database. This command will launch migrations
+start                          Start docker containers
+stop                           Stop docker containers
+test                           Run test suite
+```
+
+```bash
 cd client && make help
+start                          Start react app
+
 ```
 
 ## Tests
