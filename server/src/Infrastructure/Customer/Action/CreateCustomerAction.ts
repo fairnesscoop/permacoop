@@ -8,23 +8,25 @@ import {
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {CreateTaskCommand} from 'src/Application/Project/Command/Task/CreateTaskCommand';
-import {TaskView} from 'src/Application/Project/View/TaskView';
+import {CreateCustomerCommand} from 'src/Application/Customer/Command/CreateCustomerCommand';
+import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 
-@Controller('tasks')
-@ApiUseTags('Project')
+@Controller('customers')
+@ApiUseTags('Customer')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'))
-export class CreateTaskAction {
+export class CreateCustomerAction {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter
   ) {}
 
   @Post()
-  @ApiOperation({title: 'Create new task'})
-  public async index(@Body() command: CreateTaskCommand): Promise<TaskView> {
+  @ApiOperation({title: 'Create new customer'})
+  public async index(
+    @Body() command: CreateCustomerCommand
+  ): Promise<CustomerView> {
     try {
       return await this.commandBus.execute(command);
     } catch (e) {
