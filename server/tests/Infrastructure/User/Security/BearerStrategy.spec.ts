@@ -25,15 +25,27 @@ describe('BearerStrategy', () => {
   });
 
   it('testUserFound', async () => {
-    // todo : Temporarly disabled, waiting for ts-mockito issue.
-    /*
-    const user = mock(User);
-
-    when(userRepository.findOneByApiToken('apiToken')).thenResolve(
-      instance(user)
+    const user = new User(
+      'Mathieu',
+      'MARCHOIS',
+      'mathieu@fairness.coop',
+      'token',
+      'password'
     );
-    expect(await bearerStrategy.validate('apiToken')).toBeInstanceOf(User);
+
+    when(userRepository.findOneByApiToken('apiToken')).thenResolve(user);
+    expect(await bearerStrategy.validate('apiToken')).toMatchObject(user);
     verify(userRepository.findOneByApiToken('apiToken')).once();
-    */
+  });
+
+  it('testUserNotFound', async () => {
+    when(userRepository.findOneByApiToken('apiToken')).thenResolve(undefined);
+
+    try {
+      await bearerStrategy.validate('apiToken');
+    } catch (e) {
+      expect(e).toBeInstanceOf(UnauthorizedException);
+      verify(userRepository.findOneByApiToken('apiToken')).once();
+    }
   });
 });

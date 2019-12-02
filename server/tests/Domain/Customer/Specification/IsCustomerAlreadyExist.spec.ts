@@ -15,16 +15,20 @@ describe('IsCustomerAlreadyExist', () => {
   });
 
   it('testCustomerAlreadyExist', async () => {
-    when(customerRepository.findOneByName('Customer')).thenResolve(
-      new Customer('Customer')
+    when(customerRepository.findOneByName('Radio France')).thenResolve(
+      new Customer('Radio France')
     );
-    expect(await isCustomerAlreadyExist.isSatisfiedBy('Customer')).toBe(true);
-    verify(customerRepository.findOneByName('Customer')).once();
+    expect(await isCustomerAlreadyExist.isSatisfiedBy('Radio France')).toBe(
+      true
+    );
+    verify(customerRepository.findOneByName('Radio France')).once();
   });
 
   it('testCustomerDontExist', async () => {
-    when(customerRepository.findOneByName('Customer')).thenResolve(null);
-    expect(await isCustomerAlreadyExist.isSatisfiedBy('Customer')).toBe(false);
-    verify(customerRepository.findOneByName('Customer')).once();
+    when(customerRepository.findOneByName('Radio France')).thenResolve(null);
+    expect(await isCustomerAlreadyExist.isSatisfiedBy('Radio France')).toBe(
+      false
+    );
+    verify(customerRepository.findOneByName('Radio France')).once();
   });
 });

@@ -1,4 +1,4 @@
-import {mock, instance, when, verify, anyOfClass} from 'ts-mockito';
+import {mock, instance, when, verify, deepEqual} from 'ts-mockito';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
 import {EncryptionAdapter} from 'src/Infrastructure/Adapter/EncryptionAdapter';
 import {CreateUserCommand} from 'src/Application/User/Command/CreateUserCommand';
@@ -39,7 +39,8 @@ describe('CreatUserCommandHandler', () => {
     try {
       await commandHandler.execute(command);
     } catch (e) {
-      expect(e instanceof EmailAlreadyExistException).toBe(true);
+      expect(e).toBeInstanceOf(EmailAlreadyExistException);
+      expect(e.message).toBe('user.errors.email_already_exist');
       verify(canRegisterSpecification.isSatisfiedBy(email)).once();
       verify(encryptionAdapter.hash('plainPassword')).never();
       verify(
@@ -47,12 +48,14 @@ describe('CreatUserCommandHandler', () => {
       ).never();
       verify(
         userRepository.save(
-          new User(
-            'Mathieu',
-            'MARCHOIS',
-            'mathieu@fairness.coop',
-            'hashToken',
-            'hashPassword'
+          deepEqual(
+            new User(
+              'Mathieu',
+              'MARCHOIS',
+              'mathieu@fairness.coop',
+              'hashToken',
+              'hashPassword'
+            )
           )
         )
       ).never();
@@ -60,10 +63,11 @@ describe('CreatUserCommandHandler', () => {
   });
 
   it('testRegisterSuccess', async () => {
-    // todo : Temporarly disabled, waiting for ts-mockito issue.
-    /*
     const createdUser: User = mock(User);
 
+    when(createdUser.getId()).thenReturn(
+      'fcf9a99f-0c7b-45ca-b68a-bfd79d73a49f'
+    );
     when(createdUser.getFirstName()).thenReturn('Mathieu');
     when(createdUser.getLastName()).thenReturn('MARCHOIS');
     when(createdUser.getEmail()).thenReturn('mathieu@fairness.coop');
@@ -72,12 +76,14 @@ describe('CreatUserCommandHandler', () => {
     when(encryptionAdapter.hash(command.password)).thenResolve('hashPassword');
     when(
       userRepository.save(
-        new User(
-          'Mathieu',
-          'MARCHOIS',
-          'mathieu@fairness.coop',
-          'hashToken',
-          'hashPassword'
+        deepEqual(
+          new User(
+            'Mathieu',
+            'MARCHOIS',
+            'mathieu@fairness.coop',
+            'hashToken',
+            'hashPassword'
+          )
         )
       )
     ).thenResolve(instance(createdUser));
@@ -87,7 +93,7 @@ describe('CreatUserCommandHandler', () => {
 
     expect(await commandHandler.execute(command)).toMatchObject(
       new UserView(
-        'uuid',
+        'fcf9a99f-0c7b-45ca-b68a-bfd79d73a49f',
         'Mathieu',
         'MARCHOIS',
         'mathieu@fairness.coop'
@@ -97,7 +103,18 @@ describe('CreatUserCommandHandler', () => {
     verify(canRegisterSpecification.isSatisfiedBy(email)).once();
     verify(encryptionAdapter.hash('plainPassword')).once();
     verify(encryptionAdapter.hash('mathieu@fairness.coopplainPassword')).once();
-    verify(userRepository.save(anyOfClass(User))).once();
-  */
+    verify(
+      userRepository.save(
+        deepEqual(
+          new User(
+            'Mathieu',
+            'MARCHOIS',
+            'mathieu@fairness.coop',
+            'hashToken',
+            'hashPassword'
+          )
+        )
+      )
+    ).once();
   });
 });
