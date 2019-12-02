@@ -1,7 +1,7 @@
 import {CommandHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
 import {LoginCommand} from './LoginCommand';
-import {AuthenticatedView} from '../../View/Auth/AuthenticatedView';
+import {AuthenticatedView} from '../../View/AuthenticatedView';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
 import {User} from 'src/Domain/User/User.entity';
@@ -18,7 +18,8 @@ export class LoginCommandHandler {
   ) {}
 
   public async execute(command: LoginCommand): Promise<AuthenticatedView> {
-    const {email, password} = command;
+    const {password} = command;
+    const email = command.email.toLowerCase();
     const user = await this.userRepository.findOneByEmail(email);
 
     if (!(user instanceof User)) {

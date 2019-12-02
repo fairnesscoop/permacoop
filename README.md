@@ -1,6 +1,6 @@
 # :seedling: CoopERP :seedling:
 
-CoopERP is an eco-design and open-source ERP for cooperatives.
+CoopERP is an eco-design and open-source ERP solution for cooperatives.
 
 ## Technical stack
 
@@ -40,21 +40,25 @@ The server and client will be started:
 
 These following commands will display all available helpers
 
+### Server
+
 ```bash
 cd server && make help
 build                          Build docker containers
 build-dist                     Build dist
 connect-db                     Connect to the database
-connect-node                   Connect to the node container
+connect-node                   Connect to node container
+init-db                        Setup the database. This command will launch migrations
 lint                           Linter
-logs                           Display server logs
-ps                             List containers
+logs                           Display logs from node container
+ps                             List docker containers
 rm                             Remove docker containers
-setup-db                       Setup the database. This command will launch migrations
 start                          Start docker containers
 stop                           Stop docker containers
 test                           Run test suite
 ```
+
+### Client
 
 ```bash
 cd client && make help

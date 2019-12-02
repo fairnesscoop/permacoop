@@ -1,7 +1,7 @@
 import {CommandHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
 import {RegisterCommand} from './RegisterCommand';
-import {AuthenticatedView} from '../../View/Auth/AuthenticatedView';
+import {AuthenticatedView} from '../../View/AuthenticatedView';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
 import {User} from 'src/Domain/User/User.entity';
@@ -19,7 +19,8 @@ export class RegisterCommandHandler {
   ) {}
 
   public async execute(command: RegisterCommand): Promise<AuthenticatedView> {
-    const {firstName, lastName, email, password} = command;
+    const {firstName, lastName, password} = command;
+    const email = command.email.toLowerCase();
 
     if (false === (await this.canRegisterSpecification.isSatisfiedBy(email))) {
       throw new EmailAlreadyExistException();
@@ -28,10 +29,15 @@ export class RegisterCommandHandler {
     const hashPassword = await this.encryptionAdapter.hash(password);
     const apiToken = await this.encryptionAdapter.hash(email + password);
 
-    await this.userRepository.save(
+    const user = await this.userRepository.save(
       new User(firstName, lastName, email, apiToken, hashPassword)
     );
 
-    return new AuthenticatedView(firstName, lastName, email, apiToken);
+    return new AuthenticatedView(
+      user.getFirstName(),
+      user.getLastName(),
+      user.getEmail(),
+      user.getApiToken()
+    );
   }
 }

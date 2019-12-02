@@ -6,13 +6,13 @@ import {LoginCommand} from 'src/Application/User/Command/Auth/LoginCommand';
 import {PasswordNotMatchException} from 'src/Domain/User/Exception/PasswordNotMatchException';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
 import {User} from 'src/Domain/User/User.entity';
-import {AuthenticatedView} from 'src/Application/User/View/Auth/AuthenticatedView';
+import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
 
 describe('LoginCommandHandler', () => {
   const email = 'mathieu@fairness.coop';
   const user = new User('Mathieu', 'MARCHOIS', email, 'apiToken', 'hash');
   const command = new LoginCommand();
-  command.email = email;
+  command.email = 'mathieu@FAIRNESS.coop';
   command.password = 'plainPassword';
 
   let userRepository: UserRepository;
