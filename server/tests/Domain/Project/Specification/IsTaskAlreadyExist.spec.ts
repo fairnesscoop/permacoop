@@ -13,14 +13,16 @@ describe('IsTaskAlreadyExist', () => {
   });
 
   it('testTaskAlreadyExist', async () => {
-    when(taskRepository.findOneByName('Task')).thenResolve(new Task('Task'));
-    expect(await isTaskAlreadyExist.isSatisfiedBy('Task')).toBe(true);
-    verify(taskRepository.findOneByName('Task')).once();
+    when(taskRepository.findOneByName('Development')).thenResolve(
+      new Task('Development')
+    );
+    expect(await isTaskAlreadyExist.isSatisfiedBy('Development')).toBe(true);
+    verify(taskRepository.findOneByName('Development')).once();
   });
 
   it('testTaskDontExist', async () => {
-    when(taskRepository.findOneByName('Task')).thenResolve(null);
-    expect(await isTaskAlreadyExist.isSatisfiedBy('Task')).toBe(false);
-    verify(taskRepository.findOneByName('Task')).once();
+    when(taskRepository.findOneByName('Development')).thenResolve(null);
+    expect(await isTaskAlreadyExist.isSatisfiedBy('Development')).toBe(false);
+    verify(taskRepository.findOneByName('Development')).once();
   });
 });
