@@ -21,4 +21,11 @@ export class CustomerRepository implements ICustomerRepository {
       .where('LOWER(customer.name) = LOWER(:name)', {name})
       .getOne();
   }
+
+  public findOneById(id: string): Promise<Customer | undefined> {
+    return this.repository
+      .createQueryBuilder('customer')
+      .where('customer.id = :id', {id})
+      .getOne();
+  }
 }
