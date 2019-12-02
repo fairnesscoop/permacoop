@@ -7,11 +7,11 @@ import {
 } from '@nestjs/common';
 import {ApiUseTags, ApiOperation} from '@nestjs/swagger';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
-import {LoginCommand} from 'src/Application/User/Command/Auth/LoginCommand';
+import {LoginCommand} from 'src/Application/User/Command/LoginCommand';
 import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
 
 @Controller('login')
-@ApiUseTags('Auth')
+@ApiUseTags('User')
 export class LoginAction {
   constructor(
     @Inject('ICommandBusAdapter')

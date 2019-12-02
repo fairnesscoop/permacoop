@@ -1,8 +1,8 @@
 import {mock, instance, when, verify, anything} from 'ts-mockito';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
-import {LoginCommandHandler} from 'src/Application/User/Command/Auth/LoginCommandHandler';
+import {LoginCommandHandler} from 'src/Application/User/Command/LoginCommandHandler';
 import {EncryptionAdapter} from 'src/Infrastructure/Adapter/EncryptionAdapter';
-import {LoginCommand} from 'src/Application/User/Command/Auth/LoginCommand';
+import {LoginCommand} from 'src/Application/User/Command/LoginCommand';
 import {PasswordNotMatchException} from 'src/Domain/User/Exception/PasswordNotMatchException';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
 import {User} from 'src/Domain/User/User.entity';

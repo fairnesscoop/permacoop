@@ -1,16 +1,16 @@
 import {mock, instance, when, verify, anyOfClass} from 'ts-mockito';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
 import {EncryptionAdapter} from 'src/Infrastructure/Adapter/EncryptionAdapter';
-import {RegisterCommand} from 'src/Application/User/Command/Auth/RegisterCommand';
-import {RegisterCommandHandler} from 'src/Application/User/Command/Auth/RegisterCommandHandler';
+import {CreateUserCommand} from 'src/Application/User/Command/CreateUserCommand';
+import {CreateUserCommandHandler} from 'src/Application/User/Command/CreateUserCommandHandler';
 import {CanRegisterSpecification} from 'src/Domain/User/Specification/CanRegisterSpecification';
 import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
-import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
+import {UserView} from 'src/Application/User/View/UserView';
 import {User} from 'src/Domain/User/User.entity';
 
-describe('RegisterCommandHandler', () => {
+describe('CreatUserCommandHandler', () => {
   const email = 'mathieu@fairness.coop';
-  const command = new RegisterCommand();
+  const command = new CreateUserCommand();
   command.email = 'mathieu@FAIRNESS.coop';
   command.firstName = 'Mathieu';
   command.lastName = 'MARCHOIS';
@@ -19,14 +19,14 @@ describe('RegisterCommandHandler', () => {
   let userRepository: UserRepository;
   let encryptionAdapter: EncryptionAdapter;
   let canRegisterSpecification: CanRegisterSpecification;
-  let commandHandler: RegisterCommandHandler;
+  let commandHandler: CreateUserCommandHandler;
 
   beforeEach(() => {
     userRepository = mock(UserRepository);
     encryptionAdapter = mock(EncryptionAdapter);
     canRegisterSpecification = mock(CanRegisterSpecification);
 
-    commandHandler = new RegisterCommandHandler(
+    commandHandler = new CreateUserCommandHandler(
       instance(userRepository),
       instance(encryptionAdapter),
       instance(canRegisterSpecification)
@@ -86,11 +86,11 @@ describe('RegisterCommandHandler', () => {
     );
 
     expect(await commandHandler.execute(command)).toMatchObject(
-      new AuthenticatedView(
+      new UserView(
+        'uuid',
         'Mathieu',
         'MARCHOIS',
-        'mathieu@fairness.coop',
-        'hashToken'
+        'mathieu@fairness.coop'
       )
     );
 
