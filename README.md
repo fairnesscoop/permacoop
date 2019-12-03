@@ -6,6 +6,7 @@ CoopERP is an eco-design and open-source ERP solution for cooperatives.
 
 - [Node.js](https://nodejs.org) / [Nestjs](https://nestjs.com/)
 - [Typescript](https://www.typescriptlang.org/)
+- [Typeorm](https://typeorm.io)
 - [Ts-mockito](https://github.com/NagRock/ts-mockito)
 - [Jest](https://jestjs.io/)
 - [React](https://fr.reactjs.org/) / [Redux](https://redux.js.org/)
