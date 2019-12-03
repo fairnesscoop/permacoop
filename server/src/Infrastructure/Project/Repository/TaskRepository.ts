@@ -21,4 +21,12 @@ export class TaskRepository implements ITaskRepository {
       .where('LOWER(task.name) = LOWER(:name)', {name})
       .getOne();
   }
+
+  public findTasks(): Promise<Task[]> {
+    return this.repository
+      .createQueryBuilder('task')
+      .select(['task.id', 'task.name'])
+      .orderBy('task.name', 'ASC')
+      .getMany();
+  }
 }
