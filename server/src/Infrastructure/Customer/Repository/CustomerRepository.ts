@@ -28,4 +28,12 @@ export class CustomerRepository implements ICustomerRepository {
       .where('customer.id = :id', {id})
       .getOne();
   }
+
+  public findCustomers(): Promise<Customer[]> {
+    return this.repository
+      .createQueryBuilder('customer')
+      .select(['customer.id', 'customer.name'])
+      .orderBy('customer.name', 'ASC')
+      .getMany();
+  }
 }

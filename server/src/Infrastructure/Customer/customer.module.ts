@@ -9,15 +9,18 @@ import {CreateCustomerAction} from './Action/CreateCustomerAction';
 import {IsCustomerAlreadyExist} from 'src/Domain/Customer/Specification/IsCustomerAlreadyExist';
 import {CreateCustomerCommandHandler} from 'src/Application/Customer/Command/CreateCustomerCommandHandler';
 import {GetCustomerByIdQueryHandler} from 'src/Application/Customer/Query/GetCustomerByIdQueryHandler';
+import {GetCustomersQueryHandler} from 'src/Application/Customer/Query/GetCustomersQueryHandler';
+import {GetCustomersAction} from './Action/GetCustomersAction';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Task, Project, Customer])],
-  controllers: [CreateCustomerAction],
+  controllers: [CreateCustomerAction, GetCustomersAction],
   providers: [
     {provide: 'ICustomerRepository', useClass: CustomerRepository},
     IsCustomerAlreadyExist,
     CreateCustomerCommandHandler,
-    GetCustomerByIdQueryHandler
+    GetCustomerByIdQueryHandler,
+    GetCustomersQueryHandler
   ]
 })
 export class CustomerModule {}
