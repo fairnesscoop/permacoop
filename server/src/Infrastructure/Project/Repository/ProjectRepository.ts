@@ -21,4 +21,14 @@ export class ProjectRepository implements IProjectRepository {
       .where('LOWER(project.name) = LOWER(:name)', {name})
       .getOne();
   }
+
+  public findProjects(): Promise<Project[]> {
+    return this.repository
+      .createQueryBuilder('project')
+      .select(['project.id', 'project.name', 'customer.id', 'customer.name'])
+      .innerJoin('project.customer', 'customer')
+      .orderBy('customer.name', 'ASC')
+      .addOrderBy('project.name', 'ASC')
+      .getMany();
+  }
 }
