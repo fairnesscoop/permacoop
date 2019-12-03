@@ -15,7 +15,7 @@ describe('GetCustomersQueryHandler', () => {
 
     const customer2 = mock(Customer);
     when(customer2.getId()).thenReturn('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
-    when(customer2.getName()).thenReturn('Vimeet');
+    when(customer2.getName()).thenReturn('Proximum');
 
     when(customerRepository.findCustomers()).thenResolve([
       instance(customer1),
@@ -28,7 +28,7 @@ describe('GetCustomersQueryHandler', () => {
 
     const expectedResult = [
       new CustomerView('d54f15d6-1a1d-47e8-8672-9f46018f9960', 'Radio France'),
-      new CustomerView('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2', 'Vimeet')
+      new CustomerView('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2', 'Proximum')
     ];
 
     expect(await queryHandler.execute(new GetCustomersQuery())).toMatchObject(
