@@ -1,4 +1,10 @@
-# :seedling: CoopERP :seedling:
+# CoopERP
+
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mmarchois/cooperp/CI?style=for-the-badge)
+[![GitHub stars](https://img.shields.io/github/stars/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/surmon-china/nodepress/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/surmon-china/nodepress/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/mmarchois/cooperp)
+[![GitHub license](https://img.shields.io/github/license/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/mmarchois/cooperp)
 
 CoopERP is an eco-design and open-source ERP solution for cooperatives.
 
@@ -41,30 +47,9 @@ The server and client will be started:
 
 These following commands will display all available helpers
 
-### Server
-
 ```bash
 cd server && make help
-build                          Build docker containers
-build-dist                     Build dist
-connect-db                     Connect to the database
-connect-node                   Connect to node container
-init-db                        Setup the database. This command will launch migrations
-lint                           Linter
-logs                           Display logs from node container
-ps                             List docker containers
-rm                             Remove docker containers
-start                          Start docker containers
-stop                           Stop docker containers
-test                           Run test suite
-```
-
-### Client
-
-```bash
 cd client && make help
-start                          Start react app
-
 ```
 
 ## Tests
