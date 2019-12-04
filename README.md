@@ -1,8 +1,8 @@
 # CoopERP
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mmarchois/cooperp/CI?style=for-the-badge)
-[![GitHub stars](https://img.shields.io/github/stars/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/surmon-china/nodepress/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/surmon-china/nodepress/issues)
+[![GitHub stars](https://img.shields.io/github/stars/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/mmarchois/cooperp/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/mmarchois/cooperp/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/mmarchois/cooperp)
 [![GitHub license](https://img.shields.io/github/license/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/mmarchois/cooperp)
 
