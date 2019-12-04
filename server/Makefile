@@ -20,6 +20,8 @@ connect-db: ## Connect to the database
 	docker-compose -p cooperp exec database psql -h database
 test: ## Run test suite
 	docker-compose -p cooperp run node npm run test
+test-coverage: ## Run test suite with coverage
+	docker-compose -p cooperp run node npm run test:cov
 lint: ## Linter
 	docker-compose -p cooperp run node npm run lint
 build-dist: ## Build dist

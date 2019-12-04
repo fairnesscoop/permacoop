@@ -10,4 +10,8 @@ jobs:
           cd server
           npm install
           make lint
-          make test
+          make test-coverage
+      - uses: codecov/codecov-action@v1
+        with:
+          token: b6b3657a-491e-4466-90b2-adc25c26f50b
+          name: Coverage
