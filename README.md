@@ -1,10 +1,10 @@
 # CoopERP
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mmarchois/cooperp/CI?style=for-the-badge)
-[![GitHub stars](https://img.shields.io/github/stars/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/mmarchois/cooperp/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/mmarchois/cooperp/issues)
-[![GitHub last commit](https://img.shields.io/github/last-commit/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/mmarchois/cooperp)
-[![GitHub license](https://img.shields.io/github/license/mmarchois/cooperp.svg?style=for-the-badge)](https://github.com/mmarchois/cooperp)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mmarchois/cooperp/CI)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f1e9a74c64bd478b9c00d04c984466b8)](https://www.codacy.com/manual/mmarchois/cooperp?utm_source=github.com&utm_medium=referral&utm_content=mmarchois/cooperp&utm_campaign=Badge_Grade)
+[![GitHub issues](https://img.shields.io/github/issues/mmarchois/cooperp.svg)](https://github.com/surmon-china/nodepress/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/mmarchois/cooperp.svg)](https://github.com/mmarchois/cooperp)
+[![GitHub license](https://img.shields.io/github/license/mmarchois/cooperp.svg)](https://github.com/mmarchois/cooperp)
 
 CoopERP is an eco-design and open-source ERP solution for cooperatives.
 
