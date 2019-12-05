@@ -22,7 +22,7 @@ CoopERP is an eco-design and open-source ERP solution for cooperatives.
 
 ## Prerequisites
 
-You must have [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed on your system.
+You must have [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed on your system. You also need Node in version at least 10 installed on your system.
 
 ## Installation
 
