@@ -1,5 +1,0 @@
-FROM postgres:11.6
-
-ENV POSTGRES_USER cooperp
-ENV POSTGRES_PASSWORD cooperp
-ENV POSTGRES_DB cooperp

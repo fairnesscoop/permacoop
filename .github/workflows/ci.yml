@@ -7,10 +7,9 @@ jobs:
       - uses: actions/checkout@v1
       - name: Tests
         run: |
-          cd server
-          npm install
-          make lint
-          make test-coverage
+          make start
+          #make api-linter
+          make VERBOSE=1 api-test-coverage
       - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

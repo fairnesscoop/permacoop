@@ -32,25 +32,37 @@ At the first launch, just execute the following command:
 make install
 ```
 
-Then, you just have to run these following commands to start the application:
-
-```bash
-cd server && make start
-cd client && make start
-```
-
 The server and client will be started:
 
-- API documentation available on http://localhost:3000/api
-- Client avaible on http://localhost:3001
+- API documentation available on http://localhost:8080/api
+- Client avaible on http://localhost:3000
+
+For the next times you just need to execute the following command to start your application :
+
+```bash
+make start
+```
+
+A default user has been created :
+
+```json
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john@doe.com",
+  "password": "$argon2i$v=19$m=4096,t=3,p=1$slHh/xhoh8SvIjApBHSZnA$hqsry11DeWbNYsFnzADPkYOP2WQrf0yqDXGC3xjSX9A", # john
+  "apiToken": "$argon2i$v=19$m=4096,t=3,p=1$u7Jw1anFWyHcpfeOxjGYuQ$Ic4YheZZK9aF81q7CW8geSiG6Bsy+f52EnKTyzBlEXE"
+}
+```
+
+To authenticate it, add a bearer authentication header with his `{apiToken}` to each request.
 
 ## Helpers
 
-These following commands will display all available helpers
+This command will display all available helpers
 
 ```bash
-cd server && make help
-cd client && make help
+make help
 ```
 
 ## Tests
@@ -58,7 +70,7 @@ cd client && make help
 Run the unit test suite with this following command:
 
 ```bash
-cd server && make test
+make api-test
 ```
 
 ## Credits

@@ -1,0 +1,45 @@
+version: '3'
+
+volumes:
+  database: {}
+
+services:
+  database:
+    image: postgres:11.6
+    environment:
+      POSTGRES_USER: cooperp
+      POSTGRES_PASSWORD: cooperp
+      POSTGRES_DB: cooperp
+      PGUSER: cooperp
+      PGPASSWORD: cooperp
+    ports:
+      - '5432:5432'
+    networks:
+      - cooperp
+    volumes:
+      - 'database:/var/lib/postgresql/data'
+
+  api:
+    build: ./server
+    depends_on:
+      - database
+    networks:
+      - cooperp
+    volumes:
+      - './server:/src/server:cached'
+      - '/src/server/node_modules'
+    ports:
+      - 8080:3000
+
+  client:
+    build: ./client
+    networks:
+      - cooperp
+    volumes:
+      - './client:/src/client:cached'
+      - '/src/client/node_modules'
+    ports:
+      - 3000:3000
+
+networks:
+  cooperp:
