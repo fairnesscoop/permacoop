@@ -5,21 +5,25 @@ volumes:
 
 services:
   database:
-    build: ./docker/postgres
+    image: postgres:11.6
     environment:
+      POSTGRES_USER: cooperp
+      POSTGRES_PASSWORD: cooperp
+      POSTGRES_DB: cooperp
       PGUSER: cooperp
       PGPASSWORD: cooperp
     ports:
       - '5432:5432'
     volumes:
-      - '.:/var/www:cached'
       - 'database:/var/lib/postgresql/data'
 
-  node:
-    build: ./docker/node
+  api:
+    image: node:13.2
+    working_dir: '/var/www'
     depends_on:
       - database
     volumes:
-      - '.:/var/www:cached'
+      - './server:/var/www:cached'
     ports:
-      - 3000:3000
+      - 8080:3000
+    command: npm run start:dev
