@@ -1,0 +1,29 @@
+{
+  "translation": {
+    "logout": "Se déconnecter",
+    "server": {
+      "errors": "Une erreur est survenue !"
+    },
+    "form": {
+      "buttons": {
+        "connect": "Se connecter"
+      },
+      "errors": {
+        "requiredField": "Ce champs est requis.",
+        "invalidEmail": "Cette adresse e-mail n'est pas valide."
+      }
+    },
+    "user": {
+      "errors": {
+        "not_found": "Email ou mot de passe incorrect",
+        "password_not_match": "Email ou mot de passe incorrect"
+      }
+    },
+    "authentication": {
+      "form": {
+        "email": "Adresse e-mail",
+        "password": "Mot de passe"
+      }
+    }
+  }
+}

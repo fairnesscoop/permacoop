@@ -6,6 +6,9 @@ import {Provider} from 'react-redux';
 import configureStore from './store';
 import * as serviceWorker from './serviceWorker';
 import Layout from './modules/common/components/Layout';
+import commonRoutes from './modules/common/routes';
+import authRoutes from './modules/auth/routes';
+import './i18n';
 
 const {store, persistor} = configureStore();
 
@@ -14,7 +17,10 @@ ReactDOM.render(
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
         <Layout>
-          <Switch>Routes</Switch>
+          <Switch>
+            {authRoutes}
+            {commonRoutes}
+          </Switch>
         </Layout>
       </BrowserRouter>
     </PersistGate>

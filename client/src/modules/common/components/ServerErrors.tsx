@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Error} from '../models/Error';
 import {Alert} from 'react-bootstrap';
+import {useTranslation} from 'react-i18next';
+import {Error} from '../models/Error';
 
 interface IProps {
   errors: Error[];
@@ -8,6 +9,7 @@ interface IProps {
 
 const ServerErrors: React.FC<IProps> = ({errors}) => {
   const [show, setShow] = useState(true);
+  const {t} = useTranslation();
 
   if (!show || 0 === errors.length) {
     return null;
@@ -16,7 +18,7 @@ const ServerErrors: React.FC<IProps> = ({errors}) => {
   return (
     <>
       <Alert variant={'danger'} onClose={() => setShow(false)} dismissible>
-        <Alert.Heading>Oups, une erreur est survenue !</Alert.Heading>
+        <Alert.Heading>{t('server.errors')}</Alert.Heading>
 
         <ul>
           {errors.map((error, key) => (
