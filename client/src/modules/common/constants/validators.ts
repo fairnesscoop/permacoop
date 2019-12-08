@@ -1,1 +1,1 @@
-export const REQUIRED_FIELD = 'Ce champs est requis';
+export const REQUIRED_FIELD = 'form.required.fields';
