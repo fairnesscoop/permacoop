@@ -7,13 +7,22 @@ const Menu: React.FC = () => {
     <>
       <Navbar bg={'light'} expand={'lg'} fixed={'top'}>
         <Link className={'navbar-brand'} to={'/'}>
-          CoopERP
+          <img src={'/images/logo.png'} alt={'Fairness'} height={42} /> CoopERP
         </Link>
         <Navbar.Toggle aria-controls={'basic-navbar-nav'} />
         <Navbar.Collapse id={'basic-navbar-nav'}>
           <Nav className={'mr-auto'}>
             <Link className={'nav-link'} to={'/'}>
-              test
+              Projets
+            </Link>
+            <Link className={'nav-link'} to={'/'}>
+              Clients
+            </Link>
+            <Link className={'nav-link'} to={'/'}>
+              Coopérateurs
+            </Link>
+            <Link className={'nav-link'} to={'/'}>
+              CRA
             </Link>
           </Nav>
         </Navbar.Collapse>
