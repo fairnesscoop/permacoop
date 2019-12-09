@@ -31,7 +31,8 @@
     "redux-form": "^8.2.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "typescript": "3.7.2"
+    "typescript": "3.7.2",
+    "serialize-javascript": ">=2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
