@@ -3,7 +3,7 @@
   "author": "Mathieu MARCHOIS",
   "version": "1.0.0",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "@types/jest": "24.0.23",
     "@types/js-cookie": "^2.2.4",

@@ -8,8 +8,8 @@ const Layout: React.FC = ({children}) => {
     <>
       <Menu />
       <Container>
-        {/* Add 5rem to fix fixed navbar */}
-        <div style={{marginTop: '5rem'}}>{children}</div>
+        {/* Add 4.5rem to fix fixed navbar */}
+        <div style={{marginTop: '4.5rem'}}>{children}</div>
       </Container>
     </>
   );

@@ -10,7 +10,7 @@ export const authenticate = (payload: IAuthenticationForm) => async (
   dispatch: Dispatch,
   state: AppState,
   axios: any
-) => {
+): Promise<void> => {
   dispatch(loading(true));
 
   try {

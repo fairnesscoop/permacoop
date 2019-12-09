@@ -19,6 +19,12 @@
         "password_not_match": "Email ou mot de passe incorrect"
       }
     },
+    "task": {
+      "title": "Tâches",
+      "list": {
+        "noItems": "Il n'y a pas encore de tâches."
+      }
+    },
     "authentication": {
       "form": {
         "email": "Adresse e-mail",

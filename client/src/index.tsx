@@ -7,6 +7,7 @@ import configureStore from './store';
 import * as serviceWorker from './serviceWorker';
 import Layout from './modules/common/components/Layout';
 import commonRoutes from './modules/common/routes';
+import taskRoutes from './modules/task/routes';
 import authRoutes from './modules/auth/routes';
 import './i18n';
 
@@ -19,6 +20,7 @@ ReactDOM.render(
         <Layout>
           <Switch>
             {authRoutes}
+            {taskRoutes}
             {commonRoutes}
           </Switch>
         </Layout>
