@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import reducers from './reducers';
-import {client} from '../utils/axios';
+import {client, axiosMiddleware} from '../utils/axios';
 
 const persistConfig = {
   key: 'cooperp',
@@ -19,7 +19,9 @@ const buildStore = (): Store => {
 
   return createStore(
     persistedReducer,
-    composeEnhancers(applyMiddleware(thunk.withExtraArgument(client)))
+    composeEnhancers(
+      applyMiddleware(thunk.withExtraArgument(client), axiosMiddleware(client))
+    )
   );
 };
 

@@ -1,9 +1,12 @@
 import {Error} from '../modules/common/models/Error';
 import i18n from '../i18n';
 
-const errorFormater = (exception: any): Error[] => {
-  const e = exception.response.data ?? exception;
-  const message = e.message;
+const errorFormater = (e: any): Error[] => {
+  let message = e.message;
+
+  if (e.response) {
+    message = e.response.data.message ?? e.response.data.error;
+  }
 
   if (Array.isArray(message)) {
     const errors: Error[] = [];

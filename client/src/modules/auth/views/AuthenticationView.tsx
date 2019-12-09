@@ -53,5 +53,7 @@ export default connect(
   (state: AppState) => ({
     authentication: state.auth.authentication
   }),
-  dispatch => ({...bindActionCreators({authenticate, reset}, dispatch)})
+  dispatch => ({
+    ...bindActionCreators({authenticate, reset}, dispatch)
+  })
 )(AuthenticationView);

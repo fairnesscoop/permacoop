@@ -28,20 +28,31 @@ const Menu: React.FC<IProps> = ({user, logout}) => {
             <Navbar.Toggle aria-controls={'basic-navbar-nav'} />
             <Navbar.Collapse id={'basic-navbar-nav'}>
               <Nav className={'mr-auto'}>
-                <Link className={'nav-link'} to={'/'}>
-                  Projets
-                </Link>
-                <Link className={'nav-link'} to={'/'}>
+                <Nav>
+                  <NavDropdown
+                    title={'Projets'}
+                    id={'basic-nav-dropdown'}
+                    alignRight={true}
+                  >
+                    <Link to={'/projects'} className={'dropdown-item'}>
+                      Projets
+                    </Link>
+                    <Link to={'/tasks'} className={'dropdown-item'}>
+                      {t('task.title')}
+                    </Link>
+                    <Link to={'/'} className={'dropdown-item'}>
+                      Mon CRA
+                    </Link>
+                  </NavDropdown>
+                </Nav>
+                <Link className={'nav-link'} to={'/customers'}>
                   Clients
                 </Link>
                 <Link className={'nav-link'} to={'/'}>
+                  Protocole de décisions
+                </Link>
+                <Link className={'nav-link'} to={'/'}>
                   Coopérateurs
-                </Link>
-                <Link className={'nav-link'} to={'/'}>
-                  Tâches
-                </Link>
-                <Link className={'nav-link'} to={'/'}>
-                  CRA
                 </Link>
               </Nav>
             </Navbar.Collapse>
