@@ -22,35 +22,50 @@ CoopERP is an eco-design and open-source ERP solution for cooperatives.
 
 ## Prerequisites
 
-You must have [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed on your system.
+You must have **[Docker](https://www.docker.com/)**, **[Docker Compose](https://docs.docker.com/compose/)** and **[Node](https://nodejs.org/en/)** (>= 12) installed on your system.
 
 ## Installation
 
-At the first launch, just execute the following command:
+At **the first launch**, just execute these commands to install your application :
 
 ```bash
 make install
+make client-start
 ```
 
-Then, you just have to run these following commands to start the application:
+For the **next times** you just need to execute these commands to start your application :
 
 ```bash
-cd server && make start
-cd client && make start
+make api-start
+make client-start
 ```
 
 The server and client will be started:
 
-- API documentation available on http://localhost:3000/api
-- Client avaible on http://localhost:3001
+- API documentation available on http://localhost:8080/api
+- Client avaible on http://localhost:3000
+
+## Security
+
+The client must send the user `apiToken` in the Authorization header when making requests to protected resources : `Authorization: Bearer <apiToken>`
+
+At the installation of the project a default user was created :
+
+```json
+{
+  "email": "john@doe.com",
+  "password": "john"
+}
+```
+
+To retrieve the `apiToken`, make a post request on `/login` with a user email and password.
 
 ## Helpers
 
-These following commands will display all available helpers
+This following command will display all available helpers :
 
 ```bash
-cd server && make help
-cd client && make help
+make help
 ```
 
 ## Tests
@@ -58,7 +73,7 @@ cd client && make help
 Run the unit test suite with this following command:
 
 ```bash
-cd server && make test
+make api-test
 ```
 
 ## Credits
