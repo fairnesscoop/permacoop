@@ -1,7 +1,7 @@
 import {Error} from '../modules/common/models/Error';
 import i18n from '../i18n';
 
-const errorFormater = (e: any): Error[] => {
+export const errorNormalizer = (e: any): Error[] => {
   let message = e.message;
 
   if (e.response) {
@@ -22,5 +22,3 @@ const errorFormater = (e: any): Error[] => {
 
   return [new Error(i18n.t(message))];
 };
-
-export default errorFormater;
