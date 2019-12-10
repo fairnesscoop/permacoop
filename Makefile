@@ -10,11 +10,11 @@ install: ## Install API and client
 	make database-migrate
 client-start: ## Start react app
 	cd client && npm start
-stop: ## Stop docker containers
+api-stop: ## Stop docker containers
 	docker-compose -p cooperp stop
-rm: ## Remove docker containers
+api-rm: ## Remove docker containers
 	docker-compose -p cooperp rm
-ps: ## List docker containers
+api-ps: ## List docker containers
 	docker-compose -p cooperp ps
 api-start: ## Start docker containers
 	docker-compose -p cooperp up -d

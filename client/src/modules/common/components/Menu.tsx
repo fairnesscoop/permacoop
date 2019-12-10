@@ -48,11 +48,11 @@ const Menu: React.FC<IProps> = ({user, logout}) => {
                 <Link className={'nav-link'} to={'/customers'}>
                   {t('customer.title')}
                 </Link>
-                <Link className={'nav-link'} to={'/'}>
-                  Protocole de décisions
+                <Link className={'nav-link'} to={'/users'}>
+                  {t('user.title')}
                 </Link>
                 <Link className={'nav-link'} to={'/'}>
-                  Coopérateurs
+                  Protocole de décisions
                 </Link>
               </Nav>
             </Navbar.Collapse>

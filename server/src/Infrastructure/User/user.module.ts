@@ -11,16 +11,19 @@ import {CreateUserCommandHandler} from 'src/Application/User/Command/CreateUserC
 import {EncryptionAdapter} from '../Adapter/EncryptionAdapter';
 import {CanRegisterSpecification} from 'src/Domain/User/Specification/CanRegisterSpecification';
 import {BearerStrategy} from './Security/BearerStrategy';
+import {GetUsersQueryHandler} from 'src/Application/User/Query/GetUsersQueryHandler';
+import {GetUsersAction} from './Action/GetUsersAction';
 
 @Module({
   imports: [BusModule, PassportModule, TypeOrmModule.forFeature([User])],
-  controllers: [LoginAction, CreateUserAction],
+  controllers: [LoginAction, CreateUserAction, GetUsersAction],
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
     {provide: 'IEncryptionAdapter', useClass: EncryptionAdapter},
     LoginCommandHandler,
     CreateUserCommandHandler,
     CanRegisterSpecification,
+    GetUsersQueryHandler,
     BearerStrategy
   ]
 })

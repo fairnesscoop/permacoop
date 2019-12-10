@@ -9,6 +9,7 @@ import Layout from './modules/common/components/Layout';
 import commonRoutes from './modules/common/routes';
 import taskRoutes from './modules/task/routes';
 import customerRoutes from './modules/customer/routes';
+import userRoutes from './modules/user/routes';
 import authRoutes from './modules/auth/routes';
 import './i18n';
 
@@ -23,6 +24,7 @@ ReactDOM.render(
             {authRoutes}
             {taskRoutes}
             {customerRoutes}
+            {userRoutes}
             {commonRoutes}
           </Switch>
         </Layout>
