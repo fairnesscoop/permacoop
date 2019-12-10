@@ -34,19 +34,19 @@ const Menu: React.FC<IProps> = ({user, logout}) => {
                     id={'basic-nav-dropdown'}
                     alignRight={true}
                   >
+                    <Link to={'/'} className={'dropdown-item'}>
+                      Mon CRA
+                    </Link>
                     <Link to={'/projects'} className={'dropdown-item'}>
                       Projets
                     </Link>
                     <Link to={'/tasks'} className={'dropdown-item'}>
                       {t('task.title')}
                     </Link>
-                    <Link to={'/'} className={'dropdown-item'}>
-                      Mon CRA
-                    </Link>
                   </NavDropdown>
                 </Nav>
                 <Link className={'nav-link'} to={'/customers'}>
-                  Clients
+                  {t('customer.title')}
                 </Link>
                 <Link className={'nav-link'} to={'/'}>
                   Protocole de décisions
