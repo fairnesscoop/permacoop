@@ -25,6 +25,12 @@
         "noItems": "Il n'y a pas encore de tâches."
       }
     },
+    "customer": {
+      "title": "Clients",
+      "list": {
+        "noItems": "Il n'y a pas encore de clients."
+      }
+    },
     "authentication": {
       "form": {
         "email": "Adresse e-mail",
