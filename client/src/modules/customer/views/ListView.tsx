@@ -38,7 +38,7 @@ const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>{t('customer.title')}</th>
+                <th>{t('customer.list.title')}</th>
                 <th></th>
               </tr>
             </thead>

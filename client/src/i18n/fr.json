@@ -6,7 +6,8 @@
     },
     "form": {
       "buttons": {
-        "connect": "Se connecter"
+        "connect": "Se connecter",
+        "save": "Sauvegarder"
       },
       "errors": {
         "requiredField": "Ce champs est requis.",
@@ -27,18 +28,36 @@
       }
     },
     "project": {
-      "title": "Projets"
+      "title": "Projets",
+      "list": {
+        "title": "Projet",
+        "noItems": "Il n'y a pas encore de projet."
+      },
+      "add": {
+        "title": "Ajouter un projet"
+      },
+      "form": {
+        "name": "Nom du projet"
+      }
     },
     "task": {
       "title": "Missions",
       "list": {
-        "noItems": "Il n'y a pas encore de missions."
+        "title": "Mission",
+        "noItems": "Il n'y a pas encore de mission."
+      },
+      "add": {
+        "title": "Ajouter une mission"
+      },
+      "form": {
+        "name": "Nom de la mission"
       }
     },
     "customer": {
       "title": "Clients",
       "list": {
-        "noItems": "Il n'y a pas encore de clients."
+        "title": "Client",
+        "noItems": "Il n'y a pas encore de client."
       }
     },
     "authentication": {

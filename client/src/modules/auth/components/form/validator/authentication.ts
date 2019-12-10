@@ -7,11 +7,11 @@ import {
 } from '../../../../common/constants/validators';
 import {isEmail} from '../../../../common/components/form/validator';
 
-const validate = (payload: any): FormErrors<IAuthenticationForm> => {
+export const validate = (payload: any): FormErrors<IAuthenticationForm> => {
   const errors: FormErrors<IAuthenticationForm> = {};
 
   if (!payload.email) {
-    errors.email = i18n.t('form.errors.requiredField');
+    errors.email = i18n.t(REQUIRED_FIELD);
   } else if (!isEmail(payload.email)) {
     errors.email = i18n.t(INVALID_EMAIL);
   }
@@ -22,5 +22,3 @@ const validate = (payload: any): FormErrors<IAuthenticationForm> => {
 
   return errors;
 };
-
-export default validate;
