@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import Layout from './modules/common/components/Layout';
 import commonRoutes from './modules/common/routes';
 import taskRoutes from './modules/task/routes';
+import projectRoutes from './modules/project/routes';
 import customerRoutes from './modules/customer/routes';
 import userRoutes from './modules/user/routes';
 import authRoutes from './modules/auth/routes';
@@ -24,6 +25,7 @@ ReactDOM.render(
             {authRoutes}
             {taskRoutes}
             {customerRoutes}
+            {projectRoutes}
             {userRoutes}
             {commonRoutes}
           </Switch>
@@ -34,7 +36,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();

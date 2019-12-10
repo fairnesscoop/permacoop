@@ -30,27 +30,37 @@ const Menu: React.FC<IProps> = ({user, logout}) => {
               <Nav className={'mr-auto'}>
                 <Nav>
                   <NavDropdown
-                    title={'Projets'}
+                    title={'Administratifs'}
                     id={'basic-nav-dropdown'}
                     alignRight={true}
                   >
                     <Link to={'/'} className={'dropdown-item'}>
-                      Mon CRA
+                      CRA
                     </Link>
+                    <NavDropdown.Divider />
                     <Link to={'/projects'} className={'dropdown-item'}>
-                      Projets
+                      {t('project.title')}
                     </Link>
+                    <NavDropdown.Divider />
+                    <Link className={'dropdown-item'} to={'/customers'}>
+                      {t('customer.title')}
+                    </Link>
+                    <NavDropdown.Divider />
                     <Link to={'/tasks'} className={'dropdown-item'}>
                       {t('task.title')}
                     </Link>
                   </NavDropdown>
                 </Nav>
-                <Link className={'nav-link'} to={'/customers'}>
-                  {t('customer.title')}
-                </Link>
                 <Link className={'nav-link'} to={'/users'}>
                   {t('user.title')}
                 </Link>
+                <a
+                  href={'https://trello.com/b/wWIwS9KI/fairnesscrm'}
+                  className={'nav-link'}
+                  target={'_blank'}
+                >
+                  CRM
+                </a>
                 <Link className={'nav-link'} to={'/'}>
                   Protocole de décisions
                 </Link>
