@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DashboardView: React.FC = () => {
-  return <>Dahboard</>;
+  return <>Dashboard</>;
 };
 
 export default DashboardView;

@@ -26,10 +26,13 @@
         "password_not_match": "Email ou mot de passe incorrect"
       }
     },
+    "project": {
+      "title": "Projets"
+    },
     "task": {
-      "title": "Tâches",
+      "title": "Missions",
       "list": {
-        "noItems": "Il n'y a pas encore de tâches."
+        "noItems": "Il n'y a pas encore de missions."
       }
     },
     "customer": {
