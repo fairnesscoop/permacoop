@@ -33,6 +33,15 @@ export class UserRepository implements IUserRepository {
       .getOne();
   }
 
+  public findUsers(): Promise<User[]> {
+    return this.repository
+      .createQueryBuilder('user')
+      .select(['user.id', 'user.firstName', 'user.lastName', 'user.email'])
+      .orderBy('user.lastName', 'ASC')
+      .addOrderBy('user.firstName', 'ASC')
+      .getMany();
+  }
+
   public save(user: User): Promise<User> {
     return this.repository.save(user);
   }

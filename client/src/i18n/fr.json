@@ -14,6 +14,13 @@
       }
     },
     "user": {
+      "title": "Coopérateurs",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Adresse e-mail",
+      "list": {
+        "noItems": "Il n'y a pas encore de coopérateurs."
+      },
       "errors": {
         "not_found": "Email ou mot de passe incorrect",
         "password_not_match": "Email ou mot de passe incorrect"
