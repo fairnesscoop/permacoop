@@ -1,7 +1,7 @@
 import {Dispatch} from 'redux';
 import {AppState} from '../../../store/reducers';
 import {loading, errors, success} from '../actions/list';
-import errorFormater from '../../../utils/errorFormater';
+import {errorNormalizer} from '../../../normalizer/errors';
 import {Task} from '../models/Task';
 
 export const listTasks = () => async (
@@ -21,7 +21,7 @@ export const listTasks = () => async (
 
     dispatch(success(tasks));
   } catch (e) {
-    dispatch(errors(errorFormater(e)));
+    dispatch(errors(errorNormalizer(e)));
   } finally {
     dispatch(loading(false));
   }

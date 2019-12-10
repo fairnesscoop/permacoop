@@ -1,7 +1,7 @@
 import {Dispatch} from 'redux';
 import {loading, errors, success} from '../actions/authentication';
 import {AppState} from '../../../store/reducers';
-import errorFormater from '../../../utils/errorFormater';
+import {errorNormalizer} from '../../../normalizer/errors';
 import {TokenStorage} from '../../../utils/tokenStorage';
 import {LoggedUser} from '../models/LoggedUser';
 import {IAuthenticationForm} from '../types/authentication';
@@ -20,7 +20,7 @@ export const authenticate = (payload: IAuthenticationForm) => async (
     TokenStorage.save(apiToken);
     dispatch(success(new LoggedUser(firstName, lastName, email)));
   } catch (e) {
-    dispatch(errors(errorFormater(e)));
+    dispatch(errors(errorNormalizer(e)));
   } finally {
     dispatch(loading(false));
   }

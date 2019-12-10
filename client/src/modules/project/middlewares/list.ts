@@ -1,9 +1,9 @@
 import {Dispatch} from 'redux';
 import {AppState} from '../../../store/reducers';
 import {loading, errors, success} from '../actions/list';
-import errorFormater from '../../../utils/errorFormater';
 import {Project} from '../models/Project';
 import {ProjectFactory} from '../factory/ProjectFactory';
+import {errorNormalizer} from '../../../normalizer/errors';
 
 export const listProjects = () => async (
   dispatch: Dispatch,
@@ -22,7 +22,7 @@ export const listProjects = () => async (
 
     dispatch(success(projects));
   } catch (e) {
-    dispatch(errors(errorFormater(e)));
+    dispatch(errors(errorNormalizer(e)));
   } finally {
     dispatch(loading(false));
   }

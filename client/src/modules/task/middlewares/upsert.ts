@@ -1,7 +1,7 @@
 import {Dispatch} from 'redux';
 import {AppState} from '../../../store/reducers';
 import {loading, errors, success} from '../actions/upsert';
-import errorFormater from '../../../utils/errorFormater';
+import {errorNormalizer} from '../../../normalizer/errors';
 import {Task} from '../models/Task';
 
 export const upsertTask = (payload: Task) => async (
@@ -23,7 +23,7 @@ export const upsertTask = (payload: Task) => async (
     const {id, name} = response.data;
     dispatch(success(new Task(id, name)));
   } catch (e) {
-    dispatch(errors(errorFormater(e)));
+    dispatch(errors(errorNormalizer(e)));
   } finally {
     dispatch(loading(false));
   }
