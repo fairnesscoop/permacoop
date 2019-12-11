@@ -13,7 +13,7 @@ import {
   IAuthenticationLogoutAction
 } from '../types/authentication';
 import {LoggedUser} from '../models/LoggedUser';
-import {Error} from '../../common/models/Error';
+import {Error} from '../../core/models/Error';
 
 export const loading = (loading: boolean): IAuthenticationLoadingAction => ({
   type: AUTH_AUTHENTICATION_LOADING,

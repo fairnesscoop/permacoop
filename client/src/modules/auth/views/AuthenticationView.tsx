@@ -11,7 +11,7 @@ import {
 import {authenticate} from '../middlewares/authentication';
 import {reset} from '../actions/authentication';
 import {AppState} from '../../../store/reducers';
-import ServerErrors from '../../common/components/ServerErrors';
+import ServerErrors from '../../core/components/ServerErrors';
 
 interface IProps {
   authentication: AuthenticationState;

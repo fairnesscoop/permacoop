@@ -2,9 +2,9 @@ import React from 'react';
 import {Row, Col, Form} from 'react-bootstrap';
 import {Field, reduxForm, InjectedFormProps} from 'redux-form';
 import {useTranslation} from 'react-i18next';
-import TextInput from '../../../common/components/form/TextInput';
+import TextInput from '../../../core/components/form/TextInput';
 import {Task} from '../../models/Task';
-import {SubmitButton} from '../../../common/components/form/SubmitButton';
+import {SubmitButton} from '../../../core/components/form/SubmitButton';
 import {validate} from '../../components/form/validator/task';
 
 interface IProps {

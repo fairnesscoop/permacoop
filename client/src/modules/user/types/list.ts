@@ -1,6 +1,6 @@
-import {Error} from '../../common/models/Error';
+import {Error} from '../../core/models/Error';
 import {User} from '../models/User';
-import {ILoadingAction, IErrorAction} from '../../common/types/actions';
+import {ILoadingAction, IErrorAction} from '../../core/types/actions';
 import {
   USER_LIST_LOADING,
   USER_LIST_SUCCESS,

@@ -1,4 +1,4 @@
-import {Error} from '../modules/common/models/Error';
+import {Error} from '../modules/core/models/Error';
 import i18n from '../i18n';
 
 export const errorNormalizer = (e: any): Error[] => {

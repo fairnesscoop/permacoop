@@ -1,6 +1,6 @@
-import {Error} from '../../common/models/Error';
+import {Error} from '../../core/models/Error';
 import {Task} from '../models/Task';
-import {ILoadingAction, IErrorAction} from '../../common/types/actions';
+import {ILoadingAction, IErrorAction} from '../../core/types/actions';
 import {
   TASK_LIST_LOADING,
   TASK_LIST_SUCCESS,

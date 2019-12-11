@@ -1,6 +1,6 @@
-import {Error} from '../../common/models/Error';
+import {Error} from '../../core/models/Error';
 import {Project} from '../models/Project';
-import {ILoadingAction, IErrorAction} from '../../common/types/actions';
+import {ILoadingAction, IErrorAction} from '../../core/types/actions';
 import {
   PROJECT_LIST_LOADING,
   PROJECT_LIST_SUCCESS,

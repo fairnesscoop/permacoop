@@ -5,18 +5,18 @@ import {bindActionCreators} from 'redux';
 import {Row, Col} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
 import {AppState} from '../../../store/reducers';
-import Breadcrumb from '../../common/components/Breadcrumb';
-import {BreadcrumbItem} from '../../common/models/BreadcrumbItem';
+import Breadcrumb from '../../core/components/Breadcrumb';
+import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import TaskForm from '../components/form/TaskForm';
 import {Task} from '../models/Task';
-import {TaskUpsertState, ITaskUpsertResetAction} from '../types/upsert';
-import {reset} from '../actions/upsert';
+import {reset} from '../../core/actions/upsert';
 import {upsertTask} from '../middlewares/upsert';
-import ServerErrors from '../../common/components/ServerErrors';
+import ServerErrors from '../../core/components/ServerErrors';
+import {CoreUpsertState, ICoreUpsertResetAction} from '../../core/types/upsert';
 
 interface IProps {
-  upsert: TaskUpsertState;
-  reset(): ITaskUpsertResetAction;
+  upsert: CoreUpsertState<Task>;
+  reset(): ICoreUpsertResetAction;
   upsertTask(payload: Task): void;
 }
 
@@ -57,7 +57,7 @@ const AddView: React.FC<IProps> = ({upsertTask, reset, upsert}) => {
 
 export default connect(
   (state: AppState) => ({
-    upsert: state.task.upsert
+    upsert: state.core.upsert
   }),
   dispatch => ({
     ...bindActionCreators({reset, upsertTask}, dispatch)

@@ -7,9 +7,9 @@ import {AppState} from '../../../store/reducers';
 import {CustomerListState, ICustomerListResetAction} from '../types/list';
 import {listCustomers} from '../middlewares/list';
 import {reset} from '../actions/list';
-import Breadcrumb from '../../common/components/Breadcrumb';
-import ServerErrors from '../../common/components/ServerErrors';
-import {BreadcrumbItem} from '../../common/models/BreadcrumbItem';
+import Breadcrumb from '../../core/components/Breadcrumb';
+import ServerErrors from '../../core/components/ServerErrors';
+import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import {Customer} from '../models/Customer';
 
 interface IProps {

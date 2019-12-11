@@ -4,8 +4,8 @@ import i18n from '../../../../../i18n';
 import {
   INVALID_EMAIL,
   REQUIRED_FIELD
-} from '../../../../common/constants/validators';
-import {isEmail} from '../../../../common/components/form/validator';
+} from '../../../../core/constants/validators';
+import {isEmail} from '../../../../core/components/form/validator';
 
 export const validate = (payload: any): FormErrors<IAuthenticationForm> => {
   const errors: FormErrors<IAuthenticationForm> = {};

@@ -1,6 +1,6 @@
-import {Error} from '../../common/models/Error';
+import {Error} from '../../core/models/Error';
 import {LoggedUser} from '../models/LoggedUser';
-import {ILoadingAction, IErrorAction} from '../../common/types/actions';
+import {ILoadingAction, IErrorAction} from '../../core/types/actions';
 import {
   AUTH_AUTHENTICATION_LOADING,
   AUTH_AUTHENTICATION_ERROR,
