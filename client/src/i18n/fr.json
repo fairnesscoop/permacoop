@@ -55,6 +55,12 @@
     },
     "customer": {
       "title": "Clients",
+      "add": {
+        "title": "Ajouter un client"
+      },
+      "form": {
+        "name": "Nom du client"
+      },
       "list": {
         "title": "Client",
         "noItems": "Il n'y a pas encore de client."
