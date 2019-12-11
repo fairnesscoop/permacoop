@@ -4,18 +4,18 @@ import {bindActionCreators} from 'redux';
 import {Spinner, Row, Col, Table} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
 import {AppState} from '../../../store/reducers';
-import {UserListState, IUserListResetAction} from '../types/list';
 import {listUsers} from '../middlewares/list';
-import {reset} from '../actions/list';
+import {reset} from '../../core/actions/list';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import ServerErrors from '../../core/components/ServerErrors';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import {User} from '../models/User';
+import {CoreListState, ICoreListResetAction} from '../../core/types/list';
 
 interface IProps {
-  list: UserListState;
+  list: CoreListState<User>;
   listUsers(): void;
-  reset(): IUserListResetAction;
+  reset(): ICoreListResetAction;
 }
 
 const ListView: React.FC<IProps> = ({list, listUsers, reset}) => {
@@ -45,14 +45,17 @@ const ListView: React.FC<IProps> = ({list, listUsers, reset}) => {
               </tr>
             </thead>
             <tbody>
-              {list.payload.map((user: User) => (
-                <tr key={user.id}>
-                  <td>{user.firstName}</td>
-                  <td>{user.lastName}</td>
-                  <td>{user.email}</td>
-                  <td></td>
-                </tr>
-              ))}
+              {list.payload.map(
+                user =>
+                  user instanceof User && (
+                    <tr key={user.id}>
+                      <td>{user.firstName}</td>
+                      <td>{user.lastName}</td>
+                      <td>{user.email}</td>
+                      <td></td>
+                    </tr>
+                  )
+              )}
               {0 === list.payload.length && (
                 <tr>
                   <td colSpan={4}>{t('user.list.noItems')}</td>
@@ -75,7 +78,7 @@ const ListView: React.FC<IProps> = ({list, listUsers, reset}) => {
 
 export default connect(
   (state: AppState) => ({
-    list: state.user.list
+    list: state.core.list
   }),
   dispatch => ({
     ...bindActionCreators({listUsers, reset}, dispatch)

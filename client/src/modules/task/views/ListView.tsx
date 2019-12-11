@@ -5,18 +5,18 @@ import {Spinner, Row, Col, Table} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
 import {Link} from 'react-router-dom';
 import {AppState} from '../../../store/reducers';
-import {TaskListState, ITaskListResetAction} from '../types/list';
 import {listTasks} from '../middlewares/list';
-import {reset} from '../actions/list';
+import {reset} from '../../core/actions/list';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import ServerErrors from '../../core/components/ServerErrors';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import {Task} from '../models/Task';
+import {CoreListState, ICoreListResetAction} from '../../core/types/list';
 
 interface IProps {
-  list: TaskListState;
+  list: CoreListState<Task>;
   listTasks(): void;
-  reset(): ITaskListResetAction;
+  reset(): ICoreListResetAction;
 }
 
 const ListView: React.FC<IProps> = ({list, listTasks, reset}) => {
@@ -47,12 +47,15 @@ const ListView: React.FC<IProps> = ({list, listTasks, reset}) => {
               </tr>
             </thead>
             <tbody>
-              {list.payload.map((task: Task) => (
-                <tr key={task.id}>
-                  <td>{task.name}</td>
-                  <td></td>
-                </tr>
-              ))}
+              {list.payload.map(
+                task =>
+                  task instanceof Task && (
+                    <tr key={task.id}>
+                      <td>{task.name}</td>
+                      <td></td>
+                    </tr>
+                  )
+              )}
               {0 === list.payload.length && (
                 <tr>
                   <td colSpan={2}>{t('task.list.noItems')}</td>
@@ -75,7 +78,7 @@ const ListView: React.FC<IProps> = ({list, listTasks, reset}) => {
 
 export default connect(
   (state: AppState) => ({
-    list: state.task.list
+    list: state.core.list
   }),
   dispatch => ({
     ...bindActionCreators({listTasks, reset}, dispatch)

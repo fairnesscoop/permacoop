@@ -1,26 +1,13 @@
 import {Dispatch} from 'redux';
-import {AppState} from '../../../store/reducers';
-import {loading, errors, success} from '../actions/list';
-import {Project} from '../models/Project';
-import {ProjectFactory} from '../factory/ProjectFactory';
+import {loading, errors, success} from '../../core/actions/list';
 import {errorNormalizer} from '../../../normalizer/errors';
+import {ProjectRepository} from '../repositories/ProjectRepository';
 
-export const listProjects = () => async (
-  dispatch: Dispatch,
-  state: AppState,
-  axios: any
-): Promise<void> => {
+export const listProjects = () => async (dispatch: Dispatch): Promise<void> => {
   dispatch(loading(true));
 
   try {
-    const response = await axios.get('projects');
-    const projects: Project[] = [];
-
-    for (const project of response.data) {
-      projects.push(ProjectFactory.create(project));
-    }
-
-    dispatch(success(projects));
+    dispatch(success(await ProjectRepository.findProjects()));
   } catch (e) {
     dispatch(errors(errorNormalizer(e)));
   } finally {

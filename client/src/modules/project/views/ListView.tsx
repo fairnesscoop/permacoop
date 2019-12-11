@@ -4,18 +4,18 @@ import {bindActionCreators} from 'redux';
 import {Spinner, Row, Col, Table} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
 import {AppState} from '../../../store/reducers';
-import {ProjectListState, IProjectListResetAction} from '../types/list';
 import {listProjects} from '../middlewares/list';
-import {reset} from '../actions/list';
+import {reset} from '../../core/actions/list';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import ServerErrors from '../../core/components/ServerErrors';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import {Project} from '../models/Project';
+import {CoreListState, ICoreListResetAction} from '../../core/types/list';
 
 interface IProps {
-  list: ProjectListState;
+  list: CoreListState<Project>;
   listProjects(): void;
-  reset(): IProjectListResetAction;
+  reset(): ICoreListResetAction;
 }
 
 const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
@@ -43,12 +43,15 @@ const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
               </tr>
             </thead>
             <tbody>
-              {list.payload.map((project: Project) => (
-                <tr key={project.id}>
-                  <td>{project.name}</td>
-                  <td>{project.customer.name}</td>
-                </tr>
-              ))}
+              {list.payload.map(
+                project =>
+                  project instanceof Project && (
+                    <tr key={project.id}>
+                      <td>{project.name}</td>
+                      <td>{project.customer.name}</td>
+                    </tr>
+                  )
+              )}
               {0 === list.payload.length && (
                 <tr>
                   <td colSpan={2}>{t('project.list.noItems')}</td>
@@ -71,7 +74,7 @@ const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
 
 export default connect(
   (state: AppState) => ({
-    list: state.project.list
+    list: state.core.list
   }),
   dispatch => ({
     ...bindActionCreators({listProjects, reset}, dispatch)

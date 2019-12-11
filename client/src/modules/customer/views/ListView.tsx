@@ -4,18 +4,18 @@ import {bindActionCreators} from 'redux';
 import {Spinner, Row, Col, Table} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
 import {AppState} from '../../../store/reducers';
-import {CustomerListState, ICustomerListResetAction} from '../types/list';
 import {listCustomers} from '../middlewares/list';
-import {reset} from '../actions/list';
+import {reset} from '../../core/actions/list';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import ServerErrors from '../../core/components/ServerErrors';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import {Customer} from '../models/Customer';
+import {CoreListState, ICoreListResetAction} from '../../core/types/list';
 
 interface IProps {
-  list: CustomerListState;
+  list: CoreListState<Customer>;
   listCustomers(): void;
-  reset(): ICustomerListResetAction;
+  reset(): ICoreListResetAction;
 }
 
 const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
@@ -43,12 +43,15 @@ const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
               </tr>
             </thead>
             <tbody>
-              {list.payload.map((customer: Customer) => (
-                <tr key={customer.id}>
-                  <td>{customer.name}</td>
-                  <td></td>
-                </tr>
-              ))}
+              {list.payload.map(
+                customer =>
+                  customer instanceof Customer && (
+                    <tr key={customer.id}>
+                      <td>{customer.name}</td>
+                      <td></td>
+                    </tr>
+                  )
+              )}
               {0 === list.payload.length && (
                 <tr>
                   <td colSpan={2}>{t('customer.list.noItems')}</td>
@@ -71,7 +74,7 @@ const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
 
 export default connect(
   (state: AppState) => ({
-    list: state.customer.list
+    list: state.core.list
   }),
   dispatch => ({
     ...bindActionCreators({listCustomers, reset}, dispatch)

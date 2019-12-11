@@ -19,9 +19,7 @@ const buildStore = (): Store => {
 
   return createStore(
     persistedReducer,
-    composeEnhancers(
-      applyMiddleware(thunk.withExtraArgument(client), axiosMiddleware(client))
-    )
+    composeEnhancers(applyMiddleware(thunk, axiosMiddleware(client)))
   );
 };
 

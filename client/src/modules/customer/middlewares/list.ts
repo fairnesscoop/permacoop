@@ -1,25 +1,15 @@
 import {Dispatch} from 'redux';
-import {AppState} from '../../../store/reducers';
-import {loading, errors, success} from '../actions/list';
+import {loading, errors, success} from '../../core/actions/list';
 import {errorNormalizer} from '../../../normalizer/errors';
-import {Customer} from '../models/Customer';
+import {CustomerRepository} from '../repositories/CustomerRepository';
 
 export const listCustomers = () => async (
-  dispatch: Dispatch,
-  state: AppState,
-  axios: any
+  dispatch: Dispatch
 ): Promise<void> => {
   dispatch(loading(true));
 
   try {
-    const response = await axios.get('customers');
-    const customers: Customer[] = [];
-
-    for (const {id, name} of response.data) {
-      customers.push(new Customer(id, name));
-    }
-
-    dispatch(success(customers));
+    dispatch(success(await CustomerRepository.findCustomers()));
   } catch (e) {
     dispatch(errors(errorNormalizer(e)));
   } finally {
