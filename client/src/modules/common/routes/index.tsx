@@ -1,6 +1,6 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import LoadingComponent from '../../common/components/LoadingComponent';
+import LoadingComponent from '../components/LoadingComponent';
 import SecuredRoute from '../../auth/components/SecuredRoute';
 
 const Dashboard = Loadable({

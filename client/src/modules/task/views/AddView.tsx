@@ -9,14 +9,17 @@ import Breadcrumb from '../../common/components/Breadcrumb';
 import {BreadcrumbItem} from '../../common/models/BreadcrumbItem';
 import TaskForm from '../components/form/TaskForm';
 import {Task} from '../models/Task';
-import {TaskUpsertState, ITaskUpsertResetAction} from '../types/upsert';
-import {reset} from '../actions/upsert';
+import {reset} from '../../common/actions/upsert';
 import {upsertTask} from '../middlewares/upsert';
 import ServerErrors from '../../common/components/ServerErrors';
+import {
+  CoreUpsertState,
+  ICoreUpsertResetAction
+} from '../../common/types/upsert';
 
 interface IProps {
-  upsert: TaskUpsertState;
-  reset(): ITaskUpsertResetAction;
+  upsert: CoreUpsertState<Task>;
+  reset(): ICoreUpsertResetAction;
   upsertTask(payload: Task): void;
 }
 
@@ -57,7 +60,7 @@ const AddView: React.FC<IProps> = ({upsertTask, reset, upsert}) => {
 
 export default connect(
   (state: AppState) => ({
-    upsert: state.task.upsert
+    upsert: state.core.upsert
   }),
   dispatch => ({
     ...bindActionCreators({reset, upsertTask}, dispatch)

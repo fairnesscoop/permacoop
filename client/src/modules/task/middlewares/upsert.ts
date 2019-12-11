@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux';
 import {AppState} from '../../../store/reducers';
-import {loading, errors, success} from '../actions/upsert';
+import {loading, errors, success} from '../../common/actions/upsert';
 import {errorNormalizer} from '../../../normalizer/errors';
 import {Task} from '../models/Task';
 

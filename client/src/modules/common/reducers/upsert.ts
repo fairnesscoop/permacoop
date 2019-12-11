@@ -1,12 +1,12 @@
-import {TaskUpsertState, TaskUpsertActionTypes} from '../types/upsert';
+import {CoreUpsertState, CoreUpsertActionTypes} from '../types/upsert';
 import {
-  TASK_UPSERT_SUCCESS,
-  TASK_UPSERT_LOADING,
-  TASK_UPSERT_ERROR,
-  TASK_UPSERT_RESET
+  CORE_UPSERT_SUCCESS,
+  CORE_UPSERT_LOADING,
+  CORE_UPSERT_ERROR,
+  CORE_UPSERT_RESET
 } from '../constants/upsert';
 
-const initialState: TaskUpsertState = {
+const initialState: CoreUpsertState<any> = {
   loading: false,
   errors: [],
   payload: null
@@ -14,28 +14,28 @@ const initialState: TaskUpsertState = {
 
 export const upsertReducers = (
   state = initialState,
-  action: TaskUpsertActionTypes
-): TaskUpsertState => {
+  action: CoreUpsertActionTypes
+): CoreUpsertState<any> => {
   switch (action.type) {
-    case TASK_UPSERT_SUCCESS:
+    case CORE_UPSERT_SUCCESS:
       return {
         ...state,
         payload: action.payload
       };
 
-    case TASK_UPSERT_LOADING:
+    case CORE_UPSERT_LOADING:
       return {
         ...state,
         loading: action.loading
       };
 
-    case TASK_UPSERT_ERROR:
+    case CORE_UPSERT_ERROR:
       return {
         ...state,
         errors: action.errors
       };
 
-    case TASK_UPSERT_RESET:
+    case CORE_UPSERT_RESET:
       return initialState;
 
     default:
