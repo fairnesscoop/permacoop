@@ -12,4 +12,18 @@ export class CustomerRepository {
 
     return customers;
   }
+
+  public static async save(payload: Customer): Promise<Customer> {
+    let response;
+
+    if (payload.id) {
+      response = await axios.put(`customers/${payload.id}`, payload);
+    } else {
+      response = await axios.post('customers', payload);
+    }
+
+    const {id, name} = response.data;
+
+    return new Customer(id, name);
+  }
 }

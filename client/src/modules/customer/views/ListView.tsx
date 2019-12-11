@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {Spinner, Row, Col, Table} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
@@ -35,6 +36,9 @@ const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
         <Col>
           <Breadcrumb items={[new BreadcrumbItem(t('customer.title'))]} />
           <ServerErrors errors={list.errors} />
+          <Link to={'/customers/add'} className={'btn btn-primary mb-3'}>
+            {t('customer.add.title')}
+          </Link>
           <Table striped bordered hover>
             <thead>
               <tr>
