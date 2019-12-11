@@ -1,12 +1,12 @@
-import {TaskListState, TaskListActionTypes} from '../types/list';
+import {CoreListState, CoreListActionTypes} from '../types/list';
 import {
-  TASK_LIST_SUCCESS,
-  TASK_LIST_LOADING,
-  TASK_LIST_ERROR,
-  TASK_LIST_RESET
+  CORE_LIST_SUCCESS,
+  CORE_LIST_LOADING,
+  CORE_LIST_ERROR,
+  CORE_LIST_RESET
 } from '../constants/list';
 
-const initialState: TaskListState = {
+const initialState: CoreListState<any> = {
   loading: false,
   errors: [],
   payload: []
@@ -14,28 +14,28 @@ const initialState: TaskListState = {
 
 export const listReducers = (
   state = initialState,
-  action: TaskListActionTypes
-): TaskListState => {
+  action: CoreListActionTypes
+): CoreListState<any> => {
   switch (action.type) {
-    case TASK_LIST_SUCCESS:
+    case CORE_LIST_SUCCESS:
       return {
         ...state,
         payload: action.payload
       };
 
-    case TASK_LIST_LOADING:
+    case CORE_LIST_LOADING:
       return {
         ...state,
         loading: action.loading
       };
 
-    case TASK_LIST_ERROR:
+    case CORE_LIST_ERROR:
       return {
         ...state,
         errors: action.errors
       };
 
-    case TASK_LIST_RESET:
+    case CORE_LIST_RESET:
       return initialState;
 
     default:
