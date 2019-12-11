@@ -4,7 +4,7 @@ import {
   PROJECT_LIST_ERROR,
   PROJECT_LIST_RESET
 } from '../constants/list';
-import {Error} from '../../common/models/Error';
+import {Error} from '../../core/models/Error';
 import {
   IProjectListSuccessAction,
   IProjectListLoadingAction,

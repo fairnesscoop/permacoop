@@ -2,7 +2,7 @@ import React from 'react';
 import {Form, Col, Row} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
 import {reduxForm, InjectedFormProps, Field} from 'redux-form';
-import TextInput from '../../../common/components/form/TextInput';
+import TextInput from '../../../core/components/form/TextInput';
 import {validate} from './validator/authentication';
 import {IAuthenticationForm} from '../../types/authentication';
 

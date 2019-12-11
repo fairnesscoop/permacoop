@@ -5,7 +5,7 @@ import task from '../modules/task/reducers';
 import customer from '../modules/customer/reducers';
 import project from '../modules/project/reducers';
 import user from '../modules/user/reducers';
-import core from '../modules/common/reducers';
+import core from '../modules/core/reducers';
 
 const rootReducer = combineReducers({
   form: formReducer,

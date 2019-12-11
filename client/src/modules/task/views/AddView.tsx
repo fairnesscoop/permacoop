@@ -5,17 +5,14 @@ import {bindActionCreators} from 'redux';
 import {Row, Col} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
 import {AppState} from '../../../store/reducers';
-import Breadcrumb from '../../common/components/Breadcrumb';
-import {BreadcrumbItem} from '../../common/models/BreadcrumbItem';
+import Breadcrumb from '../../core/components/Breadcrumb';
+import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import TaskForm from '../components/form/TaskForm';
 import {Task} from '../models/Task';
-import {reset} from '../../common/actions/upsert';
+import {reset} from '../../core/actions/upsert';
 import {upsertTask} from '../middlewares/upsert';
-import ServerErrors from '../../common/components/ServerErrors';
-import {
-  CoreUpsertState,
-  ICoreUpsertResetAction
-} from '../../common/types/upsert';
+import ServerErrors from '../../core/components/ServerErrors';
+import {CoreUpsertState, ICoreUpsertResetAction} from '../../core/types/upsert';
 
 interface IProps {
   upsert: CoreUpsertState<Task>;

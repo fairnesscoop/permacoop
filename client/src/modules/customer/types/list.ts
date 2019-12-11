@@ -1,6 +1,6 @@
-import {Error} from '../../common/models/Error';
+import {Error} from '../../core/models/Error';
 import {Customer} from '../models/Customer';
-import {ILoadingAction, IErrorAction} from '../../common/types/actions';
+import {ILoadingAction, IErrorAction} from '../../core/types/actions';
 import {
   CUSTOMER_LIST_LOADING,
   CUSTOMER_LIST_SUCCESS,

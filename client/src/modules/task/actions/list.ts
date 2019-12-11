@@ -4,7 +4,7 @@ import {
   TASK_LIST_ERROR,
   TASK_LIST_RESET
 } from '../constants/list';
-import {Error} from '../../common/models/Error';
+import {Error} from '../../core/models/Error';
 import {
   ITaskListSuccessAction,
   ITaskListLoadingAction,

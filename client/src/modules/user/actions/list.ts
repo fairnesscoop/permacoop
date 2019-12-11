@@ -4,7 +4,7 @@ import {
   USER_LIST_ERROR,
   USER_LIST_RESET
 } from '../constants/list';
-import {Error} from '../../common/models/Error';
+import {Error} from '../../core/models/Error';
 import {
   IUserListSuccessAction,
   IUserListLoadingAction,
