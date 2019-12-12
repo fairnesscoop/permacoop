@@ -1,10 +1,10 @@
 import {Dispatch} from 'redux';
 import {loading, errors, success} from '../actions/authentication';
 import {errorNormalizer} from '../../../normalizer/errors';
-import {IAuthenticationForm} from '../types/authentication';
 import {login} from '../repositories/login';
+import {AuthenticationFormData} from '../components/form/AuthenticationForm';
 
-export const authenticate = (payload: IAuthenticationForm) => async (
+export const authenticate = (payload: AuthenticationFormData) => async (
   dispatch: Dispatch
 ): Promise<void> => {
   dispatch(loading(true));

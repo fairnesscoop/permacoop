@@ -19,9 +19,9 @@ const Menu: React.FC<IProps> = ({user, logout}) => {
 
   return (
     <>
-      <Navbar bg={'light'} expand={'lg'} fixed={'top'}>
+      <Navbar bg={'dark'} variant={'dark'} expand={'lg'} fixed={'top'}>
         <Link className={'navbar-brand'} to={'/'}>
-          <img src={'/images/logo.png'} alt={'Fairness'} height={42} /> CoopERP
+          <img src={'/images/logo.png'} alt={'Fairness'} height={42} />
         </Link>
         {user && (
           <>

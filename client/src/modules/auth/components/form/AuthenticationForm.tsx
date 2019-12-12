@@ -4,14 +4,18 @@ import {useTranslation} from 'react-i18next';
 import {reduxForm, InjectedFormProps, Field} from 'redux-form';
 import TextInput from '../../../core/components/form/TextInput';
 import {validate} from './validator/authentication';
-import {IAuthenticationForm} from '../../types/authentication';
 
 interface IProps {
   loading: boolean;
 }
 
+export interface AuthenticationFormData {
+  email: string;
+  password: string;
+}
+
 const AuthenticationForm: React.FC<InjectedFormProps<
-  IAuthenticationForm,
+  AuthenticationFormData,
   IProps
 > &
   IProps> = ({loading, handleSubmit}: any) => {
@@ -46,7 +50,7 @@ const AuthenticationForm: React.FC<InjectedFormProps<
   );
 };
 
-export default reduxForm<IAuthenticationForm, IProps>({
+export default reduxForm<AuthenticationFormData, IProps>({
   form: 'login',
   validate
 })(AuthenticationForm);

@@ -47,7 +47,11 @@
       "add": {
         "title": "Ajouter un projet"
       },
+      "errors": {
+        "already_exist": "Ce projet a déjà été créé"
+      },
       "form": {
+        "customer": "Client",
         "name": "Nom du projet"
       }
     },
@@ -69,7 +73,11 @@
         "title": "Ajouter un client"
       },
       "form": {
-        "name": "Nom du client"
+        "name": "Nom du client",
+        "placeholder": "Choisir un client"
+      },
+      "errors": {
+        "not_found": "Le client n'existe pas"
       },
       "list": {
         "title": "Client"

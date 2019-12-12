@@ -12,18 +12,18 @@ import ServerErrors from '../../core/components/ServerErrors';
 import {CoreUpsertState, ICoreUpsertResetAction} from '../../core/types/upsert';
 import {Customer} from '../models/Customer';
 import {upsertCustomer} from '../middlewares/upsert';
-import CustomerForm from '../components/form/CustomerForm';
+import CustomerForm, {CustomerFormData} from '../components/form/CustomerForm';
 
 interface IProps {
   upsert: CoreUpsertState<Customer>;
   reset(): ICoreUpsertResetAction;
-  upsertCustomer(payload: Customer): void;
+  upsertCustomer(payload: CustomerFormData, id?: string): void;
 }
 
 const AddView: React.FC<IProps> = ({upsertCustomer, reset, upsert}) => {
   const {t} = useTranslation();
 
-  const handleSubmit = (payload: Customer) => {
+  const handleSubmit = (payload: CustomerFormData) => {
     upsertCustomer(payload);
   };
 
@@ -31,7 +31,7 @@ const AddView: React.FC<IProps> = ({upsertCustomer, reset, upsert}) => {
     return () => {
       reset();
     };
-  });
+  }, [reset]);
 
   if (upsert.payload) {
     return <Redirect to={'/customers'} />;

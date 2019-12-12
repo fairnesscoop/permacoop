@@ -2,9 +2,10 @@ import React, {useEffect} from 'react';
 import {Redirect} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import AuthenticationForm from '../components/form/AuthenticationForm';
+import AuthenticationForm, {
+  AuthenticationFormData
+} from '../components/form/AuthenticationForm';
 import {
-  IAuthenticationForm,
   AuthenticationState,
   IAuthenticationResetAction
 } from '../types/authentication';
@@ -15,7 +16,7 @@ import ServerErrors from '../../core/components/ServerErrors';
 
 interface IProps {
   authentication: AuthenticationState;
-  authenticate(payload: IAuthenticationForm): void;
+  authenticate(payload: AuthenticationFormData): void;
   reset(): IAuthenticationResetAction;
 }
 
@@ -24,7 +25,7 @@ const AuthenticationView: React.FC<IProps> = ({
   authenticate,
   reset
 }) => {
-  const handleSubmit = (payload: IAuthenticationForm) => {
+  const handleSubmit = (payload: AuthenticationFormData) => {
     authenticate(payload);
   };
 

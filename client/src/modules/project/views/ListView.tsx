@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Spinner, Row, Col, Table} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
+import {Link} from 'react-router-dom';
 import {AppState} from '../../../store/reducers';
 import {listProjects} from '../middlewares/list';
 import {reset} from '../../core/actions/list';
@@ -35,6 +36,9 @@ const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
         <Col>
           <Breadcrumb items={[new BreadcrumbItem(t('project.title'))]} />
           <ServerErrors errors={list.errors} />
+          <Link to={'/projects/add'} className={'btn btn-primary mb-3'}>
+            {t('project.add.title')}
+          </Link>
           <Table striped bordered hover>
             <thead>
               <tr>
