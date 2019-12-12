@@ -8,6 +8,12 @@ const List = Loadable({
   loading: LoadingComponent
 });
 
+const Add = Loadable({
+  loader: () => import('../views/AddView'),
+  loading: LoadingComponent
+});
+
 export default [
-  <SecuredRoute key={'user'} exact path={'/users'} component={List} />
+  <SecuredRoute key={'user'} exact path={'/users'} component={List} />,
+  <SecuredRoute key={'user.add'} exact path={'/users/add'} component={Add} />
 ];

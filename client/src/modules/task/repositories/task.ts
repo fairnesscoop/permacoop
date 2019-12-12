@@ -1,27 +1,30 @@
 import {client as axios} from '../../../utils/axios';
 import {Task} from '../models/Task';
+import {TaskFormData} from '../components/form/TaskForm';
+import {TaskFactory} from '../factory/TaskFactory';
 
 export const findTasks = async (): Promise<Task[]> => {
   const response = await axios.get('tasks');
   const tasks: Task[] = [];
 
-  for (const {id, name} of response.data) {
-    tasks.push(new Task(id, name));
+  for (const data of response.data) {
+    tasks.push(TaskFactory.create(data));
   }
 
   return tasks;
 };
 
-export const saveTask = async (payload: Task): Promise<Task> => {
+export const saveTask = async (
+  payload: TaskFormData,
+  id?: string
+): Promise<Task> => {
   let response;
 
-  if (payload.id) {
-    response = await axios.put(`tasks/${payload.id}`, payload);
+  if (id) {
+    response = await axios.put(`tasks/${id}`, payload);
   } else {
     response = await axios.post('tasks', payload);
   }
 
-  const {id, name} = response.data;
-
-  return new Task(id, name);
+  return TaskFactory.create(response.data);
 };

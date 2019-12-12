@@ -43,7 +43,6 @@ const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
             <thead>
               <tr>
                 <th>{t('customer.list.title')}</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -52,7 +51,6 @@ const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
                   customer instanceof Customer && (
                     <tr key={customer.id}>
                       <td>{customer.name}</td>
-                      <td></td>
                     </tr>
                   )
               )}

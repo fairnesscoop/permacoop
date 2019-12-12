@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Spinner, Row, Col, Table} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {AppState} from '../../../store/reducers';
 import {listUsers} from '../middlewares/list';
@@ -35,13 +36,15 @@ const ListView: React.FC<IProps> = ({list, listUsers, reset}) => {
         <Col>
           <Breadcrumb items={[new BreadcrumbItem(t('user.title'))]} />
           <ServerErrors errors={list.errors} />
+          <Link to={'/users/add'} className={'btn btn-primary mb-3'}>
+            {t('user.add.title')}
+          </Link>
           <Table striped bordered hover>
             <thead>
               <tr>
                 <th>{t('user.firstName')}</th>
                 <th>{t('user.lastName')}</th>
                 <th>{t('user.email')}</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -52,7 +55,6 @@ const ListView: React.FC<IProps> = ({list, listUsers, reset}) => {
                       <td>{user.firstName}</td>
                       <td>{user.lastName}</td>
                       <td>{user.email}</td>
-                      <td></td>
                     </tr>
                   )
               )}
