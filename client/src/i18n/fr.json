@@ -30,8 +30,7 @@
     "project": {
       "title": "Projets",
       "list": {
-        "title": "Projet",
-        "noItems": "Il n'y a pas encore de projet."
+        "title": "Projet"
       },
       "add": {
         "title": "Ajouter un projet"
@@ -43,8 +42,7 @@
     "task": {
       "title": "Missions",
       "list": {
-        "title": "Mission",
-        "noItems": "Il n'y a pas encore de mission."
+        "title": "Mission"
       },
       "add": {
         "title": "Ajouter une mission"
@@ -62,8 +60,7 @@
         "name": "Nom du client"
       },
       "list": {
-        "title": "Client",
-        "noItems": "Il n'y a pas encore de client."
+        "title": "Client"
       }
     },
     "authentication": {
