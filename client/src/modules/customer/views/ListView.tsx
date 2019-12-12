@@ -56,11 +56,6 @@ const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
                     </tr>
                   )
               )}
-              {0 === list.payload.length && (
-                <tr>
-                  <td colSpan={2}>{t('customer.list.noItems')}</td>
-                </tr>
-              )}
             </tbody>
           </Table>
         </Col>

@@ -1,7 +1,7 @@
 import {Dispatch} from 'redux';
 import {loading, errors, success} from '../../core/actions/list';
 import {errorNormalizer} from '../../../normalizer/errors';
-import {CustomerRepository} from '../repositories/CustomerRepository';
+import {findCustomers} from '../repositories/customer';
 
 export const listCustomers = () => async (
   dispatch: Dispatch
@@ -9,7 +9,7 @@ export const listCustomers = () => async (
   dispatch(loading(true));
 
   try {
-    dispatch(success(await CustomerRepository.findCustomers()));
+    dispatch(success(await findCustomers()));
   } catch (e) {
     dispatch(errors(errorNormalizer(e)));
   } finally {

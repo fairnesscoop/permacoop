@@ -2,7 +2,7 @@ import {Dispatch} from 'redux';
 import {loading, errors, success} from '../../core/actions/upsert';
 import {errorNormalizer} from '../../../normalizer/errors';
 import {Task} from '../models/Task';
-import {TaskRepository} from '../repositories/TaskRepository';
+import {saveTask} from '../repositories/task';
 
 export const upsertTask = (payload: Task) => async (
   dispatch: Dispatch
@@ -10,7 +10,7 @@ export const upsertTask = (payload: Task) => async (
   dispatch(loading(true));
 
   try {
-    dispatch(success(await TaskRepository.save(payload)));
+    dispatch(success(await saveTask(payload)));
   } catch (e) {
     dispatch(errors(errorNormalizer(e)));
   } finally {
