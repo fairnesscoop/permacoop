@@ -1,13 +1,10 @@
 import {FormErrors} from 'redux-form';
 import i18n from '../../../../../i18n';
 import {REQUIRED_FIELD} from '../../../../core/constants/validators';
+import {TaskFormData} from '../TaskForm';
 
-export interface ITaskUpsertValidation {
-  name: string;
-}
-
-export const validate = (payload: any): FormErrors<ITaskUpsertValidation> => {
-  const errors: FormErrors<ITaskUpsertValidation> = {};
+export const validate = (payload: TaskFormData): FormErrors<TaskFormData> => {
+  const errors: FormErrors<TaskFormData> = {};
 
   if (!payload.name) {
     errors.name = i18n.t(REQUIRED_FIELD);

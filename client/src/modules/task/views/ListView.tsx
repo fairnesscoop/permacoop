@@ -43,7 +43,6 @@ const ListView: React.FC<IProps> = ({list, listTasks, reset}) => {
             <thead>
               <tr>
                 <th>{t('task.list.title')}</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -52,7 +51,6 @@ const ListView: React.FC<IProps> = ({list, listTasks, reset}) => {
                   task instanceof Task && (
                     <tr key={task.id}>
                       <td>{task.name}</td>
-                      <td></td>
                     </tr>
                   )
               )}

@@ -1,16 +1,16 @@
 import {Dispatch} from 'redux';
 import {loading, errors, success} from '../../core/actions/upsert';
 import {errorNormalizer} from '../../../normalizer/errors';
-import {saveTask} from '../repositories/task';
-import {TaskFormData} from '../components/form/TaskForm';
+import {saveUser} from '../repositories/user';
+import {UserFormData} from '../components/form/UserForm';
 
-export const upsertTask = (payload: TaskFormData, id?: string) => async (
+export const upsertUser = (payload: UserFormData, id?: string) => async (
   dispatch: Dispatch
 ): Promise<void> => {
   dispatch(loading(true));
 
   try {
-    dispatch(success(await saveTask(payload, id)));
+    dispatch(success(await saveUser(payload, id)));
   } catch (e) {
     dispatch(errors(errorNormalizer(e)));
   } finally {
