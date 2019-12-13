@@ -9,7 +9,7 @@ import {
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
-import {CreateProjectCommand} from 'src/Application/Project/Command/Project/CreateProjectCommand';
+import {CreateProjectCommand} from 'src/Application/Project/Command/CreateProjectCommand';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
 
 @Controller('projects')

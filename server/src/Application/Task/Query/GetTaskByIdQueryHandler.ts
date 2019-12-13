@@ -1,9 +1,9 @@
 import {Inject} from '@nestjs/common';
 import {QueryHandler} from '@nestjs/cqrs';
-import {ITaskRepository} from 'src/Domain/Project/Repository/ITaskRepository';
-import {TaskView} from '../../View/TaskView';
+import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
+import {TaskView} from '../View/TaskView';
 import {GetTaskByIdQuery} from './GetTaskByIdQuery';
-import {TaskNotFoundException} from 'src/Domain/Project/Exception/TaskNotFoundException';
+import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
 
 @QueryHandler(GetTaskByIdQuery)
 export class GetTaskByIdQueryHandler {

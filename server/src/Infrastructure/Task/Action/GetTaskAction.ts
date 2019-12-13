@@ -8,8 +8,8 @@ import {
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {TaskView} from 'src/Application/Project/View/TaskView';
-import {GetTaskByIdQuery} from 'src/Application/Project/Query/Task/GetTaskByIdQuery';
+import {TaskView} from 'src/Application/Task/View/TaskView';
+import {GetTaskByIdQuery} from 'src/Application/Task/Query/GetTaskByIdQuery';
 import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
 
 @Controller('tasks')

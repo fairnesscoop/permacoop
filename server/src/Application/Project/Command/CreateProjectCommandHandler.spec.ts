@@ -1,9 +1,9 @@
 import {instance, mock, when, deepEqual, verify, anything} from 'ts-mockito';
-import {CreateProjectCommandHandler} from 'src/Application/Project/Command/Project/CreateProjectCommandHandler';
+import {CreateProjectCommandHandler} from 'src/Application/Project/Command/CreateProjectCommandHandler';
 import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
 import {QueryBusAdapter} from 'src/Infrastructure/Adapter/QueryBusAdapter';
 import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
-import {CreateProjectCommand} from 'src/Application/Project/Command/Project/CreateProjectCommand';
+import {CreateProjectCommand} from 'src/Application/Project/Command/CreateProjectCommand';
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 import {GetCustomerByIdQuery} from 'src/Application/Customer/Query/GetCustomerByIdQuery';
 import {Customer} from 'src/Domain/Customer/Customer.entity';

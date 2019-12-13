@@ -42,8 +42,8 @@ const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>{t('project.title')}</th>
                 <th>{t('customer.title')}</th>
+                <th>{t('project.title')}</th>
               </tr>
             </thead>
             <tbody>
@@ -51,8 +51,8 @@ const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
                 project =>
                   project instanceof Project && (
                     <tr key={project.id}>
-                      <td>{project.name}</td>
                       <td>{project.customer.name}</td>
+                      <td>{project.name}</td>
                     </tr>
                   )
               )}

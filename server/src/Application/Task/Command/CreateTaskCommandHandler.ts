@@ -1,11 +1,11 @@
 import {Inject} from '@nestjs/common';
 import {CommandHandler} from '@nestjs/cqrs';
 import {CreateTaskCommand} from './CreateTaskCommand';
-import {ITaskRepository} from 'src/Domain/Project/Repository/ITaskRepository';
-import {TaskView} from '../../View/TaskView';
-import {IsTaskAlreadyExist} from 'src/Domain/Project/Specification/IsTaskAlreadyExist';
-import {TaskAlreadyExistException} from 'src/Domain/Project/Exception/TaskAlreadyExistException';
-import {Task} from 'src/Domain/Project/Task.entity';
+import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
+import {TaskView} from '../View/TaskView';
+import {IsTaskAlreadyExist} from 'src/Domain/Task/Specification/IsTaskAlreadyExist';
+import {TaskAlreadyExistException} from 'src/Domain/Task/Exception/TaskAlreadyExistException';
+import {Task} from 'src/Domain/Task/Task.entity';
 
 @CommandHandler(CreateTaskCommand)
 export class CreateTaskCommandHandler {

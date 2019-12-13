@@ -1,7 +1,7 @@
 import {mock, instance, when, verify} from 'ts-mockito';
-import {TaskRepository} from 'src/Infrastructure/Project/Repository/TaskRepository';
-import {IsTaskAlreadyExist} from 'src/Domain/Project/Specification/IsTaskAlreadyExist';
-import {Task} from 'src/Domain/Project/Task.entity';
+import {TaskRepository} from 'src/Infrastructure/Task/Repository/TaskRepository';
+import {IsTaskAlreadyExist} from 'src/Domain/Task/Specification/IsTaskAlreadyExist';
+import {Task} from 'src/Domain/Task/Task.entity';
 
 describe('IsTaskAlreadyExist', () => {
   let taskRepository: TaskRepository;

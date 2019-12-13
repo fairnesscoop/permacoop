@@ -2,7 +2,7 @@ import {Module} from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {BusModule} from '../bus.module';
 import {CustomerRepository} from './Repository/CustomerRepository';
-import {Task} from 'src/Domain/Project/Task.entity';
+import {Task} from 'src/Domain/Task/Task.entity';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {CreateCustomerAction} from './Action/CreateCustomerAction';

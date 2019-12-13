@@ -6,7 +6,7 @@ import {GetCustomerByIdQuery} from 'src/Application/Customer/Query/GetCustomerBy
 import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {ProjectView} from '../../View/ProjectView';
+import {ProjectView} from '../View/ProjectView';
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
 import {ProjectAlreadyExistException} from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
