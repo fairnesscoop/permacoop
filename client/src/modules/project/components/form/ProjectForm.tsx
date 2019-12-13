@@ -4,17 +4,19 @@ import {Field, reduxForm, InjectedFormProps} from 'redux-form';
 import {useTranslation} from 'react-i18next';
 import TextInput from '../../../core/components/form/TextInput';
 import {SubmitButton} from '../../../core/components/form/SubmitButton';
-import {validate} from './validator/customer';
+import {validate} from './validator/project';
+import {CustomerInput} from '../../../customer/components/form/input/CustomerInput';
 
 interface IProps {
   loading: boolean;
 }
 
-export interface CustomerFormData {
+export interface ProjectFormData {
   name: string;
+  customerId: string;
 }
 
-const CustomerForm: React.FC<InjectedFormProps<CustomerFormData, IProps> &
+const ProjectForm: React.FC<InjectedFormProps<ProjectFormData, IProps> &
   IProps> = ({handleSubmit, loading}) => {
   const {t} = useTranslation();
 
@@ -24,9 +26,10 @@ const CustomerForm: React.FC<InjectedFormProps<CustomerFormData, IProps> &
         <Form onSubmit={handleSubmit} className={'m-3'}>
           <Field
             name={'name'}
-            label={t('customer.form.name')}
+            label={t('project.form.name')}
             component={TextInput}
           />
+          <CustomerInput />
           <SubmitButton loading={loading} />
         </Form>
       </Col>
@@ -34,7 +37,6 @@ const CustomerForm: React.FC<InjectedFormProps<CustomerFormData, IProps> &
   );
 };
 
-export default reduxForm<CustomerFormData, IProps>({
-  form: 'customer',
-  validate
-})(CustomerForm);
+export default reduxForm<ProjectFormData, IProps>({form: 'project', validate})(
+  ProjectForm
+);

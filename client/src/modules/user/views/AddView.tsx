@@ -17,7 +17,7 @@ import {CoreUpsertState, ICoreUpsertResetAction} from '../../core/types/upsert';
 interface IProps {
   upsert: CoreUpsertState<User>;
   reset(): ICoreUpsertResetAction;
-  upsertUser(payload: UserFormData): void;
+  upsertUser(payload: UserFormData, id?: string): void;
 }
 
 const AddView: React.FC<IProps> = ({upsertUser, reset, upsert}) => {

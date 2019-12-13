@@ -7,24 +7,24 @@ import {useTranslation} from 'react-i18next';
 import {AppState} from '../../../store/reducers';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
-import TaskForm, {TaskFormData} from '../components/form/TaskForm';
-import {Task} from '../models/Task';
+import ProjectForm, {ProjectFormData} from '../components/form/ProjectForm';
+import {Project} from '../models/Project';
 import {reset} from '../../core/actions/upsert';
-import {upsertTask} from '../middlewares/upsert';
+import {upsertProject} from '../middlewares/upsert';
 import ServerErrors from '../../core/components/ServerErrors';
 import {CoreUpsertState, ICoreUpsertResetAction} from '../../core/types/upsert';
 
 interface IProps {
-  upsert: CoreUpsertState<Task>;
+  upsert: CoreUpsertState<Project>;
   reset(): ICoreUpsertResetAction;
-  upsertTask(payload: TaskFormData, id?: string): void;
+  upsertProject(payload: ProjectFormData, id?: string): void;
 }
 
-const AddView: React.FC<IProps> = ({upsertTask, reset, upsert}) => {
+const AddView: React.FC<IProps> = ({upsertProject, reset, upsert}) => {
   const {t} = useTranslation();
 
-  const handleSubmit = (payload: TaskFormData) => {
-    upsertTask(payload);
+  const handleSubmit = (payload: ProjectFormData) => {
+    upsertProject(payload);
   };
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const AddView: React.FC<IProps> = ({upsertTask, reset, upsert}) => {
   }, [reset]);
 
   if (upsert.payload) {
-    return <Redirect to={'/tasks'} />;
+    return <Redirect to={'/projects'} />;
   }
 
   return (
@@ -43,14 +43,14 @@ const AddView: React.FC<IProps> = ({upsertTask, reset, upsert}) => {
         <Col>
           <Breadcrumb
             items={[
-              new BreadcrumbItem(t('task.title'), '/tasks', false),
-              new BreadcrumbItem(t('task.add.title'))
+              new BreadcrumbItem(t('project.title'), '/projects', false),
+              new BreadcrumbItem(t('project.add.title'))
             ]}
           />
           <ServerErrors errors={upsert.errors} />
         </Col>
       </Row>
-      <TaskForm loading={upsert.loading} onSubmit={handleSubmit} />
+      <ProjectForm loading={upsert.loading} onSubmit={handleSubmit} />
     </>
   );
 };
@@ -60,6 +60,6 @@ export default connect(
     upsert: state.core.upsert
   }),
   dispatch => ({
-    ...bindActionCreators({reset, upsertTask}, dispatch)
+    ...bindActionCreators({reset, upsertProject}, dispatch)
   })
 )(AddView);

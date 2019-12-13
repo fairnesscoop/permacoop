@@ -36,11 +36,6 @@ export interface IAuthenticationResetAction {
   type: typeof AUTH_AUTHENTICATION_RESET;
 }
 
-export interface IAuthenticationForm {
-  email: string;
-  password: string;
-}
-
 export type AuthenticationActionTypes =
   | IAuthenticationLoadingAction
   | IAuthenticationErrorAction

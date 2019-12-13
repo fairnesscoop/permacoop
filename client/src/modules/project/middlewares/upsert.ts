@@ -1,17 +1,16 @@
 import {Dispatch} from 'redux';
 import {loading, errors, success} from '../../core/actions/upsert';
 import {errorNormalizer} from '../../../normalizer/errors';
-import {saveCustomer} from '../repositories/customer';
-import {CustomerFormData} from '../components/form/CustomerForm';
+import {saveProject} from '../repositories/project';
+import {ProjectFormData} from '../components/form/ProjectForm';
 
-export const upsertCustomer = (
-  payload: CustomerFormData,
-  id?: string
-) => async (dispatch: Dispatch): Promise<void> => {
+export const upsertProject = (payload: ProjectFormData, id?: string) => async (
+  dispatch: Dispatch
+): Promise<void> => {
   dispatch(loading(true));
 
   try {
-    dispatch(success(await saveCustomer(payload, id)));
+    dispatch(success(await saveProject(payload, id)));
   } catch (e) {
     dispatch(errors(errorNormalizer(e)));
   } finally {
