@@ -17,6 +17,8 @@ import {GetTasksAction} from './Action/Task/GetTasksAction';
 import {GetTasksQueryHandler} from 'src/Application/Project/Query/Task/GetTasksQueryHandler';
 import {GetProjectsAction} from './Action/Project/GetProjectsAction';
 import {GetProjectsQueryHandler} from 'src/Application/Project/Query/Project/GetProjectsQueryHandler';
+import {UpdateTaskCommandHandler} from 'src/Application/Project/Command/Task/UpdateTaskCommandHandler';
+import {UpdateTaskAction} from './Action/Task/UpdateTaskAction';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Task, Project, Customer])],
@@ -24,7 +26,8 @@ import {GetProjectsQueryHandler} from 'src/Application/Project/Query/Project/Get
     CreateTaskAction,
     CreateProjectAction,
     GetTasksAction,
-    GetProjectsAction
+    GetProjectsAction,
+    UpdateTaskAction
   ],
   providers: [
     {provide: 'ITaskRepository', useClass: TaskRepository},
@@ -35,7 +38,8 @@ import {GetProjectsQueryHandler} from 'src/Application/Project/Query/Project/Get
     IsTaskAlreadyExist,
     IsProjectAlreadyExist,
     GetTasksQueryHandler,
-    GetProjectsQueryHandler
+    GetProjectsQueryHandler,
+    UpdateTaskCommandHandler
   ]
 })
 export class ProjectModule {}

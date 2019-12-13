@@ -19,4 +19,8 @@ export class Task {
   public getName(): string {
     return this.name;
   }
+
+  public updateName(name: string): void {
+    this.name = name;
+  }
 }
