@@ -19,7 +19,7 @@ import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 import {UpdateTaskCommand} from 'src/Application/Project/Command/Task/UpdateTaskCommand';
 
 @Controller('tasks')
-@ApiUseTags('Project')
+@ApiUseTags('Task')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'))
 export class UpdateTaskAction {

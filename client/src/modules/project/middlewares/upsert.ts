@@ -4,13 +4,13 @@ import {errorNormalizer} from '../../../normalizer/errors';
 import {saveProject} from '../repositories/project';
 import {ProjectFormData} from '../components/form/ProjectForm';
 
-export const upsertProject = (payload: ProjectFormData, id?: string) => async (
+export const upsertProject = (payload: ProjectFormData) => async (
   dispatch: Dispatch
 ): Promise<void> => {
   dispatch(loading(true));
 
   try {
-    dispatch(success(await saveProject(payload, id)));
+    dispatch(success(await saveProject(payload)));
   } catch (e) {
     dispatch(errors(errorNormalizer(e)));
   } finally {

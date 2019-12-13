@@ -12,6 +12,7 @@ interface IProps {
 }
 
 export interface ProjectFormData {
+  id?: string;
   name: string;
   customerId: string;
 }

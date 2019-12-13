@@ -11,6 +11,7 @@ interface IProps {
 }
 
 export interface CustomerFormData {
+  id?: string;
   name: string;
 }
 

@@ -15,13 +15,12 @@ export const findCustomers = async (): Promise<Customer[]> => {
 };
 
 export const saveCustomer = async (
-  payload: CustomerFormData,
-  id?: string
+  payload: CustomerFormData
 ): Promise<Customer> => {
   let response;
 
-  if (id) {
-    response = await axios.put(`customers/${id}`, payload);
+  if (payload.id) {
+    response = await axios.put(`customers/${payload.id}`, payload);
   } else {
     response = await axios.post('customers', payload);
   }

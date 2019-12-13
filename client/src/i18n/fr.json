@@ -7,7 +7,8 @@
     "form": {
       "buttons": {
         "connect": "Se connecter",
-        "save": "Sauvegarder"
+        "save": "Valider",
+        "update": "Modifier"
       },
       "errors": {
         "requiredField": "Ce champs est requis.",
@@ -56,15 +57,21 @@
       }
     },
     "task": {
-      "title": "Missions",
+      "title": "Types de missions",
       "list": {
-        "title": "Mission"
+        "title": "Type de mission"
       },
       "add": {
-        "title": "Ajouter une mission"
+        "title": "Ajouter un type de mission"
+      },
+      "update": {
+        "title": "Edition du type \"{{name}}\""
+      },
+      "errors": {
+        "already_exist": "Ce type de mission existe déjà"
       },
       "form": {
-        "name": "Nom de la mission"
+        "name": "Nom du type de mission"
       }
     },
     "customer": {

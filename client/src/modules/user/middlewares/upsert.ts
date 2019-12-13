@@ -4,13 +4,13 @@ import {errorNormalizer} from '../../../normalizer/errors';
 import {saveUser} from '../repositories/user';
 import {UserFormData} from '../components/form/UserForm';
 
-export const upsertUser = (payload: UserFormData, id?: string) => async (
+export const upsertUser = (payload: UserFormData) => async (
   dispatch: Dispatch
 ): Promise<void> => {
   dispatch(loading(true));
 
   try {
-    dispatch(success(await saveUser(payload, id)));
+    dispatch(success(await saveUser(payload)));
   } catch (e) {
     dispatch(errors(errorNormalizer(e)));
   } finally {

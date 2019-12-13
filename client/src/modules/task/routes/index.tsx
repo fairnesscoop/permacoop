@@ -13,7 +13,18 @@ const Add = Loadable({
   loading: LoadingComponent
 });
 
+const Update = Loadable({
+  loader: () => import('../views/UpdateView'),
+  loading: LoadingComponent
+});
+
 export default [
   <SecuredRoute key={'task'} exact path={'/tasks'} component={List} />,
-  <SecuredRoute key={'task.add'} exact path={'/tasks/add'} component={Add} />
+  <SecuredRoute key={'task.add'} exact path={'/tasks/add'} component={Add} />,
+  <SecuredRoute
+    key={'task.update'}
+    exact
+    path={'/tasks/:id/edit'}
+    component={Update}
+  />
 ];

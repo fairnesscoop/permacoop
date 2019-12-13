@@ -11,6 +11,7 @@ interface IProps {
 }
 
 export interface TaskFormData {
+  id?: string;
   name: string;
 }
 

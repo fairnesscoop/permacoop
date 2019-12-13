@@ -6,7 +6,7 @@ import {GetTasksQuery} from 'src/Application/Project/Query/Task/GetTasksQuery';
 import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
 
 @Controller('tasks')
-@ApiUseTags('Project')
+@ApiUseTags('Task')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'))
 export class GetTasksAction {

@@ -6,7 +6,6 @@ import {Provider} from 'react-redux';
 import configureStore from './store';
 import * as serviceWorker from './serviceWorker';
 import Layout from './modules/core/components/Layout';
-import commonRoutes from './modules/core/routes';
 import taskRoutes from './modules/task/routes';
 import projectRoutes from './modules/project/routes';
 import customerRoutes from './modules/customer/routes';
@@ -27,7 +26,6 @@ ReactDOM.render(
             {customerRoutes}
             {projectRoutes}
             {userRoutes}
-            {commonRoutes}
           </Switch>
         </Layout>
       </BrowserRouter>

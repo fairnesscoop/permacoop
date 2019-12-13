@@ -15,13 +15,12 @@ export const findProjects = async (): Promise<Project[]> => {
 };
 
 export const saveProject = async (
-  payload: ProjectFormData,
-  id?: string
+  payload: ProjectFormData
 ): Promise<Project> => {
   let response;
 
-  if (id) {
-    response = await axios.put(`projects/${id}`, payload);
+  if (payload.id) {
+    response = await axios.put(`projects/${payload.id}`, payload);
   } else {
     response = await axios.post('projects', payload);
   }

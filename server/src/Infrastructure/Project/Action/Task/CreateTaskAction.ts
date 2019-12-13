@@ -13,7 +13,7 @@ import {TaskView} from 'src/Application/Project/View/TaskView';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 
 @Controller('tasks')
-@ApiUseTags('Project')
+@ApiUseTags('Task')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'))
 export class CreateTaskAction {
