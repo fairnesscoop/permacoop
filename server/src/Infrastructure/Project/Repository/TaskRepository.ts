@@ -22,6 +22,13 @@ export class TaskRepository implements ITaskRepository {
       .getOne();
   }
 
+  public findOneById(id: string): Promise<Task | undefined> {
+    return this.repository
+      .createQueryBuilder('task')
+      .where('task.id = :id', {id})
+      .getOne();
+  }
+
   public findTasks(): Promise<Task[]> {
     return this.repository
       .createQueryBuilder('task')

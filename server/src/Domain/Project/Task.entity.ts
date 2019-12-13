@@ -1,4 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import {thisExpression} from '@babel/types';
 
 @Entity()
 export class Task {
@@ -18,5 +19,9 @@ export class Task {
 
   public getName(): string {
     return this.name;
+  }
+
+  public updateName(name: string): void {
+    this.name = name;
   }
 }
