@@ -23,11 +23,11 @@ import {UpdateTaskAction} from './Action/Task/UpdateTaskAction';
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Task, Project, Customer])],
   controllers: [
-    CreateTaskAction,
-    CreateProjectAction,
     GetTasksAction,
+    CreateTaskAction,
+    UpdateTaskAction,
     GetProjectsAction,
-    UpdateTaskAction
+    CreateProjectAction
   ],
   providers: [
     {provide: 'ITaskRepository', useClass: TaskRepository},

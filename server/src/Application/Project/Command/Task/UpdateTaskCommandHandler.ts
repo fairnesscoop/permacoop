@@ -23,11 +23,15 @@ export class UpdateTaskCommandHandler {
       throw new TaskNotFoundException();
     }
 
-    if (true === (await this.isTaskAlreadyExist.isSatisfiedBy(name))) {
+    if (
+      name !== task.getName() &&
+      true === (await this.isTaskAlreadyExist.isSatisfiedBy(name))
+    ) {
       throw new TaskAlreadyExistException();
     }
 
     task.updateName(name);
+
     await this.taskRepository.save(task);
 
     return new TaskView(task.getId(), task.getName());
