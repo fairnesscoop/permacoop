@@ -1,43 +1,31 @@
 import {
   Body,
+  Post,
   Controller,
   Inject,
   BadRequestException,
-  UseGuards,
-  Put,
-  Param
+  UseGuards
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {
-  ApiUseTags,
-  ApiBearerAuth,
-  ApiOperation,
-  ApiImplicitParam
-} from '@nestjs/swagger';
-import {TaskView} from 'src/Application/Project/View/TaskView';
+import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {CreateTaskCommand} from 'src/Application/Task/Command/CreateTaskCommand';
+import {TaskView} from 'src/Application/Task/View/TaskView';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
-import {UpdateTaskCommand} from 'src/Application/Project/Command/Task/UpdateTaskCommand';
 
 @Controller('tasks')
 @ApiUseTags('Task')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'))
-export class UpdateTaskAction {
+export class CreateTaskAction {
   constructor(
     @Inject('ICommandBusAdapter')
     private readonly commandBus: ICommandBusAdapter
   ) {}
 
-  @Put(':id')
-  @ApiImplicitParam({name: 'id'})
-  @ApiOperation({title: 'Update task'})
-  public async index(
-    @Param('id') id,
-    @Body() command: UpdateTaskCommand
-  ): Promise<TaskView> {
+  @Post()
+  @ApiOperation({title: 'Create new task'})
+  public async index(@Body() command: CreateTaskCommand): Promise<TaskView> {
     try {
-      command.id = id;
-
       return await this.commandBus.execute(command);
     } catch (e) {
       throw new BadRequestException(e.message);

@@ -3,7 +3,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
-import {GetProjectsQuery} from 'src/Application/Project/Query/Project/GetProjectsQuery';
+import {GetProjectsQuery} from 'src/Application/Project/Query/GetProjectsQuery';
 
 @Controller('projects')
 @ApiUseTags('Project')

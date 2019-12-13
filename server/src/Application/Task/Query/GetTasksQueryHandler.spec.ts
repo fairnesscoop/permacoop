@@ -1,9 +1,9 @@
 import {mock, instance, when, verify} from 'ts-mockito';
-import {GetTasksQueryHandler} from 'src/Application/Project/Query/Task/GetTasksQueryHandler';
-import {TaskRepository} from 'src/Infrastructure/Project/Repository/TaskRepository';
-import {GetTasksQuery} from 'src/Application/Project/Query/Task/GetTasksQuery';
-import {Task} from 'src/Domain/Project/Task.entity';
-import {TaskView} from 'src/Application/Project/View/TaskView';
+import {GetTasksQueryHandler} from 'src/Application/Task/Query/GetTasksQueryHandler';
+import {TaskRepository} from 'src/Infrastructure/Task/Repository/TaskRepository';
+import {GetTasksQuery} from 'src/Application/Task/Query/GetTasksQuery';
+import {Task} from 'src/Domain/Task/Task.entity';
+import {TaskView} from 'src/Application/Task/View/TaskView';
 
 describe('GetTasksQueryHandler', () => {
   it('testGetTasks', async () => {

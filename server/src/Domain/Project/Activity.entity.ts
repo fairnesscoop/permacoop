@@ -1,7 +1,7 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import {User} from '../User/User.entity';
 import {Project} from './Project.entity';
-import {Task} from './Task.entity';
+import {Task} from '../Task/Task.entity';
 
 @Entity()
 export class Activity {

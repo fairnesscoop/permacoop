@@ -1,7 +1,7 @@
 import {mock, instance, when, verify} from 'ts-mockito';
-import {GetProjectsQueryHandler} from 'src/Application/Project/Query/Project/GetProjectsQueryHandler';
+import {GetProjectsQueryHandler} from 'src/Application/Project/Query/GetProjectsQueryHandler';
 import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
-import {GetProjectsQuery} from 'src/Application/Project/Query/Project/GetProjectsQuery';
+import {GetProjectsQuery} from 'src/Application/Project/Query/GetProjectsQuery';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {Customer} from 'src/Domain/Customer/Customer.entity';

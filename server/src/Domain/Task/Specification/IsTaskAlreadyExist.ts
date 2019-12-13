@@ -1,7 +1,7 @@
 import {Injectable, Inject} from '@nestjs/common';
 import {ISpecification} from 'src/Domain/ISpecification';
-import {ITaskRepository} from '../../Task/Repository/ITaskRepository';
-import {Task} from '../../Task/Task.entity';
+import {ITaskRepository} from '../Repository/ITaskRepository';
+import {Task} from '../Task.entity';
 
 @Injectable()
 export class IsTaskAlreadyExist implements ISpecification {

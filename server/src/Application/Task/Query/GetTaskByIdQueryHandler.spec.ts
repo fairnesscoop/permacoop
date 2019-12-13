@@ -1,10 +1,10 @@
 import {mock, instance, when, verify} from 'ts-mockito';
-import {TaskRepository} from 'src/Infrastructure/Project/Repository/TaskRepository';
-import {Task} from 'src/Domain/Project/Task.entity';
-import {TaskView} from 'src/Application/Project/View/TaskView';
+import {TaskRepository} from 'src/Infrastructure/Task/Repository/TaskRepository';
+import {Task} from 'src/Domain/Task/Task.entity';
+import {TaskView} from 'src/Application/Task/View/TaskView';
 import {GetTaskByIdQueryHandler} from './GetTaskByIdQueryHandler';
 import {GetTaskByIdQuery} from './GetTaskByIdQuery';
-import {TaskNotFoundException} from 'src/Domain/Project/Exception/TaskNotFoundException';
+import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
 
 describe('GetTaskByIdQueryHandler', () => {
   const query = new GetTaskByIdQuery();

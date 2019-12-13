@@ -1,8 +1,8 @@
 import {Controller, Inject, UseGuards, Get} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {TaskView} from 'src/Application/Project/View/TaskView';
-import {GetTasksQuery} from 'src/Application/Project/Query/Task/GetTasksQuery';
+import {TaskView} from 'src/Application/Task/View/TaskView';
+import {GetTasksQuery} from 'src/Application/Task/Query/GetTasksQuery';
 import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
 
 @Controller('tasks')

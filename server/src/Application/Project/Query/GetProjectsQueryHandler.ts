@@ -1,7 +1,7 @@
 import {QueryHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
 import {GetProjectsQuery} from './GetProjectsQuery';
-import {ProjectView} from '../../View/ProjectView';
+import {ProjectView} from '../View/ProjectView';
 import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 
