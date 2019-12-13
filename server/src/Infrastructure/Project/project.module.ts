@@ -19,11 +19,14 @@ import {GetProjectsAction} from './Action/Project/GetProjectsAction';
 import {GetProjectsQueryHandler} from 'src/Application/Project/Query/Project/GetProjectsQueryHandler';
 import {UpdateTaskCommandHandler} from 'src/Application/Project/Command/Task/UpdateTaskCommandHandler';
 import {UpdateTaskAction} from './Action/Task/UpdateTaskAction';
+import {GetTaskAction} from './Action/Task/GetTaskAction';
+import {GetTaskByIdQueryHandler} from 'src/Application/Project/Query/Task/GetTaskByIdQueryHandler';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Task, Project, Customer])],
   controllers: [
     GetTasksAction,
+    GetTaskAction,
     CreateTaskAction,
     UpdateTaskAction,
     GetProjectsAction,
@@ -39,7 +42,8 @@ import {UpdateTaskAction} from './Action/Task/UpdateTaskAction';
     IsProjectAlreadyExist,
     GetTasksQueryHandler,
     GetProjectsQueryHandler,
-    UpdateTaskCommandHandler
+    UpdateTaskCommandHandler,
+    GetTaskByIdQueryHandler
   ]
 })
 export class ProjectModule {}

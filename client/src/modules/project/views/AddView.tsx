@@ -17,7 +17,7 @@ import {CoreUpsertState, ICoreUpsertResetAction} from '../../core/types/upsert';
 interface IProps {
   upsert: CoreUpsertState<Project>;
   reset(): ICoreUpsertResetAction;
-  upsertProject(payload: ProjectFormData, id?: string): void;
+  upsertProject(payload: ProjectFormData): void;
 }
 
 const AddView: React.FC<IProps> = ({upsertProject, reset, upsert}) => {

@@ -14,14 +14,17 @@ export const findTasks = async (): Promise<Task[]> => {
   return tasks;
 };
 
-export const saveTask = async (
-  payload: TaskFormData,
-  id?: string
-): Promise<Task> => {
+export const findOneById = async (id: string): Promise<Task> => {
+  const response = await axios.get(`tasks/${id}`);
+
+  return TaskFactory.create(response.data);
+};
+
+export const saveTask = async (payload: TaskFormData): Promise<Task> => {
   let response;
 
-  if (id) {
-    response = await axios.put(`tasks/${id}`, payload);
+  if (payload.id) {
+    response = await axios.put(`tasks/${payload.id}`, payload);
   } else {
     response = await axios.post('tasks', payload);
   }

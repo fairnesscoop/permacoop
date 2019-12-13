@@ -17,7 +17,7 @@ import CustomerForm, {CustomerFormData} from '../components/form/CustomerForm';
 interface IProps {
   upsert: CoreUpsertState<Customer>;
   reset(): ICoreUpsertResetAction;
-  upsertCustomer(payload: CustomerFormData, id?: string): void;
+  upsertCustomer(payload: CustomerFormData): void;
 }
 
 const AddView: React.FC<IProps> = ({upsertCustomer, reset, upsert}) => {

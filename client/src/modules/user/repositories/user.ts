@@ -14,17 +14,8 @@ export const findUsers = async (): Promise<User[]> => {
   return users;
 };
 
-export const saveUser = async (
-  payload: UserFormData,
-  id?: string
-): Promise<User> => {
-  let response;
+export const saveUser = async (payload: UserFormData): Promise<User> => {
+  const {data} = await axios.post('users', payload);
 
-  if (id) {
-    response = await axios.put(`users/${id}`, payload);
-  } else {
-    response = await axios.post('users', payload);
-  }
-
-  return UserFactory.create(response.data);
+  return UserFactory.create(data);
 };
