@@ -3,7 +3,7 @@ import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository'
 import {EncryptionAdapter} from 'src/Infrastructure/Adapter/EncryptionAdapter';
 import {CreateUserCommand} from 'src/Application/User/Command/CreateUserCommand';
 import {CreateUserCommandHandler} from 'src/Application/User/Command/CreateUserCommandHandler';
-import {CanRegisterSpecification} from 'src/Domain/User/Specification/CanRegisterSpecification';
+import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
 import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
 import {UserView} from 'src/Application/User/View/UserView';
 import {User} from 'src/Domain/User/User.entity';
@@ -18,30 +18,30 @@ describe('CreatUserCommandHandler', () => {
 
   let userRepository: UserRepository;
   let encryptionAdapter: EncryptionAdapter;
-  let canRegisterSpecification: CanRegisterSpecification;
+  let isEmailAlreadyExist: IsEmailAlreadyExist;
   let commandHandler: CreateUserCommandHandler;
 
   beforeEach(() => {
     userRepository = mock(UserRepository);
     encryptionAdapter = mock(EncryptionAdapter);
-    canRegisterSpecification = mock(CanRegisterSpecification);
+    isEmailAlreadyExist = mock(IsEmailAlreadyExist);
 
     commandHandler = new CreateUserCommandHandler(
       instance(userRepository),
       instance(encryptionAdapter),
-      instance(canRegisterSpecification)
+      instance(isEmailAlreadyExist)
     );
   });
 
-  it('testUserNotFound', async () => {
-    when(canRegisterSpecification.isSatisfiedBy(email)).thenResolve(false);
+  it('testEmailAlreadyExist', async () => {
+    when(isEmailAlreadyExist.isSatisfiedBy(email)).thenResolve(true);
 
     try {
       await commandHandler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(EmailAlreadyExistException);
       expect(e.message).toBe('user.errors.email_already_exist');
-      verify(canRegisterSpecification.isSatisfiedBy(email)).once();
+      verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
       verify(encryptionAdapter.hash('plainPassword')).never();
       verify(
         encryptionAdapter.hash('mathieu@fairness.coopplainPassword')
@@ -72,7 +72,7 @@ describe('CreatUserCommandHandler', () => {
     when(createdUser.getLastName()).thenReturn('MARCHOIS');
     when(createdUser.getEmail()).thenReturn('mathieu@fairness.coop');
     when(createdUser.getApiToken()).thenReturn('hashToken');
-    when(canRegisterSpecification.isSatisfiedBy(email)).thenResolve(true);
+    when(isEmailAlreadyExist.isSatisfiedBy(email)).thenResolve(false);
     when(encryptionAdapter.hash(command.password)).thenResolve('hashPassword');
     when(
       userRepository.save(
@@ -100,7 +100,7 @@ describe('CreatUserCommandHandler', () => {
       )
     );
 
-    verify(canRegisterSpecification.isSatisfiedBy(email)).once();
+    verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
     verify(encryptionAdapter.hash('plainPassword')).once();
     verify(encryptionAdapter.hash('mathieu@fairness.coopplainPassword')).once();
     verify(

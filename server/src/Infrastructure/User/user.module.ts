@@ -9,21 +9,31 @@ import {UserRepository} from './Repository/UserRepository';
 import {LoginCommandHandler} from 'src/Application/User/Command/LoginCommandHandler';
 import {CreateUserCommandHandler} from 'src/Application/User/Command/CreateUserCommandHandler';
 import {EncryptionAdapter} from '../Adapter/EncryptionAdapter';
-import {CanRegisterSpecification} from 'src/Domain/User/Specification/CanRegisterSpecification';
+import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
 import {BearerStrategy} from './Security/BearerStrategy';
 import {GetUsersQueryHandler} from 'src/Application/User/Query/GetUsersQueryHandler';
 import {GetUsersAction} from './Action/GetUsersAction';
+import {GetMeAction} from './Action/GetMeAction';
+import {UpdateMeAction} from './Action/UpdateMeAction';
+import {UpdateProfileCommandHandler} from 'src/Application/User/Command/UpdateProfileCommandHandler';
 
 @Module({
   imports: [BusModule, PassportModule, TypeOrmModule.forFeature([User])],
-  controllers: [LoginAction, CreateUserAction, GetUsersAction],
+  controllers: [
+    LoginAction,
+    CreateUserAction,
+    GetMeAction,
+    UpdateMeAction,
+    GetUsersAction
+  ],
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
     {provide: 'IEncryptionAdapter', useClass: EncryptionAdapter},
     LoginCommandHandler,
     CreateUserCommandHandler,
-    CanRegisterSpecification,
+    IsEmailAlreadyExist,
     GetUsersQueryHandler,
+    UpdateProfileCommandHandler,
     BearerStrategy
   ]
 })
