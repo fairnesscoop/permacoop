@@ -42,8 +42,9 @@ const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>{t('customer.title')}</th>
-                <th>{t('project.title')}</th>
+                <th>{t('customer.list.title')}</th>
+                <th>{t('project.list.title')}</th>
+                <th style={{width: '10%'}}></th>
               </tr>
             </thead>
             <tbody>
@@ -53,6 +54,14 @@ const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
                     <tr key={project.id}>
                       <td>{project.customer.name}</td>
                       <td>{project.name}</td>
+                      <td>
+                        <Link
+                          to={`/projects/${project.id}/edit`}
+                          className={'btn btn-outline-secondary btn-sm'}
+                        >
+                          {t('form.buttons.update')}
+                        </Link>
+                      </td>
                     </tr>
                   )
               )}

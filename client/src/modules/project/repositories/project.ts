@@ -14,6 +14,12 @@ export const findProjects = async (): Promise<Project[]> => {
   return projects;
 };
 
+export const findOneById = async (id: string): Promise<Project> => {
+  const {data} = await axios.get(`projects/${id}`);
+
+  return ProjectFactory.create(data);
+};
+
 export const saveProject = async (
   payload: ProjectFormData
 ): Promise<Project> => {

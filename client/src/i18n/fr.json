@@ -48,6 +48,9 @@
       "add": {
         "title": "Ajouter un projet"
       },
+      "update": {
+        "title": "Edition du project \"{{name}}\""
+      },
       "errors": {
         "already_exist": "Ce projet existe déjà"
       },
@@ -68,7 +71,8 @@
         "title": "Edition de la mission \"{{name}}\""
       },
       "errors": {
-        "already_exist": "Cette mission existe déjà"
+        "already_exist": "Cette mission existe déjà",
+        "not_found": "Cette mission n'existe pas"
       },
       "form": {
         "name": "Nom de la mission"
