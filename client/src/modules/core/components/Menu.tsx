@@ -21,48 +21,24 @@ const Menu: React.FC<IProps> = ({user, logout}) => {
     <>
       <Navbar bg={'dark'} variant={'dark'} expand={'lg'} fixed={'top'}>
         <Link className={'navbar-brand'} to={'/'}>
-          <img src={'/images/logo.png'} alt={'Fairness'} height={42} />
+          <img src={'/images/logo.png'} alt={'CoopERP'} height={38} />
         </Link>
         {user && (
           <>
             <Navbar.Toggle aria-controls={'basic-navbar-nav'} />
             <Navbar.Collapse id={'basic-navbar-nav'}>
               <Nav className={'mr-auto'}>
-                <Nav>
-                  <NavDropdown
-                    title={'Administratifs'}
-                    id={'basic-nav-dropdown'}
-                    alignRight={true}
-                  >
-                    <Link to={'/'} className={'dropdown-item'}>
-                      CRA
-                    </Link>
-                    <NavDropdown.Divider />
-                    <Link to={'/projects'} className={'dropdown-item'}>
-                      {t('project.title')}
-                    </Link>
-                    <NavDropdown.Divider />
-                    <Link className={'dropdown-item'} to={'/customers'}>
-                      {t('customer.title')}
-                    </Link>
-                    <NavDropdown.Divider />
-                    <Link to={'/tasks'} className={'dropdown-item'}>
-                      {t('task.title')}
-                    </Link>
-                  </NavDropdown>
-                </Nav>
+                <Link to={'/projects'} className={'nav-link'}>
+                  {t('project.title')}
+                </Link>
+                <Link className={'nav-link'} to={'/customers'}>
+                  {t('customer.title')}
+                </Link>
+                <Link to={'/tasks'} className={'nav-link'}>
+                  {t('task.title')}
+                </Link>
                 <Link className={'nav-link'} to={'/users'}>
                   {t('user.title')}
-                </Link>
-                <a
-                  href={'https://trello.com/b/wWIwS9KI/fairnesscrm'}
-                  className={'nav-link'}
-                  target={'_blank'}
-                >
-                  CRM
-                </a>
-                <Link className={'nav-link'} to={'/'}>
-                  Protocole de décisions
                 </Link>
               </Nav>
             </Navbar.Collapse>
