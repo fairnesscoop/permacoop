@@ -43,6 +43,7 @@ const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
             <thead>
               <tr>
                 <th>{t('customer.list.title')}</th>
+                <th style={{width: '10%'}}></th>
               </tr>
             </thead>
             <tbody>
@@ -51,6 +52,14 @@ const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
                   customer instanceof Customer && (
                     <tr key={customer.id}>
                       <td>{customer.name}</td>
+                      <td>
+                        <Link
+                          to={`/customers/${customer.id}/edit`}
+                          className={'btn btn-outline-secondary btn-sm'}
+                        >
+                          {t('form.buttons.update')}
+                        </Link>
+                      </td>
                     </tr>
                   )
               )}
