@@ -65,4 +65,14 @@ export class User {
   public getCreatedAt(): Date {
     return this.createdAt;
   }
+
+  public update(firstName: string, lastName: string, email: string): void {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+  }
+
+  public updatePassword(password: string): void {
+    this.password = password;
+  }
 }

@@ -1,15 +1,14 @@
 import {CommandHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
-import {CreateUserCommand} from './CreateUserCommand';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
-import {User} from 'src/Domain/User/User.entity';
 import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
 import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
 import {UserView} from '../View/UserView';
+import {UpdateProfileCommand} from './UpdateProfileCommand';
 
-@CommandHandler(CreateUserCommand)
-export class CreateUserCommandHandler {
+@CommandHandler(UpdateProfileCommand)
+export class UpdateProfileCommandHandler {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
@@ -18,20 +17,24 @@ export class CreateUserCommandHandler {
     private readonly isEmailAlreadyExist: IsEmailAlreadyExist
   ) {}
 
-  public async execute(command: CreateUserCommand): Promise<UserView> {
-    const {firstName, lastName, password} = command;
+  public async execute(command: UpdateProfileCommand): Promise<UserView> {
+    const {firstName, lastName, password, user} = command;
     const email = command.email.toLowerCase();
 
-    if (true === (await this.isEmailAlreadyExist.isSatisfiedBy(email))) {
+    if (
+      email !== user.getEmail() &&
+      true === (await this.isEmailAlreadyExist.isSatisfiedBy(email))
+    ) {
       throw new EmailAlreadyExistException();
     }
 
-    const hashPassword = await this.encryptionAdapter.hash(password);
-    const apiToken = await this.encryptionAdapter.hash(email + password);
+    user.update(firstName, lastName, email);
 
-    const user = await this.userRepository.save(
-      new User(firstName, lastName, email, apiToken, hashPassword)
-    );
+    if (password) {
+      user.updatePassword(await this.encryptionAdapter.hash(password));
+    }
+
+    await this.userRepository.save(user);
 
     return new UserView(
       user.getId(),
