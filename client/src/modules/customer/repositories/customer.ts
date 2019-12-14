@@ -14,6 +14,12 @@ export const findCustomers = async (): Promise<Customer[]> => {
   return customers;
 };
 
+export const findOneById = async (id: string): Promise<Customer> => {
+  const {data} = await axios.get(`customers/${id}`);
+
+  return CustomerFactory.create(data);
+};
+
 export const saveCustomer = async (
   payload: CustomerFormData
 ): Promise<Customer> => {

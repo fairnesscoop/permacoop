@@ -49,7 +49,7 @@
         "title": "Ajouter un projet"
       },
       "errors": {
-        "already_exist": "Ce projet a déjà été créé"
+        "already_exist": "Ce projet existe déjà"
       },
       "form": {
         "customer": "Client",
@@ -83,8 +83,12 @@
         "name": "Nom du client",
         "placeholder": "Choisir un client"
       },
+      "update": {
+        "title": "Edition du client \"{{name}}\""
+      },
       "errors": {
-        "not_found": "Le client n'existe pas"
+        "not_found": "Le client n'existe pas",
+        "already_exist": "Ce client existe existe déjà"
       },
       "list": {
         "title": "Client"

@@ -13,6 +13,11 @@ const Add = Loadable({
   loading: LoadingComponent
 });
 
+const Update = Loadable({
+  loader: () => import('../views/UpdateView'),
+  loading: LoadingComponent
+});
+
 export default [
   <SecuredRoute key={'customer'} exact path={'/customers'} component={List} />,
   <SecuredRoute
@@ -20,5 +25,11 @@ export default [
     exact
     path={'/customers/add'}
     component={Add}
+  />,
+  <SecuredRoute
+    key={'customer.update'}
+    exact
+    path={'/customers/:id/edit'}
+    component={Update}
   />
 ];
