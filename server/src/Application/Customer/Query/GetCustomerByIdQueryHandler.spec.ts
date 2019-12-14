@@ -1,23 +1,56 @@
-import {mock, instance, when} from 'ts-mockito';
-import {GetCustomerByIdQueryHandler} from 'src/Application/Customer/Query/GetCustomerByIdQueryHandler';
+import {mock, instance, when, verify} from 'ts-mockito';
 import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
-import {GetCustomerByIdQuery} from 'src/Application/Customer/Query/GetCustomerByIdQuery';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
+import {CustomerView} from 'src/Application/Customer/View/CustomerView';
+import {GetCustomerByIdQueryHandler} from './GetCustomerByIdQueryHandler';
+import {GetCustomerByIdQuery} from './GetCustomerByIdQuery';
+import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 
 describe('GetCustomerByIdQueryHandler', () => {
-  it('testGetCustomerById', async () => {
+  const query = new GetCustomerByIdQuery();
+  query.id = 'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2';
+
+  it('testGetCustomer', async () => {
     const customerRepository = mock(CustomerRepository);
-    const query = new GetCustomerByIdQueryHandler(instance(customerRepository));
-    const customer = new Customer('Radio France');
+    const queryHandler = new GetCustomerByIdQueryHandler(
+      instance(customerRepository)
+    );
+    const expectedResult = new CustomerView(
+      'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
+      'Radio France'
+    );
+    const customer = mock(Customer);
 
+    when(customer.getId()).thenReturn('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
+    when(customer.getName()).thenReturn('Radio France');
     when(
-      customerRepository.findOneById('2a29a2d2-328d-4e34-8b99-ddfcec536696')
-    ).thenResolve(customer);
+      customerRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
+    ).thenResolve(instance(customer));
 
-    expect(
-      await query.execute(
-        new GetCustomerByIdQuery('2a29a2d2-328d-4e34-8b99-ddfcec536696')
-      )
-    ).toMatchObject(customer);
+    expect(await queryHandler.execute(query)).toMatchObject(expectedResult);
+
+    verify(
+      customerRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
+    ).once();
+  });
+
+  it('testGetCustomerNotFound', async () => {
+    const customerRepository = mock(CustomerRepository);
+    const queryHandler = new GetCustomerByIdQueryHandler(
+      instance(customerRepository)
+    );
+    when(
+      customerRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
+    ).thenResolve(null);
+
+    try {
+      await queryHandler.execute(query);
+    } catch (e) {
+      expect(e).toBeInstanceOf(CustomerNotFoundException);
+      expect(e.message).toBe('customer.errors.not_found');
+      verify(
+        customerRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
+      ).once();
+    }
   });
 });
