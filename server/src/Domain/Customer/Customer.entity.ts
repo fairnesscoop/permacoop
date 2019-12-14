@@ -26,4 +26,8 @@ export class Customer {
   public getCreatedAt(): Date {
     return this.createdAt;
   }
+
+  public updateName(name: string): void {
+    this.name = name;
+  }
 }

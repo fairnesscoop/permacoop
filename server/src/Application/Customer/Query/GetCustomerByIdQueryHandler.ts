@@ -2,7 +2,8 @@ import {QueryHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
 import {GetCustomerByIdQuery} from './GetCustomerByIdQuery';
 import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
+import {CustomerView} from '../View/CustomerView';
+import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 
 @QueryHandler(GetCustomerByIdQuery)
 export class GetCustomerByIdQueryHandler {
@@ -11,7 +12,12 @@ export class GetCustomerByIdQueryHandler {
     private readonly customerRepository: ICustomerRepository
   ) {}
 
-  public execute(query: GetCustomerByIdQuery): Promise<Customer | undefined> {
-    return this.customerRepository.findOneById(query.id);
+  public async execute(query: GetCustomerByIdQuery): Promise<CustomerView> {
+    const customer = await this.customerRepository.findOneById(query.id);
+    if (!customer) {
+      throw new CustomerNotFoundException();
+    }
+
+    return new CustomerView(customer.getId(), customer.getName());
   }
 }
