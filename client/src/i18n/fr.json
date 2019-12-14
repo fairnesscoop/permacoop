@@ -57,21 +57,21 @@
       }
     },
     "task": {
-      "title": "Types de missions",
+      "title": "Missions",
       "list": {
-        "title": "Type de mission"
+        "title": "Mission"
       },
       "add": {
-        "title": "Ajouter un type de mission"
+        "title": "Ajouter une mission"
       },
       "update": {
-        "title": "Edition du type \"{{name}}\""
+        "title": "Edition de la mission \"{{name}}\""
       },
       "errors": {
-        "already_exist": "Ce type de mission existe déjà"
+        "already_exist": "Cette mission existe déjà"
       },
       "form": {
-        "name": "Nom du type de mission"
+        "name": "Nom de la mission"
       }
     },
     "customer": {
@@ -88,7 +88,7 @@
       },
       "errors": {
         "not_found": "Le client n'existe pas",
-        "already_exist": "Ce client existe existe déjà"
+        "already_exist": "Ce client existe déjà"
       },
       "list": {
         "title": "Client"
