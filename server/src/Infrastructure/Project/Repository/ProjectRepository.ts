@@ -22,6 +22,15 @@ export class ProjectRepository implements IProjectRepository {
       .getOne();
   }
 
+  public findOneById(id: string): Promise<Project | undefined> {
+    return this.repository
+      .createQueryBuilder('project')
+      .select(['project.id', 'project.name', 'customer.id', 'customer.name'])
+      .where('project.id = :id', {id})
+      .innerJoin('project.customer', 'customer')
+      .getOne();
+  }
+
   public findProjects(): Promise<Project[]> {
     return this.repository
       .createQueryBuilder('project')

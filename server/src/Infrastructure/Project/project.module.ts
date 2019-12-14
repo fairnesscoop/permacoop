@@ -8,19 +8,29 @@ import {CreateProjectCommandHandler} from 'src/Application/Project/Command/Creat
 import {ProjectRepository} from './Repository/ProjectRepository';
 import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
 import {CustomerRepository} from '../Customer/Repository/CustomerRepository';
-
 import {GetProjectsAction} from './Action/GetProjectsAction';
 import {GetProjectsQueryHandler} from 'src/Application/Project/Query/GetProjectsQueryHandler';
+import {UpdateProjectAction} from './Action/UpdateProjectAction';
+import {GetProjectAction} from './Action/GetProjectAction';
+import {GetProjectByIdQueryHandler} from 'src/Application/Project/Query/GetProjectByIdQueryHandler';
+import {UpdateProjectCommandHandler} from 'src/Application/Project/Command/UpdateProjectCommandHandler';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Project, Customer])],
-  controllers: [GetProjectsAction, CreateProjectAction],
+  controllers: [
+    GetProjectsAction,
+    GetProjectAction,
+    CreateProjectAction,
+    UpdateProjectAction
+  ],
   providers: [
     {provide: 'IProjectRepository', useClass: ProjectRepository},
     {provide: 'ICustomerRepository', useClass: CustomerRepository},
     CreateProjectCommandHandler,
     IsProjectAlreadyExist,
-    GetProjectsQueryHandler
+    GetProjectsQueryHandler,
+    GetProjectByIdQueryHandler,
+    UpdateProjectCommandHandler
   ]
 })
 export class ProjectModule {}

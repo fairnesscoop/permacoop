@@ -35,4 +35,9 @@ export class Project {
   public getCustomer(): Customer {
     return this.customer;
   }
+
+  public updateCustomerAndName(customer: Customer, name: string): void {
+    this.customer = customer;
+    this.name = name;
+  }
 }
