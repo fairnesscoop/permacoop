@@ -7,6 +7,7 @@ import configureStore from './store';
 import * as serviceWorker from './serviceWorker';
 import Layout from './modules/core/components/Layout';
 import taskRoutes from './modules/task/routes';
+import dashboardRoutes from './modules/dashboard/routes';
 import projectRoutes from './modules/project/routes';
 import customerRoutes from './modules/customer/routes';
 import userRoutes from './modules/user/routes';
@@ -22,6 +23,7 @@ ReactDOM.render(
         <Layout>
           <Switch>
             {authRoutes}
+            {dashboardRoutes}
             {taskRoutes}
             {customerRoutes}
             {projectRoutes}

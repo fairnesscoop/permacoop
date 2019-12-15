@@ -14,8 +14,20 @@ export const findUsers = async (): Promise<User[]> => {
   return users;
 };
 
-export const saveUser = async (payload: UserFormData): Promise<User> => {
-  const {data} = await axios.post('users', payload);
+export const findCurrentUser = async (): Promise<User> => {
+  const {data} = await axios.get('users/me');
 
   return UserFactory.create(data);
+};
+
+export const saveUser = async (payload: UserFormData): Promise<User> => {
+  let response = null;
+
+  if (payload.id) {
+    response = await axios.put('users/me', payload);
+  } else {
+    response = await axios.post('users', payload);
+  }
+
+  return UserFactory.create(response.data);
 };

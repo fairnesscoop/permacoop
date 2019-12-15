@@ -4,6 +4,9 @@
     "server": {
       "errors": "Une erreur est survenue !"
     },
+    "dashboard": {
+      "title": "Tableau de bord"
+    },
     "form": {
       "buttons": {
         "connect": "Se connecter",
@@ -26,6 +29,9 @@
       },
       "add": {
         "title": "Ajouter un coopérateur"
+      },
+      "profil": {
+        "title": "Mon profil"
       },
       "form": {
         "firstName": "Nom",
