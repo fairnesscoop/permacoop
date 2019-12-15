@@ -27,6 +27,9 @@
       "add": {
         "title": "Ajouter un coopérateur"
       },
+      "profil": {
+        "title": "Mon profil"
+      },
       "form": {
         "firstName": "Nom",
         "lastName": "Prénom",

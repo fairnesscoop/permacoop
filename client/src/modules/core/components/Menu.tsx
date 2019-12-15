@@ -49,6 +49,9 @@ const Menu: React.FC<IProps> = ({user, logout}) => {
                   id={'basic-nav-dropdown'}
                   alignRight={true}
                 >
+                  <Link to={'/profile'} className={'dropdown-item'}>
+                    {t('user.profil.title')}
+                  </Link>
                   <NavDropdown.Item onClick={logout}>
                     {t('logout')}
                   </NavDropdown.Item>

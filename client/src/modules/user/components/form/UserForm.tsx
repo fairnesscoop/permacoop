@@ -11,6 +11,7 @@ interface IProps {
 }
 
 export interface UserFormData {
+  id?: string;
   firstName: string;
   lastName: string;
   email: string;

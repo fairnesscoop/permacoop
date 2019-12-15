@@ -13,7 +13,13 @@ const Add = Loadable({
   loading: LoadingComponent
 });
 
+const Profile = Loadable({
+  loader: () => import('../views/ProfileView'),
+  loading: LoadingComponent
+});
+
 export default [
   <SecuredRoute key={'user'} exact path={'/users'} component={List} />,
-  <SecuredRoute key={'user.add'} exact path={'/users/add'} component={Add} />
+  <SecuredRoute key={'user.add'} exact path={'/users/add'} component={Add} />,
+  <SecuredRoute key={'profile'} exact path={'/profile'} component={Profile} />
 ];
