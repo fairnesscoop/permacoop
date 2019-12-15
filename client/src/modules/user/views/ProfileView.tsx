@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Row, Col} from 'react-bootstrap';
@@ -49,7 +50,7 @@ const ProfileView: React.FC<IProps> = ({
   }, [reset, getCurrentUser, resetShow]);
 
   if (upsert.payload) {
-    //return <Redirect to={'/users'} />;
+    return <Redirect to={'/'} />;
   }
 
   return (

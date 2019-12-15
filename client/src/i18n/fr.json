@@ -4,6 +4,9 @@
     "server": {
       "errors": "Une erreur est survenue !"
     },
+    "dashboard": {
+      "title": "Tableau de bord"
+    },
     "form": {
       "buttons": {
         "connect": "Se connecter",
