@@ -66,6 +66,10 @@ export class User {
     return this.createdAt;
   }
 
+  public getFullName(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
   public update(firstName: string, lastName: string, email: string): void {
     this.firstName = firstName;
     this.lastName = lastName;

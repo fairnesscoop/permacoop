@@ -31,8 +31,9 @@ export class CreateProjectAction {
   @ApiOperation({title: 'Create new project'})
   public async index(@Body() projectDto: ProjectDTO): Promise<ProjectView> {
     try {
+      const {name, customerId} = projectDto;
       const id = await this.commandBus.execute(
-        new CreateProjectCommand(projectDto.name, projectDto.customerId)
+        new CreateProjectCommand(name, customerId)
       );
 
       return await this.queryBus.execute(new GetProjectByIdQuery(id));

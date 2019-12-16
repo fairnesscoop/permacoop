@@ -4,7 +4,6 @@ import {GetProjectByIdQuery} from './GetProjectByIdQuery';
 import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
 import {ProjectView} from '../View/ProjectView';
 import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotFoundException';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 
 @QueryHandler(GetProjectByIdQuery)
 export class GetProjectByIdQueryHandler {
@@ -19,12 +18,6 @@ export class GetProjectByIdQueryHandler {
       throw new ProjectNotFoundException();
     }
 
-    const customer = project.getCustomer();
-
-    return new ProjectView(
-      project.getId(),
-      project.getName(),
-      new CustomerView(customer.getId(), customer.getName())
-    );
+    return new ProjectView(project.getId(), project.getName());
   }
 }

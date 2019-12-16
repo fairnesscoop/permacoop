@@ -4,6 +4,6 @@ export class ProjectView {
   constructor(
     public readonly id: string,
     public readonly name: string,
-    public readonly customer: CustomerView
+    public readonly customer?: CustomerView
   ) {}
 }

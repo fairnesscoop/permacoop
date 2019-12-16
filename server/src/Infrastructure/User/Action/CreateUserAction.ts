@@ -31,13 +31,9 @@ export class CreateUserAction {
   @ApiOperation({title: 'Create new user account'})
   public async index(@Body() createUserDto: CreateUserDTO): Promise<UserView> {
     try {
+      const {firstName, lastName, email, password} = createUserDto;
       const id = await this.commandBus.execute(
-        new CreateUserCommand(
-          createUserDto.firstName,
-          createUserDto.lastName,
-          createUserDto.email,
-          createUserDto.password
-        )
+        new CreateUserCommand(firstName, lastName, email, password)
       );
 
       return await this.queryBus.execute(new GetUserByIdQuery(id));
