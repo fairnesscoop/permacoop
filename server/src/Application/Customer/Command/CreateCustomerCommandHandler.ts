@@ -2,7 +2,6 @@ import {Inject} from '@nestjs/common';
 import {CommandHandler} from '@nestjs/cqrs';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {CreateCustomerCommand} from './CreateCustomerCommand';
-import {CustomerView} from '../View/CustomerView';
 import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
 import {CustomerAlreadyExistException} from 'src/Domain/Customer/Exception/CustomerAlreadyExistException';
 import {IsCustomerAlreadyExist} from 'src/Domain/Customer/Specification/IsCustomerAlreadyExist';
@@ -15,7 +14,7 @@ export class CreateCustomerCommandHandler {
     private readonly isCustomerAlreadyExist: IsCustomerAlreadyExist
   ) {}
 
-  public async execute(command: CreateCustomerCommand): Promise<CustomerView> {
+  public async execute(command: CreateCustomerCommand): Promise<string> {
     const {name} = command;
 
     if (true === (await this.isCustomerAlreadyExist.isSatisfiedBy(name))) {
@@ -24,6 +23,6 @@ export class CreateCustomerCommandHandler {
 
     const customer = await this.customerRepository.save(new Customer(name));
 
-    return new CustomerView(customer.getId(), customer.getName());
+    return customer.getId();
   }
 }

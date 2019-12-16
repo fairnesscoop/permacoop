@@ -6,8 +6,6 @@ import {CreateProjectCommand} from 'src/Application/Project/Command/CreateProjec
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {ProjectAlreadyExistException} from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
-import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
 
@@ -17,9 +15,10 @@ describe('CreateProjectCommandHandler', () => {
   let isProjectAlreadyExist: IsProjectAlreadyExist;
   let handler: CreateProjectCommandHandler;
 
-  const command = new CreateProjectCommand();
-  command.name = 'z51';
-  command.customerId = 'b5e8dc18-ca67-4323-bdae-654afe09499f';
+  const command = new CreateProjectCommand(
+    'Project',
+    'b5e8dc18-ca67-4323-bdae-654afe09499f'
+  );
 
   beforeEach(() => {
     projectRepository = mock(ProjectRepository);
@@ -55,7 +54,7 @@ describe('CreateProjectCommandHandler', () => {
     when(
       customerRepository.findOneById('b5e8dc18-ca67-4323-bdae-654afe09499f')
     ).thenResolve(new Customer('Radio France'));
-    when(isProjectAlreadyExist.isSatisfiedBy('z51')).thenResolve(true);
+    when(isProjectAlreadyExist.isSatisfiedBy('Project')).thenResolve(true);
 
     try {
       await handler.execute(command);
@@ -65,7 +64,7 @@ describe('CreateProjectCommandHandler', () => {
       verify(
         customerRepository.findOneById('b5e8dc18-ca67-4323-bdae-654afe09499f')
       ).once();
-      verify(isProjectAlreadyExist.isSatisfiedBy('z51')).once();
+      verify(isProjectAlreadyExist.isSatisfiedBy('Project')).once();
       verify(projectRepository.save(anything())).never();
     }
   });
@@ -74,34 +73,32 @@ describe('CreateProjectCommandHandler', () => {
     const createdProject = mock(Project);
     const customer = mock(Customer);
 
-    when(isProjectAlreadyExist.isSatisfiedBy('z51')).thenResolve(false);
-    when(customer.getId()).thenReturn('b5e8dc18-ca67-4323-bdae-654afe09499f');
-    when(customer.getName()).thenReturn('Radio France');
     when(createdProject.getId()).thenReturn(
       'ec9b683c-c075-41d9-8f85-532b2a2428f1'
     );
-    when(createdProject.getName()).thenReturn('z51');
+    when(isProjectAlreadyExist.isSatisfiedBy('Project')).thenResolve(false);
     when(
       customerRepository.findOneById('b5e8dc18-ca67-4323-bdae-654afe09499f')
     ).thenResolve(instance(customer));
     when(
-      projectRepository.save(deepEqual(new Project('z51', instance(customer))))
+      projectRepository.save(
+        deepEqual(new Project('Project', instance(customer)))
+      )
     ).thenResolve(instance(createdProject));
 
-    expect(await handler.execute(command)).toMatchObject(
-      new ProjectView(
-        'ec9b683c-c075-41d9-8f85-532b2a2428f1',
-        'z51',
-        new CustomerView('b5e8dc18-ca67-4323-bdae-654afe09499f', 'Radio France')
-      )
+    expect(await handler.execute(command)).toBe(
+      'ec9b683c-c075-41d9-8f85-532b2a2428f1'
     );
 
     verify(
       customerRepository.findOneById('b5e8dc18-ca67-4323-bdae-654afe09499f')
     ).once();
-    verify(isProjectAlreadyExist.isSatisfiedBy('z51')).once();
+    verify(isProjectAlreadyExist.isSatisfiedBy('Project')).once();
     verify(
-      projectRepository.save(deepEqual(new Project('z51', instance(customer))))
+      projectRepository.save(
+        deepEqual(new Project('Project', instance(customer)))
+      )
     ).once();
+    verify(createdProject.getId()).once();
   });
 });

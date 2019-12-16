@@ -6,7 +6,6 @@ import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
 import {User} from 'src/Domain/User/User.entity';
 import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
 import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
-import {UserView} from '../View/UserView';
 
 @CommandHandler(CreateUserCommand)
 export class CreateUserCommandHandler {
@@ -18,7 +17,7 @@ export class CreateUserCommandHandler {
     private readonly isEmailAlreadyExist: IsEmailAlreadyExist
   ) {}
 
-  public async execute(command: CreateUserCommand): Promise<UserView> {
+  public async execute(command: CreateUserCommand): Promise<string> {
     const {firstName, lastName, password} = command;
     const email = command.email.toLowerCase();
 
@@ -33,11 +32,6 @@ export class CreateUserCommandHandler {
       new User(firstName, lastName, email, apiToken, hashPassword)
     );
 
-    return new UserView(
-      user.getId(),
-      user.getFirstName(),
-      user.getLastName(),
-      user.getEmail()
-    );
+    return user.getId();
   }
 }

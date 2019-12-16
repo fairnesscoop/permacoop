@@ -11,6 +11,9 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 import {CreateProjectCommand} from 'src/Application/Project/Command/CreateProjectCommand';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
+import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {GetProjectByIdQuery} from 'src/Application/Project/Query/GetProjectByIdQuery';
+import {ProjectDTO} from './DTO/ProjectDTO';
 
 @Controller('projects')
 @ApiUseTags('Project')
@@ -19,16 +22,20 @@ import {ProjectView} from 'src/Application/Project/View/ProjectView';
 export class CreateProjectAction {
   constructor(
     @Inject('ICommandBusAdapter')
-    private readonly commandBus: ICommandBusAdapter
+    private readonly commandBus: ICommandBusAdapter,
+    @Inject('IQueryBusAdapter')
+    private readonly queryBus: IQueryBusAdapter
   ) {}
 
   @Post()
   @ApiOperation({title: 'Create new project'})
-  public async index(
-    @Body() command: CreateProjectCommand
-  ): Promise<ProjectView> {
+  public async index(@Body() projectDto: ProjectDTO): Promise<ProjectView> {
     try {
-      return await this.commandBus.execute(command);
+      const id = await this.commandBus.execute(
+        new CreateProjectCommand(projectDto.name, projectDto.customerId)
+      );
+
+      return await this.queryBus.execute(new GetProjectByIdQuery(id));
     } catch (e) {
       throw new BadRequestException(e.message);
     }

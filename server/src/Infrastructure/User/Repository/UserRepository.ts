@@ -32,6 +32,13 @@ export class UserRepository implements IUserRepository {
       .where('user.email = :email', {email})
       .getOne();
   }
+  public findOneById(id: string): Promise<User | undefined> {
+    return this.repository
+      .createQueryBuilder('user')
+      .select(['user.id', 'user.firstName', 'user.lastName', 'user.email'])
+      .where('user.id = :id', {id})
+      .getOne();
+  }
 
   public findUsers(): Promise<User[]> {
     return this.repository

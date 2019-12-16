@@ -5,16 +5,16 @@ import {CreateUserCommand} from 'src/Application/User/Command/CreateUserCommand'
 import {CreateUserCommandHandler} from 'src/Application/User/Command/CreateUserCommandHandler';
 import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
 import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
-import {UserView} from 'src/Application/User/View/UserView';
 import {User} from 'src/Domain/User/User.entity';
 
 describe('CreatUserCommandHandler', () => {
   const email = 'mathieu@fairness.coop';
-  const command = new CreateUserCommand();
-  command.email = 'mathieu@FAIRNESS.coop';
-  command.firstName = 'Mathieu';
-  command.lastName = 'MARCHOIS';
-  command.password = 'plainPassword';
+  const command = new CreateUserCommand(
+    'Mathieu',
+    'MARCHOIS',
+    'mathieu@FAIRNESS.coop',
+    'plainPassword'
+  );
 
   let userRepository: UserRepository;
   let encryptionAdapter: EncryptionAdapter;
@@ -68,10 +68,6 @@ describe('CreatUserCommandHandler', () => {
     when(createdUser.getId()).thenReturn(
       'fcf9a99f-0c7b-45ca-b68a-bfd79d73a49f'
     );
-    when(createdUser.getFirstName()).thenReturn('Mathieu');
-    when(createdUser.getLastName()).thenReturn('MARCHOIS');
-    when(createdUser.getEmail()).thenReturn('mathieu@fairness.coop');
-    when(createdUser.getApiToken()).thenReturn('hashToken');
     when(isEmailAlreadyExist.isSatisfiedBy(email)).thenResolve(false);
     when(encryptionAdapter.hash(command.password)).thenResolve('hashPassword');
     when(
@@ -91,13 +87,8 @@ describe('CreatUserCommandHandler', () => {
       'hashToken'
     );
 
-    expect(await commandHandler.execute(command)).toMatchObject(
-      new UserView(
-        'fcf9a99f-0c7b-45ca-b68a-bfd79d73a49f',
-        'Mathieu',
-        'MARCHOIS',
-        'mathieu@fairness.coop'
-      )
+    expect(await commandHandler.execute(command)).toBe(
+      'fcf9a99f-0c7b-45ca-b68a-bfd79d73a49f'
     );
 
     verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
@@ -116,5 +107,6 @@ describe('CreatUserCommandHandler', () => {
         )
       )
     ).once();
+    verify(createdUser.getId()).once();
   });
 });

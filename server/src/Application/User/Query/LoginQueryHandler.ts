@@ -1,6 +1,6 @@
-import {CommandHandler} from '@nestjs/cqrs';
+import {QueryHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
-import {LoginCommand} from './LoginCommand';
+import {LoginQuery} from './LoginQuery';
 import {AuthenticatedView} from '../View/AuthenticatedView';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
@@ -8,8 +8,8 @@ import {User} from 'src/Domain/User/User.entity';
 import {PasswordNotMatchException} from 'src/Domain/User/Exception/PasswordNotMatchException';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
 
-@CommandHandler(LoginCommand)
-export class LoginCommandHandler {
+@QueryHandler(LoginQuery)
+export class LoginQueryHandler {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
@@ -17,9 +17,9 @@ export class LoginCommandHandler {
     private readonly encryptionAdapter: IEncryptionAdapter
   ) {}
 
-  public async execute(command: LoginCommand): Promise<AuthenticatedView> {
-    const {password} = command;
-    const email = command.email.toLowerCase();
+  public async execute(query: LoginQuery): Promise<AuthenticatedView> {
+    const {password} = query;
+    const email = query.email.toLowerCase();
     const user = await this.userRepository.findOneByEmail(email);
 
     if (!(user instanceof User)) {

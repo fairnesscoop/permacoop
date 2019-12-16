@@ -3,8 +3,6 @@ import {CommandHandler} from '@nestjs/cqrs';
 import {CreateProjectCommand} from './CreateProjectCommand';
 import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
 import {Project} from 'src/Domain/Project/Project.entity';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {ProjectView} from '../View/ProjectView';
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
 import {ProjectAlreadyExistException} from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
@@ -20,7 +18,7 @@ export class CreateProjectCommandHandler {
     private readonly isProjectAlreadyExist: IsProjectAlreadyExist
   ) {}
 
-  public async execute(command: CreateProjectCommand): Promise<ProjectView> {
+  public async execute(command: CreateProjectCommand): Promise<string> {
     const {name, customerId} = command;
 
     const customer = await this.customerRepository.findOneById(customerId);
@@ -36,10 +34,6 @@ export class CreateProjectCommandHandler {
       new Project(name, customer)
     );
 
-    return new ProjectView(
-      project.getId(),
-      project.getName(),
-      new CustomerView(customer.getId(), customer.getName())
-    );
+    return project.getId();
   }
 }

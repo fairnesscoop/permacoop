@@ -11,6 +11,9 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CreateCustomerCommand} from 'src/Application/Customer/Command/CreateCustomerCommand';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
+import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {GetCustomerByIdQuery} from 'src/Application/Customer/Query/GetCustomerByIdQuery';
+import {CustomerDTO} from './DTO/CustomerDTO';
 
 @Controller('customers')
 @ApiUseTags('Customer')
@@ -19,16 +22,20 @@ import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 export class CreateCustomerAction {
   constructor(
     @Inject('ICommandBusAdapter')
-    private readonly commandBus: ICommandBusAdapter
+    private readonly commandBus: ICommandBusAdapter,
+    @Inject('IQueryBusAdapter')
+    private readonly queryBus: IQueryBusAdapter
   ) {}
 
   @Post()
   @ApiOperation({title: 'Create new customer'})
-  public async index(
-    @Body() command: CreateCustomerCommand
-  ): Promise<CustomerView> {
+  public async index(@Body() customerDto: CustomerDTO): Promise<CustomerView> {
     try {
-      return await this.commandBus.execute(command);
+      const id = await this.commandBus.execute(
+        new CreateCustomerCommand(customerDto.name)
+      );
+
+      return await this.queryBus.execute(new GetCustomerByIdQuery(id));
     } catch (e) {
       throw new BadRequestException(e.message);
     }

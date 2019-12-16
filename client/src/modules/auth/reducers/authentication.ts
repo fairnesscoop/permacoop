@@ -10,9 +10,6 @@ import {
   AUTH_AUTHENTICATION_LOGOUT
 } from '../constants/authentication';
 import {TokenStorage} from '../../../utils/tokenStorage';
-import {CORE_UPSERT_SUCCESS} from '../../core/constants/upsert';
-import {User} from '../../user/models/User';
-import {LoggedUser} from '../models/LoggedUser';
 
 const initialState: AuthenticationState = {
   loading: false,
@@ -35,17 +32,6 @@ export const authenticationReducers = (
       return {
         ...state,
         user: action.payload
-      };
-
-    case CORE_UPSERT_SUCCESS:
-      const user = action.payload;
-      if (!(user instanceof User)) {
-        return state;
-      }
-
-      return {
-        ...state,
-        user: new LoggedUser(user.firstName, user.lastName, user.email)
       };
 
     case AUTH_AUTHENTICATION_ERROR:

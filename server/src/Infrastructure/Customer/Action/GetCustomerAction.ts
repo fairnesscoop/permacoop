@@ -11,6 +11,7 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {GetCustomerByIdQuery} from 'src/Application/Customer/Query/GetCustomerByIdQuery';
 import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {CustomerIdDTO} from './DTO/CustomerIdDTO';
 
 @Controller('customers')
 @ApiUseTags('Customer')
@@ -25,10 +26,12 @@ export class GetCustomerAction {
   @Get(':id')
   @ApiOperation({title: 'Get customer'})
   public async index(
-    @Param() query: GetCustomerByIdQuery
+    @Param() customerIdDto: CustomerIdDTO
   ): Promise<CustomerView> {
     try {
-      return await this.queryBus.execute(query);
+      return await this.queryBus.execute(
+        new GetCustomerByIdQuery(customerIdDto.id)
+      );
     } catch (e) {
       throw new NotFoundException(e.message);
     }

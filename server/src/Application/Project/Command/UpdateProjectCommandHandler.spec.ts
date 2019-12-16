@@ -1,7 +1,6 @@
-import {mock, instance, when, verify, anything, anyString} from 'ts-mockito';
+import {mock, instance, when, verify, anything} from 'ts-mockito';
 import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
 import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
-import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {UpdateProjectCommand} from './UpdateProjectCommand';
 import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotFoundException';
@@ -10,7 +9,6 @@ import {UpdateProjectCommandHandler} from './UpdateProjectCommandHandler';
 import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 
 describe('UpdateProjectCommandHandler', () => {
   let projectRepository: ProjectRepository;
@@ -20,10 +18,11 @@ describe('UpdateProjectCommandHandler', () => {
   let customer: Customer;
   let handler: UpdateProjectCommandHandler;
 
-  const command = new UpdateProjectCommand();
-  command.id = 'afda00b1-bf49-4102-9bc2-bce17f3acd48';
-  command.name = 'Encom';
-  command.customerId = 'd4aa560e-d2f7-422e-ae8d-6af5d0455eeb';
+  const command = new UpdateProjectCommand(
+    'afda00b1-bf49-4102-9bc2-bce17f3acd48',
+    'Project',
+    'd4aa560e-d2f7-422e-ae8d-6af5d0455eeb'
+  );
 
   beforeEach(() => {
     projectRepository = mock(ProjectRepository);
@@ -46,23 +45,16 @@ describe('UpdateProjectCommandHandler', () => {
     when(
       customerRepository.findOneById('d4aa560e-d2f7-422e-ae8d-6af5d0455eeb')
     ).thenResolve(instance(customer));
-    when(isProjectAlreadyExist.isSatisfiedBy('Encom')).thenResolve(false);
+    when(isProjectAlreadyExist.isSatisfiedBy('Project')).thenResolve(false);
     when(updatedProject.getId()).thenReturn(
       'afda00b1-bf49-4102-9bc2-bce17f3acd48'
     );
-    when(updatedProject.getName()).thenReturn('z51');
-    when(customer.getId()).thenReturn('d4aa560e-d2f7-422e-ae8d-6af5d0455eeb');
-    when(customer.getName()).thenReturn('Radio France');
+    when(updatedProject.getName()).thenReturn('Old project');
 
-    expect(await handler.execute(command)).toMatchObject(
-      new ProjectView(
-        'afda00b1-bf49-4102-9bc2-bce17f3acd48',
-        anyString(),
-        new CustomerView('d4aa560e-d2f7-422e-ae8d-6af5d0455eeb', 'Radio France')
-      )
-    );
+    // Command return nothing
+    expect(await handler.execute(command)).toBeUndefined();
 
-    verify(isProjectAlreadyExist.isSatisfiedBy('Encom')).once();
+    verify(isProjectAlreadyExist.isSatisfiedBy('Project')).once();
     verify(
       projectRepository.findOneById('afda00b1-bf49-4102-9bc2-bce17f3acd48')
     ).once();
@@ -71,13 +63,12 @@ describe('UpdateProjectCommandHandler', () => {
     ).once();
     verify(projectRepository.save(instance(updatedProject))).once();
     verify(
-      updatedProject.updateCustomerAndName(instance(customer), 'Encom')
+      updatedProject.updateCustomerAndName(instance(customer), 'Project')
     ).once();
     verify(
-      updatedProject.updateCustomerAndName(instance(customer), 'Encom')
+      updatedProject.updateCustomerAndName(instance(customer), 'Project')
     ).calledBefore(projectRepository.save(instance(updatedProject)));
-    verify(updatedProject.getId()).once();
-    verify(updatedProject.getName()).twice();
+    verify(updatedProject.getName()).once();
   });
 
   it('testProjectNotFound', async () => {
@@ -99,7 +90,6 @@ describe('UpdateProjectCommandHandler', () => {
       verify(
         updatedProject.updateCustomerAndName(anything(), anything())
       ).never();
-      verify(updatedProject.getId()).never();
       verify(updatedProject.getName()).never();
     }
   });
@@ -128,7 +118,6 @@ describe('UpdateProjectCommandHandler', () => {
       verify(
         updatedProject.updateCustomerAndName(anything(), anything())
       ).never();
-      verify(updatedProject.getId()).never();
       verify(updatedProject.getName()).never();
     }
   });
@@ -140,14 +129,14 @@ describe('UpdateProjectCommandHandler', () => {
     when(
       customerRepository.findOneById('d4aa560e-d2f7-422e-ae8d-6af5d0455eeb')
     ).thenResolve(instance(customer));
-    when(isProjectAlreadyExist.isSatisfiedBy('Encom')).thenResolve(true);
+    when(isProjectAlreadyExist.isSatisfiedBy('Project')).thenResolve(true);
 
     try {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectAlreadyExistException);
       expect(e.message).toBe('project.errors.already_exist');
-      verify(isProjectAlreadyExist.isSatisfiedBy('Encom')).once();
+      verify(isProjectAlreadyExist.isSatisfiedBy('Project')).once();
       verify(
         projectRepository.findOneById('afda00b1-bf49-4102-9bc2-bce17f3acd48')
       ).once();
@@ -158,7 +147,6 @@ describe('UpdateProjectCommandHandler', () => {
       verify(
         updatedProject.updateCustomerAndName(anything(), anything())
       ).never();
-      verify(updatedProject.getId()).never();
       verify(updatedProject.getName()).once();
     }
   });

@@ -1,7 +1,6 @@
-import {mock, instance, when, verify, anything, anyString} from 'ts-mockito';
+import {mock, instance, when, verify, anything} from 'ts-mockito';
 import {TaskRepository} from 'src/Infrastructure/Task/Repository/TaskRepository';
 import {IsTaskAlreadyExist} from 'src/Domain/Task/Specification/IsTaskAlreadyExist';
-import {TaskView} from 'src/Application/Task/View/TaskView';
 import {Task} from 'src/Domain/Task/Task.entity';
 import {UpdateTaskCommand} from './UpdateTaskCommand';
 import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
@@ -14,9 +13,10 @@ describe('UpdateTaskCommandHandler', () => {
   let updatedTask: Task;
   let handler: UpdateTaskCommandHandler;
 
-  const command = new UpdateTaskCommand();
-  command.id = 'afda00b1-bf49-4102-9bc2-bce17f3acd48';
-  command.name = 'Development mobile';
+  const command = new UpdateTaskCommand(
+    'afda00b1-bf49-4102-9bc2-bce17f3acd48',
+    'Development mobile'
+  );
 
   beforeEach(() => {
     taskRepository = mock(TaskRepository);
@@ -33,16 +33,13 @@ describe('UpdateTaskCommandHandler', () => {
     when(
       taskRepository.findOneById('afda00b1-bf49-4102-9bc2-bce17f3acd48')
     ).thenResolve(instance(updatedTask));
-    when(updatedTask.getId()).thenReturn(
-      'afda00b1-bf49-4102-9bc2-bce17f3acd48'
-    );
     when(updatedTask.getName()).thenReturn('Development');
     when(isTaskAlreadyExist.isSatisfiedBy('Development mobile')).thenResolve(
       false
     );
-    expect(await handler.execute(command)).toMatchObject(
-      new TaskView('afda00b1-bf49-4102-9bc2-bce17f3acd48', anyString())
-    );
+
+    // Command return nothing
+    expect(await handler.execute(command)).toBeUndefined();
 
     verify(isTaskAlreadyExist.isSatisfiedBy('Development mobile')).once();
     verify(taskRepository.save(instance(updatedTask))).once();
@@ -50,8 +47,7 @@ describe('UpdateTaskCommandHandler', () => {
     verify(updatedTask.updateName('Development mobile')).calledBefore(
       taskRepository.save(instance(updatedTask))
     );
-    verify(updatedTask.getId()).once();
-    verify(updatedTask.getName()).twice();
+    verify(updatedTask.getName()).once();
   });
 
   it('testTaskNotFound', async () => {
@@ -67,7 +63,6 @@ describe('UpdateTaskCommandHandler', () => {
       verify(isTaskAlreadyExist.isSatisfiedBy(anything())).never();
       verify(taskRepository.save(anything())).never();
       verify(updatedTask.updateName(anything())).never();
-      verify(updatedTask.getId()).never();
       verify(updatedTask.getName()).never();
     }
   });
@@ -88,7 +83,6 @@ describe('UpdateTaskCommandHandler', () => {
       verify(isTaskAlreadyExist.isSatisfiedBy('Development mobile')).once();
       verify(taskRepository.save(anything())).never();
       verify(updatedTask.updateName(anything())).never();
-      verify(updatedTask.getId()).never();
       verify(updatedTask.getName()).once();
     }
   });

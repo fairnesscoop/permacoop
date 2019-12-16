@@ -4,7 +4,6 @@ import {IsCustomerAlreadyExist} from 'src/Domain/Customer/Specification/IsCustom
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {CreateCustomerCommandHandler} from 'src/Application/Customer/Command/CreateCustomerCommandHandler';
 import {CreateCustomerCommand} from 'src/Application/Customer/Command/CreateCustomerCommand';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {CustomerAlreadyExistException} from 'src/Domain/Customer/Exception/CustomerAlreadyExistException';
 
 describe('CreateCustomerCommandHandler', () => {
@@ -13,8 +12,7 @@ describe('CreateCustomerCommandHandler', () => {
   let createdCustomer: Customer;
   let handler: CreateCustomerCommandHandler;
 
-  const command = new CreateCustomerCommand();
-  command.name = 'Radio France';
+  const command = new CreateCustomerCommand('Customer');
 
   beforeEach(() => {
     customerRepository = mock(CustomerRepository);
@@ -28,45 +26,37 @@ describe('CreateCustomerCommandHandler', () => {
   });
 
   it('testCustomerCreatedSuccessfully', async () => {
-    when(isCustomerAlreadyExist.isSatisfiedBy('Radio France')).thenResolve(
-      false
-    );
+    when(isCustomerAlreadyExist.isSatisfiedBy('Customer')).thenResolve(false);
     when(createdCustomer.getId()).thenReturn(
       '2d5fb4da-12c2-11ea-8d71-362b9e155667'
     );
-    when(createdCustomer.getName()).thenReturn('Radio France');
+    when(createdCustomer.getName()).thenReturn('Customer');
     when(
-      customerRepository.save(deepEqual(new Customer('Radio France')))
+      customerRepository.save(deepEqual(new Customer('Customer')))
     ).thenResolve(instance(createdCustomer));
 
-    expect(await handler.execute(command)).toMatchObject(
-      new CustomerView('2d5fb4da-12c2-11ea-8d71-362b9e155667', 'Radio France')
+    expect(await handler.execute(command)).toBe(
+      '2d5fb4da-12c2-11ea-8d71-362b9e155667'
     );
 
-    verify(isCustomerAlreadyExist.isSatisfiedBy('Radio France')).once();
-    verify(
-      customerRepository.save(deepEqual(new Customer('Radio France')))
-    ).once();
+    verify(isCustomerAlreadyExist.isSatisfiedBy('Customer')).once();
+    verify(customerRepository.save(deepEqual(new Customer('Customer')))).once();
     verify(createdCustomer.getId()).once();
-    verify(createdCustomer.getName()).once();
   });
 
   it('testCustomerAlreadyExist', async () => {
-    when(isCustomerAlreadyExist.isSatisfiedBy('Radio France')).thenResolve(
-      true
-    );
+    when(isCustomerAlreadyExist.isSatisfiedBy('Customer')).thenResolve(true);
 
     try {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(CustomerAlreadyExistException);
       expect(e.message).toBe('customer.errors.already_exist');
-      verify(isCustomerAlreadyExist.isSatisfiedBy('Radio France')).once();
+      verify(isCustomerAlreadyExist.isSatisfiedBy('Customer')).once();
       verify(
-        customerRepository.save(deepEqual(new Customer('Radio France')))
+        customerRepository.save(deepEqual(new Customer('Customer')))
       ).never();
       verify(createdCustomer.getId()).never();
-      verify(createdCustomer.getName()).never();
     }
   });
 });

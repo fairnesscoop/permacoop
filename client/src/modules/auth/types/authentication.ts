@@ -8,7 +8,6 @@ import {
   AUTH_AUTHENTICATION_LOGOUT,
   AUTH_AUTHENTICATION_RESET
 } from '../constants/authentication';
-import {ICoreUpsertSuccessAction} from '../../core/types/upsert';
 
 export type AuthenticationState = Readonly<{
   loading: boolean;
@@ -42,5 +41,4 @@ export type AuthenticationActionTypes =
   | IAuthenticationErrorAction
   | IAuthenticationSuccessAction
   | IAuthenticationResetAction
-  | IAuthenticationLogoutAction
-  | ICoreUpsertSuccessAction<any>;
+  | IAuthenticationLogoutAction;

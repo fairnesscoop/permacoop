@@ -1,14 +1,8 @@
-import {ApiModelProperty} from '@nestjs/swagger';
-import {IsNotEmpty, IsUUID} from 'class-validator';
 import {ICommand} from 'src/Application/ICommand';
 
 export class CreateProjectCommand implements ICommand {
-  @ApiModelProperty()
-  @IsNotEmpty()
-  public name: string;
-
-  @ApiModelProperty()
-  @IsNotEmpty()
-  @IsUUID()
-  public customerId: string;
+  constructor(
+    public readonly name: string,
+    public readonly customerId: string
+  ) {}
 }
