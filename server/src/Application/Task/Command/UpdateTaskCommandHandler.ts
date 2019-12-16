@@ -2,7 +2,6 @@ import {CommandHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
 import {UpdateTaskCommand} from './UpdateTaskCommand';
 import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
-import {TaskView} from '../View/TaskView';
 import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
 import {IsTaskAlreadyExist} from 'src/Domain/Task/Specification/IsTaskAlreadyExist';
 import {TaskAlreadyExistException} from 'src/Domain/Task/Exception/TaskAlreadyExistException';
@@ -15,7 +14,7 @@ export class UpdateTaskCommandHandler {
     private readonly isTaskAlreadyExist: IsTaskAlreadyExist
   ) {}
 
-  public async execute(command: UpdateTaskCommand): Promise<TaskView> {
+  public async execute(command: UpdateTaskCommand): Promise<void> {
     const {id, name} = command;
 
     const task = await this.taskRepository.findOneById(id);
@@ -31,9 +30,6 @@ export class UpdateTaskCommandHandler {
     }
 
     task.updateName(name);
-
     await this.taskRepository.save(task);
-
-    return new TaskView(task.getId(), task.getName());
   }
 }

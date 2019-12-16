@@ -7,8 +7,9 @@ import {GetCustomerByIdQuery} from './GetCustomerByIdQuery';
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 
 describe('GetCustomerByIdQueryHandler', () => {
-  const query = new GetCustomerByIdQuery();
-  query.id = 'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2';
+  const query = new GetCustomerByIdQuery(
+    'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2'
+  );
 
   it('testGetCustomer', async () => {
     const customerRepository = mock(CustomerRepository);

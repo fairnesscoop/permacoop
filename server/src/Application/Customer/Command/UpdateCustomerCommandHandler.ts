@@ -2,7 +2,6 @@ import {CommandHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
 import {UpdateCustomerCommand} from './UpdateCustomerCommand';
 import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
-import {CustomerView} from '../View/CustomerView';
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 import {IsCustomerAlreadyExist} from 'src/Domain/Customer/Specification/IsCustomerAlreadyExist';
 import {CustomerAlreadyExistException} from 'src/Domain/Customer/Exception/CustomerAlreadyExistException';
@@ -15,7 +14,7 @@ export class UpdateCustomerCommandHandler {
     private readonly isCustomerAlreadyExist: IsCustomerAlreadyExist
   ) {}
 
-  public async execute(command: UpdateCustomerCommand): Promise<CustomerView> {
+  public async execute(command: UpdateCustomerCommand): Promise<void> {
     const {id, name} = command;
 
     const customer = await this.customerRepository.findOneById(id);
@@ -32,7 +31,5 @@ export class UpdateCustomerCommandHandler {
 
     customer.updateName(name);
     await this.customerRepository.save(customer);
-
-    return new CustomerView(customer.getId(), customer.getName());
   }
 }

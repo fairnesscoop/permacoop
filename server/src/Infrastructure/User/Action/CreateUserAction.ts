@@ -11,6 +11,9 @@ import {ApiUseTags, ApiOperation, ApiBearerAuth} from '@nestjs/swagger';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 import {CreateUserCommand} from 'src/Application/User/Command/CreateUserCommand';
 import {UserView} from 'src/Application/User/View/UserView';
+import {CreateUserDTO} from './DTO/CreateUserDTO';
+import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {GetUserByIdQuery} from 'src/Application/User/Query/GetUserByIdQuery';
 
 @Controller('users')
 @ApiUseTags('User')
@@ -19,14 +22,25 @@ import {UserView} from 'src/Application/User/View/UserView';
 export class CreateUserAction {
   constructor(
     @Inject('ICommandBusAdapter')
-    private readonly commandBus: ICommandBusAdapter
+    private readonly commandBus: ICommandBusAdapter,
+    @Inject('IQueryBusAdapter')
+    private readonly queryBus: IQueryBusAdapter
   ) {}
 
   @Post()
   @ApiOperation({title: 'Create new user account'})
-  public async index(@Body() command: CreateUserCommand): Promise<UserView> {
+  public async index(@Body() createUserDto: CreateUserDTO): Promise<UserView> {
     try {
-      return await this.commandBus.execute(command);
+      const id = await this.commandBus.execute(
+        new CreateUserCommand(
+          createUserDto.firstName,
+          createUserDto.lastName,
+          createUserDto.email,
+          createUserDto.password
+        )
+      );
+
+      return await this.queryBus.execute(new GetUserByIdQuery(id));
     } catch (e) {
       throw new BadRequestException(e.message);
     }

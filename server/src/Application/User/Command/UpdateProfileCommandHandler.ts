@@ -4,7 +4,6 @@ import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
 import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
 import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
-import {UserView} from '../View/UserView';
 import {UpdateProfileCommand} from './UpdateProfileCommand';
 
 @CommandHandler(UpdateProfileCommand)
@@ -17,7 +16,7 @@ export class UpdateProfileCommandHandler {
     private readonly isEmailAlreadyExist: IsEmailAlreadyExist
   ) {}
 
-  public async execute(command: UpdateProfileCommand): Promise<UserView> {
+  public async execute(command: UpdateProfileCommand): Promise<void> {
     const {firstName, lastName, password, user} = command;
     const email = command.email.toLowerCase();
 
@@ -35,12 +34,5 @@ export class UpdateProfileCommandHandler {
     }
 
     await this.userRepository.save(user);
-
-    return new UserView(
-      user.getId(),
-      user.getFirstName(),
-      user.getLastName(),
-      user.getEmail()
-    );
   }
 }

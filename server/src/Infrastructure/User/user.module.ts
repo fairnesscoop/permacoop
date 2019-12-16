@@ -6,7 +6,7 @@ import {User} from 'src/Domain/User/User.entity';
 import {LoginAction} from './Action/LoginAction';
 import {CreateUserAction} from './Action/CreateUserAction';
 import {UserRepository} from './Repository/UserRepository';
-import {LoginCommandHandler} from 'src/Application/User/Command/LoginCommandHandler';
+import {LoginQueryHandler} from 'src/Application/User/Query/LoginQueryHandler';
 import {CreateUserCommandHandler} from 'src/Application/User/Command/CreateUserCommandHandler';
 import {EncryptionAdapter} from '../Adapter/EncryptionAdapter';
 import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
@@ -16,6 +16,7 @@ import {GetUsersAction} from './Action/GetUsersAction';
 import {GetMeAction} from './Action/GetMeAction';
 import {UpdateMeAction} from './Action/UpdateMeAction';
 import {UpdateProfileCommandHandler} from 'src/Application/User/Command/UpdateProfileCommandHandler';
+import {GetUserByIdQueryHandler} from 'src/Application/User/Query/GetUserByIdQueryHandler';
 
 @Module({
   imports: [BusModule, PassportModule, TypeOrmModule.forFeature([User])],
@@ -29,12 +30,13 @@ import {UpdateProfileCommandHandler} from 'src/Application/User/Command/UpdatePr
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
     {provide: 'IEncryptionAdapter', useClass: EncryptionAdapter},
-    LoginCommandHandler,
+    LoginQueryHandler,
     CreateUserCommandHandler,
     IsEmailAlreadyExist,
     GetUsersQueryHandler,
     UpdateProfileCommandHandler,
-    BearerStrategy
+    BearerStrategy,
+    GetUserByIdQueryHandler
   ]
 })
 export class UserModule {}

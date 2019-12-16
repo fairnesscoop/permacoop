@@ -11,6 +11,9 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CreateTaskCommand} from 'src/Application/Task/Command/CreateTaskCommand';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
+import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {GetTaskByIdQuery} from 'src/Application/Task/Query/GetTaskByIdQuery';
+import {TaskDTO} from './DTO/TaskDTO';
 
 @Controller('tasks')
 @ApiUseTags('Task')
@@ -19,14 +22,20 @@ import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 export class CreateTaskAction {
   constructor(
     @Inject('ICommandBusAdapter')
-    private readonly commandBus: ICommandBusAdapter
+    private readonly commandBus: ICommandBusAdapter,
+    @Inject('IQueryBusAdapter')
+    private readonly queryBus: IQueryBusAdapter
   ) {}
 
   @Post()
   @ApiOperation({title: 'Create new task'})
-  public async index(@Body() command: CreateTaskCommand): Promise<TaskView> {
+  public async index(@Body() taskDto: TaskDTO): Promise<TaskView> {
     try {
-      return await this.commandBus.execute(command);
+      const id = await this.commandBus.execute(
+        new CreateTaskCommand(taskDto.name)
+      );
+
+      return await this.queryBus.execute(new GetTaskByIdQuery(id));
     } catch (e) {
       throw new BadRequestException(e.message);
     }

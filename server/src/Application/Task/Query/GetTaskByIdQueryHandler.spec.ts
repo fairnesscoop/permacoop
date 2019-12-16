@@ -7,8 +7,7 @@ import {GetTaskByIdQuery} from './GetTaskByIdQuery';
 import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
 
 describe('GetTaskByIdQueryHandler', () => {
-  const query = new GetTaskByIdQuery();
-  query.id = 'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2';
+  const query = new GetTaskByIdQuery('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
 
   it('testGetTask', async () => {
     const taskRepository = mock(TaskRepository);

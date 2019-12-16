@@ -9,8 +9,7 @@ import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 
 describe('GetProjectByIdQueryHandler', () => {
-  const query = new GetProjectByIdQuery();
-  query.id = 'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2';
+  const query = new GetProjectByIdQuery('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
 
   it('testGetProject', async () => {
     const projectRepository = mock(ProjectRepository);
@@ -22,9 +21,9 @@ describe('GetProjectByIdQueryHandler', () => {
     const project = mock(Project);
 
     when(customer.getId()).thenReturn('58958f69-d104-471b-b780-bbb0ec6c52da');
-    when(customer.getName()).thenReturn('Radio France');
+    when(customer.getName()).thenReturn('Customer');
     when(project.getId()).thenReturn('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
-    when(project.getName()).thenReturn('z51');
+    when(project.getName()).thenReturn('Project');
     when(project.getCustomer()).thenReturn(instance(customer));
     when(
       projectRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
@@ -33,14 +32,19 @@ describe('GetProjectByIdQueryHandler', () => {
     expect(await queryHandler.execute(query)).toMatchObject(
       new ProjectView(
         'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
-        'z51',
-        new CustomerView('58958f69-d104-471b-b780-bbb0ec6c52da', 'Radio France')
+        'Project',
+        new CustomerView('58958f69-d104-471b-b780-bbb0ec6c52da', 'Customer')
       )
     );
 
     verify(
       projectRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
     ).once();
+    verify(customer.getId()).once();
+    verify(customer.getName()).once();
+    verify(project.getId()).once();
+    verify(project.getName()).once();
+    verify(project.getCustomer()).once();
   });
 
   it('testGetProjectNotFound', async () => {

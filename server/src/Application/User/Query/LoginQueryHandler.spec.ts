@@ -1,28 +1,26 @@
 import {mock, instance, when, verify, anything} from 'ts-mockito';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
-import {LoginCommandHandler} from 'src/Application/User/Command/LoginCommandHandler';
+import {LoginQueryHandler} from 'src/Application/User/Query/LoginQueryHandler';
 import {EncryptionAdapter} from 'src/Infrastructure/Adapter/EncryptionAdapter';
-import {LoginCommand} from 'src/Application/User/Command/LoginCommand';
+import {LoginQuery} from 'src/Application/User/Query/LoginQuery';
 import {PasswordNotMatchException} from 'src/Domain/User/Exception/PasswordNotMatchException';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
 import {User} from 'src/Domain/User/User.entity';
 import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
 
-describe('LoginCommandHandler', () => {
+describe('LoginQueryHandler', () => {
   const email = 'mathieu@fairness.coop';
   const user = new User('Mathieu', 'MARCHOIS', email, 'apiToken', 'hash');
-  const command = new LoginCommand();
-  command.email = 'mathieu@FAIRNESS.coop';
-  command.password = 'plainPassword';
+  const query = new LoginQuery('mathieu@FAIRNESS.coop', 'plainPassword');
 
   let userRepository: UserRepository;
   let encryptionAdapter: EncryptionAdapter;
-  let commandHandler: LoginCommandHandler;
+  let queryHandler: LoginQueryHandler;
 
   beforeEach(() => {
     userRepository = mock(UserRepository);
     encryptionAdapter = mock(EncryptionAdapter);
-    commandHandler = new LoginCommandHandler(
+    queryHandler = new LoginQueryHandler(
       instance(userRepository),
       instance(encryptionAdapter)
     );
@@ -32,7 +30,7 @@ describe('LoginCommandHandler', () => {
     when(userRepository.findOneByEmail(email)).thenResolve(null);
 
     try {
-      await commandHandler.execute(command);
+      await queryHandler.execute(query);
     } catch (e) {
       expect(e instanceof UserNotFoundException).toBe(true);
       verify(userRepository.findOneByEmail(email)).once();
@@ -45,7 +43,7 @@ describe('LoginCommandHandler', () => {
     when(userRepository.findOneByEmail(email)).thenResolve(user);
 
     try {
-      await commandHandler.execute(command);
+      await queryHandler.execute(query);
     } catch (e) {
       expect(e instanceof PasswordNotMatchException).toBe(true);
       verify(userRepository.findOneByEmail(email)).once();
@@ -57,7 +55,7 @@ describe('LoginCommandHandler', () => {
     when(userRepository.findOneByEmail(email)).thenResolve(user);
     when(encryptionAdapter.compare('hash', 'plainPassword')).thenResolve(true);
 
-    expect(await commandHandler.execute(command)).toMatchObject(
+    expect(await queryHandler.execute(query)).toMatchObject(
       new AuthenticatedView('Mathieu', 'MARCHOIS', email, 'apiToken')
     );
 
