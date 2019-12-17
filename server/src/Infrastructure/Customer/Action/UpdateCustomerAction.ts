@@ -36,7 +36,7 @@ export class UpdateCustomerAction {
     @Body() customerDto: CustomerDTO
   ): Promise<CustomerView> {
     try {
-      const id = customerIdDto.id;
+      const {id} = customerIdDto;
       await this.commandBus.execute(
         new UpdateCustomerCommand(id, customerDto.name)
       );

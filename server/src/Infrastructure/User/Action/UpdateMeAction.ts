@@ -36,14 +36,9 @@ export class UpdateMeAction {
     @LoggedUser() user: User
   ): Promise<UserView> {
     try {
+      const {firstName, lastName, email, password} = updateUserDto;
       await this.commandBus.execute(
-        new UpdateProfileCommand(
-          user,
-          updateUserDto.firstName,
-          updateUserDto.lastName,
-          updateUserDto.email,
-          updateUserDto.password
-        )
+        new UpdateProfileCommand(user, firstName, lastName, email, password)
       );
 
       return await this.queryBus.execute(new GetUserByIdQuery(user.getId()));

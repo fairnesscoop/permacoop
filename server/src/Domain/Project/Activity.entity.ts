@@ -5,13 +5,17 @@ import {Task} from '../Task/Task.entity';
 
 @Entity()
 export class Activity {
+  // Times spent are stored in base 100
+  public static readonly MAXIMUM_TIMESPENT_PER_DAY: number = 100;
+  public static readonly AVAILABLE_TIMESPENTS: number[] = [25, 50, 75, 100];
+
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
   @Column({type: 'integer', nullable: false})
   private time: number;
 
-  @Column({type: 'timestamp', nullable: false})
+  @Column({type: 'date', nullable: false})
   private date: Date;
 
   @Column({type: 'varchar', nullable: true})
@@ -31,15 +35,15 @@ export class Activity {
     task: Task,
     user: User,
     time: number,
-    summary: string,
-    date: Date
+    date: Date,
+    summary?: string
   ) {
     this.project = project;
     this.task = task;
     this.user = user;
     this.time = time;
-    this.summary = summary;
     this.date = date;
+    this.summary = summary;
   }
 
   public getId(): string {
@@ -54,7 +58,7 @@ export class Activity {
     return this.date;
   }
 
-  public getSummary(): string {
+  public getSummary(): string | null {
     return this.summary;
   }
 

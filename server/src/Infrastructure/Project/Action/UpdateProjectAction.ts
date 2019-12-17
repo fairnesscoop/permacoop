@@ -36,17 +36,14 @@ export class UpdateProjectAction {
     @Body() projectDto: ProjectDTO
   ): Promise<ProjectView> {
     try {
+      const {id} = projectIdDto;
+      const {name, customerId} = projectDto;
+
       await this.commandBus.execute(
-        new UpdateProjectCommand(
-          projectIdDto.id,
-          projectDto.name,
-          projectDto.customerId
-        )
+        new UpdateProjectCommand(id, name, customerId)
       );
 
-      return await this.queryBus.execute(
-        new GetProjectByIdQuery(projectIdDto.id)
-      );
+      return await this.queryBus.execute(new GetProjectByIdQuery(id));
     } catch (e) {
       throw new BadRequestException(e.message);
     }
