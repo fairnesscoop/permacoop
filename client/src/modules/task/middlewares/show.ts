@@ -1,6 +1,5 @@
 import {Dispatch} from 'redux';
 import {loading, errors, success} from '../../core/actions/show';
-import {errorNormalizer} from '../../../normalizer/errors';
 import {findOneById} from '../repositories/task';
 
 export const getTask = (id: string) => async (dispatch: Dispatch) => {
@@ -9,7 +8,7 @@ export const getTask = (id: string) => async (dispatch: Dispatch) => {
   try {
     dispatch(success(await findOneById(id)));
   } catch (e) {
-    dispatch(errors(errorNormalizer(e)));
+    dispatch(errors(e));
   } finally {
     dispatch(loading(true));
   }

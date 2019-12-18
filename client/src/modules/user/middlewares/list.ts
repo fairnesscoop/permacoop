@@ -1,6 +1,5 @@
 import {Dispatch} from 'redux';
 import {loading, errors, success} from '../../core/actions/list';
-import {errorNormalizer} from '../../../normalizer/errors';
 import {findUsers} from '../repositories/user';
 
 export const listUsers = () => async (dispatch: Dispatch): Promise<void> => {
@@ -9,7 +8,7 @@ export const listUsers = () => async (dispatch: Dispatch): Promise<void> => {
   try {
     dispatch(success(await findUsers()));
   } catch (e) {
-    dispatch(errors(errorNormalizer(e)));
+    dispatch(errors(e));
   } finally {
     dispatch(loading(false));
   }
