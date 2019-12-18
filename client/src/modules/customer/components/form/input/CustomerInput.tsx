@@ -19,7 +19,7 @@ export const CustomerInput: React.FC = () => {
 
   return (
     <Field
-      label={t('customer.list.title')}
+      label={t('customer.form.title')}
       name={'customerId'}
       component={SelectInput}
     >

@@ -21,13 +21,16 @@ const Menu: React.FC<IProps> = ({user, logout}) => {
     <>
       <Navbar bg={'dark'} variant={'dark'} expand={'lg'} fixed={'top'}>
         <Link className={'navbar-brand'} to={'/'}>
-          <img src={'/images/logo.png'} alt={'CoopERP'} height={38} /> CoopERP
+          <img src={'/images/logo.png'} alt={'CoopERP'} height={36} /> CoopERP
         </Link>
         {user && (
           <>
             <Navbar.Toggle aria-controls={'basic-navbar-nav'} />
             <Navbar.Collapse id={'basic-navbar-nav'}>
               <Nav className={'mr-auto'}>
+                <Link to={'/activities'} className={'nav-link'}>
+                  {t('activity.title')}
+                </Link>
                 <Link to={'/projects'} className={'nav-link'}>
                   {t('project.title')}
                 </Link>

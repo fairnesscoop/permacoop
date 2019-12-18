@@ -41,7 +41,7 @@ export class AddActivityAction {
         new AddActivityCommand(
           user,
           new Date(date),
-          time,
+          Number(time),
           projectId,
           taskId,
           summary

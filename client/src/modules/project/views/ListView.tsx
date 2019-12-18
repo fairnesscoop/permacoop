@@ -52,7 +52,7 @@ const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
                 project =>
                   project instanceof Project && (
                     <tr key={project.id}>
-                      <td>{project.customer.name}</td>
+                      <td>{project?.customer?.name}</td>
                       <td>{project.name}</td>
                       <td>
                         <Link

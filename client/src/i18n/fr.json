@@ -19,6 +19,23 @@
         "passwordsNotMatch": "Les mots de passe doivent être identiques."
       }
     },
+    "activity": {
+      "title": "CRA",
+      "add": {
+        "title": "Ajouter une nouvelle activité"
+      },
+      "errors": {
+        "maximum_reached": "Vous avez atteint le temps passé maximum pour cette journée"
+      },
+      "form": {
+        "time": "Temps passé *",
+        "date": "Date *",
+        "project": "Projet *",
+        "task": "Mission *",
+        "summary": "Commentaire",
+        "placeholder": "-- Choisir le temps passé --"
+      }
+    },
     "user": {
       "title": "Coopérateurs",
       "firstName": "Prénom",
@@ -34,11 +51,11 @@
         "title": "Mon profil"
       },
       "form": {
-        "firstName": "Prénom",
-        "lastName": "Nom",
-        "email": "Adresse e-mail",
-        "password": "Mot de passe",
-        "confirmPassword": "Confirmer le mot de passe"
+        "firstName": "Prénom *",
+        "lastName": "Nom *",
+        "email": "Adresse e-mail *",
+        "password": "Mot de passe *",
+        "confirmPassword": "Confirmer le mot de passe *"
       },
       "errors": {
         "not_found": "Email ou mot de passe incorrect",
@@ -55,14 +72,16 @@
         "title": "Ajouter un projet"
       },
       "update": {
-        "title": "Edition du project \"{{name}}\""
+        "title": "Edition du projet \"{{name}}\""
       },
       "errors": {
         "already_exist": "Ce projet existe déjà"
       },
       "form": {
         "customer": "Client",
-        "name": "Nom du projet"
+        "name": "Nom du projet *",
+        "title": "Projet *",
+        "placeholder": "-- Choisir un projet --"
       }
     },
     "task": {
@@ -81,7 +100,9 @@
         "not_found": "Cette mission n'existe pas"
       },
       "form": {
-        "name": "Nom de la mission"
+        "name": "Nom de la mission *",
+        "title": "Mission *",
+        "placeholder": "-- Choisir une mission --"
       }
     },
     "customer": {
@@ -90,8 +111,9 @@
         "title": "Ajouter un client"
       },
       "form": {
-        "name": "Nom du client",
-        "placeholder": "Choisir un client"
+        "name": "Nom du client *",
+        "title": "Client *",
+        "placeholder": "-- Choisir un client --"
       },
       "update": {
         "title": "Edition du client \"{{name}}\""
