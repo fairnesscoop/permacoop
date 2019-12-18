@@ -4,13 +4,13 @@ import {
   CORE_SHOW_ERROR,
   CORE_SHOW_RESET
 } from '../constants/show';
-import {Error} from '../models/Error';
 import {
   ICoreShowSuccessAction,
   ICoreShowLoadingAction,
   ICoreShowErrorAction,
   ICoreShowResetAction
 } from '../types/show';
+import {errorNormalizer} from '../../../normalizer/errors';
 
 export const success = (payload: any): ICoreShowSuccessAction<any> => ({
   type: CORE_SHOW_SUCCESS,
@@ -22,9 +22,9 @@ export const loading = (loading: boolean): ICoreShowLoadingAction => ({
   loading
 });
 
-export const errors = (errors: Error[]): ICoreShowErrorAction => ({
+export const errors = (e: any): ICoreShowErrorAction => ({
   type: CORE_SHOW_ERROR,
-  errors
+  errors: errorNormalizer(e)
 });
 
 export const reset = (): ICoreShowResetAction => ({

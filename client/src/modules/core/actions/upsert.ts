@@ -4,13 +4,13 @@ import {
   CORE_UPSERT_ERROR,
   CORE_UPSERT_RESET
 } from '../constants/upsert';
-import {Error} from '../models/Error';
 import {
   ICoreUpsertSuccessAction,
   ICoreUpsertLoadingAction,
   ICoreUpsertErrorAction,
   ICoreUpsertResetAction
 } from '../types/upsert';
+import {errorNormalizer} from '../../../normalizer/errors';
 
 export const success = (payload: any): ICoreUpsertSuccessAction<any> => ({
   type: CORE_UPSERT_SUCCESS,
@@ -22,9 +22,9 @@ export const loading = (loading: boolean): ICoreUpsertLoadingAction => ({
   loading
 });
 
-export const errors = (errors: Error[]): ICoreUpsertErrorAction => ({
+export const errors = (e: any): ICoreUpsertErrorAction => ({
   type: CORE_UPSERT_ERROR,
-  errors
+  errors: errorNormalizer(e)
 });
 
 export const reset = (): ICoreUpsertResetAction => ({

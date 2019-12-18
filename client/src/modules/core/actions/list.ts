@@ -4,13 +4,13 @@ import {
   CORE_LIST_ERROR,
   CORE_LIST_RESET
 } from '../constants/list';
-import {Error} from '../../core/models/Error';
 import {
   ICoreListSuccessAction,
   ICoreListLoadingAction,
   ICoreListErrorAction,
   ICoreListResetAction
 } from '../types/list';
+import {errorNormalizer} from '../../../normalizer/errors';
 
 export const success = (payload: any): ICoreListSuccessAction<any> => ({
   type: CORE_LIST_SUCCESS,
@@ -22,9 +22,9 @@ export const loading = (loading: boolean): ICoreListLoadingAction => ({
   loading
 });
 
-export const errors = (errors: Error[]): ICoreListErrorAction => ({
+export const errors = (e: any): ICoreListErrorAction => ({
   type: CORE_LIST_ERROR,
-  errors
+  errors: errorNormalizer(e)
 });
 
 export const reset = (): ICoreListResetAction => ({
