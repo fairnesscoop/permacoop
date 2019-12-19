@@ -12,7 +12,7 @@ import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
 import {LoginDTO} from './DTO/LoginDTO';
 
 @Controller('login')
-@ApiUseTags('User')
+@ApiUseTags('Auth')
 export class LoginAction {
   constructor(
     @Inject('IQueryBusAdapter')

@@ -23,6 +23,7 @@ export class UserRepository implements IUserRepository {
     return this.repository
       .createQueryBuilder('user')
       .select([
+        'user.id',
         'user.firstName',
         'user.lastName',
         'user.email',

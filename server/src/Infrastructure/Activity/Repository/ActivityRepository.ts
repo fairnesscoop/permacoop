@@ -51,4 +51,32 @@ export class ActivityRepository implements IActivityRepository {
       .innerJoin('activity.user', 'user')
       .getOne();
   }
+
+  public findByUserIdAndMonth(userId: string, date: Date): Promise<Activity[]> {
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    return this.repository
+      .createQueryBuilder('activity')
+      .select([
+        'activity.id',
+        'activity.date',
+        'activity.time',
+        'activity.summary',
+        'project.id',
+        'project.name',
+        'task.id',
+        'task.name',
+        'user.firstName',
+        'user.lastName'
+      ])
+      .where('user.id = :userId', {userId})
+      .andWhere('extract(month FROM activity.date) = :month', {month})
+      .andWhere('extract(year FROM activity.date) = :year', {year})
+      .innerJoin('activity.task', 'task')
+      .innerJoin('activity.project', 'project')
+      .innerJoin('activity.user', 'user')
+      .orderBy('activity.date', 'ASC')
+      .getMany();
+  }
 }

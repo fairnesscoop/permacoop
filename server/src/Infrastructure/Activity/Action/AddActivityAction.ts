@@ -12,7 +12,7 @@ import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
 import {AddActivityCommand} from 'src/Application/Activity/Command/AddActivityCommand';
-import {AddActivityDTO} from './DTO/AddActivityDTO';
+import {ActivityDTO} from './DTO/ActivityDTO';
 import {ActivityView} from 'src/Application/Activity/View/ActivityView';
 import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
 import {GetActivityByIdQuery} from 'src/Application/Activity/Query/GetActivityByIdQuery';
@@ -32,11 +32,11 @@ export class AddActivityAction {
   @Post()
   @ApiOperation({title: 'Add new activity'})
   public async index(
-    @Body() addActivityDto: AddActivityDTO,
+    @Body() activityDto: ActivityDTO,
     @LoggedUser() user: User
   ): Promise<ActivityView> {
     try {
-      const {date, projectId, taskId, summary, time} = addActivityDto;
+      const {date, projectId, taskId, summary, time} = activityDto;
       const id = await this.commandBus.execute(
         new AddActivityCommand(
           user,

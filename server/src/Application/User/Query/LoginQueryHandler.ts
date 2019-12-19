@@ -4,7 +4,6 @@ import {LoginQuery} from './LoginQuery';
 import {AuthenticatedView} from '../View/AuthenticatedView';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
-import {User} from 'src/Domain/User/User.entity';
 import {PasswordNotMatchException} from 'src/Domain/User/Exception/PasswordNotMatchException';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
 
@@ -22,7 +21,7 @@ export class LoginQueryHandler {
     const email = query.email.toLowerCase();
     const user = await this.userRepository.findOneByEmail(email);
 
-    if (!(user instanceof User)) {
+    if (!user) {
       throw new UserNotFoundException();
     }
 
@@ -34,6 +33,7 @@ export class LoginQueryHandler {
     }
 
     return new AuthenticatedView(
+      user.getId(),
       user.getFirstName(),
       user.getLastName(),
       user.getEmail(),

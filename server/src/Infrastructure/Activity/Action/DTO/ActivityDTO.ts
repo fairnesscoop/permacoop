@@ -8,7 +8,7 @@ import {
   IsNumberString
 } from 'class-validator';
 
-export class AddActivityDTO {
+export class ActivityDTO {
   @ApiModelProperty()
   @IsNotEmpty()
   @IsDateString()
