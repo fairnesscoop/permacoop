@@ -23,7 +23,7 @@ export const CustomerInput: React.FC = () => {
       name={'customerId'}
       component={SelectInput}
     >
-      <option>{t('customer.form.placeholder')}</option>
+      <option value={''}>{t('customer.form.placeholder')}</option>
       {customers.map((customer: Customer) => (
         <option key={customer.id} value={customer.id}>
           {customer.name}

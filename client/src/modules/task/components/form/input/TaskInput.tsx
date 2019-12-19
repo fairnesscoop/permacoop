@@ -19,7 +19,7 @@ export const TaskInput: React.FC = () => {
 
   return (
     <Field label={t('task.form.title')} name={'taskId'} component={SelectInput}>
-      <option>{t('task.form.placeholder')}</option>
+      <option value={''}>{t('task.form.placeholder')}</option>
       {tasks.map((task: Task) => (
         <option key={task.id} value={task.id}>
           {task.name}

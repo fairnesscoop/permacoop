@@ -23,7 +23,7 @@ export const ProjectInput: React.FC = () => {
       name={'projectId'}
       component={SelectInput}
     >
-      <option>{t('project.form.placeholder')}</option>
+      <option value={''}>{t('project.form.placeholder')}</option>
       {projects.map(
         project =>
           project instanceof Project && (

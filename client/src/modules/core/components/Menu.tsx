@@ -53,11 +53,11 @@ const Menu: React.FC<IProps> = ({user, logout}) => {
                   alignRight={true}
                 >
                   <Link to={'/profile'} className={'dropdown-item'}>
-                    {t('user.profil.title')}
+                    <i className={'fas fa-user'}></i> {t('user.profil.title')}
                   </Link>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={logout}>
-                    {t('logout')}
+                    <i className={'fas fa-sign-out-alt'}></i> {t('logout')}
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>

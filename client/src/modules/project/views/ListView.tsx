@@ -44,7 +44,7 @@ const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
               <tr>
                 <th>{t('customer.list.title')}</th>
                 <th>{t('project.list.title')}</th>
-                <th style={{width: '10%'}}></th>
+                <th style={{width: '15%'}}></th>
               </tr>
             </thead>
             <tbody>
@@ -59,6 +59,7 @@ const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
                           to={`/projects/${project.id}/edit`}
                           className={'btn btn-outline-secondary btn-sm'}
                         >
+                          <i className={'fas fa-edit'}></i>{' '}
                           {t('form.buttons.update')}
                         </Link>
                       </td>
