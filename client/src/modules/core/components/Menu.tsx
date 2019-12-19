@@ -48,7 +48,7 @@ const Menu: React.FC<IProps> = ({user, logout}) => {
             <Navbar.Collapse className={'justify-content-end'}>
               <Nav>
                 <NavDropdown
-                  title={user.firstName + ' ' + user.lastName}
+                  title={`${user.firstName} ${user.lastName}`}
                   id={'basic-nav-dropdown'}
                   alignRight={true}
                 >

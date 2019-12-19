@@ -41,7 +41,7 @@ const ActivityForm: React.FC<InjectedFormProps<ActivityFormData, IProps> &
             label={t('activity.form.time')}
             component={SelectInput}
           >
-            <option>{t('activity.form.placeholder')}</option>
+            <option value={''}>{t('activity.form.placeholder')}</option>
             <option value={25}>0.25</option>
             <option value={50}>0.5</option>
             <option value={75}>0.75</option>
