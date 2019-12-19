@@ -11,7 +11,9 @@ const Breadcrumb: React.FC<IProps> = ({items}) => {
     <nav className={'mt-3'}>
       <ol className={'breadcrumb'}>
         <li className={'breadcrumb-item'}>
-          <Link to={'/'}>CoopERP</Link>
+          <Link to={'/'}>
+            <i className={'fas fa-home'}></i> CoopERP
+          </Link>
         </li>
 
         {items.map((item: BreadcrumbItem, key) => {

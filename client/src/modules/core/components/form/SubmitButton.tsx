@@ -11,7 +11,7 @@ export const SubmitButton: React.FC<IProps> = ({loading}) => {
   return (
     <div className={'form-group row'}>
       <button type={'submit'} className={'btn btn-primary'} disabled={loading}>
-        {t('form.buttons.save')}
+        <i className={'fas fa-save'}></i> {t('form.buttons.save')}
       </button>
     </div>
   );

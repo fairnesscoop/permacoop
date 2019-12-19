@@ -37,7 +37,7 @@ const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
           <Breadcrumb items={[new BreadcrumbItem(t('customer.title'))]} />
           <ServerErrors errors={list.errors} />
           <Link to={'/customers/add'} className={'btn btn-primary mb-3'}>
-            {t('customer.add.title')}
+            <i className={'fas fa-plus'}></i> {t('customer.add.title')}
           </Link>
           <Table striped bordered hover>
             <thead>

@@ -14,7 +14,7 @@ const ListView: React.FC = () => {
         <Col>
           <Breadcrumb items={[new BreadcrumbItem(t('activity.title'))]} />
           <Link to={'/activities/add'} className={'btn btn-primary mb-3'}>
-            {t('activity.add.title')}
+            <i className={'fas fa-plus'}></i> {t('activity.add.title')}
           </Link>
         </Col>
       </Row>
