@@ -10,10 +10,10 @@ import {ActivityModule} from './Infrastructure/Activity/activity.module';
   imports: [
     TypeOrmModule.forRoot(),
     UserModule,
+    ActivityModule,
     ProjectModule,
     CustomerModule,
-    TaskModule,
-    ActivityModule
+    TaskModule
   ]
 })
 export class AppModule {}

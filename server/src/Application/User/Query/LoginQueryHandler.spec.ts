@@ -10,7 +10,6 @@ import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
 
 describe('LoginQueryHandler', () => {
   const email = 'mathieu@fairness.coop';
-  const user = new User('Mathieu', 'MARCHOIS', email, 'apiToken', 'hash');
   const query = new LoginQuery('mathieu@FAIRNESS.coop', 'plainPassword');
 
   let userRepository: UserRepository;
@@ -39,8 +38,10 @@ describe('LoginQueryHandler', () => {
   });
 
   it('testPasswordNotMatch', async () => {
+    const user = mock(User);
     when(encryptionAdapter.compare('hash', 'plainPassword')).thenResolve(false);
-    when(userRepository.findOneByEmail(email)).thenResolve(user);
+    when(userRepository.findOneByEmail(email)).thenResolve(instance(user));
+    when(user.getPassword()).thenReturn('hash');
 
     try {
       await queryHandler.execute(query);
@@ -48,18 +49,38 @@ describe('LoginQueryHandler', () => {
       expect(e instanceof PasswordNotMatchException).toBe(true);
       verify(userRepository.findOneByEmail(email)).once();
       verify(encryptionAdapter.compare('hash', 'plainPassword')).once();
+      verify(user.getPassword()).once();
     }
   });
 
   it('testLoginSuccess', async () => {
-    when(userRepository.findOneByEmail(email)).thenResolve(user);
+    const user = mock(User);
+    when(userRepository.findOneByEmail(email)).thenResolve(instance(user));
     when(encryptionAdapter.compare('hash', 'plainPassword')).thenResolve(true);
+    when(user.getId()).thenReturn('14984335-f5aa-402a-a170-5393bb954538');
+    when(user.getFirstName()).thenReturn('Mathieu');
+    when(user.getLastName()).thenReturn('MARCHOIS');
+    when(user.getEmail()).thenReturn(email);
+    when(user.getPassword()).thenReturn('hash');
+    when(user.getApiToken()).thenReturn('apiToken');
 
     expect(await queryHandler.execute(query)).toMatchObject(
-      new AuthenticatedView('Mathieu', 'MARCHOIS', email, 'apiToken')
+      new AuthenticatedView(
+        '14984335-f5aa-402a-a170-5393bb954538',
+        'Mathieu',
+        'MARCHOIS',
+        email,
+        'apiToken'
+      )
     );
 
     verify(userRepository.findOneByEmail(email)).once();
     verify(encryptionAdapter.compare('hash', 'plainPassword')).once();
+    verify(user.getId()).once();
+    verify(user.getFirstName()).once();
+    verify(user.getLastName()).once();
+    verify(user.getEmail()).once();
+    verify(user.getPassword()).once();
+    verify(user.getApiToken()).once();
   });
 });

@@ -1,9 +1,9 @@
-import {AddActivityDTO} from './AddActivityDTO';
+import {ActivityDTO} from './ActivityDTO';
 import {validate} from 'class-validator';
 
-describe('AddActivityDTO', () => {
+describe('ActivityDTO', () => {
   it('testValidDTO', async () => {
-    const dto = new AddActivityDTO();
+    const dto = new ActivityDTO();
     dto.date = '2019-12-19T11:20:04.568Z';
     dto.time = '25';
     dto.projectId = '2218609f-293b-4438-b3a0-cce8961e8acc';
@@ -15,7 +15,7 @@ describe('AddActivityDTO', () => {
   });
 
   it('testInvalidDTO', async () => {
-    const dto = new AddActivityDTO();
+    const dto = new ActivityDTO();
     dto.date = '2019-12-19';
     dto.time = '30';
     dto.projectId = '1';
@@ -41,7 +41,7 @@ describe('AddActivityDTO', () => {
   });
 
   it('testEmptyDTO', async () => {
-    const dto = new AddActivityDTO();
+    const dto = new ActivityDTO();
     dto.date = '';
     dto.time = '';
     dto.projectId = '';

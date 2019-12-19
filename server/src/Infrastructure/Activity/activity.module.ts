@@ -11,18 +11,20 @@ import {Task} from 'src/Domain/Task/Task.entity';
 import {GetActivityByIdQueryHandler} from 'src/Application/Activity/Query/GetActivityByIdQueryHandler';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {ProjectRepository} from '../Project/Repository/ProjectRepository';
+import {GetActivitiesAction} from './Action/GetActivitiesAction';
+import {GetActivitiesByUserIdAndMonthHandler} from 'src/Application/Activity/Query/GetActivitiesByUserIdAndMonthHandler';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Project, Activity, Task])],
-  controllers: [AddActivityAction],
+  controllers: [AddActivityAction, GetActivitiesAction],
   providers: [
     {provide: 'IProjectRepository', useClass: ProjectRepository},
     {provide: 'IActivityRepository', useClass: ActivityRepository},
     {provide: 'ITaskRepository', useClass: TaskRepository},
-
     IsMaximumTimeSpentReached,
     GetActivityByIdQueryHandler,
-    AddActivityCommandHandler
+    AddActivityCommandHandler,
+    GetActivitiesByUserIdAndMonthHandler
   ]
 })
 export class ActivityModule {}
