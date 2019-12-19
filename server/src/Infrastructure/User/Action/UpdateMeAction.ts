@@ -13,7 +13,7 @@ import {UserView} from 'src/Application/User/View/UserView';
 import {UpdateProfileCommand} from 'src/Application/User/Command/UpdateProfileCommand';
 import {LoggedUser} from '../Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
-import {UpdateUserDTO} from './DTO/UpdateUserDTO';
+import {UserDTO} from './DTO/UserDTO';
 import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
 import {GetUserByIdQuery} from 'src/Application/User/Query/GetUserByIdQuery';
 
@@ -32,11 +32,11 @@ export class UpdateMeAction {
   @Put('me')
   @ApiOperation({title: 'Update current user'})
   public async index(
-    @Body() updateUserDto: UpdateUserDTO,
+    @Body() userDTO: UserDTO,
     @LoggedUser() user: User
   ): Promise<UserView> {
     try {
-      const {firstName, lastName, email, password} = updateUserDto;
+      const {firstName, lastName, email, password} = userDTO;
       await this.commandBus.execute(
         new UpdateProfileCommand(user, firstName, lastName, email, password)
       );

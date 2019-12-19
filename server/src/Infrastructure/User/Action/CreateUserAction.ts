@@ -11,7 +11,7 @@ import {ApiUseTags, ApiOperation, ApiBearerAuth} from '@nestjs/swagger';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 import {CreateUserCommand} from 'src/Application/User/Command/CreateUserCommand';
 import {UserView} from 'src/Application/User/View/UserView';
-import {CreateUserDTO} from './DTO/CreateUserDTO';
+import {UserDTO} from './DTO/UserDTO';
 import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
 import {GetUserByIdQuery} from 'src/Application/User/Query/GetUserByIdQuery';
 
@@ -29,9 +29,9 @@ export class CreateUserAction {
 
   @Post()
   @ApiOperation({title: 'Create new user account'})
-  public async index(@Body() createUserDto: CreateUserDTO): Promise<UserView> {
+  public async index(@Body() userDto: UserDTO): Promise<UserView> {
     try {
-      const {firstName, lastName, email, password} = createUserDto;
+      const {firstName, lastName, email, password} = userDto;
       const id = await this.commandBus.execute(
         new CreateUserCommand(firstName, lastName, email, password)
       );

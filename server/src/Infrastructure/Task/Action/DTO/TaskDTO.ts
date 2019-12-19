@@ -4,5 +4,5 @@ import {IsNotEmpty} from 'class-validator';
 export class TaskDTO {
   @ApiModelProperty()
   @IsNotEmpty()
-  public readonly name: string;
+  public name: string;
 }

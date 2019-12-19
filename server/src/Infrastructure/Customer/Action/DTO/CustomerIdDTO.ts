@@ -5,5 +5,5 @@ export class CustomerIdDTO {
   @ApiModelProperty()
   @IsNotEmpty()
   @IsUUID()
-  public readonly id: string;
+  public id: string;
 }

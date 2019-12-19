@@ -5,9 +5,9 @@ export class LoginDTO {
   @IsNotEmpty()
   @IsEmail()
   @ApiModelProperty()
-  public readonly email: string;
+  public email: string;
 
   @IsNotEmpty()
   @ApiModelProperty()
-  public readonly password: string;
+  public password: string;
 }
