@@ -7,7 +7,6 @@ import {Task} from '../Task/Task.entity';
 export class Activity {
   // Times spent are stored in base 100
   public static readonly MAXIMUM_TIMESPENT_PER_DAY: number = 100;
-  public static readonly AVAILABLE_TIMESPENTS: number[] = [25, 50, 75, 100];
 
   @PrimaryGeneratedColumn('uuid')
   private id: string;

@@ -4,10 +4,9 @@ import {
   IsUUID,
   IsDateString,
   IsString,
-  IsNumber,
-  IsIn
+  IsIn,
+  IsNumberString
 } from 'class-validator';
-import {Activity} from 'src/Domain/Project/Activity.entity';
 
 export class AddActivityDTO {
   @ApiModelProperty()
@@ -17,9 +16,9 @@ export class AddActivityDTO {
 
   @ApiModelProperty()
   @IsNotEmpty()
-  @IsNumber()
-  @IsIn(Activity.AVAILABLE_TIMESPENTS)
-  public time: number;
+  @IsNumberString()
+  @IsIn(['25', '50', '75', '100'])
+  public time: string;
 
   @ApiModelProperty()
   @IsNotEmpty()

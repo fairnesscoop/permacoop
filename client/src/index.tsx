@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import Layout from './modules/core/components/Layout';
 import taskRoutes from './modules/task/routes';
 import dashboardRoutes from './modules/dashboard/routes';
+import activityRoutes from './modules/activity/routes';
 import projectRoutes from './modules/project/routes';
 import customerRoutes from './modules/customer/routes';
 import userRoutes from './modules/user/routes';
@@ -26,6 +27,7 @@ ReactDOM.render(
             {dashboardRoutes}
             {taskRoutes}
             {customerRoutes}
+            {activityRoutes}
             {projectRoutes}
             {userRoutes}
           </Switch>
