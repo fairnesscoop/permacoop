@@ -11,7 +11,7 @@ const Layout: React.FC = ({children}) => {
         {/* Add 4.5rem to fix fixed navbar */}
         <div style={{marginTop: '4.5rem'}}>{children}</div>
       </Container>
-      <Navbar fixed={'bottom'}>
+      <Navbar>
         <Navbar.Collapse className={'justify-content-center center'}>
           <Navbar.Text>
             Copyright © {new Date().getFullYear()}{' '}

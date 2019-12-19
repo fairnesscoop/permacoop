@@ -8,10 +8,6 @@ export const validate = (
 ): FormErrors<ActivityFormData> => {
   const errors: FormErrors<ActivityFormData> = {};
 
-  if (!payload.date) {
-    errors.date = i18n.t(REQUIRED_FIELD);
-  }
-
   if (!payload.time) {
     errors.time = i18n.t(REQUIRED_FIELD);
   }

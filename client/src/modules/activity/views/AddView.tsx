@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Redirect, RouteComponentProps} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {Row, Col} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
@@ -13,18 +13,28 @@ import {CoreUpsertState, ICoreUpsertResetAction} from '../../core/types/upsert';
 import {Activity} from '../models/Activity';
 import {upsertActivity} from '../middlewares/upsert';
 import ActivityForm, {ActivityFormData} from '../components/form/ActivityForm';
+import {dateNormalizer} from '../../../normalizer/date';
 
-interface IProps {
-  upsert: CoreUpsertState<Activity>;
-  reset(): ICoreUpsertResetAction;
-  upsertActivity(payload: ActivityFormData): void;
+interface RouteParams {
+  date: string;
 }
 
-const AddView: React.FC<IProps> = ({upsertActivity, reset, upsert}) => {
+interface IProps extends RouteComponentProps<RouteParams> {
+  upsert: CoreUpsertState<Activity>;
+  reset(): ICoreUpsertResetAction;
+  upsertActivity(date: string, payload: ActivityFormData): void;
+}
+
+const AddView: React.FC<IProps> = ({
+  upsertActivity,
+  reset,
+  upsert,
+  match: {params: date}
+}) => {
   const {t} = useTranslation();
 
   const handleSubmit = (payload: ActivityFormData) => {
-    upsertActivity(payload);
+    upsertActivity(date.date, payload);
   };
 
   useEffect(() => {
@@ -44,7 +54,9 @@ const AddView: React.FC<IProps> = ({upsertActivity, reset, upsert}) => {
           <Breadcrumb
             items={[
               new BreadcrumbItem(t('activity.title'), '/activities', false),
-              new BreadcrumbItem(t('activity.add.title'))
+              new BreadcrumbItem(
+                t('activity.add.title', {date: dateNormalizer(date.date)})
+              )
             ]}
           />
           <ServerErrors errors={upsert.errors} />

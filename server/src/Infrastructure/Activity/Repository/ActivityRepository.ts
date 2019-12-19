@@ -18,12 +18,12 @@ export class ActivityRepository implements IActivityRepository {
 
   public async getTimeSpentSumByUserAndDate(
     user: User,
-    date: Date
+    date: string
   ): Promise<number> {
     const result = await this.repository
       .createQueryBuilder('activity')
       .select('SUM(activity.time) as time')
-      .where('activity.date = :date', {date: date.toISOString().split('T')[0]})
+      .where('activity.date = :date', {date})
       .andWhere('activity.user = :user', {user: user.getId()})
       .getRawOne();
 
@@ -41,42 +41,44 @@ export class ActivityRepository implements IActivityRepository {
         'project.id',
         'project.name',
         'task.id',
-        'task.name',
-        'user.firstName',
-        'user.lastName'
+        'task.name'
       ])
       .where('activity.id = :id', {id})
       .innerJoin('activity.task', 'task')
       .innerJoin('activity.project', 'project')
-      .innerJoin('activity.user', 'user')
       .getOne();
   }
 
-  public findByUserIdAndMonth(userId: string, date: Date): Promise<Activity[]> {
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+  public findMonthlyActivitiesByUser(
+    userId: string,
+    date: string
+  ): Promise<Activity[]> {
+    const month = new Date(date).getMonth() + 1;
+    const year = new Date(date).getFullYear();
 
     return this.repository
       .createQueryBuilder('activity')
       .select([
         'activity.id',
-        'activity.date',
         'activity.time',
         'activity.summary',
+        'activity.date',
         'project.id',
         'project.name',
+        'customer.id',
+        'customer.name',
         'task.id',
-        'task.name',
-        'user.firstName',
-        'user.lastName'
+        'task.name'
       ])
       .where('user.id = :userId', {userId})
       .andWhere('extract(month FROM activity.date) = :month', {month})
       .andWhere('extract(year FROM activity.date) = :year', {year})
       .innerJoin('activity.task', 'task')
       .innerJoin('activity.project', 'project')
+      .innerJoin('project.customer', 'customer')
       .innerJoin('activity.user', 'user')
       .orderBy('activity.date', 'ASC')
+      .addOrderBy('activity.time', 'ASC')
       .getMany();
   }
 }

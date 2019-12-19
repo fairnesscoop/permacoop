@@ -4,7 +4,6 @@ import {Task} from '../../task/models/Task';
 export class Activity {
   constructor(
     public readonly id: string,
-    public readonly date: Date,
     public readonly time: number,
     public readonly summary: string,
     public readonly username: string,

@@ -18,7 +18,7 @@ export default [
   <SecuredRoute
     key={'activity.add'}
     exact
-    path={'/activities/add'}
+    path={'/activities/add/:date'}
     component={Add}
   />
 ];

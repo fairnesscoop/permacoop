@@ -15,7 +15,7 @@ export class Activity {
   private time: number;
 
   @Column({type: 'date', nullable: false})
-  private date: Date;
+  private date: string;
 
   @Column({type: 'varchar', nullable: true})
   private summary: string;
@@ -34,7 +34,7 @@ export class Activity {
     task: Task,
     user: User,
     time: number,
-    date: Date,
+    date: string,
     summary?: string
   ) {
     this.project = project;
@@ -53,7 +53,7 @@ export class Activity {
     return this.time;
   }
 
-  public getDate(): Date {
+  public getDate(): string {
     return this.date;
   }
 

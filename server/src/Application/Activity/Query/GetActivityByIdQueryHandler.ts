@@ -25,10 +25,8 @@ export class GetActivityByIdQueryHandler {
 
     return new ActivityView(
       activity.getId(),
-      activity.getDate(),
       activity.getTime(),
       activity.getSummary(),
-      activity.getUser().getFullName(),
       new ProjectView(project.getId(), project.getName()),
       new TaskView(task.getId(), task.getName())
     );
