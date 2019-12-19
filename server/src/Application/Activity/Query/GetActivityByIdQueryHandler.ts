@@ -1,10 +1,10 @@
 import {QueryHandler} from '@nestjs/cqrs';
 import {GetActivityByIdQuery} from './GetActivityByIdQuery';
 import {ActivityView} from '../View/ActivityView';
-import {IActivityRepository} from 'src/Domain/Project/Repository/IActivityRepository';
+import {IActivityRepository} from 'src/Domain/Activity/Repository/IActivityRepository';
 import {Inject} from '@nestjs/common';
-import {ActivityNotFoundException} from 'src/Domain/Project/Exception/ActivityNotFoundException';
-import {ProjectView} from '../View/ProjectView';
+import {ActivityNotFoundException} from 'src/Domain/Activity/Exception/ActivityNotFoundException';
+import {ProjectView} from '../../Project/View/ProjectView';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 
 @QueryHandler(GetActivityByIdQuery)

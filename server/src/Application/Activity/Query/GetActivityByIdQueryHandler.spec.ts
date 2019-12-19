@@ -1,14 +1,14 @@
 import {mock, instance, when, verify} from 'ts-mockito';
-import {ActivityRepository} from 'src/Infrastructure/Project/Repository/ActivityRepository';
-import {Activity} from 'src/Domain/Project/Activity.entity';
-import {ActivityView} from 'src/Application/Project/View/ActivityView';
+import {ActivityRepository} from 'src/Infrastructure/Activity/Repository/ActivityRepository';
+import {Activity} from 'src/Domain/Activity/Activity.entity';
+import {ActivityView} from 'src/Application/Activity/View/ActivityView';
 import {GetActivityByIdQueryHandler} from './GetActivityByIdQueryHandler';
 import {GetActivityByIdQuery} from './GetActivityByIdQuery';
-import {ActivityNotFoundException} from 'src/Domain/Project/Exception/ActivityNotFoundException';
+import {ActivityNotFoundException} from 'src/Domain/Activity/Exception/ActivityNotFoundException';
 import {Task} from 'src/Domain/Task/Task.entity';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {User} from 'src/Domain/User/User.entity';
-import {ProjectView} from '../View/ProjectView';
+import {ProjectView} from '../../Project/View/ProjectView';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 
 describe('GetActivityByIdQueryHandler', () => {

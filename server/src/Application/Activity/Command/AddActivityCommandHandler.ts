@@ -3,12 +3,12 @@ import {Inject} from '@nestjs/common';
 import {AddActivityCommand} from './AddActivityCommand';
 import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
 import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
-import {IActivityRepository} from 'src/Domain/Project/Repository/IActivityRepository';
+import {IActivityRepository} from 'src/Domain/Activity/Repository/IActivityRepository';
 import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotFoundException';
 import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
-import {IsMaximumTimeSpentReached} from 'src/Domain/Project/Specification/IsMaximumTimeSpentReached';
-import {Activity} from 'src/Domain/Project/Activity.entity';
-import {MaximumActivityReachedException} from 'src/Domain/Project/Exception/MaximumActivityReachedException';
+import {IsMaximumTimeSpentReached} from 'src/Domain/Activity/Specification/IsMaximumTimeSpentReached';
+import {Activity} from 'src/Domain/Activity/Activity.entity';
+import {MaximumActivityReachedException} from 'src/Domain/Activity/Exception/MaximumActivityReachedException';
 
 @CommandHandler(AddActivityCommand)
 export class AddActivityCommandHandler {

@@ -9,8 +9,8 @@ import {
 } from 'ts-mockito';
 import {TaskRepository} from 'src/Infrastructure/Task/Repository/TaskRepository';
 import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
-import {ActivityRepository} from 'src/Infrastructure/Project/Repository/ActivityRepository';
-import {IsMaximumTimeSpentReached} from 'src/Domain/Project/Specification/IsMaximumTimeSpentReached';
+import {ActivityRepository} from 'src/Infrastructure/Activity/Repository/ActivityRepository';
+import {IsMaximumTimeSpentReached} from 'src/Domain/Activity/Specification/IsMaximumTimeSpentReached';
 import {AddActivityCommandHandler} from './AddActivityCommandHandler';
 import {AddActivityCommand} from './AddActivityCommand';
 import {User} from 'src/Domain/User/User.entity';
@@ -18,9 +18,8 @@ import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotF
 import {Project} from 'src/Domain/Project/Project.entity';
 import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
 import {Task} from 'src/Domain/Task/Task.entity';
-import {MaximumActivityReachedException} from 'src/Domain/Project/Exception/MaximumActivityReachedException';
-import {Activity} from 'src/Domain/Project/Activity.entity';
-import {ActivityView} from '../../View/ActivityView';
+import {MaximumActivityReachedException} from 'src/Domain/Activity/Exception/MaximumActivityReachedException';
+import {Activity} from 'src/Domain/Activity/Activity.entity';
 
 describe('AddActivityCommandHandler', () => {
   let taskRepository: TaskRepository;

@@ -1,5 +1,5 @@
 import {instance, mock, when, verify} from 'ts-mockito';
-import {ActivityRepository} from 'src/Infrastructure/Project/Repository/ActivityRepository';
+import {ActivityRepository} from 'src/Infrastructure/Activity/Repository/ActivityRepository';
 import {IsMaximumTimeSpentReached} from './IsMaximumTimeSpentReached';
 import {Activity} from '../Activity.entity';
 import {User} from 'src/Domain/User/User.entity';
