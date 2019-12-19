@@ -4,5 +4,5 @@ import {IsNotEmpty} from 'class-validator';
 export class CustomerDTO {
   @ApiModelProperty()
   @IsNotEmpty()
-  public readonly name: string;
+  public name: string;
 }

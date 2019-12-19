@@ -5,5 +5,5 @@ export class TaskIdDTO {
   @ApiModelProperty()
   @IsNotEmpty()
   @IsUUID()
-  public readonly id: string;
+  public id: string;
 }
