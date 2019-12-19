@@ -11,14 +11,14 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
-import {AddActivityCommand} from 'src/Application/Project/Command/Activity/AddActivityCommand';
+import {AddActivityCommand} from 'src/Application/Activity/Command/AddActivityCommand';
 import {AddActivityDTO} from './DTO/AddActivityDTO';
-import {ActivityView} from 'src/Application/Project/View/ActivityView';
+import {ActivityView} from 'src/Application/Activity/View/ActivityView';
 import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
-import {GetActivityByIdQuery} from 'src/Application/Project/Query/GetActivityByIdQuery';
+import {GetActivityByIdQuery} from 'src/Application/Activity/Query/GetActivityByIdQuery';
 
 @Controller('activities')
-@ApiUseTags('Project')
+@ApiUseTags('Activity')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'))
 export class AddActivityAction {

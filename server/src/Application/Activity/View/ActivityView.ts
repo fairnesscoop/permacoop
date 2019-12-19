@@ -1,5 +1,5 @@
-import {ProjectView} from './ProjectView';
 import {TaskView} from 'src/Application/Task/View/TaskView';
+import {ProjectView} from 'src/Application/Project/View/ProjectView';
 
 export class ActivityView {
   constructor(
