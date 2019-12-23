@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
+import {History} from 'history';
+import {format} from 'date-fns';
 import {bindActionCreators} from 'redux';
 import {Spinner, Row, Col, Table} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
@@ -13,38 +15,69 @@ import {CoreListState, ICoreListResetAction} from '../../core/types/list';
 import {LoggedUser} from '../../auth/models/LoggedUser';
 import {MonthlyActivities} from '../models/MonthlyActivities';
 import ActivityDetail from '../components/ActivityDetail';
+import {useQuery} from '../../core/hooks/query';
+import {UserFilter} from '../../user/components/filter/UserFilter';
+import {monthNormalizer} from '../../../normalizer/date';
 
 interface IProps {
   list: CoreListState<MonthlyActivities>;
   user: LoggedUser | null;
   listActivities(userId: string, date: Date): void;
   reset(): ICoreListResetAction;
+  history: History;
 }
 
-const ListView: React.FC<IProps> = ({list, listActivities, user, reset}) => {
+const ListView: React.FC<IProps> = ({
+  list,
+  listActivities,
+  user,
+  reset,
+  history
+}) => {
   const {t} = useTranslation();
+  const query = useQuery();
+  const userId = query.get('userId') || user?.id;
+  const date = query.get('date') || format(new Date(), 'y-MM-dd');
 
   useEffect(() => {
-    if (user) {
-      listActivities(user.id, new Date());
+    if (userId) {
+      listActivities(userId, new Date(date));
     }
 
     return () => {
       reset();
     };
-  }, [listActivities, user, reset]);
+  }, [listActivities, date, userId, user, reset]);
 
   return (
     <>
       <Row>
         <Col>
-          <Breadcrumb items={[new BreadcrumbItem(t('activity.title'))]} />
+          <Breadcrumb
+            items={[
+              new BreadcrumbItem(
+                t('activity.list.title', {date: monthNormalizer(date)})
+              )
+            ]}
+          />
           <ServerErrors errors={list.errors} />
+          <Row className={'mb-3'}>
+            {userId && (
+              <UserFilter
+                userId={userId}
+                onChange={(e: any) => {
+                  history.push(
+                    `/activities?userId=${e.target.value}&date=${date}`
+                  );
+                }}
+              />
+            )}
+          </Row>
           <Table bordered>
             <thead>
               <tr>
                 <th>{t('activity.list.date')}</th>
-                <th>{t('activity.list.title')}</th>
+                <th>{t('activity.list.activities')}</th>
                 <th></th>
               </tr>
             </thead>
@@ -54,6 +87,7 @@ const ListView: React.FC<IProps> = ({list, listActivities, user, reset}) => {
                   monthlyActivities instanceof MonthlyActivities && (
                     <ActivityDetail
                       key={key}
+                      canAddActivity={userId === user?.id}
                       monthlyActivities={monthlyActivities}
                     />
                   )

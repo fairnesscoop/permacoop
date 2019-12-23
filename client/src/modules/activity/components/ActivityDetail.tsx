@@ -7,9 +7,13 @@ import {dateNormalizer} from '../../../normalizer/date';
 
 interface IProps {
   monthlyActivities: MonthlyActivities;
+  canAddActivity: boolean;
 }
 
-const ActivityDetail: React.FC<IProps> = ({monthlyActivities}) => {
+const ActivityDetail: React.FC<IProps> = ({
+  monthlyActivities,
+  canAddActivity
+}) => {
   return (
     <tr className={monthlyActivities.isWeekend ? 'disabled' : ''}>
       <td>{dateNormalizer(monthlyActivities.date)}</td>
@@ -30,7 +34,7 @@ const ActivityDetail: React.FC<IProps> = ({monthlyActivities}) => {
         )}
       </td>
       <td>
-        {false === monthlyActivities.isWeekend && (
+        {canAddActivity && false === monthlyActivities.isWeekend && (
           <Link
             to={`/activities/add/${monthlyActivities.date}`}
             className={'btn btn-outline-primary btn-sm'}
