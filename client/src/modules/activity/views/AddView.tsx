@@ -44,7 +44,7 @@ const AddView: React.FC<IProps> = ({
   }, [reset]);
 
   if (upsert.payload) {
-    return <Redirect to={'/activities'} />;
+    return <Redirect to={`/activities?date=${date.date}`} />;
   }
 
   return (

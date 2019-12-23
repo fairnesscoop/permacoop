@@ -23,7 +23,8 @@
       "title": "CRA",
       "list": {
         "date": "Date",
-        "title": "Activités"
+        "activities": "Activités",
+        "title": "CRA du mois de {{date}}"
       },
       "add": {
         "title": "Activité du {{date}}"
@@ -45,6 +46,9 @@
       "firstName": "Prénom",
       "lastName": "Nom",
       "email": "Adresse e-mail",
+      "filter": {
+        "title": "Filtrer par coopérateur"
+      },
       "list": {
         "noItems": "Il n'y a pas encore de coopérateurs."
       },
