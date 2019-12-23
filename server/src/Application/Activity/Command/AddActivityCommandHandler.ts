@@ -9,6 +9,7 @@ import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundExcep
 import {IsMaximumTimeSpentReached} from 'src/Domain/Activity/Specification/IsMaximumTimeSpentReached';
 import {Activity} from 'src/Domain/Activity/Activity.entity';
 import {MaximumActivityReachedException} from 'src/Domain/Activity/Exception/MaximumActivityReachedException';
+import {IDateUtilsAdapter} from 'src/Application/Adapter/IDateUtilsAdapter';
 
 @CommandHandler(AddActivityCommand)
 export class AddActivityCommandHandler {
@@ -19,6 +20,8 @@ export class AddActivityCommandHandler {
     private readonly projectRepository: IProjectRepository,
     @Inject('IActivityRepository')
     private readonly activityRepository: IActivityRepository,
+    @Inject('IDateUtilsAdapter')
+    private readonly dateUtilsAdapter: IDateUtilsAdapter,
     private readonly isMaximumTimeSpentReached: IsMaximumTimeSpentReached
   ) {}
 
@@ -35,7 +38,14 @@ export class AddActivityCommandHandler {
       throw new TaskNotFoundException();
     }
 
-    const activity = new Activity(project, task, user, time, date, summary);
+    const activity = new Activity(
+      project,
+      task,
+      user,
+      time,
+      this.dateUtilsAdapter.format(date, 'y-MM-dd'),
+      summary
+    );
 
     if (
       true === (await this.isMaximumTimeSpentReached.isSatisfiedBy(activity))

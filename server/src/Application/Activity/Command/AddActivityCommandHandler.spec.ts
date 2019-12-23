@@ -20,22 +20,23 @@ import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundExcep
 import {Task} from 'src/Domain/Task/Task.entity';
 import {MaximumActivityReachedException} from 'src/Domain/Activity/Exception/MaximumActivityReachedException';
 import {Activity} from 'src/Domain/Activity/Activity.entity';
+import {DateUtilsAdapter} from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 
 describe('AddActivityCommandHandler', () => {
   let taskRepository: TaskRepository;
   let projectRepository: ProjectRepository;
   let activityRepository: ActivityRepository;
   let isMaximumTimeSpentReached: IsMaximumTimeSpentReached;
+  let dateUtilsAdapter: DateUtilsAdapter;
   let handler: AddActivityCommandHandler;
 
   const user = mock(User);
   const project = mock(Project);
   const task = mock(Task);
-  const date = new Date();
 
   const command = new AddActivityCommand(
     instance(user),
-    date,
+    new Date('2019-12-12'),
     100,
     '50e624ef-3609-4053-a437-f74844a2d2de',
     'e3fc9666-2932-4dc1-b2b9-d904388293fb',
@@ -48,11 +49,13 @@ describe('AddActivityCommandHandler', () => {
     activityRepository = mock(ActivityRepository);
     taskRepository = mock(TaskRepository);
     isMaximumTimeSpentReached = mock(IsMaximumTimeSpentReached);
+    dateUtilsAdapter = mock(DateUtilsAdapter);
 
     handler = new AddActivityCommandHandler(
       instance(taskRepository),
       instance(projectRepository),
       instance(activityRepository),
+      instance(dateUtilsAdapter),
       instance(isMaximumTimeSpentReached)
     );
   });
@@ -106,7 +109,7 @@ describe('AddActivityCommandHandler', () => {
       instance(task),
       instance(user),
       100,
-      anyOfClass(Date),
+      '2019-12-12',
       'Superkaiser development'
     );
 
@@ -119,6 +122,9 @@ describe('AddActivityCommandHandler', () => {
     when(
       isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(activity))
     ).thenResolve(true);
+    when(dateUtilsAdapter.format(anyOfClass(Date), 'y-MM-dd')).thenReturn(
+      '2019-12-12'
+    );
 
     try {
       await handler.execute(command);
@@ -134,6 +140,7 @@ describe('AddActivityCommandHandler', () => {
       verify(
         isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(activity))
       ).once();
+      verify(dateUtilsAdapter.format(anyOfClass(Date), 'y-MM-dd')).once();
       verify(activityRepository.save(anything())).never();
     }
   });
@@ -144,7 +151,7 @@ describe('AddActivityCommandHandler', () => {
       instance(task),
       instance(user),
       100,
-      anyOfClass(Date),
+      '2019-12-12',
       'Superkaiser development'
     );
     const savedActivity = mock(Activity);
@@ -158,6 +165,9 @@ describe('AddActivityCommandHandler', () => {
     when(
       isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(activity))
     ).thenResolve(false);
+    when(dateUtilsAdapter.format(anyOfClass(Date), 'y-MM-dd')).thenReturn(
+      '2019-12-12'
+    );
     when(savedActivity.getId()).thenReturn(
       'a2eaac9c-a118-4502-bc9f-4dbd3b296e73'
     );
@@ -175,6 +185,7 @@ describe('AddActivityCommandHandler', () => {
     verify(
       taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
     ).once();
+    verify(dateUtilsAdapter.format(anyOfClass(Date), 'y-MM-dd')).once();
     verify(isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(activity))).once();
     verify(activityRepository.save(deepEqual(activity))).once();
     verify(savedActivity.getId()).once();

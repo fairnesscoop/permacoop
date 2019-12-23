@@ -12,7 +12,8 @@ import {GetActivityByIdQueryHandler} from 'src/Application/Activity/Query/GetAct
 import {Project} from 'src/Domain/Project/Project.entity';
 import {ProjectRepository} from '../Project/Repository/ProjectRepository';
 import {GetActivitiesAction} from './Action/GetActivitiesAction';
-import {GetActivitiesByUserIdAndMonthHandler} from 'src/Application/Activity/Query/GetActivitiesByUserIdAndMonthHandler';
+import {GetMonthlyActivitiesByUserIdQueryHandler} from 'src/Application/Activity/Query/GetMonthlyActivitiesByUserIdQueryHandler';
+import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Project, Activity, Task])],
@@ -21,10 +22,11 @@ import {GetActivitiesByUserIdAndMonthHandler} from 'src/Application/Activity/Que
     {provide: 'IProjectRepository', useClass: ProjectRepository},
     {provide: 'IActivityRepository', useClass: ActivityRepository},
     {provide: 'ITaskRepository', useClass: TaskRepository},
+    {provide: 'IDateUtilsAdapter', useClass: DateUtilsAdapter},
     IsMaximumTimeSpentReached,
     GetActivityByIdQueryHandler,
     AddActivityCommandHandler,
-    GetActivitiesByUserIdAndMonthHandler
+    GetMonthlyActivitiesByUserIdQueryHandler
   ]
 })
 export class ActivityModule {}

@@ -16,8 +16,8 @@ interface IProps {
 export interface ActivityFormData {
   id?: string;
   time: number;
-  date: Date;
   summary: number;
+  date: Date;
   taskId: string;
   projectId: string;
 }
@@ -30,12 +30,6 @@ const ActivityForm: React.FC<InjectedFormProps<ActivityFormData, IProps> &
     <Row>
       <Col sm={12}>
         <Form onSubmit={handleSubmit} className={'m-3'}>
-          <Field
-            name={'date'}
-            type={'date'}
-            label={t('activity.form.date')}
-            component={TextInput}
-          />
           <Field
             name={'time'}
             label={t('activity.form.time')}

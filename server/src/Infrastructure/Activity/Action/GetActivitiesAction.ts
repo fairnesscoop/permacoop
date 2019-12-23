@@ -2,8 +2,8 @@ import {Controller, Inject, UseGuards, Query, Get} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
-import {GetActivitiesByUserIdAndMonth} from 'src/Application/Activity/Query/GetActivitiesByUserIdAndMonth';
-import {ActivitiesByUserAndMonthDTO} from './DTO/ActivitiesByUserAndMonthDTO';
+import {GetMonthlyActivitiesByUserIdQuery} from 'src/Application/Activity/Query/GetMonthlyActivitiesByUserIdQuery';
+import {MonthlyActivitiesByUserDTO} from './DTO/MonthlyActivitiesByUserDTO';
 
 @Controller('activities')
 @ApiUseTags('Activity')
@@ -16,10 +16,10 @@ export class GetActivitiesAction {
   ) {}
 
   @Get()
-  @ApiOperation({title: 'Get activities by user and month'})
-  public async index(@Query() dto: ActivitiesByUserAndMonthDTO) {
+  @ApiOperation({title: 'Get monthly activities by user'})
+  public async index(@Query() dto: MonthlyActivitiesByUserDTO) {
     return await this.queryBus.execute(
-      new GetActivitiesByUserIdAndMonth(dto.userId, new Date(dto.date))
+      new GetMonthlyActivitiesByUserIdQuery(dto.userId, new Date(dto.date))
     );
   }
 }
