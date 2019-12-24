@@ -7,23 +7,23 @@ import {Spinner, Row, Col, Table} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
 import {AppState} from '../../../store/reducers';
 import {listActivities} from '../middlewares/list';
-import {reset} from '../../core/actions/list';
+import {reset} from '../actions/list';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import ServerErrors from '../../core/components/ServerErrors';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
-import {CoreListState, ICoreListResetAction} from '../../core/types/list';
 import {LoggedUser} from '../../auth/models/LoggedUser';
-import {MonthlyActivities} from '../models/MonthlyActivities';
 import ActivityDetail from '../components/ActivityDetail';
 import {useQuery} from '../../core/hooks/query';
 import {UserFilter} from '../../user/components/filter/UserFilter';
 import {monthNormalizer} from '../../../normalizer/date';
+import {ActivityListState, IActivityListResetAction} from '../types/list';
+import {ActivitiesByDay} from '../models/ActivitiesByDay';
 
 interface IProps {
-  list: CoreListState<MonthlyActivities>;
+  list: ActivityListState;
   user: LoggedUser | null;
   listActivities(userId: string, date: Date): void;
-  reset(): ICoreListResetAction;
+  reset(): IActivityListResetAction;
   history: History;
 }
 
@@ -56,7 +56,7 @@ const ListView: React.FC<IProps> = ({
           <Breadcrumb
             items={[
               new BreadcrumbItem(
-                t('activity.list.title', {date: monthNormalizer(date)})
+                t('activity.list.title', {month: monthNormalizer(date)})
               )
             ]}
           />
@@ -82,17 +82,26 @@ const ListView: React.FC<IProps> = ({
               </tr>
             </thead>
             <tbody>
-              {list.payload.map(
-                (monthlyActivities, key: number) =>
-                  monthlyActivities instanceof MonthlyActivities && (
+              {list.payload.days.map(
+                (activityByDays, key: number) =>
+                  activityByDays instanceof ActivitiesByDay && (
                     <ActivityDetail
                       key={key}
                       canAddActivity={userId === user?.id}
-                      monthlyActivities={monthlyActivities}
+                      activityByDays={activityByDays}
                     />
                   )
               )}
             </tbody>
+            <tfoot>
+              <tr>
+                <th colSpan={3}>
+                  {t('activity.list.total', {
+                    total: list.payload.totalTimeSpent / 100
+                  })}
+                </th>
+              </tr>
+            </tfoot>
           </Table>
         </Col>
       </Row>
@@ -109,7 +118,7 @@ const ListView: React.FC<IProps> = ({
 
 export default connect(
   (state: AppState) => ({
-    list: state.core.list,
+    list: state.activity.list,
     user: state.auth.authentication.user
   }),
   dispatch => ({

@@ -24,7 +24,8 @@
       "list": {
         "date": "Date",
         "activities": "Activités",
-        "title": "CRA du mois de {{date}}"
+        "title": "CRA du mois de {{month}}",
+        "total": "Total: {{total}}"
       },
       "add": {
         "title": "Activité du {{date}}"

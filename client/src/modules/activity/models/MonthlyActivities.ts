@@ -1,9 +1,8 @@
-import {Activity} from './Activity';
+import {ActivitiesByDay} from './ActivitiesByDay';
 
 export class MonthlyActivities {
   constructor(
-    public readonly date: string,
-    public readonly isWeekend: boolean,
-    public readonly activities: Activity[] = []
+    public readonly totalTimeSpent: number = 0,
+    public readonly days: ActivitiesByDay[] = []
   ) {}
 }

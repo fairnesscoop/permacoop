@@ -35,12 +35,11 @@ export class ActivityRepository implements IActivityRepository {
       .createQueryBuilder('activity')
       .select([
         'activity.id',
-        'activity.date',
         'activity.time',
         'activity.summary',
-        'project.id',
+        'activity.date',
         'project.name',
-        'task.id',
+        'customer.name',
         'task.name'
       ])
       .where('activity.id = :id', {id})
@@ -63,11 +62,8 @@ export class ActivityRepository implements IActivityRepository {
         'activity.time',
         'activity.summary',
         'activity.date',
-        'project.id',
         'project.name',
-        'customer.id',
         'customer.name',
-        'task.id',
         'task.name'
       ])
       .where('user.id = :userId', {userId})
