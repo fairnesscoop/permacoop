@@ -36,6 +36,10 @@ export class Project {
     return this.customer;
   }
 
+  public getFullName(): string {
+    return `${this.customer.getName()} > ${this.getName()}`;
+  }
+
   public updateCustomerAndName(customer: Customer, name: string): void {
     this.customer = customer;
     this.name = name;

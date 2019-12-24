@@ -3,6 +3,7 @@ import {Activity} from '../models/Activity';
 import {ActivityFormData} from '../components/form/ActivityForm';
 import {ActivityFactory} from '../factory/ActivityFactory';
 import {MonthlyActivities} from '../models/MonthlyActivities';
+import {ActivitiesByDay} from '../models/ActivitiesByDay';
 
 export const saveActivity = async (
   payload: ActivityFormData
@@ -21,19 +22,19 @@ export const saveActivity = async (
 export const findActivities = async (
   userId: string,
   date: Date
-): Promise<MonthlyActivities[]> => {
-  const response = await axios.get('activities', {params: {userId, date}});
-  const monthlyActivities: MonthlyActivities[] = [];
+): Promise<MonthlyActivities> => {
+  const {data} = await axios.get('activities', {params: {userId, date}});
+  const activitiesByDay: ActivitiesByDay[] = [];
 
-  for (const monthlyActivity of response.data) {
+  for (const monthlyActivity of data.days) {
     const activities: Activity[] = [];
 
     for (const activity of monthlyActivity.activities) {
-      activities.push(ActivityFactory.createWithCustomer(activity));
+      activities.push(ActivityFactory.create(activity));
     }
 
-    monthlyActivities.push(
-      new MonthlyActivities(
+    activitiesByDay.push(
+      new ActivitiesByDay(
         monthlyActivity.date,
         monthlyActivity.isWeekend,
         activities
@@ -41,5 +42,5 @@ export const findActivities = async (
     );
   }
 
-  return monthlyActivities;
+  return new MonthlyActivities(data.totalTimeSpent, activitiesByDay);
 };

@@ -4,8 +4,6 @@ import {GetActivityByIdQuery} from './GetActivityByIdQuery';
 import {ActivityView} from '../View/ActivityView';
 import {IActivityRepository} from 'src/Domain/Activity/Repository/IActivityRepository';
 import {ActivityNotFoundException} from 'src/Domain/Activity/Exception/ActivityNotFoundException';
-import {ProjectView} from '../../Project/View/ProjectView';
-import {TaskView} from 'src/Application/Task/View/TaskView';
 
 @QueryHandler(GetActivityByIdQuery)
 export class GetActivityByIdQueryHandler {
@@ -27,8 +25,8 @@ export class GetActivityByIdQueryHandler {
       activity.getId(),
       activity.getTime(),
       activity.getSummary(),
-      new ProjectView(project.getId(), project.getName()),
-      new TaskView(task.getId(), task.getName())
+      project.getFullName(),
+      task.getName()
     );
   }
 }

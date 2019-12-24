@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {loading, errors, success} from '../../core/actions/list';
+import {loading, errors, success} from '../actions/list';
 import {findActivities} from '../repositories/activity';
 
 export const listActivities = (userId: string, date: Date) => async (

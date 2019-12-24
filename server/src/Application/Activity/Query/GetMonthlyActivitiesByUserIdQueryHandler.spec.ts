@@ -7,12 +7,10 @@ import {GetMonthlyActivitiesByUserIdQueryHandler} from './GetMonthlyActivitiesBy
 import {ActivityRepository} from 'src/Infrastructure/Activity/Repository/ActivityRepository';
 import {GetMonthlyActivitiesByUserIdQuery} from './GetMonthlyActivitiesByUserIdQuery';
 import {ActivityView} from '../View/ActivityView';
-import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {TaskView} from 'src/Application/Task/View/TaskView';
-import {MonthlyActivitiesView} from '../View/MonthlyActivitiesView';
+import {ActivitiesByDayView} from '../View/ActivitiesByDayView';
 import {DateUtilsAdapter} from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
+import {MonthlyActivitiesView} from '../View/MonthlyActivitiesView';
 
 describe('GetMonthlyActivitiesByUserIdQueryHandler', () => {
   it('testGetActivities', async () => {
@@ -24,13 +22,8 @@ describe('GetMonthlyActivitiesByUserIdQueryHandler', () => {
     const customer = mock(Customer);
     const queryDate = new Date('2019-12-12T17:43:14.299Z');
 
-    when(customer.getId()).thenReturn('eca7060c-66fc-4426-8a13-00771a8f9b67');
-    when(customer.getName()).thenReturn('Customer');
-    when(project.getId()).thenReturn('b06447a5-0aed-466d-bd5d-61ff7dae872b');
-    when(project.getName()).thenReturn('Project');
+    when(project.getFullName()).thenReturn('Customer > Project');
     when(project.getCustomer()).thenReturn(instance(customer));
-    when(user.getFullName()).thenReturn('Mathieu MARCHOIS');
-    when(task.getId()).thenReturn('549e2057-2086-4809-a33b-a2b470b8e9b7');
     when(task.getName()).thenReturn('Development');
 
     const activity1 = mock(Activity);
@@ -94,74 +87,62 @@ describe('GetMonthlyActivitiesByUserIdQueryHandler', () => {
       instance(dateUtilsAdapter)
     );
 
-    const expectedResult = [
-      new MonthlyActivitiesView('2019-12-01', true),
-      new MonthlyActivitiesView('2019-12-02', false),
-      new MonthlyActivitiesView('2019-12-03', false),
-      new MonthlyActivitiesView('2019-12-04', false),
-      new MonthlyActivitiesView('2019-12-05', false),
-      new MonthlyActivitiesView('2019-12-06', false),
-      new MonthlyActivitiesView('2019-12-07', true),
-      new MonthlyActivitiesView('2019-12-08', true),
-      new MonthlyActivitiesView('2019-12-09', false),
-      new MonthlyActivitiesView('2019-12-10', false),
-      new MonthlyActivitiesView('2019-12-11', false),
-      new MonthlyActivitiesView('2019-12-12', false, [
+    const expectedResult = new MonthlyActivitiesView(200, [
+      new ActivitiesByDayView('2019-12-01', true),
+      new ActivitiesByDayView('2019-12-02', false),
+      new ActivitiesByDayView('2019-12-03', false),
+      new ActivitiesByDayView('2019-12-04', false),
+      new ActivitiesByDayView('2019-12-05', false),
+      new ActivitiesByDayView('2019-12-06', false),
+      new ActivitiesByDayView('2019-12-07', true),
+      new ActivitiesByDayView('2019-12-08', true),
+      new ActivitiesByDayView('2019-12-09', false),
+      new ActivitiesByDayView('2019-12-10', false),
+      new ActivitiesByDayView('2019-12-11', false),
+      new ActivitiesByDayView('2019-12-12', false, [
         new ActivityView(
           'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
           75,
           'Summary',
-          new ProjectView(
-            'b06447a5-0aed-466d-bd5d-61ff7dae872b',
-            'Project',
-            new CustomerView('eca7060c-66fc-4426-8a13-00771a8f9b67', 'Customer')
-          ),
-          new TaskView('549e2057-2086-4809-a33b-a2b470b8e9b7', 'Development')
+          'Customer > Project',
+          'Development'
         ),
         new ActivityView(
           'b9a9b094-5bb2-4d0b-b01e-231b6cb50039',
           25,
           '',
-          new ProjectView(
-            'b06447a5-0aed-466d-bd5d-61ff7dae872b',
-            'Project',
-            new CustomerView('eca7060c-66fc-4426-8a13-00771a8f9b67', 'Customer')
-          ),
-          new TaskView('549e2057-2086-4809-a33b-a2b470b8e9b7', 'Development')
+          'Customer > Project',
+          'Development'
         )
       ]),
-      new MonthlyActivitiesView('2019-12-13', false),
-      new MonthlyActivitiesView('2019-12-14', true),
-      new MonthlyActivitiesView('2019-12-15', true),
-      new MonthlyActivitiesView('2019-12-16', false),
-      new MonthlyActivitiesView('2019-12-17', false, [
+      new ActivitiesByDayView('2019-12-13', false),
+      new ActivitiesByDayView('2019-12-14', true),
+      new ActivitiesByDayView('2019-12-15', true),
+      new ActivitiesByDayView('2019-12-16', false),
+      new ActivitiesByDayView('2019-12-17', false, [
         new ActivityView(
           'a773a25d-8028-4190-bc03-51b33a0d1528',
           100,
           '',
-          new ProjectView(
-            'b06447a5-0aed-466d-bd5d-61ff7dae872b',
-            'Project',
-            new CustomerView('eca7060c-66fc-4426-8a13-00771a8f9b67', 'Customer')
-          ),
-          new TaskView('549e2057-2086-4809-a33b-a2b470b8e9b7', 'Development')
+          'Customer > Project',
+          'Development'
         )
       ]),
-      new MonthlyActivitiesView('2019-12-18', false),
-      new MonthlyActivitiesView('2019-12-19', false),
-      new MonthlyActivitiesView('2019-12-20', false),
-      new MonthlyActivitiesView('2019-12-21', true),
-      new MonthlyActivitiesView('2019-12-22', true),
-      new MonthlyActivitiesView('2019-12-23', false),
-      new MonthlyActivitiesView('2019-12-24', false),
-      new MonthlyActivitiesView('2019-12-25', false),
-      new MonthlyActivitiesView('2019-12-26', false),
-      new MonthlyActivitiesView('2019-12-27', false),
-      new MonthlyActivitiesView('2019-12-28', true),
-      new MonthlyActivitiesView('2019-12-29', true),
-      new MonthlyActivitiesView('2019-12-30', false),
-      new MonthlyActivitiesView('2019-12-31', false)
-    ];
+      new ActivitiesByDayView('2019-12-18', false),
+      new ActivitiesByDayView('2019-12-19', false),
+      new ActivitiesByDayView('2019-12-20', false),
+      new ActivitiesByDayView('2019-12-21', true),
+      new ActivitiesByDayView('2019-12-22', true),
+      new ActivitiesByDayView('2019-12-23', false),
+      new ActivitiesByDayView('2019-12-24', false),
+      new ActivitiesByDayView('2019-12-25', false),
+      new ActivitiesByDayView('2019-12-26', false),
+      new ActivitiesByDayView('2019-12-27', false),
+      new ActivitiesByDayView('2019-12-28', true),
+      new ActivitiesByDayView('2019-12-29', true),
+      new ActivitiesByDayView('2019-12-30', false),
+      new ActivitiesByDayView('2019-12-31', false)
+    ]);
 
     expect(
       await queryHandler.execute(

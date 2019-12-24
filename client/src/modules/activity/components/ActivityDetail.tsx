@@ -1,43 +1,40 @@
 import React from 'react';
 import {Badge} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import {MonthlyActivities} from '../models/MonthlyActivities';
 import {Activity} from '../models/Activity';
 import {dateNormalizer} from '../../../normalizer/date';
+import {ActivitiesByDay} from '../models/ActivitiesByDay';
 
 interface IProps {
-  monthlyActivities: MonthlyActivities;
+  activityByDays: ActivitiesByDay;
   canAddActivity: boolean;
 }
 
-const ActivityDetail: React.FC<IProps> = ({
-  monthlyActivities,
-  canAddActivity
-}) => {
+const ActivityDetail: React.FC<IProps> = ({activityByDays, canAddActivity}) => {
   return (
-    <tr className={monthlyActivities.isWeekend ? 'disabled' : ''}>
-      <td>{dateNormalizer(monthlyActivities.date)}</td>
+    <tr className={activityByDays.isWeekend ? 'disabled' : ''}>
+      <td>{dateNormalizer(activityByDays.date)}</td>
       <td>
-        {monthlyActivities.activities.map(
+        {activityByDays.activities.map(
           activity =>
             activity instanceof Activity && (
               <div key={activity.id}>
-                <Badge pill variant={'success'}>
-                  <i className={'fas fa-thumbtack'}></i> {activity.task.name}
+                <Badge variant={'success'}>
+                  <i className={'fas fa-thumbtack'}></i> {activity.taskName}
                 </Badge>{' '}
-                <Badge pill variant={'success'}>
+                <Badge variant={'success'}>
                   <i className={'fas fa-clock'}></i> {activity.time / 100}
                 </Badge>{' '}
-                {activity.project.fullName}
+                {activity.projectName}
               </div>
             )
         )}
       </td>
       <td>
-        {canAddActivity && false === monthlyActivities.isWeekend && (
+        {true === canAddActivity && false === activityByDays.isWeekend && (
           <Link
-            to={`/activities/add/${monthlyActivities.date}`}
-            className={'btn btn-outline-primary btn-sm'}
+            to={`/activities/add/${activityByDays.date}`}
+            className={'btn btn-outline-secondary btn-sm'}
           >
             <i className={'fas fa-plus'}></i>
           </Link>

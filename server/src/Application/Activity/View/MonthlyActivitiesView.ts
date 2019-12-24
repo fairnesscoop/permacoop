@@ -1,9 +1,8 @@
-import {ActivityView} from './ActivityView';
+import {ActivitiesByDayView} from './ActivitiesByDayView';
 
 export class MonthlyActivitiesView {
   constructor(
-    public readonly date: string,
-    public readonly isWeekend: boolean,
-    public readonly activities: ActivityView[] = []
+    public readonly totalTimeSpent: number = 0,
+    public readonly days: ActivitiesByDayView[] = []
   ) {}
 }
