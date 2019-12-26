@@ -11,7 +11,6 @@ import {reset} from '../../core/actions/upsert';
 import {reset as resetShow} from '../../core/actions/show';
 import ServerErrors from '../../core/components/ServerErrors';
 import {CoreUpsertState, ICoreUpsertResetAction} from '../../core/types/upsert';
-import {Customer} from '../models/Customer';
 import {upsertCustomer} from '../middlewares/upsert';
 import {getCustomer} from '../middlewares/show';
 import CustomerForm, {CustomerFormData} from '../components/form/CustomerForm';
@@ -22,8 +21,8 @@ interface RouteParams {
 }
 
 interface IProps extends RouteComponentProps<RouteParams> {
-  upsert: CoreUpsertState<Customer>;
-  show: CoreShowState<Customer>;
+  upsert: CoreUpsertState;
+  show: CoreShowState;
   reset(): ICoreUpsertResetAction;
   resetShow(): ICoreShowResetAction;
   upsertCustomer(payload: CustomerFormData): void;

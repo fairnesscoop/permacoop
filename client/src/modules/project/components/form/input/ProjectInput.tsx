@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Field} from 'redux-form';
-import {Project} from '../../../models/Project';
+import {IProject} from '../../../models/IProject';
 import {findProjects} from '../../../repositories/project';
 import {useTranslation} from 'react-i18next';
 import SelectInput from '../../../../core/components/form/SelectInput';
 
 export const ProjectInput: React.FC = () => {
   const {t} = useTranslation();
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<IProject[]>([]);
 
   const fetchProjects = async () => {
     setProjects(await findProjects());
@@ -24,14 +24,11 @@ export const ProjectInput: React.FC = () => {
       component={SelectInput}
     >
       <option value={''}>{t('project.form.placeholder')}</option>
-      {projects.map(
-        project =>
-          project instanceof Project && (
-            <option key={project.id} value={project.id}>
-              {project.fullName}
-            </option>
-          )
-      )}
+      {projects.map((project: IProject) => (
+        <option key={project.id} value={project.id}>
+          {project.customer?.name} {project.name}
+        </option>
+      ))}
     </Field>
   );
 };

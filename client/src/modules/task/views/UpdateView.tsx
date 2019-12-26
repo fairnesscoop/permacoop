@@ -8,7 +8,6 @@ import {AppState} from '../../../store/reducers';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import TaskForm, {TaskFormData} from '../components/form/TaskForm';
-import {Task} from '../models/Task';
 import {reset} from '../../core/actions/upsert';
 import {reset as showReset} from '../../core/actions/show';
 import {upsertTask} from '../middlewares/upsert';
@@ -22,8 +21,8 @@ interface RouteParam {
 }
 
 interface IProps extends RouteComponentProps<RouteParam> {
-  show: CoreShowState<Task>;
-  upsert: CoreUpsertState<Task>;
+  show: CoreShowState;
+  upsert: CoreUpsertState;
   reset(): ICoreUpsertResetAction;
   showReset(): ICoreShowResetAction;
   upsertTask(payload: TaskFormData): void;

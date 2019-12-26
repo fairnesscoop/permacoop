@@ -10,11 +10,11 @@ import {reset} from '../../core/actions/list';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import ServerErrors from '../../core/components/ServerErrors';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
-import {Task} from '../models/Task';
+import {ITask} from '../models/ITask';
 import {CoreListState, ICoreListResetAction} from '../../core/types/list';
 
 interface IProps {
-  list: CoreListState<Task>;
+  list: CoreListState;
   listTasks(): void;
   reset(): ICoreListResetAction;
 }
@@ -47,23 +47,20 @@ const ListView: React.FC<IProps> = ({list, listTasks, reset}) => {
               </tr>
             </thead>
             <tbody>
-              {list.payload.map(
-                task =>
-                  task instanceof Task && (
-                    <tr key={task.id}>
-                      <td>{task.name}</td>
-                      <td>
-                        <Link
-                          to={`/tasks/${task.id}/edit`}
-                          className={'btn btn-outline-secondary btn-sm'}
-                        >
-                          <i className={'fas fa-edit'}></i>{' '}
-                          {t('form.buttons.update')}
-                        </Link>
-                      </td>
-                    </tr>
-                  )
-              )}
+              {list.payload.map((task: ITask) => (
+                <tr key={task.id}>
+                  <td>{task.name}</td>
+                  <td>
+                    <Link
+                      to={`/tasks/${task.id}/edit`}
+                      className={'btn btn-outline-secondary btn-sm'}
+                    >
+                      <i className={'fas fa-edit'}></i>{' '}
+                      {t('form.buttons.update')}
+                    </Link>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </Col>

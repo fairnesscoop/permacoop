@@ -6,7 +6,7 @@ import {
   CORE_LIST_RESET
 } from '../constants/list';
 
-const initialState: CoreListState<any> = {
+const initialState: CoreListState = {
   loading: false,
   errors: [],
   payload: []
@@ -15,7 +15,7 @@ const initialState: CoreListState<any> = {
 export const listReducers = (
   state = initialState,
   action: CoreListActionTypes
-): CoreListState<any> => {
+): CoreListState => {
   switch (action.type) {
     case CORE_LIST_SUCCESS:
       return {

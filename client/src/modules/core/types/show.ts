@@ -7,19 +7,19 @@ import {
   CORE_SHOW_RESET
 } from '../constants/show';
 
-export type CoreShowState<Model> = Readonly<{
+export type CoreShowState = Readonly<{
   loading: boolean;
   errors: Error[];
-  payload: Model | null;
+  payload: any | null;
 }>;
 
 export interface ICoreShowLoadingAction extends ILoadingAction {
   type: typeof CORE_SHOW_LOADING;
 }
 
-export interface ICoreShowSuccessAction<Model> {
+export interface ICoreShowSuccessAction {
   type: typeof CORE_SHOW_SUCCESS;
-  payload: Model;
+  payload: any;
 }
 
 export interface ICoreShowErrorAction extends IErrorAction {
@@ -32,6 +32,6 @@ export interface ICoreShowResetAction {
 
 export type CoreShowActionTypes =
   | ICoreShowLoadingAction
-  | ICoreShowSuccessAction<any>
+  | ICoreShowSuccessAction
   | ICoreShowErrorAction
   | ICoreShowResetAction;

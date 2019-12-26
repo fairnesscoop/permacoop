@@ -10,11 +10,11 @@ import {reset} from '../../core/actions/list';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import ServerErrors from '../../core/components/ServerErrors';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
-import {Project} from '../models/Project';
+import {IProject} from '../models/IProject';
 import {CoreListState, ICoreListResetAction} from '../../core/types/list';
 
 interface IProps {
-  list: CoreListState<Project>;
+  list: CoreListState;
   listProjects(): void;
   reset(): ICoreListResetAction;
 }
@@ -48,24 +48,21 @@ const ListView: React.FC<IProps> = ({list, listProjects, reset}) => {
               </tr>
             </thead>
             <tbody>
-              {list.payload.map(
-                project =>
-                  project instanceof Project && (
-                    <tr key={project.id}>
-                      <td>{project?.customer?.name}</td>
-                      <td>{project.name}</td>
-                      <td>
-                        <Link
-                          to={`/projects/${project.id}/edit`}
-                          className={'btn btn-outline-secondary btn-sm'}
-                        >
-                          <i className={'fas fa-edit'}></i>{' '}
-                          {t('form.buttons.update')}
-                        </Link>
-                      </td>
-                    </tr>
-                  )
-              )}
+              {list.payload.map((project: IProject) => (
+                <tr key={project.id}>
+                  <td>{project?.customer?.name}</td>
+                  <td>{project.name}</td>
+                  <td>
+                    <Link
+                      to={`/projects/${project.id}/edit`}
+                      className={'btn btn-outline-secondary btn-sm'}
+                    >
+                      <i className={'fas fa-edit'}></i>{' '}
+                      {t('form.buttons.update')}
+                    </Link>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </Col>

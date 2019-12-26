@@ -8,14 +8,13 @@ import {AppState} from '../../../store/reducers';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import TaskForm, {TaskFormData} from '../components/form/TaskForm';
-import {Task} from '../models/Task';
 import {reset} from '../../core/actions/upsert';
 import {upsertTask} from '../middlewares/upsert';
 import ServerErrors from '../../core/components/ServerErrors';
 import {CoreUpsertState, ICoreUpsertResetAction} from '../../core/types/upsert';
 
 interface IProps {
-  upsert: CoreUpsertState<Task>;
+  upsert: CoreUpsertState;
   reset(): ICoreUpsertResetAction;
   upsertTask(payload: TaskFormData, id?: string): void;
 }

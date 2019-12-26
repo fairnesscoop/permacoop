@@ -12,7 +12,7 @@ import {
 } from '../types/upsert';
 import {errorNormalizer} from '../../../normalizer/errors';
 
-export const success = (payload: any): ICoreUpsertSuccessAction<any> => ({
+export const success = (payload: any): ICoreUpsertSuccessAction => ({
   type: CORE_UPSERT_SUCCESS,
   payload
 });

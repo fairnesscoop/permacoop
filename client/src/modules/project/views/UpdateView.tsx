@@ -8,7 +8,6 @@ import {AppState} from '../../../store/reducers';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import ProjectForm, {ProjectFormData} from '../components/form/ProjectForm';
-import {Project} from '../models/Project';
 import {reset} from '../../core/actions/upsert';
 import {reset as showReset} from '../../core/actions/show';
 import {upsertProject} from '../middlewares/upsert';
@@ -22,8 +21,8 @@ interface RouteParam {
 }
 
 interface IProps extends RouteComponentProps<RouteParam> {
-  show: CoreShowState<Project>;
-  upsert: CoreUpsertState<Project>;
+  show: CoreShowState;
+  upsert: CoreUpsertState;
   reset(): ICoreUpsertResetAction;
   showReset(): ICoreShowResetAction;
   upsertProject(payload: ProjectFormData): void;

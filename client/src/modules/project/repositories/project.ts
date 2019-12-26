@@ -1,28 +1,22 @@
 import {client as axios} from '../../../utils/axios';
-import {Project} from '../models/Project';
-import {ProjectFactory} from '../factory/ProjectFactory';
+import {IProject} from '../models/IProject';
 import {ProjectFormData} from '../components/form/ProjectForm';
 
-export const findProjects = async (): Promise<Project[]> => {
-  const response = await axios.get('projects');
-  const projects: Project[] = [];
+export const findProjects = async (): Promise<IProject[]> => {
+  const {data} = await axios.get('projects');
 
-  for (const project of response.data) {
-    projects.push(ProjectFactory.create(project));
-  }
-
-  return projects;
+  return data;
 };
 
-export const findOneById = async (id: string): Promise<Project> => {
+export const findOneById = async (id: string): Promise<IProject> => {
   const {data} = await axios.get(`projects/${id}`);
 
-  return ProjectFactory.create(data);
+  return data;
 };
 
 export const saveProject = async (
   payload: ProjectFormData
-): Promise<Project> => {
+): Promise<IProject> => {
   let response;
 
   if (payload.id) {
@@ -31,5 +25,5 @@ export const saveProject = async (
     response = await axios.post('projects', payload);
   }
 
-  return ProjectFactory.create(response.data);
+  return response.data;
 };

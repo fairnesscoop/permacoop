@@ -1,13 +1,11 @@
 import {client as axios} from '../../../utils/axios';
-import {Activity} from '../models/Activity';
+import {IActivity} from '../models/IActivity';
 import {ActivityFormData} from '../components/form/ActivityForm';
-import {ActivityFactory} from '../factory/ActivityFactory';
-import {MonthlyActivities} from '../models/MonthlyActivities';
-import {ActivitiesByDay} from '../models/ActivitiesByDay';
+import {IMonthlyActivities} from '../models/IMonthlyActivities';
 
 export const saveActivity = async (
   payload: ActivityFormData
-): Promise<Activity> => {
+): Promise<IActivity> => {
   let response;
 
   if (payload.id) {
@@ -16,31 +14,14 @@ export const saveActivity = async (
     response = await axios.post('activities', payload);
   }
 
-  return ActivityFactory.create(response.data);
+  return response.data;
 };
 
 export const findActivities = async (
   userId: string,
   date: Date
-): Promise<MonthlyActivities> => {
+): Promise<IMonthlyActivities> => {
   const {data} = await axios.get('activities', {params: {userId, date}});
-  const activitiesByDay: ActivitiesByDay[] = [];
 
-  for (const monthlyActivity of data.days) {
-    const activities: Activity[] = [];
-
-    for (const activity of monthlyActivity.activities) {
-      activities.push(ActivityFactory.create(activity));
-    }
-
-    activitiesByDay.push(
-      new ActivitiesByDay(
-        monthlyActivity.date,
-        monthlyActivity.isWeekend,
-        activities
-      )
-    );
-  }
-
-  return new MonthlyActivities(data.totalTimeSpent, activitiesByDay);
+  return data;
 };

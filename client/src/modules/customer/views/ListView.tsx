@@ -10,11 +10,11 @@ import {reset} from '../../core/actions/list';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import ServerErrors from '../../core/components/ServerErrors';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
-import {Customer} from '../models/Customer';
+import {ICustomer} from '../models/ICustomer';
 import {CoreListState, ICoreListResetAction} from '../../core/types/list';
 
 interface IProps {
-  list: CoreListState<Customer>;
+  list: CoreListState;
   listCustomers(): void;
   reset(): ICoreListResetAction;
 }
@@ -47,23 +47,20 @@ const ListView: React.FC<IProps> = ({list, listCustomers, reset}) => {
               </tr>
             </thead>
             <tbody>
-              {list.payload.map(
-                customer =>
-                  customer instanceof Customer && (
-                    <tr key={customer.id}>
-                      <td>{customer.name}</td>
-                      <td>
-                        <Link
-                          to={`/customers/${customer.id}/edit`}
-                          className={'btn btn-outline-secondary btn-sm'}
-                        >
-                          <i className={'fas fa-edit'}></i>{' '}
-                          {t('form.buttons.update')}
-                        </Link>
-                      </td>
-                    </tr>
-                  )
-              )}
+              {list.payload.map((customer: ICustomer) => (
+                <tr key={customer.id}>
+                  <td>{customer.name}</td>
+                  <td>
+                    <Link
+                      to={`/customers/${customer.id}/edit`}
+                      className={'btn btn-outline-secondary btn-sm'}
+                    >
+                      <i className={'fas fa-edit'}></i>{' '}
+                      {t('form.buttons.update')}
+                    </Link>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </Col>
