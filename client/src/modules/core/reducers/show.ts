@@ -6,7 +6,7 @@ import {
   CORE_SHOW_RESET
 } from '../constants/show';
 
-const initialState: CoreShowState<any> = {
+const initialState: CoreShowState = {
   loading: false,
   errors: [],
   payload: null
@@ -15,7 +15,7 @@ const initialState: CoreShowState<any> = {
 export const showReducers = (
   state = initialState,
   action: CoreShowActionTypes
-): CoreShowState<any> => {
+): CoreShowState => {
   switch (action.type) {
     case CORE_SHOW_SUCCESS:
       return {

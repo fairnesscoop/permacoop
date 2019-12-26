@@ -7,19 +7,19 @@ import {
   CORE_UPSERT_RESET
 } from '../constants/upsert';
 
-export type CoreUpsertState<Model> = Readonly<{
+export type CoreUpsertState = Readonly<{
   loading: boolean;
   errors: Error[];
-  payload: Model | null;
+  payload: any | null;
 }>;
 
 export interface ICoreUpsertLoadingAction extends ILoadingAction {
   type: typeof CORE_UPSERT_LOADING;
 }
 
-export interface ICoreUpsertSuccessAction<Model> {
+export interface ICoreUpsertSuccessAction {
   type: typeof CORE_UPSERT_SUCCESS;
-  payload: Model;
+  payload: any;
 }
 
 export interface ICoreUpsertErrorAction extends IErrorAction {
@@ -32,6 +32,6 @@ export interface ICoreUpsertResetAction {
 
 export type CoreUpsertActionTypes =
   | ICoreUpsertLoadingAction
-  | ICoreUpsertSuccessAction<any>
+  | ICoreUpsertSuccessAction
   | ICoreUpsertErrorAction
   | ICoreUpsertResetAction;

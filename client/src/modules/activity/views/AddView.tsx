@@ -10,7 +10,6 @@ import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import {reset} from '../../core/actions/upsert';
 import ServerErrors from '../../core/components/ServerErrors';
 import {CoreUpsertState, ICoreUpsertResetAction} from '../../core/types/upsert';
-import {Activity} from '../models/Activity';
 import {upsertActivity} from '../middlewares/upsert';
 import ActivityForm, {ActivityFormData} from '../components/form/ActivityForm';
 import {dateNormalizer} from '../../../normalizer/date';
@@ -20,7 +19,7 @@ interface RouteParams {
 }
 
 interface IProps extends RouteComponentProps<RouteParams> {
-  upsert: CoreUpsertState<Activity>;
+  upsert: CoreUpsertState;
   reset(): ICoreUpsertResetAction;
   upsertActivity(date: string, payload: ActivityFormData): void;
 }

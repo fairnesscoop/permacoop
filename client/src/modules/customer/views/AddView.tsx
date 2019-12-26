@@ -10,12 +10,11 @@ import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
 import {reset} from '../../core/actions/upsert';
 import ServerErrors from '../../core/components/ServerErrors';
 import {CoreUpsertState, ICoreUpsertResetAction} from '../../core/types/upsert';
-import {Customer} from '../models/Customer';
 import {upsertCustomer} from '../middlewares/upsert';
 import CustomerForm, {CustomerFormData} from '../components/form/CustomerForm';
 
 interface IProps {
-  upsert: CoreUpsertState<Customer>;
+  upsert: CoreUpsertState;
   reset(): ICoreUpsertResetAction;
   upsertCustomer(payload: CustomerFormData): void;
 }

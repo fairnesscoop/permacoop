@@ -1,12 +1,12 @@
 import React from 'react';
 import {Badge} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import {Activity} from '../models/Activity';
+import {IActivity} from '../models/IActivity';
 import {dateNormalizer} from '../../../normalizer/date';
-import {ActivitiesByDay} from '../models/ActivitiesByDay';
+import {IActivitiesByDay} from '../models/IActivitiesByDay';
 
 interface IProps {
-  activityByDays: ActivitiesByDay;
+  activityByDays: IActivitiesByDay;
   canAddActivity: boolean;
 }
 
@@ -15,20 +15,17 @@ const ActivityDetail: React.FC<IProps> = ({activityByDays, canAddActivity}) => {
     <tr className={activityByDays.isWeekend ? 'disabled' : ''}>
       <td>{dateNormalizer(activityByDays.date)}</td>
       <td>
-        {activityByDays.activities.map(
-          activity =>
-            activity instanceof Activity && (
-              <div key={activity.id}>
-                <Badge variant={'success'}>
-                  <i className={'fas fa-thumbtack'}></i> {activity.taskName}
-                </Badge>{' '}
-                <Badge variant={'success'}>
-                  <i className={'fas fa-clock'}></i> {activity.time / 100}
-                </Badge>{' '}
-                {activity.projectName}
-              </div>
-            )
-        )}
+        {activityByDays.activities.map((activity: IActivity) => (
+          <div key={activity.id}>
+            <Badge variant={'success'}>
+              <i className={'fas fa-thumbtack'}></i> {activity.taskName}
+            </Badge>{' '}
+            <Badge variant={'success'}>
+              <i className={'fas fa-clock'}></i> {activity.time / 100}
+            </Badge>{' '}
+            {activity.projectName}
+          </div>
+        ))}
       </td>
       <td>
         {true === canAddActivity && false === activityByDays.isWeekend && (

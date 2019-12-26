@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Col} from 'react-bootstrap';
-import {User} from '../../models/User';
+import {IUser} from '../../models/IUser';
 import {findUsers} from '../../repositories/user';
 
 interface IProps {
@@ -11,7 +11,7 @@ interface IProps {
 
 export const UserFilter: React.FC<IProps> = ({onChange, userId}) => {
   const {t} = useTranslation();
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<IUser[]>([]);
   const fetchUsers = async () => {
     setUsers(await findUsers());
   };
@@ -29,7 +29,7 @@ export const UserFilter: React.FC<IProps> = ({onChange, userId}) => {
           className={'form-control'}
           onChange={onChange}
         >
-          {users.map((user: User) => (
+          {users.map((user: IUser) => (
             <option key={user.id} value={user.id}>
               {user.firstName} {user.lastName}
             </option>

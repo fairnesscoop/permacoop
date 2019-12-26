@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Field} from 'redux-form';
-import {Task} from '../../../models/Task';
+import {ITask} from '../../../models/ITask';
 import {findTasks} from '../../../repositories/task';
 import {useTranslation} from 'react-i18next';
 import SelectInput from '../../../../core/components/form/SelectInput';
 
 export const TaskInput: React.FC = () => {
   const {t} = useTranslation();
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
 
   const fetchTasks = async () => {
     setTasks(await findTasks());
@@ -20,7 +20,7 @@ export const TaskInput: React.FC = () => {
   return (
     <Field label={t('task.form.title')} name={'taskId'} component={SelectInput}>
       <option value={''}>{t('task.form.placeholder')}</option>
-      {tasks.map((task: Task) => (
+      {tasks.map((task: ITask) => (
         <option key={task.id} value={task.id}>
           {task.name}
         </option>

@@ -10,11 +10,11 @@ import {reset} from '../../core/actions/list';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import ServerErrors from '../../core/components/ServerErrors';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
-import {User} from '../models/User';
+import {IUser} from '../models/IUser';
 import {CoreListState, ICoreListResetAction} from '../../core/types/list';
 
 interface IProps {
-  list: CoreListState<User>;
+  list: CoreListState;
   listUsers(): void;
   reset(): ICoreListResetAction;
 }
@@ -48,16 +48,13 @@ const ListView: React.FC<IProps> = ({list, listUsers, reset}) => {
               </tr>
             </thead>
             <tbody>
-              {list.payload.map(
-                user =>
-                  user instanceof User && (
-                    <tr key={user.id}>
-                      <td>{user.firstName}</td>
-                      <td>{user.lastName}</td>
-                      <td>{user.email}</td>
-                    </tr>
-                  )
-              )}
+              {list.payload.map((user: IUser) => (
+                <tr key={user.id}>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.email}</td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </Col>

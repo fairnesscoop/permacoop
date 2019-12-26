@@ -7,19 +7,19 @@ import {
   CORE_LIST_RESET
 } from '../constants/list';
 
-export type CoreListState<Model> = Readonly<{
+export type CoreListState = Readonly<{
   loading: boolean;
   errors: Error[];
-  payload: Model[];
+  payload: any[];
 }>;
 
 export interface ICoreListLoadingAction extends ILoadingAction {
   type: typeof CORE_LIST_LOADING;
 }
 
-export interface ICoreListSuccessAction<Model> {
+export interface ICoreListSuccessAction {
   type: typeof CORE_LIST_SUCCESS;
-  payload: Model[];
+  payload: any[];
 }
 
 export interface ICoreListErrorAction extends IErrorAction {
@@ -32,6 +32,6 @@ export interface ICoreListResetAction {
 
 export type CoreListActionTypes =
   | ICoreListLoadingAction
-  | ICoreListSuccessAction<any>
+  | ICoreListSuccessAction
   | ICoreListErrorAction
   | ICoreListResetAction;

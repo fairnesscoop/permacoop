@@ -6,12 +6,12 @@ import {
   ACTIVITY_LIST_ERROR,
   ACTIVITY_LIST_RESET
 } from '../constants/list';
-import {MonthlyActivities} from '../models/MonthlyActivities';
+import {IMonthlyActivities} from '../models/IMonthlyActivities';
 
 export type ActivityListState = Readonly<{
   loading: boolean;
   errors: Error[];
-  payload: MonthlyActivities;
+  payload: IMonthlyActivities | null;
 }>;
 
 export interface IActivityListLoadingAction extends ILoadingAction {
@@ -20,7 +20,7 @@ export interface IActivityListLoadingAction extends ILoadingAction {
 
 export interface IActivityListSuccessAction {
   type: typeof ACTIVITY_LIST_SUCCESS;
-  payload: MonthlyActivities;
+  payload: IMonthlyActivities;
 }
 
 export interface IActivityListErrorAction extends IErrorAction {

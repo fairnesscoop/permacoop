@@ -11,10 +11,10 @@ import {
   IActivityListResetAction
 } from '../types/list';
 import {errorNormalizer} from '../../../normalizer/errors';
-import {MonthlyActivities} from '../models/MonthlyActivities';
+import {IMonthlyActivities} from '../models/IMonthlyActivities';
 
 export const success = (
-  payload: MonthlyActivities
+  payload: IMonthlyActivities
 ): IActivityListSuccessAction => ({
   type: ACTIVITY_LIST_SUCCESS,
   payload

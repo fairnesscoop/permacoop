@@ -5,12 +5,11 @@ import {
   ACTIVITY_LIST_ERROR,
   ACTIVITY_LIST_RESET
 } from '../constants/list';
-import {MonthlyActivities} from '../models/MonthlyActivities';
 
 const initialState: ActivityListState = {
   loading: false,
   errors: [],
-  payload: new MonthlyActivities()
+  payload: null
 };
 
 export const listReducers = (

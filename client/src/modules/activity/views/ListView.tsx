@@ -17,7 +17,7 @@ import {useQuery} from '../../core/hooks/query';
 import {UserFilter} from '../../user/components/filter/UserFilter';
 import {monthNormalizer} from '../../../normalizer/date';
 import {ActivityListState, IActivityListResetAction} from '../types/list';
-import {ActivitiesByDay} from '../models/ActivitiesByDay';
+import {IActivitiesByDay} from '../models/IActivitiesByDay';
 
 interface IProps {
   list: ActivityListState;
@@ -82,22 +82,21 @@ const ListView: React.FC<IProps> = ({
               </tr>
             </thead>
             <tbody>
-              {list.payload.days.map(
-                (activityByDays, key: number) =>
-                  activityByDays instanceof ActivitiesByDay && (
-                    <ActivityDetail
-                      key={key}
-                      canAddActivity={userId === user?.id}
-                      activityByDays={activityByDays}
-                    />
-                  )
+              {list.payload?.days.map(
+                (activityByDays: IActivitiesByDay, key: number) => (
+                  <ActivityDetail
+                    key={key}
+                    canAddActivity={userId === user?.id}
+                    activityByDays={activityByDays}
+                  />
+                )
               )}
             </tbody>
             <tfoot>
               <tr>
                 <th colSpan={3}>
                   {t('activity.list.total', {
-                    total: list.payload.totalTimeSpent / 100
+                    total: list.payload ? list.payload.totalTimeSpent / 100 : 0
                   })}
                 </th>
               </tr>

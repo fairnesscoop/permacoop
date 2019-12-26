@@ -6,7 +6,7 @@ import {
   CORE_UPSERT_RESET
 } from '../constants/upsert';
 
-const initialState: CoreUpsertState<any> = {
+const initialState: CoreUpsertState = {
   loading: false,
   errors: [],
   payload: null
@@ -15,7 +15,7 @@ const initialState: CoreUpsertState<any> = {
 export const upsertReducers = (
   state = initialState,
   action: CoreUpsertActionTypes
-): CoreUpsertState<any> => {
+): CoreUpsertState => {
   switch (action.type) {
     case CORE_UPSERT_SUCCESS:
       return {

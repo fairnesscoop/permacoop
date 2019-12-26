@@ -1,28 +1,22 @@
 import {client as axios} from '../../../utils/axios';
-import {Customer} from '../models/Customer';
+import {ICustomer} from '../models/ICustomer';
 import {CustomerFormData} from '../components/form/CustomerForm';
-import {CustomerFactory} from '../factory/CustomerFactory';
 
-export const findCustomers = async (): Promise<Customer[]> => {
-  const response = await axios.get('customers');
-  const customers: Customer[] = [];
+export const findCustomers = async (): Promise<ICustomer[]> => {
+  const {data} = await axios.get('customers');
 
-  for (const data of response.data) {
-    customers.push(CustomerFactory.create(data));
-  }
-
-  return customers;
+  return data;
 };
 
-export const findOneById = async (id: string): Promise<Customer> => {
+export const findOneById = async (id: string): Promise<ICustomer> => {
   const {data} = await axios.get(`customers/${id}`);
 
-  return CustomerFactory.create(data);
+  return data;
 };
 
 export const saveCustomer = async (
   payload: CustomerFormData
-): Promise<Customer> => {
+): Promise<ICustomer> => {
   let response;
 
   if (payload.id) {
@@ -31,5 +25,5 @@ export const saveCustomer = async (
     response = await axios.post('customers', payload);
   }
 
-  return CustomerFactory.create(response.data);
+  return response.data;
 };

@@ -1,26 +1,20 @@
 import {client as axios} from '../../../utils/axios';
-import {Task} from '../models/Task';
+import {ITask} from '../models/ITask';
 import {TaskFormData} from '../components/form/TaskForm';
-import {TaskFactory} from '../factory/TaskFactory';
 
-export const findTasks = async (): Promise<Task[]> => {
-  const response = await axios.get('tasks');
-  const tasks: Task[] = [];
+export const findTasks = async (): Promise<ITask[]> => {
+  const {data} = await axios.get('tasks');
 
-  for (const data of response.data) {
-    tasks.push(TaskFactory.create(data));
-  }
-
-  return tasks;
+  return data;
 };
 
-export const findOneById = async (id: string): Promise<Task> => {
+export const findOneById = async (id: string): Promise<ITask> => {
   const {data} = await axios.get(`tasks/${id}`);
 
-  return TaskFactory.create(data);
+  return data;
 };
 
-export const saveTask = async (payload: TaskFormData): Promise<Task> => {
+export const saveTask = async (payload: TaskFormData): Promise<ITask> => {
   let response;
 
   if (payload.id) {
@@ -29,5 +23,5 @@ export const saveTask = async (payload: TaskFormData): Promise<Task> => {
     response = await axios.post('tasks', payload);
   }
 
-  return TaskFactory.create(response.data);
+  return response.data;
 };

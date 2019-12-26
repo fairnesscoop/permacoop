@@ -1,26 +1,20 @@
 import {client as axios} from '../../../utils/axios';
-import {User} from '../models/User';
-import {UserFactory} from '../factory/UserFactory';
 import {UserFormData} from '../components/form/UserForm';
+import {IUser} from '../models/IUser';
 
-export const findUsers = async (): Promise<User[]> => {
-  const response = await axios.get('users');
-  const users: User[] = [];
+export const findUsers = async (): Promise<IUser[]> => {
+  const {data} = await axios.get('users');
 
-  for (const data of response.data) {
-    users.push(UserFactory.create(data));
-  }
-
-  return users;
+  return data;
 };
 
-export const findCurrentUser = async (): Promise<User> => {
+export const findCurrentUser = async (): Promise<IUser> => {
   const {data} = await axios.get('users/me');
 
-  return UserFactory.create(data);
+  return data;
 };
 
-export const saveUser = async (payload: UserFormData): Promise<User> => {
+export const saveUser = async (payload: UserFormData): Promise<IUser> => {
   let response = null;
 
   if (payload.id) {
@@ -29,5 +23,5 @@ export const saveUser = async (payload: UserFormData): Promise<User> => {
     response = await axios.post('users', payload);
   }
 
-  return UserFactory.create(response.data);
+  return response.data;
 };

@@ -12,7 +12,7 @@ import {
 } from '../types/show';
 import {errorNormalizer} from '../../../normalizer/errors';
 
-export const success = (payload: any): ICoreShowSuccessAction<any> => ({
+export const success = (payload: any): ICoreShowSuccessAction => ({
   type: CORE_SHOW_SUCCESS,
   payload
 });

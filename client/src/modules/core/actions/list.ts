@@ -12,7 +12,7 @@ import {
 } from '../types/list';
 import {errorNormalizer} from '../../../normalizer/errors';
 
-export const success = (payload: any): ICoreListSuccessAction<any> => ({
+export const success = (payload: any[]): ICoreListSuccessAction => ({
   type: CORE_LIST_SUCCESS,
   payload
 });

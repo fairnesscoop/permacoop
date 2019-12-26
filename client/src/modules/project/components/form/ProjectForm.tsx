@@ -6,7 +6,7 @@ import TextInput from '../../../core/components/form/TextInput';
 import {SubmitButton} from '../../../core/components/form/SubmitButton';
 import {validate} from './validator/project';
 import {CustomerInput} from '../../../customer/components/form/input/CustomerInput';
-import {Customer} from '../../../customer/models/Customer';
+import {ICustomer} from '../../../customer/models/ICustomer';
 
 interface IProps {
   loading: boolean;
@@ -16,7 +16,7 @@ export interface ProjectFormData {
   id?: string;
   name: string;
   customerId: string;
-  customer?: Customer;
+  customer?: ICustomer;
 }
 
 const ProjectForm: React.FC<InjectedFormProps<ProjectFormData, IProps> &
