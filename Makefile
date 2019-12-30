@@ -3,13 +3,16 @@ help:
 
 install: ## Install API and client
 	cp server/ormconfig.json.dist server/ormconfig.json
-	cd server && npm install
-	cd client && npm install
+	cd server && npm i
+	cd client && npm i
+	cd client-svelte && npm i
 	make api-start
 	make api-build-dist
 	make database-migrate
 client-start: ## Start react app
 	cd client && npm start
+svelte-start: ## Start svelte app
+	cd client-svelte && npm run dev
 api-stop: ## Stop docker containers
 	docker-compose -p cooperp stop
 api-rm: ## Remove docker containers
