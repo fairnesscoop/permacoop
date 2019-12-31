@@ -1,28 +1,42 @@
 <script>
   import {onMount} from 'svelte';
-  import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import ActivityDetail from '../../components/activity/ActivityDetail.svelte';
+  import {user} from '../../store';
+  import {monthNormalizer} from '../../normalizer/date';
+  import {errorNormalizer} from '../../normalizer/errors';
+  import Breadcrumb from '../_components/Breadcrumb.svelte';
+  import Loader from '../_components/Loader.svelte';
+  import ServerErrors from '../_components/ServerErrors.svelte';
+  import RowDetail from './_RowDetail.svelte';
   import {client as axios} from '../../utils/axios';
 
-  let payload = {};
+  let pageTitle = `CRA de ${monthNormalizer(new Date())}`;
+  let loading = true;
+  let errors = [];
+  let data = {};
 
   onMount(async () => {
-    let {data} = await axios.get('activities', {
-      params: {
-        userId: '3fbf06f8-73b9-4946-8c79-8547e52f3595',
-        date: new Date()
-      }
-    });
-    payload = data;
+    try {
+      ({data} = await axios.get('activities', {
+        params: {
+          userId: $user.id,
+          date: new Date()
+        }
+      }));
+    } catch (e) {
+      errors = errorNormalizer(e);
+    } finally {
+      loading = false;
+    }
   });
 </script>
 
 <svelte:head>
-  <title>CoopERP - CRA</title>
+  <title>CoopERP - {pageTitle}</title>
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{title: 'CRA'}]} />
+  <Breadcrumb items={[{title: pageTitle}]} />
+  <ServerErrors {errors} />
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -31,17 +45,18 @@
         <th />
       </tr>
     </thead>
-    {#if payload.totalTimeSpent}
+    {#if data.totalTimeSpent >= 0}
       <tbody>
-        {#each payload.days as day (day.date)}
-          <ActivityDetail {day} />
+        {#each data.days as day (day.date)}
+          <RowDetail {day} />
         {/each}
       </tbody>
       <tfoot>
         <tr>
-          <th colspan="3">Total: {payload.totalTimeSpent / 100}</th>
+          <th colspan="3">Total: {data.totalTimeSpent / 100} jours</th>
         </tr>
       </tfoot>
     {/if}
   </table>
+  <Loader {loading} />
 </div>

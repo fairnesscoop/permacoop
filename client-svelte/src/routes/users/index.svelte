@@ -1,22 +1,36 @@
 <script>
   import {onMount} from 'svelte';
   import {client as axios} from '../../utils/axios';
-  import Breadcrumb from '../../components/Breadcrumb.svelte';
+  import {errorNormalizer} from '../../normalizer/errors';
+  import Breadcrumb from '../_components/Breadcrumb.svelte';
+  import Loader from '../_components/Loader.svelte';
+  import ServerErrors from '../_components/ServerErrors.svelte';
+  import RowDetail from './_RowDetail.svelte';
 
-  let users = [];
+  let title = 'Coopérateurs';
+  let loading = true;
+  let errors = [];
+  let data = [];
 
   onMount(async () => {
-    let {data} = await axios.get('users');
-    users = data;
+    try {
+      ({data} = await axios.get('users'));
+    } catch (e) {
+      errors = errorNormalizer(e);
+    } finally {
+      loading = false;
+    }
   });
 </script>
 
 <svelte:head>
-  <title>CoopERP - Coopérateurs</title>
+  <title>CoopERP - {title}</title>
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{title: 'Coopérateurs'}]} />
+  <Breadcrumb items={[{title}]} />
+  <ServerErrors {errors} />
+  <a class="btn btn-primary mb-3" href="users/add">+ Ajouter un coopérateur</a>
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
@@ -26,13 +40,10 @@
       </tr>
     </thead>
     <tbody>
-      {#each users as user (user.id)}
-        <tr>
-          <td>{user.firstName}</td>
-          <td>{user.lastName}</td>
-          <td>{user.email}</td>
-        </tr>
+      {#each data as user (user.id)}
+        <RowDetail {user} />
       {/each}
     </tbody>
   </table>
+  <Loader {loading} />
 </div>

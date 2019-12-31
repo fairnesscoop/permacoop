@@ -24,7 +24,7 @@
     {#if !day.isWeekend}
       <a
         class="btn btn-outline-secondary btn-sm"
-        href="/activities/add/2019-12-23">
+        href={`/activities/${day.date}/add`}>
         +
       </a>
     {/if}

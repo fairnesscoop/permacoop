@@ -1,44 +1,48 @@
 <script>
   import {onMount} from 'svelte';
   import {client as axios} from '../../utils/axios';
-  import Breadcrumb from '../../components/Breadcrumb.svelte';
+  import {errorNormalizer} from '../../normalizer/errors';
+  import Loader from '../_components/Loader.svelte';
+  import ServerErrors from '../_components/ServerErrors.svelte';
+  import Breadcrumb from '../_components/Breadcrumb.svelte';
+  import RowDetail from './_RowDetail.svelte';
 
-  let projects = [];
+  let pageTitle = 'Projets';
+  let loading = true;
+  let errors = [];
+  let data = [];
 
   onMount(async () => {
-    let {data} = await axios.get('projects');
-    projects = data;
+    try {
+      ({data} = await axios.get('projects'));
+    } catch (e) {
+      errors = errorNormalizer(e);
+    } finally {
+      loading = false;
+    }
   });
 </script>
 
 <svelte:head>
-  <title>CoopERP - Projets</title>
+  <title>CoopERP - {pageTitle}</title>
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{title: 'Projets'}]} />
+  <Breadcrumb items={[{title: pageTitle}]} />
+  <ServerErrors {errors} />
+  <a class="btn btn-primary mb-3" href="projects/add">+ Ajouter un projet</a>
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-        <th>Client</th>
-        <th>Projet</th>
+        <th>Projets</th>
         <th />
       </tr>
     </thead>
     <tbody>
-      {#each projects as project (project.id)}
-        <tr>
-          <td>{project.customer.name}</td>
-          <td>{project.name}</td>
-          <td>
-            <a
-              class="btn btn-outline-secondary btn-sm"
-              href={`/projects/${project.id}/edit`}>
-              Modifier
-            </a>
-          </td>
-        </tr>
+      {#each data as project (project.id)}
+        <RowDetail {project} />
       {/each}
     </tbody>
   </table>
+  <Loader {loading} />
 </div>

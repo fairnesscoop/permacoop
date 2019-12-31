@@ -1,6 +1,8 @@
 <script>
-  import Nav from '../components/Nav.svelte';
-  import Footer from '../components/Footer.svelte';
+  import Nav from './_components/Nav.svelte';
+  import {user} from '../store';
+  import Footer from './_components/Footer.svelte';
+  import Login from './login/index.svelte';
   export let segment;
 </script>
 
@@ -8,7 +10,11 @@
 
 <div class="container">
   <div class="row" style="margin-top: 1rem;">
-    <slot />
+    {#if !$user}
+      <Login />
+    {:else}
+      <slot />
+    {/if}
   </div>
 </div>
 <Footer />

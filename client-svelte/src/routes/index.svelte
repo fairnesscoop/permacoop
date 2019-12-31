@@ -1,5 +1,5 @@
 <script>
-  import Breadcrumb from '../components/Breadcrumb.svelte';
+  import Breadcrumb from './_components/Breadcrumb.svelte';
 </script>
 
 <svelte:head>
@@ -7,6 +7,6 @@
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[]} />
+  <Breadcrumb />
   <h2>Tableau de bord</h2>
 </div>

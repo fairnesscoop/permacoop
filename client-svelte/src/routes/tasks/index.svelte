@@ -1,22 +1,36 @@
 <script>
   import {onMount} from 'svelte';
-  import Breadcrumb from '../../components/Breadcrumb.svelte';
+  import {errorNormalizer} from '../../normalizer/errors';
+  import Breadcrumb from '../_components/Breadcrumb.svelte';
+  import Loader from '../_components/Loader.svelte';
+  import ServerErrors from '../_components/ServerErrors.svelte';
+  import RowDetail from './_RowDetail.svelte';
   import {client as axios} from '../../utils/axios';
 
-  let tasks = [];
+  let pageTitle = 'Missions';
+  let loading = true;
+  let errors = [];
+  let data = [];
 
   onMount(async () => {
-    let {data} = await axios.get('tasks');
-    tasks = data;
+    try {
+      ({data} = await axios.get('tasks'));
+    } catch (e) {
+      errors = errorNormalizer(e);
+    } finally {
+      loading = false;
+    }
   });
 </script>
 
 <svelte:head>
-  <title>CoopERP - Missions</title>
+  <title>CoopERP - {pageTitle}</title>
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{title: 'Missions'}]} />
+  <Breadcrumb items={[{title: pageTitle}]} />
+  <ServerErrors {errors} />
+  <a class="btn btn-primary mb-3" href="tasks/add">+ Ajouter une mission</a>
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
@@ -25,18 +39,10 @@
       </tr>
     </thead>
     <tbody>
-      {#each tasks as task (task.id)}
-        <tr>
-          <td>{task.name}</td>
-          <td>
-            <a
-              class="btn btn-outline-secondary btn-sm"
-              href={`/tasks/${task.id}/edit`}>
-              Modifier
-            </a>
-          </td>
-        </tr>
+      {#each data as task (task.id)}
+        <RowDetail {task} />
       {/each}
     </tbody>
   </table>
+  <Loader {loading} />
 </div>
