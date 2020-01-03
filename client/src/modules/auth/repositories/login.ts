@@ -1,15 +1,14 @@
 import {client as axios} from '../../../utils/axios';
-import {LoggedUser} from '../models/LoggedUser';
+import {ILoggedUser} from '../models/ILoggedUser';
 import {TokenStorage} from '../../../utils/tokenStorage';
-import {LoggedUserFactory} from '../factory/LoggedUserFactory';
 import {AuthenticationFormData} from '../components/form/AuthenticationForm';
 
 export const login = async (
   payload: AuthenticationFormData
-): Promise<LoggedUser> => {
+): Promise<ILoggedUser> => {
   const response = await axios.post('login', payload);
   const {data} = response;
   TokenStorage.save(data.apiToken);
 
-  return LoggedUserFactory.create(data);
+  return data;
 };

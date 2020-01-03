@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Route, Redirect} from 'react-router-dom';
 import {AppState} from '../../../store/reducers';
-import {LoggedUser} from '../models/LoggedUser';
+import {ILoggedUser} from '../models/ILoggedUser';
 
 interface IProps {
-  user: LoggedUser | null;
+  user: ILoggedUser | null;
   key: string;
   component: any;
   path: string;

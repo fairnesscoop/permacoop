@@ -5,12 +5,12 @@ import {useTranslation} from 'react-i18next';
 import {Link} from 'react-router-dom';
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import {AppState} from '../../../store/reducers';
-import {LoggedUser} from '../../auth/models/LoggedUser';
+import {ILoggedUser} from '../../auth/models/ILoggedUser';
 import {logout} from '../../auth/actions/authentication';
 import {IAuthenticationLogoutAction} from '../../auth/types/authentication';
 
 interface IProps {
-  user: LoggedUser | null;
+  user: ILoggedUser | null;
   logout(): IAuthenticationLogoutAction;
 }
 
