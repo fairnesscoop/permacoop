@@ -1,0 +1,12 @@
+checks:
+  javascript: true
+build:
+  nodes:
+    analysis:
+      tests:
+        override:
+          - js-scrutinizer-run
+filter:
+  excluded_paths:
+    - 'client-svelte/static'
+    - 'client-svelte/src/store'

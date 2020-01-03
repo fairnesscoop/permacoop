@@ -18,6 +18,7 @@ CoopERP is an eco-design and open-source ERP solution for cooperatives.
 - [Ts-mockito](https://github.com/NagRock/ts-mockito)
 - [Jest](https://jestjs.io/)
 - [React](https://fr.reactjs.org/) / [Redux](https://redux.js.org/)
+- [Svelte](https://svelte.dev/) / [Sapper](https://sapper.svelte.dev/)
 - [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 
@@ -31,14 +32,16 @@ At **the first launch**, just execute these commands to install your application
 
 ```bash
 make install
-make client-start
+make client-start # React app
+make svelte-start # Svelte app
 ```
 
 For the **next times** you just need to execute these commands to start your application :
 
 ```bash
 make api-start
-make client-start
+make client-start # React app
+make svelte-start # Svelte app
 ```
 
 The server and client will be started:

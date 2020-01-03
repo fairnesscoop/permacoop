@@ -17,12 +17,8 @@ const ActivityDetail: React.FC<IProps> = ({activityByDays, canAddActivity}) => {
       <td>
         {activityByDays.activities.map((activity: IActivity) => (
           <div key={activity.id}>
-            <Badge variant={'success'}>
-              <i className={'fas fa-thumbtack'}></i> {activity.taskName}
-            </Badge>{' '}
-            <Badge variant={'success'}>
-              <i className={'fas fa-clock'}></i> {activity.time / 100}
-            </Badge>{' '}
+            <Badge variant={'success'}>{activity.taskName}</Badge>{' '}
+            <Badge variant={'success'}>{activity.time / 100}</Badge>{' '}
             {activity.projectName}
           </div>
         ))}
@@ -33,7 +29,7 @@ const ActivityDetail: React.FC<IProps> = ({activityByDays, canAddActivity}) => {
             to={`/activities/add/${activityByDays.date}`}
             className={'btn btn-outline-secondary btn-sm'}
           >
-            <i className={'fas fa-plus'}></i>
+            +
           </Link>
         )}
       </td>

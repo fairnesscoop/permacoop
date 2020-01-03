@@ -44,8 +44,8 @@ export class ActivityRepository implements IActivityRepository {
       ])
       .where('activity.id = :id', {id})
       .innerJoin('activity.task', 'task')
-      .innerJoin('project.customer', 'customer')
       .innerJoin('activity.project', 'project')
+      .innerJoin('project.customer', 'customer')
       .getOne();
   }
 
