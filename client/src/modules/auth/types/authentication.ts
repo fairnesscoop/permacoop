@@ -1,5 +1,5 @@
 import {Error} from '../../core/models/Error';
-import {LoggedUser} from '../models/LoggedUser';
+import {ILoggedUser} from '../models/ILoggedUser';
 import {ILoadingAction, IErrorAction} from '../../core/types/actions';
 import {
   AUTH_AUTHENTICATION_LOADING,
@@ -12,7 +12,7 @@ import {
 export type AuthenticationState = Readonly<{
   loading: boolean;
   errors: Error[];
-  user: LoggedUser | null;
+  user: ILoggedUser | null;
 }>;
 
 export interface IAuthenticationLoadingAction extends ILoadingAction {
@@ -25,7 +25,7 @@ export interface IAuthenticationErrorAction extends IErrorAction {
 
 export interface IAuthenticationSuccessAction {
   type: typeof AUTH_AUTHENTICATION_SUCCESS;
-  payload: LoggedUser;
+  payload: ILoggedUser;
 }
 
 export interface IAuthenticationLogoutAction {

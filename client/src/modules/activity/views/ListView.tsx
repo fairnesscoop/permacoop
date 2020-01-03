@@ -11,7 +11,7 @@ import {reset} from '../actions/list';
 import Breadcrumb from '../../core/components/Breadcrumb';
 import ServerErrors from '../../core/components/ServerErrors';
 import {BreadcrumbItem} from '../../core/models/BreadcrumbItem';
-import {LoggedUser} from '../../auth/models/LoggedUser';
+import {ILoggedUser} from '../../auth/models/ILoggedUser';
 import ActivityDetail from '../components/ActivityDetail';
 import {useQuery} from '../../core/hooks/query';
 import {UserFilter} from '../../user/components/filter/UserFilter';
@@ -21,7 +21,7 @@ import {IActivitiesByDay} from '../models/IActivitiesByDay';
 
 interface IProps {
   list: ActivityListState;
-  user: LoggedUser | null;
+  user: ILoggedUser | null;
   listActivities(userId: string, date: Date): void;
   reset(): IActivityListResetAction;
   history: History;

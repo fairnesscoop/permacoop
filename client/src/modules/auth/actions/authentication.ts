@@ -12,7 +12,7 @@ import {
   IAuthenticationResetAction,
   IAuthenticationLogoutAction
 } from '../types/authentication';
-import {LoggedUser} from '../models/LoggedUser';
+import {ILoggedUser} from '../models/ILoggedUser';
 import {errorNormalizer} from '../../../normalizer/errors';
 
 export const loading = (loading: boolean): IAuthenticationLoadingAction => ({
@@ -20,7 +20,9 @@ export const loading = (loading: boolean): IAuthenticationLoadingAction => ({
   loading
 });
 
-export const success = (payload: LoggedUser): IAuthenticationSuccessAction => ({
+export const success = (
+  payload: ILoggedUser
+): IAuthenticationSuccessAction => ({
   type: AUTH_AUTHENTICATION_SUCCESS,
   payload
 });
