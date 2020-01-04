@@ -1,12 +1,13 @@
 import {writable} from 'svelte/store';
 
-export let user;
+export const user = writable(null);
+export const useLocalStorage = (store, key) => {
+  const current_value = localStorage.getItem(key);
+  if (current_value) {
+    store.set(JSON.parse(current_value));
+  }
 
-if (typeof window !== 'undefined') {
-  user = writable(JSON.parse(localStorage.getItem('persist:erp_user')) || null);
-  user.subscribe(user =>
-    localStorage.setItem('persist:erp_user', JSON.stringify(user))
-  );
-} else {
-  user = writable(null);
-}
+  store.subscribe(value => {
+    localStorage.setItem(key, JSON.stringify(value));
+  });
+};

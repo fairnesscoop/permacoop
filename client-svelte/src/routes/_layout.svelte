@@ -3,18 +3,24 @@
   import {user} from '../store';
   import Footer from './_components/Footer.svelte';
   import Login from './login/index.svelte';
+  import {stores, goto} from '@sapper/app';
   export let segment;
+
+  const {page} = stores();
+
+  if (typeof window !== 'undefined') {
+    page.subscribe(({path}) => {
+      if ('/login' !== path && !$user) {
+        return goto('/login');
+      }
+    });
+  }
 </script>
 
 <Nav {segment} />
-
 <div class="container">
   <div class="row" style="margin-top: 1rem;">
-    {#if !$user}
-      <Login />
-    {:else}
-      <slot />
-    {/if}
+    <slot />
   </div>
 </div>
 <Footer />
