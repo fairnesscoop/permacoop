@@ -1,12 +1,12 @@
 # CoopERP
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mmarchois/cooperp/CI)
-[![codecov](https://codecov.io/gh/mmarchois/cooperp/branch/master/graph/badge.svg)](https://codecov.io/gh/mmarchois/cooperp)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mmarchois/cooperp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mmarchois/cooperp/?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f1e9a74c64bd478b9c00d04c984466b8)](https://www.codacy.com/manual/mmarchois/cooperp?utm_source=github.com&utm_medium=referral&utm_content=mmarchois/cooperp&utm_campaign=Badge_Grade)
-[![GitHub issues](https://img.shields.io/github/issues/mmarchois/cooperp.svg)](https://github.com/mmarchois/cooperp/issues)
-[![GitHub last commit](https://img.shields.io/github/last-commit/mmarchois/cooperp.svg)](https://github.com/mmarchois/cooperp)
-[![GitHub license](https://img.shields.io/github/license/mmarchois/cooperp.svg)](https://github.com/mmarchois/cooperp)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/fairnesscoop/cooperp/CI)
+[![codecov](https://codecov.io/gh/fairnesscoop/cooperp/branch/master/graph/badge.svg)](https://codecov.io/gh/fairnesscoop/cooperp)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fairnesscoop/cooperp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fairnesscoop/cooperp/?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3bf4f001d4904cdb89e71f2793d1c6b7)](https://www.codacy.com/gh/fairnesscoop/cooperp?utm_source=github.com&utm_medium=referral&utm_content=fairnesscoop/cooperp&utm_campaign=Badge_Grade)
+[![GitHub issues](https://img.shields.io/github/issues/fairnesscoop/cooperp.svg)](https://github.com/fairnesscoop/cooperp/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/fairnesscoop/cooperp.svg)](https://github.com/fairnesscoop/cooperp)
+[![GitHub license](https://img.shields.io/github/license/fairnesscoop/cooperp.svg)](https://github.com/fairnesscoop/cooperp)
 
 CoopERP is an eco-design and open-source ERP solution for cooperatives.
 
