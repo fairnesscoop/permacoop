@@ -4,9 +4,10 @@ import {User} from 'src/Domain/User/User.entity';
 export interface IActivityRepository {
   save(activity: Activity): Promise<Activity>;
   findOneById(id: string): Promise<Activity | undefined>;
-  findMonthlyActivitiesByUser(
+  findMonthlyActivities(
+    date: string,
     userId: string,
-    date: string
+    projectId: string
   ): Promise<Activity[]>;
   getTimeSpentSumByUserAndDate(user: User, date: string): Promise<number>;
 }

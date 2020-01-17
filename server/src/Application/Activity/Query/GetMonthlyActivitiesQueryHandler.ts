@@ -1,14 +1,14 @@
 import {Inject} from '@nestjs/common';
 import {QueryHandler} from '@nestjs/cqrs';
-import {GetMonthlyActivitiesByUserIdQuery} from './GetMonthlyActivitiesByUserIdQuery';
+import {GetMonthlyActivitiesQuery} from './GetMonthlyActivitiesQuery';
 import {IActivityRepository} from 'src/Domain/Activity/Repository/IActivityRepository';
 import {ActivityView} from '../View/ActivityView';
 import {MonthlyActivitiesView} from '../View/MonthlyActivitiesView';
 import {IDateUtilsAdapter} from 'src/Application/Adapter/IDateUtilsAdapter';
 import {ActivitiesByDayView} from '../View/ActivitiesByDayView';
 
-@QueryHandler(GetMonthlyActivitiesByUserIdQuery)
-export class GetMonthlyActivitiesByUserIdQueryHandler {
+@QueryHandler(GetMonthlyActivitiesQuery)
+export class GetMonthlyActivitiesQueryHandler {
   constructor(
     @Inject('IActivityRepository')
     private readonly activityRepository: IActivityRepository,
@@ -17,16 +17,17 @@ export class GetMonthlyActivitiesByUserIdQueryHandler {
   ) {}
 
   public async execute(
-    query: GetMonthlyActivitiesByUserIdQuery
+    query: GetMonthlyActivitiesQuery
   ): Promise<MonthlyActivitiesView> {
-    const {date, userId} = query;
-    const activities = await this.activityRepository.findMonthlyActivitiesByUser(
-      userId,
-      this.dateUtilsAdapter.format(date, 'y-MM-dd')
-    );
-
-    const activitiesByDayView = this.initActivitiesForEveryDayOfMonth(date);
+    const {date, userId, projectId} = query;
     let totalTimeSpent = 0;
+
+    const activities = await this.activityRepository.findMonthlyActivities(
+      this.dateUtilsAdapter.format(date, 'y-MM-dd'),
+      userId,
+      projectId
+    );
+    const activitiesByDayView = this.initActivitiesForEveryDayOfMonth(date);
 
     for (const activity of activities) {
       const task = activity.getTask();

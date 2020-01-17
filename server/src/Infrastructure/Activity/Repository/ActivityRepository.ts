@@ -49,14 +49,15 @@ export class ActivityRepository implements IActivityRepository {
       .getOne();
   }
 
-  public findMonthlyActivitiesByUser(
+  public findMonthlyActivities(
+    date: string,
     userId: string,
-    date: string
+    projectId: string
   ): Promise<Activity[]> {
     const month = new Date(date).getMonth() + 1;
     const year = new Date(date).getFullYear();
 
-    return this.repository
+    const query = this.repository
       .createQueryBuilder('activity')
       .select([
         'activity.id',
@@ -75,7 +76,14 @@ export class ActivityRepository implements IActivityRepository {
       .innerJoin('project.customer', 'customer')
       .innerJoin('activity.user', 'user')
       .orderBy('activity.date', 'ASC')
-      .addOrderBy('activity.time', 'ASC')
-      .getMany();
+      .addOrderBy('activity.time', 'ASC');
+
+    if (projectId) {
+      query
+        .andWhere('project.id = :projectId', {projectId})
+        .setParameter('projectId', projectId);
+    }
+
+    return query.getMany();
   }
 }

@@ -3,16 +3,16 @@ import {Project} from 'src/Domain/Project/Project.entity';
 import {Activity} from 'src/Domain/Activity/Activity.entity';
 import {User} from 'src/Domain/User/User.entity';
 import {Task} from 'src/Domain/Task/Task.entity';
-import {GetMonthlyActivitiesByUserIdQueryHandler} from './GetMonthlyActivitiesByUserIdQueryHandler';
+import {GetMonthlyActivitiesQueryHandler} from './GetMonthlyActivitiesQueryHandler';
 import {ActivityRepository} from 'src/Infrastructure/Activity/Repository/ActivityRepository';
-import {GetMonthlyActivitiesByUserIdQuery} from './GetMonthlyActivitiesByUserIdQuery';
+import {GetMonthlyActivitiesQuery} from './GetMonthlyActivitiesQuery';
 import {ActivityView} from '../View/ActivityView';
 import {ActivitiesByDayView} from '../View/ActivitiesByDayView';
 import {DateUtilsAdapter} from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {MonthlyActivitiesView} from '../View/MonthlyActivitiesView';
 
-describe('GetMonthlyActivitiesByUserIdQueryHandler', () => {
+describe('GetMonthlyActivitiesQueryHandler', () => {
   it('testGetActivities', async () => {
     const activityRepository = mock(ActivityRepository);
     const dateUtilsAdapter = mock(DateUtilsAdapter);
@@ -53,17 +53,18 @@ describe('GetMonthlyActivitiesByUserIdQueryHandler', () => {
     when(activity3.getProject()).thenReturn(instance(project));
     when(activity3.getUser()).thenReturn(instance(user));
 
-    when(dateUtilsAdapter.getDaysInMonth(deepEqual(queryDate))).thenReturn(31);
     when(
-      activityRepository.findMonthlyActivitiesByUser(
+      activityRepository.findMonthlyActivities(
+        '2019-12-12',
         '00bef1e1-cb52-4914-8887-568b17d99964',
-        '2019-12-12'
+        '12cdf1e1-aa32-1234-0912-568b17d12965'
       )
     ).thenResolve([
       instance(activity1),
       instance(activity2),
       instance(activity3)
     ]);
+    when(dateUtilsAdapter.getDaysInMonth(deepEqual(queryDate))).thenReturn(31);
 
     for (let i = 1; i <= 31; i++) {
       const day = i < 10 ? '0' + i : i;
@@ -82,7 +83,7 @@ describe('GetMonthlyActivitiesByUserIdQueryHandler', () => {
       ).thenReturn(weekDays.includes(i));
     }
 
-    const queryHandler = new GetMonthlyActivitiesByUserIdQueryHandler(
+    const queryHandler = new GetMonthlyActivitiesQueryHandler(
       instance(activityRepository),
       instance(dateUtilsAdapter)
     );
@@ -146,16 +147,18 @@ describe('GetMonthlyActivitiesByUserIdQueryHandler', () => {
 
     expect(
       await queryHandler.execute(
-        new GetMonthlyActivitiesByUserIdQuery(
+        new GetMonthlyActivitiesQuery(
+          new Date('2019-12-12T17:43:14.299Z'),
           '00bef1e1-cb52-4914-8887-568b17d99964',
-          new Date('2019-12-12T17:43:14.299Z')
+          '12cdf1e1-aa32-1234-0912-568b17d12965'
         )
       )
     ).toMatchObject(expectedResult);
     verify(
-      activityRepository.findMonthlyActivitiesByUser(
+      activityRepository.findMonthlyActivities(
+        '2019-12-12',
         '00bef1e1-cb52-4914-8887-568b17d99964',
-        '2019-12-12'
+        '12cdf1e1-aa32-1234-0912-568b17d12965'
       )
     ).once();
   });
