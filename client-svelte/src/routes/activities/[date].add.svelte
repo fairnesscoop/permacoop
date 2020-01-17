@@ -6,16 +6,19 @@
 
 <script>
   import {goto} from '@sapper/app';
+  import {format} from 'date-fns';
+  import {fr} from 'date-fns/locale';
   import Breadcrumb from '../_components/Breadcrumb.svelte';
   import {client as axios} from '../../utils/axios';
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../normalizer/errors';
-  import {dateNormalizer} from '../../normalizer/date';
   import ServerErrors from '../_components/ServerErrors.svelte';
 
   export let date;
 
-  let pageTitle = `Activité du ${dateNormalizer(date)}`;
+  let pageTitle = `Activité du ${format(new Date(date), 'EEEE dd MMMM yyyy', {
+    locale: fr
+  })}`;
   let errors = [];
 
   const onSave = async e => {

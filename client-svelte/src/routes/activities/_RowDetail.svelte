@@ -1,5 +1,6 @@
 <script>
-  import {dateNormalizer} from '../../normalizer/date';
+  import {format} from 'date-fns';
+  import {fr} from 'date-fns/locale';
   export let day;
 </script>
 
@@ -10,7 +11,7 @@
 </style>
 
 <tr class={day.isWeekend ? 'disabled' : ''}>
-  <td>{dateNormalizer(day.date)}</td>
+  <td>{format(new Date(day.date), 'EEEE dd MMMM yyyy', {locale: fr})}</td>
   <td>
     {#each day.activities as activity}
       <div>
