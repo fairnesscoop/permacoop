@@ -1,5 +1,5 @@
 <script context="module">
-  export const preload = async ({query}) => {
+  export const preload = ({query}) => {
     return {
       filters: {
         date: query.date ? new Date(query.date) : new Date(),
@@ -26,10 +26,12 @@
   let loading = false;
   let errors = [];
   let data = {};
+  let isLoggedUser = false;
 
   const fetchActivities = async params => {
     try {
       loading = true;
+      isLoggedUser = params.userId === $user.id;
       ({data} = await axios.get('activities', {params}));
     } catch (e) {
       errors = errorNormalizer(e);
@@ -71,7 +73,7 @@
     {#if data.totalTimeSpent >= 0}
       <tbody>
         {#each data.days as day (day.date)}
-          <RowDetail {day} />
+          <RowDetail {day} {isLoggedUser} />
         {/each}
       </tbody>
       <tfoot>

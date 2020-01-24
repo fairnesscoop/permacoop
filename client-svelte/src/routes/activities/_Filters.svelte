@@ -18,7 +18,7 @@
   }).sort(compareDesc);
 
   onMount(async () => {
-    let [usersResponse, projectsReponse] = await Promise.all([
+    const [usersResponse, projectsReponse] = await Promise.all([
       axios.get('users'),
       axios.get('projects')
     ]);
