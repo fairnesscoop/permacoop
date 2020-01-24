@@ -4,9 +4,9 @@ help:
 install: ## Install API and client
 	cp server/ormconfig.json.dist server/ormconfig.json
 	cp client-svelte/config.js.dist client-svelte/config.js
-	cd server && npm i
-	cd client && npm i
-	cd client-svelte && npm i
+	docker run -it --rm -v ${PWD}/server:/app -w /app node npm i
+	docker run -it --rm -v ${PWD}/client:/app -w /app node npm i
+	docker run -it --rm -v ${PWD}/client-svelte:/app -w /app node npm i
 	make api-start
 	make api-build-dist
 	make database-migrate
