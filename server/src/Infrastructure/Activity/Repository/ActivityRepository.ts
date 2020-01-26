@@ -49,6 +49,15 @@ export class ActivityRepository implements IActivityRepository {
       .getOne();
   }
 
+  public deleteById(id: string): void {
+    this.repository
+      .createQueryBuilder('activity')
+      .where('activity.id = :id', {id})
+      .delete()
+      .execute()
+    ;
+  }
+
   public findMonthlyActivities(
     date: string,
     userId: string,

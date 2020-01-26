@@ -6,6 +6,8 @@ import {Activity} from 'src/Domain/Activity/Activity.entity';
 import {IsMaximumTimeSpentReached} from 'src/Domain/Activity/Specification/IsMaximumTimeSpentReached';
 import {AddActivityAction} from './Action/AddActivityAction';
 import {AddActivityCommandHandler} from 'src/Application/Activity/Command/AddActivityCommandHandler';
+import {DeleteActivityAction} from './Action/DeleteActivityAction';
+import {DeleteActivityCommandHandler} from 'src/Application/Activity/Command/DeleteActivityCommandHandler';
 import {TaskRepository} from '../Task/Repository/TaskRepository';
 import {Task} from 'src/Domain/Task/Task.entity';
 import {GetActivityByIdQueryHandler} from 'src/Application/Activity/Query/GetActivityByIdQueryHandler';
@@ -17,7 +19,7 @@ import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Project, Activity, Task])],
-  controllers: [AddActivityAction, GetMonthlyActivitiesAction],
+  controllers: [AddActivityAction, DeleteActivityAction, GetMonthlyActivitiesAction],
   providers: [
     {provide: 'IProjectRepository', useClass: ProjectRepository},
     {provide: 'IActivityRepository', useClass: ActivityRepository},
@@ -26,7 +28,8 @@ import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
     IsMaximumTimeSpentReached,
     GetActivityByIdQueryHandler,
     AddActivityCommandHandler,
-    GetMonthlyActivitiesQueryHandler
+    GetMonthlyActivitiesQueryHandler,
+    DeleteActivityCommandHandler
   ]
 })
 export class ActivityModule {}

@@ -1,8 +1,15 @@
 <script>
   import {format} from 'date-fns';
+  import {client as axios} from '../../utils/axios';
   import {fr} from 'date-fns/locale';
   export let day;
   export let isLoggedUser;
+  $: day.activities;
+
+  const handleDelete = activityId => {
+    axios.delete(`activities/${activityId}`)
+    day.activities = day.activities.filter(activity => activity.id !== activityId);
+  };
 </script>
 
 <style>
@@ -18,7 +25,7 @@
       <div>
         <span class="badge badge-success">{activity.taskName}</span>
         <span class="badge badge-success">{activity.time / 100}</span>
-        {activity.projectName}
+        {activity.projectName} <button class="btn btn-sm btn-danger" on:click={handleDelete(activity.id)} title="supprimer">x</button>
       </div>
     {/each}
   </td>
