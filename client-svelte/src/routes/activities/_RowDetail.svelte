@@ -1,6 +1,8 @@
 <script>
-  import {dateNormalizer} from '../../normalizer/date';
+  import {format} from 'date-fns';
+  import {fr} from 'date-fns/locale';
   export let day;
+  export let isLoggedUser;
 </script>
 
 <style>
@@ -10,7 +12,7 @@
 </style>
 
 <tr class={day.isWeekend ? 'disabled' : ''}>
-  <td>{dateNormalizer(day.date)}</td>
+  <td>{format(new Date(day.date), 'EEEE dd MMMM yyyy', {locale: fr})}</td>
   <td>
     {#each day.activities as activity}
       <div>
@@ -21,7 +23,7 @@
     {/each}
   </td>
   <td>
-    {#if !day.isWeekend}
+    {#if !day.isWeekend && isLoggedUser}
       <a
         class="btn btn-outline-secondary btn-sm"
         href={`/activities/${day.date}/add`}>
