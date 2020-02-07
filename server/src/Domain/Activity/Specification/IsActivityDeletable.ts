@@ -11,6 +11,13 @@ export class IsActivityDeletable implements ISpecification {
   ) {}
 
   public async isSatisfiedBy(activity: Activity): Promise<boolean> {
-    return activity.getUser().getId() === (await this.loggedUser.get()).getId();
+    const user = await this.loggedUser.get();
+
+    if (!user) {
+      // Anonymous User can't delete activity.
+      return false;
+    }
+
+    return activity.getUser().getId() === user.getId();
   }
 }
