@@ -16,16 +16,23 @@ import {ProjectRepository} from '../Project/Repository/ProjectRepository';
 import {GetMonthlyActivitiesAction} from './Action/GetMonthlyActivitiesAction';
 import {GetMonthlyActivitiesQueryHandler} from 'src/Application/Activity/Query/GetMonthlyActivitiesQueryHandler';
 import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
+import {LoggedUserAdapter} from '../Adapter/LoggedUserAdapter';
+import {IsActivityDeletable} from '../../Domain/Activity/Specification/IsActivityDeletable';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Project, Activity, Task])],
-  controllers: [AddActivityAction, DeleteActivityAction, GetMonthlyActivitiesAction],
+  controllers: [
+    AddActivityAction,
+    DeleteActivityAction,
+    GetMonthlyActivitiesAction
+  ],
   providers: [
     {provide: 'IProjectRepository', useClass: ProjectRepository},
     {provide: 'IActivityRepository', useClass: ActivityRepository},
     {provide: 'ITaskRepository', useClass: TaskRepository},
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
     IsMaximumTimeSpentReached,
+    IsActivityDeletable,
     GetActivityByIdQueryHandler,
     AddActivityCommandHandler,
     GetMonthlyActivitiesQueryHandler,
