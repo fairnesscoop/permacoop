@@ -27,7 +27,7 @@ describe('AddActivityCommandHandler', () => {
   let projectRepository: ProjectRepository;
   let activityRepository: ActivityRepository;
   let isMaximumTimeSpentReached: IsMaximumTimeSpentReached;
-  let dateUtilsAdapter: DateUtilsAdapter;
+  let dateUtils: DateUtilsAdapter;
   let handler: AddActivityCommandHandler;
 
   const user = mock(User);
@@ -49,13 +49,13 @@ describe('AddActivityCommandHandler', () => {
     activityRepository = mock(ActivityRepository);
     taskRepository = mock(TaskRepository);
     isMaximumTimeSpentReached = mock(IsMaximumTimeSpentReached);
-    dateUtilsAdapter = mock(DateUtilsAdapter);
+    dateUtils = mock(DateUtilsAdapter);
 
     handler = new AddActivityCommandHandler(
       instance(taskRepository),
       instance(projectRepository),
       instance(activityRepository),
-      instance(dateUtilsAdapter),
+      instance(dateUtils),
       instance(isMaximumTimeSpentReached)
     );
   });
@@ -122,7 +122,7 @@ describe('AddActivityCommandHandler', () => {
     when(
       isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(activity))
     ).thenResolve(true);
-    when(dateUtilsAdapter.format(anyOfClass(Date), 'y-MM-dd')).thenReturn(
+    when(dateUtils.format(anyOfClass(Date), 'y-MM-dd')).thenReturn(
       '2019-12-12'
     );
 
@@ -140,7 +140,7 @@ describe('AddActivityCommandHandler', () => {
       verify(
         isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(activity))
       ).once();
-      verify(dateUtilsAdapter.format(anyOfClass(Date), 'y-MM-dd')).once();
+      verify(dateUtils.format(anyOfClass(Date), 'y-MM-dd')).once();
       verify(activityRepository.save(anything())).never();
     }
   });
@@ -165,7 +165,7 @@ describe('AddActivityCommandHandler', () => {
     when(
       isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(activity))
     ).thenResolve(false);
-    when(dateUtilsAdapter.format(anyOfClass(Date), 'y-MM-dd')).thenReturn(
+    when(dateUtils.format(anyOfClass(Date), 'y-MM-dd')).thenReturn(
       '2019-12-12'
     );
     when(savedActivity.getId()).thenReturn(
@@ -185,7 +185,7 @@ describe('AddActivityCommandHandler', () => {
     verify(
       taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
     ).once();
-    verify(dateUtilsAdapter.format(anyOfClass(Date), 'y-MM-dd')).once();
+    verify(dateUtils.format(anyOfClass(Date), 'y-MM-dd')).once();
     verify(isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(activity))).once();
     verify(activityRepository.save(deepEqual(activity))).once();
     verify(savedActivity.getId()).once();

@@ -17,18 +17,18 @@ describe('CreatUserCommandHandler', () => {
   );
 
   let userRepository: UserRepository;
-  let encryptionAdapter: EncryptionAdapter;
+  let encryption: EncryptionAdapter;
   let isEmailAlreadyExist: IsEmailAlreadyExist;
   let commandHandler: CreateUserCommandHandler;
 
   beforeEach(() => {
     userRepository = mock(UserRepository);
-    encryptionAdapter = mock(EncryptionAdapter);
+    encryption = mock(EncryptionAdapter);
     isEmailAlreadyExist = mock(IsEmailAlreadyExist);
 
     commandHandler = new CreateUserCommandHandler(
       instance(userRepository),
-      instance(encryptionAdapter),
+      instance(encryption),
       instance(isEmailAlreadyExist)
     );
   });
@@ -42,10 +42,8 @@ describe('CreatUserCommandHandler', () => {
       expect(e).toBeInstanceOf(EmailAlreadyExistException);
       expect(e.message).toBe('user.errors.email_already_exist');
       verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
-      verify(encryptionAdapter.hash('plainPassword')).never();
-      verify(
-        encryptionAdapter.hash('mathieu@fairness.coopplainPassword')
-      ).never();
+      verify(encryption.hash('plainPassword')).never();
+      verify(encryption.hash('mathieu@fairness.coopplainPassword')).never();
       verify(
         userRepository.save(
           deepEqual(
@@ -69,7 +67,7 @@ describe('CreatUserCommandHandler', () => {
       'fcf9a99f-0c7b-45ca-b68a-bfd79d73a49f'
     );
     when(isEmailAlreadyExist.isSatisfiedBy(email)).thenResolve(false);
-    when(encryptionAdapter.hash(command.password)).thenResolve('hashPassword');
+    when(encryption.hash(command.password)).thenResolve('hashPassword');
     when(
       userRepository.save(
         deepEqual(
@@ -83,17 +81,15 @@ describe('CreatUserCommandHandler', () => {
         )
       )
     ).thenResolve(instance(createdUser));
-    when(encryptionAdapter.hash(email + command.password)).thenResolve(
-      'hashToken'
-    );
+    when(encryption.hash(email + command.password)).thenResolve('hashToken');
 
     expect(await commandHandler.execute(command)).toBe(
       'fcf9a99f-0c7b-45ca-b68a-bfd79d73a49f'
     );
 
     verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
-    verify(encryptionAdapter.hash('plainPassword')).once();
-    verify(encryptionAdapter.hash('mathieu@fairness.coopplainPassword')).once();
+    verify(encryption.hash('plainPassword')).once();
+    verify(encryption.hash('mathieu@fairness.coopplainPassword')).once();
     verify(
       userRepository.save(
         deepEqual(

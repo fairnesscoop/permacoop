@@ -8,11 +8,11 @@ import {
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiOperation, ApiBearerAuth} from '@nestjs/swagger';
-import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
+import {ICommandBus} from 'src/Application/ICommandBus';
 import {CreateUserCommand} from 'src/Application/User/Command/CreateUserCommand';
 import {UserView} from 'src/Application/User/View/UserView';
 import {UserDTO} from './DTO/UserDTO';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetUserByIdQuery} from 'src/Application/User/Query/GetUserByIdQuery';
 
 @Controller('users')
@@ -21,10 +21,10 @@ import {GetUserByIdQuery} from 'src/Application/User/Query/GetUserByIdQuery';
 @UseGuards(AuthGuard('bearer'))
 export class CreateUserAction {
   constructor(
-    @Inject('ICommandBusAdapter')
-    private readonly commandBus: ICommandBusAdapter,
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('ICommandBus')
+    private readonly commandBus: ICommandBus,
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Post()

@@ -4,10 +4,10 @@ import {
   isWeekend as fnsIsWeekend,
   getDaysInMonth as fnsGetDaysInMonth
 } from 'date-fns';
-import {IDateUtilsAdapter} from 'src/Application/Adapter/IDateUtilsAdapter';
+import {IDateUtils} from 'src/Application/IDateUtils';
 
 @Injectable()
-export class DateUtilsAdapter implements IDateUtilsAdapter {
+export class DateUtilsAdapter implements IDateUtils {
   public format(date: Date, format: string): string {
     return fnsFormat(date, format);
   }

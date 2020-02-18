@@ -10,7 +10,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {GetProjectByIdQuery} from 'src/Application/Project/Query/GetProjectByIdQuery';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {ProjectIdDTO} from './DTO/ProjectIdDTO';
 
 @Controller('projects')
@@ -19,8 +19,8 @@ import {ProjectIdDTO} from './DTO/ProjectIdDTO';
 @UseGuards(AuthGuard('bearer'))
 export class GetProjectAction {
   constructor(
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Get(':id')

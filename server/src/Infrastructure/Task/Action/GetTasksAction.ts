@@ -3,7 +3,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 import {GetTasksQuery} from 'src/Application/Task/Query/GetTasksQuery';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {IQueryBus} from 'src/Application/IQueryBus';
 
 @Controller('tasks')
 @ApiUseTags('Task')
@@ -11,8 +11,8 @@ import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
 @UseGuards(AuthGuard('bearer'))
 export class GetTasksAction {
   constructor(
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Get()

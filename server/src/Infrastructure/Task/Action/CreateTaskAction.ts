@@ -10,8 +10,8 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CreateTaskCommand} from 'src/Application/Task/Command/CreateTaskCommand';
 import {TaskView} from 'src/Application/Task/View/TaskView';
-import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {ICommandBus} from 'src/Application/ICommandBus';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetTaskByIdQuery} from 'src/Application/Task/Query/GetTaskByIdQuery';
 import {TaskDTO} from './DTO/TaskDTO';
 
@@ -21,10 +21,10 @@ import {TaskDTO} from './DTO/TaskDTO';
 @UseGuards(AuthGuard('bearer'))
 export class CreateTaskAction {
   constructor(
-    @Inject('ICommandBusAdapter')
-    private readonly commandBus: ICommandBusAdapter,
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('ICommandBus')
+    private readonly commandBus: ICommandBus,
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Post()

@@ -2,7 +2,7 @@ import {Controller, Inject, UseGuards, Get} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetProjectsQuery} from 'src/Application/Project/Query/GetProjectsQuery';
 
 @Controller('projects')
@@ -11,8 +11,8 @@ import {GetProjectsQuery} from 'src/Application/Project/Query/GetProjectsQuery';
 @UseGuards(AuthGuard('bearer'))
 export class GetProjectsAction {
   constructor(
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Get()

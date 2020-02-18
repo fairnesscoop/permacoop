@@ -6,7 +6,7 @@ import {
   UnauthorizedException
 } from '@nestjs/common';
 import {ApiUseTags, ApiOperation} from '@nestjs/swagger';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {LoginQuery} from 'src/Application/User/Query/LoginQuery';
 import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
 import {LoginDTO} from './DTO/LoginDTO';
@@ -15,8 +15,8 @@ import {LoginDTO} from './DTO/LoginDTO';
 @ApiUseTags('Auth')
 export class LoginAction {
   constructor(
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Post()

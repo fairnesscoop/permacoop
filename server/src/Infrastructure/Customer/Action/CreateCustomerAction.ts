@@ -10,8 +10,8 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CreateCustomerCommand} from 'src/Application/Customer/Command/CreateCustomerCommand';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {ICommandBus} from 'src/Application/ICommandBus';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetCustomerByIdQuery} from 'src/Application/Customer/Query/GetCustomerByIdQuery';
 import {CustomerDTO} from './DTO/CustomerDTO';
 
@@ -21,10 +21,10 @@ import {CustomerDTO} from './DTO/CustomerDTO';
 @UseGuards(AuthGuard('bearer'))
 export class CreateCustomerAction {
   constructor(
-    @Inject('ICommandBusAdapter')
-    private readonly commandBus: ICommandBusAdapter,
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('ICommandBus')
+    private readonly commandBus: ICommandBus,
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Post()
