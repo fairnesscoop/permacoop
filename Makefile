@@ -3,41 +3,38 @@ help:
 
 install: ## Install API and client
 	cp server/ormconfig.json.dist server/ormconfig.json
-	cp client-svelte/config.js.dist client-svelte/config.js
+	cp client/config.js.dist client/config.js
 	cd server && npm i
 	cd client && npm i
-	cd client-svelte && npm i
 	make api-start
 	make api-build-dist
 	make database-migrate
-client-start: ## Start react app
-	cd client && npm start
-svelte-start: ## Start svelte app
-	cd client-svelte && npm run dev
+client-start: ## Start svelte app
+	cd client && npm run dev
 api-stop: ## Stop docker containers
-	docker-compose -p cooperp stop
+	docker-compose -p permacoop stop
 api-rm: ## Remove docker containers
-	docker-compose -p cooperp rm
+	docker-compose -p permacoop rm
 api-ps: ## List docker containers
-	docker-compose -p cooperp ps
+	docker-compose -p permacoop ps
 api-start: ## Start docker containers
-	docker-compose -p cooperp up -d
+	docker-compose -p permacoop up -d
 api-logs: ## Display API logs
-	docker-compose -p cooperp logs -f api
+	docker-compose -p permacoop logs -f api
 api-test: ## Run test suite
-	docker-compose -p cooperp exec api npm run test
+	docker-compose -p permacoop exec api npm run test
 api-bash: ## Connect to API container
-	docker-compose -p cooperp exec api bash
+	docker-compose -p permacoop exec api bash
 api-test-coverage: ## Run test suite with coverage
-	docker-compose -p cooperp exec api npm run test:cov
+	docker-compose -p permacoop exec api npm run test:cov
 api-linter: ## API ts linter
-	docker-compose -p cooperp exec api npm run lint
+	docker-compose -p permacoop exec api npm run lint
 api-build-dist: ## Build API dist
-	docker-compose -p cooperp exec api npm run build
+	docker-compose -p permacoop exec api npm run build
 database-migrate: ## Database migrations
-	docker-compose -p cooperp exec api npm run migration:migrate
+	docker-compose -p permacoop exec api npm run migration:migrate
 database-connect: ## Connect to the database container
-	docker-compose -p cooperp exec database psql -h database
+	docker-compose -p permacoop exec database psql -h database
 ci: ## Run CI checks
-	docker-compose -p cooperp run api npm run test:cov
-	docker-compose -p cooperp run api npm run lint
+	docker-compose -p permacoop run api npm run test:cov
+	docker-compose -p permacoop run api npm run lint

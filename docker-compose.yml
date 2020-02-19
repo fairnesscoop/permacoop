@@ -7,11 +7,11 @@ services:
   database:
     image: postgres:11.6
     environment:
-      POSTGRES_USER: cooperp
-      POSTGRES_PASSWORD: cooperp
-      POSTGRES_DB: cooperp
-      PGUSER: cooperp
-      PGPASSWORD: cooperp
+      POSTGRES_USER: permacoop
+      POSTGRES_PASSWORD: permacoop
+      POSTGRES_DB: permacoop
+      PGUSER: permacoop
+      PGPASSWORD: permacoop
     ports:
       - '5432:5432'
     volumes:

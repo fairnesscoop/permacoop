@@ -1,14 +1,14 @@
-# CoopERP
+# Permacoop
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/fairnesscoop/cooperp/CI)
-[![codecov](https://codecov.io/gh/fairnesscoop/cooperp/branch/master/graph/badge.svg)](https://codecov.io/gh/fairnesscoop/cooperp)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fairnesscoop/cooperp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fairnesscoop/cooperp/?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3bf4f001d4904cdb89e71f2793d1c6b7)](https://www.codacy.com/gh/fairnesscoop/cooperp?utm_source=github.com&utm_medium=referral&utm_content=fairnesscoop/cooperp&utm_campaign=Badge_Grade)
-[![GitHub issues](https://img.shields.io/github/issues/fairnesscoop/cooperp.svg)](https://github.com/fairnesscoop/cooperp/issues)
-[![GitHub last commit](https://img.shields.io/github/last-commit/fairnesscoop/cooperp.svg)](https://github.com/fairnesscoop/cooperp)
-[![GitHub license](https://img.shields.io/github/license/fairnesscoop/cooperp.svg)](https://github.com/fairnesscoop/cooperp)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/fairnesscoop/permacoop/CI)
+[![codecov](https://codecov.io/gh/fairnesscoop/permacoop/branch/master/graph/badge.svg)](https://codecov.io/gh/fairnesscoop/permacoop)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fairnesscoop/permacoop/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fairnesscoop/permacoop/?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3bf4f001d4904cdb89e71f2793d1c6b7)](https://www.codacy.com/gh/fairnesscoop/permacoop?utm_source=github.com&utm_medium=referral&utm_content=fairnesscoop/permacoop&utm_campaign=Badge_Grade)
+[![GitHub issues](https://img.shields.io/github/issues/fairnesscoop/permacoop.svg)](https://github.com/fairnesscoop/permacoop/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/fairnesscoop/permacoop.svg)](https://github.com/fairnesscoop/permacoop)
+[![GitHub license](https://img.shields.io/github/license/fairnesscoop/permacoop.svg)](https://github.com/fairnesscoop/permacoop)
 
-CoopERP is an eco-design and open-source ERP solution for cooperatives.
+Permacoop is an eco-design and open-source ERP solution for cooperatives.
 
 ## Technical stack
 
@@ -17,7 +17,6 @@ CoopERP is an eco-design and open-source ERP solution for cooperatives.
 - [TypeORM](https://typeorm.io)
 - [Ts-mockito](https://github.com/NagRock/ts-mockito)
 - [Jest](https://jestjs.io/)
-- [React](https://fr.reactjs.org/) / [Redux](https://redux.js.org/)
 - [Svelte](https://svelte.dev/) / [Sapper](https://sapper.svelte.dev/)
 - [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
@@ -32,16 +31,14 @@ At **the first launch**, just execute these commands to install your application
 
 ```bash
 make install
-make client-start # React app
-make svelte-start # Svelte app
+make client-start
 ```
 
 For the **next times** you just need to execute these commands to start your application :
 
 ```bash
 make api-start
-make client-start # React app
-make svelte-start # Svelte app
+make client-start
 ```
 
 The server and client will be started:

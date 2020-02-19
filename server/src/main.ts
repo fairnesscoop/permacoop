@@ -16,7 +16,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({transform: true}));
 
   const options = new DocumentBuilder()
-    .setTitle('CoopERP')
+    .setTitle('Permacoop')
     .setBasePath('api')
     .setDescription('Open-source ERP for cooperatives')
     .setVersion('1.0.0')
