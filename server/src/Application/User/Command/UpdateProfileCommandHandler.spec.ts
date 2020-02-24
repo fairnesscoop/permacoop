@@ -11,18 +11,18 @@ describe('UpdateProfileCommandHandler', () => {
   const email = 'mathieu@fairness.coop';
 
   let userRepository: UserRepository;
-  let encryptionAdapter: EncryptionAdapter;
+  let encryption: EncryptionAdapter;
   let isEmailAlreadyExist: IsEmailAlreadyExist;
   let commandHandler: UpdateProfileCommandHandler;
 
   beforeEach(() => {
     userRepository = mock(UserRepository);
-    encryptionAdapter = mock(EncryptionAdapter);
+    encryption = mock(EncryptionAdapter);
     isEmailAlreadyExist = mock(IsEmailAlreadyExist);
 
     commandHandler = new UpdateProfileCommandHandler(
       instance(userRepository),
-      instance(encryptionAdapter),
+      instance(encryption),
       instance(isEmailAlreadyExist)
     );
   });
@@ -45,7 +45,7 @@ describe('UpdateProfileCommandHandler', () => {
       expect(e).toBeInstanceOf(EmailAlreadyExistException);
       expect(e.message).toBe('user.errors.email_already_exist');
       verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
-      verify(encryptionAdapter.hash(anything())).never();
+      verify(encryption.hash(anything())).never();
       verify(userRepository.save(anything())).never();
     }
   });
@@ -84,7 +84,7 @@ describe('UpdateProfileCommandHandler', () => {
     );
 
     when(isEmailAlreadyExist.isSatisfiedBy(email)).thenResolve(false);
-    when(encryptionAdapter.hash('azerty')).thenResolve('azertyCrypted');
+    when(encryption.hash('azerty')).thenResolve('azertyCrypted');
 
     // Command return nothing
     expect(await commandHandler.execute(command)).toBeUndefined();
@@ -94,7 +94,7 @@ describe('UpdateProfileCommandHandler', () => {
     verify(user.updatePassword('azertyCrypted')).calledBefore(
       userRepository.save(instance(user))
     );
-    verify(encryptionAdapter.hash('azerty')).once();
+    verify(encryption.hash('azerty')).once();
     verify(
       user.update('Mathieu', 'Marchois', 'mathieu@fairness.coop')
     ).calledBefore(userRepository.save(instance(user)));

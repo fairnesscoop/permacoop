@@ -1,7 +1,7 @@
 import {CommandHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
-import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
+import {IEncryption} from 'src/Application/IEncryption';
 import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
 import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
 import {UpdateProfileCommand} from './UpdateProfileCommand';
@@ -11,8 +11,8 @@ export class UpdateProfileCommandHandler {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
-    @Inject('IEncryptionAdapter')
-    private readonly encryptionAdapter: IEncryptionAdapter,
+    @Inject('IEncryption')
+    private readonly encryption: IEncryption,
     private readonly isEmailAlreadyExist: IsEmailAlreadyExist
   ) {}
 
@@ -30,7 +30,7 @@ export class UpdateProfileCommandHandler {
     user.update(firstName, lastName, email);
 
     if (password) {
-      user.updatePassword(await this.encryptionAdapter.hash(password));
+      user.updatePassword(await this.encryption.hash(password));
     }
 
     await this.userRepository.save(user);

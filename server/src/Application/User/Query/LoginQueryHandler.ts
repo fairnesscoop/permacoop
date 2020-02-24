@@ -3,7 +3,7 @@ import {Inject} from '@nestjs/common';
 import {LoginQuery} from './LoginQuery';
 import {AuthenticatedView} from '../View/AuthenticatedView';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
-import {IEncryptionAdapter} from 'src/Application/Adapter/IEncryptionAdapter';
+import {IEncryption} from 'src/Application/IEncryption';
 import {PasswordNotMatchException} from 'src/Domain/User/Exception/PasswordNotMatchException';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
 
@@ -12,8 +12,8 @@ export class LoginQueryHandler {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
-    @Inject('IEncryptionAdapter')
-    private readonly encryptionAdapter: IEncryptionAdapter
+    @Inject('IEncryption')
+    private readonly encryption: IEncryption
   ) {}
 
   public async execute(query: LoginQuery): Promise<AuthenticatedView> {
@@ -26,8 +26,7 @@ export class LoginQueryHandler {
     }
 
     if (
-      false ===
-      (await this.encryptionAdapter.compare(user.getPassword(), password))
+      false === (await this.encryption.compare(user.getPassword(), password))
     ) {
       throw new PasswordNotMatchException();
     }

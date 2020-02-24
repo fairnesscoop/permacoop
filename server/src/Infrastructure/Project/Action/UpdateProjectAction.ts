@@ -10,9 +10,9 @@ import {
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
+import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateProjectCommand} from 'src/Application/Project/Command/UpdateProjectCommand';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetProjectByIdQuery} from 'src/Application/Project/Query/GetProjectByIdQuery';
 import {ProjectDTO} from './DTO/ProjectDTO';
 import {ProjectIdDTO} from './DTO/ProjectIdDTO';
@@ -23,10 +23,10 @@ import {ProjectIdDTO} from './DTO/ProjectIdDTO';
 @UseGuards(AuthGuard('bearer'))
 export class UpdateProjectAction {
   constructor(
-    @Inject('ICommandBusAdapter')
-    private readonly commandBus: ICommandBusAdapter,
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('ICommandBus')
+    private readonly commandBus: ICommandBus,
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Put(':id')

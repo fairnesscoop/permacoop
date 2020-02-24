@@ -1,10 +1,10 @@
 import {Injectable} from '@nestjs/common';
 import {QueryBus} from '@nestjs/cqrs';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {IQuery} from 'src/Application/IQuery';
 
 @Injectable()
-export class QueryBusAdapter implements IQueryBusAdapter {
+export class QueryBusAdapter implements IQueryBus {
   constructor(private readonly queryBus: QueryBus) {}
 
   public execute(query: IQuery): Promise<any> {

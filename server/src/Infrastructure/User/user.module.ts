@@ -29,7 +29,7 @@ import {GetUserByIdQueryHandler} from 'src/Application/User/Query/GetUserByIdQue
   ],
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
-    {provide: 'IEncryptionAdapter', useClass: EncryptionAdapter},
+    {provide: 'IEncryption', useClass: EncryptionAdapter},
     LoginQueryHandler,
     CreateUserCommandHandler,
     IsEmailAlreadyExist,

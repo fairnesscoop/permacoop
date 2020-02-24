@@ -8,13 +8,13 @@ import {
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
+import {ICommandBus} from 'src/Application/ICommandBus';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
 import {AddActivityCommand} from 'src/Application/Activity/Command/AddActivityCommand';
 import {ActivityDTO} from './DTO/ActivityDTO';
 import {ActivityView} from 'src/Application/Activity/View/ActivityView';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetActivityByIdQuery} from 'src/Application/Activity/Query/GetActivityByIdQuery';
 
 @Controller('activities')
@@ -23,10 +23,10 @@ import {GetActivityByIdQuery} from 'src/Application/Activity/Query/GetActivityBy
 @UseGuards(AuthGuard('bearer'))
 export class AddActivityAction {
   constructor(
-    @Inject('ICommandBusAdapter')
-    private readonly commandBus: ICommandBusAdapter,
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('ICommandBus')
+    private readonly commandBus: ICommandBus,
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Post()

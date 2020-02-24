@@ -1,7 +1,7 @@
 import {Controller, Inject, UseGuards, Query, Get} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetMonthlyActivitiesQuery} from 'src/Application/Activity/Query/GetMonthlyActivitiesQuery';
 import {MonthlyActivitiesDTO} from './DTO/MonthlyActivitiesDTO';
 
@@ -11,8 +11,8 @@ import {MonthlyActivitiesDTO} from './DTO/MonthlyActivitiesDTO';
 @UseGuards(AuthGuard('bearer'))
 export class GetMonthlyActivitiesAction {
   constructor(
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Get()

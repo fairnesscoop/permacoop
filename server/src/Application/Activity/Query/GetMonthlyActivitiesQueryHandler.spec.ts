@@ -15,7 +15,7 @@ import {MonthlyActivitiesView} from '../View/MonthlyActivitiesView';
 describe('GetMonthlyActivitiesQueryHandler', () => {
   it('testGetActivities', async () => {
     const activityRepository = mock(ActivityRepository);
-    const dateUtilsAdapter = mock(DateUtilsAdapter);
+    const dateUtils = mock(DateUtilsAdapter);
     const task = mock(Task);
     const project = mock(Project);
     const user = mock(User);
@@ -64,28 +64,26 @@ describe('GetMonthlyActivitiesQueryHandler', () => {
       instance(activity2),
       instance(activity3)
     ]);
-    when(dateUtilsAdapter.getDaysInMonth(deepEqual(queryDate))).thenReturn(31);
+    when(dateUtils.getDaysInMonth(deepEqual(queryDate))).thenReturn(31);
 
     for (let i = 1; i <= 31; i++) {
       const day = i < 10 ? '0' + i : i;
       const weekDays = [1, 7, 8, 14, 15, 21, 22, 28, 29];
 
       when(
-        dateUtilsAdapter.format(
+        dateUtils.format(
           deepEqual(new Date(`2019-12-${day}T17:43:14.299Z`)),
           'y-MM-dd'
         )
       ).thenReturn(`2019-12-${day}`);
       when(
-        dateUtilsAdapter.isWeekend(
-          deepEqual(new Date(`2019-12-${day}T17:43:14.299Z`))
-        )
+        dateUtils.isWeekend(deepEqual(new Date(`2019-12-${day}T17:43:14.299Z`)))
       ).thenReturn(weekDays.includes(i));
     }
 
     const queryHandler = new GetMonthlyActivitiesQueryHandler(
       instance(activityRepository),
-      instance(dateUtilsAdapter)
+      instance(dateUtils)
     );
 
     const expectedResult = new MonthlyActivitiesView(200, [

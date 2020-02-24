@@ -4,8 +4,8 @@ import {CommandBusAdapter} from './Adapter/CommandBusAdapter';
 import {QueryBusAdapter} from './Adapter/QueryBusAdapter';
 
 const providers = [
-  {provide: 'ICommandBusAdapter', useClass: CommandBusAdapter},
-  {provide: 'IQueryBusAdapter', useClass: QueryBusAdapter}
+  {provide: 'ICommandBus', useClass: CommandBusAdapter},
+  {provide: 'IQueryBus', useClass: QueryBusAdapter}
 ];
 
 @Module({

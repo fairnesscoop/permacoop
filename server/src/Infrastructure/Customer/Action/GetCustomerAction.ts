@@ -10,7 +10,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {GetCustomerByIdQuery} from 'src/Application/Customer/Query/GetCustomerByIdQuery';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {CustomerIdDTO} from './DTO/CustomerIdDTO';
 
 @Controller('customers')
@@ -19,8 +19,8 @@ import {CustomerIdDTO} from './DTO/CustomerIdDTO';
 @UseGuards(AuthGuard('bearer'))
 export class GetCustomerAction {
   constructor(
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Get(':id')

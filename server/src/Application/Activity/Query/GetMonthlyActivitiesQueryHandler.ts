@@ -4,7 +4,7 @@ import {GetMonthlyActivitiesQuery} from './GetMonthlyActivitiesQuery';
 import {IActivityRepository} from 'src/Domain/Activity/Repository/IActivityRepository';
 import {ActivityView} from '../View/ActivityView';
 import {MonthlyActivitiesView} from '../View/MonthlyActivitiesView';
-import {IDateUtilsAdapter} from 'src/Application/Adapter/IDateUtilsAdapter';
+import {IDateUtils} from 'src/Application/IDateUtils';
 import {ActivitiesByDayView} from '../View/ActivitiesByDayView';
 
 @QueryHandler(GetMonthlyActivitiesQuery)
@@ -12,8 +12,8 @@ export class GetMonthlyActivitiesQueryHandler {
   constructor(
     @Inject('IActivityRepository')
     private readonly activityRepository: IActivityRepository,
-    @Inject('IDateUtilsAdapter')
-    private readonly dateUtilsAdapter: IDateUtilsAdapter
+    @Inject('IDateUtils')
+    private readonly dateUtils: IDateUtils
   ) {}
 
   public async execute(
@@ -23,7 +23,7 @@ export class GetMonthlyActivitiesQueryHandler {
     let totalTimeSpent = 0;
 
     const activities = await this.activityRepository.findMonthlyActivities(
-      this.dateUtilsAdapter.format(date, 'y-MM-dd'),
+      this.dateUtils.format(date, 'y-MM-dd'),
       userId,
       projectId
     );
@@ -50,15 +50,15 @@ export class GetMonthlyActivitiesQueryHandler {
   }
 
   private initActivitiesForEveryDayOfMonth(date: Date): ActivitiesByDayView[] {
-    const nbDays = this.dateUtilsAdapter.getDaysInMonth(date);
+    const nbDays = this.dateUtils.getDaysInMonth(date);
     const activitiesByDayView: ActivitiesByDayView[] = [];
 
     for (let day = 0; day <= nbDays - 1; day++) {
       const generatedDate = new Date(date.setDate(day + 1));
 
       activitiesByDayView[day] = new ActivitiesByDayView(
-        this.dateUtilsAdapter.format(generatedDate, 'y-MM-dd'),
-        this.dateUtilsAdapter.isWeekend(generatedDate),
+        this.dateUtils.format(generatedDate, 'y-MM-dd'),
+        this.dateUtils.isWeekend(generatedDate),
         []
       );
     }

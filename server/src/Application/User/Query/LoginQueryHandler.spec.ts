@@ -13,15 +13,15 @@ describe('LoginQueryHandler', () => {
   const query = new LoginQuery('mathieu@FAIRNESS.coop', 'plainPassword');
 
   let userRepository: UserRepository;
-  let encryptionAdapter: EncryptionAdapter;
+  let encryption: EncryptionAdapter;
   let queryHandler: LoginQueryHandler;
 
   beforeEach(() => {
     userRepository = mock(UserRepository);
-    encryptionAdapter = mock(EncryptionAdapter);
+    encryption = mock(EncryptionAdapter);
     queryHandler = new LoginQueryHandler(
       instance(userRepository),
-      instance(encryptionAdapter)
+      instance(encryption)
     );
   });
 
@@ -33,13 +33,13 @@ describe('LoginQueryHandler', () => {
     } catch (e) {
       expect(e instanceof UserNotFoundException).toBe(true);
       verify(userRepository.findOneByEmail(email)).once();
-      verify(encryptionAdapter.compare(anything(), anything())).never();
+      verify(encryption.compare(anything(), anything())).never();
     }
   });
 
   it('testPasswordNotMatch', async () => {
     const user = mock(User);
-    when(encryptionAdapter.compare('hash', 'plainPassword')).thenResolve(false);
+    when(encryption.compare('hash', 'plainPassword')).thenResolve(false);
     when(userRepository.findOneByEmail(email)).thenResolve(instance(user));
     when(user.getPassword()).thenReturn('hash');
 
@@ -48,7 +48,7 @@ describe('LoginQueryHandler', () => {
     } catch (e) {
       expect(e instanceof PasswordNotMatchException).toBe(true);
       verify(userRepository.findOneByEmail(email)).once();
-      verify(encryptionAdapter.compare('hash', 'plainPassword')).once();
+      verify(encryption.compare('hash', 'plainPassword')).once();
       verify(user.getPassword()).once();
     }
   });
@@ -56,7 +56,7 @@ describe('LoginQueryHandler', () => {
   it('testLoginSuccess', async () => {
     const user = mock(User);
     when(userRepository.findOneByEmail(email)).thenResolve(instance(user));
-    when(encryptionAdapter.compare('hash', 'plainPassword')).thenResolve(true);
+    when(encryption.compare('hash', 'plainPassword')).thenResolve(true);
     when(user.getId()).thenReturn('14984335-f5aa-402a-a170-5393bb954538');
     when(user.getFirstName()).thenReturn('Mathieu');
     when(user.getLastName()).thenReturn('MARCHOIS');
@@ -75,7 +75,7 @@ describe('LoginQueryHandler', () => {
     );
 
     verify(userRepository.findOneByEmail(email)).once();
-    verify(encryptionAdapter.compare('hash', 'plainPassword')).once();
+    verify(encryption.compare('hash', 'plainPassword')).once();
     verify(user.getId()).once();
     verify(user.getFirstName()).once();
     verify(user.getLastName()).once();

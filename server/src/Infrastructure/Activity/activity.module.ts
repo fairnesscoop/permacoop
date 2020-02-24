@@ -22,7 +22,7 @@ import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
     {provide: 'IProjectRepository', useClass: ProjectRepository},
     {provide: 'IActivityRepository', useClass: ActivityRepository},
     {provide: 'ITaskRepository', useClass: TaskRepository},
-    {provide: 'IDateUtilsAdapter', useClass: DateUtilsAdapter},
+    {provide: 'IDateUtils', useClass: DateUtilsAdapter},
     IsMaximumTimeSpentReached,
     GetActivityByIdQueryHandler,
     AddActivityCommandHandler,

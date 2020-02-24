@@ -8,10 +8,10 @@ import {
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
+import {ICommandBus} from 'src/Application/ICommandBus';
 import {CreateProjectCommand} from 'src/Application/Project/Command/CreateProjectCommand';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {IQueryBusAdapter} from 'src/Application/Adapter/IQueryBusAdapter';
+import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetProjectByIdQuery} from 'src/Application/Project/Query/GetProjectByIdQuery';
 import {ProjectDTO} from './DTO/ProjectDTO';
 
@@ -21,10 +21,10 @@ import {ProjectDTO} from './DTO/ProjectDTO';
 @UseGuards(AuthGuard('bearer'))
 export class CreateProjectAction {
   constructor(
-    @Inject('ICommandBusAdapter')
-    private readonly commandBus: ICommandBusAdapter,
-    @Inject('IQueryBusAdapter')
-    private readonly queryBus: IQueryBusAdapter
+    @Inject('ICommandBus')
+    private readonly commandBus: ICommandBus,
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
   ) {}
 
   @Post()
