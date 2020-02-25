@@ -16,7 +16,6 @@ import {ProjectRepository} from '../Project/Repository/ProjectRepository';
 import {GetMonthlyActivitiesAction} from './Action/GetMonthlyActivitiesAction';
 import {GetMonthlyActivitiesQueryHandler} from 'src/Application/Activity/Query/GetMonthlyActivitiesQueryHandler';
 import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
-import {LoggedUserAdapter} from '../Adapter/LoggedUserAdapter';
 import {IsActivityDeletable} from '../../Domain/Activity/Specification/IsActivityDeletable';
 
 @Module({
