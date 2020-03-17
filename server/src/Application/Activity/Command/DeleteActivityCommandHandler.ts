@@ -5,29 +5,25 @@ import {DeleteActivityCommand} from './DeleteActivityCommand';
 import {ActivityNotFoundException} from '../../../Domain/Activity/Exception/ActivityNotFoundException';
 import {Activity} from '../../../Domain/Activity/Activity.entity';
 import {NotActivityOwnerException} from '../../../Domain/Activity/Exception/NotActivityOwnerException';
-import {IsActivityDeletable} from '../../../Domain/Activity/Specification/IsActivityDeletable';
 
 @CommandHandler(DeleteActivityCommand)
 export class DeleteActivityCommandHandler {
   constructor(
-    private readonly isActivityDeletable: IsActivityDeletable,
     @Inject('IActivityRepository')
     private readonly activityRepository: IActivityRepository
   ) {}
 
   public async execute(command: DeleteActivityCommand): Promise<void> {
-    const {activityId} = command;
+    const {activityId, user} = command;
     const activity = await this.activityRepository.findOneById(activityId);
 
     if (!(activity instanceof Activity)) {
       throw new ActivityNotFoundException();
     }
 
-    if (false === (await this.isActivityDeletable.isSatisfiedBy(activity))) {
+    if (activity.getUser().getId() !== user.getId()) {
       throw new NotActivityOwnerException();
     }
-
-    return;
 
     this.activityRepository.deleteById(activityId);
   }

@@ -4,11 +4,12 @@ import {
   Inject,
   BadRequestException,
   UseGuards,
-  Param
+  Param,
+  HttpCode
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {ICommandBusAdapter} from 'src/Application/Adapter/ICommandBusAdapter';
+import {ICommandBus} from 'src/Application/ICommandBus';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
 import {DeleteActivityCommand} from 'src/Application/Activity/Command/DeleteActivityCommand';
@@ -20,19 +21,20 @@ import {DeleteActivityDTO} from './DTO/DeleteActivityDTO';
 @UseGuards(AuthGuard('bearer'))
 export class DeleteActivityAction {
   constructor(
-    @Inject('ICommandBusAdapter')
-    private readonly commandBus: ICommandBusAdapter,
+    @Inject('ICommandBus')
+    private readonly commandBus: ICommandBus
   ) {}
 
   @Delete(':id')
   @ApiOperation({title: 'Delete activity'})
+  @HttpCode(204)
   public async index(
     @Param() deleteActivityDto: DeleteActivityDTO,
     @LoggedUser() user: User
-  ): Promise<any> {
+  ): Promise<boolean> {
     try {
       const {id: activityId} = deleteActivityDto;
-      const id = await this.commandBus.execute(
+      await this.commandBus.execute(
         new DeleteActivityCommand(user, activityId)
       );
 

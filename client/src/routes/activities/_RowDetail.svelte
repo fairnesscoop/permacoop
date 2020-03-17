@@ -4,7 +4,6 @@
   import {fr} from 'date-fns/locale';
   export let day;
   export let isLoggedUser;
-  $: day.activities;
 
   const handleDelete = activityId => {
     axios.delete(`activities/${activityId}`)
