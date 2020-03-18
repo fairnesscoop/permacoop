@@ -10,4 +10,5 @@ export interface IActivityRepository {
     projectId: string
   ): Promise<Activity[]>;
   getTimeSpentSumByUserAndDate(user: User, date: string): Promise<number>;
+  deleteById(id: string): void;
 }

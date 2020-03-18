@@ -38,6 +38,7 @@ export class ActivityRepository implements IActivityRepository {
         'activity.time',
         'activity.summary',
         'activity.date',
+        'user.id',
         'project.name',
         'customer.name',
         'task.name'
@@ -45,8 +46,18 @@ export class ActivityRepository implements IActivityRepository {
       .where('activity.id = :id', {id})
       .innerJoin('activity.task', 'task')
       .innerJoin('activity.project', 'project')
+      .innerJoin('activity.user', 'user')
       .innerJoin('project.customer', 'customer')
       .getOne();
+  }
+
+  public deleteById(id: string): void {
+    this.repository
+      .createQueryBuilder('activity')
+      .where('activity.id = :id', {id})
+      .delete()
+      .execute()
+    ;
   }
 
   public findMonthlyActivities(
