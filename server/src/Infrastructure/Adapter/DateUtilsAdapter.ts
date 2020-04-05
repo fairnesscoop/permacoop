@@ -19,4 +19,8 @@ export class DateUtilsAdapter implements IDateUtils {
   public isWeekend(date: Date): boolean {
     return fnsIsWeekend(date);
   }
+
+  public getCurrentDate(): Date {
+    return new Date();
+  }
 }
