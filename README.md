@@ -5,7 +5,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fairnesscoop/permacoop/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fairnesscoop/permacoop/?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3bf4f001d4904cdb89e71f2793d1c6b7)](https://www.codacy.com/gh/fairnesscoop/permacoop?utm_source=github.com&utm_medium=referral&utm_content=fairnesscoop/permacoop&utm_campaign=Badge_Grade)
 [![GitHub issues](https://img.shields.io/github/issues/fairnesscoop/permacoop.svg)](https://github.com/fairnesscoop/permacoop/issues)
-[![GitHub last commit](https://img.shields.io/github/last-commit/fairnesscoop/permacoop.svg)](https://github.com/fairnesscoop/permacoop)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/fairnesscoop/permacoop)
 [![GitHub license](https://img.shields.io/github/license/fairnesscoop/permacoop.svg)](https://github.com/fairnesscoop/permacoop)
 
 Permacoop is an eco-design and open-source ERP solution for cooperatives.
