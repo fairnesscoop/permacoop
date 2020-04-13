@@ -3,6 +3,7 @@ help:
 
 install: ## Install API and client
 	cp server/ormconfig.json.dist server/ormconfig.json
+	cp server/.env.dist server/.env
 	cp client/config.js.dist client/config.js
 	cd server && npm i
 	cd client && npm i
@@ -33,6 +34,8 @@ api-build-dist: ## Build API dist
 	docker-compose -p permacoop exec api npm run build
 database-migrate: ## Database migrations
 	docker-compose -p permacoop exec api npm run migration:migrate
+database-diff: ## Generate database diff
+	docker-compose -p permacoop exec api npm run migration:diff $(MIGRATION_NAME)
 database-connect: ## Connect to the database container
 	docker-compose -p permacoop exec database psql -h database
 ci: ## Run CI checks
