@@ -4,6 +4,7 @@ import {GetCustomerByIdQuery} from './GetCustomerByIdQuery';
 import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
 import {CustomerView} from '../View/CustomerView';
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
+import {AddressView} from '../View/AddressView';
 
 @QueryHandler(GetCustomerByIdQuery)
 export class GetCustomerByIdQueryHandler {
@@ -18,6 +19,18 @@ export class GetCustomerByIdQueryHandler {
       throw new CustomerNotFoundException();
     }
 
-    return new CustomerView(customer.getId(), customer.getName());
+    const address = customer.getAddress();
+
+    return new CustomerView(
+      customer.getId(),
+      customer.getName(),
+      new AddressView(
+        address.getId(),
+        address.getStreet(),
+        address.getCity(),
+        address.getZipCode(),
+        address.getCountry()
+      )
+    );
   }
 }

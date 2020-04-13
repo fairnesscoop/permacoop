@@ -36,9 +36,14 @@ export class UpdateCustomerAction {
     @Body() customerDto: CustomerDTO
   ): Promise<CustomerView> {
     try {
+      const {
+        address: {street, city, zipCode, country},
+        name
+      } = customerDto;
       const {id} = customerIdDto;
+
       await this.commandBus.execute(
-        new UpdateCustomerCommand(id, customerDto.name)
+        new UpdateCustomerCommand(id, name, street, city, zipCode, country)
       );
 
       return await this.queryBus.execute(new GetCustomerByIdQuery(id));

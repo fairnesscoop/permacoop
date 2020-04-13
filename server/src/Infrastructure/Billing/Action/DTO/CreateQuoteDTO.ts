@@ -1,11 +1,13 @@
 import {ApiModelProperty, ApiModelPropertyOptional} from '@nestjs/swagger';
+import {Type} from 'class-transformer';
 import {
   IsNotEmpty,
   IsUUID,
   IsOptional,
   IsIn,
   IsArray,
-  ValidateNested
+  ValidateNested,
+  ArrayNotEmpty
 } from 'class-validator';
 import {Quote} from 'src/Domain/Billing/Quote.entity';
 import {CreateQuoteItemDTO} from './CreateQuoteItemDTO';
@@ -28,6 +30,8 @@ export class CreateQuoteDTO {
 
   @ApiModelProperty({type: [CreateQuoteItemDTO]})
   @IsArray()
+  @ArrayNotEmpty()
+  @Type(() => CreateQuoteItemDTO)
   @ValidateNested({each: true})
   public items: CreateQuoteItemDTO[];
 }

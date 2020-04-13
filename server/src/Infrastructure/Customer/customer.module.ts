@@ -12,9 +12,11 @@ import {GetCustomersAction} from './Action/GetCustomersAction';
 import {UpdateCustomerCommandHandler} from 'src/Application/Customer/Command/UpdateCustomerCommandHandler';
 import {UpdateCustomerAction} from './Action/UpdateCustomerAction';
 import {GetCustomerAction} from './Action/GetCustomerAction';
+import {AddressRepository} from './Repository/AddressRepository';
+import {Address} from 'src/Domain/Customer/Address.entity';
 
 @Module({
-  imports: [BusModule, TypeOrmModule.forFeature([Customer])],
+  imports: [BusModule, TypeOrmModule.forFeature([Customer, Address])],
   controllers: [
     CreateCustomerAction,
     UpdateCustomerAction,
@@ -23,6 +25,7 @@ import {GetCustomerAction} from './Action/GetCustomerAction';
   ],
   providers: [
     {provide: 'ICustomerRepository', useClass: CustomerRepository},
+    {provide: 'IAddressRepository', useClass: AddressRepository},
     IsCustomerAlreadyExist,
     UpdateCustomerCommandHandler,
     CreateCustomerCommandHandler,

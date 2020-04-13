@@ -1,4 +1,4 @@
-import {mock, instance, when, verify} from 'ts-mockito';
+import {mock, instance, when, verify, anything} from 'ts-mockito';
 import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
@@ -17,7 +17,7 @@ describe('IsProjectAlreadyExist', () => {
 
   it('testProjectAlreadyExist', async () => {
     when(projectRepository.findOneByName('Encom')).thenResolve(
-      new Project('Encom', new Customer('Radio France'))
+      new Project('Encom', new Customer('Radio France', anything()))
     );
     expect(await isProjectAlreadyExist.isSatisfiedBy('Encom')).toBe(true);
     verify(projectRepository.findOneByName('Encom')).once();

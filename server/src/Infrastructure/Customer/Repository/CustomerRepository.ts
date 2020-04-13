@@ -25,6 +25,16 @@ export class CustomerRepository implements ICustomerRepository {
   public findOneById(id: string): Promise<Customer | undefined> {
     return this.repository
       .createQueryBuilder('customer')
+      .select([
+        'customer.id',
+        'customer.name',
+        'address.id',
+        'address.street',
+        'address.city',
+        'address.zipCode',
+        'address.country'
+      ])
+      .innerJoin('customer.address', 'address')
       .where('customer.id = :id', {id})
       .getOne();
   }
@@ -32,7 +42,16 @@ export class CustomerRepository implements ICustomerRepository {
   public findCustomers(): Promise<Customer[]> {
     return this.repository
       .createQueryBuilder('customer')
-      .select(['customer.id', 'customer.name'])
+      .select([
+        'customer.id',
+        'customer.name',
+        'address.id',
+        'address.street',
+        'address.city',
+        'address.zipCode',
+        'address.country'
+      ])
+      .innerJoin('customer.address', 'address')
       .orderBy('customer.name', 'ASC')
       .getMany();
   }

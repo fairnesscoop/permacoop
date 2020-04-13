@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
+import {Address} from './Address.entity';
 
 @Entity()
 export class Customer {
@@ -11,8 +12,12 @@ export class Customer {
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   private createdAt: Date;
 
-  constructor(name: string) {
+  @ManyToOne(type => Address, {nullable: false})
+  private address: Address;
+
+  constructor(name: string, address: Address) {
     this.name = name;
+    this.address = address;
   }
 
   public getId(): string {
@@ -25,6 +30,10 @@ export class Customer {
 
   public getCreatedAt(): Date {
     return this.createdAt;
+  }
+
+  public getAddress(): Address {
+    return this.address;
   }
 
   public updateName(name: string): void {
