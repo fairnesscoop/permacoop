@@ -18,6 +18,11 @@
           Permacoop
         </a>
         , solution ERP open-source et éco-conçu pour gérer votre coopérative.
+        <br />
+        Pour toutes questions ou suggestions d'améliorations, n'hésitez pas à
+        nous écrire à
+        <a href="mailto:equipe@fairness.coop">equipe@fairness.coop</a>
+        .
       </p>
     </div>
   </div>
