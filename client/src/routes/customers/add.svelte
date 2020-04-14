@@ -28,5 +28,7 @@
   <Breadcrumb
     items={[{title: 'Clients', path: 'customers'}, {title: pageTitle}]} />
   <ServerErrors {errors} />
-  <Form on:save={onSave} />
+  <Form
+    customer={{name: '', address: {street: '', city: '', zipCode: '', country: 'FR'}}}
+    on:save={onSave} />
 </div>

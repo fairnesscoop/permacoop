@@ -1,11 +1,11 @@
 <script>
   import {onMount} from 'svelte';
+  import {byAlpha2} from 'iso-country-codes';
   import {client as axios} from '../../utils/axios';
   import {errorNormalizer} from '../../normalizer/errors';
   import Breadcrumb from '../_components/Breadcrumb.svelte';
   import Loader from '../_components/Loader.svelte';
   import ServerErrors from '../_components/ServerErrors.svelte';
-  import RowDetail from './_RowDetail.svelte';
 
   let pageTitle = 'Clients';
   let loading = true;
@@ -35,12 +35,29 @@
     <thead>
       <tr>
         <th>Client</th>
+        <th>Adresse</th>
         <th />
       </tr>
     </thead>
     <tbody>
       {#each data as customer (customer.id)}
-        <RowDetail {customer} />
+        <tr>
+          <td>{customer.name}</td>
+          <td>
+            {customer.address.street}
+            <br />
+            {customer.address.zipCode} {customer.address.city}
+            <br />
+            {byAlpha2[customer.address.country].name}
+          </td>
+          <td>
+            <a
+              class="btn btn-outline-secondary btn-sm"
+              href={`/customers/${customer.id}/edit`}>
+              Modifier
+            </a>
+          </td>
+        </tr>
       {/each}
     </tbody>
   </table>

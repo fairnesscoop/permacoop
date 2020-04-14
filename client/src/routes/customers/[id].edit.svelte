@@ -4,7 +4,7 @@
   export const preload = async ({params}) => {
     const {data} = await axios.get(`customers/${params.id}`);
 
-    return {task: data};
+    return {customer: data};
   };
 </script>
 
@@ -15,14 +15,14 @@
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../_components/ServerErrors.svelte';
 
-  export let task;
+  export let customer;
 
   let errors = [];
-  let pageTitle = `Edition de la mission "${task.name}"`;
+  let pageTitle = `Edition du client "${customer.name}"`;
 
   const onSave = async e => {
     try {
-      await axios.put(`customers/${task.id}`, e.detail);
+      await axios.put(`customers/${customer.id}`, e.detail);
 
       return goto('/customers');
     } catch (e) {
@@ -39,5 +39,5 @@
   <Breadcrumb
     items={[{title: 'Clients', path: 'customers'}, {title: pageTitle}]} />
   <ServerErrors {errors} />
-  <Form name={task.name} on:save={onSave} />
+  <Form {customer} on:save={onSave} />
 </div>

@@ -35,13 +35,19 @@
   <form on:submit|preventDefault={handleSubmit}>
     <div class="form-group">
       <label for="email">Adresse email *</label>
-      <input type="email" id="email" bind:value={email} class="form-control" />
+      <input
+        type="email"
+        id="email"
+        required="required"
+        bind:value={email}
+        class="form-control" />
     </div>
     <div class="form-group">
       <label for="password">Mot de passe *</label>
       <input
         type="password"
         id="password"
+        required="required"
         bind:value={password}
         class="form-control" />
     </div>

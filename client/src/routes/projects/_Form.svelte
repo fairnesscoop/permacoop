@@ -21,11 +21,20 @@
 <form on:submit|preventDefault={submit}>
   <div class="form-group">
     <label for="name">Nom du projet *</label>
-    <input type="text" id="name" bind:value={name} class="form-control" />
+    <input
+      type="text"
+      id="name"
+      required="required"
+      bind:value={name}
+      class="form-control" />
   </div>
   <div class="form-group">
     <label for="customerId">Client *</label>
-    <select id="customerId" class="form-control" bind:value={customerId}>
+    <select
+      id="customerId"
+      required="required"
+      class="form-control"
+      bind:value={customerId}>
       <option value="">Choisir un client</option>
       {#each data as customer}
         <option value={customer.id} selected={customerId === customer.id}>

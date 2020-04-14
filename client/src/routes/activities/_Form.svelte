@@ -31,7 +31,11 @@
 <form on:submit|preventDefault={submit}>
   <div class="form-group">
     <label for="time">Temps passé *</label>
-    <select id="time" class="form-control" bind:value={time}>
+    <select
+      id="time"
+      required="required"
+      class="form-control"
+      bind:value={time}>
       <option value={'25'}>0.25 jour</option>
       <option value={'50'}>0.5 jour</option>
       <option value={'75'}>0.75 jour</option>
@@ -41,7 +45,11 @@
   </div>
   <div class="form-group">
     <label for="projectId">Projet *</label>
-    <select id="projectId" class="form-control" bind:value={projectId}>
+    <select
+      id="projectId"
+      required="required"
+      class="form-control"
+      bind:value={projectId}>
       <option value="">-- Choisir un projet --</option>
       {#each projects as project}
         <option value={project.id} selected={projectId === project.id}>
@@ -52,7 +60,11 @@
   </div>
   <div class="form-group">
     <label for="taskId">Mission *</label>
-    <select id="taskId" class="form-control" bind:value={taskId}>
+    <select
+      id="taskId"
+      required="required"
+      class="form-control"
+      bind:value={taskId}>
       <option value="">-- Choisir une mission --</option>
       {#each tasks as task}
         <option value={task.id} selected={taskId === task.id}>

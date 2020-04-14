@@ -34,7 +34,8 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-        <th>Projets</th>
+        <th>Projet</th>
+        <th>Client</th>
         <th />
       </tr>
     </thead>
