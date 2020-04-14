@@ -13,11 +13,11 @@
         {`Bonjour ${$user.firstName} ${$user.lastName} !`}
       </h1>
       <p class="lead">
-        Bienvenue sur
+        Bienvenue sur Permacoop, solution ERP
         <a href="https://github.com/fairnesscoop/permacoop" target="_blank">
-          Permacoop
+          open-source
         </a>
-        , solution ERP open-source et éco-conçu pour gérer votre coopérative.
+        et éco-conçu pour gérer votre coopérative.
         <br />
         Pour toutes questions ou suggestions d'améliorations, n'hésitez pas à
         nous écrire à
