@@ -1,4 +1,4 @@
-export const errorNormalizer = e => {
+export const errorNormalizer = (e) => {
   let message = e.message;
 
   if (e.response) {
@@ -11,8 +11,18 @@ export const errorNormalizer = e => {
     const errors = [];
 
     for (const msg of message) {
-      for (const constraint of Object.values(msg.constraints)) {
-        errors.push(constraint);
+      if (msg.children) {
+        for (const children of Object.values(msg.children)) {
+          for (const constraint of Object.values(children.constraints)) {
+            errors.push(constraint);
+          }
+        }
+      }
+
+      if (msg.constraints) {
+        for (const constraint of Object.values(msg.constraints)) {
+          errors.push(constraint);
+        }
       }
     }
 

@@ -18,6 +18,7 @@
     <input
       type="text"
       id="firstName"
+      required="required"
       bind:value={firstName}
       class="form-control" />
   </div>
@@ -26,18 +27,25 @@
     <input
       type="text"
       id="lastName"
+      required="required"
       bind:value={lastName}
       class="form-control" />
   </div>
   <div class="form-group">
     <label for="email">Email *</label>
-    <input type="email" id="email" bind:value={email} class="form-control" />
+    <input
+      type="email"
+      required="required"
+      id="email"
+      bind:value={email}
+      class="form-control" />
   </div>
   <div class="form-group">
     <label for="password">Mot de passe *</label>
     <input
       type="password"
       id="password"
+      required="required"
       bind:value={password}
       class="form-control" />
   </div>

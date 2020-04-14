@@ -11,6 +11,7 @@ import {Project} from 'src/Domain/Project/Project.entity';
 import {Quote} from 'src/Domain/Billing/Quote.entity';
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 import {InvalidProjectException} from 'src/Domain/Billing/Exception/InvalidProjectException';
+import {Address} from 'src/Domain/Customer/Address.entity';
 
 describe('CreateQuoteCommandHandler', () => {
   let quoteRepository: QuoteRepository;
@@ -21,7 +22,8 @@ describe('CreateQuoteCommandHandler', () => {
 
   const user = mock(User);
   const quote = mock(Quote);
-  const customer = new Customer('Customer');
+  const address = mock(Address);
+  const customer = new Customer('Customer', instance(address));
   const project = new Project('Project', customer);
   const command = new CreateQuoteCommand(
     instance(user),

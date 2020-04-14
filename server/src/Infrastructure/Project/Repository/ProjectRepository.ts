@@ -36,8 +36,8 @@ export class ProjectRepository implements IProjectRepository {
       .createQueryBuilder('project')
       .select(['project.id', 'project.name', 'customer.id', 'customer.name'])
       .innerJoin('project.customer', 'customer')
-      .orderBy('customer.name', 'ASC')
-      .addOrderBy('project.name', 'ASC')
+      .orderBy('project.name', 'ASC')
+      .addOrderBy('customer.name', 'ASC')
       .getMany();
   }
 }

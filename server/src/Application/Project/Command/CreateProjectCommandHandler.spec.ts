@@ -53,7 +53,7 @@ describe('CreateProjectCommandHandler', () => {
   it('testProjectAlreadyExist', async () => {
     when(
       customerRepository.findOneById('b5e8dc18-ca67-4323-bdae-654afe09499f')
-    ).thenResolve(new Customer('Radio France'));
+    ).thenResolve(new Customer('Radio France', anything()));
     when(isProjectAlreadyExist.isSatisfiedBy('Project')).thenResolve(true);
 
     try {

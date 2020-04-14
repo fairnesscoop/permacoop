@@ -3,10 +3,8 @@
 </script>
 
 <tr>
-  <td>
-    <b>[{project.customer.name}]</b>
-    {project.name}
-  </td>
+  <td>{project.name}</td>
+  <td>{project.customer.name}</td>
   <td>
     <a
       class="btn btn-outline-secondary btn-sm"

@@ -30,9 +30,14 @@ export class CreateCustomerAction {
   @Post()
   @ApiOperation({title: 'Create new customer'})
   public async index(@Body() customerDto: CustomerDTO): Promise<CustomerView> {
+    const {
+      address: {street, city, zipCode, country},
+      name
+    } = customerDto;
+
     try {
       const id = await this.commandBus.execute(
-        new CreateCustomerCommand(customerDto.name)
+        new CreateCustomerCommand(name, street, city, zipCode, country)
       );
 
       return await this.queryBus.execute(new GetCustomerByIdQuery(id));
