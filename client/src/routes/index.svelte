@@ -1,12 +1,24 @@
 <script>
-  import Breadcrumb from './_components/Breadcrumb.svelte';
+  import {user} from '../store';
 </script>
 
 <svelte:head>
-  <title>Permacoop - Tableau de bord</title>
+  <title>Permacoop</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb />
-  <h2>Tableau de bord</h2>
-</div>
+{#if $user}
+  <div class="col-md-12">
+    <div class="jumbotron">
+      <h1 class="display-5">
+        {`Bonjour ${$user.firstName} ${$user.lastName} !`}
+      </h1>
+      <p class="lead">
+        Bienvenue sur
+        <a href="https://github.com/fairnesscoop/permacoop" target="_blank">
+          Permacoop
+        </a>
+        , solution ERP open-source et éco-conçu pour gérer votre coopérative.
+      </p>
+    </div>
+  </div>
+{/if}
