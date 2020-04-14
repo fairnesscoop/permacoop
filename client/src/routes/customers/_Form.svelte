@@ -18,7 +18,6 @@
     <input
       type="text"
       id="name"
-      required="required"
       bind:value={customer.name}
       class="form-control" />
   </div>
@@ -27,7 +26,6 @@
     <input
       type="text"
       id="street"
-      required="required"
       bind:value={address.street}
       class="form-control" />
   </div>
@@ -37,7 +35,6 @@
       type="text"
       id="zipCode"
       maxlength="6"
-      required="required"
       bind:value={address.zipCode}
       class="form-control" />
   </div>
@@ -51,20 +48,11 @@
   </div>
   <div class="form-group">
     <label for="country">Pays *</label>
-    <select
-      id="country"
-      required="required"
-      class="form-control"
-      bind:value={address.country}>
+    <select id="country" class="form-control" bind:value={address.country}>
       {#each codes as code}
         <option value={code.alpha2}>{code.name}</option>
       {/each}
     </select>
   </div>
-  <button
-    type="submit"
-    class="btn btn-primary"
-    disabled={!customer.name || !address.street || !address.city || !address.country || !address.zipCode}>
-    Sauvegarder
-  </button>
+  <button type="submit" class="btn btn-primary">Sauvegarder</button>
 </form>
