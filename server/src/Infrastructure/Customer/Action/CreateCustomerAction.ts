@@ -9,10 +9,7 @@ import {
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CreateCustomerCommand} from 'src/Application/Customer/Command/CreateCustomerCommand';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {ICommandBus} from 'src/Application/ICommandBus';
-import {IQueryBus} from 'src/Application/IQueryBus';
-import {GetCustomerByIdQuery} from 'src/Application/Customer/Query/GetCustomerByIdQuery';
 import {CustomerDTO} from './DTO/CustomerDTO';
 
 @Controller('customers')
@@ -22,14 +19,12 @@ import {CustomerDTO} from './DTO/CustomerDTO';
 export class CreateCustomerAction {
   constructor(
     @Inject('ICommandBus')
-    private readonly commandBus: ICommandBus,
-    @Inject('IQueryBus')
-    private readonly queryBus: IQueryBus
+    private readonly commandBus: ICommandBus
   ) {}
 
   @Post()
   @ApiOperation({title: 'Create new customer'})
-  public async index(@Body() customerDto: CustomerDTO): Promise<CustomerView> {
+  public async index(@Body() customerDto: CustomerDTO) {
     const {
       address: {street, city, zipCode, country},
       name
@@ -40,7 +35,7 @@ export class CreateCustomerAction {
         new CreateCustomerCommand(name, street, city, zipCode, country)
       );
 
-      return await this.queryBus.execute(new GetCustomerByIdQuery(id));
+      return {id};
     } catch (e) {
       throw new BadRequestException(e.message);
     }
