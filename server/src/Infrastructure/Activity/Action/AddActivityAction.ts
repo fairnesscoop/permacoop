@@ -13,9 +13,7 @@ import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
 import {AddActivityCommand} from 'src/Application/Activity/Command/AddActivityCommand';
 import {ActivityDTO} from './DTO/ActivityDTO';
-import {ActivityView} from 'src/Application/Activity/View/ActivityView';
 import {IQueryBus} from 'src/Application/IQueryBus';
-import {GetActivityByIdQuery} from 'src/Application/Activity/Query/GetActivityByIdQuery';
 
 @Controller('activities')
 @ApiUseTags('Activity')
@@ -34,7 +32,7 @@ export class AddActivityAction {
   public async index(
     @Body() activityDto: ActivityDTO,
     @LoggedUser() user: User
-  ): Promise<ActivityView> {
+  ) {
     try {
       const {date, projectId, taskId, summary, time} = activityDto;
       const id = await this.commandBus.execute(
@@ -48,7 +46,7 @@ export class AddActivityAction {
         )
       );
 
-      return await this.queryBus.execute(new GetActivityByIdQuery(id));
+      return {id};
     } catch (e) {
       throw new BadRequestException(e.message);
     }

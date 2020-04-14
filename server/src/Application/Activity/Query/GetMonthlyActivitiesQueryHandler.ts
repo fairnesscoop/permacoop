@@ -38,7 +38,7 @@ export class GetMonthlyActivitiesQueryHandler {
       activitiesByDayView[dayIndex].activities.push(
         new ActivityView(
           activity.getId(),
-          activity.getTime(),
+          activity.getTime() / 100,
           activity.getSummary(),
           project.getFullName(),
           task.getName()
@@ -46,7 +46,7 @@ export class GetMonthlyActivitiesQueryHandler {
       );
     }
 
-    return new MonthlyActivitiesView(totalTimeSpent, activitiesByDayView);
+    return new MonthlyActivitiesView(totalTimeSpent / 100, activitiesByDayView);
   }
 
   private initActivitiesForEveryDayOfMonth(date: Date): ActivitiesByDayView[] {
