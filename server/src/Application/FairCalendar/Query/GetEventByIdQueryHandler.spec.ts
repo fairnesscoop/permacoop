@@ -7,8 +7,11 @@ import {GetEventByIdQuery} from './GetEventByIdQuery';
 import {EventNotFoundException} from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
 import {Task} from 'src/Domain/Task/Task.entity';
 import {Project} from 'src/Domain/Project/Project.entity';
+<<<<<<< HEAD
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {TaskView} from 'src/Application/Task/View/TaskView';
+=======
+>>>>>>> [fair_calendar][event] Get, lis, create & delete events
 
 describe('GetEventByIdQueryHandler', () => {
   const query = new GetEventByIdQuery('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
@@ -20,20 +23,32 @@ describe('GetEventByIdQueryHandler', () => {
     );
     const expectedResult = new EventView(
       'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
+<<<<<<< HEAD
       'mission',
       0.75,
       '2019-12-12',
       'Summary',
       new ProjectView('bf4a645c-9754-4943-baec-783361c6d814', 'RadioFrance'),
       new TaskView('7fb77f06-2d0b-4758-886a-42bba5445fcd', 'Development')
+=======
+      '[Development] RadioFrance',
+      'mission',
+      0.75,
+      '2019-12-12',
+      'Summary'
+>>>>>>> [fair_calendar][event] Get, lis, create & delete events
     );
 
     const task = mock(Task);
     const project = mock(Project);
 
+<<<<<<< HEAD
     when(project.getId()).thenReturn('bf4a645c-9754-4943-baec-783361c6d814');
     when(project.getName()).thenReturn('RadioFrance');
     when(task.getId()).thenReturn('7fb77f06-2d0b-4758-886a-42bba5445fcd');
+=======
+    when(project.getName()).thenReturn('RadioFrance');
+>>>>>>> [fair_calendar][event] Get, lis, create & delete events
     when(task.getName()).thenReturn('Development');
 
     const event1 = mock(Event);
