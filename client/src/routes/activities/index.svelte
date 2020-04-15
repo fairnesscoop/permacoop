@@ -78,7 +78,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <th colspan="3">Total: {data.totalTimeSpent / 100} jours</th>
+          <th colspan="3">Total: {data.totalTimeSpent} jours</th>
         </tr>
       </tfoot>
     {/if}

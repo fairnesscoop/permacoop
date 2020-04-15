@@ -33,21 +33,9 @@ export class ActivityRepository implements IActivityRepository {
   public findOneById(id: string): Promise<Activity> {
     return this.repository
       .createQueryBuilder('activity')
-      .select([
-        'activity.id',
-        'activity.time',
-        'activity.summary',
-        'activity.date',
-        'user.id',
-        'project.name',
-        'customer.name',
-        'task.name'
-      ])
+      .select(['activity.id', 'user.id'])
       .where('activity.id = :id', {id})
-      .innerJoin('activity.task', 'task')
-      .innerJoin('activity.project', 'project')
       .innerJoin('activity.user', 'user')
-      .innerJoin('project.customer', 'customer')
       .getOne();
   }
 
@@ -56,8 +44,7 @@ export class ActivityRepository implements IActivityRepository {
       .createQueryBuilder('activity')
       .where('activity.id = :id', {id})
       .delete()
-      .execute()
-    ;
+      .execute();
   }
 
   public findMonthlyActivities(

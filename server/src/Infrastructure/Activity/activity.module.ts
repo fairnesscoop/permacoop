@@ -10,7 +10,6 @@ import {DeleteActivityAction} from './Action/DeleteActivityAction';
 import {DeleteActivityCommandHandler} from 'src/Application/Activity/Command/DeleteActivityCommandHandler';
 import {TaskRepository} from '../Task/Repository/TaskRepository';
 import {Task} from 'src/Domain/Task/Task.entity';
-import {GetActivityByIdQueryHandler} from 'src/Application/Activity/Query/GetActivityByIdQueryHandler';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {ProjectRepository} from '../Project/Repository/ProjectRepository';
 import {GetMonthlyActivitiesAction} from './Action/GetMonthlyActivitiesAction';
@@ -30,7 +29,6 @@ import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
     {provide: 'ITaskRepository', useClass: TaskRepository},
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
     IsMaximumTimeSpentReached,
-    GetActivityByIdQueryHandler,
     AddActivityCommandHandler,
     GetMonthlyActivitiesQueryHandler,
     DeleteActivityCommandHandler

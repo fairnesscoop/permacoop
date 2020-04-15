@@ -86,7 +86,7 @@ describe('GetMonthlyActivitiesQueryHandler', () => {
       instance(dateUtils)
     );
 
-    const expectedResult = new MonthlyActivitiesView(200, [
+    const expectedResult = new MonthlyActivitiesView(2, [
       new ActivitiesByDayView('2019-12-01', true),
       new ActivitiesByDayView('2019-12-02', false),
       new ActivitiesByDayView('2019-12-03', false),
@@ -101,14 +101,14 @@ describe('GetMonthlyActivitiesQueryHandler', () => {
       new ActivitiesByDayView('2019-12-12', false, [
         new ActivityView(
           'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
-          75,
+          0.75,
           'Summary',
           'Customer > Project',
           'Development'
         ),
         new ActivityView(
           'b9a9b094-5bb2-4d0b-b01e-231b6cb50039',
-          25,
+          0.25,
           '',
           'Customer > Project',
           'Development'
@@ -121,7 +121,7 @@ describe('GetMonthlyActivitiesQueryHandler', () => {
       new ActivitiesByDayView('2019-12-17', false, [
         new ActivityView(
           'a773a25d-8028-4190-bc03-51b33a0d1528',
-          100,
+          1,
           '',
           'Customer > Project',
           'Development'

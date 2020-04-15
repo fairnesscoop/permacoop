@@ -6,8 +6,10 @@
   export let isLoggedUser;
 
   const handleDelete = activityId => {
-    axios.delete(`activities/${activityId}`)
-    day.activities = day.activities.filter(activity => activity.id !== activityId);
+    axios.delete(`activities/${activityId}`);
+    day.activities = day.activities.filter(
+      activity => activity.id !== activityId
+    );
   };
 </script>
 
@@ -23,8 +25,14 @@
     {#each day.activities as activity}
       <div>
         <span class="badge badge-success">{activity.taskName}</span>
-        <span class="badge badge-success">{activity.time / 100}</span>
-        {activity.projectName} <button class="btn btn-sm btn-danger" on:click={handleDelete(activity.id)} title="supprimer">x</button>
+        <span class="badge badge-success">{activity.time}</span>
+        {activity.projectName}
+        <button
+          class="btn btn-sm btn-danger"
+          on:click={handleDelete(activity.id)}
+          title="supprimer">
+          x
+        </button>
       </div>
     {/each}
   </td>
