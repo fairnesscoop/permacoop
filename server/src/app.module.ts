@@ -7,6 +7,7 @@ import {CustomerModule} from './Infrastructure/Customer/customer.module';
 import {TaskModule} from './Infrastructure/Task/task.module';
 import {ActivityModule} from './Infrastructure/Activity/activity.module';
 import {BillingModule} from './Infrastructure/Billing/billing.module';
+import {FairCalendarModule} from './Infrastructure/FairCalendar/faircalendar.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import {BillingModule} from './Infrastructure/Billing/billing.module';
     ActivityModule,
     BillingModule,
     CustomerModule,
+    FairCalendarModule,
     ProjectModule,
     TaskModule,
     UserModule
