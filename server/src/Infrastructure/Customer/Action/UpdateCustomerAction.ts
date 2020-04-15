@@ -9,11 +9,8 @@ import {
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateCustomerCommand} from 'src/Application/Customer/Command/UpdateCustomerCommand';
-import {IQueryBus} from 'src/Application/IQueryBus';
-import {GetCustomerByIdQuery} from 'src/Application/Customer/Query/GetCustomerByIdQuery';
 import {CustomerDTO} from './DTO/CustomerDTO';
 import {CustomerIdDTO} from './DTO/CustomerIdDTO';
 
@@ -24,9 +21,7 @@ import {CustomerIdDTO} from './DTO/CustomerIdDTO';
 export class UpdateCustomerAction {
   constructor(
     @Inject('ICommandBus')
-    private readonly commandBus: ICommandBus,
-    @Inject('IQueryBus')
-    private readonly queryBus: IQueryBus
+    private readonly commandBus: ICommandBus
   ) {}
 
   @Put(':id')
@@ -34,7 +29,7 @@ export class UpdateCustomerAction {
   public async index(
     @Param() customerIdDto: CustomerIdDTO,
     @Body() customerDto: CustomerDTO
-  ): Promise<CustomerView> {
+  ) {
     try {
       const {
         address: {street, city, zipCode, country},
@@ -46,7 +41,7 @@ export class UpdateCustomerAction {
         new UpdateCustomerCommand(id, name, street, city, zipCode, country)
       );
 
-      return await this.queryBus.execute(new GetCustomerByIdQuery(id));
+      return {id};
     } catch (e) {
       throw new BadRequestException(e.message);
     }

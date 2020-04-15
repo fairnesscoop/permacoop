@@ -9,11 +9,8 @@ import {
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateProjectCommand} from 'src/Application/Project/Command/UpdateProjectCommand';
-import {IQueryBus} from 'src/Application/IQueryBus';
-import {GetProjectByIdQuery} from 'src/Application/Project/Query/GetProjectByIdQuery';
 import {ProjectDTO} from './DTO/ProjectDTO';
 import {ProjectIdDTO} from './DTO/ProjectIdDTO';
 
@@ -24,9 +21,7 @@ import {ProjectIdDTO} from './DTO/ProjectIdDTO';
 export class UpdateProjectAction {
   constructor(
     @Inject('ICommandBus')
-    private readonly commandBus: ICommandBus,
-    @Inject('IQueryBus')
-    private readonly queryBus: IQueryBus
+    private readonly commandBus: ICommandBus
   ) {}
 
   @Put(':id')
@@ -34,7 +29,7 @@ export class UpdateProjectAction {
   public async index(
     @Param() projectIdDto: ProjectIdDTO,
     @Body() projectDto: ProjectDTO
-  ): Promise<ProjectView> {
+  ) {
     try {
       const {id} = projectIdDto;
       const {name, customerId} = projectDto;
@@ -43,7 +38,7 @@ export class UpdateProjectAction {
         new UpdateProjectCommand(id, name, customerId)
       );
 
-      return await this.queryBus.execute(new GetProjectByIdQuery(id));
+      return {id};
     } catch (e) {
       throw new BadRequestException(e.message);
     }
