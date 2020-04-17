@@ -5,7 +5,6 @@ export interface IEventsOverview {
   holiday: number;
   medicalLeave: number;
   support: number;
-  workFree: number;
   other: number;
   mealTicket: number;
   totalTimeSpent: number;

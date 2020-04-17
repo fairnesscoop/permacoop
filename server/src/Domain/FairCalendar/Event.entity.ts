@@ -9,7 +9,6 @@ export enum EventType {
   DOJO = 'dojo',
   FORMATION_CONFERENCE = 'formationConference',
   HOLIDAY = 'holiday',
-  WORK_FREE = 'workFree',
   MEDICAL_LEAVE = 'medicalLeave',
   OTHER = 'other'
 }

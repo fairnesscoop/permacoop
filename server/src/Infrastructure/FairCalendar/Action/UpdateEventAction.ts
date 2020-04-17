@@ -36,7 +36,7 @@ export class UpdateEventAction {
     const {type, time, summary, projectId, taskId} = dto;
 
     try {
-      const {id} = await this.commandBus.execute(
+      const id = await this.commandBus.execute(
         new UpdateEventCommand(
           idDto.id,
           user,

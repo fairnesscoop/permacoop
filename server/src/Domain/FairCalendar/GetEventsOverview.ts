@@ -11,7 +11,6 @@ export class GetEventsOverview {
       holiday: 0,
       medicalLeave: 0,
       support: 0,
-      workFree: 0,
       other: 0,
       mealTicket: 0,
       totalTimeSpent: 0

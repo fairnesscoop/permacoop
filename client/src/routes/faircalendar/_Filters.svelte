@@ -67,9 +67,9 @@
         <label for="userId">Filtrer par coopérateur :</label>
         <select
           id="userId"
-          on:change={handleFilter}
           name="userId"
           bind:value={userId}
+          on:change={handleFilter}
           class="form-control">
           {#each data as user}
             <option value={user.id} selected={userId === user.id}>

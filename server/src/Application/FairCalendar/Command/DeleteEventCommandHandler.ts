@@ -26,6 +26,6 @@ export class DeleteEventCommandHandler {
       throw new EventDoesntBelongToUserException();
     }
 
-    this.eventRepository.delete(event);
+    await this.eventRepository.delete(event);
   }
 }

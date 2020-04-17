@@ -10,11 +10,8 @@ import {Event} from 'src/Domain/FairCalendar/Event.entity';
 import {GetEventsOverview} from 'src/Domain/FairCalendar/GetEventsOverview';
 import {MonthlyEventsView} from '../View/MonthlyEventsView';
 import {IEventsOverview} from 'src/Domain/FairCalendar/IEventsOverview';
-<<<<<<< HEAD
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {TaskView} from 'src/Application/Task/View/TaskView';
-=======
->>>>>>> [fair_calendar][event] Get, lis, create & delete events
 
 describe('GetMonthlyEventsQueryHandler', () => {
   it('testGetEvents', async () => {
@@ -24,13 +21,9 @@ describe('GetMonthlyEventsQueryHandler', () => {
     const task = mock(Task);
     const project = mock(Project);
 
-<<<<<<< HEAD
     when(project.getId()).thenReturn('bf4a645c-9754-4943-baec-783361c6d814');
     when(project.getName()).thenReturn('RadioFrance');
     when(task.getId()).thenReturn('7fb77f06-2d0b-4758-886a-42bba5445fcd');
-=======
-    when(project.getName()).thenReturn('RadioFrance');
->>>>>>> [fair_calendar][event] Get, lis, create & delete events
     when(task.getName()).thenReturn('Development');
 
     const event1 = mock(Event);
@@ -47,11 +40,7 @@ describe('GetMonthlyEventsQueryHandler', () => {
     when(event2.getType()).thenReturn('dojo');
     when(event2.getTime()).thenReturn(25);
     when(event2.getDate()).thenReturn('2019-12-12');
-<<<<<<< HEAD
     when(event2.getSummary()).thenReturn(null);
-=======
-    when(event2.getSummary()).thenReturn('');
->>>>>>> [fair_calendar][event] Get, lis, create & delete events
     when(event2.getTask()).thenReturn(null);
     when(event2.getProject()).thenReturn(null);
 
@@ -60,11 +49,7 @@ describe('GetMonthlyEventsQueryHandler', () => {
     when(event3.getType()).thenReturn('holiday');
     when(event3.getDate()).thenReturn('2019-12-17');
     when(event3.getTime()).thenReturn(100);
-<<<<<<< HEAD
     when(event3.getSummary()).thenReturn(null);
-=======
-    when(event3.getSummary()).thenReturn('');
->>>>>>> [fair_calendar][event] Get, lis, create & delete events
     when(event3.getTask()).thenReturn(null);
     when(event3.getProject()).thenReturn(null);
 
@@ -75,7 +60,6 @@ describe('GetMonthlyEventsQueryHandler', () => {
       holiday: 1,
       medicalLeave: 0,
       support: 0,
-      workFree: 0,
       other: 0,
       mealTicket: 1,
       totalTimeSpent: 1
@@ -115,7 +99,6 @@ describe('GetMonthlyEventsQueryHandler', () => {
         [
           new EventView(
             'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
-<<<<<<< HEAD
             'mission',
             0.75,
             '2019-12-12',
@@ -125,45 +108,24 @@ describe('GetMonthlyEventsQueryHandler', () => {
               'RadioFrance'
             ),
             new TaskView('7fb77f06-2d0b-4758-886a-42bba5445fcd', 'Development')
-=======
-            '[Development] RadioFrance',
-            'mission',
-            0.75,
-            '2019-12-12',
-            'Summary'
->>>>>>> [fair_calendar][event] Get, lis, create & delete events
           ),
           new EventView(
             'b9a9b094-5bb2-4d0b-b01e-231b6cb50039',
             'dojo',
-<<<<<<< HEAD
             0.25,
             '2019-12-12',
             null,
             null,
             null
-=======
-            'dojo',
-            0.25,
-            '2019-12-12',
-            ''
->>>>>>> [fair_calendar][event] Get, lis, create & delete events
           ),
           new EventView(
             'a773a25d-8028-4190-bc03-51b33a0d1528',
             'holiday',
-<<<<<<< HEAD
             1,
             '2019-12-17',
             null,
             null,
             null
-=======
-            'holiday',
-            1,
-            '2019-12-17',
-            ''
->>>>>>> [fair_calendar][event] Get, lis, create & delete events
           )
         ],
         overview

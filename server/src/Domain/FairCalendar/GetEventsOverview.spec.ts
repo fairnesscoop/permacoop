@@ -46,11 +46,6 @@ describe('GetEventsOverview', () => {
     when(event7.getTime()).thenReturn(100);
     when(event7.getDate()).thenReturn('2019-12-01');
 
-    const event8 = mock(Event);
-    when(event8.getType()).thenReturn(EventType.WORK_FREE);
-    when(event8.getTime()).thenReturn(100);
-    when(event8.getDate()).thenReturn('2019-12-02');
-
     const event9 = mock(Event);
     when(event9.getType()).thenReturn(EventType.FORMATION_CONFERENCE);
     when(event9.getTime()).thenReturn(100);
@@ -68,7 +63,6 @@ describe('GetEventsOverview', () => {
       holiday: 1,
       medicalLeave: 1,
       support: 0.75,
-      workFree: 1,
       other: 0.5,
       mealTicket: 3,
       totalTimeSpent: 3.5
@@ -83,7 +77,6 @@ describe('GetEventsOverview', () => {
         instance(event5),
         instance(event6),
         instance(event7),
-        instance(event8),
         instance(event9),
         instance(event10)
       ])

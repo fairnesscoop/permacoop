@@ -17,7 +17,7 @@ export class EventRepository implements IEventRepository {
   }
 
   public delete(event: Event): void {
-    this.repository.delete(event);
+    this.repository.delete(event.getId());
   }
 
   public async getDayTimeSpentByUser(
@@ -43,6 +43,7 @@ export class EventRepository implements IEventRepository {
         'event.summary',
         'event.date',
         'event.type',
+        'user.id',
         'project.id',
         'project.name',
         'task.id',

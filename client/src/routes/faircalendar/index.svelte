@@ -11,6 +11,7 @@
 
 <script>
   import {onMount} from 'svelte';
+  import {goto} from '@sapper/app';
   import frLocale from '@fullcalendar/core/locales/fr';
   import '@fullcalendar/core/main.css';
   import '@fullcalendar/daygrid/main.css';
@@ -26,23 +27,54 @@
   export let filters;
 
   let loading = false;
+  let isLoggedUser = false;
   let errors = [];
   let data = {};
-  let isLoggedUser = false;
 
   const fullCalendar = async (events, date) => {
     const {Calendar} = await import('@fullcalendar/core');
     const {default: dayGridPlugin} = await import('@fullcalendar/daygrid');
+    const {default: interactionPlugin} = await import(
+      '@fullcalendar/interaction'
+    );
+
     const dom = document.getElementById('calendar');
     dom.innerHTML = '';
     const calendar = new Calendar(dom, {
       locale: frLocale,
-      plugins: [dayGridPlugin],
+      plugins: [dayGridPlugin, interactionPlugin],
       nowIndicator: true,
-      height: 600,
+      showNonCurrentDates: false,
+      selectable: true,
+      height: 620,
       header: {left: 'title', center: '', right: ''},
       columnHeaderFormat: {weekday: 'long'},
-      events: events,
+      events,
+      dateClick: info => {
+        if (!isLoggedUser) {
+          return;
+        }
+
+        goto(`/faircalendar/${info.dateStr}/add`);
+      },
+      eventDataTransform: data => {
+        const {id, date, time, summary, type, task, project} = data;
+        let title = time < 1 ? `[${time}] ` : '';
+
+        if ('mission' === type && task && project) {
+          title += `${project.name} (${task.name})`;
+        } else {
+          title += type;
+        }
+
+        data.id = id;
+        data.title = title;
+        if (isLoggedUser) {
+          data.url = `faircalendar/${id}/edit`;
+        }
+        data.className = `event-${type}`;
+        data.tip = summary;
+      },
       businessHours: {
         daysOfWeek: [1, 2, 3, 4, 5]
       }
@@ -87,6 +119,15 @@
   <Filters {...filters} on:filter={onFilter} />
   <Loader {loading} />
   <div id="calendar" />
+  <div class="mb-1 mt-2">
+    <span class="badge badge-success">Mission</span>
+    <span class="badge badge-secondary">Support // Podcast</span>
+    <span class="badge badge-info">Dojo</span>
+    <span class="badge badge-warning">Formation // Conf // Meetup</span>
+    <span class="badge badge-primary">Vacances</span>
+    <span class="badge badge-danger">Congé maladie</span>
+    <span class="badge badge-dark">Autres</span>
+  </div>
   {#if data.overview}
     <Overview overview={data.overview} />
   {/if}
