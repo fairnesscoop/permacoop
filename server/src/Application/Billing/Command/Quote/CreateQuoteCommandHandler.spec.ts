@@ -3,7 +3,7 @@ import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/Custome
 import {QuoteRepository} from 'src/Infrastructure/Billing/Repository/QuoteRepository';
 import {CreateQuoteCommandHandler} from './CreateQuoteCommandHandler';
 import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
-import {QuoteIdGenerator} from 'src/Domain/Billing/QuoteIdGenerator';
+import {QuoteIdGenerator} from 'src/Domain/Billing/Quote/QuoteIdGenerator';
 import {CreateQuoteCommand} from './CreateQuoteCommand';
 import {User} from 'src/Domain/User/User.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
@@ -151,9 +151,7 @@ describe('CreateQuoteCommandHandler', () => {
     ).thenResolve(null);
 
     try {
-      expect(await handler.execute(command)).toBe(
-        '7c35d37c-b0e3-480d-bf6c-3dc1e094886f'
-      );
+      await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(CustomerNotFoundException);
       expect(e.message).toBe('customer.errors.not_found');
@@ -175,9 +173,7 @@ describe('CreateQuoteCommandHandler', () => {
     ).thenResolve(null);
 
     try {
-      expect(await handler.execute(command)).toBe(
-        '7c35d37c-b0e3-480d-bf6c-3dc1e094886f'
-      );
+      await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(InvalidProjectException);
       expect(e.message).toBe('quote.errors.invalid_project');
@@ -204,9 +200,7 @@ describe('CreateQuoteCommandHandler', () => {
     ).thenResolve(instance(project2));
 
     try {
-      expect(await handler.execute(command)).toBe(
-        '7c35d37c-b0e3-480d-bf6c-3dc1e094886f'
-      );
+      await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(InvalidProjectException);
       expect(e.message).toBe('quote.errors.invalid_project');

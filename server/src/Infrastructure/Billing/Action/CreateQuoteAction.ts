@@ -11,9 +11,9 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
-import {CreateQuoteCommand} from 'src/Application/Billing/Command/CreateQuoteCommand';
+import {CreateQuoteCommand} from 'src/Application/Billing/Command/Quote/CreateQuoteCommand';
 import {CreateQuoteDTO} from './DTO/CreateQuoteDTO';
-import {CreateQuoteItemsCommand} from 'src/Application/Billing/Command/CreateQuoteItemsCommand';
+import {CreateQuoteItemsCommand} from 'src/Application/Billing/Command/Quote/CreateQuoteItemsCommand';
 
 @Controller('quotes')
 @ApiUseTags('Billing')

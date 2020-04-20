@@ -34,6 +34,18 @@
         <li class="nav-item {segment === 'faircalendar' ? 'active' : ''}">
           <a class="nav-link" href="faircalendar">FairCalendar</a>
         </li>
+        <li class="nav-item dropdown {segment === 'billing' ? 'active' : ''}">
+          <a
+            class="nav-link dropdown-toggle"
+            href="javascript:void"
+            role="button"
+            data-toggle="dropdown">
+            Facturation
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="billing/daily_rates">TJM</a>
+          </div>
+        </li>
         <li class="nav-item {segment === 'projects' ? 'active' : ''}">
           <a class="nav-link" href="projects">Projets</a>
         </li>
@@ -52,16 +64,11 @@
           <a
             class="nav-link dropdown-toggle"
             href="javascript:void"
-            id="navbarDropdownMenuLink"
             role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false">
+            data-toggle="dropdown">
             {`${$user.firstName} ${$user.lastName}`}
           </a>
-          <div
-            class="dropdown-menu dropdown-menu-right"
-            aria-labelledby="navbarDropdownMenuLink">
+          <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="profile">Mon profil</a>
             <div class="dropdown-divider" role="separator" />
             <a
