@@ -4,14 +4,14 @@ import {IEventRepository} from 'src/Domain/FairCalendar/Repository/IEventReposit
 import {DeleteEventCommand} from './DeleteEventCommand';
 import {EventDoesntBelongToUserException} from 'src/Domain/FairCalendar/Exception/EventDoesntBelongToUserException';
 import {EventNotFoundException} from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
-import {IsEventBelongToUser} from 'src/Domain/FairCalendar/Specification/IsEventBelongToUser';
+import {DoesEventBelongToUser} from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
 
 @CommandHandler(DeleteEventCommand)
 export class DeleteEventCommandHandler {
   constructor(
     @Inject('IEventRepository')
     private readonly eventRepository: IEventRepository,
-    private readonly isEventOwnedByUser: IsEventBelongToUser
+    private readonly doesEventBelongToUser: DoesEventBelongToUser
   ) {}
 
   public async execute(command: DeleteEventCommand): Promise<void> {
@@ -22,7 +22,7 @@ export class DeleteEventCommandHandler {
       throw new EventNotFoundException();
     }
 
-    if (false === this.isEventOwnedByUser.isSatisfiedBy(event, user)) {
+    if (false === this.doesEventBelongToUser.isSatisfiedBy(event, user)) {
       throw new EventDoesntBelongToUserException();
     }
 

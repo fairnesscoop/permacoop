@@ -12,7 +12,7 @@ import {Task} from 'src/Domain/Task/Task.entity';
 import {MaximumEventReachedException} from 'src/Domain/FairCalendar/Exception/MaximumEventReachedException';
 import {Event, EventType} from 'src/Domain/FairCalendar/Event.entity';
 import {ProjectOrTaskMissingException} from 'src/Domain/FairCalendar/Exception/ProjectOrTaskMissingException';
-import {IsEventBelongToUser} from 'src/Domain/FairCalendar/Specification/IsEventBelongToUser';
+import {DoesEventBelongToUser} from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
 import {IsMaximumTimeSpentReachedOnEdition} from 'src/Domain/FairCalendar/Specification/IsMaximumTimeSpentReachedOnEdition';
 import {EventNotFoundException} from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
 
@@ -20,7 +20,7 @@ describe('UpdateEventCommandHandler', () => {
   let taskRepository: TaskRepository;
   let projectRepository: ProjectRepository;
   let eventRepository: EventRepository;
-  let isEventBelongToUser: IsEventBelongToUser;
+  let doesEventBelongToUser: DoesEventBelongToUser;
   let isMaximumTimeSpentReachedOnEdition: IsMaximumTimeSpentReachedOnEdition;
   let handler: UpdateEventCommandHandler;
 
@@ -44,7 +44,7 @@ describe('UpdateEventCommandHandler', () => {
     projectRepository = mock(ProjectRepository);
     eventRepository = mock(EventRepository);
     taskRepository = mock(TaskRepository);
-    isEventBelongToUser = mock(IsEventBelongToUser);
+    doesEventBelongToUser = mock(DoesEventBelongToUser);
     isMaximumTimeSpentReachedOnEdition = mock(
       IsMaximumTimeSpentReachedOnEdition
     );
@@ -53,7 +53,7 @@ describe('UpdateEventCommandHandler', () => {
       instance(taskRepository),
       instance(projectRepository),
       instance(eventRepository),
-      instance(isEventBelongToUser),
+      instance(doesEventBelongToUser),
       instance(isMaximumTimeSpentReachedOnEdition)
     );
   });

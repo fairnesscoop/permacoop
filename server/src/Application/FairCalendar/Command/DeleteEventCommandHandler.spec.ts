@@ -8,11 +8,11 @@ import {EventNotFoundException} from 'src/Domain/FairCalendar/Exception/EventNot
 import {EventDoesntBelongToUserException} from 'src/Domain/FairCalendar/Exception/EventDoesntBelongToUserException';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {Task} from 'src/Domain/Task/Task.entity';
-import {IsEventBelongToUser} from 'src/Domain/FairCalendar/Specification/IsEventBelongToUser';
+import {DoesEventBelongToUser} from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
 
 describe('DeleteEventCommandHandler', () => {
   let eventRepository: EventRepository;
-  let isEventBelongToUser: IsEventBelongToUser;
+  let doesEventBelongToUser: DoesEventBelongToUser;
   let handler: DeleteEventCommandHandler;
 
   const user = mock(User);
@@ -35,10 +35,10 @@ describe('DeleteEventCommandHandler', () => {
 
   beforeEach(() => {
     eventRepository = mock(EventRepository);
-    isEventBelongToUser = mock(IsEventBelongToUser);
+    doesEventBelongToUser = mock(DoesEventBelongToUser);
     handler = new DeleteEventCommandHandler(
       instance(eventRepository),
-      instance(isEventBelongToUser)
+      instance(doesEventBelongToUser)
     );
   });
 
@@ -55,7 +55,9 @@ describe('DeleteEventCommandHandler', () => {
       verify(
         eventRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
       ).once();
-      verify(isEventBelongToUser.isSatisfiedBy(anything(), anything())).never();
+      verify(
+        doesEventBelongToUser.isSatisfiedBy(anything(), anything())
+      ).never();
       verify(eventRepository.delete(anything())).never();
     }
   });
@@ -64,7 +66,7 @@ describe('DeleteEventCommandHandler', () => {
     when(
       eventRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
     ).thenResolve(event);
-    when(isEventBelongToUser.isSatisfiedBy(event, instance(user))).thenReturn(
+    when(doesEventBelongToUser.isSatisfiedBy(event, instance(user))).thenReturn(
       false
     );
 
@@ -78,7 +80,7 @@ describe('DeleteEventCommandHandler', () => {
       verify(
         eventRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
       ).once();
-      verify(isEventBelongToUser.isSatisfiedBy(event, instance(user))).once();
+      verify(doesEventBelongToUser.isSatisfiedBy(event, instance(user))).once();
       verify(eventRepository.delete(anything())).never();
     }
   });
@@ -87,7 +89,7 @@ describe('DeleteEventCommandHandler', () => {
     when(
       eventRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
     ).thenResolve(event);
-    when(isEventBelongToUser.isSatisfiedBy(event, instance(user))).thenReturn(
+    when(doesEventBelongToUser.isSatisfiedBy(event, instance(user))).thenReturn(
       true
     );
     when(user.getId()).thenReturn('e3fc9666-2932-4dc1-b2b9-d904388293fb');

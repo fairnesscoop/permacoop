@@ -9,7 +9,7 @@ import {MaximumEventReachedException} from 'src/Domain/FairCalendar/Exception/Ma
 import {ProjectOrTaskMissingException} from 'src/Domain/FairCalendar/Exception/ProjectOrTaskMissingException';
 import {EventNotFoundException} from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
 import {EventDoesntBelongToUserException} from 'src/Domain/FairCalendar/Exception/EventDoesntBelongToUserException';
-import {IsEventBelongToUser} from 'src/Domain/FairCalendar/Specification/IsEventBelongToUser';
+import {DoesEventBelongToUser} from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
 import {AbstractProjectAndTaskGetter} from './AbstractProjectAndTaskGetter';
 import {IsMaximumTimeSpentReachedOnEdition} from 'src/Domain/FairCalendar/Specification/IsMaximumTimeSpentReachedOnEdition';
 
@@ -20,7 +20,7 @@ export class UpdateEventCommandHandler extends AbstractProjectAndTaskGetter {
     @Inject('IProjectRepository') projectRepository: IProjectRepository,
     @Inject('IEventRepository')
     private readonly eventRepository: IEventRepository,
-    private readonly isEventBelongToUser: IsEventBelongToUser,
+    private readonly doesEventBelongToUser: DoesEventBelongToUser,
     private readonly isMaximumTimeSpentReachedOnEdition: IsMaximumTimeSpentReachedOnEdition
   ) {
     super(taskRepository, projectRepository);
@@ -34,7 +34,7 @@ export class UpdateEventCommandHandler extends AbstractProjectAndTaskGetter {
       throw new EventNotFoundException();
     }
 
-    if (false === this.isEventBelongToUser.isSatisfiedBy(event, user)) {
+    if (false === this.doesEventBelongToUser.isSatisfiedBy(event, user)) {
       throw new EventDoesntBelongToUserException();
     }
 

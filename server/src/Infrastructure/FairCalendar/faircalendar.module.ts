@@ -19,7 +19,7 @@ import {GetMonthlyEventsQueryHandler} from 'src/Application/FairCalendar/Query/G
 import {GetEventByIdQueryHandler} from 'src/Application/FairCalendar/Query/GetEventByIdQueryHandler';
 import {GetEventAction} from './Action/GetEventAction';
 import {UpdateEventAction} from './Action/UpdateEventAction';
-import {IsEventBelongToUser} from 'src/Domain/FairCalendar/Specification/IsEventBelongToUser';
+import {DoesEventBelongToUser} from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
 import {UpdateEventCommandHandler} from 'src/Application/FairCalendar/Command/UpdateEventCommandHandler';
 import {IsMaximumTimeSpentReachedOnEdition} from 'src/Domain/FairCalendar/Specification/IsMaximumTimeSpentReachedOnEdition';
 
@@ -43,7 +43,7 @@ import {IsMaximumTimeSpentReachedOnEdition} from 'src/Domain/FairCalendar/Specif
     DeleteEventCommandHandler,
     UpdateEventCommandHandler,
     GetEventByIdQueryHandler,
-    IsEventBelongToUser,
+    DoesEventBelongToUser,
     IsMaximumTimeSpentReachedOnEdition,
     GetEventsOverview
   ]

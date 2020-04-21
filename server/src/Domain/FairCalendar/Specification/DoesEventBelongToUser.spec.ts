@@ -1,13 +1,13 @@
 import {instance, mock, when} from 'ts-mockito';
-import {IsEventBelongToUser} from './IsEventBelongToUser';
+import {DoesEventBelongToUser} from './DoesEventBelongToUser';
 import {Event} from '../Event.entity';
 import {User} from 'src/Domain/User/User.entity';
 
-describe('IsEventBelongToUser', () => {
-  let isEventBelongToUser: IsEventBelongToUser;
+describe('DoesEventBelongToUser', () => {
+  let doesEventBelongToUser: DoesEventBelongToUser;
 
   beforeEach(() => {
-    isEventBelongToUser = new IsEventBelongToUser();
+    doesEventBelongToUser = new DoesEventBelongToUser();
   });
 
   it('testEventNotBelongToUser', async () => {
@@ -20,7 +20,7 @@ describe('IsEventBelongToUser', () => {
     when(event.getUser()).thenReturn(instance(otherUser));
 
     expect(
-      await isEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
+      await doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
     ).toBe(false);
   });
 
@@ -32,7 +32,7 @@ describe('IsEventBelongToUser', () => {
     when(event.getUser()).thenReturn(instance(user));
 
     expect(
-      await isEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
+      await doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
     ).toBe(true);
   });
 });
