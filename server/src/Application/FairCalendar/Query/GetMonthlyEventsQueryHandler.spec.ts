@@ -60,7 +60,6 @@ describe('GetMonthlyEventsQueryHandler', () => {
       holiday: 1,
       medicalLeave: 0,
       support: 0,
-      workFree: 0,
       other: 0,
       mealTicket: 1,
       totalTimeSpent: 1

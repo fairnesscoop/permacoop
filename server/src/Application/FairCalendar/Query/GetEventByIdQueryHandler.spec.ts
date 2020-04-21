@@ -21,7 +21,7 @@ describe('GetEventByIdQueryHandler', () => {
     const expectedResult = new EventView(
       'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
       'mission',
-      0.75,
+      75,
       '2019-12-12',
       'Summary',
       new ProjectView('bf4a645c-9754-4943-baec-783361c6d814', 'RadioFrance'),
