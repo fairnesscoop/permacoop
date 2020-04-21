@@ -40,7 +40,9 @@
       bind:value={userId}>
       <option value="">-- Choisir un coopérateur --</option>
       {#each users as user}
-        <option value={user.id}>{`${user.firstName} ${user.lastName}`}</option>
+        <option value={user.id} selected={userId === user.id}>
+          {`${user.firstName} ${user.lastName}`}
+        </option>
       {/each}
     </select>
   </div>
@@ -53,7 +55,9 @@
       bind:value={customerId}>
       <option value="">-- Choisir un client --</option>
       {#each customers as customer}
-        <option value={customer.id}>{customer.name}</option>
+        <option value={customer.id} selected={customerId === customer.id}>
+          {customer.name}
+        </option>
       {/each}
     </select>
   </div>
@@ -66,7 +70,9 @@
       bind:value={taskId}>
       <option value="">-- Choisir une mission --</option>
       {#each tasks as task}
-        <option value={task.id}>{task.name}</option>
+        <option value={task.id} selected={taskId === task.id}>
+          {task.name}
+        </option>
       {/each}
     </select>
   </div>

@@ -86,6 +86,9 @@ describe('AddEventCommandHandler', () => {
     when(
       projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
     ).thenResolve(null);
+    when(
+      taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
+    ).thenResolve(instance(task));
 
     try {
       await handler.execute(command);
@@ -95,7 +98,9 @@ describe('AddEventCommandHandler', () => {
       verify(
         projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
       ).once();
-      verify(taskRepository.findOneById(anything())).never();
+      verify(
+        taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
+      ).once();
       verify(isMaximumTimeSpentReached.isSatisfiedBy(anything())).never();
       verify(eventRepository.save(anything())).never();
     }

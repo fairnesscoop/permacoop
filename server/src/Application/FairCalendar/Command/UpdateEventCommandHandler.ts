@@ -42,8 +42,10 @@ export class UpdateEventCommandHandler extends AbstractProjectAndTaskGetter {
       throw new ProjectOrTaskMissingException();
     }
 
-    const project = await this.getProject(projectId);
-    const task = await this.getTask(taskId);
+    const [project, task] = await Promise.all([
+      this.getProject(projectId),
+      this.getTask(taskId)
+    ]);
 
     if (
       true ===

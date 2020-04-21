@@ -49,4 +49,16 @@ export class DailyRate {
   public getCustomer(): Customer {
     return this.customer;
   }
+
+  public update(
+    amount: number,
+    user: User,
+    customer: Customer,
+    task: Task
+  ): void {
+    this.amount = amount;
+    this.user = user;
+    this.customer = customer;
+    this.task = task;
+  }
 }
