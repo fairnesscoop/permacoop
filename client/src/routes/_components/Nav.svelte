@@ -31,6 +31,9 @@
   {#if process.browser && $user}
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav mr-auto">
+        <li class="nav-item {segment === 'faircalendar' ? 'active' : ''}">
+          <a class="nav-link" href="faircalendar">FairCalendar</a>
+        </li>
         <li class="nav-item {segment === 'projects' ? 'active' : ''}">
           <a class="nav-link" href="projects">Projets</a>
         </li>

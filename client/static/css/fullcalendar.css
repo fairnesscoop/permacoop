@@ -1,0 +1,45 @@
+.fc-toolbar {
+  margin-bottom: 0.5rem !important;
+}
+.fc-day-header,
+.fc-week-number {
+  padding: 5px !important;
+}
+.fc-event {
+  font-weight: 700;
+}
+.event-mission {
+  color: #fff !important;
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+}
+.event-support {
+  color: #fff !important;
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}
+.event-dojo {
+  color: #fff !important;
+  background-color: #17a2b8 !important;
+  border-color: #17a2b8 !important;
+}
+.event-formationConference {
+  color: #212529 !important;
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+.event-holiday {
+  color: #fff !important;
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+}
+.event-medicalLeave {
+  color: #fff !important;
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+.event-other {
+  color: #fff !important;
+  background-color: #343a40 !important;
+  border-color: #343a40 !important;
+}
