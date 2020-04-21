@@ -54,5 +54,10 @@
       {/each}
     </select>
   </div>
-  <button type="submit" class="btn btn-primary">Sauvegarder</button>
+  <button
+    type="submit"
+    class="btn btn-primary"
+    disabled={!customer.name || !address.country || !address.zipCode || !address.city || !address.street}>
+    Sauvegarder
+  </button>
 </form>
