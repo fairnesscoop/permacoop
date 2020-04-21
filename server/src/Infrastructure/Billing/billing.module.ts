@@ -24,6 +24,8 @@ import {TaskRepository} from '../Task/Repository/TaskRepository';
 import {Task} from 'src/Domain/Task/Task.entity';
 import {IsDailyRateAlreadyExist} from 'src/Domain/Billing/Specification/IsDailyRateAlreadyExist';
 import {CreateDailyRateAction} from './Action/CreateDailyRateAction';
+import {GetDailyRatesQueryHandler} from 'src/Application/Billing/Query/DailyRate/GetDailyRatesQueryHandler';
+import {GetDailyRatesAction} from './Action/GetDailyRatesAction';
 
 @Module({
   imports: [
@@ -39,7 +41,7 @@ import {CreateDailyRateAction} from './Action/CreateDailyRateAction';
       User
     ])
   ],
-  controllers: [CreateQuoteAction, CreateDailyRateAction],
+  controllers: [CreateQuoteAction, CreateDailyRateAction, GetDailyRatesAction],
   providers: [
     {provide: 'IQuoteRepository', useClass: QuoteRepository},
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
@@ -53,7 +55,8 @@ import {CreateDailyRateAction} from './Action/CreateDailyRateAction';
     CreateQuoteItemsCommandHandler,
     CreateDailyRateCommandHandler,
     IsDailyRateAlreadyExist,
-    QuoteIdGenerator
+    QuoteIdGenerator,
+    GetDailyRatesQueryHandler
   ]
 })
 export class BillingModule {}

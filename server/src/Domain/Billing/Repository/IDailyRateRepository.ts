@@ -5,6 +5,7 @@ import {User} from 'src/Domain/User/User.entity';
 
 export interface IDailyRateRepository {
   save(dailyRate: DailyRate): Promise<DailyRate>;
+  findAll(): Promise<DailyRate[]>;
   findOneByUserCustomerAndTask(
     user: User,
     customer: Customer,

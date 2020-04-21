@@ -16,6 +16,29 @@ export class DailyRateRepository implements IDailyRateRepository {
     return this.repository.save(dailyRate);
   }
 
+  public findAll(): Promise<DailyRate[]> {
+    return this.repository
+      .createQueryBuilder('dailyRate')
+      .select([
+        'dailyRate.id',
+        'dailyRate.amount',
+        'user.id',
+        'user.firstName',
+        'user.lastName',
+        'user.email',
+        'task.id',
+        'task.name',
+        'customer.id',
+        'customer.name'
+      ])
+      .innerJoin('dailyRate.user', 'user')
+      .innerJoin('dailyRate.task', 'task')
+      .innerJoin('dailyRate.customer', 'customer')
+      .orderBy('customer.name', 'ASC')
+      .addOrderBy('dailyRate.amount', 'ASC')
+      .getMany();
+  }
+
   public findOneByUserCustomerAndTask(
     user: User,
     customer: Customer,

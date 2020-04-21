@@ -33,4 +33,20 @@ export class DailyRate {
   public getId(): string {
     return this.id;
   }
+
+  public getAmount(): number {
+    return this.amount;
+  }
+
+  public getUser(): User {
+    return this.user;
+  }
+
+  public getTask(): Task {
+    return this.task;
+  }
+
+  public getCustomer(): Customer {
+    return this.customer;
+  }
 }
