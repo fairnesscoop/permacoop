@@ -12,7 +12,7 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateCustomerCommand} from 'src/Application/Customer/Command/UpdateCustomerCommand';
 import {CustomerDTO} from './DTO/CustomerDTO';
-import {CustomerIdDTO} from './DTO/CustomerIdDTO';
+import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 
 @Controller('customers')
 @ApiUseTags('Customer')
@@ -26,16 +26,13 @@ export class UpdateCustomerAction {
 
   @Put(':id')
   @ApiOperation({title: 'Update customer'})
-  public async index(
-    @Param() customerIdDto: CustomerIdDTO,
-    @Body() customerDto: CustomerDTO
-  ) {
+  public async index(@Param() dto: IdDTO, @Body() customerDto: CustomerDTO) {
     try {
       const {
         address: {street, city, zipCode, country},
         name
       } = customerDto;
-      const {id} = customerIdDto;
+      const {id} = dto;
 
       await this.commandBus.execute(
         new UpdateCustomerCommand(id, name, street, city, zipCode, country)

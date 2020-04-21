@@ -13,7 +13,7 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
 import {DeleteEventCommand} from 'src/Application/FairCalendar/Command/DeleteEventCommand';
-import {EventIdDTO} from './DTO/EventIdDTO';
+import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 
 @Controller('events')
 @ApiUseTags('Event')
@@ -28,7 +28,7 @@ export class DeleteEventAction {
   @Delete(':id')
   @ApiOperation({title: 'Delete an event'})
   @HttpCode(204)
-  public async index(@Param() dto: EventIdDTO, @LoggedUser() user: User) {
+  public async index(@Param() dto: IdDTO, @LoggedUser() user: User) {
     try {
       await this.commandBus.execute(new DeleteEventCommand(dto.id, user));
     } catch (e) {

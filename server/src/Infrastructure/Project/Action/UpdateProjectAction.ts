@@ -12,7 +12,7 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateProjectCommand} from 'src/Application/Project/Command/UpdateProjectCommand';
 import {ProjectDTO} from './DTO/ProjectDTO';
-import {ProjectIdDTO} from './DTO/ProjectIdDTO';
+import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 
 @Controller('projects')
 @ApiUseTags('Project')
@@ -26,12 +26,9 @@ export class UpdateProjectAction {
 
   @Put(':id')
   @ApiOperation({title: 'Update project'})
-  public async index(
-    @Param() projectIdDto: ProjectIdDTO,
-    @Body() projectDto: ProjectDTO
-  ) {
+  public async index(@Param() dto: IdDTO, @Body() projectDto: ProjectDTO) {
     try {
-      const {id} = projectIdDto;
+      const {id} = dto;
       const {name, customerId} = projectDto;
 
       await this.commandBus.execute(

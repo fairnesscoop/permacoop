@@ -12,7 +12,7 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateTaskCommand} from 'src/Application/Task/Command/UpdateTaskCommand';
 import {TaskDTO} from './DTO/TaskDTO';
-import {TaskIdDTO} from './DTO/TaskIdDTO';
+import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 
 @Controller('tasks')
 @ApiUseTags('Task')
@@ -26,9 +26,9 @@ export class UpdateTaskAction {
 
   @Put(':id')
   @ApiOperation({title: 'Update task'})
-  public async index(@Param() taskIdDto: TaskIdDTO, @Body() taskDto: TaskDTO) {
+  public async index(@Param() dto: IdDTO, @Body() taskDto: TaskDTO) {
     try {
-      const {id} = taskIdDto;
+      const {id} = dto;
       await this.commandBus.execute(new UpdateTaskCommand(id, taskDto.name));
 
       return {id};

@@ -9,9 +9,9 @@ import {
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {IQueryBus} from 'src/Application/IQueryBus';
-import {EventIdDTO} from './DTO/EventIdDTO';
 import {GetEventByIdQuery} from 'src/Application/FairCalendar/Query/GetEventByIdQuery';
 import {EventView} from 'src/Application/FairCalendar/View/EventView';
+import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 
 @Controller('events')
 @ApiUseTags('Event')
@@ -25,7 +25,7 @@ export class GetEventAction {
 
   @Get(':id')
   @ApiOperation({title: 'Get event'})
-  public async index(@Param() dto: EventIdDTO): Promise<EventView> {
+  public async index(@Param() dto: IdDTO): Promise<EventView> {
     try {
       return await this.queryBus.execute(new GetEventByIdQuery(dto.id));
     } catch (e) {

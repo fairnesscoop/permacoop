@@ -9,12 +9,12 @@ import {
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {EventIdDTO} from './DTO/EventIdDTO';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
 import {EventDTO} from './DTO/EventDTO';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateEventCommand} from 'src/Application/FairCalendar/Command/UpdateEventCommand';
+import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 
 @Controller('events')
 @ApiUseTags('Event')
@@ -29,7 +29,7 @@ export class UpdateEventAction {
   @Put(':id')
   @ApiOperation({title: 'Update event'})
   public async index(
-    @Param() idDto: EventIdDTO,
+    @Param() idDto: IdDTO,
     @Body() dto: EventDTO,
     @LoggedUser() user: User
   ) {
