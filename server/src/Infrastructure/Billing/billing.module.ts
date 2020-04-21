@@ -26,6 +26,8 @@ import {IsDailyRateAlreadyExist} from 'src/Domain/Billing/Specification/IsDailyR
 import {CreateDailyRateAction} from './Action/CreateDailyRateAction';
 import {GetDailyRatesQueryHandler} from 'src/Application/Billing/Query/DailyRate/GetDailyRatesQueryHandler';
 import {GetDailyRatesAction} from './Action/GetDailyRatesAction';
+import {GetDailyRateAction} from './Action/GetDailyRateAction';
+import {GetDailyRateByIdQueryHandler} from 'src/Application/Billing/Query/DailyRate/GetDailyRateByIdQueryHandler';
 
 @Module({
   imports: [
@@ -41,7 +43,12 @@ import {GetDailyRatesAction} from './Action/GetDailyRatesAction';
       User
     ])
   ],
-  controllers: [CreateQuoteAction, CreateDailyRateAction, GetDailyRatesAction],
+  controllers: [
+    CreateQuoteAction,
+    CreateDailyRateAction,
+    GetDailyRatesAction,
+    GetDailyRateAction
+  ],
   providers: [
     {provide: 'IQuoteRepository', useClass: QuoteRepository},
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
@@ -56,7 +63,8 @@ import {GetDailyRatesAction} from './Action/GetDailyRatesAction';
     CreateDailyRateCommandHandler,
     IsDailyRateAlreadyExist,
     QuoteIdGenerator,
-    GetDailyRatesQueryHandler
+    GetDailyRatesQueryHandler,
+    GetDailyRateByIdQueryHandler
   ]
 })
 export class BillingModule {}

@@ -39,6 +39,28 @@ export class DailyRateRepository implements IDailyRateRepository {
       .getMany();
   }
 
+  public findOneById(id: string): Promise<DailyRate | undefined> {
+    return this.repository
+      .createQueryBuilder('dailyRate')
+      .select([
+        'dailyRate.id',
+        'dailyRate.amount',
+        'user.id',
+        'user.firstName',
+        'user.lastName',
+        'user.email',
+        'task.id',
+        'task.name',
+        'customer.id',
+        'customer.name'
+      ])
+      .innerJoin('dailyRate.user', 'user')
+      .innerJoin('dailyRate.task', 'task')
+      .innerJoin('dailyRate.customer', 'customer')
+      .where('dailyRate.id = :id', {id})
+      .getOne();
+  }
+
   public findOneByUserCustomerAndTask(
     user: User,
     customer: Customer,
