@@ -43,7 +43,7 @@
 
 <div class="col-md-12">
   <Breadcrumb
-    items={[{title: 'Facturation'}, {title: 'TJM', path: 'accounting/daily_rates'}, {title: pageTitle}]} />
+    items={[{title: 'Comptabilité'}, {title: 'TJM', path: 'accounting/daily_rates'}, {title: pageTitle}]} />
   <ServerErrors {errors} />
   <Form on:save={onSave} {amount} {taskId} {customerId} {userId} />
 </div>

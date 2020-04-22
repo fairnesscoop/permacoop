@@ -26,7 +26,7 @@
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{title: 'Facturation'}, {title: 'TJM'}]} />
+  <Breadcrumb items={[{title: 'Comptabilité'}, {title: 'TJM'}]} />
   <ServerErrors {errors} />
   <a class="btn btn-primary mb-3" href="accounting/daily_rates/add">
     + Ajouter un TJM
