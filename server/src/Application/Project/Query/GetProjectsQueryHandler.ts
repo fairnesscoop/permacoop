@@ -13,7 +13,8 @@ export class GetProjectsQueryHandler {
   ) {}
 
   public async execute(query: GetProjectsQuery): Promise<ProjectView[]> {
-    const projects = await this.projectRepository.findProjects();
+    const {customerId} = query;
+    const projects = await this.projectRepository.findProjects(customerId);
     const projectViews: ProjectView[] = [];
 
     for (const project of projects) {

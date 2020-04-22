@@ -2,7 +2,7 @@ import {ApiModelProperty} from '@nestjs/swagger';
 import {IsPositive, IsNotEmpty, IsInt} from 'class-validator';
 import {ICreateQuote} from 'src/Application/Accounting/Command/Quote/CreateQuoteItemsCommand';
 
-export class CreateQuoteItemDTO implements ICreateQuote {
+export class QuoteItemDTO implements ICreateQuote {
   @ApiModelProperty()
   @IsNotEmpty()
   @IsPositive()

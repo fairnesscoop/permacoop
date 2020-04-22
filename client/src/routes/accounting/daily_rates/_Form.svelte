@@ -18,7 +18,7 @@
     customers = customerResponse.data;
   });
 
-  export let amount = 600;
+  export let amount = '';
   export let customerId = '';
   export let taskId = '';
   export let userId = '';
@@ -77,20 +77,26 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="amount">Montant HT *</label>
-    <input
-      type="number"
-      required="required"
-      min="1"
-      id="amount"
-      step="any"
-      bind:value={amount}
-      class="form-control" />
+    <label for="amount">Taux HT *</label>
+    <div class="input-group">
+      <input
+        type="number"
+        required="required"
+        min="1"
+        id="amount"
+        placeholder="0,00"
+        step="0.01"
+        bind:value={amount}
+        class="form-control" />
+      <div class="input-group-append">
+        <span class="input-group-text">€</span>
+      </div>
+    </div>
   </div>
   <button
     type="submit"
     class="btn btn-primary"
     disabled={!taskId || !customerId || !userId || !amount}>
-    Sauvegarder
+    Enregistrer
   </button>
 </form>

@@ -1,9 +1,9 @@
 import {validate} from 'class-validator';
-import {CreateQuoteItemDTO} from './CreateQuoteItemDTO';
+import {QuoteItemDTO} from './QuoteItemDTO';
 
-describe('CreateQuoteItemDTO', () => {
+describe('QuoteItemDTO', () => {
   it('testValidDTO', async () => {
-    const dto = new CreateQuoteItemDTO();
+    const dto = new QuoteItemDTO();
     dto.dailyRate = 700;
     dto.title = 'Développement';
     dto.quantity = 1;
@@ -13,7 +13,7 @@ describe('CreateQuoteItemDTO', () => {
   });
 
   it('testInvalidDTO', async () => {
-    const dto = new CreateQuoteItemDTO();
+    const dto = new QuoteItemDTO();
     dto.dailyRate = 0;
     dto.title = '';
     dto.quantity = 0.5;

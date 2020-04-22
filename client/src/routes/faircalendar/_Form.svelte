@@ -101,7 +101,7 @@
     type="submit"
     class="btn btn-primary"
     disabled={!event.time || !event.type}>
-    Sauvegarder
+    Enregistrer
   </button>
-  <slot></slot>
+  <slot />
 </form>

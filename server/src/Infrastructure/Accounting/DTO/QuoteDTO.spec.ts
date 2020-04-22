@@ -1,16 +1,16 @@
-import {CreateQuoteDTO} from './CreateQuoteDTO';
+import {QuoteDTO} from './QuoteDTO';
 import {validate} from 'class-validator';
-import {CreateQuoteItemDTO} from './CreateQuoteItemDTO';
+import {QuoteItemDTO} from './QuoteItemDTO';
 import {QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
 
-const itemDto = new CreateQuoteItemDTO();
+const itemDto = new QuoteItemDTO();
 itemDto.dailyRate = 700;
 itemDto.title = 'Développement';
 itemDto.quantity = 1;
 
-describe('CreateQuoteDTO', () => {
+describe('QuoteDTO', () => {
   it('testValidDTO', async () => {
-    const dto = new CreateQuoteDTO();
+    const dto = new QuoteDTO();
     dto.projectId = '33aa85f8-52e6-44e6-9200-31dcdc038e64';
     dto.customerId = '2218609f-293b-4438-b3a0-cce8961e8acc';
     dto.status = QuoteStatus.DRAFT;
@@ -21,12 +21,12 @@ describe('CreateQuoteDTO', () => {
   });
 
   it('testWithInvalidItemsDTO', async () => {
-    const invalidDto = new CreateQuoteItemDTO();
+    const invalidDto = new QuoteItemDTO();
     invalidDto.dailyRate = -700;
     invalidDto.title = '';
     invalidDto.quantity = -1;
 
-    const dto = new CreateQuoteDTO();
+    const dto = new QuoteDTO();
     dto.projectId = '33aa85f8-52e6-44e6-9200-31dcdc038e64';
     dto.customerId = '2218609f-293b-4438-b3a0-cce8961e8acc';
     dto.status = QuoteStatus.DRAFT;
@@ -37,7 +37,7 @@ describe('CreateQuoteDTO', () => {
   });
 
   it('testEmptyProjectDTO', async () => {
-    const dto = new CreateQuoteDTO();
+    const dto = new QuoteDTO();
     dto.customerId = '2218609f-293b-4438-b3a0-cce8961e8acc';
     dto.status = QuoteStatus.DRAFT;
     dto.items = [itemDto];
@@ -47,7 +47,7 @@ describe('CreateQuoteDTO', () => {
   });
 
   it('testInvalidDTO', async () => {
-    const dto = new CreateQuoteDTO();
+    const dto = new QuoteDTO();
     dto.projectId = '1';
     dto.customerId = '12';
 

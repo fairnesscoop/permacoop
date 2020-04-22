@@ -34,7 +34,7 @@ describe('GetProjectsQueryHandler', () => {
     when(project3.getName()).thenReturn('Vimeet');
     when(project3.getCustomer()).thenReturn(instance(customer2));
 
-    when(projectRepository.findProjects()).thenResolve([
+    when(projectRepository.findProjects(null)).thenResolve([
       instance(project3),
       instance(project2),
       instance(project1)
@@ -62,24 +62,24 @@ describe('GetProjectsQueryHandler', () => {
       )
     ];
 
-    expect(await queryHandler.execute(new GetProjectsQuery())).toMatchObject(
-      expectedResult
-    );
-    verify(projectRepository.findProjects()).once();
+    expect(
+      await queryHandler.execute(new GetProjectsQuery(null))
+    ).toMatchObject(expectedResult);
+    verify(projectRepository.findProjects(null)).once();
   });
 
   it('testGetEmptyProjects', async () => {
     const projectRepository = mock(ProjectRepository);
 
-    when(projectRepository.findProjects()).thenResolve([]);
+    when(projectRepository.findProjects(null)).thenResolve([]);
 
     const queryHandler = new GetProjectsQueryHandler(
       instance(projectRepository)
     );
 
-    expect(await queryHandler.execute(new GetProjectsQuery())).toMatchObject(
-      []
-    );
-    verify(projectRepository.findProjects()).once();
+    expect(
+      await queryHandler.execute(new GetProjectsQuery(null))
+    ).toMatchObject([]);
+    verify(projectRepository.findProjects(null)).once();
   });
 });

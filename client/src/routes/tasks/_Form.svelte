@@ -19,6 +19,6 @@
       class="form-control" />
   </div>
   <button type="submit" class="btn btn-primary" disabled={!name}>
-    Sauvegarder
+    Enregistrer
   </button>
 </form>
