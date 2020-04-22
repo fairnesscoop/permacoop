@@ -34,16 +34,17 @@
         <li class="nav-item {segment === 'faircalendar' ? 'active' : ''}">
           <a class="nav-link" href="faircalendar">FairCalendar</a>
         </li>
-        <li class="nav-item dropdown {segment === 'billing' ? 'active' : ''}">
+        <li
+          class="nav-item dropdown {segment === 'accounting' ? 'active' : ''}">
           <a
             class="nav-link dropdown-toggle"
             href="javascript:void"
             role="button"
             data-toggle="dropdown">
-            Facturation
+            Comptabilité
           </a>
           <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="billing/daily_rates">TJM</a>
+            <a class="dropdown-item" href="accounting/daily_rates">TJM</a>
           </div>
         </li>
         <li class="nav-item {segment === 'projects' ? 'active' : ''}">
