@@ -11,7 +11,7 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 import {GetTaskByIdQuery} from 'src/Application/Task/Query/GetTaskByIdQuery';
 import {IQueryBus} from 'src/Application/IQueryBus';
-import {TaskIdDTO} from './DTO/TaskIdDTO';
+import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 
 @Controller('tasks')
 @ApiUseTags('Task')
@@ -25,9 +25,9 @@ export class GetTaskAction {
 
   @Get(':id')
   @ApiOperation({title: 'Get task'})
-  public async index(@Param() taskIdDTO: TaskIdDTO): Promise<TaskView> {
+  public async index(@Param() dto: IdDTO): Promise<TaskView> {
     try {
-      return await this.queryBus.execute(new GetTaskByIdQuery(taskIdDTO.id));
+      return await this.queryBus.execute(new GetTaskByIdQuery(dto.id));
     } catch (e) {
       throw new NotFoundException(e.message);
     }

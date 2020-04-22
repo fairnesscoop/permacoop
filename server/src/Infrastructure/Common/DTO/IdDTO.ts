@@ -1,7 +1,7 @@
 import {ApiModelProperty} from '@nestjs/swagger';
 import {IsNotEmpty, IsUUID} from 'class-validator';
 
-export class CustomerIdDTO {
+export class IdDTO {
   @ApiModelProperty()
   @IsNotEmpty()
   @IsUUID()

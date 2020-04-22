@@ -24,8 +24,8 @@ describe('CreateQuoteItemsCommandHandler', () => {
   const items: ICreateQuote[] = [
     {
       title: 'Développement web',
-      vat: 20,
-      dailyRate: 800,
+      vat: 19.6,
+      dailyRate: 800.5,
       quantity: 10
     },
     {
@@ -61,12 +61,12 @@ describe('CreateQuoteItemsCommandHandler', () => {
     verify(quoteRepository.find('a491ccc9-df7c-4fc6-8e90-db816208f689')).once();
     verify(
       quoteItemRepository.save(
-        deepEqual(new QuoteItem('Développement web', 10, 800, 20, quote))
+        deepEqual(new QuoteItem('Développement web', 10, 80050, 1960, quote))
       )
     ).once();
     verify(
       quoteItemRepository.save(
-        deepEqual(new QuoteItem('Développement mobile', 10, 700, 20, quote))
+        deepEqual(new QuoteItem('Développement mobile', 10, 70000, 2000, quote))
       )
     ).once();
   });

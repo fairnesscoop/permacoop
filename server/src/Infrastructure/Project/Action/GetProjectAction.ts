@@ -11,7 +11,7 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {GetProjectByIdQuery} from 'src/Application/Project/Query/GetProjectByIdQuery';
 import {IQueryBus} from 'src/Application/IQueryBus';
-import {ProjectIdDTO} from './DTO/ProjectIdDTO';
+import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 
 @Controller('projects')
 @ApiUseTags('Project')
@@ -25,13 +25,9 @@ export class GetProjectAction {
 
   @Get(':id')
   @ApiOperation({title: 'Get project'})
-  public async index(
-    @Param() ProjectIdDto: ProjectIdDTO
-  ): Promise<ProjectView> {
+  public async index(@Param() dto: IdDTO): Promise<ProjectView> {
     try {
-      return await this.queryBus.execute(
-        new GetProjectByIdQuery(ProjectIdDto.id)
-      );
+      return await this.queryBus.execute(new GetProjectByIdQuery(dto.id));
     } catch (e) {
       throw new NotFoundException(e.message);
     }

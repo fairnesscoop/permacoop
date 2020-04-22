@@ -10,26 +10,29 @@ import {
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
-import {UpdateTaskCommand} from 'src/Application/Task/Command/UpdateTaskCommand';
-import {TaskDTO} from './DTO/TaskDTO';
+import {DailyRateDTO} from './DTO/DailyRateDTO';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
+import {UpdateDailyRateCommand} from 'src/Application/Billing/Command/DailyRate/UpdateDailyRateCommand';
 
-@Controller('tasks')
-@ApiUseTags('Task')
+@Controller('daily_rates')
+@ApiUseTags('Billing')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'))
-export class UpdateTaskAction {
+export class UpdateDailyRateAction {
   constructor(
     @Inject('ICommandBus')
     private readonly commandBus: ICommandBus
   ) {}
 
   @Put(':id')
-  @ApiOperation({title: 'Update task'})
-  public async index(@Param() dto: IdDTO, @Body() taskDto: TaskDTO) {
+  @ApiOperation({title: 'Update daily rate'})
+  public async index(@Param() idDto: IdDTO, @Body() dto: DailyRateDTO) {
     try {
-      const {id} = dto;
-      await this.commandBus.execute(new UpdateTaskCommand(id, taskDto.name));
+      const {userId, customerId, taskId, amount} = dto;
+
+      const id = await this.commandBus.execute(
+        new UpdateDailyRateCommand(idDto.id, amount, userId, customerId, taskId)
+      );
 
       return {id};
     } catch (e) {

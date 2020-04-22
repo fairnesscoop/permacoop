@@ -1,9 +1,9 @@
-import {EventIdDTO} from './EventIdDTO';
+import {IdDTO} from './IdDTO';
 import {validate} from 'class-validator';
 
-describe('EventIdDTO', () => {
+describe('IdDTO', () => {
   it('testValidDTO', async () => {
-    const dto = new EventIdDTO();
+    const dto = new IdDTO();
     dto.id = 'ff623892-434b-4f2d-945e-775c87bae2ac';
 
     const validation = await validate(dto);
@@ -11,7 +11,7 @@ describe('EventIdDTO', () => {
   });
 
   it('testInvalidDTO', async () => {
-    const dto = new EventIdDTO();
+    const dto = new IdDTO();
     dto.id = '25';
 
     const validation = await validate(dto);
@@ -22,7 +22,7 @@ describe('EventIdDTO', () => {
   });
 
   it('testEmptyDTO', async () => {
-    const dto = new EventIdDTO();
+    const dto = new IdDTO();
 
     const validation = await validate(dto);
     expect(validation).toHaveLength(1);
