@@ -11,7 +11,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateCustomerCommand} from 'src/Application/Customer/Command/UpdateCustomerCommand';
-import {CustomerDTO} from './DTO/CustomerDTO';
+import {CustomerDTO} from '../DTO/CustomerDTO';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 
 @Controller('customers')

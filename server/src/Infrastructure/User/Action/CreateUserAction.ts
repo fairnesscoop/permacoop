@@ -11,7 +11,7 @@ import {ApiUseTags, ApiOperation, ApiBearerAuth} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {CreateUserCommand} from 'src/Application/User/Command/CreateUserCommand';
 import {UserView} from 'src/Application/User/View/UserView';
-import {UserDTO} from './DTO/UserDTO';
+import {UserDTO} from '../DTO/UserDTO';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetUserByIdQuery} from 'src/Application/User/Query/GetUserByIdQuery';
 

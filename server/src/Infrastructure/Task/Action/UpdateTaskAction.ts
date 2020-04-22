@@ -11,7 +11,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateTaskCommand} from 'src/Application/Task/Command/UpdateTaskCommand';
-import {TaskDTO} from './DTO/TaskDTO';
+import {TaskDTO} from '../DTO/TaskDTO';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 
 @Controller('tasks')

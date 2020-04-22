@@ -12,7 +12,7 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
 import {CreateQuoteCommand} from 'src/Application/Billing/Command/Quote/CreateQuoteCommand';
-import {CreateQuoteDTO} from './DTO/CreateQuoteDTO';
+import {CreateQuoteDTO} from '../DTO/CreateQuoteDTO';
 import {CreateQuoteItemsCommand} from 'src/Application/Billing/Command/Quote/CreateQuoteItemsCommand';
 
 @Controller('quotes')

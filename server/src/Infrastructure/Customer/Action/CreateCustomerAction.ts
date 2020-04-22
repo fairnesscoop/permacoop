@@ -10,7 +10,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CreateCustomerCommand} from 'src/Application/Customer/Command/CreateCustomerCommand';
 import {ICommandBus} from 'src/Application/ICommandBus';
-import {CustomerDTO} from './DTO/CustomerDTO';
+import {CustomerDTO} from '../DTO/CustomerDTO';
 
 @Controller('customers')
 @ApiUseTags('Customer')

@@ -13,7 +13,7 @@ import {UserView} from 'src/Application/User/View/UserView';
 import {UpdateProfileCommand} from 'src/Application/User/Command/UpdateProfileCommand';
 import {LoggedUser} from '../Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
-import {UserDTO} from './DTO/UserDTO';
+import {UserDTO} from '../DTO/UserDTO';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetUserByIdQuery} from 'src/Application/User/Query/GetUserByIdQuery';
 

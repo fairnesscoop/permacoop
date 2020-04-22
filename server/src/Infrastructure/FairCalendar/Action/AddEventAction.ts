@@ -12,7 +12,7 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
 import {AddEventCommand} from 'src/Application/FairCalendar/Command/AddEventCommand';
-import {EventDTO} from './DTO/EventDTO';
+import {EventDTO} from '../DTO/EventDTO';
 
 @Controller('events')
 @ApiUseTags('Event')

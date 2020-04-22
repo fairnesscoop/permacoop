@@ -9,7 +9,7 @@ import {ApiUseTags, ApiOperation} from '@nestjs/swagger';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {LoginQuery} from 'src/Application/User/Query/LoginQuery';
 import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
-import {LoginDTO} from './DTO/LoginDTO';
+import {LoginDTO} from '../DTO/LoginDTO';
 
 @Controller('login')
 @ApiUseTags('User')

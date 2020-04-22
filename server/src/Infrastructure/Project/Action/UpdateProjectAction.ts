@@ -11,7 +11,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateProjectCommand} from 'src/Application/Project/Command/UpdateProjectCommand';
-import {ProjectDTO} from './DTO/ProjectDTO';
+import {ProjectDTO} from '../DTO/ProjectDTO';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 
 @Controller('projects')

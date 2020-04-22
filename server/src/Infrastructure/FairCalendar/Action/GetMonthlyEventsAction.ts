@@ -3,7 +3,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetMonthlyEventsQuery} from 'src/Application/FairCalendar/Query/GetMonthlyEventsQuery';
-import {MonthlyEventsDTO} from './DTO/MonthlyEventsDTO';
+import {MonthlyEventsDTO} from '../DTO/MonthlyEventsDTO';
 
 @Controller('events')
 @ApiUseTags('Event')

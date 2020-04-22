@@ -10,7 +10,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {CreateDailyRateCommand} from 'src/Application/Billing/Command/DailyRate/CreateDailyRateCommand';
-import {DailyRateDTO} from './DTO/DailyRateDTO';
+import {DailyRateDTO} from '../DTO/DailyRateDTO';
 
 @Controller('daily_rates')
 @ApiUseTags('Billing')

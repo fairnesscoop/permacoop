@@ -10,7 +10,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {CreateProjectCommand} from 'src/Application/Project/Command/CreateProjectCommand';
-import {ProjectDTO} from './DTO/ProjectDTO';
+import {ProjectDTO} from '../DTO/ProjectDTO';
 
 @Controller('projects')
 @ApiUseTags('Project')

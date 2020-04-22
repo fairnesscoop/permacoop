@@ -11,7 +11,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
-import {EventDTO} from './DTO/EventDTO';
+import {EventDTO} from '../DTO/EventDTO';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateEventCommand} from 'src/Application/FairCalendar/Command/UpdateEventCommand';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';

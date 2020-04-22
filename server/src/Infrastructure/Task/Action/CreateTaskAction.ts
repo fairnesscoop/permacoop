@@ -10,7 +10,7 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CreateTaskCommand} from 'src/Application/Task/Command/CreateTaskCommand';
 import {ICommandBus} from 'src/Application/ICommandBus';
-import {TaskDTO} from './DTO/TaskDTO';
+import {TaskDTO} from '../DTO/TaskDTO';
 
 @Controller('tasks')
 @ApiUseTags('Task')

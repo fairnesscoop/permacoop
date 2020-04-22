@@ -10,7 +10,7 @@ import {
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
-import {DailyRateDTO} from './DTO/DailyRateDTO';
+import {DailyRateDTO} from '../DTO/DailyRateDTO';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 import {UpdateDailyRateCommand} from 'src/Application/Billing/Command/DailyRate/UpdateDailyRateCommand';
 
