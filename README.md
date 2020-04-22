@@ -1,6 +1,6 @@
 <h1 align="center"><a href="https://fairness.coop"><img src="https://fairness.coop/image/fairness_logo.svg" alt="Fairness"></a></h1>
 
-Permacoop is an eco-design and open-source ERP solution for cooperatives.
+Permacoop is an eco-design and open-source ERP solution for cooperatives
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/fairnesscoop/permacoop/CI)
 [![codecov](https://codecov.io/gh/fairnesscoop/permacoop/branch/master/graph/badge.svg)](https://codecov.io/gh/fairnesscoop/permacoop)
