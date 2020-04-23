@@ -2,7 +2,7 @@ import {mock, instance, when, verify, deepEqual, anything} from 'ts-mockito';
 import {QuoteRepository} from 'src/Infrastructure/Accounting/Repository/QuoteRepository';
 import {CreateQuoteItemsCommandHandler} from './CreateQuoteItemsCommandHandler';
 import {CreateQuoteItemsCommand, ICreateQuote} from './CreateQuoteItemsCommand';
-import {Quote} from 'src/Domain/Accounting/Quote.entity';
+import {Quote, QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
 import {QuoteItemRepository} from 'src/Infrastructure/Accounting/Repository/QuoteItemRepository';
 import {QuoteItem} from 'src/Domain/Accounting/QuoteItem.entity';
 import {User} from 'src/Domain/User/User.entity';
@@ -16,7 +16,7 @@ describe('CreateQuoteItemsCommandHandler', () => {
 
   const quote = new Quote(
     'a491ccc9-df7c-4fc6-8e90-db816208f689',
-    'draft',
+    QuoteStatus.DRAFT,
     instance(mock(User)),
     instance(mock(Customer))
   );
@@ -24,13 +24,11 @@ describe('CreateQuoteItemsCommandHandler', () => {
   const items: ICreateQuote[] = [
     {
       title: 'Développement web',
-      vat: 19.6,
       dailyRate: 800.5,
       quantity: 10
     },
     {
       title: 'Développement mobile',
-      vat: 20,
       dailyRate: 700,
       quantity: 10
     }
@@ -61,12 +59,12 @@ describe('CreateQuoteItemsCommandHandler', () => {
     verify(quoteRepository.find('a491ccc9-df7c-4fc6-8e90-db816208f689')).once();
     verify(
       quoteItemRepository.save(
-        deepEqual(new QuoteItem('Développement web', 10, 80050, 1960, quote))
+        deepEqual(new QuoteItem('Développement web', 10, 80050, quote))
       )
     ).once();
     verify(
       quoteItemRepository.save(
-        deepEqual(new QuoteItem('Développement mobile', 10, 70000, 2000, quote))
+        deepEqual(new QuoteItem('Développement mobile', 10, 70000, quote))
       )
     ).once();
   });

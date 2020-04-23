@@ -4,12 +4,12 @@ import {
   IsNotEmpty,
   IsUUID,
   IsOptional,
-  IsIn,
   IsArray,
   ValidateNested,
-  ArrayNotEmpty
+  ArrayNotEmpty,
+  IsEnum
 } from 'class-validator';
-import {Quote} from 'src/Domain/Accounting/Quote.entity';
+import {Quote, QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
 import {CreateQuoteItemDTO} from './CreateQuoteItemDTO';
 
 export class CreateQuoteDTO {
@@ -23,10 +23,10 @@ export class CreateQuoteDTO {
   @IsUUID()
   public customerId: string;
 
-  @ApiModelProperty()
+  @ApiModelProperty({enum: QuoteStatus})
   @IsNotEmpty()
-  @IsIn(Quote.getAvailableStatus())
-  public status: string;
+  @IsEnum(QuoteStatus)
+  public status: QuoteStatus;
 
   @ApiModelProperty({type: [CreateQuoteItemDTO]})
   @IsArray()

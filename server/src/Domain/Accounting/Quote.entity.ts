@@ -3,29 +3,21 @@ import {Customer} from '../Customer/Customer.entity';
 import {Project} from '../Project/Project.entity';
 import {User} from '../User/User.entity';
 
+export enum QuoteStatus {
+  DRAFT = 'draft',
+  SENT = 'sent',
+  REFUSED = 'refused',
+  ACCEPTED = 'accepted',
+  CANCELED = 'canceled'
+}
+
 @Entity()
 export class Quote {
-  public static readonly STATUS_DRAFT = 'draft';
-  public static readonly STATUS_SENT = 'sent';
-  public static readonly STATUS_REFUSED = 'refused';
-  public static readonly STATUS_ACCEPTED = 'accepted';
-  public static readonly STATUS_CANCELED = 'canceled';
-
-  public static getAvailableStatus(): string[] {
-    return [
-      Quote.STATUS_DRAFT,
-      Quote.STATUS_SENT,
-      Quote.STATUS_REFUSED,
-      Quote.STATUS_ACCEPTED,
-      Quote.STATUS_CANCELED
-    ];
-  }
-
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'varchar', nullable: false})
-  private status: string;
+  @Column('enum', {enum: QuoteStatus, nullable: false})
+  private status: QuoteStatus;
 
   @Column({type: 'varchar', nullable: false, unique: true})
   private quoteId: string;
@@ -44,7 +36,7 @@ export class Quote {
 
   constructor(
     quoteId: string,
-    status: string,
+    status: QuoteStatus,
     owner: User,
     customer: Customer,
     project?: Project | null

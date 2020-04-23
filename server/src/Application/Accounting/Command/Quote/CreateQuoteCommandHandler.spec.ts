@@ -8,7 +8,7 @@ import {CreateQuoteCommand} from './CreateQuoteCommand';
 import {User} from 'src/Domain/User/User.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {Project} from 'src/Domain/Project/Project.entity';
-import {Quote} from 'src/Domain/Accounting/Quote.entity';
+import {Quote, QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 import {InvalidProjectException} from 'src/Domain/Accounting/Exception/InvalidProjectException';
 import {Address} from 'src/Domain/Customer/Address.entity';
@@ -27,7 +27,7 @@ describe('CreateQuoteCommandHandler', () => {
   const project = new Project('Project', customer);
   const command = new CreateQuoteCommand(
     instance(user),
-    'draft',
+    QuoteStatus.DRAFT,
     'a491ccc9-df7c-4fc6-8e90-db816208f689',
     '3d0a282f-3b3e-4ef3-948f-5ab3cb77a04c'
   );
@@ -60,7 +60,7 @@ describe('CreateQuoteCommandHandler', () => {
         deepEqual(
           new Quote(
             'FS-DEVIS-2020-0001',
-            'draft',
+            QuoteStatus.DRAFT,
             instance(user),
             customer,
             project
@@ -85,7 +85,7 @@ describe('CreateQuoteCommandHandler', () => {
         deepEqual(
           new Quote(
             'FS-DEVIS-2020-0001',
-            'draft',
+            QuoteStatus.DRAFT,
             instance(user),
             customer,
             project
@@ -106,7 +106,7 @@ describe('CreateQuoteCommandHandler', () => {
         deepEqual(
           new Quote(
             'FS-DEVIS-2020-0001',
-            'draft',
+            QuoteStatus.DRAFT,
             instance(user),
             customer,
             null
@@ -119,7 +119,7 @@ describe('CreateQuoteCommandHandler', () => {
       await handler.execute(
         new CreateQuoteCommand(
           instance(user),
-          'draft',
+          QuoteStatus.DRAFT,
           'a491ccc9-df7c-4fc6-8e90-db816208f689'
         )
       )
@@ -135,7 +135,7 @@ describe('CreateQuoteCommandHandler', () => {
         deepEqual(
           new Quote(
             'FS-DEVIS-2020-0001',
-            'draft',
+            QuoteStatus.DRAFT,
             instance(user),
             customer,
             null
