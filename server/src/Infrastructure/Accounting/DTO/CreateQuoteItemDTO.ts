@@ -16,10 +16,5 @@ export class CreateQuoteItemDTO implements ICreateQuote {
 
   @ApiModelProperty()
   @IsNotEmpty()
-  @IsPositive()
-  public vat: number;
-
-  @ApiModelProperty()
-  @IsNotEmpty()
   public title: string;
 }

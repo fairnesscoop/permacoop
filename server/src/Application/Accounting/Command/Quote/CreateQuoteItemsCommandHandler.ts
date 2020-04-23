@@ -22,15 +22,9 @@ export class CreateQuoteItemsCommandHandler {
       throw new QuoteNotFoundException();
     }
 
-    for (const {title, quantity, dailyRate, vat} of command.items) {
+    for (const {title, quantity, dailyRate} of command.items) {
       this.quoteItemRepository.save(
-        new QuoteItem(
-          title,
-          quantity,
-          Math.round(dailyRate * 100),
-          Math.round(vat * 100),
-          quote
-        )
+        new QuoteItem(title, quantity, Math.round(dailyRate * 100), quote)
       );
     }
   }
