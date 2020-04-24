@@ -21,4 +21,32 @@ describe('DailyRate.entity', () => {
     expect(dailyRate.getCustomer()).toBe(instance(customer));
     expect(dailyRate.getTask()).toBe(instance(task));
   });
+
+  it('testUpdate', () => {
+    const user = mock(User);
+    const user2 = mock(User);
+    const customer = mock(Customer);
+    const customer2 = mock(Customer);
+    const task = mock(Task);
+    const task2 = mock(Task);
+
+    const dailyRate = new DailyRate(
+      10000,
+      instance(user),
+      instance(customer),
+      instance(task)
+    );
+
+    dailyRate.update(
+      100,
+      instance(user2),
+      instance(customer2),
+      instance(task2)
+    );
+
+    expect(dailyRate.getAmount()).toBe(100);
+    expect(dailyRate.getUser()).toBe(instance(user2));
+    expect(dailyRate.getCustomer()).toBe(instance(customer2));
+    expect(dailyRate.getTask()).toBe(instance(task2));
+  });
 });
