@@ -44,6 +44,6 @@
     </select>
   </div>
   <button type="submit" class="btn btn-primary" disabled={!name || !customerId}>
-    Sauvegarder
+    Enregistrer
   </button>
 </form>

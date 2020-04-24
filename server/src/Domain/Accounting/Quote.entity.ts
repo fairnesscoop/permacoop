@@ -1,7 +1,14 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany
+} from 'typeorm';
 import {Customer} from '../Customer/Customer.entity';
 import {Project} from '../Project/Project.entity';
 import {User} from '../User/User.entity';
+import {QuoteItem} from './QuoteItem.entity';
 
 export enum QuoteStatus {
   DRAFT = 'draft',
@@ -34,6 +41,12 @@ export class Quote {
   @ManyToOne(type => Project, {nullable: true})
   private project: Project;
 
+  @OneToMany(
+    type => QuoteItem,
+    quoteItem => quoteItem.quote
+  )
+  items: QuoteItem[];
+
   constructor(
     quoteId: string,
     status: QuoteStatus,
@@ -50,5 +63,29 @@ export class Quote {
 
   public getId(): string {
     return this.id;
+  }
+
+  public getQuoteId(): string {
+    return this.quoteId;
+  }
+
+  public getStatus(): QuoteStatus {
+    return this.status;
+  }
+
+  public getCreatedAt(): Date {
+    return this.createdAt;
+  }
+
+  public getCustomer(): Customer {
+    return this.customer;
+  }
+
+  public getProject(): Project | undefined {
+    return this.project;
+  }
+
+  public getItems(): QuoteItem[] {
+    return this.items;
   }
 }

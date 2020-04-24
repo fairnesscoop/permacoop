@@ -5,6 +5,7 @@
   import Breadcrumb from '../../_components/Breadcrumb.svelte';
   import Loader from '../../_components/Loader.svelte';
   import ServerErrors from '../../_components/ServerErrors.svelte';
+  import {format} from '../../../normalizer/money';
 
   let loading = true;
   let errors = [];
@@ -47,7 +48,7 @@
           <td>{dailyRate.user.firstName} {dailyRate.user.lastName}</td>
           <td>{dailyRate.task.name}</td>
           <td>{dailyRate.customer.name}</td>
-          <td>{dailyRate.amount} €</td>
+          <td>{format(dailyRate.amount)}</td>
           <td>
             <a
               class="btn btn-outline-secondary btn-sm"

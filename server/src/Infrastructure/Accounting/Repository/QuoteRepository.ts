@@ -21,6 +21,28 @@ export class QuoteRepository implements IQuoteRepository {
       .getCount();
   }
 
+  public findAll(): Promise<Quote[]> {
+    return this.repository
+      .createQueryBuilder('quote')
+      .select([
+        'quote.id',
+        'quote.quoteId',
+        'quote.status',
+        'quote.createdAt',
+        'project.id',
+        'project.name',
+        'customer.id',
+        'customer.name',
+        'item.quantity',
+        'item.dailyRate'
+      ])
+      .innerJoin('quote.customer', 'customer')
+      .innerJoin('quote.items', 'item')
+      .leftJoin('quote.project', 'project')
+      .orderBy('quote.createdAt', 'DESC')
+      .getMany();
+  }
+
   public find(id: string): Promise<Quote> {
     return this.repository
       .createQueryBuilder('quote')

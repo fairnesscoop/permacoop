@@ -43,7 +43,8 @@
             data-toggle="dropdown">
             Comptabilité
           </a>
-          <div class="dropdown-menu dropdown-menu-right">
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="accounting/quotes">Devis</a>
             <a class="dropdown-item" href="accounting/daily_rates">TJM</a>
           </div>
         </li>

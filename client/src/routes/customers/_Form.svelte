@@ -58,6 +58,6 @@
     type="submit"
     class="btn btn-primary"
     disabled={!customer.name || !address.country || !address.zipCode || !address.city || !address.street}>
-    Sauvegarder
+    Enregistrer
   </button>
 </form>

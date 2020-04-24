@@ -1,9 +1,10 @@
-import {Controller, Inject, UseGuards, Get} from '@nestjs/common';
+import {Controller, Inject, UseGuards, Get, Query} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetProjectsQuery} from 'src/Application/Project/Query/GetProjectsQuery';
+import {FiltersDTO} from '../DTO/FiltersDTO';
 
 @Controller('projects')
 @ApiUseTags('Project')
@@ -17,7 +18,9 @@ export class GetProjectsAction {
 
   @Get()
   @ApiOperation({title: 'Get all projects ordered by customer'})
-  public async index(): Promise<ProjectView[]> {
-    return await this.queryBus.execute(new GetProjectsQuery());
+  public async index(@Query() filters: FiltersDTO): Promise<ProjectView[]> {
+    return await this.queryBus.execute(
+      new GetProjectsQuery(filters.customerId)
+    );
   }
 }

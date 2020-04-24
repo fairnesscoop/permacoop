@@ -30,6 +30,8 @@ import {GetDailyRateAction} from './Action/GetDailyRateAction';
 import {GetDailyRateByIdQueryHandler} from 'src/Application/Accounting/Query/DailyRate/GetDailyRateByIdQueryHandler';
 import {UpdateDailyRateAction} from './Action/UpdateDailyRateAction';
 import {UpdateDailyRateCommandHandler} from 'src/Application/Accounting/Command/DailyRate/UpdateDailyRateCommandHandler';
+import {GetQuotesAction} from './Action/GetQuotesAction';
+import {GetQuotesQueryHandler} from 'src/Application/Accounting/Query/Quote/GetQuotesQueryHandler';
 
 @Module({
   imports: [
@@ -50,7 +52,8 @@ import {UpdateDailyRateCommandHandler} from 'src/Application/Accounting/Command/
     CreateDailyRateAction,
     GetDailyRatesAction,
     GetDailyRateAction,
-    UpdateDailyRateAction
+    UpdateDailyRateAction,
+    GetQuotesAction
   ],
   providers: [
     {provide: 'IQuoteRepository', useClass: QuoteRepository},
@@ -68,6 +71,7 @@ import {UpdateDailyRateCommandHandler} from 'src/Application/Accounting/Command/
     QuoteIdGenerator,
     GetDailyRatesQueryHandler,
     UpdateDailyRateCommandHandler,
+    GetQuotesQueryHandler,
     GetDailyRateByIdQueryHandler
   ]
 })

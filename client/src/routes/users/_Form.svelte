@@ -53,6 +53,6 @@
     type="submit"
     class="btn btn-primary"
     disabled={!firstName || !lastName || !email || !password}>
-    Sauvegarder
+    Enregistrer
   </button>
 </form>

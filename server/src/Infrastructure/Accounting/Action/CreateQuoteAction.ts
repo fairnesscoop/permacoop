@@ -12,7 +12,7 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User} from 'src/Domain/User/User.entity';
 import {CreateQuoteCommand} from 'src/Application/Accounting/Command/Quote/CreateQuoteCommand';
-import {CreateQuoteDTO} from '../DTO/CreateQuoteDTO';
+import {QuoteDTO} from '../DTO/QuoteDTO';
 import {CreateQuoteItemsCommand} from 'src/Application/Accounting/Command/Quote/CreateQuoteItemsCommand';
 
 @Controller('quotes')
@@ -27,12 +27,9 @@ export class CreateQuoteAction {
 
   @Post()
   @ApiOperation({title: 'Create new quote'})
-  public async index(
-    @Body() quoteDTO: CreateQuoteDTO,
-    @LoggedUser() user: User
-  ) {
+  public async index(@Body() dto: QuoteDTO, @LoggedUser() user: User) {
     try {
-      const {projectId, customerId, status, items} = quoteDTO;
+      const {projectId, customerId, status, items} = dto;
       const id = await this.commandBus.execute(
         new CreateQuoteCommand(user, status, customerId, projectId)
       );

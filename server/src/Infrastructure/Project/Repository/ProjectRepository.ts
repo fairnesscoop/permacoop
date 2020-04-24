@@ -31,13 +31,18 @@ export class ProjectRepository implements IProjectRepository {
       .getOne();
   }
 
-  public findProjects(): Promise<Project[]> {
-    return this.repository
+  public findProjects(customerId?: string): Promise<Project[]> {
+    const query = this.repository
       .createQueryBuilder('project')
       .select(['project.id', 'project.name', 'customer.id', 'customer.name'])
       .innerJoin('project.customer', 'customer')
       .orderBy('project.name', 'ASC')
-      .addOrderBy('customer.name', 'ASC')
-      .getMany();
+      .addOrderBy('customer.name', 'ASC');
+
+    if (customerId) {
+      query.andWhere('customer.id = :customerId', {customerId});
+    }
+
+    return query.getMany();
   }
 }

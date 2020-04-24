@@ -12,13 +12,12 @@ Permacoop is an eco-design and open-source ERP solution for cooperatives.
 ## Technical stack
 
 - [Node.js](https://nodejs.org) / [Nestjs](https://nestjs.com/)
-- [Typescript](https://www.typescriptlang.org/)
 - [TypeORM](https://typeorm.io)
-- [Ts-mockito](https://github.com/NagRock/ts-mockito)
-- [Jest](https://jestjs.io/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Jest](https://jestjs.io/) / [Ts-mockito](https://github.com/NagRock/ts-mockito)
 - [Svelte](https://svelte.dev/) / [Sapper](https://sapper.svelte.dev/)
-- [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
+- [Docker](https://www.docker.com/)
 
 ## Prerequisites
 
@@ -75,6 +74,18 @@ Run the unit test suite with this following command:
 ```bash
 make api-test
 ```
+
+## Features
+
+- Cooperators management
+- Tasks management
+- Projects management
+- Customers management
+- Calendar (timesheets etc.)
+- Accounting
+  - Quotations
+  - Daily rates
+  - Invoicing
 
 ## Credits
 
