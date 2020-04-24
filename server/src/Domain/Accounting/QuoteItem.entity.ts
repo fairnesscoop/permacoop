@@ -45,4 +45,8 @@ export class QuoteItem {
   public getQuantity(): number {
     return this.quantity;
   }
+
+  public getAmountExcludingVat(): number {
+    return (this.quantity / 100) * (this.dailyRate / 100);
+  }
 }
