@@ -10,4 +10,13 @@ describe('Customer.entity', () => {
     expect(customer.getAddress()).toBe(instance(address));
     expect(customer.getName()).toBe('Radio France');
   });
+
+  it('testUpdate', () => {
+    const address = mock(Address);
+    const customer = new Customer('Radio France', instance(address));
+    customer.updateName('RF');
+
+    expect(customer.getAddress()).toBe(instance(address));
+    expect(customer.getName()).toBe('RF');
+  });
 });
