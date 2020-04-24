@@ -15,8 +15,12 @@ export class QuoteItem {
   @Column({type: 'integer', nullable: false})
   private dailyRate: number;
 
-  @ManyToOne(type => Quote, {nullable: false})
-  private quote: Quote;
+  @ManyToOne(
+    type => Quote,
+    quote => quote.items,
+    {nullable: false}
+  )
+  quote: Quote;
 
   constructor(
     title: string,
@@ -28,5 +32,17 @@ export class QuoteItem {
     this.quantity = quantity;
     this.dailyRate = dailyRate;
     this.quote = quote;
+  }
+
+  public getTitle(): string {
+    return this.title;
+  }
+
+  public getDailyRate(): number {
+    return this.dailyRate;
+  }
+
+  public getQuantity(): number {
+    return this.quantity;
   }
 }

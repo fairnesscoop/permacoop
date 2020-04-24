@@ -43,3 +43,23 @@
   background-color: #343a40 !important;
   border-color: #343a40 !important;
 }
+.badge-draft {
+  color: #fff;
+  background-color: #6c757d;
+}
+.badge-canceled {
+  color: #212529;
+  background-color: #ffc107;
+}
+.badge-refused {
+  color: #fff;
+  background-color: #dc3545;
+}
+.badge-accepted {
+  color: #fff;
+  background-color: #28a745;
+}
+.badge-sent {
+  color: #fff;
+  background-color: #007bff;
+}
