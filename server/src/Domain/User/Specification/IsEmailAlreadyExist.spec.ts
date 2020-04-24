@@ -22,7 +22,7 @@ describe('IsEmailAlreadyExist', () => {
 
   it('testUserCannotRegister', async () => {
     when(userRepository.findOneByEmail(email)).thenResolve(
-      new User('Mathieu', 'MARCHOIS', email, 'token', 'password')
+      new User('Mathieu', 'MARCHOIS', email, 'token', 'password', '2019-09-12')
     );
     expect(await isEmailAlreadyExist.isSatisfiedBy(email)).toBe(true);
     verify(userRepository.findOneByEmail(email)).once();

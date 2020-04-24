@@ -1,5 +1,5 @@
 import {ApiModelProperty} from '@nestjs/swagger';
-import {IsEmail, IsNotEmpty} from 'class-validator';
+import {IsEmail, IsNotEmpty, IsDateString} from 'class-validator';
 
 export class UserDTO {
   @IsNotEmpty()
@@ -18,4 +18,9 @@ export class UserDTO {
   @IsNotEmpty()
   @ApiModelProperty()
   public password: string;
+
+  @IsNotEmpty()
+  @IsDateString()
+  @ApiModelProperty()
+  public entryDate: string;
 }

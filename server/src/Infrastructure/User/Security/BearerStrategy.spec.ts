@@ -30,7 +30,8 @@ describe('BearerStrategy', () => {
       'MARCHOIS',
       'mathieu@fairness.coop',
       'token',
-      'password'
+      'password',
+      '2019-09-12'
     );
 
     when(userRepository.findOneByApiToken('apiToken')).thenResolve(user);

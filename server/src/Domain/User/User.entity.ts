@@ -21,6 +21,9 @@ export class User {
   @Column({type: 'varchar', nullable: false})
   private password: string;
 
+  @Column({type: 'timestamp', nullable: false})
+  private entryDate: string;
+
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   private createdAt: Date;
 
@@ -29,13 +32,15 @@ export class User {
     lastName: string,
     email: string,
     apiToken: string,
-    password: string
+    password: string,
+    entryDate: string
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.apiToken = apiToken;
     this.password = password;
+    this.entryDate = entryDate;
   }
 
   public getId(): string {
@@ -62,8 +67,8 @@ export class User {
     return this.password;
   }
 
-  public getCreatedAt(): Date {
-    return this.createdAt;
+  public getEntryDate(): string {
+    return this.entryDate;
   }
 
   public getFullName(): string {
