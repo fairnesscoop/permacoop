@@ -85,6 +85,10 @@ export class Quote {
     return this.project;
   }
 
+  public getOwner(): User {
+    return this.owner;
+  }
+
   public getItems(): QuoteItem[] {
     return this.items;
   }

@@ -23,8 +23,7 @@ export class GetQuotesQueryHandler {
       let amountExcludingVat = 0;
 
       for (const item of quote.getItems()) {
-        amountExcludingVat +=
-          (item.getQuantity() / 100) * (item.getDailyRate() / 100);
+        amountExcludingVat += item.getAmountExcludingVat();
       }
 
       results.push(
