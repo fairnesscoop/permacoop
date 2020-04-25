@@ -11,11 +11,14 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {CreateProjectCommand} from 'src/Application/Project/Command/CreateProjectCommand';
 import {ProjectDTO} from '../DTO/ProjectDTO';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {UserRole} from 'src/Domain/User/User.entity';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
 
 @Controller('projects')
 @ApiUseTags('Project')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreateProjectAction {
   constructor(
     @Inject('ICommandBus')
@@ -23,6 +26,7 @@ export class CreateProjectAction {
   ) {}
 
   @Post()
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Create new project'})
   public async index(@Body() projectDto: ProjectDTO) {
     try {

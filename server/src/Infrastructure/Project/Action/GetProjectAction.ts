@@ -12,11 +12,14 @@ import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {GetProjectByIdQuery} from 'src/Application/Project/Query/GetProjectByIdQuery';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {UserRole} from 'src/Domain/User/User.entity';
 
 @Controller('projects')
 @ApiUseTags('Project')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetProjectAction {
   constructor(
     @Inject('IQueryBus')
@@ -24,6 +27,7 @@ export class GetProjectAction {
   ) {}
 
   @Get(':id')
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Get project'})
   public async index(@Param() dto: IdDTO): Promise<ProjectView> {
     try {

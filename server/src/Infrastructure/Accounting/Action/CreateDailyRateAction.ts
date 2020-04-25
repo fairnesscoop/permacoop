@@ -11,11 +11,14 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {CreateDailyRateCommand} from 'src/Application/Accounting/Command/DailyRate/CreateDailyRateCommand';
 import {DailyRateDTO} from '../DTO/DailyRateDTO';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {UserRole} from 'src/Domain/User/User.entity';
 
 @Controller('daily_rates')
 @ApiUseTags('Accounting')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreateDailyRateAction {
   constructor(
     @Inject('ICommandBus')
@@ -23,6 +26,7 @@ export class CreateDailyRateAction {
   ) {}
 
   @Post()
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Create new daily rate'})
   public async index(@Body() dto: DailyRateDTO) {
     try {

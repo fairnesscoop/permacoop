@@ -12,11 +12,14 @@ import {IQueryBus} from 'src/Application/IQueryBus';
 import {DailyRateView} from 'src/Application/Accounting/View/DailyRate/DailyRateView';
 import {GetDailyRateByIdQuery} from 'src/Application/Accounting/Query/DailyRate/GetDailyRateByIdQuery';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
+import {UserRole} from 'src/Domain/User/User.entity';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
 
 @Controller('daily_rates')
 @ApiUseTags('Accounting')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetDailyRateAction {
   constructor(
     @Inject('IQueryBus')
@@ -24,6 +27,7 @@ export class GetDailyRateAction {
   ) {}
 
   @Get(':id')
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Get daily rate'})
   public async index(@Param() dto: IdDTO): Promise<DailyRateView> {
     try {

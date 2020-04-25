@@ -2,7 +2,7 @@ import {InjectRepository} from '@nestjs/typeorm';
 import {Injectable} from '@nestjs/common';
 import {Repository} from 'typeorm';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
-import {User} from 'src/Domain/User/User.entity';
+import {User, UserRole} from 'src/Domain/User/User.entity';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
@@ -56,8 +56,8 @@ export class UserRepository implements IUserRepository {
       .getOne();
   }
 
-  public findUsers(): Promise<User[]> {
-    return this.repository
+  public findUsers(withAccountant: boolean): Promise<User[]> {
+    const query = this.repository
       .createQueryBuilder('user')
       .select([
         'user.id',
@@ -68,8 +68,13 @@ export class UserRepository implements IUserRepository {
         'user.entryDate'
       ])
       .orderBy('user.lastName', 'ASC')
-      .addOrderBy('user.firstName', 'ASC')
-      .getMany();
+      .addOrderBy('user.firstName', 'ASC');
+
+    if (false === withAccountant) {
+      query.where('user.role <> :role', {role: UserRole.ACCOUNTANT});
+    }
+
+    return query.getMany();
   }
 
   public save(user: User): Promise<User> {

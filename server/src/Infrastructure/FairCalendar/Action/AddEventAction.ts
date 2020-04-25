@@ -10,14 +10,16 @@ import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
-import {User} from 'src/Domain/User/User.entity';
+import {User, UserRole} from 'src/Domain/User/User.entity';
 import {AddEventCommand} from 'src/Application/FairCalendar/Command/AddEventCommand';
 import {EventDTO} from '../DTO/EventDTO';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
 
 @Controller('events')
 @ApiUseTags('Event')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class AddEventAction {
   constructor(
     @Inject('ICommandBus')
@@ -25,6 +27,7 @@ export class AddEventAction {
   ) {}
 
   @Post()
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Add new event'})
   public async index(@Body() dto: EventDTO, @LoggedUser() user: User) {
     try {

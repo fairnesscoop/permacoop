@@ -7,6 +7,7 @@
   import ServerErrors from '../../_components/ServerErrors.svelte';
   import {format} from '../../../normalizer/money';
   import SecuredView from '../../_components/SecuredView.svelte';
+  import SecuredLink from '../../_components/SecuredLink.svelte';
 
   let loading = true;
   let errors = [];
@@ -31,9 +32,12 @@
   <div class="col-md-12">
     <Breadcrumb items={[{title: 'Comptabilité'}, {title: 'TJM'}]} />
     <ServerErrors {errors} />
-    <a class="btn btn-primary mb-3" href="accounting/daily_rates/add">
+    <SecuredLink
+      className="btn btn-primary mb-3"
+      roles={['cooperator', 'employee']}
+      href="accounting/daily_rates/add">
       + Ajouter un TJM
-    </a>
+    </SecuredLink>
     <table class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
@@ -52,11 +56,12 @@
             <td>{dailyRate.customer.name}</td>
             <td>{format(dailyRate.amount)}</td>
             <td>
-              <a
-                class="btn btn-outline-secondary btn-sm"
+              <SecuredLink
+                className="btn btn-outline-secondary btn-sm"
+                roles={['cooperator', 'employee']}
                 href={`accounting/daily_rates/${dailyRate.id}/edit`}>
                 Modifier
-              </a>
+              </SecuredLink>
             </td>
           </tr>
         {/each}

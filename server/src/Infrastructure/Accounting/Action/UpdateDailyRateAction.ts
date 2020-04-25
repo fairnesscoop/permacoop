@@ -13,11 +13,14 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {DailyRateDTO} from '../DTO/DailyRateDTO';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 import {UpdateDailyRateCommand} from 'src/Application/Accounting/Command/DailyRate/UpdateDailyRateCommand';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {UserRole} from 'src/Domain/User/User.entity';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
 
 @Controller('daily_rates')
 @ApiUseTags('Accounting')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class UpdateDailyRateAction {
   constructor(
     @Inject('ICommandBus')
@@ -25,6 +28,7 @@ export class UpdateDailyRateAction {
   ) {}
 
   @Put(':id')
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Update daily rate'})
   public async index(@Param() idDto: IdDTO, @Body() dto: DailyRateDTO) {
     try {
