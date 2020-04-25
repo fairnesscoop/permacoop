@@ -23,6 +23,7 @@
   import Breadcrumb from '../_components/Breadcrumb.svelte';
   import Loader from '../_components/Loader.svelte';
   import ServerErrors from '../_components/ServerErrors.svelte';
+  import SecuredView from '../_components/SecuredView.svelte';
 
   export let filters;
 
@@ -113,22 +114,24 @@
   <title>Permacoop - FairCalendar</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb items={[{title: 'FairCalendar'}]} />
-  <ServerErrors {errors} />
-  <Filters {...filters} on:filter={onFilter} />
-  <Loader {loading} />
-  <div id="calendar" />
-  <div class="mb-1 mt-2">
-    <span class="badge badge-success">Mission</span>
-    <span class="badge badge-secondary">Support // Podcast</span>
-    <span class="badge badge-info">Dojo</span>
-    <span class="badge badge-warning">Formation // Conf // Meetup</span>
-    <span class="badge badge-primary">Vacances</span>
-    <span class="badge badge-danger">Congé maladie</span>
-    <span class="badge badge-dark">Autres</span>
+<SecuredView roles={['cooperator', 'employee']}>
+  <div class="col-md-12">
+    <Breadcrumb items={[{title: 'FairCalendar'}]} />
+    <ServerErrors {errors} />
+    <Filters {...filters} on:filter={onFilter} />
+    <Loader {loading} />
+    <div id="calendar" />
+    <div class="mb-1 mt-2">
+      <span class="badge badge-success">Mission</span>
+      <span class="badge badge-secondary">Support // Podcast</span>
+      <span class="badge badge-info">Dojo</span>
+      <span class="badge badge-warning">Formation // Conf // Meetup</span>
+      <span class="badge badge-primary">Vacances</span>
+      <span class="badge badge-danger">Congé maladie</span>
+      <span class="badge badge-dark">Autres</span>
+    </div>
+    {#if data.overview}
+      <Overview overview={data.overview} />
+    {/if}
   </div>
-  {#if data.overview}
-    <Overview overview={data.overview} />
-  {/if}
-</div>
+</SecuredView>

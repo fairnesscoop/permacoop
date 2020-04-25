@@ -16,8 +16,10 @@
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../_components/ServerErrors.svelte';
+  import SecuredView from '../_components/SecuredView.svelte';
 
   export let event;
+
   const taskId = event.task ? event.task.id : null;
   const projectId = event.project ? event.project.id : null;
   const time = String(event.time);
@@ -52,11 +54,13 @@
   <title>Permacoop - {title}</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb
-    items={[{title: 'FairCalendar', path: 'faircalendar'}, {title: title}]} />
-  <ServerErrors {errors} />
-  <Form on:save={onSave} event={{...event, taskId, projectId, time}}>
-    <button class="btn btn-danger" on:click={onDelete}>Supprimer</button>
-  </Form>
-</div>
+<SecuredView roles={['cooperator', 'employee']}>
+  <div class="col-md-12">
+    <Breadcrumb
+      items={[{title: 'FairCalendar', path: 'faircalendar'}, {title: title}]} />
+    <ServerErrors {errors} />
+    <Form on:save={onSave} event={{...event, taskId, projectId, time}}>
+      <button class="btn btn-danger" on:click={onDelete}>Supprimer</button>
+    </Form>
+  </div>
+</SecuredView>

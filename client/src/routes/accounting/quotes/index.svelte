@@ -8,6 +8,8 @@
   import Loader from '../../_components/Loader.svelte';
   import ServerErrors from '../../_components/ServerErrors.svelte';
   import {format} from '../../../normalizer/money';
+  import SecuredView from '../../_components/SecuredView.svelte';
+  import SecuredLink from '../../_components/SecuredLink.svelte';
 
   let loading = true;
   let errors = [];
@@ -28,44 +30,51 @@
   <title>Permacoop - Devis</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb items={[{title: 'Comptabilité'}, {title: 'Devis'}]} />
-  <ServerErrors {errors} />
-  <a class="btn btn-primary mb-3" href="accounting/quotes/add">
-    + Créer un nouveau devis
-  </a>
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Numéro de devis</th>
-        <th>Nom du client</th>
-        <th>Statut</th>
-        <th>Montant TTC</th>
-        <th />
-      </tr>
-    </thead>
-    <tbody>
-      {#each data as quote (quote.id)}
+<SecuredView roles={['cooperator', 'employee']}>
+  <div class="col-md-12">
+    <Breadcrumb items={[{title: 'Comptabilité'}, {title: 'Devis'}]} />
+    <ServerErrors {errors} />
+    <SecuredLink
+      className="btn btn-primary mb-3"
+      href="accounting/quotes/add"
+      roles={['cooperator', 'employee']}>
+      + Créer un nouveau devis
+    </SecuredLink>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
         <tr>
-          <td>
-            {dateFormat(new Date(quote.createdAt), 'dd/MM/yyyy', {locale: fr})}
-          </td>
-          <td>{quote.quoteId}</td>
-          <td>
-            {quote.customer.name}
-            {#if quote.project}({quote.project.name}){/if}
-          </td>
-          <td>
-            <span class="badge badge-{quote.status}">{quote.status}</span>
-          </td>
-          <td>{format(quote.amountInclusiveOfTaxe)}</td>
-          <td>
-            <a class="btn btn-outline-secondary btn-sm" href={''}>Modifier</a>
-          </td>
+          <th>Date</th>
+          <th>Numéro de devis</th>
+          <th>Nom du client</th>
+          <th>Statut</th>
+          <th>Montant TTC</th>
+          <th />
         </tr>
-      {/each}
-    </tbody>
-  </table>
-  <Loader {loading} />
-</div>
+      </thead>
+      <tbody>
+        {#each data as quote (quote.id)}
+          <tr>
+            <td>
+              {dateFormat(new Date(quote.createdAt), 'dd/MM/yyyy', {
+                locale: fr
+              })}
+            </td>
+            <td>{quote.quoteId}</td>
+            <td>
+              {quote.customer.name}
+              {#if quote.project}({quote.project.name}){/if}
+            </td>
+            <td>
+              <span class="badge badge-{quote.status}">{quote.status}</span>
+            </td>
+            <td>{format(quote.amountInclusiveOfTaxe)}</td>
+            <td>
+              <a class="btn btn-outline-secondary btn-sm" href={''}>Modifier</a>
+            </td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+    <Loader {loading} />
+  </div>
+</SecuredView>

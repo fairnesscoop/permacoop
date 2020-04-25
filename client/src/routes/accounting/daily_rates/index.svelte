@@ -6,6 +6,7 @@
   import Loader from '../../_components/Loader.svelte';
   import ServerErrors from '../../_components/ServerErrors.svelte';
   import {format} from '../../../normalizer/money';
+  import SecuredView from '../../_components/SecuredView.svelte';
 
   let loading = true;
   let errors = [];
@@ -26,39 +27,41 @@
   <title>Permacoop - TJM</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb items={[{title: 'Comptabilité'}, {title: 'TJM'}]} />
-  <ServerErrors {errors} />
-  <a class="btn btn-primary mb-3" href="accounting/daily_rates/add">
-    + Ajouter un TJM
-  </a>
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Coopérateur</th>
-        <th>Mission</th>
-        <th>Client</th>
-        <th>Montant HT</th>
-        <th />
-      </tr>
-    </thead>
-    <tbody>
-      {#each data as dailyRate (dailyRate.id)}
+<SecuredView roles={['cooperator', 'employee']}>
+  <div class="col-md-12">
+    <Breadcrumb items={[{title: 'Comptabilité'}, {title: 'TJM'}]} />
+    <ServerErrors {errors} />
+    <a class="btn btn-primary mb-3" href="accounting/daily_rates/add">
+      + Ajouter un TJM
+    </a>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
         <tr>
-          <td>{dailyRate.user.firstName} {dailyRate.user.lastName}</td>
-          <td>{dailyRate.task.name}</td>
-          <td>{dailyRate.customer.name}</td>
-          <td>{format(dailyRate.amount)}</td>
-          <td>
-            <a
-              class="btn btn-outline-secondary btn-sm"
-              href={`accounting/daily_rates/${dailyRate.id}/edit`}>
-              Modifier
-            </a>
-          </td>
+          <th>Coopérateur</th>
+          <th>Mission</th>
+          <th>Client</th>
+          <th>Montant HT</th>
+          <th />
         </tr>
-      {/each}
-    </tbody>
-  </table>
-  <Loader {loading} />
-</div>
+      </thead>
+      <tbody>
+        {#each data as dailyRate (dailyRate.id)}
+          <tr>
+            <td>{dailyRate.user.firstName} {dailyRate.user.lastName}</td>
+            <td>{dailyRate.task.name}</td>
+            <td>{dailyRate.customer.name}</td>
+            <td>{format(dailyRate.amount)}</td>
+            <td>
+              <a
+                class="btn btn-outline-secondary btn-sm"
+                href={`accounting/daily_rates/${dailyRate.id}/edit`}>
+                Modifier
+              </a>
+            </td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+    <Loader {loading} />
+  </div>
+</SecuredView>

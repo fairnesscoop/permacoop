@@ -6,6 +6,7 @@
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../../normalizer/errors';
   import ServerErrors from '../../_components/ServerErrors.svelte';
+  import SecuredView from '../../_components/SecuredView.svelte';
 
   let errors = [];
   let title = 'Créer un nouveau devis';
@@ -25,9 +26,11 @@
   <title>Permacoop - {title}</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb
-    items={[{title: 'Comptabilité'}, {path: 'accounting/quotes', title: 'Devis'}, {title}]} />
-  <ServerErrors {errors} />
-  <Form on:save={onSave} />
-</div>
+<SecuredView roles={['cooperator', 'employee']}>
+  <div class="col-md-12">
+    <Breadcrumb
+      items={[{title: 'Comptabilité'}, {path: 'accounting/quotes', title: 'Devis'}, {title}]} />
+    <ServerErrors {errors} />
+    <Form on:save={onSave} />
+  </div>
+</SecuredView>

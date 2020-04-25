@@ -3,6 +3,7 @@
   import {TokenStorage} from '../../utils/tokenStorage';
 
   export let segment;
+  let grantedRoles = ['cooperator', 'employee'];
 
   const handleLogout = () => {
     TokenStorage.remove();
@@ -31,9 +32,11 @@
   {#if process.browser && $user}
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item {segment === 'faircalendar' ? 'active' : ''}">
-          <a class="nav-link" href="faircalendar">FairCalendar</a>
-        </li>
+        {#if grantedRoles.includes($user.role)}
+          <li class="nav-item {segment === 'faircalendar' ? 'active' : ''}">
+            <a class="nav-link" href="faircalendar">FairCalendar</a>
+          </li>
+        {/if}
         <li
           class="nav-item dropdown {segment === 'accounting' ? 'active' : ''}">
           <a
@@ -44,22 +47,26 @@
             Comptabilité
           </a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="accounting/quotes">Devis</a>
-            <a class="dropdown-item" href="accounting/daily_rates">TJM</a>
+            {#if grantedRoles.includes($user.role)}
+              <a class="dropdown-item" href="accounting/quotes">Devis</a>
+              <a class="dropdown-item" href="accounting/daily_rates">TJM</a>
+            {/if}
           </div>
         </li>
-        <li class="nav-item {segment === 'projects' ? 'active' : ''}">
-          <a class="nav-link" href="projects">Projets</a>
-        </li>
-        <li class="nav-item {segment === 'customers' ? 'active' : ''}">
-          <a class="nav-link" href="customers">Clients</a>
-        </li>
-        <li class="nav-item {segment === 'tasks' ? 'active' : ''}">
-          <a class="nav-link" href="tasks">Missions</a>
-        </li>
-        <li class="nav-item {segment === 'users' ? 'active' : ''}">
-          <a class="nav-link" href="users">Utilisateurs</a>
-        </li>
+        {#if grantedRoles.includes($user.role)}
+          <li class="nav-item {segment === 'projects' ? 'active' : ''}">
+            <a class="nav-link" href="projects">Projets</a>
+          </li>
+          <li class="nav-item {segment === 'customers' ? 'active' : ''}">
+            <a class="nav-link" href="customers">Clients</a>
+          </li>
+          <li class="nav-item {segment === 'tasks' ? 'active' : ''}">
+            <a class="nav-link" href="tasks">Missions</a>
+          </li>
+          <li class="nav-item {segment === 'users' ? 'active' : ''}">
+            <a class="nav-link" href="users">Utilisateurs</a>
+          </li>
+        {/if}
       </ul>
       <ul class="navbar-nav justify-content-end">
         <li class="nav-item dropdown">

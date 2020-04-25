@@ -6,6 +6,8 @@
   import ServerErrors from '../_components/ServerErrors.svelte';
   import RowDetail from './_RowDetail.svelte';
   import {client as axios} from '../../utils/axios';
+  import SecuredView from '../_components/SecuredView.svelte';
+  import SecuredLink from '../_components/SecuredLink.svelte';
 
   let pageTitle = 'Missions';
   let loading = true;
@@ -27,22 +29,29 @@
   <title>Permacoop - {pageTitle}</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb items={[{title: pageTitle}]} />
-  <ServerErrors {errors} />
-  <a class="btn btn-primary mb-3" href="tasks/add">+ Ajouter une mission</a>
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Mission</th>
-        <th />
-      </tr>
-    </thead>
-    <tbody>
-      {#each data as task (task.id)}
-        <RowDetail {task} />
-      {/each}
-    </tbody>
-  </table>
-  <Loader {loading} />
-</div>
+<SecuredView roles={['cooperator', 'employee']}>
+  <div class="col-md-12">
+    <Breadcrumb items={[{title: pageTitle}]} />
+    <ServerErrors {errors} />
+    <SecuredLink
+      className="btn btn-primary mb-3"
+      href="tasks/add"
+      roles={['cooperator', 'employee']}>
+      + Ajouter une mission
+    </SecuredLink>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Mission</th>
+          <th />
+        </tr>
+      </thead>
+      <tbody>
+        {#each data as task (task.id)}
+          <RowDetail {task} />
+        {/each}
+      </tbody>
+    </table>
+    <Loader {loading} />
+  </div>
+</SecuredView>

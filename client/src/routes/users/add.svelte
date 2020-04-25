@@ -4,6 +4,7 @@
   import {client as axios} from '../../utils/axios';
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../normalizer/errors';
+  import SecuredView from '../_components/SecuredView.svelte';
   import ServerErrors from '../_components/ServerErrors.svelte';
 
   let pageTitle = 'Ajouter un utilisateur';
@@ -24,9 +25,11 @@
   <title>Permacoop - {pageTitle}</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb
-    items={[{title: 'Utilisateurs', path: 'users'}, {title: pageTitle}]} />
-  <ServerErrors {errors} />
-  <Form on:save={onSave} />
-</div>
+<SecuredView roles={['cooperator']}>
+  <div class="col-md-12">
+    <Breadcrumb
+      items={[{title: 'Utilisateurs', path: 'users'}, {title: pageTitle}]} />
+    <ServerErrors {errors} />
+    <Form on:save={onSave} />
+  </div>
+</SecuredView>
