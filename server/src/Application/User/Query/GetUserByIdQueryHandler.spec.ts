@@ -1,6 +1,6 @@
 import {mock, instance, when, verify} from 'ts-mockito';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
-import {User} from 'src/Domain/User/User.entity';
+import {User, UserRole} from 'src/Domain/User/User.entity';
 import {UserView} from 'src/Application/User/View/UserView';
 import {GetUserByIdQueryHandler} from './GetUserByIdQueryHandler';
 import {GetUserByIdQuery} from './GetUserByIdQuery';
@@ -19,6 +19,8 @@ describe('GetUserByIdQueryHandler', () => {
     when(user.getFirstName()).thenReturn('Mathieu');
     when(user.getLastName()).thenReturn('MARCHOIS');
     when(user.getEmail()).thenReturn('mathieu@fairness.coop');
+    when(user.getEntryDate()).thenReturn('2019-09-19');
+    when(user.getRole()).thenReturn(UserRole.COOPERATOR);
     when(
       userRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
     ).thenResolve(instance(user));
@@ -28,7 +30,9 @@ describe('GetUserByIdQueryHandler', () => {
         'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
         'Mathieu',
         'MARCHOIS',
-        'mathieu@fairness.coop'
+        'mathieu@fairness.coop',
+        UserRole.COOPERATOR,
+        '2019-09-19'
       )
     );
 

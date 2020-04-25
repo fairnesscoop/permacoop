@@ -22,7 +22,9 @@ export class GetUserByIdQueryHandler {
       user.getId(),
       user.getFirstName(),
       user.getLastName(),
-      user.getEmail()
+      user.getEmail(),
+      user.getRole(),
+      user.getEntryDate()
     );
   }
 }

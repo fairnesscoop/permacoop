@@ -3,7 +3,7 @@
   import {goto} from '@sapper/app';
   import Breadcrumb from '../_components/Breadcrumb.svelte';
   import {client as axios} from '../../utils/axios';
-  import Form from '../users/_Form.svelte';
+  import Form from './_Form.svelte';
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../_components/ServerErrors.svelte';
 

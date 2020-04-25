@@ -36,6 +36,7 @@ export class LoginQueryHandler {
       user.getFirstName(),
       user.getLastName(),
       user.getEmail(),
+      user.getRole(),
       user.getApiToken()
     );
   }

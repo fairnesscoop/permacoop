@@ -1,5 +1,11 @@
 import {Entity, Column, PrimaryGeneratedColumn, Index} from 'typeorm';
 
+export enum UserRole {
+  COOPERATOR = 'cooperator',
+  EMPLOYEE = 'employee',
+  ACCOUNTANT = 'accountant'
+}
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -21,8 +27,11 @@ export class User {
   @Column({type: 'varchar', nullable: false})
   private password: string;
 
-  @Column({type: 'timestamp', nullable: false})
+  @Column({type: 'timestamp', nullable: true})
   private entryDate: string;
+
+  @Column('enum', {enum: UserRole, nullable: false})
+  private role: UserRole;
 
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   private createdAt: Date;
@@ -33,13 +42,15 @@ export class User {
     email: string,
     apiToken: string,
     password: string,
-    entryDate: string
+    role: UserRole,
+    entryDate?: string
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.apiToken = apiToken;
     this.password = password;
+    this.role = role;
     this.entryDate = entryDate;
   }
 
@@ -69,6 +80,10 @@ export class User {
 
   public getEntryDate(): string {
     return this.entryDate;
+  }
+
+  public getRole(): UserRole {
+    return this.role;
   }
 
   public getFullName(): string {

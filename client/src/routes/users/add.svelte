@@ -6,7 +6,7 @@
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../_components/ServerErrors.svelte';
 
-  let pageTitle = 'Ajouter un coopérateur';
+  let pageTitle = 'Ajouter un utilisateur';
   let errors = [];
 
   const onSave = async e => {
@@ -26,7 +26,7 @@
 
 <div class="col-md-12">
   <Breadcrumb
-    items={[{title: 'Coopérateurs', path: 'users'}, {title: pageTitle}]} />
+    items={[{title: 'Utilisateurs', path: 'users'}, {title: pageTitle}]} />
   <ServerErrors {errors} />
   <Form on:save={onSave} />
 </div>

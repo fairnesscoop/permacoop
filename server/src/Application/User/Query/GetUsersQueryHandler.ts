@@ -21,7 +21,9 @@ export class GetUsersQueryHandler {
           user.getId(),
           user.getFirstName(),
           user.getLastName(),
-          user.getEmail()
+          user.getEmail(),
+          user.getRole(),
+          user.getEntryDate()
         )
       );
     }

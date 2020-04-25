@@ -14,10 +14,10 @@
   const handleSubmit = async () => {
     try {
       const {data} = await axios.post('login', {email, password});
-      const {apiToken, firstName, lastName, id} = data;
+      const {apiToken, firstName, lastName, role, id} = data;
 
       TokenStorage.save(apiToken);
-      $user = {firstName, lastName, id};
+      $user = {firstName, lastName, id, role};
 
       return goto('/');
     } catch (e) {

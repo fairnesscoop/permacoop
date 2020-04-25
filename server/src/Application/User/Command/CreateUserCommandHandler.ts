@@ -3,10 +3,11 @@ import {Inject} from '@nestjs/common';
 import {CreateUserCommand} from './CreateUserCommand';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IEncryption} from 'src/Application/IEncryption';
-import {User} from 'src/Domain/User/User.entity';
+import {User, UserRole} from 'src/Domain/User/User.entity';
 import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
 import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
 import {IDateUtils} from 'src/Application/IDateUtils';
+import {EntryDateMissingException} from 'src/Domain/User/Exception/EntryDateMissingException';
 
 @CommandHandler(CreateUserCommand)
 export class CreateUserCommandHandler {
@@ -21,16 +22,19 @@ export class CreateUserCommandHandler {
   ) {}
 
   public async execute(command: CreateUserCommand): Promise<string> {
-    const {firstName, lastName, password, entryDate} = command;
+    const {firstName, lastName, password, entryDate, role} = command;
     const email = command.email.toLowerCase();
 
     if (true === (await this.isEmailAlreadyExist.isSatisfiedBy(email))) {
       throw new EmailAlreadyExistException();
     }
 
+    if (role !== UserRole.ACCOUNTANT && !entryDate) {
+      throw new EntryDateMissingException();
+    }
+
     const hashPassword = await this.encryption.hash(password);
     const apiToken = await this.encryption.hash(email + password);
-
     const user = await this.userRepository.save(
       new User(
         firstName,
@@ -38,7 +42,8 @@ export class CreateUserCommandHandler {
         email,
         apiToken,
         hashPassword,
-        this.dateUtils.format(entryDate, 'y-MM-dd')
+        role,
+        entryDate ? this.dateUtils.format(entryDate, 'y-MM-dd') : null
       )
     );
 

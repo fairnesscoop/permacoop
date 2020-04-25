@@ -2,7 +2,7 @@ import {mock, instance, verify, when} from 'ts-mockito';
 import {UnauthorizedException} from '@nestjs/common';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
 import {BearerStrategy} from 'src/Infrastructure/User/Security/BearerStrategy';
-import {User} from 'src/Domain/User/User.entity';
+import {User, UserRole} from 'src/Domain/User/User.entity';
 
 describe('BearerStrategy', () => {
   let bearerStrategy: BearerStrategy;
@@ -31,6 +31,7 @@ describe('BearerStrategy', () => {
       'mathieu@fairness.coop',
       'token',
       'password',
+      UserRole.COOPERATOR,
       '2019-09-12'
     );
 

@@ -6,7 +6,7 @@ import {IDailyRateRepository} from 'src/Domain/Accounting/Repository/IDailyRateR
 import {DailyRateView} from '../../View/DailyRate/DailyRateView';
 import {DailyRateNotFoundException} from 'src/Domain/Accounting/Exception/DailyRateNotFoundException';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {UserView} from 'src/Application/User/View/UserView';
+import {UserSummaryView} from 'src/Application/User/View/UserSummaryView';
 
 @QueryHandler(GetDailyRateByIdQuery)
 export class GetDailyRateByIdQueryHandler {
@@ -28,11 +28,10 @@ export class GetDailyRateByIdQueryHandler {
     return new DailyRateView(
       dailyRate.getId(),
       dailyRate.getAmount() / 100,
-      new UserView(
+      new UserSummaryView(
         user.getId(),
         user.getFirstName(),
-        user.getLastName(),
-        user.getEmail()
+        user.getLastName()
       ),
       new TaskView(task.getId(), task.getName()),
       new CustomerView(customer.getId(), customer.getName())

@@ -5,7 +5,7 @@ import {EncryptionAdapter} from 'src/Infrastructure/Adapter/EncryptionAdapter';
 import {LoginQuery} from 'src/Application/User/Query/LoginQuery';
 import {PasswordNotMatchException} from 'src/Domain/User/Exception/PasswordNotMatchException';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
-import {User} from 'src/Domain/User/User.entity';
+import {User, UserRole} from 'src/Domain/User/User.entity';
 import {AuthenticatedView} from 'src/Application/User/View/AuthenticatedView';
 
 describe('LoginQueryHandler', () => {
@@ -63,6 +63,7 @@ describe('LoginQueryHandler', () => {
     when(user.getEmail()).thenReturn(email);
     when(user.getPassword()).thenReturn('hash');
     when(user.getApiToken()).thenReturn('apiToken');
+    when(user.getRole()).thenReturn(UserRole.COOPERATOR);
 
     expect(await queryHandler.execute(query)).toMatchObject(
       new AuthenticatedView(
@@ -70,6 +71,7 @@ describe('LoginQueryHandler', () => {
         'Mathieu',
         'MARCHOIS',
         email,
+        UserRole.COOPERATOR,
         'apiToken'
       )
     );
@@ -82,5 +84,6 @@ describe('LoginQueryHandler', () => {
     verify(user.getEmail()).once();
     verify(user.getPassword()).once();
     verify(user.getApiToken()).once();
+    verify(user.getRole()).once();
   });
 });

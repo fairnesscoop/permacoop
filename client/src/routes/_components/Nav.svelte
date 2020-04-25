@@ -58,7 +58,7 @@
           <a class="nav-link" href="tasks">Missions</a>
         </li>
         <li class="nav-item {segment === 'users' ? 'active' : ''}">
-          <a class="nav-link" href="users">Coopérateurs</a>
+          <a class="nav-link" href="users">Utilisateurs</a>
         </li>
       </ul>
       <ul class="navbar-nav justify-content-end">
