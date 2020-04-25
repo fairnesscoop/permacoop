@@ -10,16 +10,18 @@ import {
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
-import {User} from 'src/Domain/User/User.entity';
+import {User, UserRole} from 'src/Domain/User/User.entity';
 import {EventDTO} from '../DTO/EventDTO';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateEventCommand} from 'src/Application/FairCalendar/Command/UpdateEventCommand';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
 
 @Controller('events')
 @ApiUseTags('Event')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class UpdateEventAction {
   constructor(
     @Inject('ICommandBus')
@@ -27,6 +29,7 @@ export class UpdateEventAction {
   ) {}
 
   @Put(':id')
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Update event'})
   public async index(
     @Param() idDto: IdDTO,

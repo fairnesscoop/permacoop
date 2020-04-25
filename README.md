@@ -77,7 +77,7 @@ make api-test
 
 ## Features
 
-- Cooperators management
+- Users management
 - Tasks management
 - Projects management
 - Customers management

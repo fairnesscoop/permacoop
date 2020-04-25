@@ -13,11 +13,14 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateCustomerCommand} from 'src/Application/Customer/Command/UpdateCustomerCommand';
 import {CustomerDTO} from '../DTO/CustomerDTO';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {UserRole} from 'src/Domain/User/User.entity';
 
 @Controller('customers')
 @ApiUseTags('Customer')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class UpdateCustomerAction {
   constructor(
     @Inject('ICommandBus')
@@ -25,6 +28,7 @@ export class UpdateCustomerAction {
   ) {}
 
   @Put(':id')
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Update customer'})
   public async index(@Param() dto: IdDTO, @Body() customerDto: CustomerDTO) {
     try {

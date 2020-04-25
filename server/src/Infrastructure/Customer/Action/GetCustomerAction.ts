@@ -12,11 +12,14 @@ import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {GetCustomerByIdQuery} from 'src/Application/Customer/Query/GetCustomerByIdQuery';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
+import {UserRole} from 'src/Domain/User/User.entity';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
 
 @Controller('customers')
 @ApiUseTags('Customer')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetCustomerAction {
   constructor(
     @Inject('IQueryBus')
@@ -24,6 +27,7 @@ export class GetCustomerAction {
   ) {}
 
   @Get(':id')
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Get customer'})
   public async index(@Param() dto: IdDTO): Promise<CustomerView> {
     try {

@@ -14,11 +14,14 @@ import {UserView} from 'src/Application/User/View/UserView';
 import {UserDTO} from '../DTO/UserDTO';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetUserByIdQuery} from 'src/Application/User/Query/GetUserByIdQuery';
+import {Roles} from '../Decorator/Roles';
+import {RolesGuard} from '../Security/RolesGuard';
+import {UserRole} from 'src/Domain/User/User.entity';
 
 @Controller('users')
 @ApiUseTags('User')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreateUserAction {
   constructor(
     @Inject('ICommandBus')
@@ -28,6 +31,7 @@ export class CreateUserAction {
   ) {}
 
   @Post()
+  @Roles(UserRole.COOPERATOR)
   @ApiOperation({title: 'Create new user account'})
   public async index(@Body() userDto: UserDTO): Promise<UserView> {
     try {

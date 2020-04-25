@@ -13,11 +13,14 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateProjectCommand} from 'src/Application/Project/Command/UpdateProjectCommand';
 import {ProjectDTO} from '../DTO/ProjectDTO';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
+import {UserRole} from 'src/Domain/User/User.entity';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
 
 @Controller('projects')
 @ApiUseTags('Project')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class UpdateProjectAction {
   constructor(
     @Inject('ICommandBus')
@@ -25,6 +28,7 @@ export class UpdateProjectAction {
   ) {}
 
   @Put(':id')
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Update project'})
   public async index(@Param() dto: IdDTO, @Body() projectDto: ProjectDTO) {
     try {

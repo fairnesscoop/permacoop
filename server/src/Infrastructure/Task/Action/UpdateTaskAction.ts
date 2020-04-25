@@ -13,11 +13,14 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateTaskCommand} from 'src/Application/Task/Command/UpdateTaskCommand';
 import {TaskDTO} from '../DTO/TaskDTO';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {UserRole} from 'src/Domain/User/User.entity';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
 
 @Controller('tasks')
 @ApiUseTags('Task')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class UpdateTaskAction {
   constructor(
     @Inject('ICommandBus')
@@ -25,6 +28,7 @@ export class UpdateTaskAction {
   ) {}
 
   @Put(':id')
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Update task'})
   public async index(@Param() dto: IdDTO, @Body() taskDto: TaskDTO) {
     try {

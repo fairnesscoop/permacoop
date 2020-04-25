@@ -16,7 +16,7 @@
 
   onMount(async () => {
     try {
-      ({data} = await axios.get('users'));
+      ({data} = await axios.get('users', {params: {withAccountant: true}}));
     } catch (e) {
       errors = errorNormalizer(e);
     } finally {

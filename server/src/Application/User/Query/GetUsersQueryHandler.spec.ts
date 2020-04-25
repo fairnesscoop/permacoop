@@ -25,7 +25,7 @@ describe('GetUsersQueryHandler', () => {
     when(user2.getRole()).thenReturn(UserRole.COOPERATOR);
     when(user2.getEntryDate()).thenReturn('2019-09-19');
 
-    when(userRepository.findUsers()).thenResolve([
+    when(userRepository.findUsers(true)).thenResolve([
       instance(user1),
       instance(user2)
     ]);
@@ -50,20 +50,20 @@ describe('GetUsersQueryHandler', () => {
       )
     ];
 
-    expect(await handler.execute(new GetUsersQuery())).toMatchObject(
+    expect(await handler.execute(new GetUsersQuery(true))).toMatchObject(
       expectedResult
     );
-    verify(userRepository.findUsers()).once();
+    verify(userRepository.findUsers(true)).once();
   });
 
   it('testGetEmptyUsers', async () => {
     const userRepository = mock(UserRepository);
 
-    when(userRepository.findUsers()).thenResolve([]);
+    when(userRepository.findUsers(false)).thenResolve([]);
 
     const handler = new GetUsersQueryHandler(instance(userRepository));
 
-    expect(await handler.execute(new GetUsersQuery())).toMatchObject([]);
-    verify(userRepository.findUsers()).once();
+    expect(await handler.execute(new GetUsersQuery(false))).toMatchObject([]);
+    verify(userRepository.findUsers(false)).once();
   });
 });
