@@ -13,6 +13,7 @@
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../_components/ServerErrors.svelte';
+  import SecuredView from '../_components/SecuredView.svelte';
 
   export let date;
 
@@ -40,11 +41,13 @@
   <title>Permacoop - {pageTitle}</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb
-    items={[{title: 'FairCalendar', path: 'faircalendar'}, {title: pageTitle}]} />
-  <ServerErrors {errors} />
-  <Form
-    on:save={onSave}
-    event={{date, type: 'mission', time: '100', summary: '', taskId: null, projectId: null}} />
-</div>
+<SecuredView roles={['cooperator', 'employee']}>
+  <div class="col-md-12">
+    <Breadcrumb
+      items={[{title: 'FairCalendar', path: 'faircalendar'}, {title: pageTitle}]} />
+    <ServerErrors {errors} />
+    <Form
+      on:save={onSave}
+      event={{date, type: 'mission', time: '100', summary: '', taskId: null, projectId: null}} />
+  </div>
+</SecuredView>

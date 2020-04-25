@@ -5,6 +5,7 @@
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../_components/ServerErrors.svelte';
   import Form from './_Form.svelte';
+  import SecuredView from '../_components/SecuredView.svelte';
 
   let pageTitle = 'Ajouter un client';
   let errors = [];
@@ -24,11 +25,13 @@
   <title>Permacoop - {pageTitle}</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb
-    items={[{title: 'Clients', path: 'customers'}, {title: pageTitle}]} />
-  <ServerErrors {errors} />
-  <Form
-    customer={{name: '', address: {street: '', city: '', zipCode: '', country: 'FR'}}}
-    on:save={onSave} />
-</div>
+<SecuredView roles={['cooperator', 'employee']}>
+  <div class="col-md-12">
+    <Breadcrumb
+      items={[{title: 'Clients', path: 'customers'}, {title: pageTitle}]} />
+    <ServerErrors {errors} />
+    <Form
+      customer={{name: '', address: {street: '', city: '', zipCode: '', country: 'FR'}}}
+      on:save={onSave} />
+  </div>
+</SecuredView>
