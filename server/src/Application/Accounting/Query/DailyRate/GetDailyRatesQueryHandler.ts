@@ -3,7 +3,7 @@ import {Inject} from '@nestjs/common';
 import {GetDailyRatesQuery} from './GetDailyRatesQuery';
 import {IDailyRateRepository} from 'src/Domain/Accounting/Repository/IDailyRateRepository';
 import {DailyRateView} from '../../View/DailyRate/DailyRateView';
-import {UserView} from 'src/Application/User/View/UserView';
+import {UserSummaryView} from 'src/Application/User/View/UserSummaryView';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 
@@ -27,11 +27,10 @@ export class GetDailyRatesQueryHandler {
         new DailyRateView(
           dailyRate.getId(),
           dailyRate.getAmount() / 100,
-          new UserView(
+          new UserSummaryView(
             user.getId(),
             user.getFirstName(),
-            user.getLastName(),
-            user.getEmail()
+            user.getLastName()
           ),
           new TaskView(task.getId(), task.getName()),
           new CustomerView(customer.getId(), customer.getName())

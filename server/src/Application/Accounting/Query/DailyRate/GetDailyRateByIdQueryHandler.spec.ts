@@ -5,7 +5,7 @@ import {Task} from 'src/Domain/Task/Task.entity';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 import {DailyRateRepository} from 'src/Infrastructure/Accounting/Repository/DailyRateRepository';
 import {DailyRateView} from '../../View/DailyRate/DailyRateView';
-import {UserView} from 'src/Application/User/View/UserView';
+import {UserSummaryView} from 'src/Application/User/View/UserSummaryView';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {User} from 'src/Domain/User/User.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
@@ -26,11 +26,10 @@ describe('GetDailyRateByIdQueryHandler', () => {
     const expectedResult = new DailyRateView(
       'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
       620.6,
-      new UserView(
+      new UserSummaryView(
         'deffa668-b9af-4a52-94dd-61a35401b917',
         'Mathieu',
-        'MARCHOIS',
-        'mathieu.marchois@fairness.coop'
+        'MARCHOIS'
       ),
       new TaskView('d54f15d6-1a1d-47e8-8672-9f46018f9960', 'Development'),
       new CustomerView('c6434c49-216b-41b3-a30a-79a3eb1198ec', 'Radio France')

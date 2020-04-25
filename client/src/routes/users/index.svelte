@@ -7,7 +7,7 @@
   import ServerErrors from '../_components/ServerErrors.svelte';
   import RowDetail from './_RowDetail.svelte';
 
-  let title = 'Coopérateurs';
+  let title = 'Utilisateurs';
   let loading = true;
   let errors = [];
   let data = [];
@@ -30,13 +30,15 @@
 <div class="col-md-12">
   <Breadcrumb items={[{title}]} />
   <ServerErrors {errors} />
-  <a class="btn btn-primary mb-3" href="users/add">+ Ajouter un coopérateur</a>
+  <a class="btn btn-primary mb-3" href="users/add">+ Ajouter un utilisateur</a>
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
         <th>Prénom</th>
         <th>Nom</th>
-        <th>Adresse e-mail</th>
+        <th>Email</th>
+        <th>Date d'entrée</th>
+        <th>Role</th>
       </tr>
     </thead>
     <tbody>

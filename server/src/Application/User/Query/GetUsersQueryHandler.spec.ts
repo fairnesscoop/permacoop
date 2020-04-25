@@ -2,7 +2,7 @@ import {mock, instance, when, verify} from 'ts-mockito';
 import {GetUsersQueryHandler} from './GetUsersQueryHandler';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
 import {GetUsersQuery} from './GetUsersQuery';
-import {User} from 'src/Domain/User/User.entity';
+import {User, UserRole} from 'src/Domain/User/User.entity';
 import {UserView} from '../View/UserView';
 
 describe('GetUsersQueryHandler', () => {
@@ -14,12 +14,16 @@ describe('GetUsersQueryHandler', () => {
     when(user1.getFirstName()).thenReturn('Mathieu');
     when(user1.getLastName()).thenReturn('MARCHOIS');
     when(user1.getEmail()).thenReturn('mathieu@fairness.coop');
+    when(user1.getRole()).thenReturn(UserRole.COOPERATOR);
+    when(user1.getEntryDate()).thenReturn('2019-09-19');
 
     const user2 = mock(User);
     when(user2.getId()).thenReturn('0d7fee8a-ce9e-4bff-a93a-9cffafac5f1c');
     when(user2.getFirstName()).thenReturn('Hélène');
     when(user2.getLastName()).thenReturn('MARCHOIS');
     when(user2.getEmail()).thenReturn('helene@fairness.coop');
+    when(user2.getRole()).thenReturn(UserRole.COOPERATOR);
+    when(user2.getEntryDate()).thenReturn('2019-09-19');
 
     when(userRepository.findUsers()).thenResolve([
       instance(user1),
@@ -32,13 +36,17 @@ describe('GetUsersQueryHandler', () => {
         'ae2fd71d-63be-4a27-b94d-213f2cfdb44d',
         'Mathieu',
         'MARCHOIS',
-        'mathieu@fairness.coop'
+        'mathieu@fairness.coop',
+        UserRole.COOPERATOR,
+        '2019-09-19'
       ),
       new UserView(
         '0d7fee8a-ce9e-4bff-a93a-9cffafac5f1c',
         'Hélène',
         'MARCHOIS',
-        'helene@fairness.coop'
+        'helene@fairness.coop',
+        UserRole.COOPERATOR,
+        '2019-09-19'
       )
     ];
 

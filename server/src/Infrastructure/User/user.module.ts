@@ -17,6 +17,7 @@ import {GetMeAction} from './Action/GetMeAction';
 import {UpdateMeAction} from './Action/UpdateMeAction';
 import {UpdateProfileCommandHandler} from 'src/Application/User/Command/UpdateProfileCommandHandler';
 import {GetUserByIdQueryHandler} from 'src/Application/User/Query/GetUserByIdQueryHandler';
+import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
 
 @Module({
   imports: [BusModule, PassportModule, TypeOrmModule.forFeature([User])],
@@ -30,6 +31,7 @@ import {GetUserByIdQueryHandler} from 'src/Application/User/Query/GetUserByIdQue
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
     {provide: 'IEncryption', useClass: EncryptionAdapter},
+    {provide: 'IDateUtils', useClass: DateUtilsAdapter},
     LoginQueryHandler,
     CreateUserCommandHandler,
     IsEmailAlreadyExist,

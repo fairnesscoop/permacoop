@@ -5,8 +5,6 @@
   export let lastName = '';
   export let email = '';
   export let password = '';
-  export let role = 'cooperator';
-  export let entryDate = null;
 
   const dispatch = createEventDispatcher();
   const submit = () => {
@@ -14,9 +12,7 @@
       firstName,
       lastName,
       email,
-      password,
-      role,
-      entryDate: entryDate ? new Date(entryDate) : null
+      password
     });
   };
 </script>
@@ -58,33 +54,10 @@
       bind:value={password}
       class="form-control" />
   </div>
-  <div class="form-group">
-    <label for="role">Role *</label>
-    <select
-      id="role"
-      required="required"
-      class="form-control"
-      bind:value={role}>
-      <option value={'cooperator'}>Coopérateur</option>
-      <option value={'employee'}>Employé</option>
-      <option value={'accountant'}>Comptable</option>
-    </select>
-  </div>
-  {#if role !== 'accountant'}
-    <div class="form-group">
-      <label for="date">Date d'entrée *</label>
-      <input
-        type="date"
-        id="date"
-        required="required"
-        bind:value={entryDate}
-        class="form-control" />
-    </div>
-  {/if}
   <button
     type="submit"
     class="btn btn-primary"
-    disabled={!firstName || !lastName || !email || !password || !role}>
+    disabled={!firstName || !lastName || !email || !password}>
     Enregistrer
   </button>
 </form>

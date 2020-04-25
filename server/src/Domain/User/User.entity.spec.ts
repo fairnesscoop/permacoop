@@ -1,4 +1,4 @@
-import {User} from './User.entity';
+import {User, UserRole} from './User.entity';
 
 describe('User.entity', () => {
   it('testGetters', () => {
@@ -7,7 +7,9 @@ describe('User.entity', () => {
       'MARCHOIS',
       'mathieu@fairness.coop',
       'hashToken',
-      'hashPassword'
+      'hashPassword',
+      UserRole.COOPERATOR,
+      '2019-09-12'
     );
 
     expect(user.getEmail()).toBe('mathieu@fairness.coop');
@@ -15,6 +17,8 @@ describe('User.entity', () => {
     expect(user.getLastName()).toBe('MARCHOIS');
     expect(user.getPassword()).toBe('hashPassword');
     expect(user.getApiToken()).toBe('hashToken');
+    expect(user.getEntryDate()).toBe('2019-09-12');
+    expect(user.getRole()).toBe(UserRole.COOPERATOR);
   });
 
   it('testUpdate', () => {
@@ -23,7 +27,9 @@ describe('User.entity', () => {
       'MARCHOIS',
       'mathieu@fairness.coop',
       'hashToken',
-      'hashPassword'
+      'hashPassword',
+      UserRole.COOPERATOR,
+      '2019-09-12'
     );
     user.update('firstName', 'lastName', 'email@email.com');
     user.updatePassword('password');
@@ -33,5 +39,7 @@ describe('User.entity', () => {
     expect(user.getLastName()).toBe('lastName');
     expect(user.getPassword()).toBe('password');
     expect(user.getApiToken()).toBe('hashToken');
+    expect(user.getEntryDate()).toBe('2019-09-12');
+    expect(user.getRole()).toBe(UserRole.COOPERATOR);
   });
 });

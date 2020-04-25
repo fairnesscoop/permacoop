@@ -2,7 +2,7 @@ import {mock, instance, when, verify} from 'ts-mockito';
 import {DailyRateRepository} from 'src/Infrastructure/Accounting/Repository/DailyRateRepository';
 import {GetDailyRatesQueryHandler} from './GetDailyRatesQueryHandler';
 import {DailyRateView} from '../../View/DailyRate/DailyRateView';
-import {UserView} from 'src/Application/User/View/UserView';
+import {UserSummaryView} from 'src/Application/User/View/UserSummaryView';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {GetDailyRatesQuery} from './GetDailyRatesQuery';
@@ -64,11 +64,10 @@ describe('GetDailyRatesQueryHandler', () => {
       new DailyRateView(
         'd54f15d6-1a1d-47e8-8672-9f46018f9960',
         620.6,
-        new UserView(
+        new UserSummaryView(
           'deffa668-b9af-4a52-94dd-61a35401b917',
           'Mathieu',
-          'MARCHOIS',
-          'mathieu.marchois@fairness.coop'
+          'MARCHOIS'
         ),
         new TaskView('ade9021e-123c-4b9f-8be4-27a38164b789', 'Development'),
         new CustomerView('c6434c49-216b-41b3-a30a-79a3eb1198ec', 'Radio France')
@@ -76,11 +75,10 @@ describe('GetDailyRatesQueryHandler', () => {
       new DailyRateView(
         'b3332cd1-5631-4b7b-a5d4-ba49910cb877',
         700,
-        new UserView(
+        new UserSummaryView(
           'deffa668-b9af-4a52-94dd-61a35401b917',
           'Mathieu',
-          'MARCHOIS',
-          'mathieu.marchois@fairness.coop'
+          'MARCHOIS'
         ),
         new TaskView('1cd7b031-6988-48e2-a40c-4253ced7c5df', 'Formation'),
         new CustomerView('c6434c49-216b-41b3-a30a-79a3eb1198ec', 'Radio France')

@@ -14,7 +14,13 @@ export class UserRepository implements IUserRepository {
   public findOneByApiToken(apiToken: string): Promise<User | undefined> {
     return this.repository
       .createQueryBuilder('user')
-      .select(['user.id', 'user.firstName', 'user.lastName', 'user.email'])
+      .select([
+        'user.id',
+        'user.firstName',
+        'user.lastName',
+        'user.email',
+        'user.role'
+      ])
       .where('user.apiToken = :apiToken', {apiToken})
       .getOne();
   }
@@ -28,15 +34,24 @@ export class UserRepository implements IUserRepository {
         'user.lastName',
         'user.email',
         'user.apiToken',
-        'user.password'
+        'user.password',
+        'user.role'
       ])
       .where('user.email = :email', {email})
       .getOne();
   }
+
   public findOneById(id: string): Promise<User | undefined> {
     return this.repository
       .createQueryBuilder('user')
-      .select(['user.id', 'user.firstName', 'user.lastName', 'user.email'])
+      .select([
+        'user.id',
+        'user.firstName',
+        'user.lastName',
+        'user.email',
+        'user.role',
+        'user.entryDate'
+      ])
       .where('user.id = :id', {id})
       .getOne();
   }
@@ -44,7 +59,14 @@ export class UserRepository implements IUserRepository {
   public findUsers(): Promise<User[]> {
     return this.repository
       .createQueryBuilder('user')
-      .select(['user.id', 'user.firstName', 'user.lastName', 'user.email'])
+      .select([
+        'user.id',
+        'user.firstName',
+        'user.lastName',
+        'user.email',
+        'user.role',
+        'user.entryDate'
+      ])
       .orderBy('user.lastName', 'ASC')
       .addOrderBy('user.firstName', 'ASC')
       .getMany();
