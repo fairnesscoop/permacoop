@@ -9,6 +9,7 @@ describe('Project.entity', () => {
 
     const project = new Project('Project name', instance(customer));
 
+    expect(project.getId()).toBe(undefined);
     expect(project.getFullName()).toBe('[Radio France] Project name');
     expect(project.getName()).toBe('Project name');
     expect(project.getCustomer()).toBe(instance(customer));
@@ -23,6 +24,7 @@ describe('Project.entity', () => {
     const project = new Project('Project name', instance(customer));
     project.updateCustomerAndName(instance(customer2), 'project');
 
+    expect(project.getId()).toBe(undefined);
     expect(project.getFullName()).toBe('[RF] project');
     expect(project.getName()).toBe('project');
     expect(project.getCustomer()).toBe(instance(customer2));

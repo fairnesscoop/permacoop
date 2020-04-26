@@ -18,6 +18,7 @@ describe('Quote.entity', () => {
       instance(project)
     );
 
+    expect(quote.getId()).toBe(undefined);
     expect(quote.getItems()).toBe(undefined);
     expect(quote.getQuoteId()).toBe('FS-DEVIS-2020-0001');
     expect(quote.getStatus()).toBe(QuoteStatus.ACCEPTED);

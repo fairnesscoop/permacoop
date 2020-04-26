@@ -20,6 +20,7 @@ describe('Event.entity', () => {
       'Superkaiser development'
     );
 
+    expect(event.getId()).toBe(undefined);
     expect(event.getType()).toBe(EventType.MISSION);
     expect(event.getUser()).toBe(instance(user));
     expect(event.getTime()).toBe(100);
@@ -53,6 +54,7 @@ describe('Event.entity', () => {
       'Superkaiser'
     );
 
+    expect(event.getId()).toBe(undefined);
     expect(event.getType()).toBe(EventType.DOJO);
     expect(event.getUser()).toBe(instance(user));
     expect(event.getTime()).toBe(100);

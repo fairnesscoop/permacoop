@@ -12,6 +12,7 @@ describe('User.entity', () => {
       '2019-09-12'
     );
 
+    expect(user.getId()).toBe(undefined);
     expect(user.getEmail()).toBe('mathieu@fairness.coop');
     expect(user.getFirstName()).toBe('Mathieu');
     expect(user.getLastName()).toBe('MARCHOIS');
@@ -34,6 +35,7 @@ describe('User.entity', () => {
     user.update('firstName', 'lastName', 'email@email.com');
     user.updatePassword('password');
 
+    expect(user.getId()).toBe(undefined);
     expect(user.getEmail()).toBe('email@email.com');
     expect(user.getFirstName()).toBe('firstName');
     expect(user.getLastName()).toBe('lastName');
