@@ -60,7 +60,7 @@
       items={[{title: 'FairCalendar', path: 'faircalendar'}, {title: title}]} />
     <ServerErrors {errors} />
     <Form on:save={onSave} event={{...event, taskId, projectId, time}}>
-      <button class="btn btn-danger" on:click={onDelete}>Supprimer</button>
+      <button class="btn btn-danger" type="button" on:click={onDelete}>Supprimer</button>
     </Form>
   </div>
 </SecuredView>
