@@ -86,6 +86,7 @@ make api-test
   - Quotations
   - Daily rates
   - Invoicing
+  - Pay stub
 
 ## Credits
 
