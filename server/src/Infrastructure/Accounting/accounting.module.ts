@@ -12,7 +12,7 @@ import {CustomerRepository} from '../Customer/Repository/CustomerRepository';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {QuoteIdGenerator} from 'src/Domain/Accounting/Quote/QuoteIdGenerator';
-import {CreateQuoteAction} from './Action/CreateQuoteAction';
+import {CreateQuoteAction} from './Action/Quote/CreateQuoteAction';
 import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
 import {CreateQuoteItemsCommandHandler} from 'src/Application/Accounting/Command/Quote/CreateQuoteItemsCommandHandler';
 import {DailyRate} from 'src/Domain/Accounting/DailyRate.entity';
@@ -23,15 +23,21 @@ import {CreateDailyRateCommandHandler} from 'src/Application/Accounting/Command/
 import {TaskRepository} from '../Task/Repository/TaskRepository';
 import {Task} from 'src/Domain/Task/Task.entity';
 import {IsDailyRateAlreadyExist} from 'src/Domain/Accounting/Specification/IsDailyRateAlreadyExist';
-import {CreateDailyRateAction} from './Action/CreateDailyRateAction';
+import {CreateDailyRateAction} from './Action/DailyRate/CreateDailyRateAction';
 import {GetDailyRatesQueryHandler} from 'src/Application/Accounting/Query/DailyRate/GetDailyRatesQueryHandler';
-import {GetDailyRatesAction} from './Action/GetDailyRatesAction';
-import {GetDailyRateAction} from './Action/GetDailyRateAction';
+import {GetDailyRatesAction} from './Action/DailyRate/GetDailyRatesAction';
+import {GetDailyRateAction} from './Action/DailyRate/GetDailyRateAction';
 import {GetDailyRateByIdQueryHandler} from 'src/Application/Accounting/Query/DailyRate/GetDailyRateByIdQueryHandler';
-import {UpdateDailyRateAction} from './Action/UpdateDailyRateAction';
+import {UpdateDailyRateAction} from './Action/DailyRate/UpdateDailyRateAction';
 import {UpdateDailyRateCommandHandler} from 'src/Application/Accounting/Command/DailyRate/UpdateDailyRateCommandHandler';
-import {GetQuotesAction} from './Action/GetQuotesAction';
+import {GetQuotesAction} from './Action/Quote/GetQuotesAction';
 import {GetQuotesQueryHandler} from 'src/Application/Accounting/Query/Quote/GetQuotesQueryHandler';
+import {PayStub} from 'src/Domain/Accounting/PayStub.entity';
+import {PayStubRepository} from './Repository/PayStubRepository';
+import {CreatePayStubAction} from './Action/PayStub/CreatePayStubAction';
+import {CreatePayStubCommandHandler} from 'src/Application/Accounting/Command/PayStub/CreatePayStubCommandHandler';
+import {File} from 'src/Domain/File/File.entity';
+import {FileRepository} from '../File/Repository/FileRepository';
 
 @Module({
   imports: [
@@ -42,9 +48,11 @@ import {GetQuotesQueryHandler} from 'src/Application/Accounting/Query/Quote/GetQ
       QuoteItem,
       Project,
       Customer,
+      File,
       Task,
       DailyRate,
-      User
+      User,
+      PayStub
     ])
   ],
   controllers: [
@@ -53,7 +61,8 @@ import {GetQuotesQueryHandler} from 'src/Application/Accounting/Query/Quote/GetQ
     GetDailyRatesAction,
     GetDailyRateAction,
     UpdateDailyRateAction,
-    GetQuotesAction
+    GetQuotesAction,
+    CreatePayStubAction
   ],
   providers: [
     {provide: 'IQuoteRepository', useClass: QuoteRepository},
@@ -64,6 +73,8 @@ import {GetQuotesQueryHandler} from 'src/Application/Accounting/Query/Quote/GetQ
     {provide: 'IProjectRepository', useClass: ProjectRepository},
     {provide: 'ITaskRepository', useClass: TaskRepository},
     {provide: 'ICustomerRepository', useClass: CustomerRepository},
+    {provide: 'IPayStubRepository', useClass: PayStubRepository},
+    {provide: 'IFileRepository', useClass: FileRepository},
     CreateQuoteCommandHandler,
     CreateQuoteItemsCommandHandler,
     CreateDailyRateCommandHandler,
@@ -72,7 +83,8 @@ import {GetQuotesQueryHandler} from 'src/Application/Accounting/Query/Quote/GetQ
     GetDailyRatesQueryHandler,
     UpdateDailyRateCommandHandler,
     GetQuotesQueryHandler,
-    GetDailyRateByIdQueryHandler
+    GetDailyRateByIdQueryHandler,
+    CreatePayStubCommandHandler
   ]
 })
 export class AccountingModule {}

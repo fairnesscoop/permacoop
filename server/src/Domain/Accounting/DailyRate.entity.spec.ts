@@ -16,6 +16,7 @@ describe('DailyRate.entity', () => {
       instance(task)
     );
 
+    expect(dailyRate.getId()).toBe(undefined);
     expect(dailyRate.getAmount()).toBe(10000);
     expect(dailyRate.getUser()).toBe(instance(user));
     expect(dailyRate.getCustomer()).toBe(instance(customer));
@@ -44,6 +45,7 @@ describe('DailyRate.entity', () => {
       instance(task2)
     );
 
+    expect(dailyRate.getId()).toBe(undefined);
     expect(dailyRate.getAmount()).toBe(100);
     expect(dailyRate.getUser()).toBe(instance(user2));
     expect(dailyRate.getCustomer()).toBe(instance(customer2));

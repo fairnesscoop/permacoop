@@ -1,5 +1,6 @@
 # compiled output
 /dist
+/uploads
 /node_modules
 ormconfig.json
 .env

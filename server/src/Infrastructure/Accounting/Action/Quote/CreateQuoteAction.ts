@@ -12,7 +12,7 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
 import {User, UserRole} from 'src/Domain/User/User.entity';
 import {CreateQuoteCommand} from 'src/Application/Accounting/Command/Quote/CreateQuoteCommand';
-import {QuoteDTO} from '../DTO/QuoteDTO';
+import {QuoteDTO} from '../../DTO/QuoteDTO';
 import {CreateQuoteItemsCommand} from 'src/Application/Accounting/Command/Quote/CreateQuoteItemsCommand';
 import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
 import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
