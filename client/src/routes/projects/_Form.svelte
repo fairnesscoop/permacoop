@@ -1,6 +1,7 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
   import {client as axios} from '../../utils/axios';
+  import CustomersInput from '../_components/inputs/CustomersInput.svelte';
 
   let data = [];
 
@@ -28,21 +29,7 @@
       bind:value={name}
       class="form-control" />
   </div>
-  <div class="form-group">
-    <label for="customerId">Client *</label>
-    <select
-      id="customerId"
-      required="required"
-      class="form-control"
-      bind:value={customerId}>
-      <option value="">-- Choisir un client --</option>
-      {#each data as customer}
-        <option value={customer.id} selected={customerId === customer.id}>
-          {customer.name}
-        </option>
-      {/each}
-    </select>
-  </div>
+  <CustomersInput customers={data} bind:customerId />
   <button type="submit" class="btn btn-primary" disabled={!name || !customerId}>
     Enregistrer
   </button>

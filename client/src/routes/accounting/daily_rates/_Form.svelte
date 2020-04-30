@@ -1,5 +1,8 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
+  import UsersInput from '../../_components/inputs/UsersInput.svelte';
+  import CustomersInput from '../../_components/inputs/CustomersInput.svelte';
+  import TasksInput from '../../_components/inputs/TasksInput.svelte';
   import {client as axios} from '../../../utils/axios';
 
   let users = [];
@@ -31,51 +34,9 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
-  <div class="form-group">
-    <label for="userId">Coopérateur *</label>
-    <select
-      id="userId"
-      required="required"
-      class="form-control"
-      bind:value={userId}>
-      <option value="">-- Choisir un coopérateur --</option>
-      {#each users as user}
-        <option value={user.id} selected={userId === user.id}>
-          {`${user.firstName} ${user.lastName}`}
-        </option>
-      {/each}
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="customerId">Client *</label>
-    <select
-      id="customerId"
-      required="required"
-      class="form-control"
-      bind:value={customerId}>
-      <option value="">-- Choisir un client --</option>
-      {#each customers as customer}
-        <option value={customer.id} selected={customerId === customer.id}>
-          {customer.name}
-        </option>
-      {/each}
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="taskId">Mission *</label>
-    <select
-      id="taskId"
-      required="required"
-      class="form-control"
-      bind:value={taskId}>
-      <option value="">-- Choisir une mission --</option>
-      {#each tasks as task}
-        <option value={task.id} selected={taskId === task.id}>
-          {task.name}
-        </option>
-      {/each}
-    </select>
-  </div>
+  <UsersInput {users} bind:userId />
+  <CustomersInput {customers} bind:customerId />
+  <TasksInput {tasks} bind:taskId />
   <div class="form-group">
     <label for="amount">Taux HT *</label>
     <div class="input-group">

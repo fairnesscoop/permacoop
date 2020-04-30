@@ -1,6 +1,7 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
   import {client as axios} from '../../../utils/axios';
+  import ProjectsInput from '../../_components/inputs/ProjectsInput.svelte';
   import QuoteItemsForm from './_QuoteItemsForm.svelte';
   import {byAlpha2} from 'iso-country-codes';
 

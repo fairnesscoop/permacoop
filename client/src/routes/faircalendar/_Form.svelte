@@ -1,6 +1,8 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
   import {client as axios} from '../../utils/axios';
+  import TasksInput from '../_components/inputs/TasksInput.svelte';
+  import ProjectsInput from '../_components/inputs/ProjectsInput.svelte';
 
   const dispatch = createEventDispatcher();
 
@@ -58,36 +60,8 @@
     </select>
   </div>
   {#if event.type === 'mission'}
-    <div class="form-group">
-      <label for="projectId">Projet *</label>
-      <select
-        id="projectId"
-        required="required"
-        class="form-control"
-        bind:value={event.projectId}>
-        <option value="">-- Choisir un projet --</option>
-        {#each projects as project}
-          <option value={project.id} selected={event.projectId === project.id}>
-            {project.name} ({project.customer.name})
-          </option>
-        {/each}
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="taskId">Mission *</label>
-      <select
-        id="taskId"
-        required="required"
-        class="form-control"
-        bind:value={event.taskId}>
-        <option value="">-- Choisir une mission --</option>
-        {#each tasks as task}
-          <option value={task.id} selected={event.taskId === task.id}>
-            {task.name}
-          </option>
-        {/each}
-      </select>
-    </div>
+    <ProjectsInput {projects} bind:projectId={event.projectId} />
+    <TasksInput {tasks} bind:taskId={event.taskId} />
   {/if}
   <div class="form-group">
     <label for="summary">Commentaire</label>
