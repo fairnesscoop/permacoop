@@ -38,6 +38,7 @@ import {CreatePayStubAction} from './Action/PayStub/CreatePayStubAction';
 import {CreatePayStubCommandHandler} from 'src/Application/Accounting/Command/PayStub/CreatePayStubCommandHandler';
 import {File} from 'src/Domain/File/File.entity';
 import {FileRepository} from '../File/Repository/FileRepository';
+import {IsPayStubAlreadyExist} from 'src/Domain/Accounting/Specification/IsPayStubAlreadyExist';
 
 @Module({
   imports: [
@@ -84,7 +85,8 @@ import {FileRepository} from '../File/Repository/FileRepository';
     UpdateDailyRateCommandHandler,
     GetQuotesQueryHandler,
     GetDailyRateByIdQueryHandler,
-    CreatePayStubCommandHandler
+    CreatePayStubCommandHandler,
+    IsPayStubAlreadyExist
   ]
 })
 export class AccountingModule {}

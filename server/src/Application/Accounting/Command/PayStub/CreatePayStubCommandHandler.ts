@@ -7,6 +7,8 @@ import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IFileRepository} from 'src/Domain/File/Repository/IFileRepository';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
 import {FileNotFoundException} from 'src/Domain/File/Exception/FileNotFoundException';
+import {IsPayStubAlreadyExist} from 'src/Domain/Accounting/Specification/IsPayStubAlreadyExist';
+import {PayStubAlreadyExistException} from 'src/Domain/Accounting/Exception/PayStubAlreadyExistException';
 
 @CommandHandler(CreatePayStubCommand)
 export class CreatePayStubCommandHandler {
@@ -16,7 +18,9 @@ export class CreatePayStubCommandHandler {
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
     @Inject('IFileRepository')
-    private readonly fileRepository: IFileRepository
+    private readonly fileRepository: IFileRepository,
+    @Inject('IsPayStubAlreadyExist')
+    private readonly isPayStubAlreadyExist: IsPayStubAlreadyExist
   ) {}
 
   public async execute(command: CreatePayStubCommand): Promise<string> {
@@ -30,6 +34,15 @@ export class CreatePayStubCommandHandler {
     const file = await this.fileRepository.findOneById(fileId);
     if (!file) {
       throw new FileNotFoundException();
+    }
+
+    if (
+      true ===
+      (await this.isPayStubAlreadyExist.isSatisfiedBy(user, new Date(date)))
+    ) {
+      this.fileRepository.remove(file);
+
+      throw new PayStubAlreadyExistException();
     }
 
     const payStub = await this.payStubRepository.save(

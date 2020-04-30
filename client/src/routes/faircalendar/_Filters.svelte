@@ -1,8 +1,8 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
   import {client as axios} from '../../utils/axios';
-  import {subMonths, format, compareDesc, eachMonthOfInterval} from 'date-fns';
-  import {fr} from 'date-fns/locale';
+  import {format} from 'date-fns';
+  import MonthsInput from '../_components/inputs/MonthsInput.svelte';
 
   const dispatch = createEventDispatcher();
 
@@ -10,10 +10,6 @@
   export let date;
 
   let data = [];
-  let periods = eachMonthOfInterval({
-    start: subMonths(new Date(), 6),
-    end: new Date()
-  }).sort(compareDesc);
 
   onMount(async () => {
     ({data} = await axios.get('users'));
@@ -44,23 +40,11 @@
 <form class="filter">
   <div class="row">
     <div class="col-md-6">
-      <div class="form-group">
-        <label for="date">Filtrer par mois :</label>
-        <select
-          id="date"
-          name="date"
-          bind:value={date}
-          on:change={handleFilter}
-          class="form-control">
-          {#each periods as period}
-            <option
-              value={format(period, 'yyyy-MM-dd')}
-              selected={format(period, 'yyyy-MM') === format(new Date(date), 'yyyy-MM')}>
-              {format(period, 'MMMM yyyy', {locale: fr})}
-            </option>
-          {/each}
-        </select>
-      </div>
+      <MonthsInput
+        label={'Filtrer par mois :'}
+        amount={6}
+        on:change={handleFilter}
+        bind:date />
     </div>
     <div class="col-md-6">
       <div class="form-group">

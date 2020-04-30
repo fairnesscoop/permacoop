@@ -47,6 +47,11 @@
             Comptabilité
           </a>
           <div class="dropdown-menu">
+            {#if ['cooperator', 'accountant'].includes($user.role)}
+              <a class="dropdown-item" href="accounting/pay_stubs">
+                Fiches de paies
+              </a>
+            {/if}
             {#if grantedRoles.includes($user.role)}
               <a class="dropdown-item" href="accounting/quotes">Devis</a>
               <a class="dropdown-item" href="accounting/daily_rates">TJM</a>
@@ -79,6 +84,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="profile">Mon profil</a>
+            <a class="dropdown-item" href={''}>Mes fiches de paies</a>
             <div class="dropdown-divider" role="separator" />
             <a
               class="dropdown-item"
