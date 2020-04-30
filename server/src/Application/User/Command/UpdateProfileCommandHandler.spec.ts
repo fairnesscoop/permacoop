@@ -1,6 +1,6 @@
 import {mock, instance, when, verify, anything, anyString} from 'ts-mockito';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
-import {EncryptionAdapter} from 'src/Infrastructure/Adapter/EncryptionAdapter';
+import {PasswordEncoderAdapter} from 'src/Infrastructure/Adapter/PasswordEncoderAdapter';
 import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
 import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
 import {User} from 'src/Domain/User/User.entity';
@@ -11,18 +11,18 @@ describe('UpdateProfileCommandHandler', () => {
   const email = 'mathieu@fairness.coop';
 
   let userRepository: UserRepository;
-  let encryption: EncryptionAdapter;
+  let passwordEncoder: PasswordEncoderAdapter;
   let isEmailAlreadyExist: IsEmailAlreadyExist;
   let commandHandler: UpdateProfileCommandHandler;
 
   beforeEach(() => {
     userRepository = mock(UserRepository);
-    encryption = mock(EncryptionAdapter);
+    passwordEncoder = mock(PasswordEncoderAdapter);
     isEmailAlreadyExist = mock(IsEmailAlreadyExist);
 
     commandHandler = new UpdateProfileCommandHandler(
       instance(userRepository),
-      instance(encryption),
+      instance(passwordEncoder),
       instance(isEmailAlreadyExist)
     );
   });
@@ -45,7 +45,7 @@ describe('UpdateProfileCommandHandler', () => {
       expect(e).toBeInstanceOf(EmailAlreadyExistException);
       expect(e.message).toBe('user.errors.email_already_exist');
       verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
-      verify(encryption.hash(anything())).never();
+      verify(passwordEncoder.hash(anything())).never();
       verify(userRepository.save(anything())).never();
     }
   });
@@ -84,7 +84,7 @@ describe('UpdateProfileCommandHandler', () => {
     );
 
     when(isEmailAlreadyExist.isSatisfiedBy(email)).thenResolve(false);
-    when(encryption.hash('azerty')).thenResolve('azertyCrypted');
+    when(passwordEncoder.hash('azerty')).thenResolve('azertyCrypted');
 
     // Command return nothing
     expect(await commandHandler.execute(command)).toBeUndefined();
@@ -94,7 +94,7 @@ describe('UpdateProfileCommandHandler', () => {
     verify(user.updatePassword('azertyCrypted')).calledBefore(
       userRepository.save(instance(user))
     );
-    verify(encryption.hash('azerty')).once();
+    verify(passwordEncoder.hash('azerty')).once();
     verify(
       user.update('Mathieu', 'Marchois', 'mathieu@fairness.coop')
     ).calledBefore(userRepository.save(instance(user)));

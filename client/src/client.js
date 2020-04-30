@@ -1,7 +1,7 @@
 import * as sapper from '@sapper/app';
-import {user, useLocalStorage} from './store';
+import {useLocalStorage} from './store';
 
-useLocalStorage(user, 'persist:user');
+useLocalStorage();
 
 sapper.start({
   target: document.querySelector('#sapper')

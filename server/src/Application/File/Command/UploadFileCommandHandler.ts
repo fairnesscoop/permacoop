@@ -1,3 +1,4 @@
+import * as uniqid from 'uniqid';
 import {CommandHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
 import {UploadFileCommand} from './UploadFileCommand';
@@ -16,10 +17,10 @@ export class UploadFileCommandHandler {
 
   public async execute(command: UploadFileCommand): Promise<string> {
     const {uploadedFile} = command;
-    const fileName = await this.fileStorage.upload(uploadedFile);
-
+    const password = uniqid();
+    const fileName = await this.fileStorage.upload(uploadedFile, password);
     const file = await this.fileRepository.save(
-      new File(fileName, uploadedFile.size, uploadedFile.mimetype)
+      new File(fileName, uploadedFile.size, uploadedFile.mimetype, password)
     );
 
     return file.getId();

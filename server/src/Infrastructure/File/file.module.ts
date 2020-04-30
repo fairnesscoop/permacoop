@@ -8,6 +8,7 @@ import {LocalFileStorageAdapter} from '../Adapter/LocalFileStorageAdapter';
 import {UploadFileCommandHandler} from 'src/Application/File/Command/UploadFileCommandHandler';
 import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
 import {FileDirectoryStrategy} from 'src/Domain/File/Strategy/FileDirectoryStrategy';
+import {FileEncryptionAdapter} from '../Adapter/FileEncryptionAdapter';
 
 @Module({
   imports: [BusModule, ConfigModule, TypeOrmModule.forFeature([File])],
@@ -16,6 +17,7 @@ import {FileDirectoryStrategy} from 'src/Domain/File/Strategy/FileDirectoryStrat
     {provide: 'IFileRepository', useClass: FileRepository},
     {provide: 'IFileStorage', useClass: LocalFileStorageAdapter},
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
+    {provide: 'IFileEncryption', useClass: FileEncryptionAdapter},
     UploadFileCommandHandler,
     FileDirectoryStrategy
   ]

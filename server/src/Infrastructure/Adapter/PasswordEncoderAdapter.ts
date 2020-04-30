@@ -1,9 +1,9 @@
 import {Injectable} from '@nestjs/common';
 import * as argon2 from 'argon2';
-import {IEncryption} from 'src/Application/IEncryption';
+import {IPasswordEncoder} from 'src/Application/IPasswordEncoder';
 
 @Injectable()
-export class EncryptionAdapter implements IEncryption {
+export class PasswordEncoderAdapter implements IPasswordEncoder {
   public hash(payload: string): Promise<string> {
     return argon2.hash(payload);
   }

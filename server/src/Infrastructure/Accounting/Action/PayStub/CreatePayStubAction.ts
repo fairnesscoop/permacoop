@@ -23,11 +23,14 @@ import {IUploadedFile} from 'src/Domain/File/IUploadedFile';
 import {PDFValidator} from 'src/Domain/File/Validator/PDFValidator';
 import {UploadFileCommand} from 'src/Application/File/Command/UploadFileCommand';
 import {CreatePayStubCommand} from 'src/Application/Accounting/Command/PayStub/CreatePayStubCommand';
+import {UserRole} from 'src/Domain/User/User.entity';
+import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
 
 @Controller('pay_stubs')
 @ApiUseTags('Accounting')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('bearer'))
+@UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreatePayStubAction {
   constructor(
     @Inject('ICommandBus')
@@ -35,6 +38,7 @@ export class CreatePayStubAction {
   ) {}
 
   @Post()
+  @Roles(UserRole.COOPERATOR, UserRole.ACCOUNTANT)
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
   @ApiOperation({title: 'Create new paystub'})

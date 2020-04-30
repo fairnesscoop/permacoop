@@ -2,7 +2,7 @@ import {CommandHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
 import {CreateUserCommand} from './CreateUserCommand';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
-import {IEncryption} from 'src/Application/IEncryption';
+import {IPasswordEncoder} from 'src/Application/IPasswordEncoder';
 import {User, UserRole} from 'src/Domain/User/User.entity';
 import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
 import {EmailAlreadyExistException} from 'src/Domain/User/Exception/EmailAlreadyExistException';
@@ -14,8 +14,8 @@ export class CreateUserCommandHandler {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
-    @Inject('IEncryption')
-    private readonly encryption: IEncryption,
+    @Inject('IPasswordEncoder')
+    private readonly passwordEncoder: IPasswordEncoder,
     @Inject('IDateUtils')
     private readonly dateUtils: IDateUtils,
     private readonly isEmailAlreadyExist: IsEmailAlreadyExist
@@ -33,8 +33,8 @@ export class CreateUserCommandHandler {
       throw new EntryDateMissingException();
     }
 
-    const hashPassword = await this.encryption.hash(password);
-    const apiToken = await this.encryption.hash(email + password);
+    const hashPassword = await this.passwordEncoder.hash(password);
+    const apiToken = await this.passwordEncoder.hash(email + password);
     const user = await this.userRepository.save(
       new User(
         firstName,

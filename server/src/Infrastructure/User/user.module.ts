@@ -8,7 +8,7 @@ import {CreateUserAction} from './Action/CreateUserAction';
 import {UserRepository} from './Repository/UserRepository';
 import {LoginQueryHandler} from 'src/Application/User/Query/LoginQueryHandler';
 import {CreateUserCommandHandler} from 'src/Application/User/Command/CreateUserCommandHandler';
-import {EncryptionAdapter} from '../Adapter/EncryptionAdapter';
+import {PasswordEncoderAdapter} from '../Adapter/PasswordEncoderAdapter';
 import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
 import {BearerStrategy} from './Security/BearerStrategy';
 import {GetUsersQueryHandler} from 'src/Application/User/Query/GetUsersQueryHandler';
@@ -30,7 +30,7 @@ import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
   ],
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
-    {provide: 'IEncryption', useClass: EncryptionAdapter},
+    {provide: 'IPasswordEncoder', useClass: PasswordEncoderAdapter},
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
     LoginQueryHandler,
     CreateUserCommandHandler,
