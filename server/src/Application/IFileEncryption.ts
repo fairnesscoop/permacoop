@@ -1,3 +1,4 @@
 export interface IFileEncryption {
-  encrypt(buffer: Buffer, password: string): Buffer;
+  encrypt(buffer: Buffer): Promise<Buffer>;
+  decrypt(buffer: Buffer): Promise<Buffer>;
 }

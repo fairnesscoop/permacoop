@@ -17,7 +17,7 @@ export class LocalFileStorageAdapter implements IFileStorage {
     private readonly fileDirectoryStrategy: FileDirectoryStrategy
   ) {}
 
-  public async upload(file: IUploadedFile, password: string): Promise<string> {
+  public async upload(file: IUploadedFile): Promise<string> {
     const fileName = `${shortid()}_${file.originalname}`;
     const directory = await this.fileDirectoryStrategy.location(
       this.dateUtils.getCurrentDate()
@@ -29,8 +29,7 @@ export class LocalFileStorageAdapter implements IFileStorage {
     }
 
     const encryptedBuffer = await this.fileEncryptionAdapter.encrypt(
-      file.buffer,
-      password
+      file.buffer
     );
     fs.writeFileSync(`${relativeDirectory}/${fileName}`, encryptedBuffer);
 
