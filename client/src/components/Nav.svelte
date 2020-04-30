@@ -93,6 +93,7 @@
             <a class="dropdown-item" href={''}>Mes fiches de paies</a>
             <div class="dropdown-divider" role="separator" />
             <a
+              data-logout-button
               class="dropdown-item"
               on:click={() => handleLogout()}
               href="login">
