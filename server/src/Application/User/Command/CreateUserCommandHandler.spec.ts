@@ -1,6 +1,6 @@
 import {mock, instance, when, verify, deepEqual, anything} from 'ts-mockito';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
-import {EncryptionAdapter} from 'src/Infrastructure/Adapter/EncryptionAdapter';
+import {PasswordEncoderAdapter} from 'src/Infrastructure/Adapter/PasswordEncoderAdapter';
 import {CreateUserCommand} from 'src/Application/User/Command/CreateUserCommand';
 import {CreateUserCommandHandler} from 'src/Application/User/Command/CreateUserCommandHandler';
 import {IsEmailAlreadyExist} from 'src/Domain/User/Specification/IsEmailAlreadyExist';
@@ -21,20 +21,20 @@ describe('CreatUserCommandHandler', () => {
   );
 
   let userRepository: UserRepository;
-  let encryption: EncryptionAdapter;
+  let passwordEncoder: PasswordEncoderAdapter;
   let dateUtilsAdapter: DateUtilsAdapter;
   let isEmailAlreadyExist: IsEmailAlreadyExist;
   let commandHandler: CreateUserCommandHandler;
 
   beforeEach(() => {
     userRepository = mock(UserRepository);
-    encryption = mock(EncryptionAdapter);
+    passwordEncoder = mock(PasswordEncoderAdapter);
     dateUtilsAdapter = mock(DateUtilsAdapter);
     isEmailAlreadyExist = mock(IsEmailAlreadyExist);
 
     commandHandler = new CreateUserCommandHandler(
       instance(userRepository),
-      instance(encryption),
+      instance(passwordEncoder),
       instance(dateUtilsAdapter),
       instance(isEmailAlreadyExist)
     );
@@ -49,9 +49,11 @@ describe('CreatUserCommandHandler', () => {
       expect(e).toBeInstanceOf(EmailAlreadyExistException);
       expect(e.message).toBe('user.errors.email_already_exist');
       verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
-      verify(encryption.hash('plainPassword')).never();
+      verify(passwordEncoder.hash('plainPassword')).never();
       verify(dateUtilsAdapter.format(anything(), anything())).never();
-      verify(encryption.hash('mathieu@fairness.coopplainPassword')).never();
+      verify(
+        passwordEncoder.hash('mathieu@fairness.coopplainPassword')
+      ).never();
       verify(
         userRepository.save(
           deepEqual(
@@ -86,9 +88,11 @@ describe('CreatUserCommandHandler', () => {
       expect(e).toBeInstanceOf(EntryDateMissingException);
       expect(e.message).toBe('user.errors.entry_date_missing');
       verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
-      verify(encryption.hash('plainPassword')).never();
+      verify(passwordEncoder.hash('plainPassword')).never();
       verify(dateUtilsAdapter.format(anything(), anything())).never();
-      verify(encryption.hash('mathieu@fairness.coopplainPassword')).never();
+      verify(
+        passwordEncoder.hash('mathieu@fairness.coopplainPassword')
+      ).never();
       verify(
         userRepository.save(
           deepEqual(
@@ -113,7 +117,7 @@ describe('CreatUserCommandHandler', () => {
       'fcf9a99f-0c7b-45ca-b68a-bfd79d73a49f'
     );
     when(isEmailAlreadyExist.isSatisfiedBy(email)).thenResolve(false);
-    when(encryption.hash(command.password)).thenResolve('hashPassword');
+    when(passwordEncoder.hash(command.password)).thenResolve('hashPassword');
     when(
       dateUtilsAdapter.format(deepEqual(new Date('2019-09-12')), 'y-MM-dd')
     ).thenReturn('2019-09-12');
@@ -132,18 +136,20 @@ describe('CreatUserCommandHandler', () => {
         )
       )
     ).thenResolve(instance(createdUser));
-    when(encryption.hash(email + command.password)).thenResolve('hashToken');
+    when(passwordEncoder.hash(email + command.password)).thenResolve(
+      'hashToken'
+    );
 
     expect(await commandHandler.execute(command)).toBe(
       'fcf9a99f-0c7b-45ca-b68a-bfd79d73a49f'
     );
 
     verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
-    verify(encryption.hash('plainPassword')).once();
+    verify(passwordEncoder.hash('plainPassword')).once();
     verify(
       dateUtilsAdapter.format(deepEqual(new Date('2019-09-12')), 'y-MM-dd')
     ).once();
-    verify(encryption.hash('mathieu@fairness.coopplainPassword')).once();
+    verify(passwordEncoder.hash('mathieu@fairness.coopplainPassword')).once();
     verify(
       userRepository.save(
         deepEqual(
@@ -176,7 +182,7 @@ describe('CreatUserCommandHandler', () => {
       'fcf9a99f-0c7b-45ca-b68a-bfd79d73a49f'
     );
     when(isEmailAlreadyExist.isSatisfiedBy(email)).thenResolve(false);
-    when(encryption.hash(command.password)).thenResolve('hashPassword');
+    when(passwordEncoder.hash(command.password)).thenResolve('hashPassword');
     when(
       userRepository.save(
         deepEqual(
@@ -192,16 +198,18 @@ describe('CreatUserCommandHandler', () => {
         )
       )
     ).thenResolve(instance(createdUser));
-    when(encryption.hash(email + command.password)).thenResolve('hashToken');
+    when(passwordEncoder.hash(email + command.password)).thenResolve(
+      'hashToken'
+    );
 
     expect(await commandHandler.execute(command2)).toBe(
       'fcf9a99f-0c7b-45ca-b68a-bfd79d73a49f'
     );
 
     verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
-    verify(encryption.hash('plainPassword')).once();
+    verify(passwordEncoder.hash('plainPassword')).once();
     verify(dateUtilsAdapter.format(anything(), anything())).never();
-    verify(encryption.hash('mathieu@fairness.coopplainPassword')).once();
+    verify(passwordEncoder.hash('mathieu@fairness.coopplainPassword')).once();
     verify(
       userRepository.save(
         deepEqual(

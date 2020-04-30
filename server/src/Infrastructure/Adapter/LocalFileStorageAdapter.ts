@@ -5,16 +5,19 @@ import {IFileStorage} from 'src/Application/IFileStorage';
 import {IUploadedFile} from 'src/Domain/File/IUploadedFile';
 import {FileDirectoryStrategy} from 'src/Domain/File/Strategy/FileDirectoryStrategy';
 import {IDateUtils} from 'src/Application/IDateUtils';
+import {IFileEncryption} from 'src/Application/IFileEncryption';
 
 @Injectable()
 export class LocalFileStorageAdapter implements IFileStorage {
   constructor(
     @Inject('IDateUtils')
     private readonly dateUtils: IDateUtils,
+    @Inject('IFileEncryption')
+    private readonly fileEncryptionAdapter: IFileEncryption,
     private readonly fileDirectoryStrategy: FileDirectoryStrategy
   ) {}
 
-  public async upload(file: IUploadedFile): Promise<string> {
+  public async upload(file: IUploadedFile, password: string): Promise<string> {
     const fileName = `${shortid()}_${file.originalname}`;
     const directory = await this.fileDirectoryStrategy.location(
       this.dateUtils.getCurrentDate()
@@ -25,7 +28,11 @@ export class LocalFileStorageAdapter implements IFileStorage {
       fs.mkdirSync(relativeDirectory, {recursive: true});
     }
 
-    fs.writeFileSync(`${relativeDirectory}/${fileName}`, file.buffer);
+    const encryptedBuffer = await this.fileEncryptionAdapter.encrypt(
+      file.buffer,
+      password
+    );
+    fs.writeFileSync(`${relativeDirectory}/${fileName}`, encryptedBuffer);
 
     return fileName;
   }

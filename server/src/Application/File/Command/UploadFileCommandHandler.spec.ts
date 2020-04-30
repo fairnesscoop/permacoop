@@ -1,4 +1,4 @@
-import {mock, instance, when, verify, deepEqual, anything} from 'ts-mockito';
+import {mock, instance, when, verify, deepEqual, anyString} from 'ts-mockito';
 import {FileRepository} from 'src/Infrastructure/File/Repository/FileRepository';
 import {UploadFileCommandHandler} from './UploadFileCommandHandler';
 import {LocalFileStorageAdapter} from 'src/Infrastructure/Adapter/LocalFileStorageAdapter';
@@ -31,12 +31,14 @@ describe('UpdateFileCommandHandler', () => {
     const file = mock(File);
     when(file.getId()).thenReturn('cfdd06eb-cd71-44b9-82c6-46110b30ce05');
 
-    when(localFileStorageAdapter.upload(uploadedFile)).thenResolve(
+    when(localFileStorageAdapter.upload(uploadedFile, anyString())).thenResolve(
       'prefix_file.pdf'
     );
     when(
       fileRepository.save(
-        deepEqual(new File('prefix_file.pdf', 120, 'application/pdf'))
+        deepEqual(
+          new File('prefix_file.pdf', 120, 'application/pdf', anyString())
+        )
       )
     ).thenResolve(instance(file));
 
@@ -44,10 +46,12 @@ describe('UpdateFileCommandHandler', () => {
       'cfdd06eb-cd71-44b9-82c6-46110b30ce05'
     );
 
-    verify(localFileStorageAdapter.upload(uploadedFile)).once();
+    verify(localFileStorageAdapter.upload(uploadedFile, anyString())).once();
     verify(
       fileRepository.save(
-        deepEqual(new File('prefix_file.pdf', 120, 'application/pdf'))
+        deepEqual(
+          new File('prefix_file.pdf', 120, 'application/pdf', anyString())
+        )
       )
     ).once();
     verify(file.getId()).once();

@@ -1,7 +1,7 @@
 import {mock, instance, when, verify, anything} from 'ts-mockito';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
 import {LoginQueryHandler} from 'src/Application/User/Query/LoginQueryHandler';
-import {EncryptionAdapter} from 'src/Infrastructure/Adapter/EncryptionAdapter';
+import {PasswordEncoderAdapter} from 'src/Infrastructure/Adapter/PasswordEncoderAdapter';
 import {LoginQuery} from 'src/Application/User/Query/LoginQuery';
 import {PasswordNotMatchException} from 'src/Domain/User/Exception/PasswordNotMatchException';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
@@ -13,15 +13,15 @@ describe('LoginQueryHandler', () => {
   const query = new LoginQuery('mathieu@FAIRNESS.coop', 'plainPassword');
 
   let userRepository: UserRepository;
-  let encryption: EncryptionAdapter;
+  let passwordEncoder: PasswordEncoderAdapter;
   let queryHandler: LoginQueryHandler;
 
   beforeEach(() => {
     userRepository = mock(UserRepository);
-    encryption = mock(EncryptionAdapter);
+    passwordEncoder = mock(PasswordEncoderAdapter);
     queryHandler = new LoginQueryHandler(
       instance(userRepository),
-      instance(encryption)
+      instance(passwordEncoder)
     );
   });
 
@@ -33,13 +33,13 @@ describe('LoginQueryHandler', () => {
     } catch (e) {
       expect(e instanceof UserNotFoundException).toBe(true);
       verify(userRepository.findOneByEmail(email)).once();
-      verify(encryption.compare(anything(), anything())).never();
+      verify(passwordEncoder.compare(anything(), anything())).never();
     }
   });
 
   it('testPasswordNotMatch', async () => {
     const user = mock(User);
-    when(encryption.compare('hash', 'plainPassword')).thenResolve(false);
+    when(passwordEncoder.compare('hash', 'plainPassword')).thenResolve(false);
     when(userRepository.findOneByEmail(email)).thenResolve(instance(user));
     when(user.getPassword()).thenReturn('hash');
 
@@ -48,7 +48,7 @@ describe('LoginQueryHandler', () => {
     } catch (e) {
       expect(e instanceof PasswordNotMatchException).toBe(true);
       verify(userRepository.findOneByEmail(email)).once();
-      verify(encryption.compare('hash', 'plainPassword')).once();
+      verify(passwordEncoder.compare('hash', 'plainPassword')).once();
       verify(user.getPassword()).once();
     }
   });
@@ -56,7 +56,7 @@ describe('LoginQueryHandler', () => {
   it('testLoginSuccess', async () => {
     const user = mock(User);
     when(userRepository.findOneByEmail(email)).thenResolve(instance(user));
-    when(encryption.compare('hash', 'plainPassword')).thenResolve(true);
+    when(passwordEncoder.compare('hash', 'plainPassword')).thenResolve(true);
     when(user.getId()).thenReturn('14984335-f5aa-402a-a170-5393bb954538');
     when(user.getFirstName()).thenReturn('Mathieu');
     when(user.getLastName()).thenReturn('MARCHOIS');
@@ -77,7 +77,7 @@ describe('LoginQueryHandler', () => {
     );
 
     verify(userRepository.findOneByEmail(email)).once();
-    verify(encryption.compare('hash', 'plainPassword')).once();
+    verify(passwordEncoder.compare('hash', 'plainPassword')).once();
     verify(user.getId()).once();
     verify(user.getFirstName()).once();
     verify(user.getLastName()).once();

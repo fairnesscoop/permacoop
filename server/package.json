@@ -31,6 +31,7 @@
     "argon2": "^0.25.1",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.11.0",
+    "crypto": "^1.0.1",
     "date-fns": "^2.8.1",
     "helmet": "^3.21.2",
     "passport": "^0.4.0",
@@ -42,7 +43,8 @@
     "shortid": "^2.2.15",
     "swagger-ui-express": "^4.1.4",
     "typeorm": "^0.2.20",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.2",
+    "uniqid": "^5.2.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.1.2",
