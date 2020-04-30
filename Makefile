@@ -41,3 +41,5 @@ database-connect: ## Connect to the database container
 ci: ## Run CI checks
 	docker-compose -p permacoop run api npm run test:cov
 	docker-compose -p permacoop run api npm run lint
+client-test:
+	cd client; npm run test-unit
