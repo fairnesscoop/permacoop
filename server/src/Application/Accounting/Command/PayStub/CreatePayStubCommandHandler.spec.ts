@@ -8,11 +8,14 @@ import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository'
 import {FileRepository} from 'src/Infrastructure/File/Repository/FileRepository';
 import {File} from 'src/Domain/File/File.entity';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
+import {IsPayStubAlreadyExist} from 'src/Domain/Accounting/Specification/IsPayStubAlreadyExist';
+import {PayStubAlreadyExistException} from 'src/Domain/Accounting/Exception/PayStubAlreadyExistException';
 
 describe('CreatePayStubCommandHandler', () => {
   let payStubRepository: PayStubRepository;
   let userRepository: UserRepository;
   let fileRepository: FileRepository;
+  let isPayStubAlreadyExist: IsPayStubAlreadyExist;
   let handler: CreatePayStubCommandHandler;
 
   const user = mock(User);
@@ -28,11 +31,13 @@ describe('CreatePayStubCommandHandler', () => {
     payStubRepository = mock(PayStubRepository);
     userRepository = mock(UserRepository);
     fileRepository = mock(FileRepository);
+    isPayStubAlreadyExist = mock(IsPayStubAlreadyExist);
 
     handler = new CreatePayStubCommandHandler(
       instance(payStubRepository),
       instance(userRepository),
-      instance(fileRepository)
+      instance(fileRepository),
+      instance(isPayStubAlreadyExist)
     );
   });
 
@@ -43,6 +48,12 @@ describe('CreatePayStubCommandHandler', () => {
     when(
       fileRepository.findOneById('3d0a282f-3b3e-4ef3-948f-5ab3cb77a04c')
     ).thenResolve(instance(file));
+    when(
+      isPayStubAlreadyExist.isSatisfiedBy(
+        instance(user),
+        deepEqual(new Date('2020-04-29'))
+      )
+    ).thenResolve(false);
     when(payStub.getId()).thenReturn('7c35d37c-b0e3-480d-bf6c-3dc1e094886f');
     when(
       payStubRepository.save(
@@ -59,6 +70,13 @@ describe('CreatePayStubCommandHandler', () => {
     ).once();
     verify(
       fileRepository.findOneById('3d0a282f-3b3e-4ef3-948f-5ab3cb77a04c')
+    ).once();
+    verify(fileRepository.remove(anything())).never();
+    verify(
+      isPayStubAlreadyExist.isSatisfiedBy(
+        instance(user),
+        deepEqual(new Date('2020-04-29'))
+      )
     ).once();
     verify(
       payStubRepository.save(
@@ -101,6 +119,42 @@ describe('CreatePayStubCommandHandler', () => {
       ).once();
       verify(
         fileRepository.findOneById('3d0a282f-3b3e-4ef3-948f-5ab3cb77a04c')
+      ).once();
+      verify(payStubRepository.save(anything())).never();
+    }
+  });
+
+  it('testPayStubAlreadyExist', async () => {
+    when(
+      userRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
+    ).thenResolve(instance(user));
+    when(
+      fileRepository.findOneById('3d0a282f-3b3e-4ef3-948f-5ab3cb77a04c')
+    ).thenResolve(instance(file));
+    when(
+      isPayStubAlreadyExist.isSatisfiedBy(
+        instance(user),
+        deepEqual(new Date('2020-04-29'))
+      )
+    ).thenResolve(true);
+
+    try {
+      await handler.execute(command);
+    } catch (e) {
+      expect(e).toBeInstanceOf(PayStubAlreadyExistException);
+      expect(e.message).toBe('accounting.errors.pay_stub_already_exist');
+      verify(
+        userRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
+      ).once();
+      verify(
+        fileRepository.findOneById('3d0a282f-3b3e-4ef3-948f-5ab3cb77a04c')
+      ).once();
+      verify(fileRepository.remove(instance(file))).once();
+      verify(
+        isPayStubAlreadyExist.isSatisfiedBy(
+          instance(user),
+          deepEqual(new Date('2020-04-29'))
+        )
       ).once();
       verify(payStubRepository.save(anything())).never();
     }

@@ -41,7 +41,7 @@
     <table class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
-          <th>Coopérateur</th>
+          <th>Utilisateur</th>
           <th>Mission</th>
           <th>Client</th>
           <th>Montant HT</th>

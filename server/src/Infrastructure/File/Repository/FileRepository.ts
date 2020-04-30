@@ -13,6 +13,10 @@ export class FileRepository implements IFileRepository {
     return this.repository.save(file);
   }
 
+  public remove(file: File): void {
+    this.repository.delete(file.getId());
+  }
+
   public findOneById(id: string): Promise<File | undefined> {
     return this.repository
       .createQueryBuilder('file')
