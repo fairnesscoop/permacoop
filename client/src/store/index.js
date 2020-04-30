@@ -2,7 +2,7 @@ import {writable} from 'svelte/store';
 
 export const user = writable(null);
 export const useLocalStorage = () => {
-  const key = 'persist:user';
+  const key = 'permacoop:user';
   const current_value = localStorage.getItem(key);
 
   if (current_value) {

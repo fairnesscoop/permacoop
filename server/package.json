@@ -43,8 +43,7 @@
     "shortid": "^2.2.15",
     "swagger-ui-express": "^4.1.4",
     "typeorm": "^0.2.20",
-    "typescript": "^3.7.2",
-    "uniqid": "^5.2.0"
+    "typescript": "^3.7.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.1.2",
