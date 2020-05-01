@@ -1,7 +1,7 @@
 <script>
-  import Nav from './_components/Nav.svelte';
+  import Nav from './../components/Nav.svelte';
   import {user} from '../store';
-  import Footer from './_components/Footer.svelte';
+  import Footer from './../components/Footer.svelte';
   import Login from './login/index.svelte';
   import {stores, goto} from '@sapper/app';
   export let segment;

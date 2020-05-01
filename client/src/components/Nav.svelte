@@ -1,6 +1,6 @@
 <script>
-  import {user} from '../../store';
-  import {TokenStorage} from '../../utils/tokenStorage';
+  import {user} from '../store';
+  import {TokenStorage} from '../utils/tokenStorage';
 
   export let segment;
   let grantedRoles = ['cooperator', 'employee'];

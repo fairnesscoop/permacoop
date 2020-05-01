@@ -20,10 +20,10 @@
   import Filters from './_Filters.svelte';
   import Overview from './_Overview.svelte';
   import {errorNormalizer} from '../../normalizer/errors';
-  import Breadcrumb from '../_components/Breadcrumb.svelte';
-  import Loader from '../_components/Loader.svelte';
-  import ServerErrors from '../_components/ServerErrors.svelte';
-  import SecuredView from '../_components/SecuredView.svelte';
+  import Breadcrumb from '../../components/Breadcrumb.svelte';
+  import Loader from '../../components/Loader.svelte';
+  import ServerErrors from '../../components/ServerErrors.svelte';
+  import SecuredView from '../../components/SecuredView.svelte';
 
   export let filters;
 

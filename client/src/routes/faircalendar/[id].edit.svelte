@@ -9,14 +9,14 @@
 </script>
 
 <script>
-  import Breadcrumb from '../_components/Breadcrumb.svelte';
+  import Breadcrumb from '../../components/Breadcrumb.svelte';
   import {format} from 'date-fns';
   import {fr} from 'date-fns/locale';
   import {goto} from '@sapper/app';
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../normalizer/errors';
-  import ServerErrors from '../_components/ServerErrors.svelte';
-  import SecuredView from '../_components/SecuredView.svelte';
+  import ServerErrors from '../../components/ServerErrors.svelte';
+  import SecuredView from '../../components/SecuredView.svelte';
 
   export let event;
 
@@ -60,7 +60,9 @@
       items={[{title: 'FairCalendar', path: 'faircalendar'}, {title: title}]} />
     <ServerErrors {errors} />
     <Form on:save={onSave} event={{...event, taskId, projectId, time}}>
-      <button class="btn btn-danger" type="button" on:click={onDelete}>Supprimer</button>
+      <button class="btn btn-danger" type="button" on:click={onDelete}>
+        Supprimer
+      </button>
     </Form>
   </div>
 </SecuredView>

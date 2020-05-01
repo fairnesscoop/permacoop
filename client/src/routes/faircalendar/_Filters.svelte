@@ -2,7 +2,7 @@
   import {createEventDispatcher, onMount} from 'svelte';
   import {client as axios} from '../../utils/axios';
   import {format} from 'date-fns';
-  import MonthsInput from '../_components/inputs/MonthsInput.svelte';
+  import MonthsInput from '../../components/inputs/MonthsInput.svelte';
 
   const dispatch = createEventDispatcher();
 

@@ -31,6 +31,7 @@ export class LocalFileStorageAdapter implements IFileStorage {
     const encryptedBuffer = await this.fileEncryptionAdapter.encrypt(
       file.buffer
     );
+
     fs.writeFileSync(`${relativeDirectory}/${fileName}`, encryptedBuffer);
 
     return fileName;

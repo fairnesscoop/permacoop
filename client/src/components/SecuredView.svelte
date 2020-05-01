@@ -1,5 +1,5 @@
 <script>
-  import {user} from '../../store';
+  import {user} from '../store';
 
   export let roles = [];
 </script>

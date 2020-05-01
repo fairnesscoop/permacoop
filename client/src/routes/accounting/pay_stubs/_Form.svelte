@@ -1,8 +1,8 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
   import {client as axios} from '../../../utils/axios';
-  import UsersInput from '../../_components/inputs/UsersInput.svelte';
-  import MonthsInput from '../../_components/inputs/MonthsInput.svelte';
+  import UsersInput from '../../../components/inputs/UsersInput.svelte';
+  import MonthsInput from '../../../components/inputs/MonthsInput.svelte';
 
   let data = [];
 

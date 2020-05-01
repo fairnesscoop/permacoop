@@ -1,7 +1,7 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
   import {client as axios} from '../../utils/axios';
-  import CustomersInput from '../_components/inputs/CustomersInput.svelte';
+  import CustomersInput from '../../components/inputs/CustomersInput.svelte';
 
   let data = [];
 

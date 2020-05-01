@@ -1,11 +1,11 @@
 <script>
   import {goto} from '@sapper/app';
-  import Breadcrumb from '../_components/Breadcrumb.svelte';
+  import Breadcrumb from '../../components/Breadcrumb.svelte';
   import {client as axios} from '../../utils/axios';
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../normalizer/errors';
-  import ServerErrors from '../_components/ServerErrors.svelte';
-  import SecuredView from '../_components/SecuredView.svelte';
+  import ServerErrors from '../../components/ServerErrors.svelte';
+  import SecuredView from '../../components/SecuredView.svelte';
 
   let pageTitle = 'Ajouter un projet';
   let errors = [];
