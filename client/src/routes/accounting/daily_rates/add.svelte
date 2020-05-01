@@ -8,7 +8,7 @@
   import SecuredView from '../../../components/SecuredView.svelte';
   import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
 
-  let pageTitle = 'Ajouter un TJM';
+  let title = 'Ajouter un TJM';
   let errors = [];
 
   const onSave = async e => {
@@ -23,13 +23,13 @@
 </script>
 
 <svelte:head>
-  <title>Permacoop - {pageTitle}</title>
+  <title>Permacoop - {title}</title>
 </svelte:head>
 
 <SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
   <div class="col-md-12">
     <Breadcrumb
-      items={[{title: 'Comptabilité'}, {title: 'TJM', path: 'accounting/daily_rates'}, {title: pageTitle}]} />
+      items={[{title: 'Gestion & Comptabilité'}, {title: 'TJM', path: 'accounting/daily_rates'}, {title}]} />
     <ServerErrors {errors} />
     <Form on:save={onSave} />
   </div>

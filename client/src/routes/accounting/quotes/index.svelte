@@ -34,7 +34,7 @@
 
 <SecuredView {roles}>
   <div class="col-md-12">
-    <Breadcrumb items={[{title: 'Comptabilité'}, {title: 'Devis'}]} />
+    <Breadcrumb items={[{title: 'Gestion & Comptabilité'}, {title: 'Devis'}]} />
     <ServerErrors {errors} />
     <SecuredLink
       className="btn btn-primary mb-3"

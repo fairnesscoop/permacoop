@@ -22,9 +22,8 @@
   let taskId = dailyRate.task.id;
   let customerId = dailyRate.customer.id;
   let userId = dailyRate.user.id;
-  let userName = `${dailyRate.user.firstName} ${dailyRate.user.lastName}`;
 
-  let pageTitle = `Modification du TJM de ${userName} pour ${dailyRate.customer.name}`;
+  let title = `Edition du TJM "${dailyRate.customer.name}"`;
   let errors = [];
 
   const onSave = async e => {
@@ -39,13 +38,13 @@
 </script>
 
 <svelte:head>
-  <title>Permacoop - {pageTitle}</title>
+  <title>Permacoop - {title}</title>
 </svelte:head>
 
 <SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
   <div class="col-md-12">
     <Breadcrumb
-      items={[{title: 'Comptabilité'}, {title: 'TJM', path: 'accounting/daily_rates'}, {title: pageTitle}]} />
+      items={[{title: 'Gestion & Comptabilité'}, {title: 'TJM', path: 'accounting/daily_rates'}, {title}]} />
     <ServerErrors {errors} />
     <Form on:save={onSave} {amount} {taskId} {customerId} {userId} />
   </div>

@@ -34,8 +34,8 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
-  <UsersInput {users} bind:userId />
   <CustomersInput {customers} bind:customerId />
+  <UsersInput {users} bind:userId />
   <TasksInput {tasks} bind:taskId />
   <div class="form-group">
     <label for="amount">Taux HT *</label>

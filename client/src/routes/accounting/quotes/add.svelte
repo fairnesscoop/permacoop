@@ -30,7 +30,7 @@
 <SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
   <div class="col-md-12">
     <Breadcrumb
-      items={[{title: 'Comptabilité'}, {path: 'accounting/quotes', title: 'Devis'}, {title}]} />
+      items={[{title: 'Gestion & Comptabilité'}, {path: 'accounting/quotes', title: 'Devis'}, {title}]} />
     <ServerErrors {errors} />
     <Form on:save={onSave} />
   </div>
