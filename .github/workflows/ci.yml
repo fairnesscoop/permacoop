@@ -8,7 +8,9 @@ jobs:
       - name: Tests
         run: |
           cd server && npm install
+          cd ../client && npm install
           cd .. && make ci
+          cd client && npm run coverage
       - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
