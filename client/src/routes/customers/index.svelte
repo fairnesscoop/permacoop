@@ -8,7 +8,7 @@
   import ServerErrors from '../../components/ServerErrors.svelte';
   import SecuredView from '../../components/SecuredView.svelte';
   import SecuredLink from '../../components/SecuredLink.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../utils/roles';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
 
   let pageTitle = 'Clients';
   let loading = true;

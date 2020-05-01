@@ -7,7 +7,7 @@
   import {errorNormalizer} from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import SecuredView from '../../../components/SecuredView.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../utils/roles';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
 
   let errors = [];
   let title = 'Créer un nouveau devis';

@@ -3,7 +3,7 @@
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
   import SecuredView from '../../../components/SecuredView.svelte';
   import SecuredLink from '../../../components/SecuredLink.svelte';
-  import {ROLE_COOPERATOR, ROLE_ACCOUNTANT} from '../../../utils/roles';
+  import {ROLE_COOPERATOR, ROLE_ACCOUNTANT} from '../../../constants/roles';
 
   let roles = [ROLE_COOPERATOR, ROLE_ACCOUNTANT];
 </script>

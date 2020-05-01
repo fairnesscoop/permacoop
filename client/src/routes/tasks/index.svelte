@@ -7,7 +7,7 @@
   import {client as axios} from '../../utils/axios';
   import SecuredView from '../../components/SecuredView.svelte';
   import SecuredLink from '../../components/SecuredLink.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../utils/roles';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
 
   let title = 'Missions';
   let loading = true;

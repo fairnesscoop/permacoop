@@ -5,7 +5,7 @@
     ROLE_COOPERATOR,
     ROLE_EMPLOYEE,
     ROLE_ACCOUNTANT
-  } from '../utils/roles';
+  } from '../constants/roles';
 
   export let segment;
   let userRoles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
