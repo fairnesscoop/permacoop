@@ -9,7 +9,7 @@
   import SecuredLink from '../../components/SecuredLink.svelte';
   import Loader from '../../components/Loader.svelte';
   import ServerErrors from '../../components/ServerErrors.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../utils/roles';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
 
   let title = 'Utilisateurs';
   let loading = true;

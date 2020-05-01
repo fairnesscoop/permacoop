@@ -6,7 +6,7 @@
   import {errorNormalizer} from '../../normalizer/errors';
   import SecuredView from '../../components/SecuredView.svelte';
   import ServerErrors from '../../components/ServerErrors.svelte';
-  import {ROLE_COOPERATOR} from '../../utils/roles';
+  import {ROLE_COOPERATOR} from '../../constants/roles';
 
   let title = 'Ajouter un utilisateur';
   let errors = [];

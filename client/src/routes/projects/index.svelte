@@ -7,7 +7,7 @@
   import Breadcrumb from '../../components/Breadcrumb.svelte';
   import SecuredView from '../../components/SecuredView.svelte';
   import SecuredLink from '../../components/SecuredLink.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../utils/roles';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
 
   let title = 'Projets';
   let loading = true;

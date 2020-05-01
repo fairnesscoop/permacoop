@@ -6,7 +6,7 @@
   import ServerErrors from '../../components/ServerErrors.svelte';
   import Form from './_Form.svelte';
   import SecuredView from '../../components/SecuredView.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../utils/roles';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
 
   let pageTitle = 'Ajouter un client';
   let errors = [];
