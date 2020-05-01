@@ -2,11 +2,11 @@
   import {onMount} from 'svelte';
   import {goto} from '@sapper/app';
   import {client as axios} from '../../../utils/axios';
-  import Breadcrumb from '../../_components/Breadcrumb.svelte';
+  import Breadcrumb from '../../../components/Breadcrumb.svelte';
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../../normalizer/errors';
-  import ServerErrors from '../../_components/ServerErrors.svelte';
-  import SecuredView from '../../_components/SecuredView.svelte';
+  import ServerErrors from '../../../components/ServerErrors.svelte';
+  import SecuredView from '../../../components/SecuredView.svelte';
 
   let errors = [];
   let title = 'Créer un nouveau devis';

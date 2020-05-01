@@ -1,8 +1,8 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
   import {client as axios} from '../../utils/axios';
-  import TasksInput from '../_components/inputs/TasksInput.svelte';
-  import ProjectsInput from '../_components/inputs/ProjectsInput.svelte';
+  import TasksInput from '../../components/inputs/TasksInput.svelte';
+  import ProjectsInput from '../../components/inputs/ProjectsInput.svelte';
 
   const dispatch = createEventDispatcher();
 

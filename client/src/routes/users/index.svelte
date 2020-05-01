@@ -2,11 +2,11 @@
   import {onMount} from 'svelte';
   import {client as axios} from '../../utils/axios';
   import {errorNormalizer} from '../../normalizer/errors';
-  import Breadcrumb from '../_components/Breadcrumb.svelte';
-  import SecuredView from '../_components/SecuredView.svelte';
-  import SecuredLink from '../_components/SecuredLink.svelte';
-  import Loader from '../_components/Loader.svelte';
-  import ServerErrors from '../_components/ServerErrors.svelte';
+  import Breadcrumb from '../../components/Breadcrumb.svelte';
+  import SecuredView from '../../components/SecuredView.svelte';
+  import SecuredLink from '../../components/SecuredLink.svelte';
+  import Loader from '../../components/Loader.svelte';
+  import ServerErrors from '../../components/ServerErrors.svelte';
   import RowDetail from './_RowDetail.svelte';
 
   let title = 'Utilisateurs';

@@ -1,8 +1,8 @@
 <script>
   import {onMount} from 'svelte';
-  import Breadcrumb from '../../_components/Breadcrumb.svelte';
-  import SecuredView from '../../_components/SecuredView.svelte';
-  import SecuredLink from '../../_components/SecuredLink.svelte';
+  import Breadcrumb from '../../../components/Breadcrumb.svelte';
+  import SecuredView from '../../../components/SecuredView.svelte';
+  import SecuredLink from '../../../components/SecuredLink.svelte';
 </script>
 
 <svelte:head>

@@ -4,7 +4,7 @@
   import {user} from '../../store';
   import {TokenStorage} from '../../utils/tokenStorage';
   import {errorNormalizer} from '../../normalizer/errors';
-  import ServerErrors from '../_components/ServerErrors.svelte';
+  import ServerErrors from '../../components/ServerErrors.svelte';
 
   let pageTitle = 'Se connecter';
   let errors = [];
