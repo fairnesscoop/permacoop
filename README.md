@@ -82,11 +82,12 @@ make api-test
 - Projects management
 - Customers management
 - Calendar (timesheets etc.)
+- Human Resources
+  - Pay stubs
 - Accounting
   - Quotations
   - Daily rates
   - Invoicing
-  - Pay stubs
 
 ## Credits
 
