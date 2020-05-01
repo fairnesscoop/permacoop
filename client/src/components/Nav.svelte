@@ -50,20 +50,32 @@
             href="javascript:void"
             role="button"
             data-toggle="dropdown">
-            Comptabilité
+            Gestion & Comptabilité
           </a>
           <div class="dropdown-menu">
-            {#if accountantRoles.includes($user.role)}
-              <a class="dropdown-item" href="accounting/pay_stubs">
-                Fiches de paies
-              </a>
-            {/if}
             {#if userRoles.includes($user.role)}
               <a class="dropdown-item" href="accounting/quotes">Devis</a>
               <a class="dropdown-item" href="accounting/daily_rates">TJM</a>
             {/if}
           </div>
         </li>
+        {#if accountantRoles.includes($user.role)}
+          <li
+            class="nav-item dropdown {segment === 'human_resources' ? 'active' : ''}">
+            <a
+              class="nav-link dropdown-toggle"
+              href="javascript:void"
+              role="button"
+              data-toggle="dropdown">
+              RH
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="human_resources/pay_stubs">
+                Fiches de paies
+              </a>
+            </div>
+          </li>
+        {/if}
         {#if userRoles.includes($user.role)}
           <li class="nav-item {segment === 'projects' ? 'active' : ''}">
             <a class="nav-link" href="projects">Projets</a>

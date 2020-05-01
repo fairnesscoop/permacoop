@@ -32,13 +32,6 @@ import {UpdateDailyRateAction} from './Action/DailyRate/UpdateDailyRateAction';
 import {UpdateDailyRateCommandHandler} from 'src/Application/Accounting/Command/DailyRate/UpdateDailyRateCommandHandler';
 import {GetQuotesAction} from './Action/Quote/GetQuotesAction';
 import {GetQuotesQueryHandler} from 'src/Application/Accounting/Query/Quote/GetQuotesQueryHandler';
-import {PayStub} from 'src/Domain/Accounting/PayStub.entity';
-import {PayStubRepository} from './Repository/PayStubRepository';
-import {CreatePayStubAction} from './Action/PayStub/CreatePayStubAction';
-import {CreatePayStubCommandHandler} from 'src/Application/Accounting/Command/PayStub/CreatePayStubCommandHandler';
-import {File} from 'src/Domain/File/File.entity';
-import {FileRepository} from '../File/Repository/FileRepository';
-import {IsPayStubAlreadyExist} from 'src/Domain/Accounting/Specification/IsPayStubAlreadyExist';
 
 @Module({
   imports: [
@@ -49,11 +42,9 @@ import {IsPayStubAlreadyExist} from 'src/Domain/Accounting/Specification/IsPaySt
       QuoteItem,
       Project,
       Customer,
-      File,
       Task,
       DailyRate,
-      User,
-      PayStub
+      User
     ])
   ],
   controllers: [
@@ -62,8 +53,7 @@ import {IsPayStubAlreadyExist} from 'src/Domain/Accounting/Specification/IsPaySt
     GetDailyRatesAction,
     GetDailyRateAction,
     UpdateDailyRateAction,
-    GetQuotesAction,
-    CreatePayStubAction
+    GetQuotesAction
   ],
   providers: [
     {provide: 'IQuoteRepository', useClass: QuoteRepository},
@@ -74,8 +64,6 @@ import {IsPayStubAlreadyExist} from 'src/Domain/Accounting/Specification/IsPaySt
     {provide: 'IProjectRepository', useClass: ProjectRepository},
     {provide: 'ITaskRepository', useClass: TaskRepository},
     {provide: 'ICustomerRepository', useClass: CustomerRepository},
-    {provide: 'IPayStubRepository', useClass: PayStubRepository},
-    {provide: 'IFileRepository', useClass: FileRepository},
     CreateQuoteCommandHandler,
     CreateQuoteItemsCommandHandler,
     CreateDailyRateCommandHandler,
@@ -84,9 +72,7 @@ import {IsPayStubAlreadyExist} from 'src/Domain/Accounting/Specification/IsPaySt
     GetDailyRatesQueryHandler,
     UpdateDailyRateCommandHandler,
     GetQuotesQueryHandler,
-    GetDailyRateByIdQueryHandler,
-    CreatePayStubCommandHandler,
-    IsPayStubAlreadyExist
+    GetDailyRateByIdQueryHandler
   ]
 })
 export class AccountingModule {}
