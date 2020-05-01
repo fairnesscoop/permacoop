@@ -1,14 +1,14 @@
 import {CommandHandler} from '@nestjs/cqrs';
 import {Inject} from '@nestjs/common';
 import {CreatePayStubCommand} from './CreatePayStubCommand';
-import {IPayStubRepository} from 'src/Domain/Accounting/Repository/IPayStubRepository';
-import {PayStub} from 'src/Domain/Accounting/PayStub.entity';
+import {IPayStubRepository} from 'src/Domain/HumanResource/Repository/IPayStubRepository';
+import {PayStub} from 'src/Domain/HumanResource/PayStub.entity';
 import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
 import {IFileRepository} from 'src/Domain/File/Repository/IFileRepository';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
 import {FileNotFoundException} from 'src/Domain/File/Exception/FileNotFoundException';
-import {IsPayStubAlreadyExist} from 'src/Domain/Accounting/Specification/IsPayStubAlreadyExist';
-import {PayStubAlreadyExistException} from 'src/Domain/Accounting/Exception/PayStubAlreadyExistException';
+import {IsPayStubAlreadyExist} from 'src/Domain/HumanResource/Specification/IsPayStubAlreadyExist';
+import {PayStubAlreadyExistException} from 'src/Domain/HumanResource/Exception/PayStubAlreadyExistException';
 
 @CommandHandler(CreatePayStubCommand)
 export class CreatePayStubCommandHandler {

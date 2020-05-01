@@ -22,13 +22,13 @@ import {PayStubDTO} from '../../DTO/PayStubDTO';
 import {IUploadedFile} from 'src/Domain/File/IUploadedFile';
 import {PDFValidator} from 'src/Domain/File/Validator/PDFValidator';
 import {UploadFileCommand} from 'src/Application/File/Command/UploadFileCommand';
-import {CreatePayStubCommand} from 'src/Application/Accounting/Command/PayStub/CreatePayStubCommand';
+import {CreatePayStubCommand} from 'src/Application/HumanResource/PayStub/CreatePayStubCommand';
 import {UserRole} from 'src/Domain/User/User.entity';
 import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
 import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
 
 @Controller('pay_stubs')
-@ApiUseTags('Accounting')
+@ApiUseTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreatePayStubAction {

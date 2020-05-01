@@ -15,7 +15,7 @@
     try {
       await axios.post('pay_stubs', e.detail);
 
-      return goto('/accounting/pay_stubs');
+      return goto('/human_resources/pay_stubs');
     } catch (e) {
       errors = errorNormalizer(e);
     }
@@ -29,7 +29,7 @@
 <SecuredView roles={[ROLE_COOPERATOR, ROLE_ACCOUNTANT]}>
   <div class="col-md-12">
     <Breadcrumb
-      items={[{title: 'Comptabilité'}, {title: 'Fiches de paies', path: 'accounting/pay_stubs'}, {title}]} />
+      items={[{title: 'RH'}, {title: 'Fiches de paies', path: 'human_resources/pay_stubs'}, {title}]} />
     <ServerErrors {errors} />
     <Form on:save={onSave} />
   </div>

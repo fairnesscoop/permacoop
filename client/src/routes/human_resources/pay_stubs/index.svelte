@@ -14,10 +14,10 @@
 
 <SecuredView {roles}>
   <div class="col-md-12">
-    <Breadcrumb items={[{title: 'Comptabilité'}, {title: 'Fiches de paies'}]} />
+    <Breadcrumb items={[{title: 'RH'}, {title: 'Fiches de paies'}]} />
     <SecuredLink
       className="btn btn-primary mb-3"
-      href="accounting/pay_stubs/add"
+      href="human_resources/pay_stubs/add"
       {roles}>
       + Ajouter une fiche de paie
     </SecuredLink>
