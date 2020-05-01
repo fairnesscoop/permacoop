@@ -5,14 +5,15 @@
   import Loader from '../../components/Loader.svelte';
   import ServerErrors from '../../components/ServerErrors.svelte';
   import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import RowDetail from './_RowDetail.svelte';
   import SecuredView from '../../components/SecuredView.svelte';
   import SecuredLink from '../../components/SecuredLink.svelte';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../utils/roles';
 
-  let pageTitle = 'Projets';
+  let title = 'Projets';
   let loading = true;
   let errors = [];
   let data = [];
+  let roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
   onMount(async () => {
     try {
@@ -26,17 +27,14 @@
 </script>
 
 <svelte:head>
-  <title>Permacoop - {pageTitle}</title>
+  <title>Permacoop - {title}</title>
 </svelte:head>
 
-<SecuredView roles={['cooperator', 'employee']}>
+<SecuredView {roles}>
   <div class="col-md-12">
-    <Breadcrumb items={[{title: pageTitle}]} />
+    <Breadcrumb items={[{title}]} />
     <ServerErrors {errors} />
-    <SecuredLink
-      className="btn btn-primary mb-3"
-      href="projects/add"
-      roles={['cooperator', 'employee']}>
+    <SecuredLink className="btn btn-primary mb-3" href="projects/add" {roles}>
       + Ajouter un projet
     </SecuredLink>
     <table class="table table-striped table-bordered table-hover">
@@ -49,7 +47,18 @@
       </thead>
       <tbody>
         {#each data as project (project.id)}
-          <RowDetail {project} />
+          <tr>
+            <td>{project.name}</td>
+            <td>{project.customer.name}</td>
+            <td>
+              <SecuredLink
+                className="btn btn-outline-secondary btn-sm"
+                href={`/projects/${project.id}/edit`}
+                {roles}>
+                Modifier
+              </SecuredLink>
+            </td>
+          </tr>
         {/each}
       </tbody>
     </table>

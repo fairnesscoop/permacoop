@@ -1,9 +1,15 @@
 <script>
   import {user} from '../store';
   import {TokenStorage} from '../utils/tokenStorage';
+  import {
+    ROLE_COOPERATOR,
+    ROLE_EMPLOYEE,
+    ROLE_ACCOUNTANT
+  } from '../utils/roles';
 
   export let segment;
-  let grantedRoles = ['cooperator', 'employee'];
+  let userRoles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
+  let accountantRoles = [ROLE_COOPERATOR, ROLE_ACCOUNTANT];
 
   const handleLogout = () => {
     TokenStorage.remove();
@@ -32,7 +38,7 @@
   {#if process.browser && $user}
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav mr-auto">
-        {#if grantedRoles.includes($user.role)}
+        {#if userRoles.includes($user.role)}
           <li class="nav-item {segment === 'faircalendar' ? 'active' : ''}">
             <a class="nav-link" href="faircalendar">FairCalendar</a>
           </li>
@@ -47,18 +53,18 @@
             Comptabilité
           </a>
           <div class="dropdown-menu">
-            {#if ['cooperator', 'accountant'].includes($user.role)}
+            {#if accountantRoles.includes($user.role)}
               <a class="dropdown-item" href="accounting/pay_stubs">
                 Fiches de paies
               </a>
             {/if}
-            {#if grantedRoles.includes($user.role)}
+            {#if userRoles.includes($user.role)}
               <a class="dropdown-item" href="accounting/quotes">Devis</a>
               <a class="dropdown-item" href="accounting/daily_rates">TJM</a>
             {/if}
           </div>
         </li>
-        {#if grantedRoles.includes($user.role)}
+        {#if userRoles.includes($user.role)}
           <li class="nav-item {segment === 'projects' ? 'active' : ''}">
             <a class="nav-link" href="projects">Projets</a>
           </li>

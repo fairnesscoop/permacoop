@@ -4,15 +4,16 @@
   import Breadcrumb from '../../components/Breadcrumb.svelte';
   import Loader from '../../components/Loader.svelte';
   import ServerErrors from '../../components/ServerErrors.svelte';
-  import RowDetail from './_RowDetail.svelte';
   import {client as axios} from '../../utils/axios';
   import SecuredView from '../../components/SecuredView.svelte';
   import SecuredLink from '../../components/SecuredLink.svelte';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../utils/roles';
 
-  let pageTitle = 'Missions';
+  let title = 'Missions';
   let loading = true;
   let errors = [];
   let data = [];
+  let roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
   onMount(async () => {
     try {
@@ -26,17 +27,14 @@
 </script>
 
 <svelte:head>
-  <title>Permacoop - {pageTitle}</title>
+  <title>Permacoop - {title}</title>
 </svelte:head>
 
-<SecuredView roles={['cooperator', 'employee']}>
+<SecuredView {roles}>
   <div class="col-md-12">
-    <Breadcrumb items={[{title: pageTitle}]} />
+    <Breadcrumb items={[{title}]} />
     <ServerErrors {errors} />
-    <SecuredLink
-      className="btn btn-primary mb-3"
-      href="tasks/add"
-      roles={['cooperator', 'employee']}>
+    <SecuredLink className="btn btn-primary mb-3" href="tasks/add" {roles}>
       + Ajouter une mission
     </SecuredLink>
     <table class="table table-striped table-bordered table-hover">
@@ -48,7 +46,17 @@
       </thead>
       <tbody>
         {#each data as task (task.id)}
-          <RowDetail {task} />
+          <tr>
+            <td>{task.name}</td>
+            <td>
+              <SecuredLink
+                className="btn btn-outline-secondary btn-sm"
+                href={`/tasks/${task.id}/edit`}
+                {roles}>
+                Modifier
+              </SecuredLink>
+            </td>
+          </tr>
         {/each}
       </tbody>
     </table>

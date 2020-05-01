@@ -6,8 +6,9 @@
   import {errorNormalizer} from '../../normalizer/errors';
   import SecuredView from '../../components/SecuredView.svelte';
   import ServerErrors from '../../components/ServerErrors.svelte';
+  import {ROLE_COOPERATOR} from '../../utils/roles';
 
-  let pageTitle = 'Ajouter un utilisateur';
+  let title = 'Ajouter un utilisateur';
   let errors = [];
 
   const onSave = async e => {
@@ -22,13 +23,12 @@
 </script>
 
 <svelte:head>
-  <title>Permacoop - {pageTitle}</title>
+  <title>Permacoop - {title}</title>
 </svelte:head>
 
-<SecuredView roles={['cooperator']}>
+<SecuredView roles={[ROLE_COOPERATOR]}>
   <div class="col-md-12">
-    <Breadcrumb
-      items={[{title: 'Utilisateurs', path: 'users'}, {title: pageTitle}]} />
+    <Breadcrumb items={[{title: 'Utilisateurs', path: 'users'}, {title}]} />
     <ServerErrors {errors} />
     <Form on:save={onSave} />
   </div>

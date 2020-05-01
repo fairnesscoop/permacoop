@@ -8,10 +8,12 @@
   import {format} from '../../../normalizer/money';
   import SecuredView from '../../../components/SecuredView.svelte';
   import SecuredLink from '../../../components/SecuredLink.svelte';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../utils/roles';
 
   let loading = true;
   let errors = [];
   let data = [];
+  let roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
   onMount(async () => {
     try {
@@ -28,13 +30,13 @@
   <title>Permacoop - TJM</title>
 </svelte:head>
 
-<SecuredView roles={['cooperator', 'employee']}>
+<SecuredView {roles}>
   <div class="col-md-12">
     <Breadcrumb items={[{title: 'Comptabilité'}, {title: 'TJM'}]} />
     <ServerErrors {errors} />
     <SecuredLink
       className="btn btn-primary mb-3"
-      roles={['cooperator', 'employee']}
+      {roles}
       href="accounting/daily_rates/add">
       + Ajouter un TJM
     </SecuredLink>
@@ -58,7 +60,7 @@
             <td>
               <SecuredLink
                 className="btn btn-outline-secondary btn-sm"
-                roles={['cooperator', 'employee']}
+                {roles}
                 href={`accounting/daily_rates/${dailyRate.id}/edit`}>
                 Modifier
               </SecuredLink>

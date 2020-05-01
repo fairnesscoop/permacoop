@@ -14,6 +14,7 @@
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
   import SecuredView from '../../components/SecuredView.svelte';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../utils/roles';
 
   export let date;
 
@@ -41,7 +42,7 @@
   <title>Permacoop - {pageTitle}</title>
 </svelte:head>
 
-<SecuredView roles={['cooperator', 'employee']}>
+<SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
   <div class="col-md-12">
     <Breadcrumb
       items={[{title: 'FairCalendar', path: 'faircalendar'}, {title: pageTitle}]} />

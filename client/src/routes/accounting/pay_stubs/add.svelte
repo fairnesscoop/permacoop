@@ -6,6 +6,7 @@
   import {errorNormalizer} from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import SecuredView from '../../../components/SecuredView.svelte';
+  import {ROLE_COOPERATOR, ROLE_ACCOUNTANT} from '../../../utils/roles';
 
   let title = 'Ajouter une fiche de paie';
   let errors = [];
@@ -25,7 +26,7 @@
   <title>Permacoop - {title}</title>
 </svelte:head>
 
-<SecuredView roles={['cooperator', 'accountant']}>
+<SecuredView roles={[ROLE_COOPERATOR, ROLE_ACCOUNTANT]}>
   <div class="col-md-12">
     <Breadcrumb
       items={[{title: 'Comptabilité'}, {title: 'Fiches de paies', path: 'accounting/pay_stubs'}, {title}]} />
