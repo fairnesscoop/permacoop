@@ -8,11 +8,13 @@
   import ServerErrors from '../../components/ServerErrors.svelte';
   import SecuredView from '../../components/SecuredView.svelte';
   import SecuredLink from '../../components/SecuredLink.svelte';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../utils/roles';
 
   let pageTitle = 'Clients';
   let loading = true;
   let errors = [];
   let data = [];
+  let roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
   onMount(async () => {
     try {
@@ -29,14 +31,11 @@
   <title>Permacoop - {pageTitle}</title>
 </svelte:head>
 
-<SecuredView roles={['cooperator', 'employee']}>
+<SecuredView {roles}>
   <div class="col-md-12">
     <Breadcrumb items={[{title: pageTitle}]} />
     <ServerErrors {errors} />
-    <SecuredLink
-      className="btn btn-primary mb-3"
-      href="customers/add"
-      roles={['cooperator', 'employee']}>
+    <SecuredLink className="btn btn-primary mb-3" href="customers/add" {roles}>
       + Ajouter un client
     </SecuredLink>
     <table class="table table-striped table-bordered table-hover">
@@ -59,11 +58,12 @@
               {byAlpha2[customer.address.country].name}
             </td>
             <td>
-              <a
-                class="btn btn-outline-secondary btn-sm"
-                href={`/customers/${customer.id}/edit`}>
+              <SecuredLink
+                className="btn btn-outline-secondary btn-sm"
+                href={`/customers/${customer.id}/edit`}
+                {roles}>
                 Modifier
-              </a>
+              </SecuredLink>
             </td>
           </tr>
         {/each}

@@ -15,11 +15,12 @@
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
   import SecuredView from '../../components/SecuredView.svelte';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../utils/roles';
 
   export let project;
 
   let errors = [];
-  let pageTitle = `Edition du projet "${project.name}"`;
+  let title = `Edition du projet "${project.name}"`;
 
   const onSave = async e => {
     try {
@@ -33,13 +34,12 @@
 </script>
 
 <svelte:head>
-  <title>Permacoop - {pageTitle}</title>
+  <title>Permacoop - {title}</title>
 </svelte:head>
 
-<SecuredView roles={['cooperator', 'employee']}>
+<SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
   <div class="col-md-12">
-    <Breadcrumb
-      items={[{title: 'Projets', path: 'projects'}, {title: pageTitle}]} />
+    <Breadcrumb items={[{title: 'Projets', path: 'projects'}, {title}]} />
     <ServerErrors {errors} />
     <Form
       customerId={project.customer.id}

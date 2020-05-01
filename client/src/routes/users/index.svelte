@@ -1,5 +1,7 @@
 <script>
   import {onMount} from 'svelte';
+  import {format} from 'date-fns';
+  import {fr} from 'date-fns/locale';
   import {client as axios} from '../../utils/axios';
   import {errorNormalizer} from '../../normalizer/errors';
   import Breadcrumb from '../../components/Breadcrumb.svelte';
@@ -7,12 +9,13 @@
   import SecuredLink from '../../components/SecuredLink.svelte';
   import Loader from '../../components/Loader.svelte';
   import ServerErrors from '../../components/ServerErrors.svelte';
-  import RowDetail from './_RowDetail.svelte';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../utils/roles';
 
   let title = 'Utilisateurs';
   let loading = true;
   let errors = [];
   let data = [];
+  let roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
   onMount(async () => {
     try {
@@ -29,14 +32,11 @@
   <title>Permacoop - {title}</title>
 </svelte:head>
 
-<SecuredView roles={['cooperator', 'employee']}>
+<SecuredView {roles}>
   <div class="col-md-12">
     <Breadcrumb items={[{title}]} />
     <ServerErrors {errors} />
-    <SecuredLink
-      className="btn btn-primary mb-3"
-      href="users/add"
-      roles={['cooperator']}>
+    <SecuredLink className="btn btn-primary mb-3" href="users/add" {roles}>
       + Ajouter un utilisateur
     </SecuredLink>
     <table class="table table-striped table-bordered table-hover">
@@ -51,7 +51,17 @@
       </thead>
       <tbody>
         {#each data as user (user.id)}
-          <RowDetail {user} />
+          <tr>
+            <td>{user.firstName}</td>
+            <td>{user.lastName}</td>
+            <td>{user.email}</td>
+            <td>
+              {user.entryDate ? format(new Date(user.entryDate), 'dd/MM/yyyy', {
+                    locale: fr
+                  }) : '/'}
+            </td>
+            <td>{user.role}</td>
+          </tr>
         {/each}
       </tbody>
     </table>

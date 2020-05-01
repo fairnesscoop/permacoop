@@ -1,11 +1,16 @@
 <script>
   import {createEventDispatcher} from 'svelte';
+  import {
+    ROLE_COOPERATOR,
+    ROLE_ACCOUNTANT,
+    ROLE_EMPLOYEE
+  } from '../../utils/roles';
 
   export let firstName = '';
   export let lastName = '';
   export let email = '';
   export let password = '';
-  export let role = 'cooperator';
+  export let role = ROLE_COOPERATOR;
   export let entryDate = null;
 
   const dispatch = createEventDispatcher();
@@ -65,12 +70,12 @@
       required="required"
       class="form-control"
       bind:value={role}>
-      <option value={'cooperator'}>Coopérateur</option>
-      <option value={'employee'}>Employé</option>
-      <option value={'accountant'}>Comptable</option>
+      <option value={ROLE_COOPERATOR}>Coopérateur</option>
+      <option value={ROLE_EMPLOYEE}>Employé</option>
+      <option value={ROLE_ACCOUNTANT}>Comptable</option>
     </select>
   </div>
-  {#if role !== 'accountant'}
+  {#if role !== ROLE_ACCOUNTANT}
     <div class="form-group">
       <label for="date">Date d'entrée *</label>
       <input

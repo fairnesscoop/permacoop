@@ -10,10 +10,12 @@
   import {format} from '../../../normalizer/money';
   import SecuredView from '../../../components/SecuredView.svelte';
   import SecuredLink from '../../../components/SecuredLink.svelte';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../utils/roles';
 
   let loading = true;
   let errors = [];
   let data = [];
+  let roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
   onMount(async () => {
     try {
@@ -30,14 +32,14 @@
   <title>Permacoop - Devis</title>
 </svelte:head>
 
-<SecuredView roles={['cooperator', 'employee']}>
+<SecuredView {roles}>
   <div class="col-md-12">
     <Breadcrumb items={[{title: 'Comptabilité'}, {title: 'Devis'}]} />
     <ServerErrors {errors} />
     <SecuredLink
       className="btn btn-primary mb-3"
       href="accounting/quotes/add"
-      roles={['cooperator', 'employee']}>
+      {roles}>
       + Créer un nouveau devis
     </SecuredLink>
     <table class="table table-striped table-bordered table-hover">
