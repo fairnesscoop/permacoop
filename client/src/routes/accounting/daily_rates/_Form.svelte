@@ -4,6 +4,7 @@
   import CustomersInput from '../../../components/inputs/CustomersInput.svelte';
   import TasksInput from '../../../components/inputs/TasksInput.svelte';
   import {client as axios} from '../../../utils/axios';
+  import MoneyInput from '../../../components/inputs/MoneyInput.svelte';
 
   let users = [];
   let tasks = [];
@@ -37,23 +38,7 @@
   <CustomersInput {customers} bind:customerId />
   <UsersInput {users} bind:userId />
   <TasksInput {tasks} bind:taskId />
-  <div class="form-group">
-    <label for="amount">Taux HT *</label>
-    <div class="input-group">
-      <input
-        type="number"
-        required="required"
-        min="1"
-        id="amount"
-        placeholder="0,00"
-        step="0.01"
-        bind:value={amount}
-        class="form-control" />
-      <div class="input-group-append">
-        <span class="input-group-text">€</span>
-      </div>
-    </div>
-  </div>
+  <MoneyInput label={'Taux HT'} bind:value={amount} />
   <button
     type="submit"
     class="btn btn-primary"

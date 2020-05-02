@@ -63,3 +63,7 @@
   color: #fff;
   background-color: #007bff;
 }
+label.required:after {
+  content: ' *';
+  font-weight: bold;
+}

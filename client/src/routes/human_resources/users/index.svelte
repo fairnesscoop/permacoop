@@ -48,8 +48,8 @@
           <th>Prénom</th>
           <th>Nom</th>
           <th>Email</th>
-          <th>Date d'entrée</th>
           <th>Rôle</th>
+          <th />
         </tr>
       </thead>
       <tbody>
@@ -58,12 +58,15 @@
             <td>{user.firstName}</td>
             <td>{user.lastName}</td>
             <td>{user.email}</td>
-            <td>
-              {user.entryDate ? format(new Date(user.entryDate), 'dd/MM/yyyy', {
-                    locale: fr
-                  }) : '/'}
-            </td>
             <td>{user.role}</td>
+            <td>
+              <SecuredLink
+                className="btn btn-outline-secondary btn-sm"
+                href={''}
+                {roles}>
+                Modifier
+              </SecuredLink>
+            </td>
           </tr>
         {/each}
       </tbody>

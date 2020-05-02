@@ -4,7 +4,7 @@
 </script>
 
 <div class="form-group">
-  <label for="userId">Salarié *</label>
+  <label for="userId" class="required">Salarié</label>
   <select
     id="userId"
     required="required"

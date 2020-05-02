@@ -1,6 +1,8 @@
 <script>
   import {createEventDispatcher} from 'svelte';
   import {codes} from 'iso-country-codes';
+  import TextInput from '../../components/inputs/TextInput.svelte';
+  import SelectInput from '../../components/inputs/SelectInput.svelte';
 
   export let customer;
 
@@ -13,47 +15,15 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
-  <div class="form-group">
-    <label for="name">Nom du client *</label>
-    <input
-      type="text"
-      id="name"
-      bind:value={customer.name}
-      class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="street">Adresse *</label>
-    <input
-      type="text"
-      id="street"
-      bind:value={address.street}
-      class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="zipCode">Code postal *</label>
-    <input
-      type="text"
-      id="zipCode"
-      maxlength="6"
-      bind:value={address.zipCode}
-      class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="city">Ville *</label>
-    <input
-      type="text"
-      id="city"
-      bind:value={address.city}
-      class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="country">Pays *</label>
-    <select id="country" class="form-control" bind:value={address.country}>
-      {#each codes as code}
-        <option value={code.alpha2}>{code.name}</option>
-      {/each}
-    </select>
-  </div>
+  <TextInput label={'Nom du client'} bind:value={customer.name} />
+  <TextInput label={'Adresse'} bind:value={address.street} />
+  <TextInput label={'Code postal'} bind:value={address.zipCode} />
+  <TextInput label={'Ville'} bind:value={address.city} />
+  <SelectInput label={'Pays'} bind:value={address.country}>
+    {#each codes as code}
+      <option value={code.alpha2}>{code.name}</option>
+    {/each}
+  </SelectInput>
   <button
     type="submit"
     class="btn btn-primary"

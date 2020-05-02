@@ -4,7 +4,7 @@
 </script>
 
 <div class="form-group">
-  <label for="projectId">Projet *</label>
+  <label for="projectId" class="required">Projet</label>
   <select
     id="projectId"
     required="required"

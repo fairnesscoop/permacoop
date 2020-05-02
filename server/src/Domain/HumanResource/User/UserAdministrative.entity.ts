@@ -43,7 +43,7 @@ export class UserAdministrative {
     leavingDate?: string,
     transportFee?: number
   ) {
-    this.annualEarnings = annualEarnings;
+    this.annualEarnings = Math.round(annualEarnings * 100);
     this.healthInsurance = healthInsurance;
     this.executivePosition = executivePosition;
     this.contract = contract;
@@ -65,7 +65,7 @@ export class UserAdministrative {
   }
 
   public getAnnualEarnings(): number {
-    return this.annualEarnings;
+    return this.annualEarnings / 100;
   }
 
   public getTransportFee(): number {

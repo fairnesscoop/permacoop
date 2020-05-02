@@ -21,6 +21,7 @@
     "iso-country-codes": "0.0.5",
     "js-cookie": "^2.2.1",
     "polka": "next",
+    "shortid": "^2.2.15",
     "sirv": "^0.4.0"
   },
   "devDependencies": {

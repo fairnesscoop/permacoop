@@ -5,13 +5,26 @@
     ROLE_ACCOUNTANT,
     ROLE_EMPLOYEE
   } from '../../../constants/roles';
+  import UserAdministrativeForm from './_UserAdministrativeForm.svelte';
+  import TextInput from '../../../components/inputs/TextInput.svelte';
+  import EmailInput from '../../../components/inputs/EmailInput.svelte';
+  import PasswordInput from '../../../components/inputs/PasswordInput.svelte';
+  import SelectInput from '../../../components/inputs/SelectInput.svelte';
 
   export let firstName = '';
   export let lastName = '';
   export let email = '';
   export let password = '';
   export let role = ROLE_COOPERATOR;
-  export let entryDate = null;
+  export let userAdministrative = {
+    contract: 'cdi',
+    executivePosition: 'true',
+    healthInsurance: 'true',
+    annualEarnings: '',
+    transportFee: '',
+    joiningDate: '',
+    leavingDate: ''
+  };
 
   const dispatch = createEventDispatcher();
   const submit = () => {
@@ -21,70 +34,35 @@
       email,
       password,
       role,
-      entryDate: entryDate ? new Date(entryDate) : null
+      userAdministrative: {
+        ...userAdministrative,
+        joiningDate: new Date(userAdministrative.joiningDate),
+        leavingDate: userAdministrative.leavingDate
+          ? new Date(userAdministrative.leavingDate)
+          : null
+      }
     });
   };
 </script>
 
 <form on:submit|preventDefault={submit}>
-  <div class="form-group">
-    <label for="firstName">Prénom *</label>
-    <input
-      type="text"
-      id="firstName"
-      required="required"
-      bind:value={firstName}
-      class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="lastName">Nom *</label>
-    <input
-      type="text"
-      id="lastName"
-      required="required"
-      bind:value={lastName}
-      class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="email">Email *</label>
-    <input
-      type="email"
-      required="required"
-      id="email"
-      bind:value={email}
-      class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="password">Mot de passe *</label>
-    <input
-      type="password"
-      id="password"
-      required="required"
-      bind:value={password}
-      class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="role">Role *</label>
-    <select
-      id="role"
-      required="required"
-      class="form-control"
-      bind:value={role}>
-      <option value={ROLE_COOPERATOR}>Coopérateur</option>
-      <option value={ROLE_EMPLOYEE}>Employé</option>
-      <option value={ROLE_ACCOUNTANT}>Comptable</option>
-    </select>
-  </div>
-  {#if role !== ROLE_ACCOUNTANT}
-    <div class="form-group">
-      <label for="date">Date d'entrée *</label>
-      <input
-        type="date"
-        id="date"
-        required="required"
-        bind:value={entryDate}
-        class="form-control" />
+  <SelectInput label={'Role'} bind:value={role}>
+    <option value={ROLE_COOPERATOR}>Coopérateur</option>
+    <option value={ROLE_EMPLOYEE}>Employé</option>
+    <option value={ROLE_ACCOUNTANT}>Comptable</option>
+  </SelectInput>
+  <div class="row">
+    <div class="col-md-6">
+      <TextInput label={'Prénom'} bind:value={firstName} />
     </div>
+    <div class="col-md-6">
+      <TextInput label={'Nom'} bind:value={lastName} />
+    </div>
+  </div>
+  <EmailInput label={'Email'} bind:value={email} />
+  <PasswordInput label={'Mot de passe'} bind:value={password} />
+  {#if role !== ROLE_ACCOUNTANT}
+    <UserAdministrativeForm bind:userAdministrative />
   {/if}
   <button
     type="submit"
