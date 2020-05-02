@@ -59,23 +59,26 @@
             {/if}
           </div>
         </li>
-        {#if accountantRoles.includes($user.role)}
-          <li
-            class="nav-item dropdown {segment === 'human_resources' ? 'active' : ''}">
-            <a
-              class="nav-link dropdown-toggle"
-              href="javascript:void"
-              role="button"
-              data-toggle="dropdown">
-              RH
-            </a>
-            <div class="dropdown-menu">
+        <li
+          class="nav-item dropdown {segment === 'human_resources' ? 'active' : ''}">
+          <a
+            class="nav-link dropdown-toggle"
+            href="javascript:void"
+            role="button"
+            data-toggle="dropdown">
+            RH
+          </a>
+          <div class="dropdown-menu">
+            {#if userRoles.includes($user.role)}
+              <a class="dropdown-item" href="human_resources/users">Salariés</a>
+            {/if}
+            {#if accountantRoles.includes($user.role)}
               <a class="dropdown-item" href="human_resources/pay_stubs">
                 Fiches de paies
               </a>
-            </div>
-          </li>
-        {/if}
+            {/if}
+          </div>
+        </li>
         {#if userRoles.includes($user.role)}
           <li class="nav-item {segment === 'projects' ? 'active' : ''}">
             <a class="nav-link" href="projects">Projets</a>
@@ -85,9 +88,6 @@
           </li>
           <li class="nav-item {segment === 'tasks' ? 'active' : ''}">
             <a class="nav-link" href="tasks">Missions</a>
-          </li>
-          <li class="nav-item {segment === 'users' ? 'active' : ''}">
-            <a class="nav-link" href="users">Utilisateurs</a>
           </li>
         {/if}
       </ul>
@@ -102,7 +102,6 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="profile">Mon profil</a>
-            <a class="dropdown-item" href={''}>Mes fiches de paies</a>
             <div class="dropdown-divider" role="separator" />
             <a
               class="dropdown-item"

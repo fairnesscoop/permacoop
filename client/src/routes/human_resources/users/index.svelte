@@ -2,16 +2,16 @@
   import {onMount} from 'svelte';
   import {format} from 'date-fns';
   import {fr} from 'date-fns/locale';
-  import {client as axios} from '../../utils/axios';
-  import {errorNormalizer} from '../../normalizer/errors';
-  import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import SecuredView from '../../components/SecuredView.svelte';
-  import SecuredLink from '../../components/SecuredLink.svelte';
-  import Loader from '../../components/Loader.svelte';
-  import ServerErrors from '../../components/ServerErrors.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
+  import {client as axios} from '../../../utils/axios';
+  import {errorNormalizer} from '../../../normalizer/errors';
+  import Breadcrumb from '../../../components/Breadcrumb.svelte';
+  import SecuredView from '../../../components/SecuredView.svelte';
+  import SecuredLink from '../../../components/SecuredLink.svelte';
+  import Loader from '../../../components/Loader.svelte';
+  import ServerErrors from '../../../components/ServerErrors.svelte';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
 
-  let title = 'Utilisateurs';
+  let title = 'Salariés';
   let loading = true;
   let errors = [];
   let data = [];
@@ -34,10 +34,13 @@
 
 <SecuredView {roles}>
   <div class="col-md-12">
-    <Breadcrumb items={[{title}]} />
+    <Breadcrumb items={[{title: 'RH'}, {title}]} />
     <ServerErrors {errors} />
-    <SecuredLink className="btn btn-primary mb-3" href="users/add" {roles}>
-      + Ajouter un utilisateur
+    <SecuredLink
+      className="btn btn-primary mb-3"
+      href="human_resources/users/add"
+      {roles}>
+      + Ajouter un salarié
     </SecuredLink>
     <table class="table table-striped table-bordered table-hover">
       <thead>
@@ -46,7 +49,7 @@
           <th>Nom</th>
           <th>Email</th>
           <th>Date d'entrée</th>
-          <th>Role</th>
+          <th>Rôle</th>
         </tr>
       </thead>
       <tbody>

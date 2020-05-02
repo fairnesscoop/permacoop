@@ -1,15 +1,15 @@
 import {mock, instance, when, verify, deepEqual, anything} from 'ts-mockito';
-import {PayStubRepository} from 'src/Infrastructure/HumanResource/Repository/PayStubRepository';
+import {PayStubRepository} from 'src/Infrastructure/PayStub/Repository/PayStubRepository';
 import {CreatePayStubCommandHandler} from './CreatePayStubCommandHandler';
 import {CreatePayStubCommand} from './CreatePayStubCommand';
 import {User} from 'src/Domain/User/User.entity';
-import {PayStub} from 'src/Domain/HumanResource/PayStub.entity';
+import {PayStub} from 'src/Domain/PayStub/PayStub.entity';
 import {UserRepository} from 'src/Infrastructure/User/Repository/UserRepository';
 import {FileRepository} from 'src/Infrastructure/File/Repository/FileRepository';
 import {File} from 'src/Domain/File/File.entity';
 import {UserNotFoundException} from 'src/Domain/User/Exception/UserNotFoundException';
-import {IsPayStubAlreadyExist} from 'src/Domain/HumanResource/Specification/IsPayStubAlreadyExist';
-import {PayStubAlreadyExistException} from 'src/Domain/HumanResource/Exception/PayStubAlreadyExistException';
+import {IsPayStubAlreadyExist} from 'src/Domain/PayStub/Specification/IsPayStubAlreadyExist';
+import {PayStubAlreadyExistException} from 'src/Domain/PayStub/Exception/PayStubAlreadyExistException';
 
 describe('CreatePayStubCommandHandler', () => {
   let payStubRepository: PayStubRepository;

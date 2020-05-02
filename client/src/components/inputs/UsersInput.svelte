@@ -4,13 +4,13 @@
 </script>
 
 <div class="form-group">
-  <label for="userId">Utilisateur *</label>
+  <label for="userId">Salarié *</label>
   <select
     id="userId"
     required="required"
     class="form-control"
     bind:value={userId}>
-    <option value="">-- Choisir un utilisateur --</option>
+    <option value="">-- Choisir un salarié --</option>
     {#each users as user}
       <option value={user.id} selected={userId === user.id}>
         {`${user.firstName} ${user.lastName}`}
