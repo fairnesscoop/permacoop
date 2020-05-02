@@ -13,7 +13,7 @@ import {EventRepository} from 'src/Infrastructure/FairCalendar/Repository/EventR
 import {IsMaximumTimeSpentReached} from 'src/Domain/FairCalendar/Specification/IsMaximumTimeSpentReached';
 import {AddEventCommandHandler} from './AddEventCommandHandler';
 import {AddEventCommand} from './AddEventCommand';
-import {User} from 'src/Domain/User/User.entity';
+import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotFoundException';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';

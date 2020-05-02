@@ -2,7 +2,7 @@ import {mock, instance, when, verify, anything, deepEqual} from 'ts-mockito';
 import {EventRepository} from 'src/Infrastructure/FairCalendar/Repository/EventRepository';
 import {DeleteEventCommandHandler} from './DeleteEventCommandHandler';
 import {DeleteEventCommand} from './DeleteEventCommand';
-import {User} from 'src/Domain/User/User.entity';
+import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {Event, EventType} from 'src/Domain/FairCalendar/Event.entity';
 import {EventNotFoundException} from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
 import {EventDoesntBelongToUserException} from 'src/Domain/FairCalendar/Exception/EventDoesntBelongToUserException';

@@ -5,7 +5,7 @@ import {IDailyRateRepository} from 'src/Domain/Accounting/Repository/IDailyRateR
 import {DailyRate} from 'src/Domain/Accounting/DailyRate.entity';
 import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
 import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
-import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
+import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
 import {IsDailyRateAlreadyExist} from 'src/Domain/Accounting/Specification/IsDailyRateAlreadyExist';
 import {DailyRateAlreadyExistException} from 'src/Domain/Accounting/Exception/DailyRateAlreadyExistException';
 import {AbstractUserCustomerAndTaskGetter} from './AbstractUserCustomerAndTaskGetter';

@@ -11,9 +11,9 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {CreateDailyRateCommand} from 'src/Application/Accounting/Command/DailyRate/CreateDailyRateCommand';
 import {DailyRateDTO} from '../../DTO/DailyRateDTO';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
-import {UserRole} from 'src/Domain/User/User.entity';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 
 @Controller('daily_rates')
 @ApiUseTags('Accounting')

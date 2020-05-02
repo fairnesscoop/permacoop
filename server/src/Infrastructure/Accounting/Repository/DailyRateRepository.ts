@@ -2,7 +2,7 @@ import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 import {IDailyRateRepository} from 'src/Domain/Accounting/Repository/IDailyRateRepository';
 import {DailyRate} from 'src/Domain/Accounting/DailyRate.entity';
-import {User} from 'src/Domain/User/User.entity';
+import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {Task} from 'src/Domain/Task/Task.entity';
 

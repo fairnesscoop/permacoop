@@ -4,9 +4,9 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetCustomersQuery} from 'src/Application/Customer/Query/GetCustomersQuery';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
-import {UserRole} from 'src/Domain/User/User.entity';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 
 @Controller('customers')
 @ApiUseTags('Customer')

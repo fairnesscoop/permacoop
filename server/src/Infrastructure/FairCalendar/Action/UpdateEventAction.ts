@@ -9,14 +9,14 @@ import {
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
-import {User, UserRole} from 'src/Domain/User/User.entity';
+import {LoggedUser} from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
+import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {EventDTO} from '../DTO/EventDTO';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateEventCommand} from 'src/Application/FairCalendar/Command/UpdateEventCommand';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 
 @Controller('events')
 @ApiUseTags('Event')

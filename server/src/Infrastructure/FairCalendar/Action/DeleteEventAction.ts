@@ -10,12 +10,12 @@ import {
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
-import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
-import {User, UserRole} from 'src/Domain/User/User.entity';
+import {LoggedUser} from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
+import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {DeleteEventCommand} from 'src/Application/FairCalendar/Command/DeleteEventCommand';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('events')
 @ApiUseTags('Event')

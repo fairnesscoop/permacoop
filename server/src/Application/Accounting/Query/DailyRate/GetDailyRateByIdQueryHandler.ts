@@ -6,7 +6,7 @@ import {IDailyRateRepository} from 'src/Domain/Accounting/Repository/IDailyRateR
 import {DailyRateView} from '../../View/DailyRate/DailyRateView';
 import {DailyRateNotFoundException} from 'src/Domain/Accounting/Exception/DailyRateNotFoundException';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {UserSummaryView} from 'src/Application/User/View/UserSummaryView';
+import {UserSummaryView} from 'src/Application/HumanResource/User/View/UserSummaryView';
 
 @QueryHandler(GetDailyRateByIdQuery)
 export class GetDailyRateByIdQueryHandler {

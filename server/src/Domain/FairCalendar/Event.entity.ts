@@ -1,7 +1,7 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import {User} from '../User/User.entity';
 import {Task} from '../Task/Task.entity';
 import {Project} from '../Project/Project.entity';
+import {User} from '../HumanResource/User/User.entity';
 
 export enum EventType {
   MISSION = 'mission',

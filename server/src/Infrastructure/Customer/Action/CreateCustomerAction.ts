@@ -11,9 +11,9 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CreateCustomerCommand} from 'src/Application/Customer/Command/CreateCustomerCommand';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {CustomerDTO} from '../DTO/CustomerDTO';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
-import {UserRole} from 'src/Domain/User/User.entity';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 
 @Controller('customers')
 @ApiUseTags('Customer')

@@ -5,9 +5,9 @@ import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetProjectsQuery} from 'src/Application/Project/Query/GetProjectsQuery';
 import {FiltersDTO} from '../DTO/FiltersDTO';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {UserRole} from 'src/Domain/User/User.entity';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('projects')
 @ApiUseTags('Project')

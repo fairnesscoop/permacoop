@@ -5,7 +5,7 @@ import {CreateQuoteCommandHandler} from './CreateQuoteCommandHandler';
 import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
 import {QuoteIdGenerator} from 'src/Domain/Accounting/Quote/QuoteIdGenerator';
 import {CreateQuoteCommand} from './CreateQuoteCommand';
-import {User} from 'src/Domain/User/User.entity';
+import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {Quote, QuoteStatus} from 'src/Domain/Accounting/Quote.entity';

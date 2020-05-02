@@ -4,9 +4,9 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {DailyRateView} from 'src/Application/Accounting/View/DailyRate/DailyRateView';
 import {GetDailyRatesQuery} from 'src/Application/Accounting/Query/DailyRate/GetDailyRatesQuery';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {UserRole} from 'src/Domain/User/User.entity';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('daily_rates')
 @ApiUseTags('Accounting')

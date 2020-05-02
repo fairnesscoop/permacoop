@@ -3,7 +3,7 @@ import {Inject} from '@nestjs/common';
 import {UpdateDailyRateCommand} from './UpdateDailyRateCommand';
 import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
 import {IDailyRateRepository} from 'src/Domain/Accounting/Repository/IDailyRateRepository';
-import {IUserRepository} from 'src/Domain/User/Repository/IUserRepository';
+import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
 import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
 import {AbstractUserCustomerAndTaskGetter} from './AbstractUserCustomerAndTaskGetter';
 import {DailyRateNotFoundException} from 'src/Domain/Accounting/Exception/DailyRateNotFoundException';

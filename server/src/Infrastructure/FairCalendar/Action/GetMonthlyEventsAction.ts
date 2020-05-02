@@ -4,9 +4,9 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetMonthlyEventsQuery} from 'src/Application/FairCalendar/Query/GetMonthlyEventsQuery';
 import {MonthlyEventsDTO} from '../DTO/MonthlyEventsDTO';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {UserRole} from 'src/Domain/User/User.entity';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('events')
 @ApiUseTags('Event')

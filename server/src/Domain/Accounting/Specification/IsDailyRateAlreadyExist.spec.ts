@@ -2,7 +2,7 @@ import {mock, instance, when, verify, anything, anyOfClass} from 'ts-mockito';
 import {DailyRate} from 'src/Domain/Accounting/DailyRate.entity';
 import {IsDailyRateAlreadyExist} from './IsDailyRateAlreadyExist';
 import {DailyRateRepository} from 'src/Infrastructure/Accounting/Repository/DailyRateRepository';
-import {User} from 'src/Domain/User/User.entity';
+import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {Task} from 'src/Domain/Task/Task.entity';
 

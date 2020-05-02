@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import {Customer} from '../Customer/Customer.entity';
 import {Project} from '../Project/Project.entity';
-import {User} from '../User/User.entity';
+import {User} from '../HumanResource/User/User.entity';
 import {QuoteItem} from './QuoteItem.entity';
 
 export enum QuoteStatus {

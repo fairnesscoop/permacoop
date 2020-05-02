@@ -13,9 +13,9 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateProjectCommand} from 'src/Application/Project/Command/UpdateProjectCommand';
 import {ProjectDTO} from '../DTO/ProjectDTO';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
-import {UserRole} from 'src/Domain/User/User.entity';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('projects')
 @ApiUseTags('Project')
