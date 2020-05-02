@@ -6,7 +6,6 @@ export class UserView {
     public readonly firstName: string,
     public readonly lastName: string,
     public readonly email: string,
-    public readonly role: UserRole,
-    public readonly entryDate?: string
+    public readonly role: UserRole
   ) {}
 }

@@ -28,8 +28,7 @@ describe('IsEmailAlreadyExist', () => {
         email,
         'token',
         'password',
-        UserRole.COOPERATOR,
-        '2019-09-12'
+        UserRole.COOPERATOR
       )
     );
     expect(await isEmailAlreadyExist.isSatisfiedBy(email)).toBe(true);

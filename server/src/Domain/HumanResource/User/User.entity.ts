@@ -1,4 +1,12 @@
-import {Entity, Column, PrimaryGeneratedColumn, Index} from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Index,
+  OneToOne,
+  JoinColumn
+} from 'typeorm';
+import {UserAdministrative} from './UserAdministrative.entity';
 
 export enum UserRole {
   COOPERATOR = 'cooperator',
@@ -27,11 +35,12 @@ export class User {
   @Column({type: 'varchar', nullable: false})
   private password: string;
 
-  @Column({type: 'timestamp', nullable: true})
-  private entryDate: string;
-
   @Column('enum', {enum: UserRole, nullable: false})
   private role: UserRole;
+
+  @OneToOne(type => UserAdministrative, {nullable: true})
+  @JoinColumn()
+  private userAdministrative: UserAdministrative;
 
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   private createdAt: Date;
@@ -43,7 +52,7 @@ export class User {
     apiToken: string,
     password: string,
     role: UserRole,
-    entryDate?: string
+    userAdministrative?: UserAdministrative
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -51,7 +60,7 @@ export class User {
     this.apiToken = apiToken;
     this.password = password;
     this.role = role;
-    this.entryDate = entryDate;
+    this.userAdministrative = userAdministrative;
   }
 
   public getId(): string {
@@ -78,16 +87,16 @@ export class User {
     return this.password;
   }
 
-  public getEntryDate(): string {
-    return this.entryDate;
-  }
-
   public getRole(): UserRole {
     return this.role;
   }
 
   public getFullName(): string {
     return `${this.firstName} ${this.lastName}`;
+  }
+
+  public getUserAdministrative(): UserAdministrative {
+    return this.userAdministrative;
   }
 
   public update(firstName: string, lastName: string, email: string): void {

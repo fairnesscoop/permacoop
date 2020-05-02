@@ -49,8 +49,7 @@ export class UserRepository implements IUserRepository {
         'user.firstName',
         'user.lastName',
         'user.email',
-        'user.role',
-        'user.entryDate'
+        'user.role'
       ])
       .where('user.id = :id', {id})
       .getOne();
@@ -64,8 +63,7 @@ export class UserRepository implements IUserRepository {
         'user.firstName',
         'user.lastName',
         'user.email',
-        'user.role',
-        'user.entryDate'
+        'user.role'
       ])
       .orderBy('user.lastName', 'ASC')
       .addOrderBy('user.firstName', 'ASC');

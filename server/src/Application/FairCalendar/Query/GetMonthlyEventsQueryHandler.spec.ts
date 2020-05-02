@@ -29,7 +29,7 @@ describe('GetMonthlyEventsQueryHandler', () => {
     const event1 = mock(Event);
     when(event1.getId()).thenReturn('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
     when(event1.getType()).thenReturn('mission');
-    when(event1.getTime()).thenReturn(75);
+    when(event1.getTime()).thenReturn(0.75);
     when(event1.getDate()).thenReturn('2019-12-12');
     when(event1.getSummary()).thenReturn('Summary');
     when(event1.getTask()).thenReturn(instance(task));
@@ -38,7 +38,7 @@ describe('GetMonthlyEventsQueryHandler', () => {
     const event2 = mock(Event);
     when(event2.getId()).thenReturn('b9a9b094-5bb2-4d0b-b01e-231b6cb50039');
     when(event2.getType()).thenReturn('dojo');
-    when(event2.getTime()).thenReturn(25);
+    when(event2.getTime()).thenReturn(0.25);
     when(event2.getDate()).thenReturn('2019-12-12');
     when(event2.getSummary()).thenReturn(null);
     when(event2.getTask()).thenReturn(null);
@@ -48,7 +48,7 @@ describe('GetMonthlyEventsQueryHandler', () => {
     when(event3.getId()).thenReturn('a773a25d-8028-4190-bc03-51b33a0d1528');
     when(event3.getType()).thenReturn('holiday');
     when(event3.getDate()).thenReturn('2019-12-17');
-    when(event3.getTime()).thenReturn(100);
+    when(event3.getTime()).thenReturn(1);
     when(event3.getSummary()).thenReturn(null);
     when(event3.getTask()).thenReturn(null);
     when(event3.getProject()).thenReturn(null);

@@ -19,7 +19,6 @@ describe('GetUserByIdQueryHandler', () => {
     when(user.getFirstName()).thenReturn('Mathieu');
     when(user.getLastName()).thenReturn('MARCHOIS');
     when(user.getEmail()).thenReturn('mathieu@fairness.coop');
-    when(user.getEntryDate()).thenReturn('2019-09-19');
     when(user.getRole()).thenReturn(UserRole.COOPERATOR);
     when(
       userRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
@@ -31,8 +30,7 @@ describe('GetUserByIdQueryHandler', () => {
         'Mathieu',
         'MARCHOIS',
         'mathieu@fairness.coop',
-        UserRole.COOPERATOR,
-        '2019-09-19'
+        UserRole.COOPERATOR
       )
     );
 

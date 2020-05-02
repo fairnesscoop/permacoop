@@ -24,7 +24,7 @@ export class DailyRate {
   private task: Task;
 
   constructor(amount: number, user: User, customer: Customer, task: Task) {
-    this.amount = amount;
+    this.amount = Math.round(amount * 100);
     this.user = user;
     this.customer = customer;
     this.task = task;
@@ -35,7 +35,7 @@ export class DailyRate {
   }
 
   public getAmount(): number {
-    return this.amount;
+    return this.amount / 100;
   }
 
   public getUser(): User {
@@ -56,7 +56,7 @@ export class DailyRate {
     customer: Customer,
     task: Task
   ): void {
-    this.amount = amount;
+    this.amount = Math.round(amount * 100);
     this.user = user;
     this.customer = customer;
     this.task = task;
