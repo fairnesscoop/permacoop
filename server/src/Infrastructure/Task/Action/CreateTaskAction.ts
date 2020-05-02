@@ -11,9 +11,9 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CreateTaskCommand} from 'src/Application/Task/Command/CreateTaskCommand';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {TaskDTO} from '../DTO/TaskDTO';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {UserRole} from 'src/Domain/User/User.entity';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('tasks')
 @ApiUseTags('Task')

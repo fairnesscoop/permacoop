@@ -12,9 +12,9 @@ import {IQueryBus} from 'src/Application/IQueryBus';
 import {DailyRateView} from 'src/Application/Accounting/View/DailyRate/DailyRateView';
 import {GetDailyRateByIdQuery} from 'src/Application/Accounting/Query/DailyRate/GetDailyRateByIdQuery';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
-import {UserRole} from 'src/Domain/User/User.entity';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('daily_rates')
 @ApiUseTags('Accounting')

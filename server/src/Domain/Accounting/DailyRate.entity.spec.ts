@@ -1,6 +1,6 @@
 import {mock, instance} from 'ts-mockito';
 import {DailyRate} from 'src/Domain/Accounting/DailyRate.entity';
-import {User} from '../User/User.entity';
+import {User} from '../HumanResource/User/User.entity';
 import {Customer} from '../Customer/Customer.entity';
 import {Task} from '../Task/Task.entity';
 

@@ -12,9 +12,9 @@ import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetEventByIdQuery} from 'src/Application/FairCalendar/Query/GetEventByIdQuery';
 import {EventView} from 'src/Application/FairCalendar/View/EventView';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {UserRole} from 'src/Domain/User/User.entity';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('events')
 @ApiUseTags('Event')

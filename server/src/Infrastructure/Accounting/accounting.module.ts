@@ -16,9 +16,8 @@ import {CreateQuoteAction} from './Action/Quote/CreateQuoteAction';
 import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
 import {CreateQuoteItemsCommandHandler} from 'src/Application/Accounting/Command/Quote/CreateQuoteItemsCommandHandler';
 import {DailyRate} from 'src/Domain/Accounting/DailyRate.entity';
-import {User} from 'src/Domain/User/User.entity';
+import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {DailyRateRepository} from './Repository/DailyRateRepository';
-import {UserRepository} from '../User/Repository/UserRepository';
 import {CreateDailyRateCommandHandler} from 'src/Application/Accounting/Command/DailyRate/CreateDailyRateCommandHandler';
 import {TaskRepository} from '../Task/Repository/TaskRepository';
 import {Task} from 'src/Domain/Task/Task.entity';
@@ -32,6 +31,7 @@ import {UpdateDailyRateAction} from './Action/DailyRate/UpdateDailyRateAction';
 import {UpdateDailyRateCommandHandler} from 'src/Application/Accounting/Command/DailyRate/UpdateDailyRateCommandHandler';
 import {GetQuotesAction} from './Action/Quote/GetQuotesAction';
 import {GetQuotesQueryHandler} from 'src/Application/Accounting/Query/Quote/GetQuotesQueryHandler';
+import {UserRepository} from '../HumanResource/User/Repository/UserRepository';
 
 @Module({
   imports: [

@@ -4,9 +4,9 @@ import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 import {GetTasksQuery} from 'src/Application/Task/Query/GetTasksQuery';
 import {IQueryBus} from 'src/Application/IQueryBus';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {UserRole} from 'src/Domain/User/User.entity';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('tasks')
 @ApiUseTags('Task')

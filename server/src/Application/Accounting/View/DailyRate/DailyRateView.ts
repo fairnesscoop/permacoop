@@ -1,4 +1,4 @@
-import {UserSummaryView} from 'src/Application/User/View/UserSummaryView';
+import {UserSummaryView} from 'src/Application/HumanResource/User/View/UserSummaryView';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 

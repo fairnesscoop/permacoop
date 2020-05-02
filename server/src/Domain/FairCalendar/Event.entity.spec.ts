@@ -1,6 +1,6 @@
 import {mock, instance} from 'ts-mockito';
 import {Event, EventType} from './Event.entity';
-import {User} from '../User/User.entity';
+import {User} from '../HumanResource/User/User.entity';
 import {Project} from '../Project/Project.entity';
 import {Task} from '../Task/Task.entity';
 

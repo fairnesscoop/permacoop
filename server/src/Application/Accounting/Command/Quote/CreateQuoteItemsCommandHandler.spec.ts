@@ -5,7 +5,7 @@ import {CreateQuoteItemsCommand, ICreateQuote} from './CreateQuoteItemsCommand';
 import {Quote, QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
 import {QuoteItemRepository} from 'src/Infrastructure/Accounting/Repository/QuoteItemRepository';
 import {QuoteItem} from 'src/Domain/Accounting/QuoteItem.entity';
-import {User} from 'src/Domain/User/User.entity';
+import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {QuoteNotFoundException} from 'src/Domain/Accounting/Exception/QuoteNotFoundException';
 

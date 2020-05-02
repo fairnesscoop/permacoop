@@ -13,9 +13,9 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateCustomerCommand} from 'src/Application/Customer/Command/UpdateCustomerCommand';
 import {CustomerDTO} from '../DTO/CustomerDTO';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {UserRole} from 'src/Domain/User/User.entity';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 
 @Controller('customers')
 @ApiUseTags('Customer')

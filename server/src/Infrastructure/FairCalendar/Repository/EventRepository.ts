@@ -3,7 +3,7 @@ import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 import {IEventRepository} from 'src/Domain/FairCalendar/Repository/IEventRepository';
 import {Event} from 'src/Domain/FairCalendar/Event.entity';
-import {User} from 'src/Domain/User/User.entity';
+import {User} from 'src/Domain/HumanResource/User/User.entity';
 
 @Injectable()
 export class EventRepository implements IEventRepository {

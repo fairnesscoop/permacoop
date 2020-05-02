@@ -4,7 +4,7 @@ import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRe
 import {EventRepository} from 'src/Infrastructure/FairCalendar/Repository/EventRepository';
 import {UpdateEventCommandHandler} from './UpdateEventCommandHandler';
 import {UpdateEventCommand} from './UpdateEventCommand';
-import {User} from 'src/Domain/User/User.entity';
+import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotFoundException';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';

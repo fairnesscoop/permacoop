@@ -2,12 +2,12 @@ import {mock, instance, when, verify} from 'ts-mockito';
 import {DailyRateRepository} from 'src/Infrastructure/Accounting/Repository/DailyRateRepository';
 import {GetDailyRatesQueryHandler} from './GetDailyRatesQueryHandler';
 import {DailyRateView} from '../../View/DailyRate/DailyRateView';
-import {UserSummaryView} from 'src/Application/User/View/UserSummaryView';
+import {UserSummaryView} from 'src/Application/HumanResource/User/View/UserSummaryView';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {GetDailyRatesQuery} from './GetDailyRatesQuery';
 import {DailyRate} from 'src/Domain/Accounting/DailyRate.entity';
-import {User} from 'src/Domain/User/User.entity';
+import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {Task} from 'src/Domain/Task/Task.entity';
 

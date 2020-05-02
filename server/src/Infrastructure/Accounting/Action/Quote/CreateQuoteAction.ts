@@ -9,13 +9,13 @@ import {
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
-import {LoggedUser} from 'src/Infrastructure/User/Decorator/LoggedUser';
-import {User, UserRole} from 'src/Domain/User/User.entity';
+import {LoggedUser} from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
+import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {CreateQuoteCommand} from 'src/Application/Accounting/Command/Quote/CreateQuoteCommand';
 import {QuoteDTO} from '../../DTO/QuoteDTO';
 import {CreateQuoteItemsCommand} from 'src/Application/Accounting/Command/Quote/CreateQuoteItemsCommand';
-import {Roles} from 'src/Infrastructure/User/Decorator/Roles';
-import {RolesGuard} from 'src/Infrastructure/User/Security/RolesGuard';
+import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('quotes')
 @ApiUseTags('Accounting')

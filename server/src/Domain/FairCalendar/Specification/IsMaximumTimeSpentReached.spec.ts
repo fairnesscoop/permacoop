@@ -2,7 +2,7 @@ import {instance, mock, when, verify} from 'ts-mockito';
 import {EventRepository} from 'src/Infrastructure/FairCalendar/Repository/EventRepository';
 import {IsMaximumTimeSpentReached} from './IsMaximumTimeSpentReached';
 import {Event} from '../Event.entity';
-import {User} from 'src/Domain/User/User.entity';
+import {User} from 'src/Domain/HumanResource/User/User.entity';
 
 describe('IsMaximumTimeSpentReached', () => {
   let eventRepository: EventRepository;
