@@ -4,7 +4,7 @@
     ROLE_COOPERATOR,
     ROLE_ACCOUNTANT,
     ROLE_EMPLOYEE
-  } from '../../constants/roles';
+  } from '../../../constants/roles';
 
   export let firstName = '';
   export let lastName = '';

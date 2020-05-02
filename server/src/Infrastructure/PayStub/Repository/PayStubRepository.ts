@@ -1,7 +1,7 @@
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
-import {IPayStubRepository} from 'src/Domain/HumanResource/Repository/IPayStubRepository';
-import {PayStub} from 'src/Domain/HumanResource/PayStub.entity';
+import {IPayStubRepository} from 'src/Domain/PayStub/Repository/IPayStubRepository';
+import {PayStub} from 'src/Domain/PayStub/PayStub.entity';
 import {User} from 'src/Domain/User/User.entity';
 
 export class PayStubRepository implements IPayStubRepository {

@@ -8,7 +8,7 @@ import {TaskModule} from './Infrastructure/Task/task.module';
 import {AccountingModule} from './Infrastructure/Accounting/accounting.module';
 import {FairCalendarModule} from './Infrastructure/FairCalendar/faircalendar.module';
 import {FileModule} from './Infrastructure/File/file.module';
-import {HumanResourceModule} from './Infrastructure/HumanResource/humanResource.module';
+import {PayStubModule} from './Infrastructure/PayStub/payStub.module';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import {HumanResourceModule} from './Infrastructure/HumanResource/humanResource.
     CustomerModule,
     FairCalendarModule,
     FileModule,
-    HumanResourceModule,
+    PayStubModule,
     ProjectModule,
     TaskModule,
     UserModule

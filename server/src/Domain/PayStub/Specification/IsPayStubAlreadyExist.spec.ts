@@ -1,7 +1,7 @@
 import {mock, instance, when, verify, anything, anyOfClass} from 'ts-mockito';
-import {PayStub} from 'src/Domain/HumanResource/PayStub.entity';
+import {PayStub} from 'src/Domain/PayStub/PayStub.entity';
 import {IsPayStubAlreadyExist} from './IsPayStubAlreadyExist';
-import {PayStubRepository} from 'src/Infrastructure/HumanResource/Repository/PayStubRepository';
+import {PayStubRepository} from 'src/Infrastructure/PayStub/Repository/PayStubRepository';
 import {User} from 'src/Domain/User/User.entity';
 import {File} from 'src/Domain/File/File.entity';
 

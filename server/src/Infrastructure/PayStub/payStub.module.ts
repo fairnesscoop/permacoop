@@ -5,13 +5,13 @@ import {BusModule} from '../bus.module';
 import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
 import {User} from 'src/Domain/User/User.entity';
 import {UserRepository} from '../User/Repository/UserRepository';
-import {PayStub} from 'src/Domain/HumanResource/PayStub.entity';
+import {PayStub} from 'src/Domain/PayStub/PayStub.entity';
 import {PayStubRepository} from './Repository/PayStubRepository';
 import {CreatePayStubAction} from './Action/PayStub/CreatePayStubAction';
-import {CreatePayStubCommandHandler} from 'src/Application/HumanResource/PayStub/CreatePayStubCommandHandler';
+import {CreatePayStubCommandHandler} from 'src/Application/PayStub/Command/CreatePayStubCommandHandler';
 import {File} from 'src/Domain/File/File.entity';
 import {FileRepository} from '../File/Repository/FileRepository';
-import {IsPayStubAlreadyExist} from 'src/Domain/HumanResource/Specification/IsPayStubAlreadyExist';
+import {IsPayStubAlreadyExist} from 'src/Domain/PayStub/Specification/IsPayStubAlreadyExist';
 
 @Module({
   imports: [
@@ -29,4 +29,4 @@ import {IsPayStubAlreadyExist} from 'src/Domain/HumanResource/Specification/IsPa
     IsPayStubAlreadyExist
   ]
 })
-export class HumanResourceModule {}
+export class PayStubModule {}
