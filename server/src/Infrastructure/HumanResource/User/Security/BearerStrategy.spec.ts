@@ -31,8 +31,7 @@ describe('BearerStrategy', () => {
       'mathieu@fairness.coop',
       'token',
       'password',
-      UserRole.COOPERATOR,
-      '2019-09-12'
+      UserRole.COOPERATOR
     );
 
     when(userRepository.findOneByApiToken('apiToken')).thenResolve(user);

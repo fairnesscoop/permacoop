@@ -10,14 +10,14 @@ describe('DailyRate.entity', () => {
     const customer = mock(Customer);
     const task = mock(Task);
     const dailyRate = new DailyRate(
-      10000,
+      600,
       instance(user),
       instance(customer),
       instance(task)
     );
 
     expect(dailyRate.getId()).toBe(undefined);
-    expect(dailyRate.getAmount()).toBe(10000);
+    expect(dailyRate.getAmount()).toBe(600);
     expect(dailyRate.getUser()).toBe(instance(user));
     expect(dailyRate.getCustomer()).toBe(instance(customer));
     expect(dailyRate.getTask()).toBe(instance(task));
@@ -32,21 +32,21 @@ describe('DailyRate.entity', () => {
     const task2 = mock(Task);
 
     const dailyRate = new DailyRate(
-      10000,
+      600,
       instance(user),
       instance(customer),
       instance(task)
     );
 
     dailyRate.update(
-      100,
+      650.5,
       instance(user2),
       instance(customer2),
       instance(task2)
     );
 
     expect(dailyRate.getId()).toBe(undefined);
-    expect(dailyRate.getAmount()).toBe(100);
+    expect(dailyRate.getAmount()).toBe(650.5);
     expect(dailyRate.getUser()).toBe(instance(user2));
     expect(dailyRate.getCustomer()).toBe(instance(customer2));
     expect(dailyRate.getTask()).toBe(instance(task2));

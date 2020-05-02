@@ -15,7 +15,6 @@ describe('GetUsersQueryHandler', () => {
     when(user1.getLastName()).thenReturn('MARCHOIS');
     when(user1.getEmail()).thenReturn('mathieu@fairness.coop');
     when(user1.getRole()).thenReturn(UserRole.COOPERATOR);
-    when(user1.getEntryDate()).thenReturn('2019-09-19');
 
     const user2 = mock(User);
     when(user2.getId()).thenReturn('0d7fee8a-ce9e-4bff-a93a-9cffafac5f1c');
@@ -23,7 +22,6 @@ describe('GetUsersQueryHandler', () => {
     when(user2.getLastName()).thenReturn('MARCHOIS');
     when(user2.getEmail()).thenReturn('helene@fairness.coop');
     when(user2.getRole()).thenReturn(UserRole.COOPERATOR);
-    when(user2.getEntryDate()).thenReturn('2019-09-19');
 
     when(userRepository.findUsers(true)).thenResolve([
       instance(user1),
@@ -37,16 +35,14 @@ describe('GetUsersQueryHandler', () => {
         'Mathieu',
         'MARCHOIS',
         'mathieu@fairness.coop',
-        UserRole.COOPERATOR,
-        '2019-09-19'
+        UserRole.COOPERATOR
       ),
       new UserView(
         '0d7fee8a-ce9e-4bff-a93a-9cffafac5f1c',
         'Hélène',
         'MARCHOIS',
         'helene@fairness.coop',
-        UserRole.COOPERATOR,
-        '2019-09-19'
+        UserRole.COOPERATOR
       )
     ];
 

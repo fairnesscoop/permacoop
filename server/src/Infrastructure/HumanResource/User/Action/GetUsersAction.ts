@@ -10,7 +10,7 @@ import {RolesGuard} from '../Security/RolesGuard';
 import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 
 @Controller('users')
-@ApiUseTags('User')
+@ApiUseTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetUsersAction {

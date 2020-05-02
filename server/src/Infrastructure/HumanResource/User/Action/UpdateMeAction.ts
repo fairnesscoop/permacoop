@@ -18,7 +18,7 @@ import {GetUserByIdQuery} from 'src/Application/HumanResource/User/Query/GetUser
 import {ProfileDTO} from '../DTO/ProfileDTO';
 
 @Controller('users')
-@ApiUseTags('User')
+@ApiUseTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'))
 export class UpdateMeAction {

@@ -25,12 +25,14 @@ import {IsEmailAlreadyExist} from 'src/Domain/HumanResource/User/Specification/I
 import {UpdateProfileCommandHandler} from 'src/Application/HumanResource/User/Command/UpdateProfileCommandHandler';
 import {BearerStrategy} from './User/Security/BearerStrategy';
 import {GetUserByIdQueryHandler} from 'src/Application/HumanResource/User/Query/GetUserByIdQueryHandler';
+import {UserAdministrative} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import {UserAdministrativeRepository} from './User/Repository/UserAdministrativeRepository';
 
 @Module({
   imports: [
     BusModule,
     PassportModule,
-    TypeOrmModule.forFeature([User, File, PayStub])
+    TypeOrmModule.forFeature([User, UserAdministrative, File, PayStub])
   ],
   controllers: [
     LoginAction,
@@ -46,6 +48,10 @@ import {GetUserByIdQueryHandler} from 'src/Application/HumanResource/User/Query/
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
     {provide: 'IPayStubRepository', useClass: PayStubRepository},
     {provide: 'IFileRepository', useClass: FileRepository},
+    {
+      provide: 'IUserAdministrativeRepository',
+      useClass: UserAdministrativeRepository
+    },
     CreatePayStubCommandHandler,
     IsPayStubAlreadyExist,
     LoginQueryHandler,

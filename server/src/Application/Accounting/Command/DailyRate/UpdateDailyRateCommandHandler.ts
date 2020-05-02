@@ -54,7 +54,7 @@ export class UpdateDailyRateCommandHandler extends AbstractUserCustomerAndTaskGe
       }
     }
 
-    dailyRate.update(Math.round(amount * 100), user, customer, task);
+    dailyRate.update(amount, user, customer, task);
 
     await this.dailyRateRepository.save(dailyRate);
 

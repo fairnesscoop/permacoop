@@ -24,12 +24,7 @@ export class CreateQuoteItemsCommandHandler {
 
     for (const {title, quantity, dailyRate} of command.items) {
       this.quoteItemRepository.save(
-        new QuoteItem(
-          title,
-          Math.round(quantity * 100),
-          Math.round(dailyRate * 100),
-          quote
-        )
+        new QuoteItem(title, quantity, dailyRate, quote)
       );
     }
   }

@@ -6,7 +6,7 @@ import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {UserView} from 'src/Application/HumanResource/User/View/UserView';
 
 @Controller('users')
-@ApiUseTags('User')
+@ApiUseTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'))
 export class GetMeAction {

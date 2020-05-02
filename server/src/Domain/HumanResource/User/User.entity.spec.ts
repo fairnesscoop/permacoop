@@ -1,7 +1,10 @@
+import {mock, instance} from 'ts-mockito';
 import {User, UserRole} from './User.entity';
+import {UserAdministrative} from './UserAdministrative.entity';
 
 describe('User.entity', () => {
   it('testGetters', () => {
+    const admin = mock(UserAdministrative);
     const user = new User(
       'Mathieu',
       'MARCHOIS',
@@ -9,7 +12,7 @@ describe('User.entity', () => {
       'hashToken',
       'hashPassword',
       UserRole.COOPERATOR,
-      '2019-09-12'
+      instance(admin)
     );
 
     expect(user.getId()).toBe(undefined);
@@ -18,8 +21,8 @@ describe('User.entity', () => {
     expect(user.getLastName()).toBe('MARCHOIS');
     expect(user.getPassword()).toBe('hashPassword');
     expect(user.getApiToken()).toBe('hashToken');
-    expect(user.getEntryDate()).toBe('2019-09-12');
     expect(user.getRole()).toBe(UserRole.COOPERATOR);
+    expect(user.getUserAdministrative()).toBe(instance(admin));
   });
 
   it('testUpdate', () => {
@@ -29,8 +32,7 @@ describe('User.entity', () => {
       'mathieu@fairness.coop',
       'hashToken',
       'hashPassword',
-      UserRole.COOPERATOR,
-      '2019-09-12'
+      UserRole.COOPERATOR
     );
     user.update('firstName', 'lastName', 'email@email.com');
     user.updatePassword('password');
@@ -41,7 +43,6 @@ describe('User.entity', () => {
     expect(user.getLastName()).toBe('lastName');
     expect(user.getPassword()).toBe('password');
     expect(user.getApiToken()).toBe('hashToken');
-    expect(user.getEntryDate()).toBe('2019-09-12');
     expect(user.getRole()).toBe(UserRole.COOPERATOR);
   });
 });

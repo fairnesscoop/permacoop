@@ -1,12 +1,8 @@
-import {ApiModelProperty, ApiModelPropertyOptional} from '@nestjs/swagger';
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsDateString,
-  IsOptional,
-  IsEnum
-} from 'class-validator';
+import {ApiModelProperty} from '@nestjs/swagger';
+import {Type} from 'class-transformer';
+import {IsEmail, IsNotEmpty, IsEnum, ValidateNested} from 'class-validator';
 import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {UserAdministrativeDTO} from './UserAdministrativeDTO';
 
 export class UserDTO {
   @IsNotEmpty()
@@ -26,13 +22,13 @@ export class UserDTO {
   @ApiModelProperty()
   public password: string;
 
-  @IsOptional()
-  @IsDateString()
-  @ApiModelPropertyOptional()
-  public entryDate?: string;
-
   @ApiModelProperty({enum: UserRole})
   @IsNotEmpty()
   @IsEnum(UserRole)
   public role: UserRole;
+
+  @ApiModelProperty({type: UserAdministrativeDTO})
+  @ValidateNested()
+  @Type(() => UserAdministrativeDTO)
+  public userAdministrative: UserAdministrativeDTO;
 }

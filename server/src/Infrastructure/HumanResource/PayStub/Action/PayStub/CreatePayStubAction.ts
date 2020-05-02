@@ -28,7 +28,7 @@ import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGu
 import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 
 @Controller('pay_stubs')
-@ApiUseTags('Pay stub')
+@ApiUseTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreatePayStubAction {

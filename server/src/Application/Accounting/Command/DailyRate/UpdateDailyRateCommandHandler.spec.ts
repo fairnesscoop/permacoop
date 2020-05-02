@@ -308,12 +308,7 @@ describe('UpdateDailyRateCommandHandler', () => {
       isDailyRateAlreadyExist.isSatisfiedBy(anything(), anything(), anything())
     ).never();
     verify(
-      dailyRate.update(
-        10000,
-        instance(user),
-        instance(customer),
-        instance(task)
-      )
+      dailyRate.update(100, instance(user), instance(customer), instance(task))
     ).calledBefore(dailyRateRepository.save(instance(dailyRate)));
     verify(dailyRateRepository.save(instance(dailyRate))).once();
   });
@@ -376,12 +371,7 @@ describe('UpdateDailyRateCommandHandler', () => {
       )
     ).once();
     verify(
-      dailyRate.update(
-        10000,
-        instance(user),
-        instance(customer),
-        instance(task)
-      )
+      dailyRate.update(100, instance(user), instance(customer), instance(task))
     ).calledBefore(dailyRateRepository.save(instance(dailyRate)));
     verify(dailyRateRepository.save(instance(dailyRate))).once();
   });
