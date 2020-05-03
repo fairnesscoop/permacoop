@@ -72,11 +72,9 @@
             {#if userRoles.includes($user.role)}
               <a class="dropdown-item" href="human_resources/users">Salariés</a>
             {/if}
-            {#if accountantRoles.includes($user.role)}
-              <a class="dropdown-item" href="human_resources/pay_stubs">
-                Fiches de paies
-              </a>
-            {/if}
+            <a class="dropdown-item" href="human_resources/pay_stubs">
+              Fiches de paies
+            </a>
           </div>
         </li>
         {#if userRoles.includes($user.role)}
