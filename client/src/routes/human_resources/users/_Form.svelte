@@ -20,28 +20,36 @@
     contract: 'cdi',
     executivePosition: 'true',
     healthInsurance: 'true',
-    annualEarnings: '',
-    transportFee: '',
-    joiningDate: '',
-    leavingDate: ''
+    annualEarnings: null,
+    transportFee: null,
+    joiningDate: null,
+    leavingDate: null
   };
 
   const dispatch = createEventDispatcher();
   const submit = () => {
-    dispatch('save', {
-      firstName,
-      lastName,
-      email,
-      password,
-      role,
-      userAdministrative: {
-        ...userAdministrative,
-        joiningDate: new Date(userAdministrative.joiningDate),
-        leavingDate: userAdministrative.leavingDate
-          ? new Date(userAdministrative.leavingDate)
-          : null
-      }
-    });
+    let data = {};
+
+    if (role === ROLE_ACCOUNTANT) {
+      data = {firstName, lastName, email, password, role};
+    } else {
+      data = {
+        firstName,
+        lastName,
+        email,
+        password,
+        role,
+        userAdministrative: {
+          ...userAdministrative,
+          joiningDate: new Date(userAdministrative.joiningDate),
+          leavingDate: userAdministrative.leavingDate
+            ? new Date(userAdministrative.leavingDate)
+            : null
+        }
+      };
+    }
+
+    dispatch('save', data);
   };
 </script>
 
