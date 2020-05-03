@@ -30,10 +30,12 @@ describe('GetQuotesQueryHandler', () => {
     when(project.getName()).thenReturn('Project');
 
     const quoteItem1 = mock(QuoteItem);
-    when(quoteItem1.getAmountExcludingVat()).thenReturn(1383.12);
+    when(quoteItem1.getQuantity()).thenReturn(200);
+    when(quoteItem1.getDailyRate()).thenReturn(60000);
 
     const quoteItem2 = mock(QuoteItem);
-    when(quoteItem2.getAmountExcludingVat()).thenReturn(120.0);
+    when(quoteItem2.getQuantity()).thenReturn(160);
+    when(quoteItem2.getDailyRate()).thenReturn(6500);
 
     const quote1 = mock(Quote);
     when(quote1.getId()).thenReturn('d54f15d6-1a1d-47e8-8672-9f46018f9960');
@@ -66,7 +68,7 @@ describe('GetQuotesQueryHandler', () => {
         'FS-DEVIS-2020-0001',
         QuoteStatus.REFUSED,
         date,
-        1659.744,
+        1440,
         new CustomerView(
           'c6434c49-216b-41b3-a30a-79a3eb1198ec',
           'Radio France'
@@ -78,7 +80,7 @@ describe('GetQuotesQueryHandler', () => {
         'FS-DEVIS-2020-0002',
         QuoteStatus.ACCEPTED,
         date2,
-        144,
+        124.8,
         new CustomerView(
           'c6434c49-216b-41b3-a30a-79a3eb1198ec',
           'Radio France'

@@ -35,13 +35,13 @@ describe('CreatUserCommandHandler', () => {
     transportFee: 75.2
   };
   const userAdministrative = new UserAdministrative(
-    50000,
+    5000000,
     true,
     true,
     ContractType.CDI,
     '2018-04-09',
     null,
-    75.2
+    7520
   );
 
   let userRepository: UserRepository;

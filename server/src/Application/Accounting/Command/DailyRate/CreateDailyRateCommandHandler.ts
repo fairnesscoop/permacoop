@@ -38,7 +38,7 @@ export class CreateDailyRateCommandHandler extends AbstractUserCustomerAndTaskGe
     }
 
     const dailyRate = await this.dailyRateRepository.save(
-      new DailyRate(amount, user, customer, task)
+      new DailyRate(Math.round(amount * 100), user, customer, task)
     );
 
     return dailyRate.getId();

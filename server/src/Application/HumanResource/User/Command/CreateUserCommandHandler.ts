@@ -82,13 +82,13 @@ export class CreateUserCommandHandler {
 
     return await this.userAdministrativeRepository.save(
       new UserAdministrative(
-        annualEarnings,
+        Math.round(annualEarnings * 100),
         healthInsurance,
         executivePosition,
         contract,
         joiningDate,
         leavingDate,
-        transportFee
+        transportFee ? Math.round(transportFee * 100) : 0
       )
     );
   }

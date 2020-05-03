@@ -43,13 +43,13 @@ export class UserAdministrative {
     leavingDate?: string,
     transportFee?: number
   ) {
-    this.annualEarnings = Math.round(annualEarnings * 100);
+    this.annualEarnings = annualEarnings;
     this.healthInsurance = healthInsurance;
     this.executivePosition = executivePosition;
     this.contract = contract;
     this.joiningDate = joiningDate;
     this.leavingDate = leavingDate;
-    this.transportFee = Math.round(transportFee * 100);
+    this.transportFee = transportFee;
   }
 
   public getId(): string {
@@ -65,11 +65,11 @@ export class UserAdministrative {
   }
 
   public getAnnualEarnings(): number {
-    return this.annualEarnings / 100;
+    return this.annualEarnings;
   }
 
   public getTransportFee(): number {
-    return this.transportFee / 100;
+    return this.transportFee;
   }
 
   public haveHealthInsurance(): boolean {

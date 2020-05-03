@@ -211,7 +211,12 @@ describe('CreateDailyRateCommandHandler', () => {
     when(
       dailyRateRepository.save(
         deepEqual(
-          new DailyRate(100, instance(user), instance(customer), instance(task))
+          new DailyRate(
+            10000,
+            instance(user),
+            instance(customer),
+            instance(task)
+          )
         )
       )
     ).thenResolve(instance(savedDailyRate));
@@ -239,7 +244,12 @@ describe('CreateDailyRateCommandHandler', () => {
     verify(
       dailyRateRepository.save(
         deepEqual(
-          new DailyRate(100, instance(user), instance(customer), instance(task))
+          new DailyRate(
+            10000,
+            instance(user),
+            instance(customer),
+            instance(task)
+          )
         )
       )
     ).once();

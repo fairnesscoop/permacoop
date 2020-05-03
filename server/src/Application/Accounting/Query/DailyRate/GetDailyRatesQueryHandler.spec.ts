@@ -35,7 +35,7 @@ describe('GetDailyRatesQueryHandler', () => {
 
     const dailyRate1 = mock(DailyRate);
     when(dailyRate1.getId()).thenReturn('d54f15d6-1a1d-47e8-8672-9f46018f9960');
-    when(dailyRate1.getAmount()).thenReturn(620.6);
+    when(dailyRate1.getAmount()).thenReturn(62060);
     when(dailyRate1.getUser()).thenReturn(instance(user));
     when(dailyRate1.getCustomer()).thenReturn(instance(customer));
     when(dailyRate1.getTask()).thenReturn(instance(task));
@@ -46,7 +46,7 @@ describe('GetDailyRatesQueryHandler', () => {
 
     const dailyRate2 = mock(DailyRate);
     when(dailyRate2.getId()).thenReturn('b3332cd1-5631-4b7b-a5d4-ba49910cb877');
-    when(dailyRate2.getAmount()).thenReturn(700);
+    when(dailyRate2.getAmount()).thenReturn(70000);
     when(dailyRate2.getUser()).thenReturn(instance(user));
     when(dailyRate2.getCustomer()).thenReturn(instance(customer));
     when(dailyRate2.getTask()).thenReturn(instance(task2));
