@@ -28,9 +28,9 @@
 
 <form on:submit|preventDefault={submit}>
   <UsersInput users={data} bind:userId />
-  <MonthsInput label={'Période *'} bind:date amount={3} />
+  <MonthsInput label={'Période'} bind:date amount={3} />
   <div class="form-group">
-    <label for="file">Fiche de paie *</label>
+    <label for="file" class="required">Fiche de paie</label>
     <input
       type="file"
       id="file"

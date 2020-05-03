@@ -29,8 +29,8 @@ export class QuoteItem {
     quote: Quote
   ) {
     this.title = title;
-    this.quantity = Math.round(quantity * 100);
-    this.dailyRate = Math.round(dailyRate * 100);
+    this.quantity = quantity;
+    this.dailyRate = dailyRate;
     this.quote = quote;
   }
 
@@ -39,14 +39,10 @@ export class QuoteItem {
   }
 
   public getDailyRate(): number {
-    return this.dailyRate / 100;
+    return this.dailyRate;
   }
 
   public getQuantity(): number {
-    return this.quantity / 100;
-  }
-
-  public getAmountExcludingVat(): number {
-    return this.getQuantity() * this.getDailyRate();
+    return this.quantity;
   }
 }

@@ -59,12 +59,12 @@ describe('CreateQuoteItemsCommandHandler', () => {
     verify(quoteRepository.find('a491ccc9-df7c-4fc6-8e90-db816208f689')).once();
     verify(
       quoteItemRepository.save(
-        deepEqual(new QuoteItem('Développement web', 10, 800.5, quote))
+        deepEqual(new QuoteItem('Développement web', 1000, 80050, quote))
       )
     ).once();
     verify(
       quoteItemRepository.save(
-        deepEqual(new QuoteItem('Développement mobile', 1.5, 700, quote))
+        deepEqual(new QuoteItem('Développement mobile', 150, 70000, quote))
       )
     ).once();
   });

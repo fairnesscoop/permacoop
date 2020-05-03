@@ -51,7 +51,7 @@ describe('GetDailyRateByIdQueryHandler', () => {
 
     const dailyRate1 = mock(DailyRate);
     when(dailyRate1.getId()).thenReturn('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
-    when(dailyRate1.getAmount()).thenReturn(620.6);
+    when(dailyRate1.getAmount()).thenReturn(62060);
     when(dailyRate1.getUser()).thenReturn(instance(user));
     when(dailyRate1.getCustomer()).thenReturn(instance(customer));
     when(dailyRate1.getTask()).thenReturn(instance(task));

@@ -8,14 +8,13 @@ describe('QuoteItem.entity', () => {
 
     const quoteItem = new QuoteItem(
       'Développement mobile',
-      120,
-      650,
+      12000,
+      65000,
       instance(quote)
     );
 
     expect(quoteItem.getTitle()).toBe('Développement mobile');
-    expect(quoteItem.getQuantity()).toBe(120);
-    expect(quoteItem.getDailyRate()).toBe(650);
-    expect(quoteItem.getAmountExcludingVat()).toBe(78000);
+    expect(quoteItem.getQuantity()).toBe(12000);
+    expect(quoteItem.getDailyRate()).toBe(65000);
   });
 });

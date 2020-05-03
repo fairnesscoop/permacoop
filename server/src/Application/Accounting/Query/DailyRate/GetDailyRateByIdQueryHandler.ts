@@ -27,7 +27,7 @@ export class GetDailyRateByIdQueryHandler {
 
     return new DailyRateView(
       dailyRate.getId(),
-      dailyRate.getAmount(),
+      dailyRate.getAmount() / 100,
       new UserSummaryView(
         user.getId(),
         user.getFirstName(),

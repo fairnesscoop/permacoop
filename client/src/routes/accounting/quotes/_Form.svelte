@@ -42,7 +42,7 @@
 
 <form on:submit|preventDefault={submit}>
   <div class="form-group">
-    <label for="status">Statut *</label>
+    <label for="status">Statut</label>
     <select
       id="status"
       required="required"
@@ -56,7 +56,7 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="customerId">Nom du client *</label>
+    <label for="customerId">Nom du client</label>
     <select
       id="customerId"
       required="required"

@@ -71,7 +71,12 @@
             </td>
             <td>{format(quote.amountInclusiveOfTaxe)}</td>
             <td>
-              <a class="btn btn-outline-secondary btn-sm" href={''}>Modifier</a>
+              <SecuredLink
+                className="btn btn-outline-secondary btn-sm"
+                href={''}
+                {roles}>
+                Modifier
+              </SecuredLink>
             </td>
           </tr>
         {/each}

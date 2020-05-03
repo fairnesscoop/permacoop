@@ -1,5 +1,7 @@
 <script>
   import {createEventDispatcher} from 'svelte';
+  import TextInput from '../../components/inputs/TextInput.svelte';
+
   export let name = '';
   const dispatch = createEventDispatcher();
 
@@ -9,15 +11,7 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
-  <div class="form-group">
-    <label for="name">Nom de la mission *</label>
-    <input
-      type="text"
-      required="required"
-      id="name"
-      bind:value={name}
-      class="form-control" />
-  </div>
+  <TextInput label={'Nom de la mission'} bind:value={name} />
   <button type="submit" class="btn btn-primary" disabled={!name}>
     Enregistrer
   </button>

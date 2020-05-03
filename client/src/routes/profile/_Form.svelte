@@ -1,5 +1,8 @@
 <script>
   import {createEventDispatcher} from 'svelte';
+  import TextInput from '../../components/inputs/TextInput.svelte';
+  import EmailInput from '../../components/inputs/EmailInput.svelte';
+  import PasswordInput from '../../components/inputs/PasswordInput.svelte';
 
   export let firstName = '';
   export let lastName = '';
@@ -18,42 +21,10 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
-  <div class="form-group">
-    <label for="firstName">Prénom *</label>
-    <input
-      type="text"
-      id="firstName"
-      required="required"
-      bind:value={firstName}
-      class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="lastName">Nom *</label>
-    <input
-      type="text"
-      id="lastName"
-      required="required"
-      bind:value={lastName}
-      class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="email">Email *</label>
-    <input
-      type="email"
-      required="required"
-      id="email"
-      bind:value={email}
-      class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="password">Mot de passe *</label>
-    <input
-      type="password"
-      id="password"
-      required="required"
-      bind:value={password}
-      class="form-control" />
-  </div>
+  <TextInput label={'Prénom'} bind:value={firstName} />
+  <TextInput label={'Nom'} bind:value={lastName} />
+  <EmailInput label={'Email'} bind:value={email} />
+  <PasswordInput label={'Mot de passe'} bind:value={password} />
   <button
     type="submit"
     class="btn btn-primary"
