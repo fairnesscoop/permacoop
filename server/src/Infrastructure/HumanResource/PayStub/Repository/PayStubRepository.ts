@@ -29,4 +29,23 @@ export class PayStubRepository implements IPayStubRepository {
       .andWhere('extract(year FROM payStub.date) = :year', {year})
       .getOne();
   }
+
+  public findAll(): Promise<PayStub[]> {
+    return this.repository
+      .createQueryBuilder('payStub')
+      .select([
+        'payStub.id',
+        'payStub.date',
+        'user.id',
+        'user.firstName',
+        'user.lastName',
+        'file.id',
+        'file.name',
+        'file.size'
+      ])
+      .innerJoin('payStub.file', 'file')
+      .innerJoin('payStub.user', 'user')
+      .orderBy('payStub.date', 'DESC')
+      .getMany();
+  }
 }

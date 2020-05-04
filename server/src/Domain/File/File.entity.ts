@@ -38,4 +38,11 @@ export class File {
   public getMimeType(): string {
     return this.mimeType;
   }
+
+  public getOriginalName(): string {
+    return this.name
+      .split('_')
+      .splice(1)
+      .join('_');
+  }
 }

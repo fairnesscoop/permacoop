@@ -27,6 +27,8 @@ import {BearerStrategy} from './User/Security/BearerStrategy';
 import {GetUserByIdQueryHandler} from 'src/Application/HumanResource/User/Query/GetUserByIdQueryHandler';
 import {UserAdministrative} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import {UserAdministrativeRepository} from './User/Repository/UserAdministrativeRepository';
+import {GetPayStubsAction} from './PayStub/Action/PayStub/GetPayStubsAction';
+import {GetPayStubsQueryHandler} from 'src/Application/HumanResource/PayStub/Query/GetPayStubsQueryHandler';
 
 @Module({
   imports: [
@@ -40,7 +42,8 @@ import {UserAdministrativeRepository} from './User/Repository/UserAdministrative
     GetMeAction,
     UpdateMeAction,
     GetUsersAction,
-    CreatePayStubAction
+    CreatePayStubAction,
+    GetPayStubsAction
   ],
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
@@ -60,7 +63,8 @@ import {UserAdministrativeRepository} from './User/Repository/UserAdministrative
     GetUsersQueryHandler,
     UpdateProfileCommandHandler,
     BearerStrategy,
-    GetUserByIdQueryHandler
+    GetUserByIdQueryHandler,
+    GetPayStubsQueryHandler
   ]
 })
 export class HumanResourceModule {}
