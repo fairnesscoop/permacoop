@@ -9,6 +9,7 @@ import {UploadFileCommandHandler} from 'src/Application/File/Command/UploadFileC
 import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
 import {FileDirectoryStrategy} from 'src/Domain/File/Strategy/FileDirectoryStrategy';
 import {FileEncryptionAdapter} from '../Adapter/FileEncryptionAdapter';
+import {DownloadFileQueryHandler} from 'src/Application/File/Command/DownloadFileQueryHandler';
 
 @Module({
   imports: [BusModule, ConfigModule, TypeOrmModule.forFeature([File])],
@@ -19,7 +20,8 @@ import {FileEncryptionAdapter} from '../Adapter/FileEncryptionAdapter';
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
     {provide: 'IFileEncryption', useClass: FileEncryptionAdapter},
     UploadFileCommandHandler,
-    FileDirectoryStrategy
+    FileDirectoryStrategy,
+    DownloadFileQueryHandler
   ]
 })
 export class FileModule {}

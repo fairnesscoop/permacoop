@@ -20,7 +20,7 @@ export class FileRepository implements IFileRepository {
   public findOneById(id: string): Promise<File | undefined> {
     return this.repository
       .createQueryBuilder('file')
-      .select('file.id')
+      .select(['file.id', 'file.name', 'file.mimeType', 'file.uploadedAt'])
       .where('file.id = :id', {id})
       .getOne();
   }

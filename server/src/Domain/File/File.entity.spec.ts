@@ -13,5 +13,6 @@ describe('File.entity', () => {
     expect(file.getName()).toBe('xbn7s_file_mathieu_marchois.pdf');
     expect(file.getOriginalName()).toBe('file_mathieu_marchois.pdf');
     expect(file.getSize()).toBe(600);
+    expect(file.getUploadedAt()).toBe(undefined);
   });
 });

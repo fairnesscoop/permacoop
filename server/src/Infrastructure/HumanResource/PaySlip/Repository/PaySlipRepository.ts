@@ -30,6 +30,25 @@ export class PaySlipRepository implements IPaySlipRepository {
       .getOne();
   }
 
+  public findOneById(id: string): Promise<PaySlip | undefined> {
+    return this.repository
+      .createQueryBuilder('paySlip')
+      .select([
+        'paySlip.id',
+        'paySlip.date',
+        'user.id',
+        'user.firstName',
+        'user.lastName',
+        'file.id',
+        'file.name',
+        'file.size'
+      ])
+      .innerJoin('paySlip.file', 'file')
+      .innerJoin('paySlip.user', 'user')
+      .where('paySlip.id = :id', {id})
+      .getOne();
+  }
+
   public findAll(): Promise<PaySlip[]> {
     return this.repository
       .createQueryBuilder('paySlip')
