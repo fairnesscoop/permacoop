@@ -77,13 +77,13 @@ make api-test
 
 ## Features
 
-- Users management
 - Tasks management
 - Projects management
 - Customers management
 - Calendar (timesheets etc.)
 - Human Resources
-  - Pay stubs
+  - Pay libs
+  - Cooperators / employee
 - Accounting
   - Quotations
   - Daily rates
