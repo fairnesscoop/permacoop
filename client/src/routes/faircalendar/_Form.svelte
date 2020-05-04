@@ -51,7 +51,7 @@
     <ProjectsInput {projects} bind:projectId={event.projectId} />
     <TasksInput {tasks} bind:taskId={event.taskId} />
   {/if}
-  <TextInput label={'Commentaire'} bind:value={event.summary} />
+  <TextInput label={'Commentaire'} bind:value={event.summary} required={''} />
   <button
     type="submit"
     class="btn btn-primary"

@@ -72,7 +72,7 @@
             {#if userRoles.includes($user.role)}
               <a class="dropdown-item" href="human_resources/users">Salariés</a>
             {/if}
-            <a class="dropdown-item" href="human_resources/pay_stubs">
+            <a class="dropdown-item" href="human_resources/pay_slips">
               Fiches de paies
             </a>
           </div>
