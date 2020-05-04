@@ -19,7 +19,7 @@ export class LocalFileStorageAdapter implements IFileStorage {
   ) {}
 
   public async upload(file: IUploadedFile): Promise<string | null> {
-    const fileName = `${shortid()}_${file.originalname}`;
+    const fileName = `${this.getShortId()}_${file.originalname}`;
     const date = this.dateUtils.getCurrentDate();
     const dir = await this.fileDirectoryStrategy.location(date);
     const directory = `${__dirname}/../../../../${dir}`;
@@ -52,5 +52,13 @@ export class LocalFileStorageAdapter implements IFileStorage {
     } catch (e) {
       return null;
     }
+  }
+
+  private getShortId(): string {
+    shortid.characters(
+      '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@'
+    );
+
+    return shortid();
   }
 }

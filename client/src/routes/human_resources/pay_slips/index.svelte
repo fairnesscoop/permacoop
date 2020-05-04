@@ -12,10 +12,12 @@
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import {client as axios} from '../../../utils/axios';
   import {ROLE_COOPERATOR, ROLE_ACCOUNTANT} from '../../../constants/roles';
+  import {downloadFile} from '../../../utils/downloadFile';
 
   let roles = [ROLE_COOPERATOR, ROLE_ACCOUNTANT];
   let data = [];
   let loading = true;
+  let disableDownloadableButton = false;
   let errors = [];
 
   onMount(async () => {
@@ -27,6 +29,20 @@
       loading = false;
     }
   });
+
+  const download = async (id, fileName) => {
+    try {
+      disableDownloadableButton = true;
+      const {data} = await axios.get(`pay_slips/${id}/download`, {
+        responseType: 'blob'
+      });
+      downloadFile(data, fileName);
+    } catch (e) {
+      errors = errorNormalizer(e);
+    } finally {
+      disableDownloadableButton = false;
+    }
+  };
 </script>
 
 <svelte:head>
@@ -59,9 +75,12 @@
           <td>{paySlip.file.originalName}</td>
           <td>
             {#if $user.id === paySlip.user.id}
-              <a class="btn btn-outline-secondary btn-sm" href="d">
+              <button
+                disabled={disableDownloadableButton}
+                class="btn btn-outline-secondary btn-sm"
+                on:click={download(paySlip.id, paySlip.file.originalName)}>
                 Télécharger ({filesize(paySlip.file.size)})
-              </a>
+              </button>
             {/if}
           </td>
         </tr>
