@@ -5,4 +5,5 @@ export interface IPaySlipRepository {
   save(paySlip: PaySlip): Promise<PaySlip>;
   findOneByUserAndDate(user: User, date: Date): Promise<PaySlip | undefined>;
   findAll(): Promise<PaySlip[]>;
+  findOneById(id: string): Promise<PaySlip | undefined>;
 }

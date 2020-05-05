@@ -39,6 +39,10 @@ export class File {
     return this.mimeType;
   }
 
+  public getUploadedAt(): Date {
+    return this.uploadedAt;
+  }
+
   public getOriginalName(): string {
     return this.name
       .split('_')

@@ -142,7 +142,7 @@ describe('CreatePaySlipCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(PaySlipAlreadyExistException);
-      expect(e.message).toBe('accounting.errors.pay_slip_already_exist');
+      expect(e.message).toBe('human_resource.errors.pay_slip_already_exist');
       verify(
         userRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
       ).once();

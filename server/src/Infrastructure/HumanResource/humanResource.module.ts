@@ -29,6 +29,8 @@ import {UserAdministrativeRepository} from './User/Repository/UserAdministrative
 import {GetPaySlipsQueryHandler} from 'src/Application/HumanResource/PaySlip/Query/GetPaySlipsQueryHandler';
 import {CreatePaySlipAction} from './PaySlip/Action/CreatePaySlipAction';
 import {GetPaySlipsAction} from './PaySlip/Action/GetPaySlipsAction';
+import {DownloadPaySlipAction} from './PaySlip/Action/DownloadPaySlipAction';
+import {GetPaySlipByIdQueryHandler} from 'src/Application/HumanResource/PaySlip/Query/GetPaySlipByIdQueryHandler';
 
 @Module({
   imports: [
@@ -43,7 +45,8 @@ import {GetPaySlipsAction} from './PaySlip/Action/GetPaySlipsAction';
     UpdateMeAction,
     GetUsersAction,
     CreatePaySlipAction,
-    GetPaySlipsAction
+    GetPaySlipsAction,
+    DownloadPaySlipAction
   ],
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
@@ -64,7 +67,8 @@ import {GetPaySlipsAction} from './PaySlip/Action/GetPaySlipsAction';
     UpdateProfileCommandHandler,
     BearerStrategy,
     GetUserByIdQueryHandler,
-    GetPaySlipsQueryHandler
+    GetPaySlipsQueryHandler,
+    GetPaySlipByIdQueryHandler
   ]
 })
 export class HumanResourceModule {}
