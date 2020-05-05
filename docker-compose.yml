@@ -18,7 +18,7 @@ services:
       - 'database:/var/lib/postgresql/data'
 
   api:
-    image: node:13.2
+    image: node:14.1.0
     working_dir: '/var/www'
     depends_on:
       - database

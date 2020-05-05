@@ -21,7 +21,7 @@ Permacoop is an eco-design and open-source ERP solution for cooperatives.
 
 ## Prerequisites
 
-You must have **[Docker](https://www.docker.com/)**, **[Docker Compose](https://docs.docker.com/compose/)** and **[Node](https://nodejs.org/en/)** (>= 12) installed on your system.
+You must have **[Docker](https://www.docker.com/)** and **[Docker Compose](https://docs.docker.com/compose/)**.
 
 ## Installation
 
