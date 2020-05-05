@@ -31,12 +31,17 @@ import {CreatePaySlipAction} from './PaySlip/Action/CreatePaySlipAction';
 import {GetPaySlipsAction} from './PaySlip/Action/GetPaySlipsAction';
 import {DownloadPaySlipAction} from './PaySlip/Action/DownloadPaySlipAction';
 import {GetPaySlipByIdQueryHandler} from 'src/Application/HumanResource/PaySlip/Query/GetPaySlipByIdQueryHandler';
+import {Holiday} from 'src/Domain/HumanResource/Holiday/Holiday.entity';
+import {HolidayRepository} from './Holiday/Repository/HolidayRepository';
+import {CreateHolidayCommandHandler} from 'src/Application/HumanResource/Holiday/Command/CreateHolidayCommandHandler';
+import {DoesHolidayExistForPeriod} from 'src/Domain/HumanResource/Holiday/Specification/DoesHolidayExistForPeriod';
+import {CreateHolidayAction} from './Holiday/Action/CreateHolidayAction';
 
 @Module({
   imports: [
     BusModule,
     PassportModule,
-    TypeOrmModule.forFeature([User, UserAdministrative, File, PaySlip])
+    TypeOrmModule.forFeature([User, UserAdministrative, File, PaySlip, Holiday])
   ],
   controllers: [
     LoginAction,
@@ -46,10 +51,12 @@ import {GetPaySlipByIdQueryHandler} from 'src/Application/HumanResource/PaySlip/
     GetUsersAction,
     CreatePaySlipAction,
     GetPaySlipsAction,
-    DownloadPaySlipAction
+    DownloadPaySlipAction,
+    CreateHolidayAction
   ],
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
+    {provide: 'IHolidayRepository', useClass: HolidayRepository},
     {provide: 'IPasswordEncoder', useClass: PasswordEncoderAdapter},
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
     {provide: 'IPaySlipRepository', useClass: PaySlipRepository},
@@ -68,7 +75,9 @@ import {GetPaySlipByIdQueryHandler} from 'src/Application/HumanResource/PaySlip/
     BearerStrategy,
     GetUserByIdQueryHandler,
     GetPaySlipsQueryHandler,
-    GetPaySlipByIdQueryHandler
+    GetPaySlipByIdQueryHandler,
+    CreateHolidayCommandHandler,
+    DoesHolidayExistForPeriod
   ]
 })
 export class HumanResourceModule {}

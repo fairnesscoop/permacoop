@@ -7,7 +7,7 @@ import {DownloadFileQuery} from './DownloadFileQuery';
 import {DownloadedFileView} from '../View/DownloadedFileView';
 import {FileNotFoundException} from 'src/Domain/File/Exception/FileNotFoundException';
 
-describe('DownloadFileCommandHandler', () => {
+describe('DownloadFileQueryHandler', () => {
   let handler: DownloadFileQueryHandler;
   let localFileStorageAdapter: LocalFileStorageAdapter;
   let fileRepository: FileRepository;

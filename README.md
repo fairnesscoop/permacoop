@@ -83,6 +83,7 @@ make api-test
 - Calendar (timesheets etc.)
 - Human Resources
   - Pay libs
+  - Holidays
   - Cooperators / employee
 - Accounting
   - Quotations
