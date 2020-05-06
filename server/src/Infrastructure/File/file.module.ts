@@ -9,7 +9,7 @@ import {UploadFileCommandHandler} from 'src/Application/File/Command/UploadFileC
 import {DateUtilsAdapter} from '../Adapter/DateUtilsAdapter';
 import {FileDirectoryStrategy} from 'src/Domain/File/Strategy/FileDirectoryStrategy';
 import {FileEncryptionAdapter} from '../Adapter/FileEncryptionAdapter';
-import {DownloadFileQueryHandler} from 'src/Application/File/Command/DownloadFileQueryHandler';
+import {DownloadFileQueryHandler} from 'src/Application/File/Query/DownloadFileQueryHandler';
 
 @Module({
   imports: [BusModule, ConfigModule, TypeOrmModule.forFeature([File])],
