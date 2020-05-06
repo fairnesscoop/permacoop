@@ -15,7 +15,7 @@ import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 import {LoggedUser} from '../../User/Decorator/LoggedUser';
 import {IQueryBus} from 'src/Application/IQueryBus';
-import {DownloadFileQuery} from 'src/Application/File/Command/DownloadFileQuery';
+import {DownloadFileQuery} from 'src/Application/File/Query/DownloadFileQuery';
 import {GetPaySlipByIdQuery} from 'src/Application/HumanResource/PaySlip/Query/GetPaySlipByIdQuery';
 import {PaySlipView} from 'src/Application/HumanResource/PaySlip/View/PaySlipView';
 import {DownloadedFileView} from 'src/Application/File/View/DownloadedFileView';
