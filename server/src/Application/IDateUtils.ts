@@ -3,4 +3,5 @@ export interface IDateUtils {
   getDaysInMonth(date: Date): number;
   isWeekend(date: Date): boolean;
   getCurrentDate(): Date;
+  getCurrentDateToISOString(): string;
 }

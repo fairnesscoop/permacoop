@@ -8,6 +8,8 @@ import {IDateUtils} from 'src/Application/IDateUtils';
 
 @Injectable()
 export class DateUtilsAdapter implements IDateUtils {
+  constructor(private readonly date: Date = new Date()) {}
+
   public format(date: Date, format: string): string {
     return fnsFormat(date, format);
   }
@@ -21,6 +23,10 @@ export class DateUtilsAdapter implements IDateUtils {
   }
 
   public getCurrentDate(): Date {
-    return new Date();
+    return this.date;
+  }
+
+  public getCurrentDateToISOString(): string {
+    return this.date.toISOString();
   }
 }

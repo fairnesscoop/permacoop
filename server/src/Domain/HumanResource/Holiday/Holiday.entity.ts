@@ -40,6 +40,9 @@ export class Holiday {
   @Column({type: 'varchar', nullable: true})
   private comment: string;
 
+  @Column({type: 'varchar', nullable: true})
+  private moderationComment: string;
+
   @Column({type: 'timestamp', nullable: true})
   private moderateAt: string;
 
@@ -102,5 +105,28 @@ export class Holiday {
 
   public getComment(): string {
     return this.comment;
+  }
+
+  public getModerator(): User {
+    return this.moderator;
+  }
+
+  public getModerateAt(): string {
+    return this.moderateAt;
+  }
+
+  public getModerationComment(): string {
+    return this.moderationComment;
+  }
+
+  public refuse(
+    moderator: User,
+    date: string,
+    moderationComment?: string
+  ): void {
+    this.status = HolidayStatus.REFUSED;
+    this.moderator = moderator;
+    this.moderateAt = date;
+    this.moderationComment = moderationComment;
   }
 }
