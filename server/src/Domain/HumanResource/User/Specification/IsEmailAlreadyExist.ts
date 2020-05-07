@@ -1,10 +1,9 @@
 import {Inject, Injectable} from '@nestjs/common';
-import {ISpecification} from 'src/Domain/ISpecification';
 import {IUserRepository} from '../Repository/IUserRepository';
 import {User} from '../User.entity';
 
 @Injectable()
-export class IsEmailAlreadyExist implements ISpecification {
+export class IsEmailAlreadyExist {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository

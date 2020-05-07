@@ -1,10 +1,9 @@
 import {Injectable, Inject} from '@nestjs/common';
-import {ISpecification} from 'src/Domain/ISpecification';
 import {ICustomerRepository} from '../Repository/ICustomerRepository';
 import {Customer} from '../Customer.entity';
 
 @Injectable()
-export class IsCustomerAlreadyExist implements ISpecification {
+export class IsCustomerAlreadyExist {
   constructor(
     @Inject('ICustomerRepository')
     private readonly customerRepository: ICustomerRepository

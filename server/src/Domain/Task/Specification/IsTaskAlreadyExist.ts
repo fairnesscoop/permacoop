@@ -1,10 +1,9 @@
 import {Injectable, Inject} from '@nestjs/common';
-import {ISpecification} from 'src/Domain/ISpecification';
 import {ITaskRepository} from '../Repository/ITaskRepository';
 import {Task} from '../Task.entity';
 
 @Injectable()
-export class IsTaskAlreadyExist implements ISpecification {
+export class IsTaskAlreadyExist {
   constructor(
     @Inject('ITaskRepository')
     private readonly taskRepository: ITaskRepository

@@ -1,9 +1,8 @@
 import {Inject} from '@nestjs/common';
-import {ISpecification} from 'src/Domain/ISpecification';
 import {IEventRepository} from '../Repository/IEventRepository';
 import {Event} from '../Event.entity';
 
-export class IsMaximumTimeSpentReached implements ISpecification {
+export class IsMaximumTimeSpentReached {
   constructor(
     @Inject('IEventRepository')
     private readonly eventRepository: IEventRepository
