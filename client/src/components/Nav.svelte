@@ -71,6 +71,9 @@
           <div class="dropdown-menu">
             {#if userRoles.includes($user.role)}
               <a class="dropdown-item" href="human_resources/users">Salariés</a>
+              <a class="dropdown-item" href="human_resources/holidays">
+                Congés
+              </a>
             {/if}
             <a class="dropdown-item" href="human_resources/pay_slips">
               Fiches de paies
