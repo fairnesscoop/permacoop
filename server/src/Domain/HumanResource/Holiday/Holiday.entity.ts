@@ -2,7 +2,7 @@ import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
 import {User} from '../User/User.entity';
 
 export enum HolidayStatus {
-  WAITING = 'waiting',
+  PENDING = 'pending',
   ACCEPTED = 'accepted',
   REFUSED = 'refused'
 }
@@ -58,7 +58,7 @@ export class Holiday {
     endsAllDay: boolean,
     comment?: string
   ) {
-    this.status = HolidayStatus.WAITING;
+    this.status = HolidayStatus.PENDING;
     this.user = user;
     this.leaveType = leaveType;
     this.startDate = startDate;

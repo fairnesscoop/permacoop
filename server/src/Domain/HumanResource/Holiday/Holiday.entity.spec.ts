@@ -20,7 +20,7 @@ describe('Holiday.entity', () => {
     expect(holiday.getUser()).toBe(instance(user));
     expect(holiday.getStartDate()).toBe('2019-01-04');
     expect(holiday.getEndDate()).toBe('2019-01-06');
-    expect(holiday.getStatus()).toBe(HolidayStatus.WAITING);
+    expect(holiday.getStatus()).toBe(HolidayStatus.PENDING);
     expect(holiday.getLeaveType()).toBe(HolidayLeaveType.PAID);
     expect(holiday.getComment()).toBe('H&M wedding');
     expect(holiday.isStartsAllDay()).toBe(true);

@@ -33,9 +33,9 @@ export class HolidayRepository implements IHolidayRepository {
           endDate
         }
       )
-      .andWhere('(holiday.status = :accepted OR holiday.status = :waiting)', {
+      .andWhere('(holiday.status = :accepted OR holiday.status = :pending)', {
         accepted: HolidayStatus.ACCEPTED,
-        waiting: HolidayStatus.WAITING
+        pending: HolidayStatus.PENDING
       })
       .getOne();
   }
