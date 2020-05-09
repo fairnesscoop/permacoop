@@ -27,4 +27,14 @@ describe('DateUtilsAdapter', () => {
       false
     );
   });
+
+  it('testGetCurrentDate', () => {
+    const date = new Date('2020-05-09T11:49:58.706Z');
+    const dateUtils = new DateUtilsAdapter(date);
+
+    expect(dateUtils.getCurrentDate()).toBe(date);
+    expect(dateUtils.getCurrentDateToISOString()).toBe(
+      '2020-05-09T11:49:58.706Z'
+    );
+  });
 });

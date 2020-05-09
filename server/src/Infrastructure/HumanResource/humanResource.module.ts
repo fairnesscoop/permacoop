@@ -36,6 +36,9 @@ import {HolidayRepository} from './Holiday/Repository/HolidayRepository';
 import {CreateHolidayCommandHandler} from 'src/Application/HumanResource/Holiday/Command/CreateHolidayCommandHandler';
 import {DoesHolidayExistForPeriod} from 'src/Domain/HumanResource/Holiday/Specification/DoesHolidayExistForPeriod';
 import {CreateHolidayAction} from './Holiday/Action/CreateHolidayAction';
+import {RefuseHolidayCommandHandler} from 'src/Application/HumanResource/Holiday/Command/RefuseHolidayCommandHandler';
+import {RefuseHolidayAction} from './Holiday/Action/RefuseHolidayAction';
+import {CanHolidayBeModerated} from 'src/Domain/HumanResource/Holiday/Specification/CanHolidayBeModerated';
 
 @Module({
   imports: [
@@ -52,7 +55,8 @@ import {CreateHolidayAction} from './Holiday/Action/CreateHolidayAction';
     CreatePaySlipAction,
     GetPaySlipsAction,
     DownloadPaySlipAction,
-    CreateHolidayAction
+    CreateHolidayAction,
+    RefuseHolidayAction
   ],
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
@@ -65,6 +69,7 @@ import {CreateHolidayAction} from './Holiday/Action/CreateHolidayAction';
       provide: 'IUserAdministrativeRepository',
       useClass: UserAdministrativeRepository
     },
+    Date,
     CreatePaySlipCommandHandler,
     IsPaySlipAlreadyExist,
     LoginQueryHandler,
@@ -77,7 +82,9 @@ import {CreateHolidayAction} from './Holiday/Action/CreateHolidayAction';
     GetPaySlipsQueryHandler,
     GetPaySlipByIdQueryHandler,
     CreateHolidayCommandHandler,
-    DoesHolidayExistForPeriod
+    DoesHolidayExistForPeriod,
+    RefuseHolidayCommandHandler,
+    CanHolidayBeModerated
   ]
 })
 export class HumanResourceModule {}

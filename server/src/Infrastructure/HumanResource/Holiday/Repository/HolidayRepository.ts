@@ -17,6 +17,15 @@ export class HolidayRepository implements IHolidayRepository {
     return this.repository.save(holiday);
   }
 
+  public findOneById(id: string): Promise<Holiday | undefined> {
+    return this.repository
+      .createQueryBuilder('holiday')
+      .select(['holiday.id', 'holiday.status', 'user.id'])
+      .where('holiday.id = :id', {id})
+      .innerJoin('holiday.user', 'user')
+      .getOne();
+  }
+
   public findExistingHolidaysByUserAndPeriod(
     user: User,
     startDate: string,

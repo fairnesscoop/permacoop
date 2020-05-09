@@ -37,6 +37,7 @@ import {IsMaximumTimeSpentReachedOnEdition} from 'src/Domain/FairCalendar/Specif
     {provide: 'IEventRepository', useClass: EventRepository},
     {provide: 'ITaskRepository', useClass: TaskRepository},
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
+    Date,
     IsMaximumTimeSpentReached,
     AddEventCommandHandler,
     GetMonthlyEventsQueryHandler,
