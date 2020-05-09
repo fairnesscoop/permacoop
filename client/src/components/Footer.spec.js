@@ -1,11 +1,11 @@
+import '@testing-library/jest-dom/extend-expect';
 import Footer from './Footer.svelte';
-import {render} from '@testing-library/svelte';
+import {screen, render} from '@testing-library/svelte';
 
 it('renders the footer', async () => {
-  const {container} = render(Footer);
+  render(Footer);
 
   const currentYear = new Date().getFullYear();
-  expect(container.querySelector('.navbar-text').innerHTML).toContain(
-    currentYear
-  );
+  const footerText = `Copyright © ${currentYear}`;
+  expect(screen.getByText(footerText)).toBeInTheDocument();
 });

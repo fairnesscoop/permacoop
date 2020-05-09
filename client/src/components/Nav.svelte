@@ -105,7 +105,6 @@
             <a class="dropdown-item" href="profile">Mon profil</a>
             <div class="dropdown-divider" role="separator" />
             <a
-              data-logout-button
               class="dropdown-item"
               on:click={() => handleLogout()}
               href="login">

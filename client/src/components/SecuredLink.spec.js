@@ -1,5 +1,10 @@
 import SecuredLink from './SecuredLink.svelte';
-import {render} from '@testing-library/svelte';
+import {screen, render} from '@testing-library/svelte';
+import {
+  ROLE_COOPERATOR,
+  ROLE_EMPLOYEE,
+  ROLE_ACCOUNTANT
+} from '../constants/roles';
 import {user} from '../store';
 
 beforeEach(() => {
@@ -12,20 +17,20 @@ it('renders the secured link for authorized user', async () => {
     firstName: 'Nicolas',
     lastName: 'Dievart',
     id: 12,
-    role: 'cooperator'
+    role: ROLE_COOPERATOR
   });
 
   const className = 'link';
   const href = 'https://fairness.coop/';
-  const roles = ['cooperator', 'employee'];
+  const roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
-  const {container} = render(SecuredLink, {
+  render(SecuredLink, {
     href,
     className,
     roles
   });
 
-  const link = container.querySelector('a');
+  const link = screen.getByRole('link');
   expect(link.href).toBe(href);
   expect(link.classList.contains('link')).toBe(true);
 });
@@ -35,19 +40,18 @@ it('renders nothing for non-authorized user', async () => {
     firstName: 'Nicolas',
     lastName: 'Dievart',
     id: 12,
-    role: 'accountant'
+    role: ROLE_ACCOUNTANT
   });
 
   const className = 'link';
   const href = 'https://fairness.coop/';
-  const roles = ['cooperator', 'employee'];
+  const roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
-  const {container} = render(SecuredLink, {
+  render(SecuredLink, {
     href,
     className,
     roles
   });
 
-  const link = container.querySelector('a');
-  expect(link).toBeNull();
+  expect(screen.queryByRole('link')).toBeNull();
 });
