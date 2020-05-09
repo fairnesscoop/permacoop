@@ -1,8 +1,9 @@
 import Nav from './Nav.svelte';
-import {render, fireEvent} from '@testing-library/svelte';
+import {screen, render, fireEvent} from '@testing-library/svelte';
 import {user} from '../store';
 import {tick} from 'svelte';
 import {get} from 'svelte/store';
+import {ROLE_COOPERATOR, ROLE_ACCOUNTANT} from '../constants/roles';
 import {TokenStorage} from '../utils/tokenStorage';
 jest.mock('../utils/tokenStorage');
 
@@ -17,17 +18,17 @@ it('renders the nav for the accounting user', async () => {
     id: 12,
     firstName: 'Boaty',
     lastName: 'Mcboatface',
-    role: 'accounting'
+    role: ROLE_ACCOUNTANT
   });
 
-  const {queryByText} = render(Nav, {
+  render(Nav, {
     segment: 'accounting'
   });
 
-  expect(queryByText('Comptabilité')).not.toBeNull();
-  expect(queryByText('Boaty Mcboatface')).not.toBeNull();
-  expect(queryByText('Devis')).toBeNull();
-  expect(queryByText('TJM')).toBeNull();
+  expect(screen.queryByText('Gestion & Comptabilité')).not.toBeNull();
+  expect(screen.queryByText('Boaty Mcboatface')).not.toBeNull();
+  expect(screen.queryByText('Devis')).toBeNull();
+  expect(screen.queryByText('TJM')).toBeNull();
 });
 
 it('renders the nav for the cooperator user', async () => {
@@ -35,17 +36,17 @@ it('renders the nav for the cooperator user', async () => {
     id: 12,
     firstName: 'Boaty',
     lastName: 'Mcboatface',
-    role: 'cooperator'
+    role: ROLE_COOPERATOR
   });
 
-  const {queryByText} = render(Nav, {
+  render(Nav, {
     segment: 'customers'
   });
 
-  expect(queryByText('Comptabilité')).not.toBeNull();
-  expect(queryByText('Boaty Mcboatface')).not.toBeNull();
-  expect(queryByText('Devis')).not.toBeNull();
-  expect(queryByText('TJM')).not.toBeNull();
+  expect(screen.queryByText('Gestion & Comptabilité')).not.toBeNull();
+  expect(screen.queryByText('Boaty Mcboatface')).not.toBeNull();
+  expect(screen.queryByText('Devis')).not.toBeNull();
+  expect(screen.queryByText('TJM')).not.toBeNull();
 });
 
 it('renders the nav and handle logout', async () => {
@@ -53,14 +54,14 @@ it('renders the nav and handle logout', async () => {
     id: 12,
     firstName: 'Boaty',
     lastName: 'Mcboatface',
-    role: 'cooperator'
+    role: ROLE_COOPERATOR
   });
 
-  const {container} = render(Nav, {
+  render(Nav, {
     segment: 'customers'
   });
 
-  fireEvent.click(container.querySelector('[data-logout-button]'), {});
+  fireEvent.click(screen.getByRole('link', {name: /Se déconnecter/i}), {});
   await tick();
 
   expect(get(user)).toBeNull();

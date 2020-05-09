@@ -1,5 +1,11 @@
+import '@testing-library/jest-dom/extend-expect';
+import {screen, render} from '@testing-library/svelte';
 import SecuredView from './SecuredView.svelte';
-import {render} from '@testing-library/svelte';
+import {
+  ROLE_COOPERATOR,
+  ROLE_EMPLOYEE,
+  ROLE_ACCOUNTANT
+} from '../constants/roles';
 import {user} from '../store';
 
 beforeEach(() => {
@@ -9,28 +15,28 @@ beforeEach(() => {
 
 it('renders the secured view for non-authorized user', async () => {
   user.set({
-    role: 'accountant'
+    role: ROLE_ACCOUNTANT
   });
 
-  const roles = ['cooperator', 'employee'];
+  const roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
-  const {getByText} = render(SecuredView, {
+  render(SecuredView, {
     roles
   });
 
-  expect(getByText('Accès interdit !')).not.toBeNull();
+  expect(screen.getByText(/Accès interdit !/i)).toBeInTheDocument();
 });
 
 it('renders nothing for authorized user', async () => {
   user.set({
-    role: 'cooperator'
+    role: ROLE_COOPERATOR
   });
 
-  const roles = ['cooperator', 'employee'];
+  const roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
-  const {queryByText} = render(SecuredView, {
+  render(SecuredView, {
     roles
   });
 
-  expect(queryByText('Accès interdit !')).toBeNull();
+  expect(screen.queryByText(/Accès interdit !/i)).not.toBeInTheDocument();
 });
