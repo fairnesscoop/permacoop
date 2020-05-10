@@ -1,7 +1,7 @@
 import Breadcrumb from './Breadcrumb.svelte';
 import {screen, render} from '@testing-library/svelte';
 
-it('renders the breadcrumb', async () => {
+it('renders the breadcrumb', () => {
   const items = [{path: '/fairness', title: 'Fairness'}, {title: 'Anything'}];
   render(Breadcrumb, {items});
 

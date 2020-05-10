@@ -2,7 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import ServerErrors from './ServerErrors.svelte';
 import {screen, render} from '@testing-library/svelte';
 
-it('renders nothing with no error.', async () => {
+it('renders nothing with no error.', () => {
   render(ServerErrors, {errors: []});
 
   expect(
@@ -10,7 +10,7 @@ it('renders nothing with no error.', async () => {
   ).not.toBeInTheDocument();
 });
 
-it('renders the given errors', async () => {
+it('renders the given errors', () => {
   const errors = ['first error', 'second error'];
   render(ServerErrors, {errors});
 

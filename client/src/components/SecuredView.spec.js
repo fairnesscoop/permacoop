@@ -13,7 +13,7 @@ beforeEach(() => {
   process.browser = true;
 });
 
-it('renders the secured view for non-authorized user', async () => {
+it('renders the secured view for non-authorized user', () => {
   user.set({
     role: ROLE_ACCOUNTANT
   });
@@ -27,7 +27,7 @@ it('renders the secured view for non-authorized user', async () => {
   expect(screen.getByText(/Accès interdit !/i)).toBeInTheDocument();
 });
 
-it('renders nothing for authorized user', async () => {
+it('renders nothing for authorized user', () => {
   user.set({
     role: ROLE_COOPERATOR
   });

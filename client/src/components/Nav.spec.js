@@ -13,7 +13,7 @@ beforeEach(() => {
   TokenStorage.mockClear();
 });
 
-it('renders the nav for the accounting user', async () => {
+it('renders the nav for the accounting user', () => {
   user.set({
     id: 12,
     firstName: 'Boaty',
