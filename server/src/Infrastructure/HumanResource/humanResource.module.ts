@@ -39,12 +39,24 @@ import {CreateHolidayAction} from './Holiday/Action/CreateHolidayAction';
 import {RefuseHolidayCommandHandler} from 'src/Application/HumanResource/Holiday/Command/RefuseHolidayCommandHandler';
 import {RefuseHolidayAction} from './Holiday/Action/RefuseHolidayAction';
 import {CanHolidayBeModerated} from 'src/Domain/HumanResource/Holiday/Specification/CanHolidayBeModerated';
+import {AcceptedHolidayEventListener} from 'src/Application/HumanResource/Holiday/Event/AcceptedHolidayEventListener';
+import {HolidayToEventsConverter} from 'src/Domain/FairCalendar/Converter/HolidayToEventsConverter';
+import {EventRepository} from '../FairCalendar/Repository/EventRepository';
+import {Event} from 'src/Domain/FairCalendar/Event.entity';
+import {AcceptHolidayAction} from './Holiday/Action/AcceptHolidayAction';
 
 @Module({
   imports: [
     BusModule,
     PassportModule,
-    TypeOrmModule.forFeature([User, UserAdministrative, File, PaySlip, Holiday])
+    TypeOrmModule.forFeature([
+      User,
+      UserAdministrative,
+      File,
+      PaySlip,
+      Holiday,
+      Event
+    ])
   ],
   controllers: [
     LoginAction,
@@ -56,7 +68,8 @@ import {CanHolidayBeModerated} from 'src/Domain/HumanResource/Holiday/Specificat
     GetPaySlipsAction,
     DownloadPaySlipAction,
     CreateHolidayAction,
-    RefuseHolidayAction
+    RefuseHolidayAction,
+    AcceptHolidayAction
   ],
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
@@ -65,6 +78,7 @@ import {CanHolidayBeModerated} from 'src/Domain/HumanResource/Holiday/Specificat
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
     {provide: 'IPaySlipRepository', useClass: PaySlipRepository},
     {provide: 'IFileRepository', useClass: FileRepository},
+    {provide: 'IEventRepository', useClass: EventRepository},
     {
       provide: 'IUserAdministrativeRepository',
       useClass: UserAdministrativeRepository
@@ -84,7 +98,9 @@ import {CanHolidayBeModerated} from 'src/Domain/HumanResource/Holiday/Specificat
     CreateHolidayCommandHandler,
     DoesHolidayExistForPeriod,
     RefuseHolidayCommandHandler,
-    CanHolidayBeModerated
+    CanHolidayBeModerated,
+    AcceptedHolidayEventListener,
+    HolidayToEventsConverter
   ]
 })
 export class HumanResourceModule {}

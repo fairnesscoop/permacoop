@@ -129,4 +129,15 @@ export class Holiday {
     this.moderateAt = date;
     this.moderationComment = moderationComment;
   }
+
+  public accept(
+    moderator: User,
+    date: string,
+    moderationComment?: string
+  ): void {
+    this.status = HolidayStatus.ACCEPTED;
+    this.moderator = moderator;
+    this.moderateAt = date;
+    this.moderationComment = moderationComment;
+  }
 }

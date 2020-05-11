@@ -2,7 +2,9 @@ import {Injectable} from '@nestjs/common';
 import {
   format as fnsFormat,
   isWeekend as fnsIsWeekend,
-  getDaysInMonth as fnsGetDaysInMonth
+  getDaysInMonth as fnsGetDaysInMonth,
+  eachDayOfInterval,
+  addDays
 } from 'date-fns';
 import {IDateUtils} from 'src/Application/IDateUtils';
 
@@ -28,5 +30,69 @@ export class DateUtilsAdapter implements IDateUtils {
 
   public getCurrentDateToISOString(): string {
     return this.date.toISOString();
+  }
+
+  public getWorkedDaysDuringAPeriod(start: Date, end: Date): Date[] {
+    const dates: Date[] = [];
+    const workedFreeDays: Date[] = [];
+
+    for (let year = start.getFullYear(); year <= end.getFullYear(); year++) {
+      workedFreeDays.push(...this.getWorkedFreeDays(year));
+    }
+
+    for (const day of eachDayOfInterval({start, end})) {
+      if (
+        this.isWeekend(day) ||
+        workedFreeDays.filter(d => d.toISOString() === day.toISOString())
+          .length > 0
+      ) {
+        continue;
+      }
+
+      dates.push(day);
+    }
+
+    return dates;
+  }
+
+  public getWorkedFreeDays(year: number): Date[] {
+    const fixedDays: Date[] = [
+      new Date(`${year}-01-01`), // New Year's Day
+      new Date(`${year}-05-01`), // Labour Day
+      new Date(`${year}-05-08`), // Victory in 1945
+      new Date(`${year}-07-14`), // National Day
+      new Date(`${year}-08-15`), // Assumption
+      new Date(`${year}-11-01`), // All Saints' Day
+      new Date(`${year}-11-11`), // The Armistice
+      new Date(`${year}-12-25`) // Christmas
+    ];
+
+    const easterDate = this.getEasterDate(year);
+    const easterDays: Date[] = [
+      addDays(easterDate, 1), // Easter Monday
+      addDays(easterDate, 39) // Ascension
+    ];
+
+    return [...fixedDays, ...easterDays];
+  }
+
+  public getEasterDate(year: number): Date {
+    const a = year % 19;
+    const b = Math.floor(year / 100);
+    const c = year % 100;
+    const d = Math.floor(b / 4);
+    const e = b % 4;
+    const f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3);
+    const h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4);
+    const k = c % 4;
+    const l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const n0 = h + l + 7 * m + 114;
+    const n = Math.floor(n0 / 31) - 1;
+    const p = (n0 % 31) + 1;
+
+    return new Date(year, n, p);
   }
 }
