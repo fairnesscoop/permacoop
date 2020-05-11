@@ -12,7 +12,7 @@ beforeEach(() => {
   process.browser = true;
 });
 
-it('renders the secured link for authorized user', async () => {
+it('renders the secured link for authorized user', () => {
   user.set({
     firstName: 'Nicolas',
     lastName: 'Dievart',
@@ -35,7 +35,7 @@ it('renders the secured link for authorized user', async () => {
   expect(link.classList.contains('link')).toBe(true);
 });
 
-it('renders nothing for non-authorized user', async () => {
+it('renders nothing for non-authorized user', () => {
   user.set({
     firstName: 'Nicolas',
     lastName: 'Dievart',
