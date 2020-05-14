@@ -43,7 +43,8 @@
   background-color: #343a40 !important;
   border-color: #343a40 !important;
 }
-.badge-draft {
+.badge-draft,
+.badge-pending {
   color: #fff;
   background-color: #6c757d;
 }

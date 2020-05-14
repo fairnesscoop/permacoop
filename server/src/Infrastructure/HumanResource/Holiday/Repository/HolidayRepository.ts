@@ -48,4 +48,24 @@ export class HolidayRepository implements IHolidayRepository {
       })
       .getOne();
   }
+
+  public findHolidays(): Promise<Holiday[]> {
+    return this.repository
+      .createQueryBuilder('holiday')
+      .select([
+        'holiday.id',
+        'holiday.leaveType',
+        'holiday.status',
+        'holiday.startDate',
+        'holiday.startsAllDay',
+        'holiday.endDate',
+        'holiday.endsAllDay',
+        'user.id',
+        'user.firstName',
+        'user.lastName'
+      ])
+      .innerJoin('holiday.user', 'user')
+      .orderBy('holiday.startDate', 'ASC')
+      .getMany();
+  }
 }
