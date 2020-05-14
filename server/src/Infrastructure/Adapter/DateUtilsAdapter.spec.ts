@@ -37,4 +37,68 @@ describe('DateUtilsAdapter', () => {
       '2020-05-09T11:49:58.706Z'
     );
   });
+
+  it('testGetWorkedDaysDuringAPeriod', () => {
+    const startDate = new Date('2020-12-24');
+    const endDate = new Date('2021-01-04');
+    const dateUtils = new DateUtilsAdapter();
+
+    expect(
+      dateUtils.getWorkedDaysDuringAPeriod(startDate, endDate)
+    ).toMatchObject([
+      new Date('2020-12-24'),
+      new Date('2020-12-28'),
+      new Date('2020-12-29'),
+      new Date('2020-12-30'),
+      new Date('2020-12-31'),
+      new Date('2021-01-04')
+    ]);
+  });
+
+  it('testGetWorkedFreeDays', () => {
+    const dateUtils = new DateUtilsAdapter();
+
+    expect(dateUtils.getWorkedFreeDays(2020)).toMatchObject([
+      new Date(`2020-01-01T00:00:00.000Z`),
+      new Date(`2020-05-01T00:00:00.000Z`),
+      new Date(`2020-05-08T00:00:00.000Z`),
+      new Date(`2020-07-14T00:00:00.000Z`),
+      new Date(`2020-08-15T00:00:00.000Z`),
+      new Date(`2020-11-01T00:00:00.000Z`),
+      new Date(`2020-11-11T00:00:00.000Z`),
+      new Date(`2020-12-25T00:00:00.000Z`),
+      new Date(`2020-04-13T00:00:00.000Z`),
+      new Date(`2020-05-21T00:00:00.000Z`)
+    ]);
+
+    expect(dateUtils.getWorkedFreeDays(2021)).toMatchObject([
+      new Date(`2021-01-01T00:00:00.000Z`),
+      new Date(`2021-05-01T00:00:00.000Z`),
+      new Date(`2021-05-08T00:00:00.000Z`),
+      new Date(`2021-07-14T00:00:00.000Z`),
+      new Date(`2021-08-15T00:00:00.000Z`),
+      new Date(`2021-11-01T00:00:00.000Z`),
+      new Date(`2021-11-11T00:00:00.000Z`),
+      new Date(`2021-12-25T00:00:00.000Z`),
+      new Date(`2021-04-05T00:00:00.000Z`),
+      new Date(`2021-05-13T00:00:00.000Z`)
+    ]);
+  });
+
+  it('testGetEasterDate', () => {
+    const dateUtils = new DateUtilsAdapter();
+
+    expect(dateUtils.getEasterDate(2020)).toMatchObject(
+      new Date(`2020-04-12T00:00:00.000Z`)
+    );
+    expect(dateUtils.getEasterDate(2021)).toMatchObject(
+      new Date(`2021-04-04T00:00:00.000Z`)
+    );
+    expect(dateUtils.getEasterDate(2022)).toMatchObject(
+      new Date(`2022-04-17T00:00:00.000Z`)
+    );
+    expect(dateUtils.getEasterDate(2023)).toMatchObject(
+      new Date(`2023-04-09T00:00:00.000Z`)
+    );
+  });
 });

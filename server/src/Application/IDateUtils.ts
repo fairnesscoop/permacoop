@@ -4,4 +4,7 @@ export interface IDateUtils {
   isWeekend(date: Date): boolean;
   getCurrentDate(): Date;
   getCurrentDateToISOString(): string;
+  getWorkedDaysDuringAPeriod(start: Date, end: Date): Date[];
+  getWorkedFreeDays(year: number): Date[];
+  getEasterDate(year: number): Date;
 }
