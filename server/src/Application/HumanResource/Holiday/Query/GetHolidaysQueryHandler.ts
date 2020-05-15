@@ -5,6 +5,7 @@ import {IHolidayRepository} from 'src/Domain/HumanResource/Holiday/Repository/IH
 import {IDateUtils} from 'src/Application/IDateUtils';
 import {HolidayView} from '../View/HolidayView';
 import {UserSummaryView} from '../../User/View/UserSummaryView';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetHolidaysQuery)
 export class GetHolidaysQueryHandler {
@@ -15,9 +16,13 @@ export class GetHolidaysQueryHandler {
     private readonly dateUtils: IDateUtils
   ) {}
 
-  public async execute(query: GetHolidaysQuery): Promise<HolidayView[]> {
-    const holidays = await this.holidayRepository.findHolidays();
+  public async execute(
+    query: GetHolidaysQuery
+  ): Promise<Pagination<HolidayView>> {
     const holidayViews: HolidayView[] = [];
+    const [holidays, total] = await this.holidayRepository.findHolidays(
+      query.page
+    );
 
     for (const holiday of holidays) {
       const user = holiday.getUser();
@@ -51,6 +56,6 @@ export class GetHolidaysQueryHandler {
       );
     }
 
-    return holidayViews;
+    return new Pagination<HolidayView>(holidayViews, total);
   }
 }

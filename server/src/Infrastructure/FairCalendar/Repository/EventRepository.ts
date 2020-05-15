@@ -107,7 +107,7 @@ export class EventRepository implements IEventRepository {
       .createQueryBuilder('event')
       .select('count(event.id) as id')
       .where('event.user = :id', {id: user.getId()})
-      .andWhere('(event.date BETWEEN :startDate AND :endDate)', {
+      .andWhere('event.date BETWEEN :startDate AND :endDate', {
         startDate,
         endDate
       })

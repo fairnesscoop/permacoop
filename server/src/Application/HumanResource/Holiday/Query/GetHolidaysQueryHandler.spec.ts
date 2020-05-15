@@ -12,6 +12,7 @@ import {
 } from 'src/Domain/HumanResource/Holiday/Holiday.entity';
 import {UserSummaryView} from '../../User/View/UserSummaryView';
 import {User} from 'src/Domain/HumanResource/User/User.entity';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 describe('GetHolidaysQueryHandler', () => {
   let holidayRepository: HolidayRepository;
@@ -28,34 +29,37 @@ describe('GetHolidaysQueryHandler', () => {
   });
 
   it('testGetHolidays', async () => {
-    const expectedResult = [
-      new HolidayView(
-        'd54f15d6-1a1d-47e8-8672-9f46018f9960',
-        HolidayLeaveType.PAID,
-        HolidayStatus.PENDING,
-        '2020-05-05',
-        '2020-05-15',
-        6.5,
-        new UserSummaryView(
-          'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
-          'Mathieu',
-          'MARCHOIS'
+    const expectedResult = new Pagination<HolidayView>(
+      [
+        new HolidayView(
+          'd54f15d6-1a1d-47e8-8672-9f46018f9960',
+          HolidayLeaveType.PAID,
+          HolidayStatus.PENDING,
+          '2020-05-05',
+          '2020-05-15',
+          6.5,
+          new UserSummaryView(
+            'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
+            'Mathieu',
+            'MARCHOIS'
+          )
+        ),
+        new HolidayView(
+          '252dacfc-1db9-4112-b1bc-37d28d50ced0',
+          HolidayLeaveType.SPECIAL,
+          HolidayStatus.REFUSED,
+          '2020-05-01',
+          '2020-05-15',
+          8,
+          new UserSummaryView(
+            'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
+            'Mathieu',
+            'MARCHOIS'
+          )
         )
-      ),
-      new HolidayView(
-        '252dacfc-1db9-4112-b1bc-37d28d50ced0',
-        HolidayLeaveType.SPECIAL,
-        HolidayStatus.REFUSED,
-        '2020-05-01',
-        '2020-05-15',
-        8,
-        new UserSummaryView(
-          'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
-          'Mathieu',
-          'MARCHOIS'
-        )
-      )
-    ];
+      ],
+      2
+    );
 
     const user = mock(User);
     when(user.getId()).thenReturn('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
@@ -83,9 +87,9 @@ describe('GetHolidaysQueryHandler', () => {
     when(holiday2.isEndsAllDay()).thenReturn(false);
     when(holiday2.getUser()).thenReturn(instance(user));
 
-    when(holidayRepository.findHolidays()).thenResolve([
-      instance(holiday1),
-      instance(holiday2)
+    when(holidayRepository.findHolidays(1)).thenResolve([
+      [instance(holiday1), instance(holiday2)],
+      2
     ]);
 
     when(
@@ -120,7 +124,7 @@ describe('GetHolidaysQueryHandler', () => {
       new Date('2020-05-14T00:00:00.000Z')
     ]);
 
-    expect(await queryHandler.execute(new GetCustomersQuery())).toMatchObject(
+    expect(await queryHandler.execute(new GetCustomersQuery(1))).toMatchObject(
       expectedResult
     );
 
@@ -136,19 +140,6 @@ describe('GetHolidaysQueryHandler', () => {
         deepEqual(new Date('2020-05-15T00:00:00.000Z'))
       )
     ).once();
-    verify(holidayRepository.findHolidays()).once();
-  });
-
-  it('testGetNoHolidays', async () => {
-    when(holidayRepository.findHolidays()).thenResolve([]);
-
-    expect(await queryHandler.execute(new GetCustomersQuery())).toMatchObject(
-      []
-    );
-
-    verify(holidayRepository.findHolidays()).once();
-    verify(
-      dateUtils.getWorkedDaysDuringAPeriod(anything(), anything())
-    ).never();
+    verify(holidayRepository.findHolidays(1)).once();
   });
 });

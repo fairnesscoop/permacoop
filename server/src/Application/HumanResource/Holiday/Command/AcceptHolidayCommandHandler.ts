@@ -8,6 +8,8 @@ import {CanHolidayBeModerated} from 'src/Domain/HumanResource/Holiday/Specificat
 import {AcceptHolidayCommand} from './AcceptHolidayCommand';
 import {IEventBus} from 'src/Application/IEventBus';
 import {AcceptedHolidayEvent} from '../Event/AcceptedHolidayEvent';
+import {DoesEventsExistForPeriod} from 'src/Domain/FairCalendar/Specification/DoesEventsExistForPeriod';
+import {EventsAlreadyExistForThisPeriodException} from 'src/Domain/FairCalendar/Exception/EventsAlreadyExistForThisPeriodException';
 
 @CommandHandler(AcceptHolidayCommand)
 export class AcceptHolidayCommandHandler {
@@ -18,7 +20,8 @@ export class AcceptHolidayCommandHandler {
     private readonly eventBus: IEventBus,
     @Inject('IDateUtils')
     private readonly dateUtils: IDateUtils,
-    private readonly canHolidayBeModerated: CanHolidayBeModerated
+    private readonly canHolidayBeModerated: CanHolidayBeModerated,
+    private readonly doesEventsExistForPeriod: DoesEventsExistForPeriod
   ) {}
 
   public async execute(command: AcceptHolidayCommand): Promise<string> {
@@ -33,6 +36,17 @@ export class AcceptHolidayCommandHandler {
       false === this.canHolidayBeModerated.isSatisfiedBy(holiday, moderator)
     ) {
       throw new HolidayCantBeModeratedException();
+    }
+
+    if (
+      true ===
+      (await this.doesEventsExistForPeriod.isSatisfiedBy(
+        holiday.getUser(),
+        holiday.getStartDate(),
+        holiday.getEndDate()
+      ))
+    ) {
+      throw new EventsAlreadyExistForThisPeriodException();
     }
 
     holiday.accept(

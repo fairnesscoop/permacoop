@@ -4,7 +4,7 @@ import {User} from '../../User/User.entity';
 export interface IHolidayRepository {
   save(holiday: Holiday): Promise<Holiday>;
   findOneById(id: string): Promise<Holiday | undefined>;
-  findHolidays(): Promise<Holiday[]>;
+  findHolidays(page: number): Promise<[Holiday[], number]>;
   findExistingHolidaysByUserAndPeriod(
     user: User,
     startDate: string,

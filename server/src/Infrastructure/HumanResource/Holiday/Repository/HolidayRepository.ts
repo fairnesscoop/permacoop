@@ -6,6 +6,7 @@ import {
   HolidayStatus
 } from 'src/Domain/HumanResource/Holiday/Holiday.entity';
 import {User} from 'src/Domain/HumanResource/User/User.entity';
+import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
 
 export class HolidayRepository implements IHolidayRepository {
   constructor(
@@ -49,7 +50,7 @@ export class HolidayRepository implements IHolidayRepository {
       .getOne();
   }
 
-  public findHolidays(): Promise<Holiday[]> {
+  public findHolidays(page: number): Promise<[Holiday[], number]> {
     return this.repository
       .createQueryBuilder('holiday')
       .select([
@@ -66,6 +67,8 @@ export class HolidayRepository implements IHolidayRepository {
       ])
       .innerJoin('holiday.user', 'user')
       .orderBy('holiday.startDate', 'ASC')
-      .getMany();
+      .limit(MAX_ITEMS_PER_PAGE)
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .getManyAndCount();
   }
 }
