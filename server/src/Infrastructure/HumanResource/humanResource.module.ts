@@ -46,6 +46,7 @@ import {Event} from 'src/Domain/FairCalendar/Event.entity';
 import {AcceptHolidayAction} from './Holiday/Action/AcceptHolidayAction';
 import {GetHolidaysQueryHandler} from 'src/Application/HumanResource/Holiday/Query/GetHolidaysQueryHandler';
 import {GetHolidaysAction} from './Holiday/Action/GetHolidaysAction';
+import {DoesEventsExistForPeriod} from 'src/Domain/FairCalendar/Specification/DoesEventsExistForPeriod';
 
 @Module({
   imports: [
@@ -104,7 +105,8 @@ import {GetHolidaysAction} from './Holiday/Action/GetHolidaysAction';
     CanHolidayBeModerated,
     AcceptedHolidayEventListener,
     HolidayToEventsConverter,
-    GetHolidaysQueryHandler
+    GetHolidaysQueryHandler,
+    DoesEventsExistForPeriod
   ]
 })
 export class HumanResourceModule {}

@@ -97,4 +97,22 @@ export class EventRepository implements IEventRepository {
       .orderBy('event.date', 'ASC')
       .getMany();
   }
+
+  public async countExistingEventsByUserAndPeriod(
+    user: User,
+    startDate: string,
+    endDate: string
+  ): Promise<number> {
+    const result = await this.repository
+      .createQueryBuilder('event')
+      .select('count(event.id) as id')
+      .where('event.user = :id', {id: user.getId()})
+      .andWhere('(event.date BETWEEN :startDate AND :endDate)', {
+        startDate,
+        endDate
+      })
+      .getRawOne();
+
+    return Number(result.id) || 0;
+  }
 }
