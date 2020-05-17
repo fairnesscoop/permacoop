@@ -6,6 +6,7 @@ import {Project} from 'src/Domain/Project/Project.entity';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 describe('GetProjectsQueryHandler', () => {
   it('testGetProjects', async () => {
@@ -34,52 +35,45 @@ describe('GetProjectsQueryHandler', () => {
     when(project3.getName()).thenReturn('Vimeet');
     when(project3.getCustomer()).thenReturn(instance(customer2));
 
-    when(projectRepository.findProjects(null)).thenResolve([
-      instance(project3),
-      instance(project2),
-      instance(project1)
+    when(projectRepository.findProjects(1, undefined)).thenResolve([
+      [instance(project3), instance(project2), instance(project1)],
+      3
     ]);
 
     const queryHandler = new GetProjectsQueryHandler(
       instance(projectRepository)
     );
 
-    const expectedResult = [
-      new ProjectView(
-        '992eb372-cc02-4ffe-86e0-7b955b7f1a6e',
-        'Vimeet',
-        new CustomerView('b9a9b094-5bb2-4d0b-b01e-231b6cb50039', 'Proximum')
-      ),
-      new ProjectView(
-        'd54f15d6-1a1d-47e8-8672-9f46018f9960',
-        'BO cruiser',
-        new CustomerView('58958f69-d104-471b-b780-bbb0ec6c52da', 'Radio France')
-      ),
-      new ProjectView(
-        'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
-        'z51',
-        new CustomerView('58958f69-d104-471b-b780-bbb0ec6c52da', 'Radio France')
-      )
-    ];
-
-    expect(
-      await queryHandler.execute(new GetProjectsQuery(null))
-    ).toMatchObject(expectedResult);
-    verify(projectRepository.findProjects(null)).once();
-  });
-
-  it('testGetEmptyProjects', async () => {
-    const projectRepository = mock(ProjectRepository);
-
-    when(projectRepository.findProjects(null)).thenResolve([]);
-
-    const queryHandler = new GetProjectsQueryHandler(
-      instance(projectRepository)
+    const expectedResult = new Pagination<ProjectView>(
+      [
+        new ProjectView(
+          '992eb372-cc02-4ffe-86e0-7b955b7f1a6e',
+          'Vimeet',
+          new CustomerView('b9a9b094-5bb2-4d0b-b01e-231b6cb50039', 'Proximum')
+        ),
+        new ProjectView(
+          'd54f15d6-1a1d-47e8-8672-9f46018f9960',
+          'BO cruiser',
+          new CustomerView(
+            '58958f69-d104-471b-b780-bbb0ec6c52da',
+            'Radio France'
+          )
+        ),
+        new ProjectView(
+          'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
+          'z51',
+          new CustomerView(
+            '58958f69-d104-471b-b780-bbb0ec6c52da',
+            'Radio France'
+          )
+        )
+      ],
+      3
     );
 
-    expect(
-      await queryHandler.execute(new GetProjectsQuery(null))
-    ).toMatchObject([]);
-    verify(projectRepository.findProjects(null)).once();
+    expect(await queryHandler.execute(new GetProjectsQuery(1))).toMatchObject(
+      expectedResult
+    );
+    verify(projectRepository.findProjects(1, undefined)).once();
   });
 });

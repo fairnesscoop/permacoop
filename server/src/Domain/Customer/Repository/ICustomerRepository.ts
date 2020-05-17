@@ -4,5 +4,5 @@ export interface ICustomerRepository {
   save(customer: Customer): Promise<Customer>;
   findOneByName(name: string): Promise<Customer | undefined>;
   findOneById(id: string): Promise<Customer | undefined>;
-  findCustomers(): Promise<Customer[]>;
+  findCustomers(page: number): Promise<[Customer[], number]>;
 }

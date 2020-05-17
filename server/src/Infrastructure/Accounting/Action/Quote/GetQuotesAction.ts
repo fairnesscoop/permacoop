@@ -1,4 +1,4 @@
-import {Controller, Inject, UseGuards, Get} from '@nestjs/common';
+import {Controller, Inject, UseGuards, Get, Query} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {IQueryBus} from 'src/Application/IQueryBus';
@@ -7,6 +7,8 @@ import {GetQuotesQuery} from 'src/Application/Accounting/Query/Quote/GetQuotesQu
 import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
+import {PaginationDTO} from 'src/Infrastructure/Common/DTO/PaginationDTO';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 @Controller('quotes')
 @ApiUseTags('Accounting')
@@ -21,7 +23,11 @@ export class GetQuotesAction {
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Get all quotes'})
-  public async index(): Promise<DailyRateView[]> {
-    return await this.queryBus.execute(new GetQuotesQuery());
+  public async index(
+    @Query() pagination: PaginationDTO
+  ): Promise<Pagination<DailyRateView>> {
+    return await this.queryBus.execute(
+      new GetQuotesQuery(Number(pagination.page))
+    );
   }
 }

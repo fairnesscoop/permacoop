@@ -6,7 +6,7 @@ import {User} from 'src/Domain/HumanResource/User/User.entity';
 export interface IDailyRateRepository {
   save(dailyRate: DailyRate): Promise<DailyRate>;
   findOneById(id: string): Promise<DailyRate | undefined>;
-  findAll(): Promise<DailyRate[]>;
+  findDailyRates(page: number): Promise<[DailyRate[], number]>;
   findOneByUserCustomerAndTask(
     user: User,
     customer: Customer,

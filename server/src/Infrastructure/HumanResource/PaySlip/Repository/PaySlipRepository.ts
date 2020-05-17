@@ -3,6 +3,7 @@ import {Repository} from 'typeorm';
 import {IPaySlipRepository} from 'src/Domain/HumanResource/PaySlip/Repository/IPaySlipRepository';
 import {PaySlip} from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
 import {User} from 'src/Domain/HumanResource/User/User.entity';
+import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
 
 export class PaySlipRepository implements IPaySlipRepository {
   constructor(
@@ -49,7 +50,7 @@ export class PaySlipRepository implements IPaySlipRepository {
       .getOne();
   }
 
-  public findAll(): Promise<PaySlip[]> {
+  public findPaySlips(page: number): Promise<[PaySlip[], number]> {
     return this.repository
       .createQueryBuilder('paySlip')
       .select([
@@ -65,6 +66,8 @@ export class PaySlipRepository implements IPaySlipRepository {
       .innerJoin('paySlip.file', 'file')
       .innerJoin('paySlip.user', 'user')
       .orderBy('paySlip.date', 'DESC')
-      .getMany();
+      .limit(MAX_ITEMS_PER_PAGE)
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .getManyAndCount();
   }
 }

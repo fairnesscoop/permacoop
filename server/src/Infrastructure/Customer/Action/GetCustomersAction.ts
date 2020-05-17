@@ -1,4 +1,4 @@
-import {Controller, Inject, UseGuards, Get} from '@nestjs/common';
+import {Controller, Inject, UseGuards, Get, Query} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
@@ -7,6 +7,8 @@ import {GetCustomersQuery} from 'src/Application/Customer/Query/GetCustomersQuer
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import {PaginationDTO} from 'src/Infrastructure/Common/DTO/PaginationDTO';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 @Controller('customers')
 @ApiUseTags('Customer')
@@ -21,7 +23,11 @@ export class GetCustomersAction {
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Get all customers'})
-  public async index(): Promise<CustomerView[]> {
-    return await this.queryBus.execute(new GetCustomersQuery());
+  public async index(
+    @Query() pagination: PaginationDTO
+  ): Promise<Pagination<CustomerView>> {
+    return await this.queryBus.execute(
+      new GetCustomersQuery(Number(pagination.page))
+    );
   }
 }

@@ -8,6 +8,7 @@ import {FiltersDTO} from '../DTO/FiltersDTO';
 import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 @Controller('projects')
 @ApiUseTags('Project')
@@ -22,9 +23,11 @@ export class GetProjectsAction {
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({title: 'Get all projects ordered by customer'})
-  public async index(@Query() filters: FiltersDTO): Promise<ProjectView[]> {
+  public async index(
+    @Query() filters: FiltersDTO
+  ): Promise<Pagination<ProjectView>> {
     return await this.queryBus.execute(
-      new GetProjectsQuery(filters.customerId)
+      new GetProjectsQuery(Number(filters.page), filters.customerId)
     );
   }
 }

@@ -5,6 +5,7 @@ import {DailyRate} from 'src/Domain/Accounting/DailyRate.entity';
 import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {Task} from 'src/Domain/Task/Task.entity';
+import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
 
 export class DailyRateRepository implements IDailyRateRepository {
   constructor(
@@ -16,7 +17,7 @@ export class DailyRateRepository implements IDailyRateRepository {
     return this.repository.save(dailyRate);
   }
 
-  public findAll(): Promise<DailyRate[]> {
+  public findDailyRates(page: number): Promise<[DailyRate[], number]> {
     return this.repository
       .createQueryBuilder('dailyRate')
       .select([
@@ -35,7 +36,9 @@ export class DailyRateRepository implements IDailyRateRepository {
       .innerJoin('dailyRate.customer', 'customer')
       .orderBy('user.lastName', 'ASC')
       .addOrderBy('user.firstName', 'ASC')
-      .getMany();
+      .limit(MAX_ITEMS_PER_PAGE)
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .getManyAndCount();
   }
 
   public findOneById(id: string): Promise<DailyRate | undefined> {

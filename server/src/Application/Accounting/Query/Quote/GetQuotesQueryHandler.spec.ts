@@ -9,6 +9,7 @@ import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {QuoteView} from '../../View/DailyRate/QuoteView';
 import {Project} from 'src/Domain/Project/Project.entity';
 import {QuoteItem} from 'src/Domain/Accounting/QuoteItem.entity';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 describe('GetQuotesQueryHandler', () => {
   let quoteRepository: QuoteRepository;
@@ -55,54 +56,47 @@ describe('GetQuotesQueryHandler', () => {
     when(quote2.getProject()).thenReturn(instance(project));
     when(quote2.getItems()).thenReturn([instance(quoteItem2)]);
 
-    when(quoteRepository.findAll()).thenResolve([
-      instance(quote1),
-      instance(quote2)
+    when(quoteRepository.findQuotes(1)).thenResolve([
+      [instance(quote1), instance(quote2)],
+      2
     ]);
 
     const queryHandler = new GetQuotesQueryHandler(instance(quoteRepository));
 
-    const expectedResult = [
-      new QuoteView(
-        'd54f15d6-1a1d-47e8-8672-9f46018f9960',
-        'FS-DEVIS-2020-0001',
-        QuoteStatus.REFUSED,
-        date,
-        1440,
-        new CustomerView(
-          'c6434c49-216b-41b3-a30a-79a3eb1198ec',
-          'Radio France'
+    const expectedResult = new Pagination<QuoteView>(
+      [
+        new QuoteView(
+          'd54f15d6-1a1d-47e8-8672-9f46018f9960',
+          'FS-DEVIS-2020-0001',
+          QuoteStatus.REFUSED,
+          date,
+          1440,
+          new CustomerView(
+            'c6434c49-216b-41b3-a30a-79a3eb1198ec',
+            'Radio France'
+          ),
+          new ProjectView('ade9021e-123c-4b9f-8be4-27a38164b789', 'Project')
         ),
-        new ProjectView('ade9021e-123c-4b9f-8be4-27a38164b789', 'Project')
-      ),
-      new QuoteView(
-        'b3332cd1-5631-4b7b-a5d4-ba49910cb877',
-        'FS-DEVIS-2020-0002',
-        QuoteStatus.ACCEPTED,
-        date2,
-        124.8,
-        new CustomerView(
-          'c6434c49-216b-41b3-a30a-79a3eb1198ec',
-          'Radio France'
-        ),
-        new ProjectView('ade9021e-123c-4b9f-8be4-27a38164b789', 'Project')
-      )
-    ];
+        new QuoteView(
+          'b3332cd1-5631-4b7b-a5d4-ba49910cb877',
+          'FS-DEVIS-2020-0002',
+          QuoteStatus.ACCEPTED,
+          date2,
+          124.8,
+          new CustomerView(
+            'c6434c49-216b-41b3-a30a-79a3eb1198ec',
+            'Radio France'
+          ),
+          new ProjectView('ade9021e-123c-4b9f-8be4-27a38164b789', 'Project')
+        )
+      ],
+      2
+    );
 
-    expect(await queryHandler.execute(new GetQuotesQuery())).toMatchObject(
+    expect(await queryHandler.execute(new GetQuotesQuery(1))).toMatchObject(
       expectedResult
     );
 
-    verify(quoteRepository.findAll()).once();
-  });
-
-  it('testGetEmptyQuotes', async () => {
-    when(quoteRepository.findAll()).thenResolve([]);
-
-    const queryHandler = new GetQuotesQueryHandler(instance(quoteRepository));
-
-    expect(await queryHandler.execute(new GetQuotesQuery())).toMatchObject([]);
-
-    verify(quoteRepository.findAll()).once();
+    verify(quoteRepository.findQuotes(1)).once();
   });
 });

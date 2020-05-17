@@ -3,6 +3,7 @@ import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
 import {Task} from 'src/Domain/Task/Task.entity';
+import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
 
 @Injectable()
 export class TaskRepository implements ITaskRepository {
@@ -29,11 +30,13 @@ export class TaskRepository implements ITaskRepository {
       .getOne();
   }
 
-  public findTasks(): Promise<Task[]> {
+  public findTasks(page: number = 1): Promise<[Task[], number]> {
     return this.repository
       .createQueryBuilder('task')
       .select(['task.id', 'task.name'])
       .orderBy('task.name', 'ASC')
-      .getMany();
+      .limit(MAX_ITEMS_PER_PAGE)
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .getManyAndCount();
   }
 }
