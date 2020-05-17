@@ -1,91 +1,86 @@
+<script context="module">
+  export const preload = async ({query}) => {
+    return {
+      page: query.page || 1
+    };
+  };
+</script>
+
 <script>
   import {onMount} from 'svelte';
-  import filesize from 'filesize';
-  import {format} from 'date-fns';
-  import {fr} from 'date-fns/locale';
-  import {user} from '../../../store';
   import {errorNormalizer} from '../../../normalizer/errors';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
   import SecuredView from '../../../components/SecuredView.svelte';
   import SecuredLink from '../../../components/SecuredLink.svelte';
   import Loader from '../../../components/Loader.svelte';
   import ServerErrors from '../../../components/ServerErrors.svelte';
+  import Table from './_Table.svelte';
   import {client as axios} from '../../../utils/axios';
+  import {historyPushState} from '../../../utils/url';
+  import Pagination from '../../../components/Pagination.svelte';
   import {ROLE_COOPERATOR, ROLE_ACCOUNTANT} from '../../../constants/roles';
-  import {downloadFile} from '../../../utils/downloadFile';
 
+  export let page;
+
+  let title = 'Fiches de paies';
   let roles = [ROLE_COOPERATOR, ROLE_ACCOUNTANT];
-  let data = [];
-  let loading = true;
-  let disableDownloadableButton = false;
+  let loading;
   let errors = [];
+  let response = {
+    items: [],
+    totalItems: 0,
+    pageCount: 0
+  };
 
   onMount(async () => {
+    fetchPaySlips();
+  });
+
+  const changePage = async e => {
+    page = e.detail;
+    historyPushState('human_resources/pay_slips', {page});
+    fetchPaySlips();
+  };
+
+  const fetchPaySlips = async () => {
     try {
-      ({data} = await axios.get('pay_slips'));
+      loading = true;
+      response = (await axios.get('pay_slips', {params: {page}})).data;
     } catch (e) {
       errors = errorNormalizer(e);
     } finally {
       loading = false;
     }
-  });
-
-  const download = async (id, fileName) => {
-    try {
-      disableDownloadableButton = true;
-      const {data} = await axios.get(`pay_slips/${id}/download`, {
-        responseType: 'blob'
-      });
-      downloadFile(data, fileName);
-    } catch (e) {
-      errors = errorNormalizer(e);
-    } finally {
-      disableDownloadableButton = false;
-    }
   };
 </script>
 
 <svelte:head>
-  <title>Permacoop - Fiches de paies</title>
+  <title>Permacoop - {title}</title>
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{title: 'RH'}, {title: 'Fiches de paies'}]} />
+  <Breadcrumb items={[{title: 'RH'}, {title}]} />
+  <div class="row">
+    <div class="col-md-8">
+      <h3>
+        {title}
+        <small>({response.totalItems})</small>
+      </h3>
+    </div>
+    <div class="col-md-4">
+      <SecuredLink
+        className="btn btn-primary float-right mb-3"
+        href="human_resources/pay_slips/add"
+        {roles}>
+        + Ajouter une fiche de paie
+      </SecuredLink>
+    </div>
+  </div>
   <ServerErrors {errors} />
-  <SecuredLink
-    className="btn btn-primary mb-3"
-    href="human_resources/pay_slips/add"
-    {roles}>
-    + Ajouter une fiche de paie
-  </SecuredLink>
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Salarié</th>
-        <th>Fichier</th>
-        <th />
-      </tr>
-    </thead>
-    <tbody>
-      {#each data as paySlip (paySlip.id)}
-        <tr>
-          <td>{format(new Date(paySlip.date), 'MMMM yyyy', {locale: fr})}</td>
-          <td>{paySlip.user.firstName} {paySlip.user.lastName}</td>
-          <td>{paySlip.file.originalName}</td>
-          <td>
-            {#if $user.id === paySlip.user.id}
-              <button
-                disabled={disableDownloadableButton}
-                class="btn btn-outline-secondary btn-sm"
-                on:click={download(paySlip.id, paySlip.file.originalName)}>
-                Télécharger ({filesize(paySlip.file.size)})
-              </button>
-            {/if}
-          </td>
-        </tr>
-      {/each}
-    </tbody>
-  </table>
   <Loader {loading} />
+  <Table items={response.items} />
+  <Pagination
+    on:change={changePage}
+    currentPage={page}
+    pageCount={response.pageCount} />
 </div>

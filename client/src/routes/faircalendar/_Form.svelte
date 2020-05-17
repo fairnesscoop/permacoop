@@ -8,13 +8,13 @@
 
   const dispatch = createEventDispatcher();
 
-  let tasks = [];
-  let projects = [];
+  let tasks = {items: []};
+  let projects = {items: []};
 
   onMount(async () => {
     let [tasksReponse, projectsReponse] = await Promise.all([
-      axios.get('tasks'),
-      axios.get('projects')
+      axios.get('tasks', {params: {page: 1}}),
+      axios.get('projects', {params: {page: 1}})
     ]);
 
     tasks = tasksReponse.data;
@@ -48,8 +48,8 @@
     <option value={'100'}>1 jour</option>
   </SelectInput>
   {#if event.type === 'mission'}
-    <ProjectsInput {projects} bind:projectId={event.projectId} />
-    <TasksInput {tasks} bind:taskId={event.taskId} />
+    <ProjectsInput projects={projects.items} bind:projectId={event.projectId} />
+    <TasksInput tasks={tasks.items} bind:taskId={event.taskId} />
   {/if}
   <TextInput label={'Commentaire'} bind:value={event.summary} required={''} />
   <button
