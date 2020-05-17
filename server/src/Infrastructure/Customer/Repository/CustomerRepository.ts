@@ -3,6 +3,7 @@ import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
+import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
 
 @Injectable()
 export class CustomerRepository implements ICustomerRepository {
@@ -39,7 +40,7 @@ export class CustomerRepository implements ICustomerRepository {
       .getOne();
   }
 
-  public findCustomers(): Promise<Customer[]> {
+  public findCustomers(page: number): Promise<[Customer[], number]> {
     return this.repository
       .createQueryBuilder('customer')
       .select([
@@ -53,6 +54,8 @@ export class CustomerRepository implements ICustomerRepository {
       ])
       .innerJoin('customer.address', 'address')
       .orderBy('customer.name', 'ASC')
-      .getMany();
+      .limit(MAX_ITEMS_PER_PAGE)
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .getManyAndCount();
   }
 }

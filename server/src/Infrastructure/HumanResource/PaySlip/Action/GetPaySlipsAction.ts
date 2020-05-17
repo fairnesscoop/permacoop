@@ -1,9 +1,11 @@
-import {Controller, Inject, UseGuards, Get} from '@nestjs/common';
+import {Controller, Inject, UseGuards, Get, Query} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {PaySlipView} from 'src/Application/HumanResource/PaySlip/View/PaySlipView';
 import {GetPaySlipsQuery} from 'src/Application/HumanResource/PaySlip/Query/GetPaySlipsQuery';
+import {PaginationDTO} from 'src/Infrastructure/Common/DTO/PaginationDTO';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 @Controller('pay_slips')
 @ApiUseTags('Human Resource')
@@ -17,7 +19,11 @@ export class GetPaySlipsAction {
 
   @Get()
   @ApiOperation({title: 'Get all pay slips'})
-  public async index(): Promise<PaySlipView[]> {
-    return await this.queryBus.execute(new GetPaySlipsQuery());
+  public async index(
+    @Query() pagination: PaginationDTO
+  ): Promise<Pagination<PaySlipView>> {
+    return await this.queryBus.execute(
+      new GetPaySlipsQuery(Number(pagination.page))
+    );
   }
 }

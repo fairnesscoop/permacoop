@@ -10,6 +10,7 @@ import {DailyRate} from 'src/Domain/Accounting/DailyRate.entity';
 import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {Task} from 'src/Domain/Task/Task.entity';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 describe('GetDailyRatesQueryHandler', () => {
   let dailyRateRepository: DailyRateRepository;
@@ -51,58 +52,53 @@ describe('GetDailyRatesQueryHandler', () => {
     when(dailyRate2.getCustomer()).thenReturn(instance(customer));
     when(dailyRate2.getTask()).thenReturn(instance(task2));
 
-    when(dailyRateRepository.findAll()).thenResolve([
-      instance(dailyRate1),
-      instance(dailyRate2)
+    when(dailyRateRepository.findDailyRates(1)).thenResolve([
+      [instance(dailyRate1), instance(dailyRate2)],
+      2
     ]);
 
     const queryHandler = new GetDailyRatesQueryHandler(
       instance(dailyRateRepository)
     );
 
-    const expectedResult = [
-      new DailyRateView(
-        'd54f15d6-1a1d-47e8-8672-9f46018f9960',
-        620.6,
-        new UserSummaryView(
-          'deffa668-b9af-4a52-94dd-61a35401b917',
-          'Mathieu',
-          'MARCHOIS'
+    const expectedResult = new Pagination<DailyRateView>(
+      [
+        new DailyRateView(
+          'd54f15d6-1a1d-47e8-8672-9f46018f9960',
+          620.6,
+          new UserSummaryView(
+            'deffa668-b9af-4a52-94dd-61a35401b917',
+            'Mathieu',
+            'MARCHOIS'
+          ),
+          new TaskView('ade9021e-123c-4b9f-8be4-27a38164b789', 'Development'),
+          new CustomerView(
+            'c6434c49-216b-41b3-a30a-79a3eb1198ec',
+            'Radio France'
+          )
         ),
-        new TaskView('ade9021e-123c-4b9f-8be4-27a38164b789', 'Development'),
-        new CustomerView('c6434c49-216b-41b3-a30a-79a3eb1198ec', 'Radio France')
-      ),
-      new DailyRateView(
-        'b3332cd1-5631-4b7b-a5d4-ba49910cb877',
-        700,
-        new UserSummaryView(
-          'deffa668-b9af-4a52-94dd-61a35401b917',
-          'Mathieu',
-          'MARCHOIS'
-        ),
-        new TaskView('1cd7b031-6988-48e2-a40c-4253ced7c5df', 'Formation'),
-        new CustomerView('c6434c49-216b-41b3-a30a-79a3eb1198ec', 'Radio France')
-      )
-    ];
+        new DailyRateView(
+          'b3332cd1-5631-4b7b-a5d4-ba49910cb877',
+          700,
+          new UserSummaryView(
+            'deffa668-b9af-4a52-94dd-61a35401b917',
+            'Mathieu',
+            'MARCHOIS'
+          ),
+          new TaskView('1cd7b031-6988-48e2-a40c-4253ced7c5df', 'Formation'),
+          new CustomerView(
+            'c6434c49-216b-41b3-a30a-79a3eb1198ec',
+            'Radio France'
+          )
+        )
+      ],
+      2
+    );
 
-    expect(await queryHandler.execute(new GetDailyRatesQuery())).toMatchObject(
+    expect(await queryHandler.execute(new GetDailyRatesQuery(1))).toMatchObject(
       expectedResult
     );
 
-    verify(dailyRateRepository.findAll()).once();
-  });
-
-  it('testGetEmptyDailyRates', async () => {
-    when(dailyRateRepository.findAll()).thenResolve([]);
-
-    const queryHandler = new GetDailyRatesQueryHandler(
-      instance(dailyRateRepository)
-    );
-
-    expect(await queryHandler.execute(new GetDailyRatesQuery())).toMatchObject(
-      []
-    );
-
-    verify(dailyRateRepository.findAll()).once();
+    verify(dailyRateRepository.findDailyRates(1)).once();
   });
 });

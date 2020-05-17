@@ -5,6 +5,7 @@ import {IQuoteRepository} from 'src/Domain/Accounting/Repository/IQuoteRepositor
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {QuoteView} from '../../View/DailyRate/QuoteView';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetQuotesQuery)
 export class GetQuotesQueryHandler {
@@ -13,9 +14,9 @@ export class GetQuotesQueryHandler {
     private readonly quoteRepository: IQuoteRepository
   ) {}
 
-  public async execute(query: GetQuotesQuery): Promise<QuoteView[]> {
-    const quotes = await this.quoteRepository.findAll();
+  public async execute(query: GetQuotesQuery): Promise<Pagination<QuoteView>> {
     const results: QuoteView[] = [];
+    const [quotes, total] = await this.quoteRepository.findQuotes(query.page);
 
     for (const quote of quotes) {
       const project = quote.getProject();
@@ -42,6 +43,6 @@ export class GetQuotesQueryHandler {
       );
     }
 
-    return results;
+    return new Pagination<QuoteView>(results, total);
   }
 }

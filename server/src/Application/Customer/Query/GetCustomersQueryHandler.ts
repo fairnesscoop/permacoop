@@ -4,6 +4,7 @@ import {GetCustomersQuery} from './GetCustomersQuery';
 import {CustomerView} from '../View/CustomerView';
 import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
 import {AddressView} from '../View/AddressView';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetCustomersQuery)
 export class GetCustomersQueryHandler {
@@ -12,9 +13,13 @@ export class GetCustomersQueryHandler {
     private readonly customerRepository: ICustomerRepository
   ) {}
 
-  public async execute(query: GetCustomersQuery): Promise<CustomerView[]> {
-    const customers = await this.customerRepository.findCustomers();
+  public async execute(
+    query: GetCustomersQuery
+  ): Promise<Pagination<CustomerView>> {
     const customerViews: CustomerView[] = [];
+    const [customers, total] = await this.customerRepository.findCustomers(
+      query.page
+    );
 
     for (const customer of customers) {
       const address = customer.getAddress();
@@ -34,6 +39,6 @@ export class GetCustomersQueryHandler {
       );
     }
 
-    return customerViews;
+    return new Pagination<CustomerView>(customerViews, total);
   }
 }

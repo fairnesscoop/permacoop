@@ -5,6 +5,7 @@ import {IPaySlipRepository} from 'src/Domain/HumanResource/PaySlip/Repository/IP
 import {PaySlipView} from '../View/PaySlipView';
 import {UserSummaryView} from '../../User/View/UserSummaryView';
 import {FileView} from 'src/Application/File/View/FileView';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetPaySlipsQuery)
 export class GetPaySlipsQueryHandler {
@@ -13,9 +14,13 @@ export class GetPaySlipsQueryHandler {
     private readonly paySlipRepository: IPaySlipRepository
   ) {}
 
-  public async execute(query: GetPaySlipsQuery): Promise<PaySlipView[]> {
-    const paySlips = await this.paySlipRepository.findAll();
+  public async execute(
+    query: GetPaySlipsQuery
+  ): Promise<Pagination<PaySlipView>> {
     const paySlipViews: PaySlipView[] = [];
+    const [paySlips, total] = await this.paySlipRepository.findPaySlips(
+      query.page
+    );
 
     for (const paySlip of paySlips) {
       const user = paySlip.getUser();
@@ -35,6 +40,6 @@ export class GetPaySlipsQueryHandler {
       );
     }
 
-    return paySlipViews;
+    return new Pagination<PaySlipView>(paySlipViews, total);
   }
 }

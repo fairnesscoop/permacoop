@@ -3,6 +3,7 @@ import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
 import {Project} from 'src/Domain/Project/Project.entity';
+import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
 
 @Injectable()
 export class ProjectRepository implements IProjectRepository {
@@ -31,18 +32,23 @@ export class ProjectRepository implements IProjectRepository {
       .getOne();
   }
 
-  public findProjects(customerId?: string): Promise<Project[]> {
+  public findProjects(
+    page: number = 1,
+    customerId?: string
+  ): Promise<[Project[], number]> {
     const query = this.repository
       .createQueryBuilder('project')
       .select(['project.id', 'project.name', 'customer.id', 'customer.name'])
       .innerJoin('project.customer', 'customer')
       .orderBy('project.name', 'ASC')
-      .addOrderBy('customer.name', 'ASC');
+      .addOrderBy('customer.name', 'ASC')
+      .limit(MAX_ITEMS_PER_PAGE)
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE);
 
     if (customerId) {
       query.andWhere('customer.id = :customerId', {customerId});
     }
 
-    return query.getMany();
+    return query.getManyAndCount();
   }
 }

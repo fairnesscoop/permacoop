@@ -4,6 +4,7 @@ import {GetProjectsQuery} from './GetProjectsQuery';
 import {ProjectView} from '../View/ProjectView';
 import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetProjectsQuery)
 export class GetProjectsQueryHandler {
@@ -12,10 +13,16 @@ export class GetProjectsQueryHandler {
     private readonly projectRepository: IProjectRepository
   ) {}
 
-  public async execute(query: GetProjectsQuery): Promise<ProjectView[]> {
-    const {customerId} = query;
-    const projects = await this.projectRepository.findProjects(customerId);
+  public async execute(
+    query: GetProjectsQuery
+  ): Promise<Pagination<ProjectView>> {
+    const {customerId, page} = query;
+
     const projectViews: ProjectView[] = [];
+    const [projects, total] = await this.projectRepository.findProjects(
+      page,
+      customerId
+    );
 
     for (const project of projects) {
       const customer = project.getCustomer();
@@ -29,6 +36,6 @@ export class GetProjectsQueryHandler {
       );
     }
 
-    return projectViews;
+    return new Pagination<ProjectView>(projectViews, total);
   }
 }

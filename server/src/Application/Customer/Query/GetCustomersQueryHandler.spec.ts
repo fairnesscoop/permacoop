@@ -6,6 +6,7 @@ import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
 import {AddressView} from '../View/AddressView';
 import {Address} from 'src/Domain/Customer/Address.entity';
+import {Pagination} from 'src/Application/Common/Pagination';
 
 describe('GetCustomersQueryHandler', () => {
   it('testGetCustomers', async () => {
@@ -35,60 +36,47 @@ describe('GetCustomersQueryHandler', () => {
     when(customer2.getName()).thenReturn('Proximum');
     when(customer2.getAddress()).thenReturn(instance(address2));
 
-    when(customerRepository.findCustomers()).thenResolve([
-      instance(customer1),
-      instance(customer2)
+    when(customerRepository.findCustomers(1)).thenResolve([
+      [instance(customer1), instance(customer2)],
+      2
     ]);
 
     const queryHandler = new GetCustomersQueryHandler(
       instance(customerRepository)
     );
 
-    const expectedResult = [
-      new CustomerView(
-        'd54f15d6-1a1d-47e8-8672-9f46018f9960',
-        'Radio France',
-        new AddressView(
-          'f4646506-dd8f-490f-927e-d5c54cc035d6',
-          '116 Avenue du Président Kennedy',
-          'Paris',
-          '75016',
-          'FR'
+    const expectedResult = new Pagination<CustomerView>(
+      [
+        new CustomerView(
+          'd54f15d6-1a1d-47e8-8672-9f46018f9960',
+          'Radio France',
+          new AddressView(
+            'f4646506-dd8f-490f-927e-d5c54cc035d6',
+            '116 Avenue du Président Kennedy',
+            'Paris',
+            '75016',
+            'FR'
+          )
+        ),
+        new CustomerView(
+          'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
+          'Proximum',
+          new AddressView(
+            '62bebec4-e34c-43d5-a6c8-7715dd95d662',
+            '855 Avenue Roger Salengro',
+            'Chaville',
+            '92370',
+            'FR'
+          )
         )
-      ),
-      new CustomerView(
-        'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
-        'Proximum',
-        new AddressView(
-          '62bebec4-e34c-43d5-a6c8-7715dd95d662',
-          '855 Avenue Roger Salengro',
-          'Chaville',
-          '92370',
-          'FR'
-        )
-      )
-    ];
+      ],
+      2
+    );
 
-    expect(await queryHandler.execute(new GetCustomersQuery())).toMatchObject(
+    expect(await queryHandler.execute(new GetCustomersQuery(1))).toMatchObject(
       expectedResult
     );
 
-    verify(customerRepository.findCustomers()).once();
-  });
-
-  it('testGetEmptyCustomers', async () => {
-    const customerRepository = mock(CustomerRepository);
-
-    when(customerRepository.findCustomers()).thenResolve([]);
-
-    const queryHandler = new GetCustomersQueryHandler(
-      instance(customerRepository)
-    );
-
-    expect(await queryHandler.execute(new GetCustomersQuery())).toMatchObject(
-      []
-    );
-
-    verify(customerRepository.findCustomers()).once();
+    verify(customerRepository.findCustomers(1)).once();
   });
 });
