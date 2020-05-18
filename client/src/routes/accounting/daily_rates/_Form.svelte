@@ -7,13 +7,13 @@
   import MoneyInput from '../../../components/inputs/MoneyInput.svelte';
 
   let users = [];
-  let tasks = [];
-  let customers = [];
+  let tasks = {items: []};
+  let customers = {items: []};
 
   onMount(async () => {
     const [customerResponse, taskResponse, userResponse] = await Promise.all([
-      axios.get('customers'),
-      axios.get('tasks'),
+      axios.get('customers', {params: {page: 1}}),
+      axios.get('tasks', {params: {page: 1}}),
       axios.get('users')
     ]);
 
@@ -35,9 +35,9 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
-  <CustomersInput {customers} bind:customerId />
+  <CustomersInput customers={customers.items} bind:customerId />
   <UsersInput {users} bind:userId />
-  <TasksInput {tasks} bind:taskId />
+  <TasksInput tasks={tasks.items} bind:taskId />
   <MoneyInput label={'Taux HT'} bind:value={amount} />
   <button
     type="submit"

@@ -4,10 +4,12 @@
   import CustomersInput from '../../components/inputs/CustomersInput.svelte';
   import TextInput from '../../components/inputs/TextInput.svelte';
 
-  let data = [];
+  let response = {
+    items: []
+  };
 
   onMount(async () => {
-    ({data} = await axios.get('customers'));
+    response = (await axios.get('customers', {params: {page: 1}})).data;
   });
 
   export let name = '';
@@ -22,7 +24,7 @@
 
 <form on:submit|preventDefault={submit}>
   <TextInput label={'Nom du projet'} bind:value={name} />
-  <CustomersInput customers={data} bind:customerId />
+  <CustomersInput customers={response.items} bind:customerId />
   <button type="submit" class="btn btn-primary" disabled={!name || !customerId}>
     Enregistrer
   </button>

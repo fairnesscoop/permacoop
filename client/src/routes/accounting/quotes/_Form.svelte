@@ -17,20 +17,18 @@
       dailyRate: ''
     }
   ];
-  let projects = [];
-  let customers = [];
+  let projects = {items: []};
+  let customers = {items: []};
 
   onMount(async () => {
-    const customerResponse = await axios.get('customers');
-    customers = customerResponse.data;
+    customers = (await axios.get('customers', {params: {page: 1}})).data;
   });
 
   const onCustomerSelected = async () => {
-    const projectResponse = await axios.get(
-      `projects?customerId=${customerId}`
-    );
+    projects = (await axios.get(`projects`, {
+      params: {page: 1, customerId}
+    })).data;
     projectId = undefined;
-    projects = projectResponse.data;
     displayForm = true;
   };
 
@@ -64,7 +62,7 @@
       bind:value={customerId}
       on:change={onCustomerSelected}>
       <option value="">-- Choisir un client --</option>
-      {#each customers as customer}
+      {#each customers.items as customer}
         <option value={customer.id} selected={customerId === customer.id}>
           {customer.name} ({customer.address.street} - {customer.address.zipCode}
           {customer.address.city} - {byAlpha2[customer.address.country].name})
@@ -77,7 +75,7 @@
       <label for="projectId">Nom du projet</label>
       <select id="projectId" class="form-control" bind:value={projectId}>
         <option value={undefined} />
-        {#each projects as project}
+        {#each projects.items as project}
           <option value={project.id} selected={projectId === project.id}>
             {project.name}
           </option>
