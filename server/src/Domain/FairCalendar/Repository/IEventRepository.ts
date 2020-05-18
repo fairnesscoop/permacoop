@@ -7,4 +7,9 @@ export interface IEventRepository {
   findOneById(id: string): Promise<Event | undefined>;
   findMonthlyEvents(date: string, userId: string): Promise<Event[]>;
   getDayTimeSpentByUser(user: User, date: string): Promise<number>;
+  countExistingEventsByUserAndPeriod(
+    user: User,
+    startDate: string,
+    endDate: string
+  ): Promise<number>;
 }

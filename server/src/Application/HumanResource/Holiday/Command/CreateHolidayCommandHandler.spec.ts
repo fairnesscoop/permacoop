@@ -9,10 +9,13 @@ import {
   Holiday
 } from 'src/Domain/HumanResource/Holiday/Holiday.entity';
 import {HolidayAlreadyExistForThisPeriodException} from 'src/Domain/HumanResource/Holiday/Exception/HolidayAlreadyExistForThisPeriodException';
+import {DoesEventsExistForPeriod} from 'src/Domain/FairCalendar/Specification/DoesEventsExistForPeriod';
+import {EventsAlreadyExistForThisPeriodException} from 'src/Domain/FairCalendar/Exception/EventsAlreadyExistForThisPeriodException';
 
 describe('CreateHolidayCommandHandler', () => {
   let holidayRepository: HolidayRepository;
   let doesHolidayExistForPeriod: DoesHolidayExistForPeriod;
+  let doesEventsExistForPeriod: DoesEventsExistForPeriod;
   let handler: CreateHolidayCommandHandler;
 
   const user = mock(User);
@@ -29,10 +32,12 @@ describe('CreateHolidayCommandHandler', () => {
   beforeEach(() => {
     holidayRepository = mock(HolidayRepository);
     doesHolidayExistForPeriod = mock(DoesHolidayExistForPeriod);
+    doesEventsExistForPeriod = mock(DoesEventsExistForPeriod);
 
     handler = new CreateHolidayCommandHandler(
       instance(holidayRepository),
-      instance(doesHolidayExistForPeriod)
+      instance(doesHolidayExistForPeriod),
+      instance(doesEventsExistForPeriod)
     );
   });
 
@@ -59,6 +64,54 @@ describe('CreateHolidayCommandHandler', () => {
           '2019-01-06'
         )
       ).once();
+      verify(
+        doesEventsExistForPeriod.isSatisfiedBy(
+          instance(user),
+          '2019-01-04',
+          '2019-01-06'
+        )
+      ).never();
+      verify(holidayRepository.save(anything())).never();
+    }
+  });
+
+  it('testEventsAlreadyExist', async () => {
+    when(
+      doesHolidayExistForPeriod.isSatisfiedBy(
+        instance(user),
+        '2019-01-04',
+        '2019-01-06'
+      )
+    ).thenResolve(false);
+    when(
+      doesEventsExistForPeriod.isSatisfiedBy(
+        instance(user),
+        '2019-01-04',
+        '2019-01-06'
+      )
+    ).thenResolve(true);
+
+    try {
+      await handler.execute(command);
+    } catch (e) {
+      expect(e).toBeInstanceOf(EventsAlreadyExistForThisPeriodException);
+      expect(e.message).toBe(
+        'fair_calendar.errors.events_already_exist_for_this_period'
+      );
+      verify(
+        doesHolidayExistForPeriod.isSatisfiedBy(
+          instance(user),
+          '2019-01-04',
+          '2019-01-06'
+        )
+      ).once();
+      verify(
+        doesEventsExistForPeriod.isSatisfiedBy(
+          instance(user),
+          '2019-01-04',
+          '2019-01-06'
+        )
+      ).once();
       verify(holidayRepository.save(anything())).never();
     }
   });
@@ -69,6 +122,13 @@ describe('CreateHolidayCommandHandler', () => {
 
     when(
       doesHolidayExistForPeriod.isSatisfiedBy(
+        instance(user),
+        '2019-01-04',
+        '2019-01-06'
+      )
+    ).thenResolve(false);
+    when(
+      doesEventsExistForPeriod.isSatisfiedBy(
         instance(user),
         '2019-01-04',
         '2019-01-06'
@@ -97,6 +157,13 @@ describe('CreateHolidayCommandHandler', () => {
 
     verify(
       doesHolidayExistForPeriod.isSatisfiedBy(
+        instance(user),
+        '2019-01-04',
+        '2019-01-06'
+      )
+    ).once();
+    verify(
+      doesEventsExistForPeriod.isSatisfiedBy(
         instance(user),
         '2019-01-04',
         '2019-01-06'

@@ -10,12 +10,15 @@ import {HolidayCantBeModeratedException} from 'src/Domain/HumanResource/Holiday/
 import {CanHolidayBeModerated} from 'src/Domain/HumanResource/Holiday/Specification/CanHolidayBeModerated';
 import {EventBusAdapter} from 'src/Infrastructure/Adapter/EventBusAdapter';
 import {AcceptedHolidayEvent} from '../Event/AcceptedHolidayEvent';
+import {DoesEventsExistForPeriod} from 'src/Domain/FairCalendar/Specification/DoesEventsExistForPeriod';
+import {EventsAlreadyExistForThisPeriodException} from 'src/Domain/FairCalendar/Exception/EventsAlreadyExistForThisPeriodException';
 
 describe('AcceptHolidayCommandHandler', () => {
   let holidayRepository: HolidayRepository;
   let eventBusAdapter: EventBusAdapter;
   let dateUtilsAdapter: DateUtilsAdapter;
   let canHolidayBeModerated: CanHolidayBeModerated;
+  let doesEventsExistForPeriod: DoesEventsExistForPeriod;
   let handler: AcceptHolidayCommandHandler;
 
   const user = mock(User);
@@ -31,12 +34,14 @@ describe('AcceptHolidayCommandHandler', () => {
     eventBusAdapter = mock(EventBusAdapter);
     dateUtilsAdapter = mock(DateUtilsAdapter);
     canHolidayBeModerated = mock(CanHolidayBeModerated);
+    doesEventsExistForPeriod = mock(DoesEventsExistForPeriod);
 
     handler = new AcceptHolidayCommandHandler(
       instance(holidayRepository),
       instance(eventBusAdapter),
       instance(dateUtilsAdapter),
-      instance(canHolidayBeModerated)
+      instance(canHolidayBeModerated),
+      instance(doesEventsExistForPeriod)
     );
   });
 
@@ -56,13 +61,20 @@ describe('AcceptHolidayCommandHandler', () => {
       verify(
         canHolidayBeModerated.isSatisfiedBy(anything(), anything())
       ).never();
+      verify(
+        doesEventsExistForPeriod.isSatisfiedBy(
+          anything(),
+          anything(),
+          anything()
+        )
+      ).never();
       verify(holiday.accept(anything(), anything(), anything())).never();
       verify(eventBusAdapter.publish(anything())).never();
       verify(holidayRepository.save(anything())).never();
     }
   });
 
-  it('testHolidayCantBeAccepted', async () => {
+  it('testHolidayCantBeModerated', async () => {
     when(
       holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(instance(holiday));
@@ -81,6 +93,58 @@ describe('AcceptHolidayCommandHandler', () => {
       verify(
         holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
       ).once();
+      verify(
+        doesEventsExistForPeriod.isSatisfiedBy(
+          anything(),
+          anything(),
+          anything()
+        )
+      ).never();
+      verify(eventBusAdapter.publish(anything())).never();
+      verify(holiday.accept(anything(), anything(), anything())).never();
+      verify(holidayRepository.save(anything())).never();
+    }
+  });
+
+  it('testEventsAlreadyExist', async () => {
+    when(holiday.getStartDate()).thenReturn('2019-01-04');
+    when(holiday.getEndDate()).thenReturn('2019-01-06');
+    when(holiday.getUser()).thenReturn(instance(user));
+
+    when(
+      holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+    ).thenResolve(instance(holiday));
+    when(
+      canHolidayBeModerated.isSatisfiedBy(instance(holiday), instance(user))
+    ).thenReturn(true);
+    when(
+      doesEventsExistForPeriod.isSatisfiedBy(
+        instance(user),
+        '2019-01-04',
+        '2019-01-06'
+      )
+    ).thenResolve(true);
+
+    try {
+      await handler.execute(command);
+    } catch (e) {
+      expect(e).toBeInstanceOf(EventsAlreadyExistForThisPeriodException);
+      expect(e.message).toBe(
+        'fair_calendar.errors.events_already_exist_for_this_period'
+      );
+      verify(
+        canHolidayBeModerated.isSatisfiedBy(instance(holiday), instance(user))
+      ).once();
+      verify(
+        holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+      ).once();
+      verify(
+        doesEventsExistForPeriod.isSatisfiedBy(
+          instance(user),
+          '2019-01-04',
+          '2019-01-06'
+        )
+      ).once();
       verify(eventBusAdapter.publish(anything())).never();
       verify(holiday.accept(anything(), anything(), anything())).never();
       verify(holidayRepository.save(anything())).never();
@@ -89,12 +153,24 @@ describe('AcceptHolidayCommandHandler', () => {
 
   it('testHolidaySuccessfullyAccepted', async () => {
     when(holiday.getId()).thenReturn('cfdd06eb-cd71-44b9-82c6-46110b30ce05');
+    when(holiday.getStartDate()).thenReturn('2020-09-10');
+    when(holiday.getEndDate()).thenReturn('2020-09-15');
+    when(holiday.getUser()).thenReturn(instance(user));
+
     when(
       holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(instance(holiday));
     when(
       canHolidayBeModerated.isSatisfiedBy(instance(holiday), instance(user))
     ).thenReturn(true);
+    when(
+      doesEventsExistForPeriod.isSatisfiedBy(
+        instance(user),
+        '2020-09-10',
+        '2020-09-15'
+      )
+    ).thenResolve(false);
+
     when(dateUtilsAdapter.getCurrentDateToISOString()).thenReturn(
       '2020-09-10T00:00:00.000Z'
     );
@@ -105,6 +181,13 @@ describe('AcceptHolidayCommandHandler', () => {
 
     verify(
       canHolidayBeModerated.isSatisfiedBy(instance(holiday), instance(user))
+    ).once();
+    verify(
+      doesEventsExistForPeriod.isSatisfiedBy(
+        instance(user),
+        '2020-09-10',
+        '2020-09-15'
+      )
     ).once();
     verify(
       eventBusAdapter.publish(

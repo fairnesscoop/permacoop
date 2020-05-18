@@ -45,9 +45,9 @@ export class CreateHolidayAction {
           user,
           leaveType,
           startDate,
-          Boolean(startsAllDay),
+          startsAllDay === 'true',
           endDate,
-          Boolean(endsAllDay),
+          endsAllDay === 'true',
           comment
         )
       );
