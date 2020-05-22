@@ -33,13 +33,13 @@ api-logs: ## Display API logs
 api-bash: ## Connect to API container
 	${exec} api bash
 api-build-dist: ## Build API dist
-	${exec} npm run build
+	${exec} api npm run build
 client-logs: ## Display Client logs
 	${logs} client
 client-bash: ## Connect to client container
 	${exec} client bash
 database-migrate: ## Database migrations
-	${exec} npm run migration:migrate
+	${exec} api npm run migration:migrate
 database-diff: ## Generate database diff
 	${exec} api npm run migration:diff $(MIGRATION_NAME)
 database-connect: ## Connect to the database container
