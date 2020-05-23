@@ -2,6 +2,7 @@ version: '3'
 
 volumes:
   database: {}
+  uploads: {}
 
 services:
   database:
@@ -24,6 +25,18 @@ services:
       - database
     volumes:
       - './server:/var/www:cached'
+      - 'uploads:/var/www/uploads'
     ports:
       - 8080:3000
     command: npm run start:dev
+
+  client:
+    image: node:13.2
+    working_dir: '/var/www'
+    depends_on:
+      - api
+    volumes:
+      - './client:/var/www:cached'
+    ports:
+      - 8000:3000
+    command: npm run dev

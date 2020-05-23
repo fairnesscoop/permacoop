@@ -1,45 +1,49 @@
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+compose = docker-compose -p permacoop
+exec = ${compose} exec
+run = ${compose} run
+logs = ${compose} logs -f
+
 install: ## Install API and client
 	cp server/ormconfig.json.dist server/ormconfig.json
 	cp server/.env.dist server/.env
 	cp client/config.js.dist client/config.js
-	cd server && npm i
-	cd client && npm i
-	make api-start
+	docker run -it --rm -v ${PWD}/server:/app -w /app node npm i
+	docker run -it --rm -v ${PWD}/client:/app -w /app node npm i
+	make start
 	make api-build-dist
 	make database-migrate
-client-start: ## Start svelte app
-	cd client && npm run dev
-api-stop: ## Stop docker containers
-	docker-compose -p permacoop stop
-api-rm: ## Remove docker containers
-	docker-compose -p permacoop rm
-api-ps: ## List docker containers
-	docker-compose -p permacoop ps
-api-start: ## Start docker containers
-	docker-compose -p permacoop up -d
+stop: ## Stop docker containers
+	${compose} stop
+rm: ## Remove docker containers
+	${compose} rm
+ps: ## List docker containers
+	${compose} ps
+start: ## Start docker containers
+	${compose} up -d
+test: ## Run test suite
+	${exec} api npm run test
+	${exec} client npm run test-unit
+linter: ## Linter
+	${exec} api npm run lint
 api-logs: ## Display API logs
-	docker-compose -p permacoop logs -f api
-api-test: ## Run test suite
-	docker-compose -p permacoop exec api npm run test
+	${logs} api
 api-bash: ## Connect to API container
-	docker-compose -p permacoop exec api bash
-api-test-coverage: ## Run test suite with coverage
-	docker-compose -p permacoop exec api npm run test:cov
-api-linter: ## API ts linter
-	docker-compose -p permacoop exec api npm run lint
+	${exec} api bash
 api-build-dist: ## Build API dist
-	docker-compose -p permacoop exec api npm run build
+	${exec} api npm run build
+client-logs: ## Display Client logs
+	${logs} client
+client-bash: ## Connect to client container
+	${exec} client bash
 database-migrate: ## Database migrations
-	docker-compose -p permacoop exec api npm run migration:migrate
+	${exec} api npm run migration:migrate
 database-diff: ## Generate database diff
-	docker-compose -p permacoop exec api npm run migration:diff $(MIGRATION_NAME)
+	${exec} api npm run migration:diff $(MIGRATION_NAME)
 database-connect: ## Connect to the database container
-	docker-compose -p permacoop exec database psql -h database
+	${exec} database psql -h database
 ci: ## Run CI checks
-	docker-compose -p permacoop run api npm run test:cov
-	docker-compose -p permacoop run api npm run lint
-client-test:
-	cd client; npm run test-unit
+	${run} api npm run test:cov
+	${run} api npm run lint

@@ -21,28 +21,27 @@ Permacoop is an eco-design and open-source ERP solution for cooperatives.
 
 ## Prerequisites
 
-You must have **[Docker](https://www.docker.com/)**, **[Docker Compose](https://docs.docker.com/compose/)** and **[Node](https://nodejs.org/en/)** (>= 12) installed on your system.
+You must have **[Docker](https://www.docker.com/)** and **[Docker Compose](https://docs.docker.com/compose/)**.
 
 ## Installation
 
-At **the first launch**, just execute these commands to install your application :
+At **the first launch**, just execute this command to install your application :
 
 ```bash
 make install
-make client-start
 ```
 
-For the **next times** you just need to execute these commands to start your application :
+For the **next times** you just need to execute this command to start your application :
 
 ```bash
-make api-start
-make client-start
+make start
+
 ```
 
 The server and client will be started:
 
 - API documentation available on http://localhost:8080/api
-- Client avaible on http://localhost:3000
+- Client avaible on http://localhost:8000
 
 ## Security
 
@@ -72,7 +71,7 @@ make help
 Run the unit test suite with this following command:
 
 ```bash
-make api-test
+make test
 ```
 
 ## Features
