@@ -7,7 +7,7 @@ import {
   UseGuards
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiOperation, ApiBearerAuth} from '@nestjs/swagger';
+import {ApiTags, ApiOperation, ApiBearerAuth} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UserView} from 'src/Application/HumanResource/User/View/UserView';
 import {UpdateProfileCommand} from 'src/Application/HumanResource/User/Command/UpdateProfileCommand';
@@ -18,7 +18,7 @@ import {GetUserByIdQuery} from 'src/Application/HumanResource/User/Query/GetUser
 import {ProfileDTO} from '../DTO/ProfileDTO';
 
 @Controller('users')
-@ApiUseTags('Human Resource')
+@ApiTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'))
 export class UpdateMeAction {
@@ -30,7 +30,7 @@ export class UpdateMeAction {
   ) {}
 
   @Put('me')
-  @ApiOperation({title: 'Update current user'})
+  @ApiOperation({summary: 'Update current user'})
   public async index(
     @Body() dto: ProfileDTO,
     @LoggedUser() user: User

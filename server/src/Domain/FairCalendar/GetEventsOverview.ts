@@ -18,7 +18,7 @@ export class GetEventsOverview {
 
     for (const event of events) {
       const dayIndex = new Date(event.getDate()).getDate() - 1;
-      const time = event.getTime();
+      const time = event.getTime() / 100;
       const type = event.getType();
 
       if (eventsByDate[dayIndex]) {

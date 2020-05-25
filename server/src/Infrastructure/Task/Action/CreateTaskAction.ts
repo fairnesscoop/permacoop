@@ -7,7 +7,7 @@ import {
   UseGuards
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CreateTaskCommand} from 'src/Application/Task/Command/CreateTaskCommand';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {TaskDTO} from '../DTO/TaskDTO';
@@ -16,7 +16,7 @@ import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('tasks')
-@ApiUseTags('Task')
+@ApiTags('Task')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreateTaskAction {
@@ -27,7 +27,7 @@ export class CreateTaskAction {
 
   @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Create new task'})
+  @ApiOperation({summary: 'Create new task'})
   public async index(@Body() taskDto: TaskDTO) {
     try {
       const id = await this.commandBus.execute(

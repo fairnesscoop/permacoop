@@ -1,4 +1,4 @@
-import {ApiModelProperty, ApiModelPropertyOptional} from '@nestjs/swagger';
+import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsEnum,
@@ -10,33 +10,33 @@ import {HolidayLeaveType} from 'src/Domain/HumanResource/Holiday/Holiday.entity'
 import {DateGreaterOrEqualThan} from 'src/Infrastructure/Common/Validator/DateGreaterOrEqualThan';
 
 export class HolidayDTO {
-  @ApiModelProperty({enum: HolidayLeaveType})
+  @ApiProperty({enum: HolidayLeaveType})
   @IsNotEmpty()
   @IsEnum(HolidayLeaveType)
   public leaveType: HolidayLeaveType;
 
   @IsNotEmpty()
   @IsDateString()
-  @ApiModelProperty()
+  @ApiProperty()
   public startDate: string;
 
   @IsNotEmpty()
   @IsBooleanString()
-  @ApiModelProperty()
+  @ApiProperty()
   public startsAllDay: string;
 
   @IsNotEmpty()
   @IsDateString()
   @DateGreaterOrEqualThan('startDate')
-  @ApiModelProperty()
+  @ApiProperty()
   public endDate: string;
 
   @IsNotEmpty()
   @IsBooleanString()
-  @ApiModelProperty()
+  @ApiProperty()
   public endsAllDay: string;
 
   @IsOptional()
-  @ApiModelPropertyOptional()
+  @ApiPropertyOptional()
   public comment: string;
 }

@@ -7,7 +7,7 @@ import {
   UseGuards
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {CreateProjectCommand} from 'src/Application/Project/Command/CreateProjectCommand';
 import {ProjectDTO} from '../DTO/ProjectDTO';
@@ -16,7 +16,7 @@ import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('projects')
-@ApiUseTags('Project')
+@ApiTags('Project')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreateProjectAction {
@@ -27,7 +27,7 @@ export class CreateProjectAction {
 
   @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Create new project'})
+  @ApiOperation({summary: 'Create new project'})
   public async index(@Body() projectDto: ProjectDTO) {
     try {
       const {name, customerId} = projectDto;

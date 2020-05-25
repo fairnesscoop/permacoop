@@ -1,4 +1,4 @@
-import {ApiModelProperty, ApiModelPropertyOptional} from '@nestjs/swagger';
+import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsEnum,
@@ -14,35 +14,35 @@ export class UserAdministrativeDTO {
   @IsNotEmpty()
   @IsInt()
   @IsPositive()
-  @ApiModelProperty()
+  @ApiProperty()
   public annualEarnings: number;
 
   @IsOptional()
   @IsPositive()
-  @ApiModelPropertyOptional()
+  @ApiPropertyOptional()
   public transportFee: number;
 
   @IsNotEmpty()
   @IsBooleanString()
-  @ApiModelProperty()
+  @ApiProperty()
   public healthInsurance: string;
 
   @IsNotEmpty()
   @IsBooleanString()
-  @ApiModelProperty()
+  @ApiProperty()
   public executivePosition: string;
 
   @IsNotEmpty()
   @IsDateString()
-  @ApiModelProperty()
+  @ApiProperty()
   public joiningDate: string;
 
   @IsOptional()
   @IsDateString()
-  @ApiModelPropertyOptional()
+  @ApiPropertyOptional()
   public leavingDate: string;
 
-  @ApiModelProperty({enum: ContractType})
+  @ApiProperty({enum: ContractType})
   @IsNotEmpty()
   @IsEnum(ContractType)
   public contract: ContractType;

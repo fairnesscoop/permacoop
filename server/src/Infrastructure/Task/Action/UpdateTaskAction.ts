@@ -8,7 +8,7 @@ import {
   Param
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateTaskCommand} from 'src/Application/Task/Command/UpdateTaskCommand';
 import {TaskDTO} from '../DTO/TaskDTO';
@@ -18,7 +18,7 @@ import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('tasks')
-@ApiUseTags('Task')
+@ApiTags('Task')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class UpdateTaskAction {
@@ -29,7 +29,7 @@ export class UpdateTaskAction {
 
   @Put(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Update task'})
+  @ApiOperation({summary: 'Update task'})
   public async index(@Param() dto: IdDTO, @Body() taskDto: TaskDTO) {
     try {
       const {id} = dto;

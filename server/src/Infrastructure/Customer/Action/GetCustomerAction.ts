@@ -7,7 +7,7 @@ import {
   NotFoundException
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CustomerView} from 'src/Application/Customer/View/CustomerView';
 import {GetCustomerByIdQuery} from 'src/Application/Customer/Query/GetCustomerByIdQuery';
 import {IQueryBus} from 'src/Application/IQueryBus';
@@ -17,7 +17,7 @@ import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('customers')
-@ApiUseTags('Customer')
+@ApiTags('Customer')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetCustomerAction {
@@ -28,7 +28,7 @@ export class GetCustomerAction {
 
   @Get(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Get customer'})
+  @ApiOperation({summary: 'Get customer'})
   public async index(@Param() dto: IdDTO): Promise<CustomerView> {
     try {
       return await this.queryBus.execute(new GetCustomerByIdQuery(dto.id));

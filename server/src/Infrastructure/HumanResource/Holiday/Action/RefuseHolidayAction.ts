@@ -8,7 +8,7 @@ import {
   Body
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
 import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import {UserRole, User} from 'src/Domain/HumanResource/User/User.entity';
@@ -19,7 +19,7 @@ import {ICommandBus} from 'src/Application/ICommandBus';
 import {ModerationDTO} from '../DTO/ModerationDTO';
 
 @Controller('holidays')
-@ApiUseTags('Human Resource')
+@ApiTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class RefuseHolidayAction {
@@ -30,7 +30,7 @@ export class RefuseHolidayAction {
 
   @Put(':id/refuse')
   @Roles(UserRole.COOPERATOR)
-  @ApiOperation({title: 'Refuse holiday'})
+  @ApiOperation({summary: 'Refuse holiday'})
   public async index(
     @Param() dto: IdDTO,
     @Body() moderation: ModerationDTO,

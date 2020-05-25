@@ -1,6 +1,6 @@
 import {Controller, Inject, UseGuards, Get, Query} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 import {GetTasksQuery} from 'src/Application/Task/Query/GetTasksQuery';
 import {IQueryBus} from 'src/Application/IQueryBus';
@@ -11,7 +11,7 @@ import {PaginationDTO} from 'src/Infrastructure/Common/DTO/PaginationDTO';
 import {Pagination} from 'src/Application/Common/Pagination';
 
 @Controller('tasks')
-@ApiUseTags('Task')
+@ApiTags('Task')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetTasksAction {
@@ -22,7 +22,7 @@ export class GetTasksAction {
 
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Get all tasks'})
+  @ApiOperation({summary: 'Get all tasks'})
   public async index(
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<TaskView>> {

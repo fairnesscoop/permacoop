@@ -1,6 +1,6 @@
 import {Controller, Inject, UseGuards, Get, Query} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
@@ -11,7 +11,7 @@ import {PaginationDTO} from 'src/Infrastructure/Common/DTO/PaginationDTO';
 import {Pagination} from 'src/Application/Common/Pagination';
 
 @Controller('holidays')
-@ApiUseTags('Human Resource')
+@ApiTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetHolidaysAction {
@@ -22,7 +22,7 @@ export class GetHolidaysAction {
 
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Get all holidays'})
+  @ApiOperation({summary: 'Get all holidays'})
   public async index(
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<HolidayView>> {

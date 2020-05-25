@@ -7,7 +7,7 @@ import {
   NotFoundException
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {TaskView} from 'src/Application/Task/View/TaskView';
 import {GetTaskByIdQuery} from 'src/Application/Task/Query/GetTaskByIdQuery';
 import {IQueryBus} from 'src/Application/IQueryBus';
@@ -17,7 +17,7 @@ import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGu
 import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 
 @Controller('tasks')
-@ApiUseTags('Task')
+@ApiTags('Task')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetTaskAction {
@@ -28,7 +28,7 @@ export class GetTaskAction {
 
   @Get(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Get task'})
+  @ApiOperation({summary: 'Get task'})
   public async index(@Param() dto: IdDTO): Promise<TaskView> {
     try {
       return await this.queryBus.execute(new GetTaskByIdQuery(dto.id));

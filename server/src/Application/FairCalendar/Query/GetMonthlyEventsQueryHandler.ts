@@ -39,7 +39,7 @@ export class GetMonthlyEventsQueryHandler {
         new EventView(
           event.getId(),
           event.getType(),
-          event.getTime(),
+          event.getTime() / 100,
           event.getDate(),
           event.getSummary(),
           project ? new ProjectView(project.getId(), project.getName()) : null,

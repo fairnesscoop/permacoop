@@ -1,8 +1,8 @@
-import {ApiModelProperty} from '@nestjs/swagger';
+import {ApiProperty} from '@nestjs/swagger';
 import {IsNotEmpty, IsNumberString} from 'class-validator';
 
 export class PaginationDTO {
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   @IsNumberString()
   public page: string;

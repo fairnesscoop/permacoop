@@ -1,14 +1,18 @@
-import {ApiModelProperty} from '@nestjs/swagger';
+import {ApiProperty} from '@nestjs/swagger';
 import {IsNotEmpty, IsDateString, IsUUID} from 'class-validator';
+import {IUploadedFile} from 'src/Domain/File/IUploadedFile';
 
 export class PaySlipDTO {
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public date: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   @IsUUID()
   public userId: string;
+
+  @ApiProperty({type: 'string', format: 'binary'})
+  public file: IUploadedFile;
 }
