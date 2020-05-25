@@ -9,10 +9,9 @@ import {
   UseInterceptors
 } from '@nestjs/common';
 import {
-  ApiUseTags,
+  ApiTags,
   ApiBearerAuth,
   ApiOperation,
-  ApiImplicitFile,
   ApiConsumes
 } from '@nestjs/swagger';
 import {FileInterceptor} from '@nestjs/platform-express';
@@ -28,7 +27,7 @@ import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGu
 import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 
 @Controller('pay_slips')
-@ApiUseTags('Human Resource')
+@ApiTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreatePaySlipAction {
@@ -41,13 +40,12 @@ export class CreatePaySlipAction {
   @Roles(UserRole.COOPERATOR, UserRole.ACCOUNTANT)
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
-  @ApiOperation({title: 'Create new payslip'})
-  @ApiImplicitFile({name: 'file', required: true})
+  @ApiOperation({summary: 'Create new payslip'})
   public async index(
-    @UploadedFile() file: IUploadedFile,
-    @Body() dto: PaySlipDTO
+    @Body() dto: PaySlipDTO,
+    @UploadedFile() file: IUploadedFile
   ) {
-    if (false === PDFValidator.isValid(file)) {
+    if (!file || false === PDFValidator.isValid(file)) {
       throw new BadRequestException('file.erros.invalid_pdf');
     }
 

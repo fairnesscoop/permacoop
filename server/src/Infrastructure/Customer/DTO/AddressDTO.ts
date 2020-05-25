@@ -1,21 +1,21 @@
-import {ApiModelProperty} from '@nestjs/swagger';
+import {ApiProperty} from '@nestjs/swagger';
 import {IsNotEmpty, MaxLength, IsISO31661Alpha2} from 'class-validator';
 
 export class AddressDTO {
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   public street: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   public city: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   @MaxLength(6)
   public zipCode: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   @IsISO31661Alpha2()
   public country: string;

@@ -1,6 +1,6 @@
 import {Controller, Inject, UseGuards, Query, Get} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetMonthlyEventsQuery} from 'src/Application/FairCalendar/Query/GetMonthlyEventsQuery';
 import {MonthlyEventsDTO} from '../DTO/MonthlyEventsDTO';
@@ -9,7 +9,7 @@ import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('events')
-@ApiUseTags('Event')
+@ApiTags('Event')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetMonthlyActivitiesAction {
@@ -20,7 +20,7 @@ export class GetMonthlyActivitiesAction {
 
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Get monthly events by user'})
+  @ApiOperation({summary: 'Get monthly events by user'})
   public async index(@Query() dto: MonthlyEventsDTO) {
     return await this.queryBus.execute(
       new GetMonthlyEventsQuery(new Date(dto.date), dto.userId)

@@ -7,7 +7,7 @@ import {
   UseGuards
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {LoggedUser} from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
 import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
@@ -18,7 +18,7 @@ import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('quotes')
-@ApiUseTags('Accounting')
+@ApiTags('Accounting')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreateQuoteAction {
@@ -29,7 +29,7 @@ export class CreateQuoteAction {
 
   @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Create new quote'})
+  @ApiOperation({summary: 'Create new quote'})
   public async index(@Body() dto: QuoteDTO, @LoggedUser() user: User) {
     try {
       const {projectId, customerId, status, items} = dto;

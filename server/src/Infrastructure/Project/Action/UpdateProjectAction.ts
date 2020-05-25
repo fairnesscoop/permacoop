@@ -8,7 +8,7 @@ import {
   Param
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {UpdateProjectCommand} from 'src/Application/Project/Command/UpdateProjectCommand';
 import {ProjectDTO} from '../DTO/ProjectDTO';
@@ -18,7 +18,7 @@ import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('projects')
-@ApiUseTags('Project')
+@ApiTags('Project')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class UpdateProjectAction {
@@ -29,7 +29,7 @@ export class UpdateProjectAction {
 
   @Put(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Update project'})
+  @ApiOperation({summary: 'Update project'})
   public async index(@Param() dto: IdDTO, @Body() projectDto: ProjectDTO) {
     try {
       const {id} = dto;

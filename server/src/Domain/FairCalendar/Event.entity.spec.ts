@@ -23,7 +23,7 @@ describe('Event.entity', () => {
     expect(event.getId()).toBe(undefined);
     expect(event.getType()).toBe(EventType.MISSION);
     expect(event.getUser()).toBe(instance(user));
-    expect(event.getTime()).toBe(1);
+    expect(event.getTime()).toBe(100);
     expect(event.getDate()).toBe('2019-12-12');
     expect(event.getProject()).toBe(instance(project));
     expect(event.getTask()).toBe(instance(task));
@@ -57,7 +57,7 @@ describe('Event.entity', () => {
     expect(event.getId()).toBe(undefined);
     expect(event.getType()).toBe(EventType.DOJO);
     expect(event.getUser()).toBe(instance(user));
-    expect(event.getTime()).toBe(0.75);
+    expect(event.getTime()).toBe(75);
     expect(event.getDate()).toBe('2019-12-12');
     expect(event.getProject()).toBe(instance(project2));
     expect(event.getTask()).toBe(instance(task2));

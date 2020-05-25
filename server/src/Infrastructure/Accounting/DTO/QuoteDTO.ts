@@ -1,4 +1,4 @@
-import {ApiModelProperty, ApiModelPropertyOptional} from '@nestjs/swagger';
+import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 import {Type} from 'class-transformer';
 import {
   IsNotEmpty,
@@ -13,22 +13,22 @@ import {QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
 import {QuoteItemDTO} from './QuoteItemDTO';
 
 export class QuoteDTO {
-  @ApiModelPropertyOptional()
+  @ApiPropertyOptional()
   @IsOptional()
   @IsUUID()
   public projectId: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   @IsUUID()
   public customerId: string;
 
-  @ApiModelProperty({enum: QuoteStatus})
+  @ApiProperty({enum: QuoteStatus})
   @IsNotEmpty()
   @IsEnum(QuoteStatus)
   public status: QuoteStatus;
 
-  @ApiModelProperty({type: [QuoteItemDTO]})
+  @ApiProperty({type: [QuoteItemDTO]})
   @IsArray()
   @ArrayNotEmpty()
   @Type(() => QuoteItemDTO)

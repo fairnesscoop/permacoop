@@ -7,7 +7,7 @@ import {
   UseGuards
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {CreateCustomerCommand} from 'src/Application/Customer/Command/CreateCustomerCommand';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {CustomerDTO} from '../DTO/CustomerDTO';
@@ -16,7 +16,7 @@ import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 
 @Controller('customers')
-@ApiUseTags('Customer')
+@ApiTags('Customer')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreateCustomerAction {
@@ -27,7 +27,7 @@ export class CreateCustomerAction {
 
   @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Create new customer'})
+  @ApiOperation({summary: 'Create new customer'})
   public async index(@Body() customerDto: CustomerDTO) {
     const {
       address: {street, city, zipCode, country},

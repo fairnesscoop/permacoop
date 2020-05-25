@@ -8,18 +8,18 @@ services:
   database:
     image: postgres:11.6
     environment:
-      POSTGRES_USER: permacoop
-      POSTGRES_PASSWORD: permacoop
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
       POSTGRES_DB: permacoop
-      PGUSER: permacoop
-      PGPASSWORD: permacoop
+      PGUSER: docker
+      PGPASSWORD: docker
     ports:
       - '5432:5432'
     volumes:
       - 'database:/var/lib/postgresql/data'
 
   api:
-    image: node:13.2
+    image: node:14.3
     working_dir: '/var/www'
     depends_on:
       - database
@@ -31,7 +31,7 @@ services:
     command: npm run start:dev
 
   client:
-    image: node:13.2
+    image: node:14.3
     working_dir: '/var/www'
     depends_on:
       - api
@@ -39,4 +39,5 @@ services:
       - './client:/var/www:cached'
     ports:
       - 8000:3000
+      - 10000:10000
     command: npm run dev

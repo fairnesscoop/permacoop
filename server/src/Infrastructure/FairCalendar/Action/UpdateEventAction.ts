@@ -8,7 +8,7 @@ import {
   Body
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {LoggedUser} from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
 import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {EventDTO} from '../DTO/EventDTO';
@@ -19,7 +19,7 @@ import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGu
 import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 
 @Controller('events')
-@ApiUseTags('Event')
+@ApiTags('Event')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class UpdateEventAction {
@@ -30,7 +30,7 @@ export class UpdateEventAction {
 
   @Put(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Update event'})
+  @ApiOperation({summary: 'Update event'})
   public async index(
     @Param() idDto: IdDTO,
     @Body() dto: EventDTO,

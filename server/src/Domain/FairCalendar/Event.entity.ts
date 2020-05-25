@@ -75,7 +75,7 @@ export class Event {
   }
 
   public getTime(): number {
-    return this.time / 100;
+    return this.time;
   }
 
   public getDate(): string {

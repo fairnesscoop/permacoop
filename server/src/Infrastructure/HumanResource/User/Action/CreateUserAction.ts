@@ -7,7 +7,7 @@ import {
   UseGuards
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiOperation, ApiBearerAuth} from '@nestjs/swagger';
+import {ApiTags, ApiOperation, ApiBearerAuth} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {
   CreateUserCommand,
@@ -22,7 +22,7 @@ import {RolesGuard} from '../Security/RolesGuard';
 import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 
 @Controller('users')
-@ApiUseTags('Human Resource')
+@ApiTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreateUserAction {
@@ -35,7 +35,7 @@ export class CreateUserAction {
 
   @Post()
   @Roles(UserRole.COOPERATOR)
-  @ApiOperation({title: 'Create new user account'})
+  @ApiOperation({summary: 'Create new user account'})
   public async index(@Body() userDto: UserDTO): Promise<UserView> {
     try {
       const {firstName, lastName, email, password, role} = userDto;

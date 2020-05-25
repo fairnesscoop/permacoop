@@ -7,7 +7,7 @@ import {
   UseGuards
 } from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ICommandBus} from 'src/Application/ICommandBus';
 import {HolidayDTO} from '../DTO/HolidayDTO';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
@@ -17,7 +17,7 @@ import {CreateHolidayCommand} from 'src/Application/HumanResource/Holiday/Comman
 import {LoggedUser} from '../../User/Decorator/LoggedUser';
 
 @Controller('holidays')
-@ApiUseTags('Human Resource')
+@ApiTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class CreateHolidayAction {
@@ -28,7 +28,7 @@ export class CreateHolidayAction {
 
   @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Create new holiday'})
+  @ApiOperation({summary: 'Create new holiday'})
   public async index(@Body() dto: HolidayDTO, @LoggedUser() user: User) {
     const {
       leaveType,

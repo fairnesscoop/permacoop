@@ -1,23 +1,23 @@
-import {ApiModelProperty} from '@nestjs/swagger';
+import {ApiProperty} from '@nestjs/swagger';
 import {IsNotEmpty, IsUUID, IsOptional, IsPositive} from 'class-validator';
 
 export class DailyRateDTO {
-  @ApiModelProperty()
+  @ApiProperty()
   @IsOptional()
   @IsUUID()
   public userId: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   @IsUUID()
   public customerId: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   @IsUUID()
   public taskId: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsPositive()
   @IsNotEmpty()
   public amount: number;

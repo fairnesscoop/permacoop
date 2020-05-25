@@ -1,13 +1,13 @@
-import {ApiModelProperty} from '@nestjs/swagger';
+import {ApiProperty} from '@nestjs/swagger';
 import {IsNotEmpty, IsUUID, IsDateString} from 'class-validator';
 
 export class MonthlyEventsDTO {
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   @IsUUID()
   public userId: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
   public date: string;

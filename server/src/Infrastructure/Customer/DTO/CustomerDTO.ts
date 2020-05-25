@@ -1,14 +1,14 @@
-import {ApiModelProperty} from '@nestjs/swagger';
+import {ApiProperty} from '@nestjs/swagger';
 import {Type} from 'class-transformer';
 import {IsNotEmpty, ValidateNested} from 'class-validator';
 import {AddressDTO} from './AddressDTO';
 
 export class CustomerDTO {
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   public name: string;
 
-  @ApiModelProperty({type: AddressDTO})
+  @ApiProperty({type: AddressDTO})
   @ValidateNested()
   @IsNotEmpty()
   @Type(() => AddressDTO)

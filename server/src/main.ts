@@ -13,10 +13,11 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
     .setTitle('Permacoop')
-    .setBasePath('api')
-    .setDescription('Open-source ERP for cooperatives')
+    .setDescription(
+      'PermaCoop is an eco-design and open-source ERP solution for cooperatives.'
+    )
     .setVersion('1.0.0')
-    .addBearerAuth('Authorization', 'header')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, options);

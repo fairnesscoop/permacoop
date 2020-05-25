@@ -1,13 +1,16 @@
 <script>
-  import {user} from '../../../store';
   import filesize from 'filesize';
   import {format} from 'date-fns';
   import {fr} from 'date-fns/locale';
+  import {user} from '../../../store';
+  import {errorNormalizer} from '../../../normalizer/errors';
+  import ServerErrors from '../../../components/ServerErrors.svelte';
   import {client as axios} from '../../../utils/axios';
   import {downloadFile} from '../../../utils/downloadFile';
 
   export let items;
 
+  let errors = [];
   let disableDownloadableButton = false;
 
   const download = async (id, fileName) => {
@@ -25,6 +28,7 @@
   };
 </script>
 
+<ServerErrors {errors} />
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>

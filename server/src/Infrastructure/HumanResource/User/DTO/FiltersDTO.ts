@@ -1,8 +1,8 @@
-import {ApiModelPropertyOptional} from '@nestjs/swagger';
+import {ApiPropertyOptional} from '@nestjs/swagger';
 import {IsOptional, IsBooleanString} from 'class-validator';
 
 export class FiltersDTO {
-  @ApiModelPropertyOptional()
+  @ApiPropertyOptional()
   @IsOptional()
   @IsBooleanString()
   public withAccountant;

@@ -1,6 +1,6 @@
 import {Controller, Inject, UseGuards, Get, Query} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {ProjectView} from 'src/Application/Project/View/ProjectView';
 import {IQueryBus} from 'src/Application/IQueryBus';
 import {GetProjectsQuery} from 'src/Application/Project/Query/GetProjectsQuery';
@@ -11,7 +11,7 @@ import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGu
 import {Pagination} from 'src/Application/Common/Pagination';
 
 @Controller('projects')
-@ApiUseTags('Project')
+@ApiTags('Project')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetProjectsAction {
@@ -22,7 +22,7 @@ export class GetProjectsAction {
 
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({title: 'Get all projects ordered by customer'})
+  @ApiOperation({summary: 'Get all projects ordered by customer'})
   public async index(
     @Query() filters: FiltersDTO
   ): Promise<Pagination<ProjectView>> {

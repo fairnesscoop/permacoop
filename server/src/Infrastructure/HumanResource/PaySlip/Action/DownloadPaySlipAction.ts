@@ -9,7 +9,7 @@ import {
   Res
 } from '@nestjs/common';
 import {PassThrough} from 'stream';
-import {ApiUseTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
+import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
 import {AuthGuard} from '@nestjs/passport';
 import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
@@ -21,7 +21,7 @@ import {PaySlipView} from 'src/Application/HumanResource/PaySlip/View/PaySlipVie
 import {DownloadedFileView} from 'src/Application/File/View/DownloadedFileView';
 
 @Controller('pay_slips')
-@ApiUseTags('Human Resource')
+@ApiTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'))
 export class DownloadPaySlipAction {
@@ -31,7 +31,7 @@ export class DownloadPaySlipAction {
   ) {}
 
   @Get(':id/download')
-  @ApiOperation({title: 'Download payslip'})
+  @ApiOperation({summary: 'Download payslip'})
   public async index(
     @Param() dto: IdDTO,
     @LoggedUser() loggedUser: User,

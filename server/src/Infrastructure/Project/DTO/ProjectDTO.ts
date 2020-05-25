@@ -1,12 +1,12 @@
-import {ApiModelProperty} from '@nestjs/swagger';
+import {ApiProperty} from '@nestjs/swagger';
 import {IsNotEmpty, IsUUID} from 'class-validator';
 
 export class ProjectDTO {
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   public name: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNotEmpty()
   @IsUUID()
   public customerId: string;
