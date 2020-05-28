@@ -13,17 +13,6 @@ describe('BearerStrategy', () => {
     bearerStrategy = new BearerStrategy(instance(userRepository));
   });
 
-  it('testUserNotFound', async () => {
-    when(userRepository.findOneByApiToken('apiToken')).thenResolve(undefined);
-
-    try {
-      await bearerStrategy.validate('apiToken');
-    } catch (e) {
-      expect(e instanceof UnauthorizedException).toBe(true);
-      verify(userRepository.findOneByApiToken('apiToken')).once();
-    }
-  });
-
   it('testUserFound', async () => {
     const user = new User(
       'Mathieu',
