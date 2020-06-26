@@ -19,10 +19,11 @@ describe('UserDTO', () => {
 
   it('testValidWithAdministrativeDTO', async () => {
     const adminDto = new UserAdministrativeDTO();
+    adminDto.role = UserRole.COOPERATOR;
     adminDto.annualEarnings = 50000;
     adminDto.contract = ContractType.CDI;
-    adminDto.executivePosition = 'true';
-    adminDto.healthInsurance = 'true';
+    adminDto.executivePosition = true;
+    adminDto.healthInsurance = true;
     adminDto.transportFee = 7500;
     adminDto.joiningDate = '2020-12-17T03:24:00';
     adminDto.leavingDate = '2021-12-17T03:24:00';

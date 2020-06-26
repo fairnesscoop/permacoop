@@ -2,7 +2,7 @@
   import {goto} from '@sapper/app';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
   import {client as axios} from '../../../utils/axios';
-  import Form from './_Form.svelte';
+  import AddForm from './_AddForm.svelte';
   import {errorNormalizer} from '../../../normalizer/errors';
   import SecuredView from '../../../components/SecuredView.svelte';
   import ServerErrors from '../../../components/ServerErrors.svelte';
@@ -31,6 +31,6 @@
     <Breadcrumb
       items={[{title: 'RH'}, {title: 'Salariés', path: 'human_resources/users'}, {title}]} />
     <ServerErrors {errors} />
-    <Form on:save={onSave} />
+    <AddForm on:save={onSave} />
   </div>
 </SecuredView>

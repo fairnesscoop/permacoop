@@ -25,7 +25,7 @@
         <td>
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
-            href={''}
+            href={`human_resources/users/${user.id}/edit`}
             {roles}>
             Modifier
           </SecuredLink>

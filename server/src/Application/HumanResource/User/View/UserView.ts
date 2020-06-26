@@ -1,4 +1,5 @@
 import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import {UserAdministrative} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 
 export class UserView {
   constructor(

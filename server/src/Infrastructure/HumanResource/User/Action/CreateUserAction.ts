@@ -55,8 +55,8 @@ export class CreateUserAction {
         userAdministrative = {
           annualEarnings,
           contract,
-          executivePosition: executivePosition === 'true',
-          healthInsurance: healthInsurance === 'true',
+          executivePosition: executivePosition,
+          healthInsurance: healthInsurance,
           joiningDate,
           leavingDate,
           transportFee

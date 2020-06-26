@@ -2,15 +2,21 @@ import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsEnum,
-  IsDateString,
   IsOptional,
   IsPositive,
   IsInt,
-  IsBooleanString
+  IsBoolean,
+  IsDateString
 } from 'class-validator';
 import {ContractType} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 
 export class UserAdministrativeDTO {
+  @ApiProperty({enum: UserRole})
+  @IsNotEmpty()
+  @IsEnum(UserRole)
+  public role: UserRole;
+
   @IsNotEmpty()
   @IsInt()
   @IsPositive()
@@ -23,14 +29,14 @@ export class UserAdministrativeDTO {
   public transportFee: number;
 
   @IsNotEmpty()
-  @IsBooleanString()
+  @IsBoolean()
   @ApiProperty()
-  public healthInsurance: string;
+  public healthInsurance: boolean;
 
   @IsNotEmpty()
-  @IsBooleanString()
+  @IsBoolean()
   @ApiProperty()
-  public executivePosition: string;
+  public executivePosition: boolean;
 
   @IsNotEmpty()
   @IsDateString()

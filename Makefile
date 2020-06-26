@@ -26,6 +26,8 @@ start: ## Start docker containers
 test: ## Run test suite
 	${exec} api npm run test
 	${exec} client npm run test-unit
+test-watch: ## Run test suite
+	${exec} api npm run test:watch
 linter: ## Linter
 	${exec} api npm run lint
 api-logs: ## Display API logs

@@ -8,6 +8,7 @@ import {PaySlip} from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
 import {LoginAction} from './User/Action/LoginAction';
 import {CreateUserAction} from './User/Action/CreateUserAction';
 import {GetMeAction} from './User/Action/GetMeAction';
+import {GetUserAction} from './User/Action/GetUserAction';
 import {UpdateMeAction} from './User/Action/UpdateMeAction';
 import {GetUsersAction} from './User/Action/GetUsersAction';
 import {UserRepository} from './User/Repository/UserRepository';
@@ -24,6 +25,7 @@ import {IsEmailAlreadyExist} from 'src/Domain/HumanResource/User/Specification/I
 import {UpdateProfileCommandHandler} from 'src/Application/HumanResource/User/Command/UpdateProfileCommandHandler';
 import {BearerStrategy} from './User/Security/BearerStrategy';
 import {GetUserByIdQueryHandler} from 'src/Application/HumanResource/User/Query/GetUserByIdQueryHandler';
+import {GetUserAdministrativeByIdQueryHandler} from 'src/Application/HumanResource/User/Query/GetUserAdministrativeByIdQueryHandler';
 import {UserAdministrative} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import {UserAdministrativeRepository} from './User/Repository/UserAdministrativeRepository';
 import {GetPaySlipsQueryHandler} from 'src/Application/HumanResource/PaySlip/Query/GetPaySlipsQueryHandler';
@@ -47,6 +49,8 @@ import {AcceptHolidayAction} from './Holiday/Action/AcceptHolidayAction';
 import {GetHolidaysQueryHandler} from 'src/Application/HumanResource/Holiday/Query/GetHolidaysQueryHandler';
 import {GetHolidaysAction} from './Holiday/Action/GetHolidaysAction';
 import {DoesEventsExistForPeriod} from 'src/Domain/FairCalendar/Specification/DoesEventsExistForPeriod';
+import { UpdateUserAction } from './User/Action/UpdateUserAction';
+import { UpdateUserCommandHandler } from 'src/Application/HumanResource/User/Command/UpdateUserCommandHandler';
 
 @Module({
   imports: [
@@ -64,8 +68,10 @@ import {DoesEventsExistForPeriod} from 'src/Domain/FairCalendar/Specification/Do
   controllers: [
     LoginAction,
     CreateUserAction,
+    UpdateUserAction,
     GetMeAction,
     UpdateMeAction,
+    GetUserAction,
     GetUsersAction,
     CreatePaySlipAction,
     GetPaySlipsAction,
@@ -95,8 +101,10 @@ import {DoesEventsExistForPeriod} from 'src/Domain/FairCalendar/Specification/Do
     IsEmailAlreadyExist,
     GetUsersQueryHandler,
     UpdateProfileCommandHandler,
+    UpdateUserCommandHandler,
     BearerStrategy,
     GetUserByIdQueryHandler,
+    GetUserAdministrativeByIdQueryHandler,
     GetPaySlipsQueryHandler,
     GetPaySlipByIdQueryHandler,
     CreateHolidayCommandHandler,

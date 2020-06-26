@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, OneToOne} from 'typeorm';
+import {User} from './User.entity';
 
 export enum ContractType {
   CDI = 'cdi',
@@ -13,10 +14,10 @@ export class UserAdministrative {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'timestamp', nullable: false})
+  @Column({type: 'date', nullable: false})
   private joiningDate: string;
 
-  @Column({type: 'timestamp', nullable: true})
+  @Column({type: 'date', nullable: true})
   private leavingDate: string;
 
   @Column({type: 'integer', nullable: false})
@@ -33,6 +34,9 @@ export class UserAdministrative {
 
   @Column('enum', {enum: ContractType, nullable: false})
   private contract: ContractType;
+
+  @OneToOne(type => User, user => user.userAdministrative)
+  public user: User;
 
   constructor(
     annualEarnings: number,
@@ -82,5 +86,23 @@ export class UserAdministrative {
 
   public getContract(): ContractType {
     return this.contract;
+  }
+
+  public update(
+    annualEarnings: number,
+    contract: ContractType,
+    executivePosition: boolean,
+    healthInsurance: boolean,
+    joiningDate: string,
+    leavingDate: string,
+    transportFee: number
+  ): void {
+    this.annualEarnings = annualEarnings;
+    this.contract = contract;
+    this.executivePosition = executivePosition;
+    this.healthInsurance = healthInsurance;
+    this.joiningDate = joiningDate;
+    this.leavingDate = leavingDate;
+    this.transportFee = transportFee;
   }
 }

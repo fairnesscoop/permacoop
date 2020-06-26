@@ -38,9 +38,9 @@ export class User {
   @Column('enum', {enum: UserRole, nullable: false})
   private role: UserRole;
 
-  @OneToOne(type => UserAdministrative, {nullable: true})
+  @OneToOne(type => UserAdministrative, userAdministrative => userAdministrative.user, {nullable: true})
   @JoinColumn()
-  private userAdministrative: UserAdministrative;
+  public userAdministrative: UserAdministrative;
 
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   private createdAt: Date;
@@ -107,5 +107,9 @@ export class User {
 
   public updatePassword(password: string): void {
     this.password = password;
+  }
+
+  public updateRole(role: UserRole): void {
+    this.role = role;
   }
 }

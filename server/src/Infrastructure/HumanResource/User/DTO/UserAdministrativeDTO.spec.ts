@@ -1,14 +1,16 @@
 import {UserAdministrativeDTO} from './UserAdministrativeDTO';
 import {validate} from 'class-validator';
 import {ContractType} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 
 describe('UserAdministrativeDTO', () => {
   it('testValidDTO', async () => {
     const dto = new UserAdministrativeDTO();
+    dto.role = UserRole.COOPERATOR;
     dto.annualEarnings = 50000;
     dto.contract = ContractType.CDI;
-    dto.executivePosition = 'true';
-    dto.healthInsurance = 'true';
+    dto.executivePosition = true;
+    dto.healthInsurance = true;
     dto.transportFee = 75.2;
     dto.joiningDate = '2020-12-17T03:24:00';
     dto.leavingDate = '2021-12-17T03:24:00';
@@ -19,6 +21,7 @@ describe('UserAdministrativeDTO', () => {
 
   it('testInvalidDTO', async () => {
     const dto = new UserAdministrativeDTO();
+    dto.role = UserRole.COOPERATOR;
     dto.transportFee = 1.5;
     dto.joiningDate = '';
     dto.leavingDate = '';
@@ -36,11 +39,11 @@ describe('UserAdministrativeDTO', () => {
       isPositive: 'transportFee must be a positive number'
     });
     expect(validation[2].constraints).toMatchObject({
-      isBooleanString: 'healthInsurance must be a boolean string',
+      isBoolean: 'healthInsurance must be a boolean value',
       isNotEmpty: 'healthInsurance should not be empty'
     });
     expect(validation[3].constraints).toMatchObject({
-      isBooleanString: 'executivePosition must be a boolean string',
+      isBoolean: 'executivePosition must be a boolean value',
       isNotEmpty: 'executivePosition should not be empty'
     });
     expect(validation[4].constraints).toMatchObject({

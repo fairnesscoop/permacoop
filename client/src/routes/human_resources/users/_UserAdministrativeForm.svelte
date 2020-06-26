@@ -26,16 +26,16 @@
     <SelectInput
       label={'Statut cadre'}
       bind:value={userAdministrative.executivePosition}>
-      <option value={'true'}>Oui</option>
-      <option value={'false'}>Non</option>
+      <option value={true}>Oui</option>
+      <option value={false}>Non</option>
     </SelectInput>
   </div>
   <div class="col-md-4">
     <SelectInput
       label={'Mutuelle'}
       bind:value={userAdministrative.healthInsurance}>
-      <option value={'true'}>Oui</option>
-      <option value={'false'}>Non</option>
+      <option value={true}>Oui</option>
+      <option value={false}>Non</option>
     </SelectInput>
   </div>
   <div class="col-md-6">
@@ -57,7 +57,7 @@
   <div class="col-md-6">
     <DateInput
       label={'Date de sortie'}
-      required={''}
+      required={false}
       bind:value={userAdministrative.leavingDate} />
   </div>
 </div>
