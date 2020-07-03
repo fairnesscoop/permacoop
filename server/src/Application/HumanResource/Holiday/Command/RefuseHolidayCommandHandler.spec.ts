@@ -37,7 +37,7 @@ describe('RefuseHolidayCommandHandler', () => {
 
   it('testHolidayNotNotFound', async () => {
     when(
-      holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+      holidayRepository.findOneDetailById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(null);
 
     try {
@@ -46,7 +46,7 @@ describe('RefuseHolidayCommandHandler', () => {
       expect(e).toBeInstanceOf(HolidayNotFoundException);
       expect(e.message).toBe('human_resource.errors.holiday_not_found');
       verify(
-        holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+        holidayRepository.findOneDetailById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
       ).once();
       verify(
         canHolidayBeModerated.isSatisfiedBy(anything(), anything())
@@ -58,7 +58,7 @@ describe('RefuseHolidayCommandHandler', () => {
 
   it('testHolidayCantBeRefused', async () => {
     when(
-      holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+      holidayRepository.findOneDetailById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(instance(holiday));
     when(
       canHolidayBeModerated.isSatisfiedBy(instance(holiday), instance(user))
@@ -73,7 +73,7 @@ describe('RefuseHolidayCommandHandler', () => {
         canHolidayBeModerated.isSatisfiedBy(instance(holiday), instance(user))
       ).once();
       verify(
-        holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+        holidayRepository.findOneDetailById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
       ).once();
       verify(holiday.refuse(anything(), anything(), anything())).never();
       verify(holidayRepository.save(anything())).never();
@@ -82,7 +82,7 @@ describe('RefuseHolidayCommandHandler', () => {
 
   it('testHolidaySuccessfullyRefused', async () => {
     when(
-      holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+      holidayRepository.findOneDetailById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(instance(holiday));
     when(holiday.getId()).thenReturn('cfdd06eb-cd71-44b9-82c6-46110b30ce05');
     when(
@@ -100,7 +100,7 @@ describe('RefuseHolidayCommandHandler', () => {
       canHolidayBeModerated.isSatisfiedBy(instance(holiday), instance(user))
     ).once();
     verify(
-      holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+      holidayRepository.findOneDetailById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).once();
     verify(
       holiday.refuse(instance(user), '2020-09-10T00:00:00.000Z', 'Bad period')

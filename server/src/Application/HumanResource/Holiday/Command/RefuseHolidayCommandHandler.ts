@@ -20,7 +20,7 @@ export class RefuseHolidayCommandHandler {
   public async execute(command: RefuseHolidayCommand): Promise<string> {
     const {moderator, id, moderationComment} = command;
 
-    const holiday = await this.holidayRepository.findOneById(id);
+    const holiday = await this.holidayRepository.findOneDetailById(id);
     if (!holiday) {
       throw new HolidayNotFoundException();
     }

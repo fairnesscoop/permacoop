@@ -27,7 +27,7 @@ export class AcceptHolidayCommandHandler {
   public async execute(command: AcceptHolidayCommand): Promise<string> {
     const {moderator, moderationComment, id} = command;
 
-    const holiday = await this.holidayRepository.findOneById(id);
+    const holiday = await this.holidayRepository.findOneDetailById(id);
     if (!holiday) {
       throw new HolidayNotFoundException();
     }

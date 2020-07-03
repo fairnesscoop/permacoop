@@ -27,6 +27,25 @@ export class HolidayRepository implements IHolidayRepository {
       .getOne();
   }
 
+  public findOneDetailById(id: string): Promise<Holiday | undefined> {
+    return this.repository
+      .createQueryBuilder('holiday')
+      .select([
+        'holiday.id',
+        'holiday.status',
+        'holiday.leaveType',
+        'holiday.startdate',
+        'holiday.endDate',
+        'holiday.duration',
+        'user.id',
+        'user.firstName',
+        'user.lastName'
+      ])
+      .where('holiday.id = :id', {id})
+      .innerJoin('holiday.user', 'user')
+      .getOne();
+  }
+
   public findExistingHolidaysByUserAndPeriod(
     user: User,
     startDate: string,
