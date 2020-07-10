@@ -1,7 +1,7 @@
 <script>
-  import {createEventDispatcher, onMount} from 'svelte';
-  import {client as axios} from '../../utils/axios';
-  import {format} from 'date-fns';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { client as axios } from '../../utils/axios';
+  import { format } from 'date-fns';
   import MonthsInput from '../../components/inputs/MonthsInput.svelte';
 
   const dispatch = createEventDispatcher();
@@ -12,7 +12,7 @@
   let data = [];
 
   onMount(async () => {
-    ({data} = await axios.get('users'));
+    ({ data } = await axios.get('users'));
   });
 
   const handleFilter = () => {
@@ -24,7 +24,7 @@
     const uri = new URLSearchParams(filters).toString();
     window.history.pushState({}, null, `/faircalendar?${uri}`);
 
-    dispatch('filter', {...filters, date: new Date(date)});
+    dispatch('filter', { ...filters, date: new Date(date) });
   };
 </script>
 

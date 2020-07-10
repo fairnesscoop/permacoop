@@ -1,5 +1,5 @@
 <script>
-  import {createEventDispatcher} from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import {
     ROLE_COOPERATOR,
     ROLE_ACCOUNTANT,
@@ -31,7 +31,7 @@
     let data = {};
 
     if (role === ROLE_ACCOUNTANT) {
-      data = {firstName, lastName, email, password, role};
+      data = { firstName, lastName, email, password, role };
     } else {
       data = {
         firstName,

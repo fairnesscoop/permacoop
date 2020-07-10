@@ -1,5 +1,8 @@
 <script>
-  import {user} from '../store';
+  import { stores } from '@sapper/app';
+
+  const { sessions } = stores();
+  const user = $sessions.user;
 </script>
 
 <svelte:head>

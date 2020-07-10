@@ -1,6 +1,6 @@
 <script>
   import SecuredLink from '../../components/SecuredLink.svelte';
-  import {byAlpha2} from 'iso-country-codes';
+  import { byAlpha2 } from 'iso-country-codes';
 
   export let items;
   export let roles;

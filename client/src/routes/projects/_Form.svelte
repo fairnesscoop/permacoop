@@ -1,6 +1,7 @@
 <script>
-  import {createEventDispatcher, onMount} from 'svelte';
-  import {client as axios} from '../../utils/axios';
+  import { stores } from '@sapper/app';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { get } from '../../utils/axios';
   import CustomersInput from '../../components/inputs/CustomersInput.svelte';
   import TextInput from '../../components/inputs/TextInput.svelte';
 
@@ -8,17 +9,22 @@
     items: []
   };
 
-  onMount(async () => {
-    response = (await axios.get('customers', {params: {page: 1}})).data;
-  });
-
   export let name = '';
   export let customerId = '';
 
   const dispatch = createEventDispatcher();
+  const session = stores();
+
+  onMount(async () => {
+    response = (await get(
+      'customers',
+      { params: { page: 1 } },
+      $session.user.apiToken
+    )).data;
+  });
 
   const submit = () => {
-    dispatch('save', {name, customerId});
+    dispatch('save', { name, customerId });
   };
 </script>
 

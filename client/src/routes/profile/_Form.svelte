@@ -1,5 +1,5 @@
 <script>
-  import {createEventDispatcher} from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import TextInput from '../../components/inputs/TextInput.svelte';
   import EmailInput from '../../components/inputs/EmailInput.svelte';
   import PasswordInput from '../../components/inputs/PasswordInput.svelte';

@@ -1,5 +1,5 @@
 <script context="module">
-  export const preload = async ({query}) => {
+  export const preload = async ({ query }) => {
     return {
       page: query.page || 1
     };
@@ -7,17 +7,17 @@
 </script>
 
 <script>
-  import {onMount} from 'svelte';
-  import {errorNormalizer} from '../../../normalizer/errors';
+  import { onMount } from 'svelte';
+  import { stores } from '@sapper/app';
+  import { errorNormalizer } from '../../../normalizer/errors';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import SecuredView from '../../../components/SecuredView.svelte';
   import SecuredLink from '../../../components/SecuredLink.svelte';
   import Loader from '../../../components/Loader.svelte';
   import Table from './_Table.svelte';
-  import {client as axios} from '../../../utils/axios';
+  import { get } from '../../../utils/axios';
   import ServerErrors from '../../../components/ServerErrors.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
-  import {historyPushState} from '../../../utils/url';
+  import { ROLE_COOPERATOR, ROLE_EMPLOYEE } from '../../../constants/roles';
+  import { historyPushState } from '../../../utils/url';
   import Pagination from '../../../components/Pagination.svelte';
 
   export let page;
@@ -32,20 +32,26 @@
     pageCount: 0
   };
 
+  const { session } = stores();
+
   onMount(async () => {
     fetchHolidays();
   });
 
   const changePage = async e => {
     page = e.detail;
-    historyPushState('human_resources/holidays', {page});
+    historyPushState('human_resources/holidays', { page });
     fetchHolidays();
   };
 
   const fetchHolidays = async () => {
     try {
       loading = true;
-      response = (await axios.get('holidays', {params: {page}})).data;
+      response = (await get(
+        'holidays',
+        { params: { page } },
+        $session.user.apiToken
+      )).data;
     } catch (e) {
       errors = errorNormalizer(e);
     } finally {
@@ -59,7 +65,7 @@
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{title: 'RH'}, {title}]} />
+  <Breadcrumb items={[{ title: 'RH' }, { title }]} />
   <ServerErrors {errors} />
   <div class="row">
     <div class="col-md-8">

@@ -1,21 +1,20 @@
 <script context="module">
-  export const preload = ({params}) => {
-    return {date: params.date};
+  export const preload = ({ params }, { user }) => {
+    return { date: params.date, token: user.apiToken };
   };
 </script>
 
 <script>
-  import {goto} from '@sapper/app';
-  import {format} from 'date-fns';
-  import {fr} from 'date-fns/locale';
+  import { goto } from '@sapper/app';
+  import { format } from 'date-fns';
+  import { fr } from 'date-fns/locale';
   import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import {client as axios} from '../../utils/axios';
+  import { post } from '../../utils/axios';
   import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../normalizer/errors';
+  import { errorNormalizer } from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
-  import SecuredView from '../../components/SecuredView.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
 
+  export let token;
   export let date;
 
   let pageTitle = `Ajout d'activité du ${format(
@@ -29,7 +28,7 @@
 
   const onSave = async e => {
     try {
-      await axios.post('events', e.detail);
+      await post('events', e.detail, token);
 
       return goto('/faircalendar');
     } catch (e) {
@@ -42,13 +41,11 @@
   <title>Permacoop - {pageTitle}</title>
 </svelte:head>
 
-<SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
-  <div class="col-md-12">
-    <Breadcrumb
-      items={[{title: 'FairCalendar', path: 'faircalendar'}, {title: pageTitle}]} />
-    <ServerErrors {errors} />
-    <Form
-      on:save={onSave}
-      event={{date, type: 'mission', time: '100', summary: '', taskId: null, projectId: null}} />
-  </div>
-</SecuredView>
+<div class="col-md-12">
+  <Breadcrumb
+    items={[{ title: 'FairCalendar', path: 'faircalendar' }, { title: pageTitle }]} />
+  <ServerErrors {errors} />
+  <Form
+    on:save={onSave}
+    event={{ date, type: 'mission', time: '100', summary: '', taskId: null, projectId: null }} />
+</div>

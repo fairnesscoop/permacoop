@@ -1,12 +1,12 @@
 <script>
-  import {createEventDispatcher} from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import TextInput from '../../components/inputs/TextInput.svelte';
 
   export let name = '';
   const dispatch = createEventDispatcher();
 
   const submit = () => {
-    dispatch('save', {name});
+    dispatch('save', { name });
   };
 </script>
 

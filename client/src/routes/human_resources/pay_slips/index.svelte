@@ -1,26 +1,27 @@
 <script context="module">
-  export const preload = async ({query}) => {
+  export const preload = async ({ query }, { user }) => {
     return {
-      page: query.page || 1
+      page: query.page || 1,
+      token: user.apiToken
     };
   };
 </script>
 
 <script>
-  import {onMount} from 'svelte';
-  import {errorNormalizer} from '../../../normalizer/errors';
+  import { onMount } from 'svelte';
+  import { errorNormalizer } from '../../../normalizer/errors';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import SecuredView from '../../../components/SecuredView.svelte';
   import SecuredLink from '../../../components/SecuredLink.svelte';
   import Loader from '../../../components/Loader.svelte';
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import Table from './_Table.svelte';
-  import {client as axios} from '../../../utils/axios';
-  import {historyPushState} from '../../../utils/url';
+  import { get } from '../../../utils/axios';
+  import { historyPushState } from '../../../utils/url';
   import Pagination from '../../../components/Pagination.svelte';
-  import {ROLE_COOPERATOR, ROLE_ACCOUNTANT} from '../../../constants/roles';
+  import { ROLE_COOPERATOR, ROLE_ACCOUNTANT } from '../../../constants/roles';
 
   export let page;
+  export let token;
 
   let title = 'Fiches de paies';
   let roles = [ROLE_COOPERATOR, ROLE_ACCOUNTANT];
@@ -38,14 +39,14 @@
 
   const changePage = async e => {
     page = e.detail;
-    historyPushState('human_resources/pay_slips', {page});
+    historyPushState('human_resources/pay_slips', { page });
     fetchPaySlips();
   };
 
   const fetchPaySlips = async () => {
     try {
       loading = true;
-      response = (await axios.get('pay_slips', {params: {page}})).data;
+      response = (await get('pay_slips', { params: { page } }, token)).data;
     } catch (e) {
       errors = errorNormalizer(e);
     } finally {
@@ -59,7 +60,7 @@
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{title: 'RH'}, {title}]} />
+  <Breadcrumb items={[{ title: 'RH' }, { title }]} />
   <div class="row">
     <div class="col-md-8">
       <h3>

@@ -1,20 +1,23 @@
 <script>
-  import {createEventDispatcher, onMount} from 'svelte';
-  import {client as axios} from '../../utils/axios';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { stores } from '@sapper/app';
+  import { get } from '../../utils/axios';
   import TasksInput from '../../components/inputs/TasksInput.svelte';
   import ProjectsInput from '../../components/inputs/ProjectsInput.svelte';
   import TextInput from '../../components/inputs/TextInput.svelte';
   import SelectInput from '../../components/inputs/SelectInput.svelte';
 
   const dispatch = createEventDispatcher();
+  const session = stores();
+  const token = $session.user ? $session.user.apiToken : null;
 
-  let tasks = {items: []};
-  let projects = {items: []};
+  let tasks = { items: [] };
+  let projects = { items: [] };
 
   onMount(async () => {
     let [tasksReponse, projectsReponse] = await Promise.all([
-      axios.get('tasks', {params: {page: 1}}),
-      axios.get('projects', {params: {page: 1}})
+      get('tasks', { params: { page: 1 } }, token),
+      get('projects', { params: { page: 1 } }, token)
     ]);
 
     tasks = tasksReponse.data;

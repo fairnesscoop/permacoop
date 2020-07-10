@@ -1,20 +1,29 @@
 <script>
+  import { stores, goto } from '@sapper/app';
+  import { guard } from '@beyonk/sapper-rbac';
+  import routes from '../routes';
   import Nav from './../components/Nav.svelte';
-  import {user} from '../store';
   import Footer from './../components/Footer.svelte';
-  import Login from './login/index.svelte';
-  import {stores, goto} from '@sapper/app';
+
   export let segment;
 
-  const {page} = stores();
+  const { page, session } = stores();
+  const options = {
+    routes,
+    deny: () => {
+      const user = $session.user;
 
-  if (typeof window !== 'undefined') {
-    page.subscribe(({path}) => {
-      if ('/login' !== path && !$user) {
-        return goto('/login');
+      if (!user) {
+        goto('/login');
       }
-    });
-  }
+    }
+  };
+
+  page.subscribe(async v => {
+    await tick();
+
+    guard(v.path, $session.user, options);
+  });
 </script>
 
 <Nav {segment} />

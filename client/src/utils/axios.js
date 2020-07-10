@@ -1,28 +1,33 @@
 import axios from 'axios';
-import {goto} from '@sapper/app';
-import {TokenStorage} from './tokenStorage';
 
-export const client = axios.create({
+const client = axios.create({
   baseURL: '/api'
 });
 
-client.interceptors.request.use((conf) => {
-  if ('login' !== conf.url) {
-    conf.headers.Authorization = `Bearer ${TokenStorage.get()}`;
+const header = token => {
+  if (!token) {
+    return;
   }
 
-  return conf;
-});
-
-client.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    const {responseURL} = error.request;
-
-    if (401 === error.response.status && -1 === responseURL.indexOf('login')) {
-      return goto('/login');
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`
     }
+  };
+};
 
-    return Promise.reject(error);
-  }
-);
+export const post = (url, payload, token) => {
+  return client.post(url, payload, header(token));
+};
+
+export const put = (url, payload, token) => {
+  return client.put(url, payload, header(token));
+};
+
+export const del = (url, token) => {
+  return client.delete(url, header(token));
+};
+
+export const get = (url, payload, token) => {
+  return client.get(url, { ...payload, ...header(token) });
+};

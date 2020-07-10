@@ -1,31 +1,31 @@
 <script context="module">
-  export const preload = ({query}) => {
+  export const preload = ({ query }, { user }) => {
     return {
       filters: {
         date: query.date ? new Date(query.date) : new Date(),
-        userId: query.userId ? query.userId : null
+        userId: query.userId ? query.userId : null,
+        user
       }
     };
   };
 </script>
 
 <script>
-  import {onMount} from 'svelte';
-  import {goto} from '@sapper/app';
+  import { onMount } from 'svelte';
+  import { goto } from '@sapper/app';
   import frLocale from '@fullcalendar/core/locales/fr';
   import '@fullcalendar/core/main.css';
   import '@fullcalendar/daygrid/main.css';
-  import {user} from '../../store';
-  import {client as axios} from '../../utils/axios';
+  import { get } from '../../utils/axios';
   import Filters from './_Filters.svelte';
   import Overview from './_Overview.svelte';
-  import {errorNormalizer} from '../../normalizer/errors';
+  import { errorNormalizer } from '../../normalizer/errors';
   import Breadcrumb from '../../components/Breadcrumb.svelte';
   import Loader from '../../components/Loader.svelte';
   import ServerErrors from '../../components/ServerErrors.svelte';
-  import SecuredView from '../../components/SecuredView.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
 
+  export let token;
+  export let user;
   export let filters;
 
   let loading = false;
@@ -34,9 +34,9 @@
   let data = {};
 
   const fullCalendar = async (events, date) => {
-    const {Calendar} = await import('@fullcalendar/core');
-    const {default: dayGridPlugin} = await import('@fullcalendar/daygrid');
-    const {default: interactionPlugin} = await import(
+    const { Calendar } = await import('@fullcalendar/core');
+    const { default: dayGridPlugin } = await import('@fullcalendar/daygrid');
+    const { default: interactionPlugin } = await import(
       '@fullcalendar/interaction'
     );
 
@@ -49,8 +49,8 @@
       showNonCurrentDates: false,
       selectable: true,
       height: 620,
-      header: {left: 'title', center: '', right: ''},
-      columnHeaderFormat: {weekday: 'long'},
+      header: { left: 'title', center: '', right: '' },
+      columnHeaderFormat: { weekday: 'long' },
       events,
       dateClick: info => {
         if (!isLoggedUser) {
@@ -60,7 +60,7 @@
         goto(`/faircalendar/${info.dateStr}/add`);
       },
       eventDataTransform: data => {
-        const {id, date, time, summary, type, task, project} = data;
+        const { id, date, time, summary, type, task, project } = data;
         let title = time < 1 ? `[${time}] ` : '';
 
         if ('mission' === type && task && project) {
@@ -88,8 +88,8 @@
   const fetchEvents = async params => {
     try {
       loading = true;
-      isLoggedUser = params.userId === $user.id;
-      ({data} = await axios.get('events', {params}));
+      isLoggedUser = params.userId === user.id;
+      ({ data } = await get('events', { params }, user.apiToken));
       fullCalendar(data.events, params.date);
     } catch (e) {
       errors = errorNormalizer(e);
@@ -100,7 +100,7 @@
 
   onMount(async () => {
     if (!filters.userId) {
-      filters.userId = $user.id;
+      filters.userId = user.id;
     }
 
     fetchEvents(filters);
@@ -115,24 +115,22 @@
   <title>Permacoop - FairCalendar</title>
 </svelte:head>
 
-<SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
-  <div class="col-md-12">
-    <Breadcrumb items={[{title: 'FairCalendar'}]} />
-    <ServerErrors {errors} />
-    <Filters {...filters} on:filter={onFilter} />
-    <Loader {loading} />
-    <div id="calendar" />
-    <div class="mb-1 mt-2">
-      <span class="badge badge-success">Mission</span>
-      <span class="badge badge-secondary">Support // Podcast</span>
-      <span class="badge badge-info">Dojo</span>
-      <span class="badge badge-warning">Formation // Conf // Meetup</span>
-      <span class="badge badge-primary">Vacances</span>
-      <span class="badge badge-danger">Congé maladie</span>
-      <span class="badge badge-dark">Autres</span>
-    </div>
-    {#if data.overview}
-      <Overview overview={data.overview} />
-    {/if}
+<div class="col-md-12">
+  <Breadcrumb items={[{ title: 'FairCalendar' }]} />
+  <ServerErrors {errors} />
+  <Filters {...filters} on:filter={onFilter} />
+  <Loader {loading} />
+  <div id="calendar" />
+  <div class="mb-1 mt-2">
+    <span class="badge badge-success">Mission</span>
+    <span class="badge badge-secondary">Support // Podcast</span>
+    <span class="badge badge-info">Dojo</span>
+    <span class="badge badge-warning">Formation // Conf // Meetup</span>
+    <span class="badge badge-primary">Vacances</span>
+    <span class="badge badge-danger">Congé maladie</span>
+    <span class="badge badge-dark">Autres</span>
   </div>
-</SecuredView>
+  {#if data.overview}
+    <Overview overview={data.overview} />
+  {/if}
+</div>

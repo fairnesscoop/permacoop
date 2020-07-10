@@ -1,5 +1,5 @@
 <script>
-  import {createEventDispatcher, onMount} from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import DateInput from '../../../components/inputs/DateInput.svelte';
   import SelectInput from '../../../components/inputs/SelectInput.svelte';
   import TextInput from '../../../components/inputs/TextInput.svelte';

@@ -1,25 +1,24 @@
 <script context="module">
-  import {client as axios} from '../../utils/axios';
+  import { get, del, put } from '../../utils/axios';
 
-  export const preload = async ({params}) => {
-    const {data} = await axios.get(`events/${params.id}`);
+  export const preload = async ({ params }, { user }) => {
+    const { data } = await get(`events/${params.id}`, {}, user.apiToken);
 
-    return {event: data};
+    return { event: data, token: user.apiToken };
   };
 </script>
 
 <script>
   import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import {format} from 'date-fns';
-  import {fr} from 'date-fns/locale';
-  import {goto} from '@sapper/app';
+  import { format } from 'date-fns';
+  import { fr } from 'date-fns/locale';
+  import { goto } from '@sapper/app';
   import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../normalizer/errors';
+  import { errorNormalizer } from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
-  import SecuredView from '../../components/SecuredView.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
 
   export let event;
+  export let token;
 
   const taskId = event.task ? event.task.id : null;
   const projectId = event.project ? event.project.id : null;
@@ -32,7 +31,7 @@
 
   const onSave = async e => {
     try {
-      await axios.put(`events/${event.id}`, e.detail);
+      await put(`events/${event.id}`, e.detail, token);
 
       return goto('/faircalendar');
     } catch (e) {
@@ -42,7 +41,7 @@
 
   const onDelete = async () => {
     try {
-      await axios.delete(`events/${event.id}`);
+      await del(`events/${event.id}`, token);
 
       return goto('/faircalendar');
     } catch (e) {
@@ -55,15 +54,13 @@
   <title>Permacoop - {title}</title>
 </svelte:head>
 
-<SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
-  <div class="col-md-12">
-    <Breadcrumb
-      items={[{title: 'FairCalendar', path: 'faircalendar'}, {title: title}]} />
-    <ServerErrors {errors} />
-    <Form on:save={onSave} event={{...event, taskId, projectId, time}}>
-      <button class="btn btn-danger" type="button" on:click={onDelete}>
-        Supprimer
-      </button>
-    </Form>
-  </div>
-</SecuredView>
+<div class="col-md-12">
+  <Breadcrumb
+    items={[{ title: 'FairCalendar', path: 'faircalendar' }, { title: title }]} />
+  <ServerErrors {errors} />
+  <Form on:save={onSave} event={{ ...event, taskId, projectId, time }}>
+    <button class="btn btn-danger" type="button" on:click={onDelete}>
+      Supprimer
+    </button>
+  </Form>
+</div>

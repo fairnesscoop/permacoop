@@ -1,10 +1,10 @@
 <script context="module">
-  import {client as axios} from '../../../utils/axios';
+  import {get, put} from '../../../utils/axios';
 
-  export const preload = async ({params}) => {
-    const {data} = await axios.get(`daily_rates/${params.id}`);
+  export const preload = async ({params}, {user}) => {
+    const {data} = await get(`daily_rates/${params.id}`, {}, user.apiToken);
 
-    return {dailyRate: data};
+    return {dailyRate: data, token: user.apiToken};
   };
 </script>
 
@@ -16,7 +16,9 @@
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import SecuredView from '../../../components/SecuredView.svelte';
   import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
+
   export let dailyRate;
+  export let token;
 
   let amount = dailyRate.amount;
   let taskId = dailyRate.task.id;
@@ -26,9 +28,9 @@
   let title = `Edition du TJM "${dailyRate.customer.name}"`;
   let errors = [];
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
-      await axios.put(`daily_rates/${dailyRate.id}`, e.detail);
+      await put(`daily_rates/${dailyRate.id}`, e.detail, token);
 
       return goto('/accounting/daily_rates');
     } catch (e) {

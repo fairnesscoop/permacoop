@@ -1,30 +1,29 @@
 <script context="module">
-  import {client as axios} from '../../utils/axios';
+  import { get, put } from '../../utils/axios';
 
-  export const preload = async ({params}) => {
-    const {data} = await axios.get(`projects/${params.id}`);
+  export const preload = async ({ params }, { user }) => {
+    const { data } = await get(`projects/${params.id}`, {}, user.apiToken);
 
-    return {project: data};
+    return { project: data, token: user.apiToken };
   };
 </script>
 
 <script>
-  import {goto} from '@sapper/app';
+  import { goto } from '@sapper/app';
   import Breadcrumb from '../../components/Breadcrumb.svelte';
   import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../normalizer/errors';
+  import { errorNormalizer } from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
-  import SecuredView from '../../components/SecuredView.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
 
   export let project;
+  export let token;
 
   let errors = [];
   let title = `Edition du projet "${project.name}"`;
 
   const onSave = async e => {
     try {
-      await axios.put(`projects/${project.id}`, e.detail);
+      await put(`projects/${project.id}`, e.detail, token);
 
       return goto('/projects');
     } catch (e) {
@@ -37,13 +36,8 @@
   <title>Permacoop - {title}</title>
 </svelte:head>
 
-<SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
-  <div class="col-md-12">
-    <Breadcrumb items={[{title: 'Projets', path: 'projects'}, {title}]} />
-    <ServerErrors {errors} />
-    <Form
-      customerId={project.customer.id}
-      name={project.name}
-      on:save={onSave} />
-  </div>
-</SecuredView>
+<div class="col-md-12">
+  <Breadcrumb items={[{ title: 'Projets', path: 'projects' }, { title }]} />
+  <ServerErrors {errors} />
+  <Form customerId={project.customer.id} name={project.name} on:save={onSave} />
+</div>
