@@ -24,7 +24,8 @@
     "js-cookie": "^2.2.1",
     "polka": "next",
     "shortid": "^2.2.15",
-    "sirv": "^0.4.6"
+    "sirv": "^0.4.6",
+    "serialize-javascript": ">=3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
