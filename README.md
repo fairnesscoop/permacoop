@@ -40,8 +40,8 @@ make start
 
 The server and client will be started:
 
-- API documentation available on http://localhost:8080/api
-- Client avaible on http://localhost:8000
+- API documentation available on http://localhost/api
+- Client avaible on http://localhost/
 
 ## Security
 

@@ -13,8 +13,6 @@ services:
       POSTGRES_DB: permacoop
       PGUSER: docker
       PGPASSWORD: docker
-    ports:
-      - '5432:5432'
     volumes:
       - 'database:/var/lib/postgresql/data'
 
@@ -26,8 +24,6 @@ services:
     volumes:
       - './server:/var/www:cached'
       - 'uploads:/var/www/uploads'
-    ports:
-      - 8080:3000
     command: npm run start:dev
 
   client:
@@ -38,6 +34,18 @@ services:
     volumes:
       - './client:/var/www:cached'
     ports:
-      - 8000:3000
+      - 5000:5000
       - 10000:10000
     command: npm run dev
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
+    depends_on:
+      - 'client'
+      - 'api'
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
