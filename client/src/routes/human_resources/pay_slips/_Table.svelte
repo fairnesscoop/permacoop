@@ -2,11 +2,13 @@
   import filesize from 'filesize';
   import {format} from 'date-fns';
   import {fr} from 'date-fns/locale';
-  import {user} from '../../../store';
+  import {stores} from '@sapper/app';
   import {errorNormalizer} from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
-  import {client as axios} from '../../../utils/axios';
+  import {get} from '../../../utils/axios';
   import {downloadFile} from '../../../utils/downloadFile';
+
+  const { session } = stores();
 
   export let items;
 
@@ -16,9 +18,9 @@
   const download = async (id, fileName) => {
     try {
       disableDownloadableButton = true;
-      const {data} = await axios.get(`pay_slips/${id}/download`, {
+      const {data} = await get(`pay_slips/${id}/download`, {
         responseType: 'blob'
-      });
+      }, $session.user.apiToken);
       downloadFile(data, fileName);
     } catch (e) {
       errors = errorNormalizer(e);
@@ -45,7 +47,7 @@
         <td>{paySlip.user.firstName} {paySlip.user.lastName}</td>
         <td>{paySlip.file.originalName}</td>
         <td>
-          {#if $user.id === paySlip.user.id}
+          {#if $session.user.id === paySlip.user.id}
             <button
               disabled={disableDownloadableButton}
               class="btn btn-outline-secondary btn-sm"

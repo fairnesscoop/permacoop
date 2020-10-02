@@ -1,8 +1,7 @@
 <script>
-  import {goto} from '@sapper/app';
-  import {client as axios} from '../../utils/axios';
-  import {user} from '../../store';
-  import {TokenStorage} from '../../utils/tokenStorage';
+  import {goto, stores} from '@sapper/app';
+  import {post} from '../../utils/axios';
+  import sessionProxy from '../proxy';
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
   import EmailInput from '../../components/inputs/EmailInput.svelte';
@@ -11,24 +10,29 @@
   let errors = [];
   let email = '';
   let password = '';
+  let loading = false;
+
+  const { session } = stores();
 
   const handleSubmit = async () => {
     try {
-      const {data} = await axios.post('login', {email, password});
-      const {apiToken, firstName, lastName, role, id} = data;
+      loading = true;
+      const {data} = await post('login', {email, password});
 
-      TokenStorage.save(apiToken);
-      $user = {firstName, lastName, id, role};
+      await sessionProxy('POST', { ...data, scope: data.role });
+      $session.user = { ...data, scope: data.role };
 
-      return goto('/');
+      goto('/');
     } catch (e) {
       errors = errorNormalizer(e);
+    } finally {
+      loading = false;
     }
   };
 </script>
 
 <svelte:head>
-  <title>Permacoop - Se connecter</title>
+  <title>Se connecter - Permacoop</title>
 </svelte:head>
 
 <div class="col-md-12">
@@ -39,7 +43,7 @@
     <button
       type="submit"
       class="btn btn-primary"
-      disabled={!email || !password}>
+      disabled={!email || !password || loading}>
       Se connecter
     </button>
   </form>

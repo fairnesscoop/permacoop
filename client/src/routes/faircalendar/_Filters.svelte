@@ -1,10 +1,12 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
-  import {client as axios} from '../../utils/axios';
+  import {stores} from  '@sapper/app';
+  import {get} from '../../utils/axios';
   import {format} from 'date-fns';
   import MonthsInput from '../../components/inputs/MonthsInput.svelte';
 
   const dispatch = createEventDispatcher();
+  const { session } = stores();
 
   export let userId;
   export let date;
@@ -12,7 +14,7 @@
   let data = [];
 
   onMount(async () => {
-    ({data} = await axios.get('users'));
+    ({data} = await get('users', {}, $session.user.apiToken));
   });
 
   const handleFilter = () => {

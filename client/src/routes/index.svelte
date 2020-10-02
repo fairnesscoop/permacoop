@@ -1,16 +1,18 @@
 <script>
-  import {user} from '../store';
+  import { stores } from '@sapper/app';
+
+  const { session } = stores();
 </script>
 
 <svelte:head>
   <title>Permacoop</title>
 </svelte:head>
 
-{#if $user}
+{#if $session.user}
   <div class="col-md-12">
     <div class="jumbotron">
       <h1 class="display-5">
-        {`Bonjour ${$user.firstName} ${$user.lastName} !`}
+        {`Bonjour ${$session.user.firstName} ${$session.user.lastName} !`}
       </h1>
       <p class="lead">
         Bienvenue sur Permacoop, solution ERP

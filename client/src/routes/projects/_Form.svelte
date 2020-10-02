@@ -1,15 +1,18 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
-  import {client as axios} from '../../utils/axios';
+  import {stores} from  '@sapper/app';
+  import {get} from '../../utils/axios';
   import CustomersInput from '../../components/inputs/CustomersInput.svelte';
   import TextInput from '../../components/inputs/TextInput.svelte';
+
+  const { session } = stores();
 
   let response = {
     items: []
   };
 
   onMount(async () => {
-    response = (await axios.get('customers', {params: {page: 1}})).data;
+    response = (await get('customers', {params: {page: 1}}, $session.user.apiToken)).data;
   });
 
   export let name = '';

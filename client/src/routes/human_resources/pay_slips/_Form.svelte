@@ -1,13 +1,16 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
-  import {client as axios} from '../../../utils/axios';
+  import {stores} from  '@sapper/app';
+  import {get} from '../../../utils/axios';
   import UsersInput from '../../../components/inputs/UsersInput.svelte';
   import MonthsInput from '../../../components/inputs/MonthsInput.svelte';
+
+  const { session } = stores();
 
   let data = [];
 
   onMount(async () => {
-    ({data} = await axios.get('users'));
+    ({data} = await get('users', {}, $session.user.apiToken));
   });
 
   export let date = new Date();
