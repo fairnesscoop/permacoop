@@ -8,13 +8,13 @@
   import {goto} from '@sapper/app';
   import {format} from 'date-fns';
   import {fr} from 'date-fns/locale';
-  import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import {client as axios} from '../../utils/axios';
-  import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../normalizer/errors';
-  import ServerErrors from '../../components/ServerErrors.svelte';
-  import SecuredView from '../../components/SecuredView.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
+  import Breadcrumb from '../../../components/Breadcrumb.svelte';
+  import {client as axios} from '../../../utils/axios';
+  import Form from '../_Form.svelte';
+  import {errorNormalizer} from '../../../normalizer/errors';
+  import ServerErrors from '../../../components/ServerErrors.svelte';
+  import SecuredView from '../../../components/SecuredView.svelte';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
 
   export let date;
 

@@ -1,5 +1,5 @@
 <script context="module">
-  import {client as axios} from '../../utils/axios';
+  import {client as axios} from '../../../utils/axios';
 
   export const preload = async ({params}) => {
     const {data} = await axios.get(`events/${params.id}`);
@@ -9,15 +9,15 @@
 </script>
 
 <script>
-  import Breadcrumb from '../../components/Breadcrumb.svelte';
+  import Breadcrumb from '../../../components/Breadcrumb.svelte';
   import {format} from 'date-fns';
   import {fr} from 'date-fns/locale';
   import {goto} from '@sapper/app';
-  import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../normalizer/errors';
-  import ServerErrors from '../../components/ServerErrors.svelte';
-  import SecuredView from '../../components/SecuredView.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
+  import Form from '../_Form.svelte';
+  import {errorNormalizer} from '../../../normalizer/errors';
+  import ServerErrors from '../../../components/ServerErrors.svelte';
+  import SecuredView from '../../../components/SecuredView.svelte';
+  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
 
   export let event;
 

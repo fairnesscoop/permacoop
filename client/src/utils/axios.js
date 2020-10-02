@@ -1,9 +1,10 @@
 import axios from 'axios';
 import {goto} from '@sapper/app';
 import {TokenStorage} from './tokenStorage';
+import config from '../../config';
 
 export const client = axios.create({
-  baseURL: '/api'
+  baseURL: process.browser ? config.API_URL : config.API_URL_SSR
 });
 
 client.interceptors.request.use((conf) => {
