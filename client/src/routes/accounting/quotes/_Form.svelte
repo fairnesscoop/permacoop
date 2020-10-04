@@ -1,9 +1,13 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
-  import {client as axios} from '../../../utils/axios';
+  import {stores} from '@sapper/app';
+  import {get} from '../../../utils/axios';
   import QuoteItemsForm from './_QuoteItemsForm.svelte';
   import ProjectsInput from '../../../components/inputs/ProjectsInput.svelte';
   import {byAlpha2} from 'iso-country-codes';
+
+  const { session } = stores();
+  const token = $session.user.apiToken;
 
   export let customerId = '';
   export let projectId = undefined;
@@ -21,13 +25,13 @@
   let customers = {items: []};
 
   onMount(async () => {
-    customers = (await axios.get('customers', {params: {page: 1}})).data;
+    customers = (await get('customers', {params: {page: 1}}, token)).data;
   });
 
   const onCustomerSelected = async () => {
-    projects = (await axios.get(`projects`, {
+    projects = (await get(`projects`, {
       params: {page: 1, customerId}
-    })).data;
+    }, token)).data;
     projectId = undefined;
     displayForm = true;
   };

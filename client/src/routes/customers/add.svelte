@@ -1,21 +1,21 @@
 <script>
-  import {goto} from '@sapper/app';
+  import {goto, stores} from '@sapper/app';
   import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import {client as axios} from '../../utils/axios';
+  import {post} from '../../utils/axios';
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
   import Form from './_Form.svelte';
-  import SecuredView from '../../components/SecuredView.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
 
-  let pageTitle = 'Ajouter un client';
+  const { session } = stores();
+
+  let title = 'Ajouter un client';
   let errors = [];
 
   const onSave = async e => {
     try {
-      await axios.post('customers', e.detail);
+      await post('customers', e.detail, $session.user.apiToken);
 
-      return goto('/customers');
+      goto('/customers');
     } catch (e) {
       errors = errorNormalizer(e);
     }
@@ -23,16 +23,14 @@
 </script>
 
 <svelte:head>
-  <title>Permacoop - {pageTitle}</title>
+  <title>{title} - Permacoop</title>
 </svelte:head>
 
-<SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
-  <div class="col-md-12">
-    <Breadcrumb
-      items={[{title: 'Clients', path: 'customers'}, {title: pageTitle}]} />
-    <ServerErrors {errors} />
-    <Form
-      customer={{name: '', address: {street: '', city: '', zipCode: '', country: 'FR'}}}
-      on:save={onSave} />
-  </div>
-</SecuredView>
+<div class="col-md-12">
+  <Breadcrumb
+    items={[{title: 'Clients', path: 'customers'}, {title}]} />
+  <ServerErrors {errors} />
+  <Form
+    customer={{name: '', address: {street: '', city: '', zipCode: '', country: 'FR'}}}
+    on:save={onSave} />
+</div>

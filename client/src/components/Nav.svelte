@@ -1,19 +1,23 @@
 <script>
-  import {user} from '../store';
-  import {TokenStorage} from '../utils/tokenStorage';
+  import {stores, goto} from '@sapper/app';
   import {
     ROLE_COOPERATOR,
     ROLE_EMPLOYEE,
     ROLE_ACCOUNTANT
   } from '../constants/roles';
 
+  const { session } = stores();
+
   export let segment;
+
   let userRoles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
   let accountantRoles = [ROLE_COOPERATOR, ROLE_ACCOUNTANT];
 
-  const handleLogout = () => {
-    TokenStorage.remove();
-    $user = null;
+  const handleLogout = async () => {
+    $session.user = null;
+    await fetch('/proxy/session', {method: 'DELETE'});
+
+    goto('/login');
   };
 </script>
 
@@ -35,10 +39,10 @@
     aria-label="Toggle navigation">
     <span class="navbar-toggler-icon" />
   </button>
-  {#if process.browser && $user}
+  {#if process.browser && $session.user}
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav mr-auto">
-        {#if userRoles.includes($user.role)}
+        {#if userRoles.includes($session.user.role)}
           <li class="nav-item {segment === 'faircalendar' ? 'active' : ''}">
             <a class="nav-link" href="faircalendar">FairCalendar</a>
           </li>
@@ -53,7 +57,7 @@
             Gestion & Comptabilité
           </a>
           <div class="dropdown-menu">
-            {#if userRoles.includes($user.role)}
+            {#if userRoles.includes($session.user.role)}
               <a class="dropdown-item" href="accounting/quotes">Devis</a>
               <a class="dropdown-item" href="accounting/daily_rates">TJM</a>
             {/if}
@@ -69,7 +73,7 @@
             RH
           </a>
           <div class="dropdown-menu">
-            {#if userRoles.includes($user.role)}
+            {#if userRoles.includes($session.user.role)}
               <a class="dropdown-item" href="human_resources/users">Salariés</a>
               <a class="dropdown-item" href="human_resources/holidays">
                 Congés
@@ -80,7 +84,7 @@
             </a>
           </div>
         </li>
-        {#if userRoles.includes($user.role)}
+        {#if userRoles.includes($session.user.role)}
           <li class="nav-item {segment === 'projects' ? 'active' : ''}">
             <a class="nav-link" href="projects">Projets</a>
           </li>
@@ -99,7 +103,7 @@
             href="javascript:void"
             role="button"
             data-toggle="dropdown">
-            {`${$user.firstName} ${$user.lastName}`}
+            {`${$session.user.firstName} ${$session.user.lastName}`}
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="profile">Mon profil</a>

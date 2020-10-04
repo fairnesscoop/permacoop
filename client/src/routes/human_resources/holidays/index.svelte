@@ -1,7 +1,8 @@
 <script context="module">
-  export const preload = async ({query}) => {
+  export const preload = async ({query}, {user}) => {
     return {
-      page: query.page || 1
+      page: query.page || 1,
+      token: user.apiToken
     };
   };
 </script>
@@ -10,16 +11,16 @@
   import {onMount} from 'svelte';
   import {errorNormalizer} from '../../../normalizer/errors';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import SecuredView from '../../../components/SecuredView.svelte';
   import SecuredLink from '../../../components/SecuredLink.svelte';
   import Loader from '../../../components/Loader.svelte';
   import Table from './_Table.svelte';
-  import {client as axios} from '../../../utils/axios';
+  import {get} from '../../../utils/axios';
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
   import {historyPushState} from '../../../utils/url';
   import Pagination from '../../../components/Pagination.svelte';
 
+  export let token;
   export let page;
 
   let roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
@@ -45,7 +46,7 @@
   const fetchHolidays = async () => {
     try {
       loading = true;
-      response = (await axios.get('holidays', {params: {page}})).data;
+      response = (await get('holidays', {params: {page}}, token)).data;
     } catch (e) {
       errors = errorNormalizer(e);
     } finally {
@@ -55,7 +56,7 @@
 </script>
 
 <svelte:head>
-  <title>Permacoop - {title}</title>
+  <title>{title} - Permacoop</title>
 </svelte:head>
 
 <div class="col-md-12">

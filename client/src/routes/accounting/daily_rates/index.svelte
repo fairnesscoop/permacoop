@@ -1,25 +1,26 @@
 <script context="module">
-  export const preload = async ({query}) => {
+  export const preload = async ({query}, {user}) => {
     return {
-      page: query.page || 1
+      page: query.page || 1,
+      token: user.apiToken
     };
   };
 </script>
 
 <script>
   import {onMount} from 'svelte';
-  import {client as axios} from '../../../utils/axios';
+  import {get} from '../../../utils/axios';
   import {errorNormalizer} from '../../../normalizer/errors';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
   import Loader from '../../../components/Loader.svelte';
   import ServerErrors from '../../../components/ServerErrors.svelte';
-  import SecuredView from '../../../components/SecuredView.svelte';
   import SecuredLink from '../../../components/SecuredLink.svelte';
   import Table from './_Table.svelte';
   import Pagination from '../../../components/Pagination.svelte';
   import {historyPushState} from '../../../utils/url';
   import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
 
+  export let token;
   export let page;
 
   let title = 'TJM';
@@ -45,7 +46,7 @@
   const fetchDailyRates = async () => {
     try {
       loading = true;
-      response = (await axios.get('daily_rates', {params: {page}})).data;
+      response = (await get('daily_rates', {params: {page}}, token)).data;
     } catch (e) {
       errors = errorNormalizer(e);
     } finally {
@@ -55,35 +56,32 @@
 </script>
 
 <svelte:head>
-  <title>Permacoop - {title}</title>
+  <title>{title} - Permacoop</title>
 </svelte:head>
 
-<SecuredView {roles}>
-  <div class="col-md-12">
-    <Breadcrumb items={[{title: 'Gestion & Comptabilité'}, {title}]} />
-    <div class="row">
-      <div class="col-md-8">
-        <h3>
-          {title}
-          <small>({response.totalItems})</small>
-        </h3>
-      </div>
-      <div class="col-md-4">
-        <SecuredLink
-          className="btn btn-primary float-right mb-3"
-          {roles}
-          href="accounting/daily_rates/add">
-          + Ajouter un TJM
-        </SecuredLink>
-      </div>
+<div class="col-md-12">
+  <Breadcrumb items={[{title: 'Gestion & Comptabilité'}, {title}]} />
+  <div class="row">
+    <div class="col-md-8">
+      <h3>
+        {title}
+        <small>({response.totalItems})</small>
+      </h3>
     </div>
-    <ServerErrors {errors} />
-    <Loader {loading} />
-    <Table items={response.items} {roles} />
-    <Pagination
-      on:change={changePage}
-      currentPage={page}
-      pageCount={response.pageCount} />
-
+    <div class="col-md-4">
+      <SecuredLink
+        className="btn btn-primary float-right mb-3"
+        {roles}
+        href="accounting/daily_rates/add">
+        + Ajouter un TJM
+      </SecuredLink>
+    </div>
   </div>
-</SecuredView>
+  <ServerErrors {errors} />
+  <Loader {loading} />
+  <Table items={response.items} {roles} />
+  <Pagination
+    on:change={changePage}
+    currentPage={page}
+    pageCount={response.pageCount} />
+</div>

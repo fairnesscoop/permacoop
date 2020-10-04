@@ -1,19 +1,27 @@
+<script context="module">
+  export const preload = async ({}, {user}) => {
+    return {
+      token: user.apiToken
+    };
+  };
+</script>
+
 <script>
   import {goto} from '@sapper/app';
   import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import {client as axios} from '../../utils/axios';
+  import {post} from '../../utils/axios';
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
-  import SecuredView from '../../components/SecuredView.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../constants/roles';
+
+  export let token;
 
   let title = 'Ajouter un projet';
   let errors = [];
 
   const onSave = async e => {
     try {
-      await axios.post('projects', e.detail);
+      await post('projects', e.detail, token);
 
       return goto('/projects');
     } catch (e) {
@@ -23,13 +31,11 @@
 </script>
 
 <svelte:head>
-  <title>Permacoop - {title}</title>
+  <title>{title} - Permacoop</title>
 </svelte:head>
 
-<SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
-  <div class="col-md-12">
-    <Breadcrumb items={[{title: 'Projets', path: 'projects'}, {title}]} />
-    <ServerErrors {errors} />
-    <Form on:save={onSave} />
-  </div>
-</SecuredView>
+<div class="col-md-12">
+  <Breadcrumb items={[{title: 'Projets', path: 'projects'}, {title}]} />
+  <ServerErrors {errors} />
+  <Form on:save={onSave} />
+</div>

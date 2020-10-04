@@ -17,6 +17,7 @@ Permacoop is an eco-design and open-source ERP solution for cooperatives.
 - [Jest](https://jestjs.io/) / [Ts-mockito](https://github.com/NagRock/ts-mockito)
 - [Svelte](https://svelte.dev/) / [Sapper](https://sapper.svelte.dev/)
 - [PostgreSQL](https://www.postgresql.org/)
+- [Redis](https://redis.io/)
 - [Docker](https://www.docker.com/)
 
 ## Prerequisites

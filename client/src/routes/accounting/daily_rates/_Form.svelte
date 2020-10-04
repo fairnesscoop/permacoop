@@ -1,10 +1,14 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
+  import {stores} from '@sapper/app';
   import UsersInput from '../../../components/inputs/UsersInput.svelte';
   import CustomersInput from '../../../components/inputs/CustomersInput.svelte';
   import TasksInput from '../../../components/inputs/TasksInput.svelte';
-  import {client as axios} from '../../../utils/axios';
+  import {get} from '../../../utils/axios';
   import MoneyInput from '../../../components/inputs/MoneyInput.svelte';
+
+  const { session } = stores();
+  const token = $session.user.apiToken;
 
   let users = [];
   let tasks = {items: []};
@@ -12,9 +16,9 @@
 
   onMount(async () => {
     const [customerResponse, taskResponse, userResponse] = await Promise.all([
-      axios.get('customers', {params: {page: 1}}),
-      axios.get('tasks', {params: {page: 1}}),
-      axios.get('users')
+      get('customers', {params: {page: 1}}, token),
+      get('tasks', {params: {page: 1}}, token),
+      get('users', {}, token)
     ]);
 
     users = userResponse.data;
