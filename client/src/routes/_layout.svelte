@@ -2,9 +2,10 @@
   import { tick } from 'svelte';
   import { stores, goto } from '@sapper/app';
   import { guard } from '@beyonk/sapper-rbac';
+  import { settings } from '../store';
   import routes from '../routes';
   import Nav from './../components/Nav.svelte';
-  import Footer from './../components/Footer.svelte';
+  import Header from './../components/header/Header.svelte';
 
   export let segment;
 
@@ -20,10 +21,20 @@
   });
 </script>
 
-<Nav {segment} />
-<div class="container">
-  <div class="row" style="margin-top: 1rem;">
+<div class={$settings.theme}>
+  {#if segment !== 'login'}
+    <div class="flex h-screen bg-gray-50 dark:bg-gray-900 dark-theme">
+      <Nav {segment} />
+      <div class="flex flex-col flex-1 w-full">
+        <Header/>
+        <main class="h-full overflow-y-auto">
+          <div class="container px-6 mx-auto grid">
+            <slot />
+          </div>
+        </main>
+      </div>
+    </div>
+  {:else}
     <slot />
-  </div>
+  {/if}
 </div>
-<Footer />

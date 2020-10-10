@@ -1,5 +1,7 @@
 <script>
   import {format} from '../../../normalizer/money';
+  import TrashIcon from '../../../components/icons/TrashIcon.svelte';
+  import Input from '../../../components/inputs/Input.svelte';
   export let values = [];
 
   const addItem = () => {
@@ -28,70 +30,52 @@
   $: total = subTotal + vat;
 </script>
 
-<table class="table table-bordered">
+<table class="mt-6 w-full whitespace-no-wrap">
   <thead>
-    <tr>
-      <th>Description</th>
-      <th style="width:15%">Quantité</th>
-      <th style="width:20%">Taux</th>
-      <th style="width:5%" />
+    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+      <th class="px-4 py-3">Description</th>
+      <th class="px-4 py-3">Quantité</th>
+      <th class="px-4 py-3">Taux</th>
+      <th class="px-4 py-3"></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
     {#each values as value, index}
-      <tr>
-        <td>
-          <input
-            type="text"
-            required="required"
-            placeholder="Description de la prestation"
-            bind:value={value.title}
-            class="form-control" />
+      <tr class="text-gray-700 dark:text-gray-400">
+        <td class="px-4 py-3 text-sm">
+          <Input placeholder={'Description de la prestation'} marginClass={''} bind:value={value.title} required={true} />
         </td>
-        <td>
-          <input
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="0,00"
-            required="required"
-            bind:value={value.quantity}
-            class="form-control" />
+        <td class="px-4 py-3 text-sm">
+          <Input type={'money'} bind:value={value.quantity} marginClass={''} required={true} />
         </td>
-        <td>
-          <div class="input-group">
-            <input
-              type="number"
-              min="1"
-              placeholder="0,00"
-              step="0.01"
-              required="required"
-              bind:value={value.dailyRate}
-              class="form-control" />
-            <div class="input-group-append">
-              <span class="input-group-text">€</span>
-            </div>
+        <td class="px-4 py-3 text-sm">
+          <Input type={'money'} bind:value={value.dailyRate} marginClass={''} required={true} />
+        </td>
+        <td class="px-4 py-3">
+          <div class="flex items-center space-x-4 text-sm">
+            {#if values.length > 1}
+              <button type="button" on:click={() => removeItem(index)}>
+                <TrashIcon className={'w-5 h-5'} />
+              </button>
+            {/if}
           </div>
-        </td>
-        <td>
-          {#if values.length > 1}
-            <button
-              class="btn btn-sm btn-danger"
-              type="button"
-              on:click={() => removeItem(index)}>
-              x
-            </button>
-          {/if}
         </td>
       </tr>
     {/each}
     <tr>
-      <td colspan="4" style="text-align:right">
-        <div class="mb-1">
+      <td colspan="4" class="text-right">
+        <button type="button" class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple mt-2 mb-2" on:click={addItem}>
+          + Ajouter une nouvelle ligne
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="dark:text-white border-none text-right">
+        <div class="mb-2 mt-2">
           Sous total :
           <b>{format(subTotal)}</b>
         </div>
-        <div class="mb-1">
+        <div class="mb-2">
           TVA (20%) :
           <b>{format(vat)}</b>
         </div>
@@ -103,9 +87,3 @@
     </tr>
   </tbody>
 </table>
-
-<div class="form-group">
-  <button class="btn btn-sm btn-secondary" type="button" on:click={addItem}>
-    + Ajouter une autre ligne
-  </button>
-</div>

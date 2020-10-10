@@ -1,15 +1,12 @@
 <script>
-  import MoneyInput from '../../../components/inputs/MoneyInput.svelte';
-  import DateInput from '../../../components/inputs/DateInput.svelte';
+  import Input from '../../../components/inputs/Input.svelte';
   import SelectInput from '../../../components/inputs/SelectInput.svelte';
 
   export let userAdministrative;
 </script>
 
-<h3 class="mt-3">Informations administratives</h3>
-<hr />
-<div class="row">
-  <div class="col-md-4">
+<div class="flex">
+  <div class="w-1/3 pr-2">
     <SelectInput
       label={'Contrat de travail'}
       bind:value={userAdministrative.contract}>
@@ -22,7 +19,7 @@
       <option value={'apprenticeship'}>Contrat de d'apprentisage</option>
     </SelectInput>
   </div>
-  <div class="col-md-4">
+  <div class="w-1/3 pr-2">
     <SelectInput
       label={'Statut cadre'}
       bind:value={userAdministrative.executivePosition}>
@@ -30,7 +27,7 @@
       <option value={'false'}>Non</option>
     </SelectInput>
   </div>
-  <div class="col-md-4">
+  <div class="w-1/3 pr-2">
     <SelectInput
       label={'Mutuelle'}
       bind:value={userAdministrative.healthInsurance}>
@@ -38,24 +35,32 @@
       <option value={'false'}>Non</option>
     </SelectInput>
   </div>
-  <div class="col-md-6">
-    <MoneyInput
+</div>
+<div class="flex">
+  <div class="w-1/2 pr-2">
+    <Input
+      type={'money'}
       label={'Salaire annuel brut'}
       bind:value={userAdministrative.annualEarnings} />
   </div>
-  <div class="col-md-6">
-    <MoneyInput
+  <div class="w-1/2 pl-2">
+    <Input
+      type={'money'}
       label={'Frais de transport'}
       required={''}
       bind:value={userAdministrative.transportFee} />
   </div>
-  <div class="col-md-6">
-    <DateInput
+</div>
+<div class="flex">
+  <div class="w-1/2 pr-2">
+    <Input
+      type={'date'}
       label={"Date d'entrée"}
       bind:value={userAdministrative.joiningDate} />
   </div>
-  <div class="col-md-6">
-    <DateInput
+  <div class="w-1/2 pl-2">
+    <Input
+      type={'date'}
       label={'Date de sortie'}
       required={''}
       bind:value={userAdministrative.leavingDate} />

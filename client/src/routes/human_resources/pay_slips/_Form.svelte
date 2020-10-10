@@ -2,6 +2,7 @@
   import {createEventDispatcher, onMount} from 'svelte';
   import {stores} from  '@sapper/app';
   import {get} from '../../../utils/axios';
+  import Button from '../../../components/inputs/Button.svelte';
   import UsersInput from '../../../components/inputs/UsersInput.svelte';
   import MonthsInput from '../../../components/inputs/MonthsInput.svelte';
 
@@ -16,6 +17,7 @@
   export let date = new Date();
   export let userId = '';
   export let files = [];
+  export let loading;
 
   const dispatch = createEventDispatcher();
 
@@ -29,22 +31,22 @@
   };
 </script>
 
-<form on:submit|preventDefault={submit}>
+<form on:submit|preventDefault={submit} class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <UsersInput users={data} bind:userId />
   <MonthsInput label={'Période'} bind:date amount={6} />
-  <div class="form-group">
-    <label for="file" class="required">Fiche de paie</label>
+  <div class="block mt-4 text-sm">
+    <label class="text-gray-700 dark:text-gray-400">
+      Fiche de paie
+    </label>
     <input
       type="file"
       id="file"
       required="required"
-      class="form-control"
+      class="block w-full mt-1 text-sm border-green-600 dark:text-gray-300 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green form-input"
       bind:files />
-    <small class="form-text text-muted">Format PDF uniquement</small>
+    <span class="text-xs text-green-600 dark:text-green-400">
+      Format PDF uniquement
+    </span>
   </div>
-  <button
-    class="btn btn-primary"
-    disabled={!date || !userId || !files.length > 0}>
-    Enregistrer
-  </button>
+  <Button value={'Enregistrer'} {loading} disabled={!date || !userId || !files.length > 0 || loading} />
 </form>

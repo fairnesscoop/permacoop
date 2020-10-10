@@ -1,11 +1,12 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
   import {stores} from '@sapper/app';
+  import {get} from '../../../utils/axios';
   import UsersInput from '../../../components/inputs/UsersInput.svelte';
   import CustomersInput from '../../../components/inputs/CustomersInput.svelte';
   import TasksInput from '../../../components/inputs/TasksInput.svelte';
-  import {get} from '../../../utils/axios';
-  import MoneyInput from '../../../components/inputs/MoneyInput.svelte';
+  import Input from '../../../components/inputs/Input.svelte';
+  import Button from '../../../components/inputs/Button.svelte';
 
   const { session } = stores();
   const token = $session.user.apiToken;
@@ -30,6 +31,7 @@
   export let customerId = '';
   export let taskId = '';
   export let userId = '';
+  export let loading;
 
   const dispatch = createEventDispatcher();
 
@@ -38,15 +40,10 @@
   };
 </script>
 
-<form on:submit|preventDefault={submit}>
+<form on:submit|preventDefault={submit} class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <CustomersInput customers={customers.items} bind:customerId />
   <UsersInput {users} bind:userId />
   <TasksInput tasks={tasks.items} bind:taskId />
-  <MoneyInput label={'Taux HT'} bind:value={amount} />
-  <button
-    type="submit"
-    class="btn btn-primary"
-    disabled={!taskId || !customerId || !userId || !amount}>
-    Enregistrer
-  </button>
+  <Input type={'money'} label={'Taux HT'} bind:value={amount} />
+  <Button value={'Enregistrer'} {loading} disabled={!taskId || !customerId || !userId || !amount || loading} />
 </form>

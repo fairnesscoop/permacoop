@@ -5,19 +5,23 @@
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
+  import H4Title from '../../../components/H4Title.svelte';
 
-  let title = 'Ajouter un salarié';
+  let title = 'Ajouter un coopérateur - salarié';
   let errors = [];
+  let loading = false;
 
   const { session } = stores();
 
   const onSave = async e => {
     try {
+      loading = true;
       await post('users', e.detail, $session.user.apiToken);
-
-      return goto('/human_resources/users');
+      goto('/human_resources/users');
     } catch (e) {
       errors = errorNormalizer(e);
+    } finally {
+      loading = false;
     }
   };
 </script>
@@ -26,9 +30,7 @@
   <title>{title} - Permacoop</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb
-    items={[{title: 'RH'}, {title: 'Salariés', path: 'human_resources/users'}, {title}]} />
-  <ServerErrors {errors} />
-  <Form on:save={onSave} />
-</div>
+<Breadcrumb items={[{title: 'RH'}, {title: 'Coopérateurs - salariés', path: 'human_resources/users'}, {title}]} />
+<ServerErrors {errors} />
+<H4Title {title} />
+<Form on:save={onSave} {loading} />

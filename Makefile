@@ -23,6 +23,7 @@ ps: ## List docker containers
 	${compose} ps
 start: ## Start docker containers
 	${compose} up -d
+	${exec} client npm run watch:tailwind
 test: ## Run test suite
 	${exec} api npm run test
 	${exec} client npm run test-unit

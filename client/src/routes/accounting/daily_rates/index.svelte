@@ -12,21 +12,18 @@
   import {get} from '../../../utils/axios';
   import {errorNormalizer} from '../../../normalizer/errors';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import Loader from '../../../components/Loader.svelte';
+  import H4Title from '../../../components/H4Title.svelte';
+  import AddLink from '../../../components/AddLink.svelte';
   import ServerErrors from '../../../components/ServerErrors.svelte';
-  import SecuredLink from '../../../components/SecuredLink.svelte';
   import Table from './_Table.svelte';
   import Pagination from '../../../components/Pagination.svelte';
   import {historyPushState} from '../../../utils/url';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
 
   export let token;
   export let page;
 
   let title = 'TJM';
-  let loading;
   let errors = [];
-  let roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
   let response = {
     items: [],
     totalItems: 0,
@@ -45,12 +42,9 @@
 
   const fetchDailyRates = async () => {
     try {
-      loading = true;
       response = (await get('daily_rates', {params: {page}}, token)).data;
     } catch (e) {
       errors = errorNormalizer(e);
-    } finally {
-      loading = false;
     }
   };
 </script>
@@ -59,29 +53,19 @@
   <title>{title} - Permacoop</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb items={[{title: 'Gestion & Comptabilité'}, {title}]} />
-  <div class="row">
-    <div class="col-md-8">
-      <h3>
-        {title}
-        <small>({response.totalItems})</small>
-      </h3>
-    </div>
-    <div class="col-md-4">
-      <SecuredLink
-        className="btn btn-primary float-right mb-3"
-        {roles}
-        href="accounting/daily_rates/add">
-        + Ajouter un TJM
-      </SecuredLink>
-    </div>
+<Breadcrumb items={[{title: 'Gestion & Comptabilité'}, {title}]} />
+<ServerErrors {errors} />
+<div class="inline-flex items-center">
+  <H4Title {title} />
+  <AddLink href={'/accounting/daily_rates/add'} value={'Ajouter'} />
+</div>
+<div class="w-full overflow-hidden rounded-lg shadow-xs">
+  <div class="w-full overflow-x-auto">  
+    <Table items={response.items} />
   </div>
-  <ServerErrors {errors} />
-  <Loader {loading} />
-  <Table items={response.items} {roles} />
   <Pagination
     on:change={changePage}
     currentPage={page}
+    totalItems={response.totalItems}
     pageCount={response.pageCount} />
 </div>

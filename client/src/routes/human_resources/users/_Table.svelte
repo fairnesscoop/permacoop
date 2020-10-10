@@ -1,34 +1,32 @@
 <script>
-  import SecuredLink from '../../../components/SecuredLink.svelte';
+  import PencilIcon from '../../../components/icons/PencilIcon.svelte';
 
   export let users;
-  export let roles;
 </script>
 
-<table class="table table-striped table-bordered table-hover">
+<table class="w-full whitespace-no-wrap">
   <thead>
-    <tr>
-      <th>Prénom</th>
-      <th>Nom</th>
-      <th>Email</th>
-      <th>Rôle</th>
-      <th />
+    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+      <th class="px-4 py-3">Prénom</th>
+      <th class="px-4 py-3">Nom</th>
+      <th class="px-4 py-3">Email</th>
+      <th class="px-4 py-3">Rôle</th>
+      <th class="px-4 py-3">Actions</th>
     </tr>
   </thead>
-  <tbody>
-    {#each users as user (user.id)}
-      <tr>
-        <td>{user.firstName}</td>
-        <td>{user.lastName}</td>
-        <td>{user.email}</td>
-        <td>{user.role}</td>
-        <td>
-          <SecuredLink
-            className="btn btn-outline-secondary btn-sm"
-            href={''}
-            {roles}>
-            Modifier
-          </SecuredLink>
+  <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+    {#each users as {id, firstName, lastName, email, role} (id)}
+      <tr class="text-gray-700 dark:text-gray-400">
+        <td class="px-4 py-3 text-sm">{firstName}</td>
+        <td class="px-4 py-3 text-sm">{lastName}</td>
+        <td class="px-4 py-3 text-sm">{email}</td>
+        <td class="px-4 py-3 text-sm">{role}</td>
+        <td class="px-4 py-3">
+          <div class="flex items-center space-x-4 text-sm">
+            <a href={`/human_resources/users/${id}/edit`} class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Modifier">
+              <PencilIcon className={'w-5 h-5'} />
+            </a>
+          </div>
         </td>
       </tr>
     {/each}

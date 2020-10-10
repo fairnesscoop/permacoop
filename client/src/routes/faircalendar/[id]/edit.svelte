@@ -20,6 +20,7 @@
   import Form from '../_Form.svelte';
   import {errorNormalizer} from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
+  import H4Title from '../../../components/H4Title.svelte';
 
   export let event;
   export let token;
@@ -29,27 +30,30 @@
   const time = String(event.time);
 
   let errors = [];
-  let title = `Edition du ${format(new Date(event.date), 'EEEE dd MMMM yyyy', {
-    locale: fr
-  })}`;
+  let loading = false;
+  let title = `Activité du ${format(new Date(event.date), 'EEEE dd MMMM yyyy', { locale: fr } )}`;
 
   const onSave = async e => {
     try {
+      loading = true;
       await put(`events/${event.id}`, e.detail, token);
-
       goto('/faircalendar');
     } catch (e) {
       errors = errorNormalizer(e);
+    } finally {
+      loading = false;
     }
   };
 
   const onDelete = async () => {
     try {
+      loading = true;
       await del(`events/${event.id}`, token);
-
       goto('/faircalendar');
     } catch (e) {
       errors = errorNormalizer(e);
+    } finally {
+      loading = false;
     }
   };
 </script>
@@ -58,13 +62,12 @@
   <title>{title} - Permacoop</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb
-    items={[{title: 'FairCalendar', path: 'faircalendar'}, {title}]} />
-  <ServerErrors {errors} />
-  <Form on:save={onSave} event={{...event, taskId, projectId, time}}>
-    <button class="btn btn-danger" type="button" on:click={onDelete}>
-      Supprimer
-    </button>
-  </Form>
+<Breadcrumb items={[{title: 'FairCalendar', path: 'faircalendar'}, {title}]} />
+<ServerErrors {errors} />
+<div class="inline-flex items-center">
+  <H4Title {title} />
+  <button disable={loading} class="py-1 px-2 ml-2 mb-6 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple" type="button" on:click={onDelete}>
+    Supprimer
+  </button>
 </div>
+<Form on:save={onSave} event={{...event, taskId, projectId, time}} {loading} />
