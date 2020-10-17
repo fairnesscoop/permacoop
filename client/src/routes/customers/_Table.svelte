@@ -1,6 +1,6 @@
 <script>
   import SecuredLink from '../../components/SecuredLink.svelte';
-  import {byAlpha2} from 'iso-country-codes';
+  import { byAlpha2 } from 'iso-country-codes';
 
   export let items;
   export let roles;
@@ -21,7 +21,8 @@
         <td>
           {customer.address.street}
           <br />
-          {customer.address.zipCode} {customer.address.city}
+          {customer.address.zipCode}
+          {customer.address.city}
           <br />
           {byAlpha2[customer.address.country].name}
         </td>
