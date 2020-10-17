@@ -1,4 +1,5 @@
-import {timestamp, files, shell} from '@sapper/service-worker';
+/* eslint-disable */
+import { timestamp, files, shell } from '@sapper/service-worker';
 
 const ASSETS = `cache${timestamp}`;
 
@@ -57,11 +58,11 @@ self.addEventListener('fetch', event => {
   // which Sapper has generated for you. It's not right for every
   // app, but if it's right for yours then uncomment this section
   /*
-	if (url.origin === self.origin && routes.find(route => route.pattern.test(url.pathname))) {
-		event.respondWith(caches.match('/service-worker-index.html'));
-		return;
-	}
-	*/
+  if (url.origin === self.origin && routes.find(route => route.pattern.test(url.pathname))) {
+    event.respondWith(caches.match('/service-worker-index.html'));
+    return;
+  }
+  */
 
   if (event.request.cache === 'only-if-cached') return;
 

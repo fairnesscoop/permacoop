@@ -1,28 +1,28 @@
 <script context="module">
-  export const preload = ({query}, {user}) => {
+  export const preload = ({ query }, { user }) => {
     return {
       filters: {
         date: query.date ? new Date(query.date) : new Date(),
-        userId: query.userId ? query.userId : null
+        userId: query.userId ? query.userId : null,
       },
-      user
+      user,
     };
   };
 </script>
 
 <script>
-  import {onMount} from 'svelte';
-  import {goto} from '@sapper/app';
-  import frLocale from '@fullcalendar/core/locales/fr';
-  import '@fullcalendar/core/main.css';
-  import '@fullcalendar/daygrid/main.css';
-  import {get} from '../../utils/axios';
-  import Filters from './_Filters.svelte';
-  import Overview from './_Overview.svelte';
-  import {errorNormalizer} from '../../normalizer/errors';
-  import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import Loader from '../../components/Loader.svelte';
-  import ServerErrors from '../../components/ServerErrors.svelte';
+  import { onMount } from "svelte";
+  import { goto } from "@sapper/app";
+  import frLocale from "@fullcalendar/core/locales/fr";
+  import "@fullcalendar/core/main.css";
+  import "@fullcalendar/daygrid/main.css";
+  import { get } from "../../utils/axios";
+  import Filters from "./_Filters.svelte";
+  import Overview from "./_Overview.svelte";
+  import { errorNormalizer } from "../../normalizer/errors";
+  import Breadcrumb from "../../components/Breadcrumb.svelte";
+  import Loader from "../../components/Loader.svelte";
+  import ServerErrors from "../../components/ServerErrors.svelte";
 
   export let filters;
   export let user;
@@ -33,14 +33,14 @@
   let data = {};
 
   const fullCalendar = async (events, date) => {
-    const {Calendar} = await import('@fullcalendar/core');
-    const {default: dayGridPlugin} = await import('@fullcalendar/daygrid');
-    const {default: interactionPlugin} = await import(
-      '@fullcalendar/interaction'
+    const { Calendar } = await import("@fullcalendar/core");
+    const { default: dayGridPlugin } = await import("@fullcalendar/daygrid");
+    const { default: interactionPlugin } = await import(
+      "@fullcalendar/interaction"
     );
 
-    const dom = document.getElementById('calendar');
-    dom.innerHTML = '';
+    const dom = document.getElementById("calendar");
+    dom.innerHTML = "";
     const calendar = new Calendar(dom, {
       locale: frLocale,
       plugins: [dayGridPlugin, interactionPlugin],
@@ -48,21 +48,21 @@
       showNonCurrentDates: false,
       selectable: true,
       height: 620,
-      header: {left: 'title', center: '', right: ''},
-      columnHeaderFormat: {weekday: 'long'},
+      header: { left: "title", center: "", right: "" },
+      columnHeaderFormat: { weekday: "long" },
       events,
-      dateClick: info => {
+      dateClick: (info) => {
         if (!isLoggedUser) {
           return;
         }
 
         goto(`/faircalendar/${info.dateStr}/add`);
       },
-      eventDataTransform: data => {
-        const {id, date, time, summary, type, task, project} = data;
-        let title = time < 1 ? `[${time}] ` : '';
+      eventDataTransform: (data) => {
+        const { id, date, time, summary, type, task, project } = data;
+        let title = time < 1 ? `[${time}] ` : "";
 
-        if ('mission' === type && task && project) {
+        if (type === "mission" && task && project) {
           title += `${project.name} (${task.name})`;
         } else {
           title += type;
@@ -77,18 +77,18 @@
         data.tip = summary;
       },
       businessHours: {
-        daysOfWeek: [1, 2, 3, 4, 5]
-      }
+        daysOfWeek: [1, 2, 3, 4, 5],
+      },
     });
     calendar.gotoDate(date);
     calendar.render();
   };
 
-  const fetchEvents = async params => {
+  const fetchEvents = async (params) => {
     try {
       loading = true;
       isLoggedUser = params.userId === user.id;
-      ({data} = await get('events', {params}, user.apiToken));
+      ({ data } = await get("events", { params }, user.apiToken));
       fullCalendar(data.events, params.date);
     } catch (e) {
       errors = errorNormalizer(e);
@@ -105,7 +105,7 @@
     fetchEvents(filters);
   });
 
-  const onFilter = e => {
+  const onFilter = (e) => {
     fetchEvents(e.detail);
   };
 </script>
@@ -115,11 +115,11 @@
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{title: 'FairCalendar'}]} />
-  <ServerErrors {errors} />
-  <Filters {...filters} on:filter={onFilter} />
-  <Loader {loading} />
-  <div id="calendar" />
+  <Breadcrumb items="{[{ title: 'FairCalendar' }]}" />
+  <ServerErrors errors="{errors}" />
+  <Filters {...filters} on:filter="{onFilter}" />
+  <Loader loading="{loading}" />
+  <div id="calendar"></div>
   <div class="mb-1 mt-2">
     <span class="badge badge-success">Mission</span>
     <span class="badge badge-secondary">Support // Podcast</span>
@@ -130,6 +130,6 @@
     <span class="badge badge-dark">Autres</span>
   </div>
   {#if data.overview}
-    <Overview overview={data.overview} />
+    <Overview overview="{data.overview}" />
   {/if}
 </div>

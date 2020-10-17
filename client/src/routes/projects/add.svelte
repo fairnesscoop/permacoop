@@ -1,31 +1,30 @@
 <script context="module">
-  export const preload = async ({}, {user}) => {
+  export const preload = async ({}, { user }) => {
     return {
-      token: user.apiToken
+      token: user.apiToken,
     };
   };
 </script>
 
 <script>
-  import {goto} from '@sapper/app';
-  import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import {post} from '../../utils/axios';
-  import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../normalizer/errors';
-  import ServerErrors from '../../components/ServerErrors.svelte';
+  import { goto } from "@sapper/app";
+  import Breadcrumb from "../../components/Breadcrumb.svelte";
+  import { post } from "../../utils/axios";
+  import Form from "./_Form.svelte";
+  import { errorNormalizer } from "../../normalizer/errors";
+  import ServerErrors from "../../components/ServerErrors.svelte";
 
   export let token;
 
-  let title = 'Ajouter un projet';
+  const title = "Ajouter un projet";
   let errors = [];
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
-      await post('projects', e.detail, token);
-
-      return goto('/projects');
-    } catch (e) {
-      errors = errorNormalizer(e);
+      await post("projects", e.detail, token);
+      goto("/projects");
+    } catch (error) {
+      errors = errorNormalizer(error);
     }
   };
 </script>
@@ -35,7 +34,7 @@
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{title: 'Projets', path: 'projects'}, {title}]} />
-  <ServerErrors {errors} />
-  <Form on:save={onSave} />
+  <Breadcrumb items="{[{ title: 'Projets', path: 'projects' }, { title }]}" />
+  <ServerErrors errors="{errors}" />
+  <Form on:save="{onSave}" />
 </div>

@@ -4,10 +4,9 @@
   "version": "1.0.0",
   "scripts": {
     "format": "prettier -w src/**/*.{ts,svelte}",
-    "eslint": "eslint",
+    "lint": "eslint ./*.js ./src/*.js ./src/components/**/*.svelte ./src/routes/**/*.svelte ./src/routes/**/*.js",
     "dev": "sapper dev",
     "build": "sapper build --legacy",
-    "eslint:fix": "eslint --fix ./*.js ./src/*.ts ./src/components/**/*.svelte ./src/graphql/**/*.ts ./src/routes/**/*.svelte ./src/routes/**/*.ts",
     "export": "sapper export --legacy",
     "start": "node __sapper__/build",
     "test": "run-p --race dev cy:run",

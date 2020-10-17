@@ -1,8 +1,8 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
   import {stores} from  '@sapper/app';
-  import {get} from '../../utils/axios';
-  import {format} from 'date-fns';
+  import {geformat} from 'date-fns';
+import {get} from '../../utils/axios';
   import MonthsInput from '../../components/inputs/MonthsInput.svelte';
 
   const dispatch = createEventDispatcher();

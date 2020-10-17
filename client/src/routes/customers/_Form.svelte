@@ -6,7 +6,7 @@
 
   export let customer;
 
-  const address = customer.address;
+  const {address} = customer;
   const dispatch = createEventDispatcher();
 
   const submit = () => {
