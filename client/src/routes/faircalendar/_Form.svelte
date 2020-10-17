@@ -1,11 +1,11 @@
 <script>
-  import { createEventDispatcher, onMount } from "svelte";
-  import { stores } from "@sapper/app";
-  import { get } from "../../utils/axios";
-  import TasksInput from "../../components/inputs/TasksInput.svelte";
-  import ProjectsInput from "../../components/inputs/ProjectsInput.svelte";
-  import TextInput from "../../components/inputs/TextInput.svelte";
-  import SelectInput from "../../components/inputs/SelectInput.svelte";
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { stores } from '@sapper/app';
+  import { get } from '../../utils/axios';
+  import TasksInput from '../../components/inputs/TasksInput.svelte';
+  import ProjectsInput from '../../components/inputs/ProjectsInput.svelte';
+  import TextInput from '../../components/inputs/TextInput.svelte';
+  import SelectInput from '../../components/inputs/SelectInput.svelte';
 
   const dispatch = createEventDispatcher();
   const { session } = stores();
@@ -16,8 +16,8 @@
 
   onMount(async () => {
     const [tasksReponse] = await Promise.all([
-      get("tasks", { params: { page: 1 } }, token),
-      get("projects", { params: { page: 1 } }, token),
+      get('tasks', { params: { page: 1 } }, token),
+      get('projects', { params: { page: 1 } }, token),
     ]);
 
     tasks = tasksReponse.data;
@@ -27,7 +27,7 @@
   export let event;
 
   const submit = () => {
-    dispatch("save", {
+    dispatch('save', {
       ...event,
       date: new Date(event.date),
     });

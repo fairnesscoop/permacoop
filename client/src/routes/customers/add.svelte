@@ -11,7 +11,7 @@
   const title = 'Ajouter un client';
   let errors = [];
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       await post('customers', e.detail, $session.user.apiToken);
       goto('/customers');
@@ -26,9 +26,10 @@
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{ title: 'Clients', path: 'customers' }, { title }]} />
-  <ServerErrors {errors} />
+  <Breadcrumb items="{[{ title: 'Clients', path: 'customers' }, { title }]}" />
+  <ServerErrors errors="{errors}" />
   <Form
-    customer={{ name: '', address: { street: '', city: '', zipCode: '', country: 'FR' } }}
-    on:save={onSave} />
+    customer="{{ name: '', address: { street: '', city: '', zipCode: '', country: 'FR' } }}"
+    on:save="{onSave}"
+  />
 </div>

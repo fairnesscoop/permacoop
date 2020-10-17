@@ -9,17 +9,18 @@
 </script>
 
 <div class="form-group">
-  <label class={required} for={id}>{label}</label>
+  <label class="{required}" for="{id}">{label}</label>
   <div class="input-group">
     <input
       type="number"
-      {required}
+      required="{required}"
       min="0"
-      {id}
+      id="{id}"
       placeholder="0,00"
       step="0.01"
       bind:value
-      class="form-control" />
+      class="form-control"
+    />
     <div class="input-group-append">
       <span class="input-group-text">€</span>
     </div>

@@ -27,15 +27,14 @@
         <td class="text-center">{overview.holiday}</td>
         <td class="text-center">{overview.medicalLeave}</td>
         <td class="text-center">{overview.other}</td>
-        <td class="text-center">
-          <b>{overview.mealTicket}</b>
-        </td>
+        <td class="text-center"><b>{overview.mealTicket}</b></td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
         <th colspan="8">
-          Total jour(s) travaillé(s): {overview.totalTimeSpent}
+          Total jour(s) travaillé(s):
+          {overview.totalTimeSpent}
         </th>
       </tr>
     </tfoot>

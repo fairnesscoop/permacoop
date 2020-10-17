@@ -3,8 +3,8 @@ export default (method, data) => {
     method,
     headers: {
       'Content-Type': 'application/json',
-      Accept: 'application/json'
+      Accept: 'application/json',
     },
-    body: data ? JSON.stringify({ ...data }) : null
+    body: data ? JSON.stringify({ ...data }) : null,
   });
 };

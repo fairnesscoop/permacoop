@@ -1,5 +1,5 @@
 <script context="module">
-  import { get, put } from "../../../utils/axios";
+  import { get, put } from '../../../utils/axios';
 
   export const preload = async ({ params }, { user }) => {
     const token = user.apiToken;
@@ -10,11 +10,11 @@
 </script>
 
 <script>
-  import { goto } from "@sapper/app";
-  import Breadcrumb from "../../../components/Breadcrumb.svelte";
-  import Form from "../_Form.svelte";
-  import { errorNormalizer } from "../../../normalizer/errors";
-  import ServerErrors from "../../../components/ServerErrors.svelte";
+  import { goto } from '@sapper/app';
+  import Breadcrumb from '../../../components/Breadcrumb.svelte';
+  import Form from '../_Form.svelte';
+  import { errorNormalizer } from '../../../normalizer/errors';
+  import ServerErrors from '../../../components/ServerErrors.svelte';
 
   export let token;
   export let task;
@@ -26,7 +26,7 @@
     try {
       await put(`tasks/${task.id}`, e.detail, token);
 
-      goto("/tasks");
+      goto('/tasks');
     } catch (e) {
       errors = errorNormalizer(e);
     }

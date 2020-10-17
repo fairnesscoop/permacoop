@@ -1,10 +1,10 @@
 <script>
-  import {createEventDispatcher, onMount} from 'svelte';
-  import {stores} from '@sapper/app';
-  import {get} from '../../../utils/axios';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { stores } from '@sapper/app';
+  import { get } from '../../../utils/axios';
   import QuoteItemsForm from './_QuoteItemsForm.svelte';
   import ProjectsInput from '../../../components/inputs/ProjectsInput.svelte';
-  import {byAlpha2} from 'iso-country-codes';
+  import { byAlpha2 } from 'iso-country-codes';
 
   const { session } = stores();
   const token = $session.user.apiToken;
@@ -18,38 +18,45 @@
     {
       title: '',
       quantity: '',
-      dailyRate: ''
-    }
+      dailyRate: '',
+    },
   ];
-  let projects = {items: []};
-  let customers = {items: []};
+  let projects = { items: [] };
+  let customers = { items: [] };
 
   onMount(async () => {
-    customers = (await get('customers', {params: {page: 1}}, token)).data;
+    customers = (await get('customers', { params: { page: 1 } }, token)).data;
   });
 
   const onCustomerSelected = async () => {
-    projects = (await get(`projects`, {
-      params: {page: 1, customerId}
-    }, token)).data;
+    projects = (
+      await get(
+        `projects`,
+        {
+          params: { page: 1, customerId },
+        },
+        token
+      )
+    ).data;
     projectId = undefined;
     displayForm = true;
   };
 
   const dispatch = createEventDispatcher();
   const submit = () => {
-    dispatch('save', {customerId, status, items, projectId});
+    dispatch('save', { customerId, status, items, projectId });
   };
 </script>
 
-<form on:submit|preventDefault={submit}>
+<form on:submit|preventDefault="{submit}">
   <div class="form-group">
     <label for="status">Statut</label>
     <select
       id="status"
       required="required"
       class="form-control"
-      bind:value={status}>
+      bind:value="{status}"
+    >
       <option value="draft">Brouillon</option>
       <option value="sent">Envoyé</option>
       <option value="refused">Refusé</option>
@@ -63,13 +70,19 @@
       id="customerId"
       required="required"
       class="form-control"
-      bind:value={customerId}
-      on:change={onCustomerSelected}>
+      bind:value="{customerId}"
+      on:change="{onCustomerSelected}"
+    >
       <option value="">-- Choisir un client --</option>
       {#each customers.items as customer}
-        <option value={customer.id} selected={customerId === customer.id}>
-          {customer.name} ({customer.address.street} - {customer.address.zipCode}
-          {customer.address.city} - {byAlpha2[customer.address.country].name})
+        <option value="{customer.id}" selected="{customerId === customer.id}">
+          {customer.name}
+          ({customer.address.street}
+          -
+          {customer.address.zipCode}
+          {customer.address.city}
+          -
+          {byAlpha2[customer.address.country].name})
         </option>
       {/each}
     </select>
@@ -77,23 +90,24 @@
   {#if displayForm}
     <div class="form-group">
       <label for="projectId">Nom du projet</label>
-      <select id="projectId" class="form-control" bind:value={projectId}>
-        <option value={undefined} />
+      <select id="projectId" class="form-control" bind:value="{projectId}">
+        <option value="{undefined}"></option>
         {#each projects.items as project}
-          <option value={project.id} selected={projectId === project.id}>
+          <option value="{project.id}" selected="{projectId === project.id}">
             {project.name}
           </option>
         {/each}
       </select>
     </div>
     <hr />
-    <QuoteItemsForm bind:values={items} />
+    <QuoteItemsForm bind:values="{items}" />
     <hr />
   {/if}
   <button
     type="submit"
     class="btn btn-primary"
-    disabled={!customerId || !status}>
+    disabled="{!customerId || !status}"
+  >
     Enregistrer
   </button>
 </form>

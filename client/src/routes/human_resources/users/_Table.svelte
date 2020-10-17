@@ -12,7 +12,7 @@
       <th>Nom</th>
       <th>Email</th>
       <th>Rôle</th>
-      <th />
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -25,8 +25,9 @@
         <td>
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
-            href={''}
-            {roles}>
+            href="{''}"
+            roles="{roles}"
+          >
             Modifier
           </SecuredLink>
         </td>

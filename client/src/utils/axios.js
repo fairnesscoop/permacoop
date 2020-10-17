@@ -2,18 +2,18 @@ import axios from 'axios';
 import config from '../../config';
 
 const client = axios.create({
-  baseURL: process.browser ? config.API_URL : config.API_URL_SSR
+  baseURL: process.browser ? config.API_URL : config.API_URL_SSR,
 });
 
-const header = token => {
+const header = (token) => {
   if (!token) {
     return;
   }
 
   return {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   };
 };
 

@@ -1,5 +1,5 @@
 <script>
-  import {stores} from '@sapper/app';
+  import { stores } from '@sapper/app';
 
   const { session } = stores();
 
@@ -10,7 +10,7 @@
 
 {#if process.browser && $session.user}
   {#if roles.includes($session.user.role)}
-    <a class={className} {href}>
+    <a class="{className}" href="{href}">
       <slot />
     </a>
   {/if}

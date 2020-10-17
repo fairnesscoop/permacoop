@@ -11,16 +11,16 @@
   const { page, session } = stores();
   const options = {
     routes,
-    deny: () => goto('/login')
+    deny: () => goto('/login'),
   };
 
-  page.subscribe(async v => {
+  page.subscribe(async (v) => {
     await tick();
-    guard(v.path, $session.user, options)
+    guard(v.path, $session.user, options);
   });
 </script>
 
-<Nav {segment} />
+<Nav segment="{segment}" />
 <div class="container">
   <div class="row" style="margin-top: 1rem;">
     <slot />

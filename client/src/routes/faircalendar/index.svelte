@@ -11,18 +11,18 @@
 </script>
 
 <script>
-  import { onMount } from "svelte";
-  import { goto } from "@sapper/app";
-  import frLocale from "@fullcalendar/core/locales/fr";
-  import "@fullcalendar/core/main.css";
-  import "@fullcalendar/daygrid/main.css";
-  import { get } from "../../utils/axios";
-  import Filters from "./_Filters.svelte";
-  import Overview from "./_Overview.svelte";
-  import { errorNormalizer } from "../../normalizer/errors";
-  import Breadcrumb from "../../components/Breadcrumb.svelte";
-  import Loader from "../../components/Loader.svelte";
-  import ServerErrors from "../../components/ServerErrors.svelte";
+  import { onMount } from 'svelte';
+  import { goto } from '@sapper/app';
+  import frLocale from '@fullcalendar/core/locales/fr';
+  import '@fullcalendar/core/main.css';
+  import '@fullcalendar/daygrid/main.css';
+  import { get } from '../../utils/axios';
+  import Filters from './_Filters.svelte';
+  import Overview from './_Overview.svelte';
+  import { errorNormalizer } from '../../normalizer/errors';
+  import Breadcrumb from '../../components/Breadcrumb.svelte';
+  import Loader from '../../components/Loader.svelte';
+  import ServerErrors from '../../components/ServerErrors.svelte';
 
   export let filters;
   export let user;
@@ -33,14 +33,14 @@
   let data = {};
 
   const fullCalendar = async (events, date) => {
-    const { Calendar } = await import("@fullcalendar/core");
-    const { default: dayGridPlugin } = await import("@fullcalendar/daygrid");
+    const { Calendar } = await import('@fullcalendar/core');
+    const { default: dayGridPlugin } = await import('@fullcalendar/daygrid');
     const { default: interactionPlugin } = await import(
-      "@fullcalendar/interaction"
+      '@fullcalendar/interaction'
     );
 
-    const dom = document.getElementById("calendar");
-    dom.innerHTML = "";
+    const dom = document.getElementById('calendar');
+    dom.innerHTML = '';
     const calendar = new Calendar(dom, {
       locale: frLocale,
       plugins: [dayGridPlugin, interactionPlugin],
@@ -48,8 +48,8 @@
       showNonCurrentDates: false,
       selectable: true,
       height: 620,
-      header: { left: "title", center: "", right: "" },
-      columnHeaderFormat: { weekday: "long" },
+      header: { left: 'title', center: '', right: '' },
+      columnHeaderFormat: { weekday: 'long' },
       events,
       dateClick: (info) => {
         if (!isLoggedUser) {
@@ -60,9 +60,9 @@
       },
       eventDataTransform: (data) => {
         const { id, date, time, summary, type, task, project } = data;
-        let title = time < 1 ? `[${time}] ` : "";
+        let title = time < 1 ? `[${time}] ` : '';
 
-        if (type === "mission" && task && project) {
+        if (type === 'mission' && task && project) {
           title += `${project.name} (${task.name})`;
         } else {
           title += type;
@@ -88,7 +88,7 @@
     try {
       loading = true;
       isLoggedUser = params.userId === user.id;
-      ({ data } = await get("events", { params }, user.apiToken));
+      ({ data } = await get('events', { params }, user.apiToken));
       fullCalendar(data.events, params.date);
     } catch (e) {
       errors = errorNormalizer(e);

@@ -1,20 +1,20 @@
 <script context="module">
-  export const preload = ({params}, {user}) => {
+  export const preload = ({ params }, { user }) => {
     return {
-      date: params.date, 
-      token: user.apiToken
+      date: params.date,
+      token: user.apiToken,
     };
   };
 </script>
 
 <script>
-  import {goto} from '@sapper/app';
-  import {format} from 'date-fns';
-  import {fr} from 'date-fns/locale';
+  import { goto } from '@sapper/app';
+  import { format } from 'date-fns';
+  import { fr } from 'date-fns/locale';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import {post} from '../../../utils/axios';
+  import { post } from '../../../utils/axios';
   import Form from '../_Form.svelte';
-  import {errorNormalizer} from '../../../normalizer/errors';
+  import { errorNormalizer } from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
 
   export let token;
@@ -24,12 +24,12 @@
     new Date(date),
     'EEEE dd MMMM yyyy',
     {
-      locale: fr
+      locale: fr,
     }
   )}`;
   let errors = [];
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       await post('events', e.detail, token);
 
@@ -46,9 +46,11 @@
 
 <div class="col-md-12">
   <Breadcrumb
-    items={[{title: 'FairCalendar', path: 'faircalendar'}, {title}]} />
-  <ServerErrors {errors} />
+    items="{[{ title: 'FairCalendar', path: 'faircalendar' }, { title }]}"
+  />
+  <ServerErrors errors="{errors}" />
   <Form
-    on:save={onSave}
-    event={{date, type: 'mission', time: '100', summary: '', taskId: null, projectId: null}} />
+    on:save="{onSave}"
+    event="{{ date, type: 'mission', time: '100', summary: '', taskId: null, projectId: null }}"
+  />
 </div>

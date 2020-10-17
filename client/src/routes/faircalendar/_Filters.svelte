@@ -1,8 +1,17 @@
+<style>
+  form.filter {
+    background: #e9ecef;
+    padding: 0.75rem 1rem;
+    margin-bottom: 20px;
+    border-radius: 0.25rem;
+  }
+</style>
+
 <script>
-  import {createEventDispatcher, onMount} from 'svelte';
-  import {stores} from  '@sapper/app';
-  import {geformat} from 'date-fns';
-import {get} from '../../utils/axios';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { stores } from '@sapper/app';
+  import { geformat } from 'date-fns';
+  import { get } from '../../utils/axios';
   import MonthsInput from '../../components/inputs/MonthsInput.svelte';
 
   const dispatch = createEventDispatcher();
@@ -14,39 +23,31 @@ import {get} from '../../utils/axios';
   let data = [];
 
   onMount(async () => {
-    ({data} = await get('users', {}, $session.user.apiToken));
+    ({ data } = await get('users', {}, $session.user.apiToken));
   });
 
   const handleFilter = () => {
     const filters = {
       userId,
-      date: format(new Date(date), 'yyyy-MM-dd')
+      date: format(new Date(date), 'yyyy-MM-dd'),
     };
 
     const uri = new URLSearchParams(filters).toString();
     window.history.pushState({}, null, `/faircalendar?${uri}`);
 
-    dispatch('filter', {...filters, date: new Date(date)});
+    dispatch('filter', { ...filters, date: new Date(date) });
   };
 </script>
-
-<style>
-  form.filter {
-    background: #e9ecef;
-    padding: 0.75rem 1rem;
-    margin-bottom: 20px;
-    border-radius: 0.25rem;
-  }
-</style>
 
 <form class="filter">
   <div class="row">
     <div class="col-md-6">
       <MonthsInput
-        label={'Filtrer par mois :'}
-        amount={6}
-        on:change={handleFilter}
-        bind:date />
+        label="{'Filtrer par mois :'}"
+        amount="{6}"
+        on:change="{handleFilter}"
+        bind:date
+      />
     </div>
     <div class="col-md-6">
       <div class="form-group">
@@ -54,11 +55,12 @@ import {get} from '../../utils/axios';
         <select
           id="userId"
           name="userId"
-          bind:value={userId}
-          on:change={handleFilter}
-          class="form-control">
+          bind:value="{userId}"
+          on:change="{handleFilter}"
+          class="form-control"
+        >
           {#each data as user}
-            <option value={user.id} selected={userId === user.id}>
+            <option value="{user.id}" selected="{userId === user.id}">
               {`${user.lastName} ${user.firstName}`}
             </option>
           {/each}

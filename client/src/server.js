@@ -17,13 +17,13 @@ const RedisStore = require('connect-redis')(session);
 let redisConfig = {
   host: config.REDIS_HOST,
   port: config.REDIS_PORT,
-  ttl: config.SESSION_TTL
+  ttl: config.SESSION_TTL,
 };
 
 if (config.REDIS_PASSWORD) {
   redisConfig = {
     ...redisConfig,
-    password: config.REDIS_PASSWORD
+    password: config.REDIS_PASSWORD,
   };
 }
 
@@ -41,7 +41,7 @@ app
       resave: false,
       saveUninitialized: true,
       cookie: { secure: !dev, maxAge: config.SESSION_TTL },
-      store: new RedisStore({ client: redisClient })
+      store: new RedisStore({ client: redisClient }),
     }),
     compression({ threshold: 0 }),
     sirv('static', { dev }),
@@ -57,11 +57,11 @@ app
           return sapper.middleware({
             session: () => {
               return {
-                user
+                user,
               };
-            }
+            },
           })(req, res, next);
-        }
+        },
       };
 
       return guard(req.path, user, options);

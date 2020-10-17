@@ -9,10 +9,11 @@
     id="userId"
     required="required"
     class="form-control"
-    bind:value={userId}>
+    bind:value="{userId}"
+  >
     <option value="">-- Choisir un salarié --</option>
     {#each users as user}
-      <option value={user.id} selected={userId === user.id}>
+      <option value="{user.id}" selected="{userId === user.id}">
         {`${user.firstName} ${user.lastName}`}
       </option>
     {/each}

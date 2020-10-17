@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 import Footer from './Footer.svelte';
-import {screen, render} from '@testing-library/svelte';
+import { screen, render } from '@testing-library/svelte';
 
 it('renders the footer', () => {
   render(Footer);

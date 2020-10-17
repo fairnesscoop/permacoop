@@ -11,7 +11,7 @@
     <tr>
       <th>Client</th>
       <th>Adresse</th>
-      <th />
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -29,8 +29,9 @@
         <td>
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
-            href={`/customers/${customer.id}/edit`}
-            {roles}>
+            href="{`/customers/${customer.id}/edit`}"
+            roles="{roles}"
+          >
             Modifier
           </SecuredLink>
         </td>

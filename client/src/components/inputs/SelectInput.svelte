@@ -9,8 +9,8 @@
 </script>
 
 <div class="form-group">
-  <label class={required} for={id}>{label}</label>
-  <select {id} {required} class="form-control" bind:value>
+  <label class="{required}" for="{id}">{label}</label>
+  <select id="{id}" required="{required}" class="form-control" bind:value>
     <slot />
   </select>
 </div>

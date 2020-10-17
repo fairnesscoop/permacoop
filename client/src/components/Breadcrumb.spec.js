@@ -1,9 +1,12 @@
 import Breadcrumb from './Breadcrumb.svelte';
-import {screen, render} from '@testing-library/svelte';
+import { screen, render } from '@testing-library/svelte';
 
 it('renders the breadcrumb', () => {
-  const items = [{path: '/fairness', title: 'Fairness'}, {title: 'Anything'}];
-  render(Breadcrumb, {items});
+  const items = [
+    { path: '/fairness', title: 'Fairness' },
+    { title: 'Anything' },
+  ];
+  render(Breadcrumb, { items });
 
   // Check that current page is the one without path.
   const listItems = screen.getAllByRole('listitem');

@@ -9,7 +9,7 @@
   <thead>
     <tr>
       <th>Mission</th>
-      <th />
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -19,8 +19,9 @@
         <td>
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
-            href={`/tasks/${task.id}/edit`}
-            {roles}>
+            href="{`/tasks/${task.id}/edit`}"
+            roles="{roles}"
+          >
             Modifier
           </SecuredLink>
         </td>

@@ -7,29 +7,29 @@
 </script>
 
 <script>
-  import { onMount } from "svelte";
-  import { goto } from "@sapper/app";
-  import Breadcrumb from "../../components/Breadcrumb.svelte";
-  import { get, put } from "../../utils/axios";
-  import Form from "./_Form.svelte";
-  import { errorNormalizer } from "../../normalizer/errors";
-  import ServerErrors from "../../components/ServerErrors.svelte";
+  import { onMount } from 'svelte';
+  import { goto } from '@sapper/app';
+  import Breadcrumb from '../../components/Breadcrumb.svelte';
+  import { get, put } from '../../utils/axios';
+  import Form from './_Form.svelte';
+  import { errorNormalizer } from '../../normalizer/errors';
+  import ServerErrors from '../../components/ServerErrors.svelte';
 
   export let token;
 
-  const title = "Mon profil";
+  const title = 'Mon profil';
   let errors = [];
   let data = {};
 
   onMount(async () => {
-    ({ data } = await get("users/me", {}, token));
+    ({ data } = await get('users/me', {}, token));
   });
 
   const onSave = async (e) => {
     try {
-      await put("users/me", e.detail, token);
+      await put('users/me', e.detail, token);
 
-      goto("/");
+      goto('/');
     } catch (error) {
       errors = errorNormalizer(error);
     }

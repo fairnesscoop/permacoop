@@ -3,7 +3,7 @@
   "author": "Mathieu MARCHOIS",
   "version": "1.0.0",
   "scripts": {
-    "format": "prettier -w src/**/*.{ts,svelte}",
+    "format": "prettier -w src/**/*.{js,svelte}",
     "lint": "eslint ./*.js ./src/*.js ./src/components/**/*.svelte ./src/routes/**/*.svelte ./src/routes/**/*.js",
     "dev": "sapper dev",
     "build": "sapper build --legacy",

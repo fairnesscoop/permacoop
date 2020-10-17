@@ -1,6 +1,6 @@
 <script>
-  import {format} from 'date-fns';
-  import {fr} from 'date-fns/locale';
+  import { format } from 'date-fns';
+  import { fr } from 'date-fns/locale';
   import SecuredLink from '../../../components/SecuredLink.svelte';
 
   export let items;
@@ -15,7 +15,7 @@
       <th>Durée</th>
       <th>Type de congé</th>
       <th>Statut</th>
-      <th />
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -23,8 +23,10 @@
       <tr>
         <td>{holiday.user.firstName} {holiday.user.lastName}</td>
         <td>
-          Du {format(new Date(holiday.startDate), 'dd/MM/yyyy', {locale: fr})}
-          au {format(new Date(holiday.endDate), 'dd/MM/yyyy', {locale: fr})}
+          Du
+          {format(new Date(holiday.startDate), 'dd/MM/yyyy', { locale: fr })}
+          au
+          {format(new Date(holiday.endDate), 'dd/MM/yyyy', { locale: fr })}
         </td>
         <td>{holiday.duration} jours</td>
         <td>{holiday.leaveType}</td>
@@ -34,8 +36,9 @@
         <td>
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
-            href={`/human_resources/holidays/${holiday.id}`}
-            {roles}>
+            href="{`/human_resources/holidays/${holiday.id}`}"
+            roles="{roles}"
+          >
             Détail
           </SecuredLink>
         </td>

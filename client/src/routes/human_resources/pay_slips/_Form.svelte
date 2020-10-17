@@ -1,7 +1,7 @@
 <script>
-  import {createEventDispatcher, onMount} from 'svelte';
-  import {stores} from  '@sapper/app';
-  import {get} from '../../../utils/axios';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { stores } from '@sapper/app';
+  import { get } from '../../../utils/axios';
   import UsersInput from '../../../components/inputs/UsersInput.svelte';
   import MonthsInput from '../../../components/inputs/MonthsInput.svelte';
 
@@ -10,7 +10,7 @@
   let data = [];
 
   onMount(async () => {
-    ({data} = await get('users', {}, $session.user.apiToken));
+    ({ data } = await get('users', {}, $session.user.apiToken));
   });
 
   export let date = new Date();
@@ -29,9 +29,9 @@
   };
 </script>
 
-<form on:submit|preventDefault={submit}>
-  <UsersInput users={data} bind:userId />
-  <MonthsInput label={'Période'} bind:date amount={6} />
+<form on:submit|preventDefault="{submit}">
+  <UsersInput users="{data}" bind:userId />
+  <MonthsInput label="{'Période'}" bind:date amount="{6}" />
   <div class="form-group">
     <label for="file" class="required">Fiche de paie</label>
     <input
@@ -39,12 +39,14 @@
       id="file"
       required="required"
       class="form-control"
-      bind:files />
+      bind:files
+    />
     <small class="form-text text-muted">Format PDF uniquement</small>
   </div>
   <button
     class="btn btn-primary"
-    disabled={!date || !userId || !files.length > 0}>
+    disabled="{!date || !userId || !files.length > 0}"
+  >
     Enregistrer
   </button>
 </form>

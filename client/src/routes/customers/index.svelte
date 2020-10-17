@@ -8,22 +8,22 @@
 </script>
 
 <script>
-  import { onMount } from "svelte";
-  import { get } from "../../utils/axios";
-  import { errorNormalizer } from "../../normalizer/errors";
-  import Breadcrumb from "../../components/Breadcrumb.svelte";
-  import Loader from "../../components/Loader.svelte";
-  import ServerErrors from "../../components/ServerErrors.svelte";
-  import SecuredLink from "../../components/SecuredLink.svelte";
-  import Table from "./_Table.svelte";
-  import { historyPushState } from "../../utils/url";
-  import Pagination from "../../components/Pagination.svelte";
-  import { ROLE_COOPERATOR, ROLE_EMPLOYEE } from "../../constants/roles";
+  import { onMount } from 'svelte';
+  import { get } from '../../utils/axios';
+  import { errorNormalizer } from '../../normalizer/errors';
+  import Breadcrumb from '../../components/Breadcrumb.svelte';
+  import Loader from '../../components/Loader.svelte';
+  import ServerErrors from '../../components/ServerErrors.svelte';
+  import SecuredLink from '../../components/SecuredLink.svelte';
+  import Table from './_Table.svelte';
+  import { historyPushState } from '../../utils/url';
+  import Pagination from '../../components/Pagination.svelte';
+  import { ROLE_COOPERATOR, ROLE_EMPLOYEE } from '../../constants/roles';
 
   export let page;
   export let token;
 
-  const title = "Clients";
+  const title = 'Clients';
   let loading;
   let errors = [];
   const roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
@@ -36,7 +36,7 @@
   const fetchCustomers = async () => {
     try {
       loading = true;
-      response = (await get("customers", { params: { page } }, token)).data;
+      response = (await get('customers', { params: { page } }, token)).data;
     } catch (e) {
       errors = errorNormalizer(e);
     } finally {
@@ -50,7 +50,7 @@
 
   const changePage = async (e) => {
     page = e.detail;
-    historyPushState("customers", { page });
+    historyPushState('customers', { page });
     fetchCustomers();
   };
 </script>

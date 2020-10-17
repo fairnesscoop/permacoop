@@ -1,10 +1,10 @@
 <script>
-  import {onMount} from 'svelte';
-  import {goto, stores} from '@sapper/app';
-  import {post} from '../../../utils/axios';
+  import { onMount } from 'svelte';
+  import { goto, stores } from '@sapper/app';
+  import { post } from '../../../utils/axios';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
   import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../../normalizer/errors';
+  import { errorNormalizer } from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
 
   const { session } = stores();
@@ -12,7 +12,7 @@
   let errors = [];
   let title = 'Créer un nouveau devis';
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       await post('quotes', e.detail, $session.user.apiToken);
 
@@ -29,7 +29,8 @@
 
 <div class="col-md-12">
   <Breadcrumb
-    items={[{title: 'Gestion & Comptabilité'}, {path: 'accounting/quotes', title: 'Devis'}, {title}]} />
-  <ServerErrors {errors} />
-  <Form on:save={onSave} />
+    items="{[{ title: 'Gestion & Comptabilité' }, { path: 'accounting/quotes', title: 'Devis' }, { title }]}"
+  />
+  <ServerErrors errors="{errors}" />
+  <Form on:save="{onSave}" />
 </div>

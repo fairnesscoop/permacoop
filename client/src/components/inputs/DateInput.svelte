@@ -9,6 +9,12 @@
 </script>
 
 <div class="form-group">
-  <label class={required} for={id}>{label}</label>
-  <input type="date" {id} {required} bind:value class="form-control" />
+  <label class="{required}" for="{id}">{label}</label>
+  <input
+    type="date"
+    id="{id}"
+    required="{required}"
+    bind:value
+    class="form-control"
+  />
 </div>

@@ -1,6 +1,6 @@
 <script>
   import SecuredLink from '../../../components/SecuredLink.svelte';
-  import {format} from '../../../normalizer/money';
+  import { format } from '../../../normalizer/money';
 
   export let roles;
   export let items;
@@ -13,7 +13,7 @@
       <th>Mission</th>
       <th>Client</th>
       <th>Montant HT</th>
-      <th />
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -26,8 +26,9 @@
         <td>
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
-            {roles}
-            href={`accounting/daily_rates/${dailyRate.id}/edit`}>
+            roles="{roles}"
+            href="{`accounting/daily_rates/${dailyRate.id}/edit`}"
+          >
             Modifier
           </SecuredLink>
         </td>

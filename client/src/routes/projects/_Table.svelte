@@ -10,7 +10,7 @@
     <tr>
       <th>Projet</th>
       <th>Client</th>
-      <th />
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -21,8 +21,9 @@
         <td>
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
-            href={`/projects/${project.id}/edit`}
-            {roles}>
+            href="{`/projects/${project.id}/edit`}"
+            roles="{roles}"
+          >
             Modifier
           </SecuredLink>
         </td>

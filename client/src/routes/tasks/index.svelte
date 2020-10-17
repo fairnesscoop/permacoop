@@ -2,7 +2,7 @@
   export const preload = async ({ query }, { user }) => {
     return {
       page: query.page || 1,
-      token: user.apiToken
+      token: user.apiToken,
     };
   };
 </script>
@@ -30,7 +30,7 @@
   let response = {
     items: [],
     totalItems: 0,
-    pageCount: 0
+    pageCount: 0,
   };
 
   const fetchTasks = async () => {
@@ -48,7 +48,7 @@
     fetchTasks();
   });
 
-  const changePage = async event => {
+  const changePage = async (event) => {
     page = event.detail;
     historyPushState('tasks', { page });
     fetchTasks();
@@ -60,7 +60,7 @@
 </svelte:head>
 
 <div class="col-md-12">
-  <Breadcrumb items={[{ title }]} />
+  <Breadcrumb items="{[{ title }]}" />
   <div class="row">
     <div class="col-md-8">
       <h3>{title} <small>({response.totalItems})</small></h3>
@@ -69,16 +69,18 @@
       <SecuredLink
         className="btn btn-primary mb-3 float-right"
         href="tasks/add"
-        {roles}>
+        roles="{roles}"
+      >
         + Ajouter une mission
       </SecuredLink>
     </div>
   </div>
-  <ServerErrors {errors} />
-  <Loader {loading} />
-  <Table items={response.items} {roles} />
+  <ServerErrors errors="{errors}" />
+  <Loader loading="{loading}" />
+  <Table items="{response.items}" roles="{roles}" />
   <Pagination
-    on:change={changePage}
-    currentPage={page}
-    pageCount={response.pageCount} />
+    on:change="{changePage}"
+    currentPage="{page}"
+    pageCount="{response.pageCount}"
+  />
 </div>
