@@ -53,20 +53,17 @@
   {#if event.type === 'mission'}
     <ProjectsInput
       projects="{projects.items}"
-      bind:projectId="{event.projectId}"
-    />
+      bind:projectId="{event.projectId}" />
     <TasksInput tasks="{tasks.items}" bind:taskId="{event.taskId}" />
   {/if}
   <TextInput
     label="{'Commentaire'}"
     bind:value="{event.summary}"
-    required="{''}"
-  />
+    required="{''}" />
   <button
     type="submit"
     class="btn btn-primary"
-    disabled="{!event.time || !event.type}"
-  >
+    disabled="{!event.time || !event.type}">
     Enregistrer
   </button>
   <slot />

@@ -30,6 +30,5 @@
   <ServerErrors errors="{errors}" />
   <Form
     customer="{{ name: '', address: { street: '', city: '', zipCode: '', country: 'FR' } }}"
-    on:save="{onSave}"
-  />
+    on:save="{onSave}" />
 </div>

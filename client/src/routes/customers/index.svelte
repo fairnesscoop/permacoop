@@ -69,8 +69,7 @@
       <SecuredLink
         className="btn btn-primary float-right mb-3"
         href="customers/add"
-        roles="{roles}"
-      >
+        roles="{roles}">
         + Ajouter un client
       </SecuredLink>
     </div>
@@ -81,6 +80,5 @@
   <Pagination
     on:change="{changePage}"
     currentPage="{page}"
-    pageCount="{response.pageCount}"
-  />
+    pageCount="{response.pageCount}" />
 </div>

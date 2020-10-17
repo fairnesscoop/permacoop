@@ -46,8 +46,7 @@
         label="{'Filtrer par mois :'}"
         amount="{6}"
         on:change="{handleFilter}"
-        bind:date
-      />
+        bind:date />
     </div>
     <div class="col-md-6">
       <div class="form-group">
@@ -57,8 +56,7 @@
           name="userId"
           bind:value="{userId}"
           on:change="{handleFilter}"
-          class="form-control"
-        >
+          class="form-control">
           {#each data as user}
             <option value="{user.id}" selected="{userId === user.id}">
               {`${user.lastName} ${user.firstName}`}

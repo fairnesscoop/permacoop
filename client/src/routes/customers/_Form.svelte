@@ -27,8 +27,7 @@
   <button
     type="submit"
     class="btn btn-primary"
-    disabled="{!customer.name || !address.country || !address.zipCode || !address.city || !address.street}"
-  >
+    disabled="{!customer.name || !address.country || !address.zipCode || !address.city || !address.street}">
     Enregistrer
   </button>
 </form>

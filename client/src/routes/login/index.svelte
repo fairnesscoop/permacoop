@@ -43,8 +43,7 @@
     <button
       type="submit"
       class="btn btn-primary"
-      disabled="{!email || !password || loading}"
-    >
+      disabled="{!email || !password || loading}">
       Se connecter
     </button>
   </form>

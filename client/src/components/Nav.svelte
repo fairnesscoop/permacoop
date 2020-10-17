@@ -27,8 +27,7 @@
       src="/images/logo.png"
       height="30"
       class="d-inline-block align-top"
-      alt="Permacoop"
-    />
+      alt="Permacoop" />
     Permacoop
   </a>
   <button
@@ -37,8 +36,7 @@
     data-toggle="collapse"
     data-target="#nav"
     aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
+    aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   {#if process.browser && $session.user}
@@ -50,14 +48,12 @@
           </li>
         {/if}
         <li
-          class="nav-item dropdown {segment === 'accounting' ? 'active' : ''}"
-        >
+          class="nav-item dropdown {segment === 'accounting' ? 'active' : ''}">
           <a
             class="nav-link dropdown-toggle"
             href="javascript:void"
             role="button"
-            data-toggle="dropdown"
-          >
+            data-toggle="dropdown">
             Gestion & Comptabilité
           </a>
           <div class="dropdown-menu">
@@ -68,14 +64,12 @@
           </div>
         </li>
         <li
-          class="nav-item dropdown {segment === 'human_resources' ? 'active' : ''}"
-        >
+          class="nav-item dropdown {segment === 'human_resources' ? 'active' : ''}">
           <a
             class="nav-link dropdown-toggle"
             href="javascript:void"
             role="button"
-            data-toggle="dropdown"
-          >
+            data-toggle="dropdown">
             RH
           </a>
           <div class="dropdown-menu">
@@ -108,8 +102,7 @@
             class="nav-link dropdown-toggle"
             href="javascript:void"
             role="button"
-            data-toggle="dropdown"
-          >
+            data-toggle="dropdown">
             {`${$session.user.firstName} ${$session.user.lastName}`}
           </a>
           <div class="dropdown-menu dropdown-menu-right">
@@ -118,8 +111,7 @@
             <a
               class="dropdown-item"
               on:click="{() => handleLogout()}"
-              href="login"
-            >
+              href="login">
               Se déconnecter
             </a>
           </div>

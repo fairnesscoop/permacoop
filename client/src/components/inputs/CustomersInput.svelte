@@ -9,8 +9,7 @@
     id="customerId"
     required="required"
     class="form-control"
-    bind:value="{customerId}"
-  >
+    bind:value="{customerId}">
     <option value="">-- Choisir un client --</option>
     {#each customers as customer}
       <option value="{customer.id}" selected="{customerId === customer.id}">

@@ -39,14 +39,12 @@
       id="file"
       required="required"
       class="form-control"
-      bind:files
-    />
+      bind:files />
     <small class="form-text text-muted">Format PDF uniquement</small>
   </div>
   <button
     class="btn btn-primary"
-    disabled="{!date || !userId || !files.length > 0}"
-  >
+    disabled="{!date || !userId || !files.length > 0}">
     Enregistrer
   </button>
 </form>

@@ -46,8 +46,7 @@
   <button
     type="submit"
     class="btn btn-primary"
-    disabled="{!taskId || !customerId || !userId || !amount}"
-  >
+    disabled="{!taskId || !customerId || !userId || !amount}">
     Enregistrer
   </button>
 </form>

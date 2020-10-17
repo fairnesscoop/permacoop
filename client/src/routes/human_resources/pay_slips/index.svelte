@@ -68,8 +68,7 @@
       <SecuredLink
         className="btn btn-primary float-right mb-3"
         href="human_resources/pay_slips/add"
-        roles="{[ROLE_COOPERATOR, ROLE_ACCOUNTANT]}"
-      >
+        roles="{[ROLE_COOPERATOR, ROLE_ACCOUNTANT]}">
         + Ajouter une fiche de paie
       </SecuredLink>
     </div>
@@ -80,6 +79,5 @@
   <Pagination
     on:change="{changePage}"
     currentPage="{page}"
-    pageCount="{response.pageCount}"
-  />
+    pageCount="{response.pageCount}" />
 </div>

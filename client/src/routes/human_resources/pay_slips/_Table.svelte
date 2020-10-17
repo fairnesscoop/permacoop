@@ -55,8 +55,7 @@
             <button
               disabled="{disableDownloadableButton}"
               class="btn btn-outline-secondary btn-sm"
-              on:click="{download(paySlip.id, paySlip.file.originalName)}"
-            >
+              on:click="{download(paySlip.id, paySlip.file.originalName)}">
               Télécharger ({filesize(paySlip.file.size)})
             </button>
           {/if}

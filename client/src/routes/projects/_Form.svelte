@@ -33,8 +33,7 @@
   <button
     type="submit"
     class="btn btn-primary"
-    disabled="{!name || !customerId}"
-  >
+    disabled="{!name || !customerId}">
     Enregistrer
   </button>
 </form>

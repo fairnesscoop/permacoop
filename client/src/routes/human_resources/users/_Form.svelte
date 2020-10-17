@@ -75,8 +75,7 @@
   <button
     type="submit"
     class="btn btn-primary"
-    disabled="{!firstName || !lastName || !email || !password || !role}"
-  >
+    disabled="{!firstName || !lastName || !email || !password || !role}">
     Enregistrer
   </button>
 </form>

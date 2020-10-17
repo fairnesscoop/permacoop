@@ -37,8 +37,7 @@
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
             href="{`/human_resources/holidays/${holiday.id}`}"
-            roles="{roles}"
-          >
+            roles="{roles}">
             Détail
           </SecuredLink>
         </td>

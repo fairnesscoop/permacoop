@@ -70,8 +70,7 @@
       <SecuredLink
         className="btn btn-primary float-right mb-3"
         href="human_resources/holidays/add"
-        roles="{roles}"
-      >
+        roles="{roles}">
         + Demande de congé
       </SecuredLink>
     </div>
@@ -81,6 +80,5 @@
   <Pagination
     on:change="{changePage}"
     currentPage="{page}"
-    pageCount="{response.pageCount}"
-  />
+    pageCount="{response.pageCount}" />
 </div>

@@ -19,8 +19,7 @@
       placeholder="0,00"
       step="0.01"
       bind:value
-      class="form-control"
-    />
+      class="form-control" />
     <div class="input-group-append">
       <span class="input-group-text">€</span>
     </div>

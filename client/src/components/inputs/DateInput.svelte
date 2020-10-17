@@ -15,6 +15,5 @@
     id="{id}"
     required="{required}"
     bind:value
-    class="form-control"
-  />
+    class="form-control" />
 </div>

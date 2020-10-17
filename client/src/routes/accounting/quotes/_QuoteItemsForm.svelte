@@ -46,8 +46,7 @@
             required="required"
             placeholder="Description de la prestation"
             bind:value="{value.title}"
-            class="form-control"
-          />
+            class="form-control" />
         </td>
         <td>
           <input
@@ -57,8 +56,7 @@
             placeholder="0,00"
             required="required"
             bind:value="{value.quantity}"
-            class="form-control"
-          />
+            class="form-control" />
         </td>
         <td>
           <div class="input-group">
@@ -69,8 +67,7 @@
               step="0.01"
               required="required"
               bind:value="{value.dailyRate}"
-              class="form-control"
-            />
+              class="form-control" />
             <div class="input-group-append">
               <span class="input-group-text">€</span>
             </div>
@@ -81,8 +78,7 @@
             <button
               class="btn btn-sm btn-danger"
               type="button"
-              on:click="{() => removeItem(index)}"
-            >
+              on:click="{() => removeItem(index)}">
               x
             </button>
           {/if}

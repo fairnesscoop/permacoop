@@ -24,8 +24,7 @@
             class="page-link"
             href="javascript:void(0)"
             on:click="{() => changePage(currentPage - 1)}"
-            aria-label="Previous"
-          >
+            aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
@@ -35,8 +34,7 @@
           <a
             class="page-link"
             on:click="{() => changePage(page)}"
-            href="javascript:void(0)"
-          >
+            href="javascript:void(0)">
             {page}
           </a>
         </li>
@@ -47,8 +45,7 @@
             class="page-link"
             href="javascript:void(0)"
             aria-label="Next"
-            on:click="{() => changePage(currentPage + 1)}"
-          >
+            on:click="{() => changePage(currentPage + 1)}">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>

@@ -28,8 +28,7 @@
   <button
     type="submit"
     class="btn btn-primary"
-    disabled="{!firstName || !lastName || !email || !password}"
-  >
+    disabled="{!firstName || !lastName || !email || !password}">
     Enregistrer
   </button>
 </form>

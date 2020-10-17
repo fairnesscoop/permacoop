@@ -28,13 +28,11 @@
     id="date"
     bind:value="{date}"
     on:change="{handleChange}"
-    class="form-control"
-  >
+    class="form-control">
     {#each periods as period}
       <option
         value="{format(period, 'yyyy-MM-dd')}"
-        selected="{format(period, 'yyyy-MM') === format(new Date(date), 'yyyy-MM')}"
-      >
+        selected="{format(period, 'yyyy-MM') === format(new Date(date), 'yyyy-MM')}">
         {format(period, 'MMMM yyyy', { locale: fr })}
       </option>
     {/each}

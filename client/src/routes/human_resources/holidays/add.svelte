@@ -28,8 +28,7 @@
 
 <div class="col-md-12">
   <Breadcrumb
-    items="{[{ title: 'RH' }, { title: 'Congés', path: 'human_resources/holidays' }, { title }]}"
-  />
+    items="{[{ title: 'RH' }, { title: 'Congés', path: 'human_resources/holidays' }, { title }]}" />
   <ServerErrors errors="{errors}" />
   <Form on:save="{onSave}" />
 </div>

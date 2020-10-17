@@ -60,8 +60,7 @@
 
 <div class="col-md-12">
   <Breadcrumb
-    items="{[{ title: 'FairCalendar', path: 'faircalendar' }, { title }]}"
-  />
+    items="{[{ title: 'FairCalendar', path: 'faircalendar' }, { title }]}" />
   <ServerErrors errors="{errors}" />
   <Form on:save="{onSave}" event="{{ ...event, taskId, projectId, time }}">
     <button class="btn btn-danger" type="button" on:click="{onDelete}">

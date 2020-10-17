@@ -69,8 +69,7 @@
       <SecuredLink
         className="btn btn-primary float-right mb-3"
         roles="{roles}"
-        href="accounting/daily_rates/add"
-      >
+        href="accounting/daily_rates/add">
         + Ajouter un TJM
       </SecuredLink>
     </div>
@@ -81,6 +80,5 @@
   <Pagination
     on:change="{changePage}"
     currentPage="{page}"
-    pageCount="{response.pageCount}"
-  />
+    pageCount="{response.pageCount}" />
 </div>

@@ -36,8 +36,7 @@
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
             href="{''}"
-            roles="{roles}"
-          >
+            roles="{roles}">
             Modifier
           </SecuredLink>
         </td>

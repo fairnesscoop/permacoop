@@ -55,8 +55,7 @@
       <SecuredLink
         className="btn btn-primary float-right mb-3"
         href="human_resources/users/add"
-        roles="{[ROLE_COOPERATOR, ROLE_EMPLOYEE]}"
-      >
+        roles="{[ROLE_COOPERATOR, ROLE_EMPLOYEE]}">
         + Ajouter un salarié
       </SecuredLink>
     </div>

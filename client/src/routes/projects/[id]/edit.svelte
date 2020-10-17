@@ -43,6 +43,5 @@
   <Form
     customerId="{project.customer.id}"
     name="{project.name}"
-    on:save="{onSave}"
-  />
+    on:save="{onSave}" />
 </div>

@@ -20,8 +20,7 @@
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
             href="{`/tasks/${task.id}/edit`}"
-            roles="{roles}"
-          >
+            roles="{roles}">
             Modifier
           </SecuredLink>
         </td>

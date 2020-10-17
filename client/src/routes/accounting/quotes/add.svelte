@@ -29,8 +29,7 @@
 
 <div class="col-md-12">
   <Breadcrumb
-    items="{[{ title: 'Gestion & Comptabilité' }, { path: 'accounting/quotes', title: 'Devis' }, { title }]}"
-  />
+    items="{[{ title: 'Gestion & Comptabilité' }, { path: 'accounting/quotes', title: 'Devis' }, { title }]}" />
   <ServerErrors errors="{errors}" />
   <Form on:save="{onSave}" />
 </div>

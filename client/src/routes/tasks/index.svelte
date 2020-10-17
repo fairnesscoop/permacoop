@@ -69,8 +69,7 @@
       <SecuredLink
         className="btn btn-primary mb-3 float-right"
         href="tasks/add"
-        roles="{roles}"
-      >
+        roles="{roles}">
         + Ajouter une mission
       </SecuredLink>
     </div>
@@ -81,6 +80,5 @@
   <Pagination
     on:change="{changePage}"
     currentPage="{page}"
-    pageCount="{response.pageCount}"
-  />
+    pageCount="{response.pageCount}" />
 </div>

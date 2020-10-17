@@ -28,9 +28,7 @@
             "import/first": "off",
             "import/no-duplicates": "off",
             "import/no-mutable-exports": "off",
-            "import/no-mutable-unresolved": "off",
-            "no-undef": "off",
-            "no-unused-vars": "off"
+            "import/no-mutable-unresolved": "off"
         }
     }]
 }

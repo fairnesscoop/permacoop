@@ -55,8 +55,7 @@
       id="status"
       required="required"
       class="form-control"
-      bind:value="{status}"
-    >
+      bind:value="{status}">
       <option value="draft">Brouillon</option>
       <option value="sent">Envoyé</option>
       <option value="refused">Refusé</option>
@@ -71,8 +70,7 @@
       required="required"
       class="form-control"
       bind:value="{customerId}"
-      on:change="{onCustomerSelected}"
-    >
+      on:change="{onCustomerSelected}">
       <option value="">-- Choisir un client --</option>
       {#each customers.items as customer}
         <option value="{customer.id}" selected="{customerId === customer.id}">
@@ -106,8 +104,7 @@
   <button
     type="submit"
     class="btn btn-primary"
-    disabled="{!customerId || !status}"
-  >
+    disabled="{!customerId || !status}">
     Enregistrer
   </button>
 </form>

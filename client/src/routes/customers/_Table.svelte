@@ -30,8 +30,7 @@
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
             href="{`/customers/${customer.id}/edit`}"
-            roles="{roles}"
-          >
+            roles="{roles}">
             Modifier
           </SecuredLink>
         </td>

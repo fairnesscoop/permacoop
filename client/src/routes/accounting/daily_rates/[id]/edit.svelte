@@ -44,14 +44,12 @@
 
 <div class="col-md-12">
   <Breadcrumb
-    items="{[{ title: 'Gestion & Comptabilité' }, { title: 'TJM', path: 'accounting/daily_rates' }, { title }]}"
-  />
+    items="{[{ title: 'Gestion & Comptabilité' }, { title: 'TJM', path: 'accounting/daily_rates' }, { title }]}" />
   <ServerErrors errors="{errors}" />
   <Form
     on:save="{onSave}"
     amount="{amount}"
     taskId="{taskId}"
     customerId="{customerId}"
-    userId="{userId}"
-  />
+    userId="{userId}" />
 </div>

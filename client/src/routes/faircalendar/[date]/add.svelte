@@ -46,11 +46,9 @@
 
 <div class="col-md-12">
   <Breadcrumb
-    items="{[{ title: 'FairCalendar', path: 'faircalendar' }, { title }]}"
-  />
+    items="{[{ title: 'FairCalendar', path: 'faircalendar' }, { title }]}" />
   <ServerErrors errors="{errors}" />
   <Form
     on:save="{onSave}"
-    event="{{ date, type: 'mission', time: '100', summary: '', taskId: null, projectId: null }}"
-  />
+    event="{{ date, type: 'mission', time: '100', summary: '', taskId: null, projectId: null }}" />
 </div>

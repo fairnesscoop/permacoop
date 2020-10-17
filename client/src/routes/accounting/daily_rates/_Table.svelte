@@ -27,8 +27,7 @@
           <SecuredLink
             className="btn btn-outline-secondary btn-sm"
             roles="{roles}"
-            href="{`accounting/daily_rates/${dailyRate.id}/edit`}"
-          >
+            href="{`accounting/daily_rates/${dailyRate.id}/edit`}">
             Modifier
           </SecuredLink>
         </td>
