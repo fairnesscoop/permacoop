@@ -46,5 +46,7 @@ database-diff: ## Generate database diff
 database-connect: ## Connect to the database container
 	${exec} database psql -h database -d permacoop
 ci: ## Run CI checks
-	${run} api npm run test:cov
 	${run} api npm run lint
+	${run} client npm run lint
+	${run} api npm run test:cov
+
