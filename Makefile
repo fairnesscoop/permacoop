@@ -28,6 +28,7 @@ test: ## Run test suite
 	${exec} client npm run test-unit
 linter: ## Linter
 	${exec} api npm run lint
+	${exec} client npm run lint
 api-logs: ## Display API logs
 	${logs} api
 api-bash: ## Connect to API container
