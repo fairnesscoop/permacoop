@@ -6,11 +6,11 @@
     ROLE_EMPLOYEE
   } from '../../../constants/roles';
   import UserAdministrativeForm from './_UserAdministrativeForm.svelte';
-  import TextInput from '../../../components/inputs/TextInput.svelte';
-  import EmailInput from '../../../components/inputs/EmailInput.svelte';
-  import PasswordInput from '../../../components/inputs/PasswordInput.svelte';
+  import Input from '../../../components/inputs/Input.svelte';
   import SelectInput from '../../../components/inputs/SelectInput.svelte';
+  import Button from '../../../components/inputs/Button.svelte';
 
+  export let loading;
   export let firstName = '';
   export let lastName = '';
   export let email = '';
@@ -53,29 +53,30 @@
   };
 </script>
 
-<form on:submit|preventDefault={submit}>
+<form on:submit|preventDefault={submit} class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <SelectInput label={'Role'} bind:value={role}>
     <option value={ROLE_COOPERATOR}>Coopérateur</option>
     <option value={ROLE_EMPLOYEE}>Employé</option>
     <option value={ROLE_ACCOUNTANT}>Comptable</option>
   </SelectInput>
-  <div class="row">
-    <div class="col-md-6">
-      <TextInput label={'Prénom'} bind:value={firstName} />
+  <div class="flex">
+    <div class="w-1/2 pr-2">
+      <Input label={'Prénom'} bind:value={firstName} />
     </div>
-    <div class="col-md-6">
-      <TextInput label={'Nom'} bind:value={lastName} />
+    <div class="w-1/2 pl-2">
+      <Input label={'Nom'} bind:value={lastName} />
     </div>
   </div>
-  <EmailInput label={'Email'} bind:value={email} />
-  <PasswordInput label={'Mot de passe'} bind:value={password} />
+  <div class="flex">
+    <div class="w-1/2 pr-2">
+      <Input type={'email'} label={'Email'} bind:value={email} />
+    </div>
+    <div class="w-1/2 pl-2">
+      <Input type={'password'} label={'Mot de passe'} bind:value={password} />
+    </div>
+  </div>
   {#if role !== ROLE_ACCOUNTANT}
     <UserAdministrativeForm bind:userAdministrative />
   {/if}
-  <button
-    type="submit"
-    class="btn btn-primary"
-    disabled={!firstName || !lastName || !email || !password || !role}>
-    Enregistrer
-  </button>
+  <Button value={'Enregistrer'} {loading} disabled={!firstName || !lastName || !email || !password || !role || loading} />
 </form>

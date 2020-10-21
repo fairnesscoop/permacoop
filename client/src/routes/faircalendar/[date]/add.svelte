@@ -16,26 +16,24 @@
   import Form from '../_Form.svelte';
   import {errorNormalizer} from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
+  import H4Title from '../../../components/H4Title.svelte';
 
   export let token;
   export let date;
 
-  let title = `Ajout d'activité du ${format(
-    new Date(date),
-    'EEEE dd MMMM yyyy',
-    {
-      locale: fr
-    }
-  )}`;
+  let title = `Activité du ${format(new Date(date), 'EEEE dd MMMM yyyy', { locale: fr } )}`;
   let errors = [];
+  let loading = false;
 
   const onSave = async e => {
     try {
+      loading = true;
       await post('events', e.detail, token);
-
       goto('/faircalendar');
     } catch (e) {
       errors = errorNormalizer(e);
+    } finally {
+       loading = false;
     }
   };
 </script>
@@ -44,11 +42,10 @@
   <title>{title} - Permacoop</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb
-    items={[{title: 'FairCalendar', path: 'faircalendar'}, {title}]} />
-  <ServerErrors {errors} />
-  <Form
-    on:save={onSave}
-    event={{date, type: 'mission', time: '100', summary: '', taskId: null, projectId: null}} />
-</div>
+<Breadcrumb items={[{title: 'FairCalendar', path: 'faircalendar'}, {title}]} />
+<ServerErrors {errors} />
+<H4Title {title} />
+<Form
+  {loading}
+  on:save={onSave}
+  event={{date, type: 'mission', time: '100', summary: '', taskId: null, projectId: null}} />

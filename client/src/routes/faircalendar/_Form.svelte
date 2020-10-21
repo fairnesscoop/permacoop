@@ -4,8 +4,9 @@
   import {get} from '../../utils/axios';
   import TasksInput from '../../components/inputs/TasksInput.svelte';
   import ProjectsInput from '../../components/inputs/ProjectsInput.svelte';
-  import TextInput from '../../components/inputs/TextInput.svelte';
+  import Input from '../../components/inputs/Input.svelte';
   import SelectInput from '../../components/inputs/SelectInput.svelte';
+  import Button from '../../components/inputs/Button.svelte';
 
   const dispatch = createEventDispatcher();
   const { session } = stores();
@@ -25,6 +26,7 @@
   });
 
   export let event;
+  export let loading;
 
   const submit = () => {
     dispatch('save', {
@@ -34,7 +36,7 @@
   };
 </script>
 
-<form on:submit|preventDefault={submit}>
+<form on:submit|preventDefault={submit} class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <SelectInput label={'Type'} bind:value={event.type}>
     <option value={'mission'}>Mission</option>
     <option value={'dojo'}>Dojo</option>
@@ -54,12 +56,6 @@
     <ProjectsInput projects={projects.items} bind:projectId={event.projectId} />
     <TasksInput tasks={tasks.items} bind:taskId={event.taskId} />
   {/if}
-  <TextInput label={'Commentaire'} bind:value={event.summary} required={''} />
-  <button
-    type="submit"
-    class="btn btn-primary"
-    disabled={!event.time || !event.type}>
-    Enregistrer
-  </button>
-  <slot />
+  <Input label={'Commentaire'} bind:value={event.summary} required={''} />
+  <Button value={'Enregistrer'} {loading} disabled={!event.time || !event.type || loading} />
 </form>

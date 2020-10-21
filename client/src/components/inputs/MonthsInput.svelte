@@ -5,6 +5,7 @@
 
   export let label = '';
   export let amount;
+  export let emptyValue = true;
   export let date;
 
   const dispatch = createEventDispatcher();
@@ -17,13 +18,14 @@
   }).sort(compareDesc);
 </script>
 
-<div class="form-group">
-  <label for="date">{label}</label>
-  <select
-    id="date"
-    bind:value={date}
-    on:change={handleChange}
-    class="form-control">
+<div class="block mt-4 text-sm">
+  <label for="date" class="text-gray-700 dark:text-gray-400">
+    {label}
+  </label>
+  <select id="date" bind:value={date} on:change={handleChange} class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+    {#if emptyValue}
+      <option value="">-- Choisir un mois --</option>
+    {/if}
     {#each periods as period}
       <option
         value={format(period, 'yyyy-MM-dd')}
