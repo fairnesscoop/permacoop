@@ -1,11 +1,10 @@
 <script context="module">
   import {get, put} from '../../../../utils/axios';
 
-  export const preload = async ({params}, {user}) => {
-    const token = user.apiToken;
-    const {data} = await get(`projects/${params.id}`, {}, token);
+  export const preload = async ({params}) => {
+    const {data} = await get(`projects/${params.id}`);
 
-    return {project: data, token};
+    return {project: data};
   };
 </script>
 
@@ -17,7 +16,6 @@
   import ServerErrors from '../../../../components/ServerErrors.svelte';
   import H4Title from '../../../../components/H4Title.svelte';
 
-  export let token;
   export let project;
 
   let errors = [];
@@ -27,7 +25,7 @@
   const onSave = async e => {
     try {
       loading = true;
-      await put(`projects/${project.id}`, e.detail, token);
+      await put(`projects/${project.id}`, e.detail);
       goto('/crm/projects');
     } catch (e) {
       errors = errorNormalizer(e);

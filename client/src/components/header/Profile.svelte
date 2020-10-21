@@ -1,5 +1,6 @@
 <script>
   import { slide } from 'svelte/transition';
+  import Cookies from 'js-cookie';
   import { stores, goto } from '@sapper/app';
   import UserIcon from '../icons/UserIcon.svelte';
   import LogoutIcon from '../icons/LogoutIcon.svelte';
@@ -9,6 +10,7 @@
   const { session } = stores();
   const handleLogout = async () => {
     $session.user = null;
+    Cookies.remove('permacoop_token');
     goto('/login');
     await fetch('/proxy/session', {method: 'DELETE'});
   };

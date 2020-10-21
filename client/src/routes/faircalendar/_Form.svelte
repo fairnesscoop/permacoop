@@ -1,6 +1,5 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
-  import {stores} from  '@sapper/app';
   import {get} from '../../utils/axios';
   import TasksInput from '../../components/inputs/TasksInput.svelte';
   import ProjectsInput from '../../components/inputs/ProjectsInput.svelte';
@@ -9,16 +8,14 @@
   import Button from '../../components/inputs/Button.svelte';
 
   const dispatch = createEventDispatcher();
-  const { session } = stores();
-  const token = $session.user.apiToken;
 
   let tasks = {items: []};
   let projects = {items: []};
 
   onMount(async () => {
     let [tasksReponse, projectsReponse] = await Promise.all([
-      get('tasks', {params: {page: 1}}, token),
-      get('projects', {params: {page: 1}}, token)
+      get('tasks', {params: {page: 1}}),
+      get('projects', {params: {page: 1}})
     ]);
 
     tasks = tasksReponse.data;

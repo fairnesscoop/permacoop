@@ -1,8 +1,7 @@
 <script context="module">
-  export const preload = async ({query}, {user}) => {
+  export const preload = async ({query}) => {
     return {
-      page: query.page || 1,
-      token: user.apiToken
+      page: query.page || 1
     };
   };
 </script>
@@ -19,7 +18,6 @@
   import Pagination from '../../../components/Pagination.svelte';
   import {historyPushState} from '../../../utils/url';
 
-  export let token;
   export let page;
 
   let title = 'TJM';
@@ -42,7 +40,7 @@
 
   const fetchDailyRates = async () => {
     try {
-      response = (await get('daily_rates', {params: {page}}, token)).data;
+      response = (await get('daily_rates', {params: {page}})).data;
     } catch (e) {
       errors = errorNormalizer(e);
     }

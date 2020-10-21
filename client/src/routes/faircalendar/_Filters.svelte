@@ -1,12 +1,10 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
-  import {stores} from  '@sapper/app';
   import {get} from '../../utils/axios';
   import {format} from 'date-fns';
   import MonthsInput from '../../components/inputs/MonthsInput.svelte';
 
   const dispatch = createEventDispatcher();
-  const { session } = stores();
 
   export let userId;
   export let date;
@@ -14,7 +12,7 @@
   let data = [];
 
   onMount(async () => {
-    ({data} = await get('users', {}, $session.user.apiToken));
+    ({data} = await get('users'));
   });
 
   const handleFilter = () => {

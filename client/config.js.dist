@@ -1,9 +1,4 @@
 export default {
   API_URL_SSR: 'http://api:3000/api',
-  API_URL: '/api',
-  REDIS_HOST: 'redis',
-  REDIS_PORT: 6379,
-  REDIS_PASSWORD: '',
-  SESSION_SECRET: 'E7NfgykPUk2ap8',
-  SESSION_TTL: 31536000000
+  API_URL: '/api'
 };

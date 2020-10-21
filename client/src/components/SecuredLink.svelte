@@ -9,7 +9,7 @@
 </script>
 
 {#if process.browser && $session.user}
-  {#if roles.includes($session.user.role)}
+  {#if roles.includes($session.user.scope)}
     <a class={className} {href}>
       <slot />
     </a>
