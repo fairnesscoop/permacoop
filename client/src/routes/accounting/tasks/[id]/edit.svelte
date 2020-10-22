@@ -1,11 +1,10 @@
 <script context="module">
   import {get, put} from '../../../../utils/axios';
 
-  export const preload = async ({params}, {user}) => {
-    const token = user.apiToken;
-    const {data} = await get(`tasks/${params.id}`, {}, token);
+  export const preload = async ({params}) => {
+    const {data} = await get(`tasks/${params.id}`);
 
-    return {task: data, token};
+    return {task: data};
   };
 </script>
 
@@ -17,7 +16,6 @@
   import {errorNormalizer} from '../../../../normalizer/errors';
   import ServerErrors from '../../../../components/ServerErrors.svelte';
 
-  export let token;
   export let task;
 
   let title = `Edition de la mission "${task.name}"`;
@@ -27,7 +25,7 @@
   const onSave = async e => {
     try {
       loading = true;
-      await put(`tasks/${task.id}`, e.detail, token);
+      await put(`tasks/${task.id}`, e.detail);
       goto('/accounting/tasks');
     } catch (e) {
       errors = errorNormalizer(e);

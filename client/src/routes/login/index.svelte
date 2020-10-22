@@ -1,7 +1,7 @@
 <script>
   import {goto, stores} from '@sapper/app';
+  import Cookies from 'js-cookie';
   import {post} from '../../utils/axios';
-  import sessionProxy from '../proxy';
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
   import Input from '../../components/inputs/Input.svelte';
@@ -17,13 +17,12 @@
   const handleSubmit = async () => {
     try {
       loading = true;
-      const {data} = await post('login', {email, password});
-
-      await sessionProxy('POST', { ...data, scope: data.role });
-      $session.user = { ...data, scope: data.role };
-
+      const {data: {id, firstName, lastName, role, apiToken}} = await post('login', {email, password});
+      $session.user = { id, firstName, lastName, email, scope: role };
+      Cookies.set('permacoop_token', apiToken, { expires: 365, secure: process.env.NODE_ENV === 'production' });
       goto('/');
     } catch (e) {
+      console.log(e);
       errors = errorNormalizer(e);
     } finally {
       loading = false;

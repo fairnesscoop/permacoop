@@ -1,8 +1,7 @@
 <script context="module">
-  export const preload = async ({query}, {user}) => {
+  export const preload = async ({query}) => {
     return {
-      page: query.page || 1,
-      token: user.apiToken
+      page: query.page || 1
     };
   };
 </script>
@@ -19,7 +18,6 @@
   import {historyPushState} from '../../../utils/url';
   import Pagination from '../../../components/Pagination.svelte';
 
-  export let token;
   export let page;
 
   let title = 'Fiches de paies';
@@ -42,7 +40,7 @@
 
   const fetchPaySlips = async () => {
     try {
-      response = (await get('pay_slips', {params: {page}}, token)).data;
+      response = (await get('pay_slips', {params: {page}})).data;
     } catch (e) {
       errors = errorNormalizer(e);
     }

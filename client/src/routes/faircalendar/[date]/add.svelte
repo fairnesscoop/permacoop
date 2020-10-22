@@ -1,8 +1,7 @@
 <script context="module">
-  export const preload = ({params}, {user}) => {
+  export const preload = ({params}) => {
     return {
-      date: params.date, 
-      token: user.apiToken
+      date: params.date
     };
   };
 </script>
@@ -18,7 +17,6 @@
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import H4Title from '../../../components/H4Title.svelte';
 
-  export let token;
   export let date;
 
   let title = `Activité du ${format(new Date(date), 'EEEE dd MMMM yyyy', { locale: fr } )}`;
@@ -28,7 +26,7 @@
   const onSave = async e => {
     try {
       loading = true;
-      await post('events', e.detail, token);
+      await post('events', e.detail);
       goto('/faircalendar');
     } catch (e) {
       errors = errorNormalizer(e);

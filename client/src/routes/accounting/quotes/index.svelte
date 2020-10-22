@@ -1,8 +1,7 @@
 <script context="module">
-  export const preload = async ({query}, {user}) => {
+  export const preload = async ({query}) => {
     return {
-      page: query.page || 1,
-      token: user.apiToken
+      page: query.page || 1
     };
   };
 </script>
@@ -20,7 +19,6 @@
   import {historyPushState} from '../../../utils/url';
 
   export let page;
-  export let token;
 
   let title = 'Devis';
   let loading;
@@ -43,7 +41,7 @@
 
   const fetchQuotes = async () => {
     try {
-      response = (await get('quotes', {params: {page}}, token)).data;
+      response = (await get('quotes', {params: {page}})).data;
     } catch (e) {
       errors = errorNormalizer(e);
     }

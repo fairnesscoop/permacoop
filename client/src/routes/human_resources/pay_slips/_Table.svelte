@@ -20,7 +20,7 @@
       disableDownloadableButton = true;
       const {data} = await get(`pay_slips/${id}/download`, {
         responseType: 'blob'
-      }, $session.user.apiToken);
+      });
       downloadFile(data, fileName);
     } catch (e) {
       errors = errorNormalizer(e);

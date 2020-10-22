@@ -4,7 +4,6 @@
   import Breadcrumb from '../../components/Breadcrumb.svelte';
   import H4Title from '../../components/H4Title.svelte';
   import {get, put} from '../../utils/axios';
-  import sessionProxy from '../proxy';
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
@@ -17,19 +16,18 @@
   let data = {};
 
   onMount(async () => {
-    ({data} = await get('users/me', {}, $session.user.apiToken));
+    ({data} = await get('users/me'));
   });
 
   const onSave = async e => {
     try {
       loading = true;
-      const {data} = await put('users/me', e.detail, $session.user.apiToken);
-      await sessionProxy('POST', { ...data, scope: data.role });
+      const {data: {firstName, lastName, email}} = await put('users/me', e.detail);
       $session.user = {
         ...$session.user,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email
+        firstName,
+        lastName,
+        email
       };
       goto('/');
     } catch (e) {

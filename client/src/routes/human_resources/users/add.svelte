@@ -1,5 +1,5 @@
 <script>
-  import {goto, stores} from '@sapper/app';
+  import {goto} from '@sapper/app';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
   import {post} from '../../../utils/axios';
   import Form from './_Form.svelte';
@@ -11,12 +11,10 @@
   let errors = [];
   let loading = false;
 
-  const { session } = stores();
-
   const onSave = async e => {
     try {
       loading = true;
-      await post('users', e.detail, $session.user.apiToken);
+      await post('users', e.detail);
       goto('/human_resources/users');
     } catch (e) {
       errors = errorNormalizer(e);

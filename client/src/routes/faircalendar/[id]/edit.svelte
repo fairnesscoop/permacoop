@@ -2,12 +2,10 @@
   import {get, put, del} from '../../../utils/axios';
 
   export const preload = async ({params}, {user}) => {
-    const token = user.apiToken;
-    const {data: event} = await get(`events/${params.id}`, {}, token);
+    const {data: event} = await get(`events/${params.id}`);
 
     return {
-      event, 
-      token
+      event
     };
   };
 </script>
@@ -23,7 +21,6 @@
   import H4Title from '../../../components/H4Title.svelte';
 
   export let event;
-  export let token;
 
   const taskId = event.task ? event.task.id : null;
   const projectId = event.project ? event.project.id : null;
@@ -36,7 +33,7 @@
   const onSave = async e => {
     try {
       loading = true;
-      await put(`events/${event.id}`, e.detail, token);
+      await put(`events/${event.id}`, e.detail);
       goto('/faircalendar');
     } catch (e) {
       errors = errorNormalizer(e);
@@ -48,7 +45,7 @@
   const onDelete = async () => {
     try {
       loading = true;
-      await del(`events/${event.id}`, token);
+      await del(`events/${event.id}`);
       goto('/faircalendar');
     } catch (e) {
       errors = errorNormalizer(e);

@@ -1,8 +1,7 @@
 <script context="module">
-  export const preload = async ({query}, {user}) => {
+  export const preload = async ({query}) => {
     return {
-      page: query.page || 1,
-      token: user.apiToken
+      page: query.page || 1
     };
   };
 </script>
@@ -20,7 +19,6 @@
   import Pagination from '../../../components/Pagination.svelte';
 
   export let page;
-  export let token;
 
   let title = 'Clients';
   let errors = [];
@@ -42,7 +40,7 @@
 
   const fetchCustomers = async () => {
     try {
-      response = (await get('customers', {params: {page}}, token)).data;
+      response = (await get('customers', {params: {page}})).data;
     } catch (e) {
       errors = errorNormalizer(e);
     }

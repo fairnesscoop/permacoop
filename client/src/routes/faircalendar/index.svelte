@@ -91,7 +91,7 @@
       isLoggedUser = userId === user.id;
       filters.date = date;
       filters.userId = userId;
-      ({data} = await get('events', {params: {userId, date}}, user.apiToken));
+      ({data} = await get('events', {params: {userId, date}}));
       fullCalendar(data.events, date);
     } catch (e) {
       errors = errorNormalizer(e);

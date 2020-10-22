@@ -1,11 +1,10 @@
 <script context="module">
   import {get, put} from '../../../../utils/axios';
 
-  export const preload = async ({params}, {user}) => {
-    const token = user.apiToken;
-    const {data} = await get(`daily_rates/${params.id}`, {}, token);
+  export const preload = async ({params}) => {
+    const {data} = await get(`daily_rates/${params.id}`);
 
-    return {dailyRate: data, token};
+    return {dailyRate: data};
   };
 </script>
 
@@ -17,7 +16,6 @@
   import ServerErrors from '../../../../components/ServerErrors.svelte';
   import H4Title from '../../../../components/H4Title.svelte';
 
-  export let token;
   export let dailyRate;
   export let loading = false;
 
@@ -32,7 +30,7 @@
   const onSave = async e => {
     try {
       loading = true;
-      await put(`daily_rates/${dailyRate.id}`, e.detail, token);
+      await put(`daily_rates/${dailyRate.id}`, e.detail);
       goto('/accounting/daily_rates');
     } catch (e) {
       errors = errorNormalizer(e);

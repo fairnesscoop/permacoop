@@ -42,7 +42,7 @@
         </li>
       </ul>
       <ul>
-        {#if userRoles.includes($session.user.role)}
+        {#if userRoles.includes($session.user.scope)}
           <li class="relative px-6 py-3">
             {#if 'faircalendar' === segment}<span class={activeClass} aria-hidden="true"></span>{/if}
             <a class={'faircalendar' === segment ? activeLinkClass : linkClass} href="/faircalendar">
@@ -61,7 +61,7 @@
             <ChevronDownIcon className={'w-4 h-4'} />
           </button>
           <ul class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900" aria-label="submenu">
-            {#if userRoles.includes($session.user.role)}
+            {#if userRoles.includes($session.user.scope)}
               <li class={subLinkClass}>
                 <a class="w-full" href="/crm/projects">Projets</a>
               </li>
@@ -71,7 +71,7 @@
             {/if}
           </ul>
         </li>
-        {#if userRoles.includes($session.user.role)}
+        {#if userRoles.includes($session.user.scope)}
           <li class="relative px-6 py-3">
             {#if 'accounting' === segment}<span class={activeClass} aria-hidden="true"></span>{/if}
             <button class={'accounting' === segment ? activeLinkClass : linkClass} aria-haspopup="true">
@@ -104,7 +104,7 @@
             <ChevronDownIcon className={'w-4 h-4'} />
           </button>
           <ul class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900" aria-label="submenu">
-            {#if userRoles.includes($session.user.role)}
+            {#if userRoles.includes($session.user.scope)}
               <li class={subLinkClass}>
                 <a class="w-full" href="human_resources/users">Coopérateurs - salariés</a>
               </li>

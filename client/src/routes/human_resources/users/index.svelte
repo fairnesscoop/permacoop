@@ -1,11 +1,3 @@
-<script context="module">
-  export const preload = async ({}, {user}) => {
-    return {
-      token: user.apiToken
-    };
-  };
-</script>
-
 <script>
   import {onMount} from 'svelte';
   import {get} from '../../../utils/axios';
@@ -16,15 +8,13 @@
   import Table from './_Table.svelte';
   import ServerErrors from '../../../components/ServerErrors.svelte';
 
-  export let token;
-
   let title = 'Coopérateurs - salariés';
   let errors = [];
   let data = [];
 
   onMount(async () => {
     try {
-      ({data} = await get('users', {params: {withAccountant: true}}, token));
+      ({data} = await get('users', {params: {withAccountant: true}}));
     } catch (e) {
       errors = errorNormalizer(e);
     }

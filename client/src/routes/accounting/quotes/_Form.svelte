@@ -1,15 +1,11 @@
 <script>
   import {createEventDispatcher, onMount} from 'svelte';
-  import {stores} from '@sapper/app';
   import {get} from '../../../utils/axios';
   import QuoteItemsForm from './_QuoteItemsForm.svelte';
   import Button from '../../../components/inputs/Button.svelte';
   import ProjectsInput from '../../../components/inputs/ProjectsInput.svelte';
   import SelectInput from '../../../components/inputs/SelectInput.svelte';
   import {byAlpha2} from 'iso-country-codes';
-
-  const { session } = stores();
-  const token = $session.user.apiToken;
 
   export let customerId = '';
   export let loading;
@@ -28,11 +24,11 @@
   let customers = {items: []};
 
   onMount(async () => {
-    customers = (await get('customers', {params: {page: 1}}, token)).data;
+    customers = (await get('customers', {params: {page: 1}})).data;
   });
 
   const onCustomerSelected = async () => {
-    projects = (await get(`projects`, {params: {page: 1, customerId}}, token)).data;
+    projects = (await get(`projects`, {params: {page: 1, customerId}})).data;
     projectId = undefined;
     displayForm = true;
   };

@@ -1,13 +1,11 @@
 <script>
-  import {goto, stores} from '@sapper/app';
+  import {goto} from '@sapper/app';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
   import {post} from '../../../utils/axios';
   import Form from './_Form.svelte';
   import {errorNormalizer} from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import H4Title from '../../../components/H4Title.svelte';
-
-  const { session } = stores();
 
   let loading = false;
   let title = 'Ajouter un TJM';
@@ -16,7 +14,7 @@
   const onSave = async e => {
     try {
       loading = true;
-      await post('daily_rates', e.detail, $session.user.apiToken);
+      await post('daily_rates', e.detail);
       goto('/accounting/daily_rates');
     } catch (e) {
       loading = false;
