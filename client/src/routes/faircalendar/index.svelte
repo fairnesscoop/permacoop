@@ -16,6 +16,8 @@
   import { format } from 'date-fns';
   import { fr } from 'date-fns/locale';
   import frLocale from '@fullcalendar/core/locales/fr';
+  import '@fullcalendar/core/main.css';
+  import '@fullcalendar/daygrid/main.css';
   import { get } from '../../utils/axios';
   import Filters from './_Filters.svelte';
   import Overview from './_Overview.svelte';
