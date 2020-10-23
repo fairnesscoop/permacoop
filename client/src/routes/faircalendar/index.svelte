@@ -13,11 +13,9 @@
 <script>
   import { onMount } from 'svelte';
   import { goto } from '@sapper/app';
-  import {format} from 'date-fns';
-  import {fr} from 'date-fns/locale';
+  import { format } from 'date-fns';
+  import { fr } from 'date-fns/locale';
   import frLocale from '@fullcalendar/core/locales/fr';
-  import '@fullcalendar/core/main.css';
-  import '@fullcalendar/daygrid/main.css';
   import { get } from '../../utils/axios';
   import Filters from './_Filters.svelte';
   import Overview from './_Overview.svelte';
@@ -121,12 +119,3 @@
   <Overview overview={data.overview} />
 {/if}
 <div id="calendar" />
-<div class="mb-1 mt-2">
-  <span class="badge badge-success">Mission</span>
-  <span class="badge badge-secondary">Support // Podcast</span>
-  <span class="badge badge-info">Dojo</span>
-  <span class="badge badge-warning">Formation // Conf // Meetup</span>
-  <span class="badge badge-primary">Vacances</span>
-  <span class="badge badge-danger">Congé maladie</span>
-  <span class="badge badge-dark">Autres</span>
-</div>

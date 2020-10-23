@@ -28,11 +28,11 @@
   };
 </script>
 
-<form class="px-4 py-3 mb-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
+<form class="px-3 py-3 mb-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <h4 class="text-lg font-semibold text-gray-600 dark:text-gray-300">
+    Filtres
+  </h4>
   <div class="text-sm text-gray-600 dark:text-gray-400">
-    <h4 class="text-lg font-semibold text-gray-600 dark:text-gray-300">
-      Filtres :
-    </h4>
     <div class="flex">
       <div class="w-1/2 pr-2">
         <MonthsInput
