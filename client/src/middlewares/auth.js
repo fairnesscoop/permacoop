@@ -6,7 +6,15 @@ export default async (req, res, next) => {
     return next();
   }
 
-  const token = req.headers?.cookie?.replace('permacoop_token=', '');
+  const cookie = req.headers.cookie;
+
+  if (!cookie) {
+    return next();
+  }
+
+  const index = cookie.indexOf('permacoop_token');
+  const token = cookie.substring(index).replace('permacoop_token=', '');
+
   if (!token) {
     req.user = {};
 
