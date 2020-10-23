@@ -13,7 +13,7 @@
 <script>
   import { onMount } from 'svelte';
   import { goto } from '@sapper/app';
-  import { format } from 'date-fns';
+  import { format, subDays } from 'date-fns';
   import { fr } from 'date-fns/locale';
   import frLocale from '@fullcalendar/core/locales/fr';
   import '@fullcalendar/core/main.css';
@@ -49,16 +49,19 @@
       nowIndicator: true,
       showNonCurrentDates: false,
       selectable: true,
+      weekends: false,
       height: 620,
+      eventLimit: true,
       header: {left: '', center: '', right: ''},
       columnHeaderFormat: {weekday: 'long'},
       events,
-      dateClick: info => {
+      select: info => {
         if (!isLoggedUser) {
           return;
         }
 
-        goto(`/faircalendar/${info.dateStr}/add`);
+        const endDate = format(subDays(new Date(info.endStr), 1), 'yyyy-MM-dd');
+        goto(`/faircalendar/${info.startStr}_${endDate}/add`);
       },
       eventDataTransform: data => {
         const {id, date, time, summary, type, task, project} = data;

@@ -1,7 +1,7 @@
 <script context="module">
-  export const preload = ({params}) => {
+  export const preload = ({params: {period}}) => {
     return {
-      date: params.date
+      period
     };
   };
 </script>
@@ -17,21 +17,31 @@
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import H4Title from '../../../components/H4Title.svelte';
 
-  export let date;
+  export let period;
 
-  let title = `Activité du ${format(new Date(date), 'EEEE dd MMMM yyyy', { locale: fr } )}`;
+  const formatDate = (date) => {
+    return format(new Date(date), 'EE dd MMMM', { locale: fr } );
+  }
+
+  let startDate = period.split('_')[0];
+  let endDate = period.split('_')[1];
+  let title = `CRA du ${formatDate(startDate)}`;
   let errors = [];
   let loading = false;
+ 
+  if (startDate !== endDate) {
+    title += ` au ${formatDate(endDate)}`;
+  }
 
   const onSave = async e => {
     try {
       loading = true;
       await post('events', e.detail);
-      goto('/faircalendar');
+      goto(`/faircalendar?date=${startDate}`);
     } catch (e) {
       errors = errorNormalizer(e);
     } finally {
-       loading = false;
+      loading = false;
     }
   };
 </script>
@@ -46,4 +56,4 @@
 <Form
   {loading}
   on:save={onSave}
-  event={{date, type: 'mission', time: '100', summary: '', taskId: null, projectId: null}} />
+  event={{startDate, endDate, type: 'mission', time: '100', summary: '', taskId: null, projectId: null}} />

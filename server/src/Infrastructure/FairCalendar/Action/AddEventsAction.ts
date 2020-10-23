@@ -1,57 +1,51 @@
 import {
+  Body,
+  Post,
   Controller,
   Inject,
   BadRequestException,
-  UseGuards,
-  Param,
-  Put,
-  Body
+  UseGuards
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { ICommandBus } from 'src/Application/ICommandBus';
 import { LoggedUser } from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
 import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
-import { ICommandBus } from 'src/Application/ICommandBus';
-import { UpdateEventCommand } from 'src/Application/FairCalendar/Command/UpdateEventCommand';
-import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
+import { AddEventCommand } from 'src/Application/FairCalendar/Command/AddEventCommand';
+import { AddEventDTO } from '../DTO/AddEventDTO';
 import { RolesGuard } from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
-import { EditEventDTO } from '../DTO/EditEventDTO';
 
 @Controller('events')
 @ApiTags('Event')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
-export class UpdateEventAction {
+export class AddEventsAction {
   constructor(
     @Inject('ICommandBus')
     private readonly commandBus: ICommandBus
   ) {}
 
-  @Put(':id')
+  @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Update event'})
-  public async index(
-    @Param() idDto: IdDTO,
-    @Body() dto: EditEventDTO,
-    @LoggedUser() user: User
-  ) {
-    const {type, time, summary, projectId, taskId} = dto;
-
+  @ApiOperation({summary: 'Add new event(s)'})
+  public async index(@Body() dto: AddEventDTO, @LoggedUser() user: User) {
     try {
-      const id = await this.commandBus.execute(
-        new UpdateEventCommand(
-          idDto.id,
-          user,
+      const {type, startDate, endDate, projectId, taskId, summary, time} = dto;
+      const result = await this.commandBus.execute(
+        new AddEventCommand(
           type,
+          user,
           Number(time),
+          new Date(startDate),
+          new Date(endDate),
           projectId,
           taskId,
           summary
         )
       );
 
-      return {id};
+      return { ...result };
     } catch (e) {
       throw new BadRequestException(e.message);
     }

@@ -28,13 +28,13 @@
 
   let errors = [];
   let loading = false;
-  let title = `Activité du ${format(new Date(event.date), 'EEEE dd MMMM yyyy', { locale: fr } )}`;
+  let title = `CRA du ${format(new Date(event.date), 'EE dd MMMM', { locale: fr } )}`;
 
   const onSave = async e => {
     try {
       loading = true;
       await put(`events/${event.id}`, e.detail);
-      goto('/faircalendar');
+      goto(`/faircalendar?date=${event.date}`);
     } catch (e) {
       errors = errorNormalizer(e);
     } finally {
