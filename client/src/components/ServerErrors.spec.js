@@ -6,7 +6,7 @@ it('renders nothing with no error.', () => {
   render(ServerErrors, {errors: []});
 
   expect(
-    screen.queryByText('Une erreur est survenue !')
+    screen.queryByText('Erreur')
   ).not.toBeInTheDocument();
 });
 
@@ -23,5 +23,5 @@ it('renders the given errors', () => {
     "second error",
   ]
 `);
-  expect(screen.getByText(/Une erreur est survenue !/i)).toBeInTheDocument();
+  expect(screen.getByText(/Erreur/i)).toBeInTheDocument();
 });

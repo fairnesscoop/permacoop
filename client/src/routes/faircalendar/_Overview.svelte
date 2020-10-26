@@ -29,13 +29,13 @@
     </thead>
     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
       <tr class="text-gray-700 dark:text-gray-400">
-        <td class="py-3 text-center text-sm"><GreenBadge value={`${overview.mission} j`} /></td>
-        <td class="py-3 text-center text-sm"><IndigoBadge value={`${overview.support} j`} /></td>
-        <td class="py-3 text-center text-sm"><BlueBadge value={`${overview.dojo} j`}/></td>
-        <td class="py-3 text-center text-sm"><YellowBadge value={`${overview.formationConference} j`}/></td>
-        <td class="py-3 text-center text-sm"><OrangeBadge value={`${overview.holiday} j`} /></td>
-        <td class="py-3 text-center text-sm"><RedBadge value={`${overview.medicalLeave} j`} /></td>
-        <td class="py-3 text-center text-sm"><GrayBadge value={`${overview.other} j`} /></td>
+        <td class="py-3 text-center text-sm"><GreenBadge value={`${overview.mission} jour(s)`} /></td>
+        <td class="py-3 text-center text-sm"><IndigoBadge value={`${overview.support} jour(s)`} /></td>
+        <td class="py-3 text-center text-sm"><BlueBadge value={`${overview.dojo} jour(s)`}/></td>
+        <td class="py-3 text-center text-sm"><YellowBadge value={`${overview.formationConference} jour(s)`}/></td>
+        <td class="py-3 text-center text-sm"><OrangeBadge value={`${overview.holiday} jour(s)`} /></td>
+        <td class="py-3 text-center text-sm"><RedBadge value={`${overview.medicalLeave} jour(s)`} /></td>
+        <td class="py-3 text-center text-sm"><GrayBadge value={`${overview.other} jour(s)`} /></td>
         <td class="py-3 text-center text-sm"><b>{overview.mealTicket}</b></td>
       </tr>
     </tbody>

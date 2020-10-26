@@ -28,7 +28,8 @@
   const submit = () => {
     dispatch('save', {
       ...event,
-      date: new Date(event.date)
+      startDate: new Date(event.startDate),
+      endDate: new Date(event.endDate)
     });
   };
 </script>
