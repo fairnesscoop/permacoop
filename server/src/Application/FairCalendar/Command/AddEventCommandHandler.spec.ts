@@ -238,5 +238,6 @@ describe('AddEventCommandHandler', () => {
     verify(dateUtils.format(deepEqual(new Date('2020-10-19')), 'y-MM-dd')).once();
     verify(dateUtils.format(deepEqual(new Date('2020-10-20')), 'y-MM-dd')).once();
     verify(eventRepository.save(deepEqual(event2))).once();
+    verify(eventRepository.save(deepEqual(event1))).never();
   });
 });
