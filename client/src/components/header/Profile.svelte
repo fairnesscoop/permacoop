@@ -1,4 +1,5 @@
 <script>
+  import { _ } from 'svelte-i18n';
   import { slide } from 'svelte/transition';
   import Cookies from 'js-cookie';
   import { stores, goto } from '@sapper/app';
@@ -31,13 +32,13 @@
       <li class="flex">
         <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" href="/profile">
           <UserIcon className={'w-4 h-4 mr-3'} />
-          <span>Mon compte</span>
+          <span>{$_('profile.title')}</span>
         </a>
       </li>
       <li class="flex">
         <button on:click={handleLogout} class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
           <LogoutIcon className={'w-4 h-4 mr-3'} />
-          <span>Se déconnecter</span>
+          <span>{$_('profile.logout')}</span>
         </button>
       </li>
     </ul>

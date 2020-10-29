@@ -1,5 +1,6 @@
 <script>
   import { stores } from '@sapper/app';
+  import { _ } from 'svelte-i18n';
   import {
     ROLE_COOPERATOR,
     ROLE_EMPLOYEE,
@@ -30,14 +31,14 @@
     <div class="py-4 text-gray-500 dark:text-gray-400">
       <a class="inline-flex ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="/">
         <img src="images/logo.png" class="h-8" alt='Fairness'/>
-        <span class="ml-2">Permacoop</span>
+        <span class="ml-2">{$_('app')}</span>
       </a>
       <ul class="mt-6">
         <li class="relative px-6 py-3">
           {#if !segment}<span class={activeClass} aria-hidden="true"></span>{/if}
           <a class={!segment ? activeLinkClass : linkClass} href="/">
             <DashboardIcon className={'w-5 h-5'} />
-            <span class="ml-4">Tableau de bord</span>
+            <span class="ml-4">{$_('dashboard.title')}</span>
           </a>
         </li>
       </ul>
@@ -47,7 +48,7 @@
             {#if 'faircalendar' === segment}<span class={activeClass} aria-hidden="true"></span>{/if}
             <a class={'faircalendar' === segment ? activeLinkClass : linkClass} href="/faircalendar">
               <CalendarIcon className={'w-5 h-5'} />
-              <span class="ml-4">FairCalendar</span>
+              <span class="ml-4">{$_('faircalendar.breadcrumb')}</span>
             </a>
           </li>
         {/if}
@@ -56,17 +57,17 @@
             {#if 'crm' === segment}<span class={activeClass} aria-hidden="true"></span>{/if}
             <span class="inline-flex items-center">
               <CRMIcon className={'w-5 h-5'} />
-              <span class="ml-4">CRM</span>
+              <span class="ml-4">{$_('crm.breadcrumb')}</span>
             </span>
             <ChevronDownIcon className={'w-4 h-4'} />
           </button>
           <ul class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900" aria-label="submenu">
             {#if userRoles.includes($session.user.scope)}
               <li class={subLinkClass}>
-                <a class="w-full" href="/crm/projects">Projets</a>
+                <a class="w-full" href="/crm/projects">{$_('crm.projects.title')}</a>
               </li>
               <li class={subLinkClass}>
-                <a class="w-full" href="/crm/customers">Clients</a>
+                <a class="w-full" href="/crm/customers">{$_('crm.customers.title')}</a>
               </li>
             {/if}
           </ul>
@@ -77,19 +78,19 @@
             <button class={'accounting' === segment ? activeLinkClass : linkClass} aria-haspopup="true">
               <span class="inline-flex items-center">
                 <AccountingIcon className={'w-5 h-5'} />
-                <span class="ml-4">Gestion & Comptabilité</span>
+                <span class="ml-4">{$_('accounting.breadcrumb')}</span>
               </span>
               <ChevronDownIcon className={'w-4 h-4'} />
             </button>
             <ul class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900" aria-label="submenu">
               <li class={subLinkClass}>
-                <a class="w-full" href="accounting/quotes">Devis</a>
+                <a class="w-full" href="accounting/quotes">{$_('accounting.quotes.title')}</a>
               </li>
               <li class={subLinkClass}>
-                <a class="w-full" href="accounting/tasks">Missions</a>
+                <a class="w-full" href="accounting/tasks">{$_('accounting.tasks.title')}</a>
               </li>
               <li class={subLinkClass}>
-                <a class="w-full" href="accounting/daily_rates">TJM</a>
+                <a class="w-full" href="accounting/daily_rates">{$_('accounting.daily_rates.title')}</a>
               </li>
             </ul>
           </li>
@@ -99,21 +100,21 @@
             {#if 'human_resources' === segment}<span class={activeClass} aria-hidden="true"></span>{/if}
             <span class="inline-flex items-center">
               <UsersIcon className={'w-5 h-5'} />
-              <span class="ml-4">RH</span>
+              <span class="ml-4">{$_('human_resources.breadcrumb')}</span>
             </span>
             <ChevronDownIcon className={'w-4 h-4'} />
           </button>
           <ul class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900" aria-label="submenu">
             {#if userRoles.includes($session.user.scope)}
               <li class={subLinkClass}>
-                <a class="w-full" href="human_resources/users">Coopérateurs - salariés</a>
+                <a class="w-full" href="human_resources/users">{$_('human_resources.users.title')}</a>
               </li>
               <li class={subLinkClass}>
-                <a class="w-full" href="human_resources/holidays">Congés</a>
+                <a class="w-full" href="human_resources/holidays">{$_('human_resources.holidays.title')}</a>
               </li>
             {/if}
             <li class={subLinkClass}>
-              <a class="w-full" href="human_resources/pay_slips">Fiches de paies</a>
+              <a class="w-full" href="human_resources/pay_slips">{$_('human_resources.pay_slips.title')}</a>
             </li>
           </ul>
         </li>

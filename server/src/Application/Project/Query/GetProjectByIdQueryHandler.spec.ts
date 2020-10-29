@@ -60,7 +60,7 @@ describe('GetProjectByIdQueryHandler', () => {
       await queryHandler.execute(query);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectNotFoundException);
-      expect(e.message).toBe('project.errors.not_found');
+      expect(e.message).toBe('crm.projects.not_found');
       verify(
         projectRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
       ).once();

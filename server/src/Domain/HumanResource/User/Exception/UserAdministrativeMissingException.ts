@@ -1,5 +1,5 @@
 export class UserAdministrativeMissingException extends Error {
   constructor() {
-    super('user.errors.user_administrative_missing');
+    super('human_resources.users.errors.user_administrative_missing');
   }
 }

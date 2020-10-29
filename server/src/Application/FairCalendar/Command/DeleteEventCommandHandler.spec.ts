@@ -51,7 +51,7 @@ describe('DeleteEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(EventNotFoundException);
-      expect(e.message).toBe('fair_calendar.errors.event_not_found');
+      expect(e.message).toBe('faircalendar.errors.event_not_found');
       verify(
         eventRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
       ).once();
@@ -75,7 +75,7 @@ describe('DeleteEventCommandHandler', () => {
     } catch (e) {
       expect(e).toBeInstanceOf(EventDoesntBelongToUserException);
       expect(e.message).toBe(
-        'fair_calendar.errors.event_doesnt_belong_to_user'
+        'faircalendar.errors.event_doesnt_belong_to_user'
       );
       verify(
         eventRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')

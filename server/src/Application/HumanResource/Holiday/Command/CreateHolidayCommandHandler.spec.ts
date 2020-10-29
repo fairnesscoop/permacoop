@@ -55,7 +55,7 @@ describe('CreateHolidayCommandHandler', () => {
     } catch (e) {
       expect(e).toBeInstanceOf(HolidayAlreadyExistForThisPeriodException);
       expect(e.message).toBe(
-        'human_resource.errors.holiday_already_exist_for_this_period'
+        'human_resources.holidays.errors.already_exist_for_this_period'
       );
       verify(
         doesHolidayExistForPeriod.isSatisfiedBy(
@@ -96,7 +96,7 @@ describe('CreateHolidayCommandHandler', () => {
     } catch (e) {
       expect(e).toBeInstanceOf(EventsAlreadyExistForThisPeriodException);
       expect(e.message).toBe(
-        'fair_calendar.errors.events_already_exist_for_this_period'
+        'faircalendar.errors.events_already_exist_for_this_period'
       );
       verify(
         doesHolidayExistForPeriod.isSatisfiedBy(

@@ -1,5 +1,5 @@
 export class EmailAlreadyExistException extends Error {
   constructor() {
-    super('user.errors.email_already_exist');
+    super('human_resources.users.errors.email_already_exist');
   }
 }

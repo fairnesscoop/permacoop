@@ -68,7 +68,7 @@ describe('UpdateEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(EventNotFoundException);
-      expect(e.message).toBe('fair_calendar.errors.event_not_found');
+      expect(e.message).toBe('faircalendar.errors.event_not_found');
       verify(
         eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
       ).once();
@@ -99,7 +99,7 @@ describe('UpdateEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(EventDoesntBelongToUserException);
-      expect(e.message).toBe('fair_calendar.errors.event_doesnt_belong_to_user');
+      expect(e.message).toBe('faircalendar.errors.event_doesnt_belong_to_user');
       verify(
         doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
       ).once();
@@ -137,7 +137,7 @@ describe('UpdateEventCommandHandler', () => {
       );
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectOrTaskMissingException);
-      expect(e.message).toBe('fair_calendar.errors.project_or_task_missing');
+      expect(e.message).toBe('faircalendar.errors.project_or_task_missing');
       verify(
         doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
       ).once();
@@ -174,7 +174,7 @@ describe('UpdateEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectNotFoundException);
-      expect(e.message).toBe('project.errors.not_found');
+      expect(e.message).toBe('crm.projects.not_found');
       verify(
         eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
       ).once();
@@ -212,7 +212,7 @@ describe('UpdateEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(TaskNotFoundException);
-      expect(e.message).toBe('task.errors.not_found');
+      expect(e.message).toBe('accounting.tasks.errors.not_found');
       verify(
         eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
       ).once();
@@ -256,7 +256,7 @@ describe('UpdateEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(MaximumEventReachedException);
-      expect(e.message).toBe('fair_calendar.errors.event_maximum_reached');
+      expect(e.message).toBe('faircalendar.errors.event_maximum_reached');
       verify(
         eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
       ).once();

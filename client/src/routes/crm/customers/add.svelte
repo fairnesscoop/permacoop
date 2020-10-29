@@ -1,15 +1,26 @@
 <script>
-  import {goto} from '@sapper/app';
+  import { goto } from '@sapper/app';
+  import { _ } from 'svelte-i18n';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import {post} from '../../../utils/axios';
-  import {errorNormalizer} from '../../../normalizer/errors';
+  import { post } from '../../../utils/axios';
+  import { errorNormalizer } from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import H4Title from '../../../components/H4Title.svelte';
   import Form from './_Form.svelte';
 
-  let title = 'Ajouter un client';
+  let title = $_('crm.customers.add.title');
   let loading = false;
   let errors = [];
+
+  const customer = {
+    name: '', 
+    address: {
+      street: '', 
+      city: '', 
+      zipCode: '', 
+      country: 'FR'
+    }
+  };
 
   const onSave = async e => {
     try {
@@ -25,13 +36,10 @@
 </script>
 
 <svelte:head>
-  <title>{title} - Permacoop</title>
+  <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: 'CRM'}, {title: 'Clients', path: '/crm/customers'}, {title}]} />
+<Breadcrumb items={[{title: $_('crm.breadcrumb')}, {title: $_('crm.customers.title'), path: '/crm/customers'}, {title}]} />
 <H4Title {title} />
 <ServerErrors {errors} />
-<Form
-  {loading}
-  customer={{name: '', address: {street: '', city: '', zipCode: '', country: 'FR'}}}
-  on:save={onSave} />
+<Form {loading} {customer} on:save={onSave} />

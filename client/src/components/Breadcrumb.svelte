@@ -1,4 +1,5 @@
 <script>
+  import { _ } from 'svelte-i18n';
   import DashboardIcon from './icons/DashboardIcon.svelte';
 
   export let items = [];
@@ -8,7 +9,7 @@
   <ol class="list-reset flex">
     <li>
       <a href="/" class="font-semibold text-grey-dark inline-flex">
-        <DashboardIcon className={'w-4 h-4 mr-1'} /> Permacoop
+        <DashboardIcon className={'w-4 h-4 mr-1'} /> {$_('app')}
       </a>
     </li>
     {#each items as item}

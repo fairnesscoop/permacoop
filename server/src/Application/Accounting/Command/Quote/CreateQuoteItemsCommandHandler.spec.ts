@@ -78,7 +78,7 @@ describe('CreateQuoteItemsCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(QuoteNotFoundException);
-      expect(e.message).toBe('quote.errors.not_found');
+      expect(e.message).toBe('accounting.quotes.errors.not_found');
       verify(quoteItemRepository.save(anything())).never();
     }
   });

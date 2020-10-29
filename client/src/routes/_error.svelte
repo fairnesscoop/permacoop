@@ -1,4 +1,6 @@
 <script>
+  import { _ } from 'svelte-i18n';
+
   export let status;
   export let error;
 
@@ -6,7 +8,7 @@
 </script>
 
 <svelte:head>
-  <title>{status} - Permacoop</title>
+  <title>{status} - {$_('app')}</title>
 </svelte:head>
 
 <div class="container flex flex-col items-center px-6 mx-auto">

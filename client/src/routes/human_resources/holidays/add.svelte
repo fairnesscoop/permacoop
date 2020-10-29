@@ -1,13 +1,14 @@
 <script>
-  import {goto} from '@sapper/app';
+  import { goto } from '@sapper/app';
+  import { _ } from 'svelte-i18n';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import {post} from '../../../utils/axios';
+  import { post } from '../../../utils/axios';
   import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../../normalizer/errors';
+  import { errorNormalizer } from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import H4Title from '../../../components/H4Title.svelte';
 
-  let title = 'Demande de congé';
+  let title = $_('human_resources.holidays.add.title');
   let loading = false;
   let errors = [];
 
@@ -25,10 +26,10 @@
 </script>
 
 <svelte:head>
-  <title>{title} - Permacoop</title>
+  <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: 'RH'}, {title: 'Congés', path: 'human_resources/holidays'}, {title}]} />
+<Breadcrumb items={[{title: $_('human_resources.breadcrumb')}, {title: $_('human_resources.holidays.title'), path: 'human_resources/holidays'}, {title}]} />
 <ServerErrors {errors} />
 <H4Title {title} />
 <Form on:save={onSave} {loading} />

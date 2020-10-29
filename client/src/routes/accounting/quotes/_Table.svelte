@@ -1,12 +1,13 @@
 <script>
-  import {format as dateFormat} from 'date-fns';
-  import {format} from '../../../normalizer/money';
-  import PencilIcon from '../../../components/icons/PencilIcon.svelte';
+  import { _ } from 'svelte-i18n';
+  import { format as dateFormat } from 'date-fns';
+  import { format } from '../../../normalizer/money';
+  //import EditLink from '../../../components/links/EditLink.svelte';
   import GrayBadge from '../../../components/badges/GrayBadge.svelte';
   import RedBadge from '../../../components/badges/RedBadge.svelte';
   import OrangeBadge from '../../../components/badges/OrangeBadge.svelte';
   import GreenBadge from '../../../components/badges/GreenBadge.svelte';
-  import {fr} from 'date-fns/locale';
+  import { fr } from 'date-fns/locale';
 
   export let items;
 </script>
@@ -14,12 +15,12 @@
 <table class="w-full whitespace-no-wrap">
   <thead>
     <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-      <th class="px-4 py-3">Numéro de devis</th>
-      <th class="px-4 py-3">Date</th>
-      <th class="px-4 py-3">Nom du client</th>
-      <th class="px-4 py-3">Montant TTC</th>
-      <th class="px-4 py-3">Statut</th>
-      <th class="px-4 py-3">Actions</th>
+      <th class="px-4 py-3">{$_('accounting.quotes.quote_id')}</th>
+      <th class="px-4 py-3">{$_('accounting.quotes.date')}</th>
+      <th class="px-4 py-3">{$_('accounting.quotes.customer')}</th>
+      <th class="px-4 py-3">{$_('accounting.quotes.amount')}</th>
+      <th class="px-4 py-3">{$_('accounting.quotes.status.title')}</th>
+      <th class="px-4 py-3">{$_('common.actions')}</th>
     </tr>
   </thead>
   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -34,20 +35,18 @@
         <td class="px-4 py-3 text-sm">{format(amountInclusiveOfTaxe)}</td>
         <td class="px-4 py-3 text-sm">
           {#if 'draft' === status}
-            <OrangeBadge value={status}/>
+            <OrangeBadge value={$_(`accounting.quotes.status.${status}`)} />
           {:else if 'accepted' === status}
-            <GreenBadge value={status}/>
+            <GreenBadge value={$_(`accounting.quotes.status.${status}`)} />
           {:else if 'sent' === status}
-            <GrayBadge value={status}/>
+            <GrayBadge value={$_(`accounting.quotes.status.${status}`)} />
           {:else}
-            <RedBadge value={status}/>
+            <RedBadge value={$_(`accounting.quotes.status.${status}`)} />
           {/if}
         </td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
-            <a href={`/accounting/quotes/${id}/edit`} class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Modifier">
-              <PencilIcon className={'w-5 h-5'} />
-            </a>
+            <!--<EditLink href={`/accounting/quotes/${id}/edit`} />-->
           </div>
         </td>
       </tr>

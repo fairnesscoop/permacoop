@@ -1,4 +1,5 @@
 <script>
+  import { _ } from 'svelte-i18n';
   import ErrorIcon from './icons/ErrorIcon.svelte'
   export let errors = [];
 </script>
@@ -10,10 +11,10 @@
     </div>
     <div class="-mx-3 py-2 px-4">
       <div class="mx-3">
-        <span class="text-red-500 font-semibold">Erreur</span>
+        <span class="text-red-500 font-semibold">{$_('error')}</span>
         <ul class="text-gray-600 text-sm">
           {#each errors as error}
-            <li>{error}</li>
+            <li>{$_(error)}</li>
           {/each}
           </ul>
       </div>

@@ -1,5 +1,5 @@
 export class PaySlipAlreadyExistException extends Error {
   constructor() {
-    super('human_resource.errors.pay_slip_already_exist');
+    super('human_resources.pay_slips.errors.already_exist');
   }
 }

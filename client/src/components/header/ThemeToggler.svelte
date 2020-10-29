@@ -14,7 +14,7 @@
   }
 </script>
 
-<button on:click={onToggle} class="rounded-md focus:outline-none focus:shadow-outline-purple" aria-label="Theme toggler">
+<button on:click={onToggle} class="rounded-md focus:outline-none focus:shadow-outline-purple">
   {#if 'theme-dark' === $settings.theme}
     <LightThemeIcon className={'w-5 h-5'} />
   {:else}

@@ -1,5 +1,5 @@
 <script context="module">
-  export const preload = ({query}, {user}) => {
+  export const preload = ({ query }, { user }) => {
     return {
       filters: {
         date: query.date ? new Date(query.date) : new Date(),
@@ -12,6 +12,7 @@
 
 <script>
   import { onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
   import { goto } from '@sapper/app';
   import { format, subDays } from 'date-fns';
   import { fr } from 'date-fns/locale';
@@ -32,7 +33,7 @@
   let isLoggedUser = false;
   let errors = [];
   let data = {};
-  $: title = `FairCalendar ${format(new Date(filters.date), 'MMMM yyyy', { locale: fr } )}`;
+  $: title = $_('faircalendar.title', { values: { month: format(new Date(filters.date), 'MMMM yyyy', { locale: fr } )}});
 
   const fullCalendar = async (events, date) => {
     const {Calendar} = await import('@fullcalendar/core');
@@ -65,12 +66,12 @@
       },
       eventDataTransform: data => {
         const {id, date, time, summary, type, task, project} = data;
-        let title = time < 1 ? `[${time}] ` : '';
+        let title = `[${$_('common.days_duration', { values: { n: time } })}] `;
 
         if ('mission' === type && task && project) {
           title += `${project.name} (${task.name})`;
         } else {
-          title += type;
+          title += $_(`faircalendar.type.${type}`);
         }
 
         data.id = id;
@@ -113,10 +114,10 @@
 </script>
 
 <svelte:head>
-  <title>{title} - Permacoop</title>
+  <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title}]} />
+<Breadcrumb items={[{title: $_('faircalendar.breadcrumb')}]} />
 <ServerErrors {errors} />
 <H4Title {title} />
 <Filters {...filters} on:filter={onFilter} />
