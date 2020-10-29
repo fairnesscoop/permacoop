@@ -1,6 +1,7 @@
 import sirv from 'sirv';
 import express from 'express';
 import compression from 'compression';
+import cookieParser from 'cookie-parser';
 import * as sapper from '@sapper/server';
 import { guard } from '@beyonk/sapper-rbac';
 import routes from './routes';
@@ -12,6 +13,7 @@ const app = express();
 
 app
   .use(
+    cookieParser(),
     compression({ threshold: 0 }),
     sirv('static', { dev }),
     authMiddleware,
