@@ -51,7 +51,7 @@ describe('CreateTaskCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(TaskAlreadyExistException);
-      expect(e.message).toBe('task.errors.already_exist');
+      expect(e.message).toBe('accounting.tasks.errors.already_exist');
       verify(isTaskAlreadyExist.isSatisfiedBy('Development')).once();
       verify(taskRepository.save(deepEqual(new Task('Development')))).never();
       verify(createdTask.getId()).never();

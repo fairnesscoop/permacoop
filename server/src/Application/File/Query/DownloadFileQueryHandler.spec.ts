@@ -70,7 +70,7 @@ describe('DownloadFileQueryHandler', () => {
       );
     } catch (e) {
       expect(e).toBeInstanceOf(FileNotFoundException);
-      expect(e.message).toBe('file.errors.not_found');
+      expect(e.message).toBe('common.errors.file_not_found');
       verify(
         fileRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
       ).once();
@@ -91,7 +91,7 @@ describe('DownloadFileQueryHandler', () => {
       );
     } catch (e) {
       expect(e).toBeInstanceOf(FileNotFoundException);
-      expect(e.message).toBe('file.errors.not_found');
+      expect(e.message).toBe('common.errors.file_not_found');
       verify(
         fileRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
       ).once();

@@ -23,7 +23,7 @@ it('renders the users input select with the selected user', () => {
   const optionNames = options.map((option) => option.textContent.trim());
   expect(optionNames).toMatchInlineSnapshot(`
   Array [
-    "-- Choisir un salarié --",
+    "-- Choisir un coopérateur - salarié --",
     "Nicolas Dievart",
     "Mathieu Marchois",
   ]

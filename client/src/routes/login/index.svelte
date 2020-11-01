@@ -1,8 +1,9 @@
 <script>
-  import {goto, stores} from '@sapper/app';
+  import { goto, stores } from '@sapper/app';
+  import { _ } from 'svelte-i18n';
   import Cookies from 'js-cookie';
-  import {post} from '../../utils/axios';
-  import {errorNormalizer} from '../../normalizer/errors';
+  import { post } from '../../utils/axios';
+  import { errorNormalizer } from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
   import Input from '../../components/inputs/Input.svelte';
   import Button from '../../components/inputs/Button.svelte';
@@ -31,7 +32,7 @@
 </script>
 
 <svelte:head>
-  <title>Se connecter - Permacoop</title>
+  <title>{$_('login.title')} - {$_('app')}</title>
 </svelte:head>
 
 <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
@@ -43,16 +44,16 @@
       <form on:submit|preventDefault={handleSubmit} class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
         <div class="w-full">
           <h1 class="mb-5 text-xl font-semibold text-center text-gray-700 dark:text-gray-200">
-            Connexion
+            {$_('login.sub_title')}
           </h1>
           <ServerErrors {errors} />
-          <Input type={'email'} label={'Adresse email'} bind:value={email} />
-          <Input type={'password'} label={'Mot de passe'} bind:value={password} />
-          <Button value={'Se connecter'} {loading} disabled={!email || !password || loading} />
+          <Input type={'email'} label={$_('login.form.email')} bind:value={email} />
+          <Input type={'password'} label={$_('login.form.password')} bind:value={password} />
+          <Button value={$_('login.form.button')} {loading} disabled={!email || !password || loading} />
           <hr class="my-8">
           <p class="mt-4">
             <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="login/forgot-password">
-              Mot de passe oublié ?
+              {$_('login.password_lost')}
             </a>
           </p>
         </div>

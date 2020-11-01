@@ -77,7 +77,7 @@ describe('AddEventCommandHandler', () => {
       );
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectOrTaskMissingException);
-      expect(e.message).toBe('fair_calendar.errors.project_or_task_missing');
+      expect(e.message).toBe('faircalendar.errors.project_or_task_missing');
       verify(dateUtils.getWorkedDaysDuringAPeriod(anything(), anything())).never();
       verify(projectRepository.findOneById(anything())).never();
       verify(projectRepository.findOneById(anything())).never();
@@ -107,7 +107,7 @@ describe('AddEventCommandHandler', () => {
       await handler.execute(command2);
     } catch (e) {
       expect(e).toBeInstanceOf(NoDateDuringThisPeriodException);
-      expect(e.message).toBe('fair_calendar.errors.no_date_during_this_period');
+      expect(e.message).toBe('faircalendar.errors.no_date_during_this_period');
       verify(
         dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-24')), deepEqual(new Date('2020-10-25')))
       ).once();
@@ -133,7 +133,7 @@ describe('AddEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectNotFoundException);
-      expect(e.message).toBe('project.errors.not_found');
+      expect(e.message).toBe('crm.projects.not_found');
       verify(
         dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-20')))
       ).once();
@@ -163,7 +163,7 @@ describe('AddEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(TaskNotFoundException);
-      expect(e.message).toBe('task.errors.not_found');
+      expect(e.message).toBe('accounting.tasks.errors.not_found');
       verify(
         dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-20')))
       ).once();

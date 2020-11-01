@@ -1,13 +1,14 @@
 <script>
-  import {goto} from '@sapper/app';
+  import { goto } from '@sapper/app';
+  import { _ } from 'svelte-i18n';
   import H4Title from '../../../components/H4Title.svelte';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import {post} from '../../../utils/axios';
+  import { post } from '../../../utils/axios';
   import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../../normalizer/errors';
+  import { errorNormalizer } from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';  
 
-  let title = 'Ajouter une mission';
+  let title = $_('accounting.tasks.add.title');
   let loading = false;
   let errors = [];
 
@@ -25,10 +26,10 @@
 </script>
 
 <svelte:head>
-  <title>{title} - Permacoop</title>
+  <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: 'Gestion & Comptabilité'}, {title: 'Missions', path: '/accounting/tasks'}, {title}]} />
+<Breadcrumb items={[{title: $_('accounting.breadcrumb')}, {title: $_('accounting.tasks.title'), path: '/accounting/tasks'}, {title}]} />
 <H4Title {title} />
 <ServerErrors {errors} />
 <Form on:save={onSave} {loading} />

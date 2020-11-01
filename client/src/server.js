@@ -6,6 +6,7 @@ import * as sapper from '@sapper/server';
 import { guard } from '@beyonk/sapper-rbac';
 import routes from './routes';
 import authMiddleware from './middlewares/auth';
+import './i18n';
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';

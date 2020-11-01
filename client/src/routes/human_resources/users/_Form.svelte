@@ -1,5 +1,6 @@
 <script>
-  import {createEventDispatcher} from 'svelte';
+  import { createEventDispatcher } from 'svelte';
+  import { _ } from 'svelte-i18n';
   import {
     ROLE_COOPERATOR,
     ROLE_ACCOUNTANT,
@@ -54,29 +55,29 @@
 </script>
 
 <form on:submit|preventDefault={submit} class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-  <SelectInput label={'Role'} bind:value={role}>
-    <option value={ROLE_COOPERATOR}>Coopérateur</option>
-    <option value={ROLE_EMPLOYEE}>Employé</option>
-    <option value={ROLE_ACCOUNTANT}>Comptable</option>
+  <SelectInput label={$_('human_resources.users.form.role')} bind:value={role}>
+    <option value={ROLE_COOPERATOR}>{$_('common.roles.cooperator')}</option>
+    <option value={ROLE_EMPLOYEE}>{$_('common.roles.employee')}</option>
+    <option value={ROLE_ACCOUNTANT}>{$_('common.roles.accountant')}</option>
   </SelectInput>
   <div class="flex">
     <div class="w-1/2 pr-2">
-      <Input label={'Prénom'} bind:value={firstName} />
+      <Input label={$_('human_resources.users.form.first_name')} bind:value={firstName} />
     </div>
     <div class="w-1/2 pl-2">
-      <Input label={'Nom'} bind:value={lastName} />
+      <Input label={$_('human_resources.users.form.last_name')} bind:value={lastName} />
     </div>
   </div>
   <div class="flex">
     <div class="w-1/2 pr-2">
-      <Input type={'email'} label={'Email'} bind:value={email} />
+      <Input type={'email'} label={$_('human_resources.users.form.email')} bind:value={email} />
     </div>
     <div class="w-1/2 pl-2">
-      <Input type={'password'} label={'Mot de passe'} bind:value={password} />
+      <Input type={'password'} label={$_('human_resources.users.form.password')} bind:value={password} />
     </div>
   </div>
   {#if role !== ROLE_ACCOUNTANT}
     <UserAdministrativeForm bind:userAdministrative />
   {/if}
-  <Button value={'Enregistrer'} {loading} disabled={!firstName || !lastName || !email || !password || !role || loading} />
+  <Button value={$_('common.form.save')} {loading} disabled={!firstName || !lastName || !email || !password || !role || loading} />
 </form>

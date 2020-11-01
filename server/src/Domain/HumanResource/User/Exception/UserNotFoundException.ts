@@ -1,5 +1,5 @@
 export class UserNotFoundException extends Error {
   constructor() {
-    super('user.errors.not_found');
+    super('human_resources.users.errors.not_found');
   }
 }

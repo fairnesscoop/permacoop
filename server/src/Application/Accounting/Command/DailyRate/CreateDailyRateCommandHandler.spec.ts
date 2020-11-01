@@ -60,7 +60,7 @@ describe('CreateDailyRateCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(UserNotFoundException);
-      expect(e.message).toBe('user.errors.not_found');
+      expect(e.message).toBe('human_resources.users.errors.not_found');
       verify(
         userRepository.findOneById('d36bbd74-f753-4d8f-940c-d4a6b4fd0957')
       ).once();
@@ -89,7 +89,7 @@ describe('CreateDailyRateCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(CustomerNotFoundException);
-      expect(e.message).toBe('customer.errors.not_found');
+      expect(e.message).toBe('crm.customers.errors.not_found');
       verify(
         userRepository.findOneById('d36bbd74-f753-4d8f-940c-d4a6b4fd0957')
       ).once();
@@ -123,7 +123,7 @@ describe('CreateDailyRateCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(TaskNotFoundException);
-      expect(e.message).toBe('task.errors.not_found');
+      expect(e.message).toBe('accounting.tasks.errors.not_found');
       verify(
         userRepository.findOneById('d36bbd74-f753-4d8f-940c-d4a6b4fd0957')
       ).once();
@@ -165,7 +165,7 @@ describe('CreateDailyRateCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(DailyRateAlreadyExistException);
-      expect(e.message).toBe('accounting.errors.daily_rate_already_exist');
+      expect(e.message).toBe('accounting.daily_rates.errors.already_exist');
       verify(
         userRepository.findOneById('d36bbd74-f753-4d8f-940c-d4a6b4fd0957')
       ).once();

@@ -1,11 +1,10 @@
 <script>
-  import {createEventDispatcher} from 'svelte';
-  import {subMonths, format, compareDesc, eachMonthOfInterval} from 'date-fns';
-  import {fr} from 'date-fns/locale';
+  import { createEventDispatcher } from 'svelte';
+  import { subMonths, format, compareDesc, eachMonthOfInterval } from 'date-fns';
+  import { fr } from 'date-fns/locale';
 
   export let label = '';
   export let amount;
-  export let emptyValue = true;
   export let date;
 
   const dispatch = createEventDispatcher();
@@ -23,9 +22,6 @@
     {label}
   </label>
   <select id="date" bind:value={date} on:change={handleChange} class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-    {#if emptyValue}
-      <option value="">-- Choisir un mois --</option>
-    {/if}
     {#each periods as period}
       <option
         value={format(period, 'yyyy-MM-dd')}

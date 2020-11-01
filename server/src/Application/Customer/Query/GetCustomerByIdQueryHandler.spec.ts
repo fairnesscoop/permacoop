@@ -65,7 +65,7 @@ describe('GetCustomerByIdQueryHandler', () => {
       await queryHandler.execute(query);
     } catch (e) {
       expect(e).toBeInstanceOf(CustomerNotFoundException);
-      expect(e.message).toBe('customer.errors.not_found');
+      expect(e.message).toBe('crm.customers.errors.not_found');
       verify(
         customerRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
       ).once();

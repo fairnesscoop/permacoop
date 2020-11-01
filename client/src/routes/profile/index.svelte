@@ -1,16 +1,17 @@
 <script>
-  import {onMount} from 'svelte';
-  import {goto, stores} from '@sapper/app';
+  import { onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
+  import { goto, stores } from '@sapper/app';
   import Breadcrumb from '../../components/Breadcrumb.svelte';
   import H4Title from '../../components/H4Title.svelte';
-  import {get, put} from '../../utils/axios';
+  import { get, put } from '../../utils/axios';
   import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../normalizer/errors';
+  import { errorNormalizer } from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
 
   const { session } = stores();
 
-  let title = 'Mon compte';
+  let title = $_('profile.title');
   let errors = [];
   let loading = false;
   let data = {};
@@ -39,7 +40,7 @@
 </script>
 
 <svelte:head>
-  <title>{title} - Permacoop</title>
+  <title>{title} - {$_('app')}</title>
 </svelte:head>
 
 <Breadcrumb items={[{title}]} />

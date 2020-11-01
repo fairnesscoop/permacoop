@@ -12,11 +12,12 @@
 
 <script>
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import {format} from 'date-fns';
-  import {fr} from 'date-fns/locale';
-  import {goto} from '@sapper/app';
+  import { format } from 'date-fns';
+  import { _ } from 'svelte-i18n';
+  import { fr } from 'date-fns/locale';
+  import { goto } from '@sapper/app';
   import Form from '../_Form.svelte';
-  import {errorNormalizer} from '../../../normalizer/errors';
+  import { errorNormalizer } from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import H4Title from '../../../components/H4Title.svelte';
 
@@ -28,7 +29,7 @@
 
   let errors = [];
   let loading = false;
-  let title = `CRA du ${format(new Date(event.date), 'EE dd MMMM', { locale: fr } )}`;
+  let title = $_('faircalendar.from_date', { values: { date: format(new Date(event.date), 'EE dd MMMM', { locale: fr } ) } });
 
   const onSave = async e => {
     try {
@@ -56,15 +57,15 @@
 </script>
 
 <svelte:head>
-  <title>{title} - Permacoop</title>
+  <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: 'FairCalendar', path: 'faircalendar'}, {title}]} />
+<Breadcrumb items={[{title: $_('faircalendar.breadcrumb'), path: 'faircalendar'}, {title}]} />
 <ServerErrors {errors} />
 <div class="inline-flex items-center">
   <H4Title {title} />
   <button disable={loading} class="py-1 px-2 ml-2 mb-6 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple" type="button" on:click={onDelete}>
-    Supprimer
+    {$_('common.form.remove')}
   </button>
 </div>
 <Form on:save={onSave} event={{...event, taskId, projectId, time}} {loading} />

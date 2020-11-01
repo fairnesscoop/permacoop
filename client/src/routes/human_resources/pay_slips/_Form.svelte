@@ -1,6 +1,7 @@
 <script>
-  import {createEventDispatcher, onMount} from 'svelte';
-  import {get} from '../../../utils/axios';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
+  import { get } from '../../../utils/axios';
   import Button from '../../../components/inputs/Button.svelte';
   import UsersInput from '../../../components/inputs/UsersInput.svelte';
   import MonthsInput from '../../../components/inputs/MonthsInput.svelte';
@@ -33,7 +34,7 @@
   <MonthsInput label={'Période'} bind:date amount={6} />
   <div class="block mt-4 text-sm">
     <label class="text-gray-700 dark:text-gray-400">
-      Fiche de paie
+      {$_('human_resources.pay_slips.form.file')}
     </label>
     <input
       type="file"
@@ -42,8 +43,8 @@
       class="block w-full mt-1 text-sm border-green-600 dark:text-gray-300 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green form-input"
       bind:files />
     <span class="text-xs text-green-600 dark:text-green-400">
-      Format PDF uniquement
+      {$_('human_resources.pay_slips.form.file_helper')}
     </span>
   </div>
-  <Button value={'Enregistrer'} {loading} disabled={!date || !userId || !files.length > 0 || loading} />
+  <Button value={$_('common.form.save')} {loading} disabled={!date || !userId || !files.length > 0 || loading} />
 </form>

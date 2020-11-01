@@ -1,6 +1,7 @@
 <script>
-  import {createEventDispatcher, onMount} from 'svelte';
-  import {get} from '../../../utils/axios';
+  import { _ } from 'svelte-i18n';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { get } from '../../../utils/axios';
   import UsersInput from '../../../components/inputs/UsersInput.svelte';
   import CustomersInput from '../../../components/inputs/CustomersInput.svelte';
   import TasksInput from '../../../components/inputs/TasksInput.svelte';
@@ -40,6 +41,6 @@
   <CustomersInput customers={customers.items} bind:customerId />
   <UsersInput {users} bind:userId />
   <TasksInput tasks={tasks.items} bind:taskId />
-  <Input type={'money'} label={'Taux HT'} bind:value={amount} />
-  <Button value={'Enregistrer'} {loading} disabled={!taskId || !customerId || !userId || !amount || loading} />
+  <Input type={'money'} label={$_('accounting.daily_rates.form.daily_rate')} bind:value={amount} />
+  <Button value={$_('common.form.save')} {loading} disabled={!taskId || !customerId || !userId || !amount || loading} />
 </form>

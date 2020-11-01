@@ -1,18 +1,19 @@
 <script context="module">
-  import {get, put} from '../../../../utils/axios';
+  import { get, put } from '../../../../utils/axios';
 
   export const preload = async ({params}) => {
-    const {data} = await get(`customers/${params.id}`);
+    const { data } = await get(`customers/${params.id}`);
 
-    return {customer: data};
+    return { customer: data };
   };
 </script>
 
 <script>
-  import {goto} from '@sapper/app';
+  import { goto } from '@sapper/app';
+  import { _ } from 'svelte-i18n';
   import Breadcrumb from '../../../../components/Breadcrumb.svelte';
   import Form from '../_Form.svelte';
-  import {errorNormalizer} from '../../../../normalizer/errors';
+  import { errorNormalizer } from '../../../../normalizer/errors';
   import ServerErrors from '../../../../components/ServerErrors.svelte';
   import H4Title from '../../../../components/H4Title.svelte';
 
@@ -20,7 +21,7 @@
 
   let errors = [];
   let loading = false;
-  let title = `Edition du client "${customer.name}"`;
+  let title = $_('crm.customers.edit.title', { values: { name: customer.name }});
 
   const onSave = async e => {
     try {
@@ -36,10 +37,10 @@
 </script>
 
 <svelte:head>
-  <title>{title} - Permacoop</title>
+  <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: 'CRM'}, {title: 'Clients', path: '/crm/customers'}, {title}]} />
+<Breadcrumb items={[{title: $_('crm.breadcrumb')}, {title: $_('crm.customers.title'), path: '/crm/customers'}, {title}]} />
 <H4Title {title} />
 <ServerErrors {errors} />
 <Form {loading} {customer} on:save={onSave} />
