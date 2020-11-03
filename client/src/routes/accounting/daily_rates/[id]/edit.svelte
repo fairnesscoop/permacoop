@@ -1,38 +1,48 @@
 <script context="module">
-  import { get, put } from '../../../../utils/axios';
-
-  export const preload = async ({ params }) => {
-    const { data } = await get(`daily_rates/${params.id}`);
-
-    return { dailyRate: data };
+  export const preload = async ({ params: { id }}) => {
+    return { id };
   };
 </script>
 
 <script>
   import { goto } from '@sapper/app';
   import { _ } from 'svelte-i18n';
+  import { onMount } from 'svelte';
+  import { get, put } from '../../../../utils/axios';
   import Breadcrumb from '../../../../components/Breadcrumb.svelte';
   import Form from '../_Form.svelte';
   import { errorNormalizer } from '../../../../normalizer/errors';
   import ServerErrors from '../../../../components/ServerErrors.svelte';
   import H4Title from '../../../../components/H4Title.svelte';
 
-  export let dailyRate;
-  export let loading = false;
+  export let id;
 
-  const { user, customer, amount, task } = dailyRate;
-  let taskId = task.id;
-  let customerId = customer.id;
-  let userId = user.id;
-
-  const name = `${user.firstName} ${user.lastName} - ${customer.name}`;
-  let title = $_('accounting.daily_rates.edit.title', { values: { name }});
+  let loading = false;  
+  let dailyRate;
+  let taskId;
+  let customerId;
+  let userId;
   let errors = [];
+  let title = '';
+
+  onMount(async () => {
+    try {
+      ({ data: dailyRate } = await get(`daily_rates/${id}`));
+      const { user, customer, amount, task } = dailyRate;
+      const name = `${user.firstName} ${user.lastName} - ${customer.name}`;
+      title = $_('accounting.daily_rates.edit.title', { values: { name }});
+      taskId = task.id;
+      customerId = customer.id;
+      userId = user.id;
+    } catch (e) {
+      errors = errorNormalizer(e);
+    }
+  });  
 
   const onSave = async e => {
     try {
       loading = true;
-      await put(`daily_rates/${dailyRate.id}`, e.detail);
+      await put(`daily_rates/${id}`, e.detail);
       goto('/accounting/daily_rates');
     } catch (e) {
       errors = errorNormalizer(e);
@@ -49,4 +59,6 @@
 <Breadcrumb items={[{title: $_('accounting.breadcrumb')}, {title: 'TJM', path: 'accounting/daily_rates'}, {title}]} />
 <H4Title {title} />
 <ServerErrors {errors} />
-<Form on:save={onSave} {amount} {taskId} {customerId} {userId} {loading} />
+{#if dailyRate}
+  <Form on:save={onSave} amount={dailyRate.amount} {taskId} {customerId} {userId} {loading} />
+{/if}

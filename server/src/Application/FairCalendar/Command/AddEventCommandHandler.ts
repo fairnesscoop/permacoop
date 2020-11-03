@@ -11,6 +11,7 @@ import { ProjectOrTaskMissingException } from 'src/Domain/FairCalendar/Exception
 import { AbstractProjectAndTaskGetter } from './AbstractProjectAndTaskGetter';
 import { NoDateDuringThisPeriodException } from 'src/Domain/FairCalendar/Exception/NoDateDuringThisPeriodException';
 import { AddEventsView } from '../View/AddEventsView';
+import { MaximumEventReachedException } from 'src/Domain/FairCalendar/Exception/MaximumEventReachedException';
 
 @CommandHandler(AddEventCommand)
 export class AddEventCommandHandler extends AbstractProjectAndTaskGetter {
@@ -35,7 +36,6 @@ export class AddEventCommandHandler extends AbstractProjectAndTaskGetter {
     }
 
     const days = this.getDays(startDate, endDate);
-
     const [project, task] = await Promise.all([
       this.getProject(projectId),
       this.getTask(taskId)
@@ -54,8 +54,11 @@ export class AddEventCommandHandler extends AbstractProjectAndTaskGetter {
       );
 
       if (true === (await this.isMaximumTimeSpentReached.isSatisfiedBy(event))) {
-        errors.push(date);
+        if (1 === days.length) {
+          throw new MaximumEventReachedException();
+        }
 
+        errors.push(date);
         continue;
       }
 

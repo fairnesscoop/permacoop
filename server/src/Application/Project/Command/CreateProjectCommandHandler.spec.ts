@@ -60,7 +60,7 @@ describe('CreateProjectCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectAlreadyExistException);
-      expect(e.message).toBe('crm.projects.already_exist');
+      expect(e.message).toBe('crm.projects.errors.already_exist');
       verify(
         customerRepository.findOneById('b5e8dc18-ca67-4323-bdae-654afe09499f')
       ).once();
