@@ -158,9 +158,9 @@
       "event_doesnt_belong_to_user": "Cet évènement ne vous appartient pas, vous ne pouvez ni le modifier, ni le supprimer.",
       "event_not_found": "Cet évènement n'existe pas.",
       "events_already_exist_for_this_period": "Un évènement a déjà été créé durant cette période.",
-      "event_maximum_reached": "Le maxium pour une journée a été atteint",
-      "no_date_during_this_period": "Vous devez sélectionner une période valide",
-      "project_or_task_missing": "Vous devez saisir un projet et une mission"
+      "event_maximum_reached": "Vous ne pouvez pas déclarer plus d'une journée.",
+      "no_date_during_this_period": "Vous devez sélectionner une période valide.",
+      "project_or_task_missing": "Vous devez saisir un projet et une mission."
     },
     "type": {
       "mission": "Mission",

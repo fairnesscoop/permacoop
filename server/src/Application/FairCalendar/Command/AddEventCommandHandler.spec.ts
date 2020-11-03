@@ -133,7 +133,7 @@ describe('AddEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectNotFoundException);
-      expect(e.message).toBe('crm.projects.not_found');
+      expect(e.message).toBe('crm.projects.errors.not_found');
       verify(
         dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-20')))
       ).once();
@@ -174,6 +174,65 @@ describe('AddEventCommandHandler', () => {
         taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
       ).once();
       verify(isMaximumTimeSpentReached.isSatisfiedBy(anything())).never();
+      verify(eventRepository.save(anything())).never();
+    }
+  });
+
+
+  it('testAddOneMaximumTimeSpentReached', async () => {
+    const command3 = new AddEventCommand(
+      EventType.MISSION,
+      instance(user),
+      100,
+      new Date('2020-10-19'),
+      new Date('2020-10-19'),
+      '50e624ef-3609-4053-a437-f74844a2d2de',
+      'e3fc9666-2932-4dc1-b2b9-d904388293fb',
+      'RF development'
+    );
+
+    const event1 = new Event(
+      EventType.MISSION,
+      instance(user),
+      100,
+      '2020-10-19',
+      instance(project),
+      instance(task),
+      'RF development'
+    );
+
+    when(
+      dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-19')))
+    ).thenReturn([new Date('2020-10-19')]);
+    when(
+      projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
+    ).thenResolve(instance(project));
+    when(
+      taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
+    ).thenResolve(instance(task));
+    when(isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(event1))).thenResolve(
+      true
+    );
+    when(dateUtils.format(deepEqual(new Date('2020-10-19')), 'y-MM-dd')).thenReturn(
+      '2020-10-19'
+    );
+
+    try {
+      await handler.execute(command3);
+    } catch (e) {
+      expect(e).toBeInstanceOf(MaximumEventReachedException);
+      expect(e.message).toBe('faircalendar.errors.event_maximum_reached');
+      verify(
+        dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-19')))
+      ).once();
+      verify(
+        projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
+      ).once();
+      verify(
+        taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
+      ).once();
+      verify(isMaximumTimeSpentReached.isSatisfiedBy(anyOfClass(Event))).once();
+      verify(dateUtils.format(deepEqual(new Date('2020-10-19')), 'y-MM-dd')).once();
       verify(eventRepository.save(anything())).never();
     }
   });

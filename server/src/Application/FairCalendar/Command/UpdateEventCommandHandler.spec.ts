@@ -174,7 +174,7 @@ describe('UpdateEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectNotFoundException);
-      expect(e.message).toBe('crm.projects.not_found');
+      expect(e.message).toBe('crm.projects.errors.not_found');
       verify(
         eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
       ).once();
