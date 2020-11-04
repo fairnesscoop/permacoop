@@ -5,11 +5,13 @@
   "scripts": {
     "dev": "sapper dev",
     "watch:tailwind": "postcss static/css/tailwind.css -o static/css/index.css -w",
-    "build:tailwind": "NODE_ENV=production postcss static/tailwind.css -o static/index.css",
+    "build:tailwind": "NODE_ENV=production postcss static/css/tailwind.css -o static/css/index.css",
     "build": "npm run build:tailwind && sapper build --legacy",
     "export": "sapper export --legacy",
     "start": "node __sapper__/build",
     "test": "run-p --race dev cy:run",
+    "format": "prettier -w src/**/*.{js,svelte}",
+    "lint": "eslint ./*.js ./src/*.js ./src/components/**/*.svelte",
     "test-unit": "jest",
     "coverage": "jest --coverage"
   },
@@ -32,6 +34,13 @@
     "svelte-i18n": "^3.1.0"
   },
   "devDependencies": {
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.13.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "prettier": "^2.1.2",
+    "prettier-plugin-svelte": "^1.4.0",
     "@babel/core": "^7.10.4",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.10.4",

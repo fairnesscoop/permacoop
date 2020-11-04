@@ -15,6 +15,7 @@ install: ## Install API and client
 	make start
 	make api-build-dist
 	make database-migrate
+	make watch-tailwind
 stop: ## Stop docker containers
 	${compose} stop
 rm: ## Remove docker containers
@@ -23,12 +24,16 @@ ps: ## List docker containers
 	${compose} ps
 start: ## Start docker containers
 	${compose} up -d
+watch-tailwind:
 	${exec} client npm run watch:tailwind
+build-tailwind: ## Build Tailwind in production mode
+	${exec} client npm run build:tailwind
 test: ## Run test suite
 	${exec} api npm run test
 	${exec} client npm run test-unit
 linter: ## Linter
 	${exec} api npm run lint
+	${exec} client npm run lint
 api-logs: ## Display API logs
 	${logs} api
 api-bash: ## Connect to API container
