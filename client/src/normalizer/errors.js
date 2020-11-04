@@ -1,4 +1,4 @@
-export const errorNormalizer = e => {
+export const errorNormalizer = (e) => {
   if (!e.response) {
     return ['Une erreur est survenue'];
   }

@@ -17,11 +17,14 @@
   </h4>
   <table class="w-full whitespace-no-wrap">
     <thead>
-      <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+      <tr
+        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
         <th class="text-center py-3">{$_('faircalendar.type.mission')}</th>
         <th class="text-center py-3">{$_('faircalendar.type.support')}</th>
         <th class="text-center py-3">{$_('faircalendar.type.dojo')}</th>
-        <th class="text-center py-3">{$_('faircalendar.type.formationConference')}</th>
+        <th class="text-center py-3">
+          {$_('faircalendar.type.formationConference')}
+        </th>
         <th class="text-center py-3">{$_('faircalendar.type.holiday')}</th>
         <th class="text-center py-3">{$_('faircalendar.type.medicalLeave')}</th>
         <th class="text-center py-3">{$_('faircalendar.type.other')}</th>
@@ -30,13 +33,48 @@
     </thead>
     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
       <tr class="text-gray-700 dark:text-gray-400">
-        <td class="py-3 text-center text-sm"><GreenBadge value={$_('common.days_duration', { values: { n: overview.mission }})} /></td>
-        <td class="py-3 text-center text-sm"><IndigoBadge value={$_('common.days_duration', { values: { n: overview.support }})} /></td>
-        <td class="py-3 text-center text-sm"><BlueBadge value={$_('common.days_duration', { values: { n: overview.dojo }})} /></td>
-        <td class="py-3 text-center text-sm"><OrangeBadge value={$_('common.days_duration', { values: { n: overview.formationConference }})} /></td>
-        <td class="py-3 text-center text-sm"><YellowBadge value={$_('common.days_duration', { values: { n: overview.holiday }})}  /></td>
-        <td class="py-3 text-center text-sm"><RedBadge value={$_('common.days_duration', { values: { n: overview.medicalLeave }})} /></td>
-        <td class="py-3 text-center text-sm"><GrayBadge value={$_('common.days_duration', { values: { n: overview.other }})} /></td>
+        <td class="py-3 text-center text-sm">
+          <GreenBadge
+            value="{$_('common.days_duration', {
+              values: { n: overview.mission },
+            })}" />
+        </td>
+        <td class="py-3 text-center text-sm">
+          <IndigoBadge
+            value="{$_('common.days_duration', {
+              values: { n: overview.support },
+            })}" />
+        </td>
+        <td class="py-3 text-center text-sm">
+          <BlueBadge
+            value="{$_('common.days_duration', {
+              values: { n: overview.dojo },
+            })}" />
+        </td>
+        <td class="py-3 text-center text-sm">
+          <OrangeBadge
+            value="{$_('common.days_duration', {
+              values: { n: overview.formationConference },
+            })}" />
+        </td>
+        <td class="py-3 text-center text-sm">
+          <YellowBadge
+            value="{$_('common.days_duration', {
+              values: { n: overview.holiday },
+            })}" />
+        </td>
+        <td class="py-3 text-center text-sm">
+          <RedBadge
+            value="{$_('common.days_duration', {
+              values: { n: overview.medicalLeave },
+            })}" />
+        </td>
+        <td class="py-3 text-center text-sm">
+          <GrayBadge
+            value="{$_('common.days_duration', {
+              values: { n: overview.other },
+            })}" />
+        </td>
         <td class="py-3 text-center text-sm"><b>{overview.mealTicket}</b></td>
       </tr>
     </tbody>

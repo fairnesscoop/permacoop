@@ -30,11 +30,11 @@ app
           return sapper.middleware({
             session: () => {
               return {
-                user
+                user,
               };
-            }
+            },
           })(req, res, next);
-        }
+        },
       };
 
       return guard(req.path, user, options);

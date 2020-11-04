@@ -1,7 +1,7 @@
 <script context="module">
   export const preload = async ({ query }) => {
     return {
-      page: query.page || 1
+      page: query.page || 1,
     };
   };
 </script>
@@ -26,22 +26,22 @@
   let response = {
     items: [],
     totalItems: 0,
-    pageCount: 0
+    pageCount: 0,
   };
 
   onMount(async () => {
     fetchTasks();
   });
 
-  const changePage = async e => {
+  const changePage = async (e) => {
     page = e.detail;
-    historyPushState('tasks', {page});
+    historyPushState('tasks', { page });
     fetchTasks();
   };
 
   const fetchTasks = async () => {
     try {
-      response = (await get('tasks', {params: {page}})).data;
+      response = (await get('tasks', { params: { page } })).data;
     } catch (e) {
       errors = errorNormalizer(e);
     }
@@ -52,19 +52,19 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: $_('accounting.breadcrumb')}, {title}]} />
-<ServerErrors {errors} />
+<Breadcrumb items="{[{ title: $_('accounting.breadcrumb') }, { title }]}" />
+<ServerErrors errors="{errors}" />
 <div class="inline-flex items-center">
-  <H4Title {title} />
-  <AddLink href={'/accounting/tasks/add'} value={$_('common.form.add')} />
+  <H4Title title="{title}" />
+  <AddLink href="{'/accounting/tasks/add'}" value="{$_('common.form.add')}" />
 </div>
 <div class="w-full overflow-hidden rounded-lg shadow-xs">
-  <div class="w-full overflow-x-auto">  
-    <Table items={response.items} />
+  <div class="w-full overflow-x-auto">
+    <Table items="{response.items}" />
   </div>
   <Pagination
-    on:change={changePage}
-    currentPage={page}
-    totalItems={response.totalItems}
-    pageCount={response.pageCount} />
+    on:change="{changePage}"
+    currentPage="{page}"
+    totalItems="{response.totalItems}"
+    pageCount="{response.pageCount}" />
 </div>

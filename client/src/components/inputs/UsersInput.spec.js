@@ -1,5 +1,5 @@
 import UsersInput from './UsersInput.svelte';
-import {screen, render, fireEvent} from '@testing-library/svelte';
+import { screen, render, fireEvent } from '@testing-library/svelte';
 
 it('renders the users input select with the selected user', () => {
   const userId = '8a1dd502-c974-447e-9be3-a18e7abfebe3';
@@ -7,15 +7,15 @@ it('renders the users input select with the selected user', () => {
     {
       id: '8a1dd502-c974-447e-9be3-a18e7abfebe3',
       firstName: 'Nicolas',
-      lastName: 'Dievart'
+      lastName: 'Dievart',
     },
     {
       id: '14900cf1-49b1-4410-81d4-0c31086c7e6d',
       firstName: 'Mathieu',
-      lastName: 'Marchois'
-    }
+      lastName: 'Marchois',
+    },
   ];
-  render(UsersInput, {userId, users});
+  render(UsersInput, { userId, users });
 
   const select = screen.getByRole('combobox');
   expect(select.value).toBe('8a1dd502-c974-447e-9be3-a18e7abfebe3');
@@ -36,20 +36,20 @@ it('renders the users input select, on change other user selected', () => {
     {
       id: '8a1dd502-c974-447e-9be3-a18e7abfebe3',
       firstName: 'Nicolas',
-      lastName: 'Dievart'
+      lastName: 'Dievart',
     },
     {
       id: '14900cf1-49b1-4410-81d4-0c31086c7e6d',
       firstName: 'Mathieu',
-      lastName: 'Marchois'
-    }
+      lastName: 'Marchois',
+    },
   ];
-  render(UsersInput, {userId, users});
+  render(UsersInput, { userId, users });
   const select = screen.getByRole('combobox');
 
   // Switch to "mathieu"
   fireEvent.change(select, {
-    target: {value: '14900cf1-49b1-4410-81d4-0c31086c7e6d'}
+    target: { value: '14900cf1-49b1-4410-81d4-0c31086c7e6d' },
   });
 
   expect(select.value).toBe('14900cf1-49b1-4410-81d4-0c31086c7e6d');

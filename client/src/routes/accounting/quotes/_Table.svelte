@@ -14,7 +14,8 @@
 
 <table class="w-full whitespace-no-wrap">
   <thead>
-    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+    <tr
+      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
       <th class="px-4 py-3">{$_('accounting.quotes.quote_id')}</th>
       <th class="px-4 py-3">{$_('accounting.quotes.date')}</th>
       <th class="px-4 py-3">{$_('accounting.quotes.customer')}</th>
@@ -24,10 +25,12 @@
     </tr>
   </thead>
   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-    {#each items as {id, quoteId, createdAt, status, customer, amountInclusiveOfTaxe, project} (id)}
+    {#each items as { id, quoteId, createdAt, status, customer, amountInclusiveOfTaxe, project } (id)}
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="px-4 py-3 text-sm">{quoteId}</td>
-        <td class="px-4 py-3 text-sm">{dateFormat(new Date(createdAt), 'dd/MM/yyyy', {locale: fr})}</td>
+        <td class="px-4 py-3 text-sm">
+          {dateFormat(new Date(createdAt), 'dd/MM/yyyy', { locale: fr })}
+        </td>
         <td class="px-4 py-3 text-sm">
           {customer.name}
           {#if project}({project.name}){/if}
@@ -35,13 +38,13 @@
         <td class="px-4 py-3 text-sm">{format(amountInclusiveOfTaxe)}</td>
         <td class="px-4 py-3 text-sm">
           {#if 'draft' === status}
-            <OrangeBadge value={$_(`accounting.quotes.status.${status}`)} />
+            <OrangeBadge value="{$_(`accounting.quotes.status.${status}`)}" />
           {:else if 'accepted' === status}
-            <GreenBadge value={$_(`accounting.quotes.status.${status}`)} />
+            <GreenBadge value="{$_(`accounting.quotes.status.${status}`)}" />
           {:else if 'sent' === status}
-            <GrayBadge value={$_(`accounting.quotes.status.${status}`)} />
+            <GrayBadge value="{$_(`accounting.quotes.status.${status}`)}" />
           {:else}
-            <RedBadge value={$_(`accounting.quotes.status.${status}`)} />
+            <RedBadge value="{$_(`accounting.quotes.status.${status}`)}" />
           {/if}
         </td>
         <td class="px-4 py-3">

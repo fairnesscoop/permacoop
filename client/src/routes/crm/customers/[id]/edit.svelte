@@ -1,5 +1,5 @@
 <script context="module">
-  export const preload = async ({ params: { id }}) => {
+  export const preload = async ({ params: { id } }) => {
     return { id };
   };
 </script>
@@ -21,17 +21,19 @@
   let errors = [];
   let loading = false;
   let title = '';
-  
+
   onMount(async () => {
     try {
       ({ data: customer } = await get(`customers/${id}`));
-      title = $_('crm.customers.edit.title', { values: { name: customer.name }});
+      title = $_('crm.customers.edit.title', {
+        values: { name: customer.name },
+      });
     } catch (e) {
       errors = errorNormalizer(e);
     }
   });
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       loading = true;
       await put(`customers/${id}`, e.detail);
@@ -48,9 +50,10 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: $_('crm.breadcrumb')}, {title: $_('crm.customers.title'), path: '/crm/customers'}, {title}]} />
-<H4Title {title} />
-<ServerErrors {errors} />
+<Breadcrumb
+  items="{[{ title: $_('crm.breadcrumb') }, { title: $_('crm.customers.title'), path: '/crm/customers' }, { title }]}" />
+<H4Title title="{title}" />
+<ServerErrors errors="{errors}" />
 {#if customer}
-  <Form {loading} {customer} on:save={onSave} />
+  <Form loading="{loading}" customer="{customer}" on:save="{onSave}" />
 {/if}

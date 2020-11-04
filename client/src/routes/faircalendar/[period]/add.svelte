@@ -1,7 +1,7 @@
 <script context="module">
   export const preload = ({ params: { period } }) => {
     return {
-      period
+      period,
     };
   };
 </script>
@@ -21,12 +21,14 @@
   export let period;
 
   const formatDate = (date) => {
-    return format(new Date(date), 'EE dd MMMM', { locale: fr } );
-  }
+    return format(new Date(date), 'EE dd MMMM', { locale: fr });
+  };
 
   let startDate = period.split('_')[0];
   let endDate = period.split('_')[1];
-  let title = $_('faircalendar.from_date', { values: { date: formatDate(startDate) } });
+  let title = $_('faircalendar.from_date', {
+    values: { date: formatDate(startDate) },
+  });
   let errors = [];
   let loading = false;
 
@@ -37,14 +39,16 @@
     time: '100',
     summary: '',
     taskId: null,
-    projectId: null
+    projectId: null,
   };
 
   if (startDate !== endDate) {
-    title += ` ${$_('faircalendar.to_date', { values: { date: formatDate(endDate) } })}`;
+    title += ` ${$_('faircalendar.to_date', {
+      values: { date: formatDate(endDate) },
+    })}`;
   }
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       loading = true;
       await post('events', e.detail);
@@ -61,7 +65,8 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: $_('faircalendar.breadcrumb'), path: 'faircalendar'}, {title}]} />
-<ServerErrors {errors} />
-<H4Title {title} />
-<Form {loading} on:save={onSave} {event} />
+<Breadcrumb
+  items="{[{ title: $_('faircalendar.breadcrumb'), path: 'faircalendar' }, { title }]}" />
+<ServerErrors errors="{errors}" />
+<H4Title title="{title}" />
+<Form loading="{loading}" on:save="{onSave}" event="{event}" />

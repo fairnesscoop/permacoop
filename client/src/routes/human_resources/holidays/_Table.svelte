@@ -9,15 +9,16 @@
   import GrayBadge from '../../../components/badges/GrayBadge.svelte';
 
   const formatDate = (date) => {
-    return format(new Date(date), 'dd/MM/yyyy', {locale: fr});
-  }
+    return format(new Date(date), 'dd/MM/yyyy', { locale: fr });
+  };
 
   export let items;
 </script>
 
 <table class="w-full whitespace-no-wrap">
   <thead>
-    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+    <tr
+      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
       <th class="px-4 py-3">{$_('human_resources.holidays.users')}</th>
       <th class="px-4 py-3">{$_('human_resources.holidays.periods')}</th>
       <th class="px-4 py-3">{$_('human_resources.holidays.leave_types')}</th>
@@ -26,24 +27,32 @@
     </tr>
   </thead>
   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-    {#each items as {id, startDate, endDate, user, status, duration, leaveType} (id)}
+    {#each items as { id, startDate, endDate, user, status, duration, leaveType } (id)}
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="px-4 py-3 text-sm">{user.firstName} {user.lastName}</td>
         <td class="px-4 py-3 text-sm">
-          {$_('human_resources.holidays.period', { values: {
-            from: formatDate(startDate),
-            to: formatDate(endDate),
-          }})}
-          <GrayBadge value={$_('common.days_duration', { values: { n: duration } })} />
+          {$_('human_resources.holidays.period', {
+            values: {
+              from: formatDate(startDate),
+              to: formatDate(endDate),
+            },
+          })}
+          <GrayBadge
+            value="{$_('common.days_duration', { values: { n: duration } })}" />
         </td>
-        <td class="px-4 py-3 text-sm">{$_(`human_resources.holidays.leave_type.${leaveType}`)}</td>
+        <td class="px-4 py-3 text-sm">
+          {$_(`human_resources.holidays.leave_type.${leaveType}`)}
+        </td>
         <td class="px-4 py-3 text-sm">
           {#if 'pending' === status}
-            <OrangeBadge value={$_(`human_resources.holidays.states.${status}`)}/>
+            <OrangeBadge
+              value="{$_(`human_resources.holidays.states.${status}`)}" />
           {:else if 'accepted' === status}
-            <GreenBadge value={$_(`human_resources.holidays.states.${status}`)} />
+            <GreenBadge
+              value="{$_(`human_resources.holidays.states.${status}`)}" />
           {:else}
-            <RedBadge value={$_(`human_resources.holidays.states.${status}`)} />
+            <RedBadge
+              value="{$_(`human_resources.holidays.states.${status}`)}" />
           {/if}
         </td>
         <td class="px-4 py-3">

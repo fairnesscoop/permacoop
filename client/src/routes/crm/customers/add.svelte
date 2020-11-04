@@ -13,16 +13,16 @@
   let errors = [];
 
   const customer = {
-    name: '', 
+    name: '',
     address: {
-      street: '', 
-      city: '', 
-      zipCode: '', 
-      country: 'FR'
-    }
+      street: '',
+      city: '',
+      zipCode: '',
+      country: 'FR',
+    },
   };
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       loading = true;
       await post('customers', e.detail);
@@ -39,7 +39,8 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: $_('crm.breadcrumb')}, {title: $_('crm.customers.title'), path: '/crm/customers'}, {title}]} />
-<H4Title {title} />
-<ServerErrors {errors} />
-<Form {loading} {customer} on:save={onSave} />
+<Breadcrumb
+  items="{[{ title: $_('crm.breadcrumb') }, { title: $_('crm.customers.title'), path: '/crm/customers' }, { title }]}" />
+<H4Title title="{title}" />
+<ServerErrors errors="{errors}" />
+<Form loading="{loading}" customer="{customer}" on:save="{onSave}" />

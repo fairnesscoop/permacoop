@@ -9,7 +9,7 @@
   let data = [];
 
   onMount(async () => {
-    ({data} = await get('users'));
+    ({ data } = await get('users'));
   });
 
   export let date = new Date();
@@ -29,9 +29,11 @@
   };
 </script>
 
-<form on:submit|preventDefault={submit} class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-  <UsersInput users={data} bind:userId />
-  <MonthsInput label={'Période'} bind:date amount={6} />
+<form
+  on:submit|preventDefault="{submit}"
+  class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <UsersInput users="{data}" bind:userId />
+  <MonthsInput label="{'Période'}" bind:date amount="{6}" />
   <div class="block mt-4 text-sm">
     <label class="text-gray-700 dark:text-gray-400">
       {$_('human_resources.pay_slips.form.file')}
@@ -46,5 +48,8 @@
       {$_('human_resources.pay_slips.form.file_helper')}
     </span>
   </div>
-  <Button value={$_('common.form.save')} {loading} disabled={!date || !userId || !files.length > 0 || loading} />
+  <Button
+    value="{$_('common.form.save')}"
+    loading="{loading}"
+    disabled="{!date || !userId || !files.length > 0 || loading}" />
 </form>

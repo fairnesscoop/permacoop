@@ -7,11 +7,11 @@
   import Button from '../../../components/inputs/Button.svelte';
 
   let response = {
-    items: []
+    items: [],
   };
 
   onMount(async () => {
-    response = (await get('customers', {params: {page: 1}})).data;
+    response = (await get('customers', { params: { page: 1 } })).data;
   });
 
   export let loading;
@@ -21,12 +21,20 @@
   const dispatch = createEventDispatcher();
 
   const submit = () => {
-    dispatch('save', {name, customerId});
+    dispatch('save', { name, customerId });
   };
 </script>
 
-<form on:submit|preventDefault={submit} class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-  <Input label={$_('crm.projects.form.project')} type={'text'} bind:value={name} />
-  <CustomersInput customers={response.items} bind:customerId />
-  <Button value={$_('common.form.save')} {loading} disabled={!name || !customerId || loading} />
+<form
+  on:submit|preventDefault="{submit}"
+  class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <Input
+    label="{$_('crm.projects.form.project')}"
+    type="{'text'}"
+    bind:value="{name}" />
+  <CustomersInput customers="{response.items}" bind:customerId />
+  <Button
+    value="{$_('common.form.save')}"
+    loading="{loading}"
+    disabled="{!name || !customerId || loading}" />
 </form>

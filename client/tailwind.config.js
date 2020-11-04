@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 const Color = require('color');
@@ -5,14 +6,14 @@ const Color = require('color');
 module.exports = {
   theme: {
     themeVariants: ['dark'],
-    customForms: theme => ({
+    customForms: (theme) => ({
       default: {
         'input, textarea': {
           '&::placeholder': {
-            color: theme('colors.gray.400')
-          }
-        }
-      }
+            color: theme('colors.gray.400'),
+          },
+        },
+      },
     }),
     colors: {
       transparent: 'transparent',
@@ -28,7 +29,7 @@ module.exports = {
         600: '#4c4f52',
         700: '#24262d',
         800: '#1a1c23',
-        900: '#121317'
+        900: '#121317',
       },
       'cool-gray': {
         50: '#fbfdfe',
@@ -40,7 +41,7 @@ module.exports = {
         600: '#475569',
         700: '#364152',
         800: '#27303f',
-        900: '#1a202e'
+        900: '#1a202e',
       },
       red: {
         50: '#fdf2f2',
@@ -52,7 +53,7 @@ module.exports = {
         600: '#e02424',
         700: '#c81e1e',
         800: '#9b1c1c',
-        900: '#771d1d'
+        900: '#771d1d',
       },
       orange: {
         50: '#fff8f1',
@@ -64,9 +65,9 @@ module.exports = {
         600: '#d03801',
         700: '#b43403',
         800: '#8a2c0d',
-        900: '#771d1d'
+        900: '#771d1d',
       },
-       blue: {
+      blue: {
         50: '#ebf5ff',
         100: '#e1effe',
         200: '#c3ddfd',
@@ -88,7 +89,7 @@ module.exports = {
         600: '#9f580a',
         700: '#8e4b10',
         800: '#723b13',
-        900: '#633112'
+        900: '#633112',
       },
       indigo: {
         50: '#f0f5ff',
@@ -100,7 +101,7 @@ module.exports = {
         600: '#5850ec',
         700: '#5145cd',
         800: '#42389d',
-        900: '#362f78'
+        900: '#362f78',
       },
       green: {
         50: '#f3faf7',
@@ -112,7 +113,7 @@ module.exports = {
         600: '#057a55',
         700: '#046c4e',
         800: '#03543f',
-        900: '#014737'
+        900: '#014737',
       },
       purple: {
         50: '#f6f5ff',
@@ -124,18 +125,18 @@ module.exports = {
         600: '#7e3af2',
         700: '#6c2bd9',
         800: '#5521b5',
-        900: '#4a1d96'
-      }
+        900: '#4a1d96',
+      },
     },
     extend: {
       maxHeight: {
         0: '0',
-        xl: '36rem'
+        xl: '36rem',
       },
       fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans]
-      }
-    }
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+      },
+    },
   },
   variants: {
     backgroundColor: [
@@ -147,7 +148,7 @@ module.exports = {
       'dark:hover',
       'dark:focus',
       'dark:active',
-      'dark:odd'
+      'dark:odd',
     ],
     display: ['responsive', 'dark'],
     textColor: [
@@ -157,29 +158,28 @@ module.exports = {
       'dark',
       'dark:focus-within',
       'dark:hover',
-      'dark:active'
+      'dark:active',
     ],
     placeholderColor: ['focus', 'dark', 'dark:focus'],
     borderColor: ['focus', 'hover', 'dark', 'dark:focus', 'dark:hover'],
     divideColor: ['dark'],
-    boxShadow: ['focus', 'dark:focus']
+    boxShadow: ['focus', 'dark:focus'],
   },
   plugins: [
     require('tailwindcss-multi-theme'),
     require('@tailwindcss/custom-forms'),
-    plugin(({ addUtilities, e, theme, variants }) => {
+    plugin(({ addUtilities, theme, variants }) => {
       const newUtilities = {};
-      Object.entries(theme('colors')).map(([name, value]) => {
+      Object.entries(theme('colors')).forEach(([name, value]) => {
         if (name === 'transparent' || name === 'current') return;
         const color = value[300] ? value[300] : value;
         const hsla = Color(color).alpha(0.45).hsl().string();
-
         newUtilities[`.shadow-outline-${name}`] = {
-          'box-shadow': `0 0 0 3px ${hsla}`
+          'box-shadow': `0 0 0 3px ${hsla}`,
         };
       });
 
       addUtilities(newUtilities, variants('boxShadow'));
-    })
-  ]
+    }),
+  ],
 };

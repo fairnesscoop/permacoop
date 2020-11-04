@@ -9,14 +9,14 @@
   import Button from '../../../components/inputs/Button.svelte';
 
   let users = [];
-  let tasks = {items: []};
-  let customers = {items: []};
+  let tasks = { items: [] };
+  let customers = { items: [] };
 
   onMount(async () => {
     const [customerResponse, taskResponse, userResponse] = await Promise.all([
-      get('customers', {params: {page: 1}}),
-      get('tasks', {params: {page: 1}}),
-      get('users')
+      get('customers', { params: { page: 1 } }),
+      get('tasks', { params: { page: 1 } }),
+      get('users'),
     ]);
 
     users = userResponse.data;
@@ -33,14 +33,22 @@
   const dispatch = createEventDispatcher();
 
   const submit = () => {
-    dispatch('save', {amount, taskId, userId, customerId});
+    dispatch('save', { amount, taskId, userId, customerId });
   };
 </script>
 
-<form on:submit|preventDefault={submit} class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-  <CustomersInput customers={customers.items} bind:customerId />
-  <UsersInput {users} bind:userId />
-  <TasksInput tasks={tasks.items} bind:taskId />
-  <Input type={'money'} label={$_('accounting.daily_rates.form.daily_rate')} bind:value={amount} />
-  <Button value={$_('common.form.save')} {loading} disabled={!taskId || !customerId || !userId || !amount || loading} />
+<form
+  on:submit|preventDefault="{submit}"
+  class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <CustomersInput customers="{customers.items}" bind:customerId />
+  <UsersInput users="{users}" bind:userId />
+  <TasksInput tasks="{tasks.items}" bind:taskId />
+  <Input
+    type="{'money'}"
+    label="{$_('accounting.daily_rates.form.daily_rate')}"
+    bind:value="{amount}" />
+  <Button
+    value="{$_('common.form.save')}"
+    loading="{loading}"
+    disabled="{!taskId || !customerId || !userId || !amount || loading}" />
 </form>

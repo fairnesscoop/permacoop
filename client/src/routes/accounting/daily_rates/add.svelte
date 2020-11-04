@@ -12,7 +12,7 @@
   let title = $_('accounting.daily_rates.add.title');
   let errors = [];
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       loading = true;
       await post('daily_rates', e.detail);
@@ -28,7 +28,8 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: $_('accounting.breadcrumb')}, {title: $_('accounting.daily_rates.title'), path: '/accounting/daily_rates'}, {title}]} />
-<H4Title {title} />
-<ServerErrors {errors} />
-<Form on:save={onSave} {loading} />
+<Breadcrumb
+  items="{[{ title: $_('accounting.breadcrumb') }, { title: $_('accounting.daily_rates.title'), path: '/accounting/daily_rates' }, { title }]}" />
+<H4Title title="{title}" />
+<ServerErrors errors="{errors}" />
+<Form on:save="{onSave}" loading="{loading}" />

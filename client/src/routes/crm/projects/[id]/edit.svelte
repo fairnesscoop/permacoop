@@ -25,13 +25,13 @@
   onMount(async () => {
     try {
       ({ data: project } = await get(`projects/${id}`));
-      title = $_('crm.projects.edit.title', { values: { name: project.name }});
+      title = $_('crm.projects.edit.title', { values: { name: project.name } });
     } catch (e) {
       errors = errorNormalizer(e);
     }
   });
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       loading = true;
       await put(`projects/${project.id}`, e.detail);
@@ -48,13 +48,14 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: $_('crm.breadcrumb')}, {title: $_('crm.projects.title'), path: '/crm/projects'}, {title}]} />
-<H4Title {title} />
-<ServerErrors {errors} />
+<Breadcrumb
+  items="{[{ title: $_('crm.breadcrumb') }, { title: $_('crm.projects.title'), path: '/crm/projects' }, { title }]}" />
+<H4Title title="{title}" />
+<ServerErrors errors="{errors}" />
 {#if project}
   <Form
-    {loading}
-    customerId={project.customer.id}
-    name={project.name}
-    on:save={onSave} />
+    loading="{loading}"
+    customerId="{project.customer.id}"
+    name="{project.name}"
+    on:save="{onSave}" />
 {/if}
