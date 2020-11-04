@@ -12,7 +12,7 @@
   let errors = [];
   let loading = false;
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       loading = true;
       await post('pay_slips', e.detail);
@@ -30,7 +30,7 @@
 </svelte:head>
 
 <Breadcrumb
-  items={[{title: $_('human_resources.breadcrumb')}, {title: $_('human_resources.pay_slips.title') , path: 'human_resources/pay_slips'}, {title}]} />
-<ServerErrors {errors} />
-<H4Title {title} />
-<Form on:save={onSave} {loading} />
+  items="{[{ title: $_('human_resources.breadcrumb') }, { title: $_('human_resources.pay_slips.title'), path: 'human_resources/pay_slips' }, { title }]}" />
+<ServerErrors errors="{errors}" />
+<H4Title title="{title}" />
+<Form on:save="{onSave}" loading="{loading}" />

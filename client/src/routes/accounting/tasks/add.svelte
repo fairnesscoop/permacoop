@@ -6,13 +6,13 @@
   import { post } from '../../../utils/axios';
   import Form from './_Form.svelte';
   import { errorNormalizer } from '../../../normalizer/errors';
-  import ServerErrors from '../../../components/ServerErrors.svelte';  
+  import ServerErrors from '../../../components/ServerErrors.svelte';
 
   let title = $_('accounting.tasks.add.title');
   let loading = false;
   let errors = [];
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       loading = true;
       await post('tasks', e.detail);
@@ -29,7 +29,8 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: $_('accounting.breadcrumb')}, {title: $_('accounting.tasks.title'), path: '/accounting/tasks'}, {title}]} />
-<H4Title {title} />
-<ServerErrors {errors} />
-<Form on:save={onSave} {loading} />
+<Breadcrumb
+  items="{[{ title: $_('accounting.breadcrumb') }, { title: $_('accounting.tasks.title'), path: '/accounting/tasks' }, { title }]}" />
+<H4Title title="{title}" />
+<ServerErrors errors="{errors}" />
+<Form on:save="{onSave}" loading="{loading}" />

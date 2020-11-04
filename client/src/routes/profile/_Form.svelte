@@ -16,15 +16,32 @@
       firstName,
       lastName,
       email,
-      password
+      password,
     });
   };
 </script>
 
-<form on:submit|preventDefault={submit} class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-  <Input type={'text'} label={$_('profile.form.first_name')} bind:value={firstName} />
-  <Input type={'text'} label={$_('profile.form.last_name')} bind:value={lastName} />
-  <Input type={'email'} label={$_('profile.form.email')} bind:value={email} />
-  <Input type={'password'} label={$_('profile.form.password')} bind:value={password} />
-  <Button value={$_('common.form.save')} {loading} disabled={!firstName || !lastName || !email || !password} />
+<form
+  on:submit|preventDefault="{submit}"
+  class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <Input
+    type="{'text'}"
+    label="{$_('profile.form.first_name')}"
+    bind:value="{firstName}" />
+  <Input
+    type="{'text'}"
+    label="{$_('profile.form.last_name')}"
+    bind:value="{lastName}" />
+  <Input
+    type="{'email'}"
+    label="{$_('profile.form.email')}"
+    bind:value="{email}" />
+  <Input
+    type="{'password'}"
+    label="{$_('profile.form.password')}"
+    bind:value="{password}" />
+  <Button
+    value="{$_('common.form.save')}"
+    loading="{loading}"
+    disabled="{!firstName || !lastName || !email || !password}" />
 </form>

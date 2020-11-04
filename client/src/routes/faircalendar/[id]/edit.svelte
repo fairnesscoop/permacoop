@@ -1,5 +1,5 @@
 <script context="module">
-  export const preload = async ({ params: { id }}) => {
+  export const preload = async ({ params: { id } }) => {
     return { id };
   };
 </script>
@@ -30,7 +30,11 @@
   onMount(async () => {
     try {
       ({ data: event } = await get(`events/${id}`));
-      title = $_('faircalendar.from_date', { values: { date: format(new Date(event.date), 'EE dd MMMM', { locale: fr } ) } });
+      title = $_('faircalendar.from_date', {
+        values: {
+          date: format(new Date(event.date), 'EE dd MMMM', { locale: fr }),
+        },
+      });
       taskId = event.task ? event.task.id : null;
       projectId = event.project ? event.project.id : null;
       time = String(event.time);
@@ -39,7 +43,7 @@
     }
   });
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       loading = true;
       await put(`events/${id}`, e.detail);
@@ -68,16 +72,24 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: $_('faircalendar.breadcrumb'), path: 'faircalendar'}, {title}]} />
-<ServerErrors {errors} />
+<Breadcrumb
+  items="{[{ title: $_('faircalendar.breadcrumb'), path: 'faircalendar' }, { title }]}" />
+<ServerErrors errors="{errors}" />
 <div class="inline-flex items-center">
-  <H4Title {title} />
+  <H4Title title="{title}" />
   {#if event}
-    <button disable={loading} class="py-1 px-2 ml-2 mb-6 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple" type="button" on:click={onDelete}>
+    <button
+      disable="{loading}"
+      class="py-1 px-2 ml-2 mb-6 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple"
+      type="button"
+      on:click="{onDelete}">
       {$_('common.form.remove')}
     </button>
   {/if}
 </div>
 {#if event}
-  <Form on:save={onSave} event={{...event, taskId, projectId, time}} {loading} />
+  <Form
+    on:save="{onSave}"
+    event="{{ ...event, taskId, projectId, time }}"
+    loading="{loading}" />
 {/if}

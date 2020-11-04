@@ -17,18 +17,20 @@
   let data = {};
 
   onMount(async () => {
-    ({data} = await get('users/me'));
+    ({ data } = await get('users/me'));
   });
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       loading = true;
-      const {data: {firstName, lastName, email}} = await put('users/me', e.detail);
+      const {
+        data: { firstName, lastName, email },
+      } = await put('users/me', e.detail);
       $session.user = {
         ...$session.user,
         firstName,
         lastName,
-        email
+        email,
       };
       goto('/');
     } catch (e) {
@@ -43,7 +45,7 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title}]} />
-<H4Title {title} />
-<ServerErrors {errors} />
-<Form {...data} {loading} on:save={onSave} />
+<Breadcrumb items="{[{ title }]}" />
+<H4Title title="{title}" />
+<ServerErrors errors="{errors}" />
+<Form {...data} loading="{loading}" on:save="{onSave}" />

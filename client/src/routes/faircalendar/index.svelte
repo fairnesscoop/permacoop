@@ -3,9 +3,9 @@
     return {
       filters: {
         date: query.date ? new Date(query.date) : new Date(),
-        userId: query.userId ? query.userId : null
+        userId: query.userId ? query.userId : null,
       },
-      user
+      user,
     };
   };
 </script>
@@ -33,12 +33,16 @@
   let isLoggedUser = false;
   let errors = [];
   let data = {};
-  $: title = $_('faircalendar.title', { values: { month: format(new Date(filters.date), 'MMMM yyyy', { locale: fr } )}});
+  $: title = $_('faircalendar.title', {
+    values: {
+      month: format(new Date(filters.date), 'MMMM yyyy', { locale: fr }),
+    },
+  });
 
   const fullCalendar = async (events, date) => {
-    const {Calendar} = await import('@fullcalendar/core');
-    const {default: dayGridPlugin} = await import('@fullcalendar/daygrid');
-    const {default: interactionPlugin} = await import(
+    const { Calendar } = await import('@fullcalendar/core');
+    const { default: dayGridPlugin } = await import('@fullcalendar/daygrid');
+    const { default: interactionPlugin } = await import(
       '@fullcalendar/interaction'
     );
 
@@ -53,10 +57,10 @@
       weekends: false,
       height: 620,
       eventLimit: true,
-      header: {left: '', center: '', right: ''},
-      columnHeaderFormat: {weekday: 'long'},
+      header: { left: '', center: '', right: '' },
+      columnHeaderFormat: { weekday: 'long' },
       events,
-      select: info => {
+      select: (info) => {
         if (!isLoggedUser) {
           return;
         }
@@ -64,8 +68,8 @@
         const endDate = format(subDays(new Date(info.endStr), 1), 'yyyy-MM-dd');
         goto(`/faircalendar/${info.startStr}_${endDate}/add`);
       },
-      eventDataTransform: data => {
-        const {id, date, time, summary, type, task, project} = data;
+      eventDataTransform: (data) => {
+        const { id, date, time, summary, type, task, project } = data;
         let title = `[${$_('common.days_duration', { values: { n: time } })}] `;
 
         if ('mission' === type && task && project) {
@@ -83,19 +87,19 @@
         data.tip = summary;
       },
       businessHours: {
-        daysOfWeek: [1, 2, 3, 4, 5]
-      }
+        daysOfWeek: [1, 2, 3, 4, 5],
+      },
     });
     calendar.gotoDate(date);
     calendar.render();
   };
 
-  const fetchEvents = async ({userId, date}) => {
+  const fetchEvents = async ({ userId, date }) => {
     try {
       isLoggedUser = userId === user.id;
       filters.date = date;
       filters.userId = userId;
-      ({data} = await get('events', {params: {userId, date}}));
+      ({ data } = await get('events', { params: { userId, date } }));
       fullCalendar(data.events, date);
     } catch (e) {
       errors = errorNormalizer(e);
@@ -110,18 +114,18 @@
     fetchEvents(filters);
   });
 
-  const onFilter = e => fetchEvents(e.detail);
+  const onFilter = (e) => fetchEvents(e.detail);
 </script>
 
 <svelte:head>
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: $_('faircalendar.breadcrumb')}]} />
-<ServerErrors {errors} />
-<H4Title {title} />
-<Filters {...filters} on:filter={onFilter} />
+<Breadcrumb items="{[{ title: $_('faircalendar.breadcrumb') }]}" />
+<ServerErrors errors="{errors}" />
+<H4Title title="{title}" />
+<Filters {...filters} on:filter="{onFilter}" />
 {#if data.overview}
-  <Overview overview={data.overview} />
+  <Overview overview="{data.overview}" />
 {/if}
-<div id="calendar" />
+<div id="calendar"></div>

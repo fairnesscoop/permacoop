@@ -13,7 +13,7 @@
   let loading = false;
   let title = $_('accounting.quotes.add.title');
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
       loading = true;
       await post('quotes', e.detail);
@@ -29,7 +29,8 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{title: $_('accounting.breadcrumb')}, {path: 'accounting/quotes', title: $_('accounting.quotes.title')}, {title}]} />
-<H4Title {title} />
-<ServerErrors {errors} />
-<Form on:save={onSave} {loading} />
+<Breadcrumb
+  items="{[{ title: $_('accounting.breadcrumb') }, { path: 'accounting/quotes', title: $_('accounting.quotes.title') }, { title }]}" />
+<H4Title title="{title}" />
+<ServerErrors errors="{errors}" />
+<Form on:save="{onSave}" loading="{loading}" />

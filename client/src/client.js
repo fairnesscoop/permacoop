@@ -5,5 +5,5 @@ import './i18n';
 useLocalStorage('permacoop:settings', settings);
 
 sapper.start({
-  target: document.querySelector('#sapper')
+  target: document.querySelector('#sapper'),
 });

@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import config from '../../config';
 
 const client = axios.create({
-  baseURL: process.browser ? config.API_URL : config.API_URL_SSR
+  baseURL: process.browser ? config.API_URL : config.API_URL_SSR,
 });
 
 const authorizationBearerHeader = (token) => {
@@ -14,8 +14,8 @@ const authorizationBearerHeader = (token) => {
 
   return {
     headers: {
-      Authorization: `Bearer ${bearer}`
-    }
+      Authorization: `Bearer ${bearer}`,
+    },
   };
 };
 

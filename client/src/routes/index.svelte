@@ -10,10 +10,13 @@
 </svelte:head>
 
 {#if $session.user}
-  <h2 class="my-6 inline-flex text-2xl font-semibold text-gray-700 dark:text-gray-200">
-    {$_('dashboard.welcome', { values: {
-      firstName: $session.user.firstName, 
-      lastName: $session.user.lastName
-    }})}
+  <h2
+    class="my-6 inline-flex text-2xl font-semibold text-gray-700 dark:text-gray-200">
+    {$_('dashboard.welcome', {
+      values: {
+        firstName: $session.user.firstName,
+        lastName: $session.user.lastName,
+      },
+    })}
   </h2>
 {/if}

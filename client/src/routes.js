@@ -1,4 +1,4 @@
-import {Router} from '@beyonk/sapper-rbac';
+import { Router } from '@beyonk/sapper-rbac';
 
 const routes = new Router()
   .unrestrict('/login.*')

@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 
 export const settings = writable({
-  theme: ''
+  theme: '',
 });
 
 export const useLocalStorage = (key, store) => {
@@ -11,7 +11,7 @@ export const useLocalStorage = (key, store) => {
     store.set(JSON.parse(current_value));
   }
 
-  store.subscribe(value => {
+  store.subscribe((value) => {
     localStorage.setItem(key, JSON.stringify(value));
   });
 };
