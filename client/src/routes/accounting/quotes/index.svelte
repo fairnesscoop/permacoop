@@ -1,88 +1,73 @@
 <script context="module">
-  export const preload = async ({query}) => {
+  export const preload = async ({ query }) => {
     return {
-      page: query.page || 1
+      page: query.page || 1,
     };
   };
 </script>
 
 <script>
-  import {onMount} from 'svelte';
-  import {client as axios} from '../../../utils/axios';
-  import {errorNormalizer} from '../../../normalizer/errors';
+  import { onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
+  import { get } from '../../../utils/axios';
+  import { errorNormalizer } from '../../../normalizer/errors';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import Loader from '../../../components/Loader.svelte';
+  import H4Title from '../../../components/H4Title.svelte';
+  import AddLink from '../../../components/links/AddLink.svelte';
   import ServerErrors from '../../../components/ServerErrors.svelte';
-  import SecuredView from '../../../components/SecuredView.svelte';
-  import SecuredLink from '../../../components/SecuredLink.svelte';
   import Table from './_Table.svelte';
   import Pagination from '../../../components/Pagination.svelte';
-  import {historyPushState} from '../../../utils/url';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
+  import { historyPushState } from '../../../utils/url';
 
   export let page;
 
-  let title = 'Devis';
+  let title = $_('accounting.quotes.title');
   let loading;
   let errors = [];
-  let roles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
   let response = {
     items: [],
     totalItems: 0,
-    pageCount: 0
+    pageCount: 0,
   };
 
   onMount(async () => {
     fetchQuotes();
   });
 
-  const changePage = async e => {
+  const changePage = async (e) => {
     page = e.detail;
-    historyPushState('accounting/quotes', {page});
+    historyPushState('accounting/quotes', { page });
     fetchQuotes();
   };
 
   const fetchQuotes = async () => {
     try {
-      loading = true;
-      response = (await axios.get('quotes', {params: {page}})).data;
+      response = (await get('quotes', { params: { page } })).data;
     } catch (e) {
       errors = errorNormalizer(e);
-    } finally {
-      loading = false;
     }
   };
 </script>
 
 <svelte:head>
-  <title>Permacoop - {title}</title>
+  <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<SecuredView {roles}>
-  <div class="col-md-12">
-    <Breadcrumb items={[{title: 'Gestion & Comptabilité'}, {title}]} />
-    <div class="row">
-      <div class="col-md-8">
-        <h3>
-          {title}
-          <small>({response.totalItems})</small>
-        </h3>
-      </div>
-      <div class="col-md-4">
-        <SecuredLink
-          className="btn btn-primary float-right mb-3"
-          href="accounting/quotes/add"
-          {roles}>
-          + Créer un nouveau devis
-        </SecuredLink>
-      </div>
-    </div>
-    <ServerErrors {errors} />
-    <Loader {loading} />
-    <Table items={response.items} {roles} />
-    <Pagination
-      on:change={changePage}
-      currentPage={page}
-      pageCount={response.pageCount} />
+<Breadcrumb items="{[{ title: $_('accounting.breadcrumb') }, { title }]}" />
+<ServerErrors errors="{errors}" />
+<div class="inline-flex items-center">
+  <H4Title title="{title}" />
+  <AddLink
+    href="{'/accounting/quotes/add'}"
+    value="{$_('accounting.quotes.add.title')}" />
+</div>
+<div class="w-full overflow-hidden rounded-lg shadow-xs">
+  <div class="w-full overflow-x-auto">
+    <Table items="{response.items}" />
   </div>
-</SecuredView>
+  <Pagination
+    on:change="{changePage}"
+    currentPage="{page}"
+    totalItems="{response.totalItems}"
+    pageCount="{response.pageCount}" />
+</div>

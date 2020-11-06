@@ -7,7 +7,8 @@ export class AddEventCommand implements ICommand {
     public readonly type: EventType,
     public readonly user: User,
     public readonly time: number,
-    public readonly date: Date,
+    public readonly startDate: Date,
+    public readonly endDate: Date,
     public readonly projectId?: string,
     public readonly taskId?: string,
     public readonly summary?: string

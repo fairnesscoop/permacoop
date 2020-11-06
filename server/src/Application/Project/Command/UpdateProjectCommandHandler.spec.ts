@@ -80,7 +80,7 @@ describe('UpdateProjectCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectNotFoundException);
-      expect(e.message).toBe('project.errors.not_found');
+      expect(e.message).toBe('crm.projects.errors.not_found');
       verify(customerRepository.findOneById(anything())).never();
       verify(isProjectAlreadyExist.isSatisfiedBy(anything())).never();
       verify(
@@ -106,7 +106,7 @@ describe('UpdateProjectCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(CustomerNotFoundException);
-      expect(e.message).toBe('customer.errors.not_found');
+      expect(e.message).toBe('crm.customers.errors.not_found');
       verify(isProjectAlreadyExist.isSatisfiedBy(anything())).never();
       verify(
         projectRepository.findOneById('afda00b1-bf49-4102-9bc2-bce17f3acd48')
@@ -135,7 +135,7 @@ describe('UpdateProjectCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectAlreadyExistException);
-      expect(e.message).toBe('project.errors.already_exist');
+      expect(e.message).toBe('crm.projects.errors.already_exist');
       verify(isProjectAlreadyExist.isSatisfiedBy('Project')).once();
       verify(
         projectRepository.findOneById('afda00b1-bf49-4102-9bc2-bce17f3acd48')

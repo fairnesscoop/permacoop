@@ -1,0 +1,300 @@
+{
+  "app": "Permacoop",
+  "error": "Erreur",
+  "pagination": "Affichage {start}-{from} sur {totalItems}",
+  "common": {
+    "actions": "Actions",
+    "form": {
+      "save": "Enregistrer",
+      "edit": "Modifier",
+      "add": "Ajouter",
+      "remove": "Supprimer",
+      "see": "Voir"
+    },
+    "roles": {
+      "cooperator": "Coopérateur",
+      "accountant": "Comptable",
+      "employee": "Employé"
+    },
+    "errors": {
+      "file_not_found": "Le fichier demandé n'existe pas"
+    },
+    "days_duration": "{n, plural, =0 {0} one {# jour} other {# jours}}",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "login": {
+    "title": "Se connecter",
+    "sub_title": "Connexion",
+    "password_lost": "Mot de passe oublié ?",
+    "form": {
+      "button": "Se connecter",
+      "email": "Adresse email",
+      "password": "Mot de passe"
+    }
+  },
+  "accounting": {
+    "breadcrumb": "Gestion & Comptabilité",
+    "quotes": {
+      "title": "Devis",
+      "quote_id": "Numéro du devis",
+      "date": "Date",
+      "customer": "Client",
+      "amount": "Montant TTC",
+      "add": {
+        "title": "Créer un devis"
+      },
+      "form": {
+        "customer": "Nom du client",
+        "description": "Description",
+        "description_placeholder": "Description de la prestation",
+        "quantity": "Quantité",
+        "daily_rate": "Taux HT",
+        "add_new": "+ Ajouter une nouvelle ligne",
+        "sub_total": "Sous total : <b>{subTotal}</b>",
+        "vat": "TVA (20%) : <b>{vat}</b>",
+        "total": "Total TTC : <b>{total}</b>"
+      },
+      "status": {
+        "title": "Statut",
+        "draft": "Brouillon",
+        "sent": "Envoyé",
+        "refused": "Refusé",
+        "canceled": "Annulé",
+        "accepted": "Accepté"
+      },
+      "errors": {
+        "invalid_project": "Ce projet ne correspond pas au client selectionné.",
+        "not_found": "Le devis n'existe pas."
+      }
+    },
+    "daily_rates": {
+      "title": "TJM",
+      "users": "Coopérateurs - salariés",
+      "amount": "Montants HT",
+      "tasks": "Missions",
+      "customers": "Clients",
+      "errors": {
+        "already_exist": "Ce TJM a déjà été configuré.",
+        "not_found": "Le TJM n'existe pas."
+      },
+      "add": {
+        "title": "Ajouter un TJM"
+      },
+      "edit": {
+        "title": "Edition du TJM \"{name}\""
+      },
+      "form": {
+        "daily_rate": "Taux HT"
+      }
+    },
+    "tasks": {
+      "title": "Missions",
+      "form": {
+        "name": "Nom de la mission",
+        "task": "Mission",
+        "task_placeholder": "-- Choisir une mission --"
+      },
+      "add": {
+        "title": "Ajouter une mission"
+      },
+      "edit": {
+        "title": "Edition de la mission \"{name}\""
+      },
+      "errors": {
+        "not_found": "La mission n'existe pas.",
+        "already_exist": "Cette mission existe déjà."
+      }
+    }
+  },
+  "crm": {
+    "breadcrumb": "FairCRM",
+    "projects": {
+      "title": "Projets",
+      "customers": "Clients",
+      "form": {
+        "project_placeholder": "-- Choisir un projet --",
+        "project": "Nom du projet"
+      },
+      "add": {
+        "title": "Ajouter un projet"
+      },
+      "edit": {
+        "title": "Edition du projet \"{name}\""
+      },
+      "errors": {
+        "not_found": "Le projet n'existe pas.",
+        "already_exist": "Ce projet existe déjà."
+      }
+    },
+    "customers": {
+      "title": "Clients",
+      "addresses": "Adresses",
+      "errors": {
+        "already_exist": "Ce client existe déjà.",
+        "not_found": "Le client n'existe pas."
+      },
+      "form": {
+        "customer_placeholder": "-- Choisir un client --",
+        "customer": "Nom du client",
+        "address": "Adresse",
+        "zip_code": "Code postal",
+        "city": "Ville",
+        "country": "Pays"
+      },
+      "add": {
+        "title": "Ajouter un client"
+      },
+      "edit": {
+        "title": "Edition du client \"{name}\""
+      }
+    }
+  },
+  "faircalendar": {
+    "breadcrumb": "FairCalendar",
+    "title": "Faircalendar {month}",
+    "summary": "Récapitulatif",
+    "errors": {
+      "event_doesnt_belong_to_user": "Cet évènement ne vous appartient pas, vous ne pouvez ni le modifier, ni le supprimer.",
+      "event_not_found": "Cet évènement n'existe pas.",
+      "events_already_exist_for_this_period": "Un évènement a déjà été créé durant cette période.",
+      "event_maximum_reached": "Vous ne pouvez pas déclarer plus d'une journée.",
+      "no_date_during_this_period": "Vous devez sélectionner une période valide.",
+      "project_or_task_missing": "Vous devez saisir un projet et une mission."
+    },
+    "type": {
+      "mission": "Mission",
+      "support": "Support // Podcast",
+      "dojo": "Dojo",
+      "formationConference": "Formation // Conf // Meetup",
+      "holiday": "Vacances",
+      "medicalLeave": "Congé maladie",
+      "other": "Autres",
+      "meal_tickets": "Tickets resto"
+    },
+    "filter": {
+      "title": "Filtres",
+      "month": "Filtrer par mois",
+      "user": "Filtrer par coopérateur - salarié"
+    },
+    "from_date": "CRA du {date}",
+    "to_date": "au {date}",
+    "form": {
+      "type": "Type de CRA",
+      "time": "Temps passé",
+      "summary": "Commentaire"
+    }
+  },
+  "human_resources": {
+    "breadcrumb": "RH",
+    "pay_slips": {
+      "title": "Fiche de paies",
+      "periods": "Périodes",
+      "users": "Coopérateurs - salariés",
+      "files": "Fichiers",
+      "download": "Télécharger ({size})",
+      "form": {
+        "file": "Fiche de paie",
+        "file_helper": "Format PDF uniquement"
+      },
+      "errors": {
+        "already_exist": "Cette fiche de paie a déjà été créée pour la période donnée.",
+        "not_found": "La fiche de paie n'existe pas."
+      },
+      "add": {
+        "title": "Ajouter une fiche de paie"
+      }
+    },
+    "holidays": {
+      "title": "Congés",
+      "users": "Coopérateurs - salariés",
+      "periods": "Périodes",
+      "period": "Du {from} au {to}",
+      "leave_types": "Types de congés",
+      "status": "Etat",
+      "states": {
+        "pending": "En attente",
+        "accepted": "Acceptée",
+        "refused": "Refusée"
+      },
+      "add": {
+        "title": "Demande de congé"
+      },
+      "leave_type": {
+        "title": "Type de congé",
+        "medical": "Congé maladie",
+        "paid": "Congé payé",
+        "unpaid": "Congé sans solde",
+        "special": "Congé exceptionnel"
+      },
+      "errors": {
+        "already_exist_for_this_period": "Des vacances existent déjà sur la période sélectionnée.",
+        "cant_be_moderated": "Vous ne pouvez pas modérer cette demande de congé.",
+        "not_found": "La demande de congé n'existe pas."
+      },
+      "form": {
+        "from_date": "Du",
+        "to_date": "Au",
+        "all_day": "Toute la journée",
+        "comment": "Commentaire"
+      }
+    },
+    "users": {
+      "title": "Coopérateurs - salariés",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "email": "Adresse email",
+      "role": "Rôle",
+      "add": {
+        "title": "Ajouter un coopérateur - salarié"
+      },
+      "form": {
+        "user_placeholder": "-- Choisir un coopérateur - salarié --",
+        "user": "Coopérateur - salarié",
+        "contract": {
+          "title": "Contrat de travail",
+          "cdi": "CDI",
+          "cdd": "CDD",
+          "ctt": "CTT",
+          "professionalization": "Contrat de professionalisation",
+          "apprenticeship": "Contrat de d'apprentisage"
+        },
+        "executive_position": "Statut cadre",
+        "health_insurance": "Mutuelle",
+        "annual_earnings": "Salaire annuel brut",
+        "transport_fee": "Frais de transport",
+        "joining_date": "Date d'entrée",
+        "leaving_date": "Date de sortie",
+        "first_name": "Prénom",
+        "last_name": "Nom",
+        "email": "Adresse email",
+        "password": "Mot de passe",
+        "role": "Rôle"
+      },
+      "errors": {
+        "password_not_match": "Adresse email ou mot de passe incorrect.",
+        "email_already_exist": "Cette adresse email est déjà utilisée.",
+        "user_administrative_missing": "Veuillez saisir les informations administratives.",
+        "not_found": "Adresse email ou mot de passe incorrect."
+      }
+    }
+  },
+  "profile": {
+    "title": "Mon compte",
+    "logout": "Se déconnecter",
+    "form": {
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "email": "Adresse email",
+      "password": "Mot de passe"
+    }
+  },
+  "search": {
+    "title": "Chercher un client, un projet ...",
+    "aria_label": "Rechercher"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bonjour {firstName} {lastName} !"
+  }
+}

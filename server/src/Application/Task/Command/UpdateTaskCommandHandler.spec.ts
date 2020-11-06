@@ -59,7 +59,7 @@ describe('UpdateTaskCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(TaskNotFoundException);
-      expect(e.message).toBe('task.errors.not_found');
+      expect(e.message).toBe('accounting.tasks.errors.not_found');
       verify(isTaskAlreadyExist.isSatisfiedBy(anything())).never();
       verify(taskRepository.save(anything())).never();
       verify(updatedTask.updateName(anything())).never();
@@ -79,7 +79,7 @@ describe('UpdateTaskCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(TaskAlreadyExistException);
-      expect(e.message).toBe('task.errors.already_exist');
+      expect(e.message).toBe('accounting.tasks.errors.already_exist');
       verify(isTaskAlreadyExist.isSatisfiedBy('Development mobile')).once();
       verify(taskRepository.save(anything())).never();
       verify(updatedTask.updateName(anything())).never();

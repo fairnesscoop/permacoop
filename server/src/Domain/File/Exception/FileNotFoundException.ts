@@ -1,5 +1,5 @@
 export class FileNotFoundException extends Error {
   constructor() {
-    super('file.errors.not_found');
+    super('common.errors.file_not_found');
   }
 }

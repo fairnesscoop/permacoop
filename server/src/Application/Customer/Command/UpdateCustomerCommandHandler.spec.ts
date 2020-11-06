@@ -76,7 +76,7 @@ describe('UpdateCustomerCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(CustomerNotFoundException);
-      expect(e.message).toBe('customer.errors.not_found');
+      expect(e.message).toBe('crm.customers.errors.not_found');
       verify(isCustomerAlreadyExist.isSatisfiedBy(anything())).never();
       verify(addressRepository.save(anything())).never();
       verify(
@@ -98,7 +98,7 @@ describe('UpdateCustomerCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(CustomerAlreadyExistException);
-      expect(e.message).toBe('customer.errors.already_exist');
+      expect(e.message).toBe('crm.customers.errors.already_exist');
       verify(isCustomerAlreadyExist.isSatisfiedBy('Customer')).once();
       verify(customerRepository.save(anything())).never();
       verify(updatedCustomer.updateName(anything())).never();

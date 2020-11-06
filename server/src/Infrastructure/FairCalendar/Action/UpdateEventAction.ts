@@ -7,16 +7,16 @@ import {
   Put,
   Body
 } from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {LoggedUser} from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
-import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
-import {EventDTO} from '../DTO/EventDTO';
-import {ICommandBus} from 'src/Application/ICommandBus';
-import {UpdateEventCommand} from 'src/Application/FairCalendar/Command/UpdateEventCommand';
-import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
-import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
-import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { LoggedUser } from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
+import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { ICommandBus } from 'src/Application/ICommandBus';
+import { UpdateEventCommand } from 'src/Application/FairCalendar/Command/UpdateEventCommand';
+import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
+import { RolesGuard } from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
+import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import { EditEventDTO } from '../DTO/EditEventDTO';
 
 @Controller('events')
 @ApiTags('Event')
@@ -33,7 +33,7 @@ export class UpdateEventAction {
   @ApiOperation({summary: 'Update event'})
   public async index(
     @Param() idDto: IdDTO,
-    @Body() dto: EventDTO,
+    @Body() dto: EditEventDTO,
     @LoggedUser() user: User
   ) {
     const {type, time, summary, projectId, taskId} = dto;

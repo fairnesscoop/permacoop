@@ -75,7 +75,7 @@ describe('CreateCustomerCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(CustomerAlreadyExistException);
-      expect(e.message).toBe('customer.errors.already_exist');
+      expect(e.message).toBe('crm.customers.errors.already_exist');
       verify(isCustomerAlreadyExist.isSatisfiedBy('Customer')).once();
       verify(customerRepository.save(anything())).never();
       verify(createdCustomer.getId()).never();

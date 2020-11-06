@@ -1,18 +1,16 @@
 import '@testing-library/jest-dom/extend-expect';
 import ServerErrors from './ServerErrors.svelte';
-import {screen, render} from '@testing-library/svelte';
+import { screen, render } from '@testing-library/svelte';
 
 it('renders nothing with no error.', () => {
-  render(ServerErrors, {errors: []});
+  render(ServerErrors, { errors: [] });
 
-  expect(
-    screen.queryByText('Une erreur est survenue !')
-  ).not.toBeInTheDocument();
+  expect(screen.queryByText('Erreur')).not.toBeInTheDocument();
 });
 
 it('renders the given errors', () => {
   const errors = ['first error', 'second error'];
-  render(ServerErrors, {errors});
+  render(ServerErrors, { errors });
 
   const listItems = screen.getAllByRole('listitem');
   const listItemErrors = listItems.map((item) => item.textContent);
@@ -23,5 +21,5 @@ it('renders the given errors', () => {
     "second error",
   ]
 `);
-  expect(screen.getByText(/Une erreur est survenue !/i)).toBeInTheDocument();
+  expect(screen.getByText(/Erreur/i)).toBeInTheDocument();
 });

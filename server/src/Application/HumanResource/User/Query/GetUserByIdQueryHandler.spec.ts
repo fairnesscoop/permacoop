@@ -54,7 +54,7 @@ describe('GetUserByIdQueryHandler', () => {
       await queryHandler.execute(query);
     } catch (e) {
       expect(e).toBeInstanceOf(UserNotFoundException);
-      expect(e.message).toBe('user.errors.not_found');
+      expect(e.message).toBe('human_resources.users.errors.not_found');
       verify(
         userRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
       ).once();

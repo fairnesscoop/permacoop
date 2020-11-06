@@ -43,7 +43,7 @@ describe('UpdateProfileCommandHandler', () => {
       await commandHandler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(EmailAlreadyExistException);
-      expect(e.message).toBe('user.errors.email_already_exist');
+      expect(e.message).toBe('human_resources.users.errors.email_already_exist');
       verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
       verify(passwordEncoder.hash(anything())).never();
       verify(userRepository.save(anything())).never();

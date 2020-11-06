@@ -1,35 +1,33 @@
 <script>
-  import SecuredLink from '../../../components/SecuredLink.svelte';
-  import {format} from '../../../normalizer/money';
+  import { _ } from 'svelte-i18n';
+  import { format } from '../../../normalizer/money';
+  import EditLink from '../../../components/links/EditLink.svelte';
 
-  export let roles;
   export let items;
 </script>
 
-<table class="table table-striped table-bordered table-hover">
+<table class="w-full whitespace-no-wrap">
   <thead>
-    <tr>
-      <th>Utilisateur</th>
-      <th>Mission</th>
-      <th>Client</th>
-      <th>Montant HT</th>
-      <th />
+    <tr
+      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+      <th class="px-4 py-3">{$_('accounting.daily_rates.users')}</th>
+      <th class="px-4 py-3">{$_('accounting.daily_rates.amount')}</th>
+      <th class="px-4 py-3">{$_('accounting.daily_rates.tasks')}</th>
+      <th class="px-4 py-3">{$_('accounting.daily_rates.customers')}</th>
+      <th class="px-4 py-3">{$_('common.actions')}</th>
     </tr>
   </thead>
-  <tbody>
-    {#each items as dailyRate (dailyRate.id)}
-      <tr>
-        <td>{dailyRate.user.firstName} {dailyRate.user.lastName}</td>
-        <td>{dailyRate.task.name}</td>
-        <td>{dailyRate.customer.name}</td>
-        <td>{format(dailyRate.amount)}</td>
-        <td>
-          <SecuredLink
-            className="btn btn-outline-secondary btn-sm"
-            {roles}
-            href={`accounting/daily_rates/${dailyRate.id}/edit`}>
-            Modifier
-          </SecuredLink>
+  <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+    {#each items as { id, user, task, customer, amount } (id)}
+      <tr class="text-gray-700 dark:text-gray-400">
+        <td class="px-4 py-3 text-sm">{user.firstName} {user.lastName}</td>
+        <td class="px-4 py-3 text-sm">{format(amount)}</td>
+        <td class="px-4 py-3 text-sm">{task.name}</td>
+        <td class="px-4 py-3 text-sm">{customer.name}</td>
+        <td class="px-4 py-3">
+          <div class="flex items-center space-x-4 text-sm">
+            <EditLink href="{`/accounting/daily_rates/${id}/edit`}" />
+          </div>
         </td>
       </tr>
     {/each}

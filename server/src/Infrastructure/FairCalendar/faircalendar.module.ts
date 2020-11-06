@@ -4,7 +4,7 @@ import {BusModule} from '../bus.module';
 import {EventRepository} from './Repository/EventRepository';
 import {Event} from 'src/Domain/FairCalendar/Event.entity';
 import {IsMaximumTimeSpentReached} from 'src/Domain/FairCalendar/Specification/IsMaximumTimeSpentReached';
-import {AddEventAction} from './Action/AddEventAction';
+import {AddEventsAction} from './Action/AddEventsAction';
 import {AddEventCommandHandler} from 'src/Application/FairCalendar/Command/AddEventCommandHandler';
 import {DeleteEventAction} from './Action/DeleteEventAction';
 import {DeleteEventCommandHandler} from 'src/Application/FairCalendar/Command/DeleteEventCommandHandler';
@@ -26,7 +26,7 @@ import {IsMaximumTimeSpentReachedOnEdition} from 'src/Domain/FairCalendar/Specif
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Project, Event, Task])],
   controllers: [
-    AddEventAction,
+    AddEventsAction,
     DeleteEventAction,
     GetEventAction,
     UpdateEventAction,

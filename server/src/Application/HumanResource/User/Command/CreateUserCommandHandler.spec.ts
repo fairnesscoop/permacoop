@@ -71,7 +71,7 @@ describe('CreatUserCommandHandler', () => {
       await commandHandler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(EmailAlreadyExistException);
-      expect(e.message).toBe('user.errors.email_already_exist');
+      expect(e.message).toBe('human_resources.users.errors.email_already_exist');
       verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
       verify(passwordEncoder.hash('plainPassword')).never();
       verify(
@@ -289,7 +289,7 @@ describe('CreatUserCommandHandler', () => {
       await commandHandler.execute(command1);
     } catch (e) {
       expect(e).toBeInstanceOf(UserAdministrativeMissingException);
-      expect(e.message).toBe('user.errors.user_administrative_missing');
+      expect(e.message).toBe('human_resources.users.errors.user_administrative_missing');
       verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
       verify(passwordEncoder.hash(anything())).never();
       verify(passwordEncoder.hash(anything())).never();

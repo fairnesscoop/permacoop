@@ -69,7 +69,7 @@ describe('GetEventByIdQueryHandler', () => {
       await queryHandler.execute(query);
     } catch (e) {
       expect(e).toBeInstanceOf(EventNotFoundException);
-      expect(e.message).toBe('fair_calendar.errors.event_not_found');
+      expect(e.message).toBe('faircalendar.errors.event_not_found');
       verify(
         eventRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
       ).once();
