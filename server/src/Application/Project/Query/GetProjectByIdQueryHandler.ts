@@ -24,6 +24,7 @@ export class GetProjectByIdQueryHandler {
     return new ProjectView(
       project.getId(),
       project.getName(),
+      project.getDayDuration(),
       new CustomerView(customer.getId(), customer.getName())
     );
   }

@@ -21,6 +21,7 @@ describe('UpdateProjectCommandHandler', () => {
   const command = new UpdateProjectCommand(
     'afda00b1-bf49-4102-9bc2-bce17f3acd48',
     'Project',
+    8,
     'd4aa560e-d2f7-422e-ae8d-6af5d0455eeb'
   );
 
@@ -49,6 +50,7 @@ describe('UpdateProjectCommandHandler', () => {
     when(updatedProject.getId()).thenReturn(
       'afda00b1-bf49-4102-9bc2-bce17f3acd48'
     );
+    when(updatedProject.getDayDuration()).thenReturn(8);
     when(updatedProject.getName()).thenReturn('Old project');
 
     // Command return nothing
@@ -63,10 +65,10 @@ describe('UpdateProjectCommandHandler', () => {
     ).once();
     verify(projectRepository.save(instance(updatedProject))).once();
     verify(
-      updatedProject.updateCustomerAndName(instance(customer), 'Project')
+      updatedProject.update(instance(customer), 8, 'Project')
     ).once();
     verify(
-      updatedProject.updateCustomerAndName(instance(customer), 'Project')
+      updatedProject.update(instance(customer), 8, 'Project')
     ).calledBefore(projectRepository.save(instance(updatedProject)));
     verify(updatedProject.getName()).once();
   });
@@ -88,7 +90,7 @@ describe('UpdateProjectCommandHandler', () => {
       ).once();
       verify(projectRepository.save(anything())).never();
       verify(
-        updatedProject.updateCustomerAndName(anything(), anything())
+        updatedProject.update(anything(), anything(), anything())
       ).never();
       verify(updatedProject.getName()).never();
     }
@@ -116,7 +118,7 @@ describe('UpdateProjectCommandHandler', () => {
       ).once();
       verify(projectRepository.save(anything())).never();
       verify(
-        updatedProject.updateCustomerAndName(anything(), anything())
+        updatedProject.update(anything(), anything(), anything())
       ).never();
       verify(updatedProject.getName()).never();
     }
@@ -145,7 +147,7 @@ describe('UpdateProjectCommandHandler', () => {
       ).once();
       verify(projectRepository.save(anything())).never();
       verify(
-        updatedProject.updateCustomerAndName(anything(), anything())
+        updatedProject.update(anything(), anything(), anything())
       ).never();
       verify(updatedProject.getName()).once();
     }

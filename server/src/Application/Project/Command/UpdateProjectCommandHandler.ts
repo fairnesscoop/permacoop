@@ -19,7 +19,7 @@ export class UpdateProjectCommandHandler {
   ) {}
 
   public async execute(command: UpdateProjectCommand): Promise<void> {
-    const {id, name, customerId} = command;
+    const {id, name, dayDuration, customerId} = command;
 
     const project = await this.projectRepository.findOneById(id);
     if (!project) {
@@ -38,7 +38,7 @@ export class UpdateProjectCommandHandler {
       throw new ProjectAlreadyExistException();
     }
 
-    project.updateCustomerAndName(customer, name);
+    project.update(customer, dayDuration, name);
     await this.projectRepository.save(project);
   }
 }

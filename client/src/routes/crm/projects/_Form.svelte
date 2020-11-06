@@ -3,6 +3,7 @@
   import { createEventDispatcher, onMount } from 'svelte';
   import { get } from '../../../utils/axios';
   import CustomersInput from '../../../components/inputs/CustomersInput.svelte';
+  import SelectInput from '../../../components/inputs/SelectInput.svelte';
   import Input from '../../../components/inputs/Input.svelte';
   import Button from '../../../components/inputs/Button.svelte';
 
@@ -16,12 +17,13 @@
 
   export let loading;
   export let name = '';
+  export let dayDuration = 7;
   export let customerId = '';
 
   const dispatch = createEventDispatcher();
 
   const submit = () => {
-    dispatch('save', { name, customerId });
+    dispatch('save', { name, dayDuration, customerId });
   };
 </script>
 
@@ -33,6 +35,13 @@
     type="{'text'}"
     bind:value="{name}" />
   <CustomersInput customers="{response.items}" bind:customerId />
+  <SelectInput
+    label="{$_('crm.projects.form.day_duration')}"
+    bind:value="{dayDuration}">
+    {#each [7, 8] as day}
+      <option value={day}>{$_(`crm.projects.day_duration`, { values: { dayDuration: day } })}</option>
+    {/each}
+  </SelectInput>
   <Button
     value="{$_('common.form.save')}"
     loading="{loading}"

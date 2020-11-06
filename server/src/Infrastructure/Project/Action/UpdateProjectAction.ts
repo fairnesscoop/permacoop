@@ -30,13 +30,12 @@ export class UpdateProjectAction {
   @Put(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({summary: 'Update project'})
-  public async index(@Param() dto: IdDTO, @Body() projectDto: ProjectDTO) {
+  public async index(@Param() {id}: IdDTO, @Body() projectDto: ProjectDTO) {
     try {
-      const {id} = dto;
-      const {name, customerId} = projectDto;
+      const {name, dayDuration, customerId} = projectDto;
 
       await this.commandBus.execute(
-        new UpdateProjectCommand(id, name, customerId)
+        new UpdateProjectCommand(id, name, dayDuration, customerId)
       );
 
       return {id};

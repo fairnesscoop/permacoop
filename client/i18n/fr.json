@@ -112,8 +112,11 @@
     "projects": {
       "title": "Projets",
       "customers": "Clients",
+      "day_durations": "Durée d'une journée",
+      "day_duration": "{dayDuration}h",
       "form": {
         "project_placeholder": "-- Choisir un projet --",
+        "day_duration": "Durée d'une journée",
         "project": "Nom du projet"
       },
       "add": {
