@@ -108,7 +108,7 @@
     }
   },
   "crm": {
-    "breadcrumb": "CRM",
+    "breadcrumb": "FairCRM",
     "projects": {
       "title": "Projets",
       "customers": "Clients",
@@ -151,7 +151,7 @@
     }
   },
   "faircalendar": {
-    "breadcrumb": "Faircalendar",
+    "breadcrumb": "FairCalendar",
     "title": "Faircalendar {month}",
     "summary": "Récapitulatif",
     "errors": {
