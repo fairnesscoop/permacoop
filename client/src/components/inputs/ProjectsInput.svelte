@@ -16,8 +16,7 @@
     <option value="">{$_('crm.projects.form.project_placeholder')}</option>
     {#each projects as { id, customer, name }}
       <option value="{id}" selected="{projectId === id}">
-        {name}
-        ({customer.name})
+        {name} ({customer.name})
       </option>
     {/each}
   </select>

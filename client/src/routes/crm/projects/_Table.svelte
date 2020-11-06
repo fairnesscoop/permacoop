@@ -10,14 +10,16 @@
     <tr
       class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
       <th class="px-4 py-3">{$_('crm.projects.title')}</th>
+      <th class="px-4 py-3">{$_('crm.projects.day_durations')}</th>
       <th class="px-4 py-3">{$_('crm.projects.customers')}</th>
       <th class="px-4 py-3">{$_('common.actions')}</th>
     </tr>
   </thead>
   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-    {#each items as { id, name, customer } (id)}
+    {#each items as { id, name, dayDuration, customer } (id)}
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="px-4 py-3 text-sm">{name}</td>
+        <td class="px-4 py-3 text-sm">{$_('crm.projects.day_duration', { values: { dayDuration }})}</td>
         <td class="px-4 py-3 text-sm">{customer.name}</td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
