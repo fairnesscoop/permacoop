@@ -46,6 +46,8 @@
       '@fullcalendar/interaction'
     );
 
+    const isDarkmodeEnabled = document.querySelector('.theme-dark') !== null;
+
     const dom = document.getElementById('calendar');
     dom.innerHTML = '';
     const calendar = new Calendar(dom, {
@@ -83,7 +85,9 @@
         if (isLoggedUser) {
           data.url = `faircalendar/${id}/edit`;
         }
-        data.className = `event-${type}`;
+        data.className = isDarkmodeEnabled
+          ? `event-${type}--dark`
+          : `event-${type}`;
         data.tip = summary;
       },
       businessHours: {
