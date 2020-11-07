@@ -24,6 +24,7 @@ describe('GetProjectByIdQueryHandler', () => {
 
     when(project.getId()).thenReturn('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
     when(project.getName()).thenReturn('Project');
+    when(project.getDayDuration()).thenReturn(7);
     when(project.getCustomer()).thenReturn(instance(customer));
     when(
       projectRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
@@ -33,6 +34,7 @@ describe('GetProjectByIdQueryHandler', () => {
       new ProjectView(
         'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
         'Project',
+        7,
         new CustomerView('aeb50974-0dcd-4ef4-af43-d656250e43bc', 'Customer')
       )
     );
@@ -42,6 +44,7 @@ describe('GetProjectByIdQueryHandler', () => {
     ).once();
     verify(project.getId()).once();
     verify(project.getName()).once();
+    verify(project.getDayDuration()).once();
     verify(project.getCustomer()).once();
     verify(customer.getId()).once();
     verify(customer.getName()).once();
@@ -60,7 +63,7 @@ describe('GetProjectByIdQueryHandler', () => {
       await queryHandler.execute(query);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectNotFoundException);
-      expect(e.message).toBe('project.errors.not_found');
+      expect(e.message).toBe('crm.projects.errors.not_found');
       verify(
         projectRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
       ).once();

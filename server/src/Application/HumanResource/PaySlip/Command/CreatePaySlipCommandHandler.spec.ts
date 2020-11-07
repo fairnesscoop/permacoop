@@ -94,7 +94,7 @@ describe('CreatePaySlipCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(UserNotFoundException);
-      expect(e.message).toBe('user.errors.not_found');
+      expect(e.message).toBe('human_resources.users.errors.not_found');
       verify(
         userRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
       ).once();
@@ -142,7 +142,7 @@ describe('CreatePaySlipCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(PaySlipAlreadyExistException);
-      expect(e.message).toBe('human_resource.errors.pay_slip_already_exist');
+      expect(e.message).toBe('human_resources.pay_slips.errors.already_exist');
       verify(
         userRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
       ).once();

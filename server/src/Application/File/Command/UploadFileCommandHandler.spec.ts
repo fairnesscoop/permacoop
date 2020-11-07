@@ -67,7 +67,7 @@ describe('UpdateFileCommandHandler', () => {
       await handler.execute(new UploadFileCommand(uploadedFile));
     } catch (e) {
       expect(e).toBeInstanceOf(FileNotFoundException);
-      expect(e.message).toBe('file.errors.not_found');
+      expect(e.message).toBe('common.errors.file_not_found');
       verify(localFileStorageAdapter.upload(uploadedFile)).once();
       verify(fileRepository.save(anything())).never();
     }

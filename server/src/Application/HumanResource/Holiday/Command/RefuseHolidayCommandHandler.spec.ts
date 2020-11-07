@@ -44,7 +44,7 @@ describe('RefuseHolidayCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(HolidayNotFoundException);
-      expect(e.message).toBe('human_resource.errors.holiday_not_found');
+      expect(e.message).toBe('human_resources.holidays.errors.not_found');
       verify(
         holidayRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
       ).once();
@@ -68,7 +68,7 @@ describe('RefuseHolidayCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(HolidayCantBeModeratedException);
-      expect(e.message).toBe('human_resource.errors.holiday_cant_be_moderated');
+      expect(e.message).toBe('human_resources.holidays.errors.cant_be_moderated');
       verify(
         canHolidayBeModerated.isSatisfiedBy(instance(holiday), instance(user))
       ).once();

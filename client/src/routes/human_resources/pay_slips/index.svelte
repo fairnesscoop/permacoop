@@ -1,86 +1,73 @@
 <script context="module">
-  export const preload = async ({query}) => {
+  export const preload = async ({ query }) => {
     return {
-      page: query.page || 1
+      page: query.page || 1,
     };
   };
 </script>
 
 <script>
-  import {onMount} from 'svelte';
-  import {errorNormalizer} from '../../../normalizer/errors';
+  import { onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
+  import { errorNormalizer } from '../../../normalizer/errors';
+  import { get } from '../../../utils/axios';
+  import { historyPushState } from '../../../utils/url';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import SecuredView from '../../../components/SecuredView.svelte';
-  import SecuredLink from '../../../components/SecuredLink.svelte';
-  import Loader from '../../../components/Loader.svelte';
   import ServerErrors from '../../../components/ServerErrors.svelte';
+  import AddLink from '../../../components/links/AddLink.svelte';
+  import H4Title from '../../../components/H4Title.svelte';
   import Table from './_Table.svelte';
-  import {client as axios} from '../../../utils/axios';
-  import {historyPushState} from '../../../utils/url';
   import Pagination from '../../../components/Pagination.svelte';
-  import {ROLE_COOPERATOR, ROLE_ACCOUNTANT} from '../../../constants/roles';
 
   export let page;
 
-  let title = 'Fiches de paies';
-  let roles = [ROLE_COOPERATOR, ROLE_ACCOUNTANT];
-  let loading;
+  let title = $_('human_resources.pay_slips.title');
   let errors = [];
   let response = {
     items: [],
     totalItems: 0,
-    pageCount: 0
+    pageCount: 0,
   };
 
   onMount(async () => {
     fetchPaySlips();
   });
 
-  const changePage = async e => {
+  const changePage = async (e) => {
     page = e.detail;
-    historyPushState('human_resources/pay_slips', {page});
+    historyPushState('human_resources/pay_slips', { page });
     fetchPaySlips();
   };
 
   const fetchPaySlips = async () => {
     try {
-      loading = true;
-      response = (await axios.get('pay_slips', {params: {page}})).data;
+      response = (await get('pay_slips', { params: { page } })).data;
     } catch (e) {
       errors = errorNormalizer(e);
-    } finally {
-      loading = false;
     }
   };
 </script>
 
 <svelte:head>
-  <title>Permacoop - {title}</title>
+  <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb items={[{title: 'RH'}, {title}]} />
-  <div class="row">
-    <div class="col-md-8">
-      <h3>
-        {title}
-        <small>({response.totalItems})</small>
-      </h3>
-    </div>
-    <div class="col-md-4">
-      <SecuredLink
-        className="btn btn-primary float-right mb-3"
-        href="human_resources/pay_slips/add"
-        {roles}>
-        + Ajouter une fiche de paie
-      </SecuredLink>
-    </div>
+<Breadcrumb
+  items="{[{ title: $_('human_resources.breadcrumb') }, { title }]}" />
+<ServerErrors errors="{errors}" />
+<div class="inline-flex items-center">
+  <H4Title title="{title}" />
+  <AddLink
+    href="{'/human_resources/pay_slips/add'}"
+    value="{$_('common.form.add')}" />
+</div>
+<div class="w-full overflow-hidden rounded-lg shadow-xs">
+  <div class="w-full overflow-x-auto">
+    <Table items="{response.items}" />
   </div>
-  <ServerErrors {errors} />
-  <Loader {loading} />
-  <Table items={response.items} />
   <Pagination
-    on:change={changePage}
-    currentPage={page}
-    pageCount={response.pageCount} />
+    on:change="{changePage}"
+    currentPage="{page}"
+    totalItems="{response.totalItems}"
+    pageCount="{response.pageCount}" />
 </div>

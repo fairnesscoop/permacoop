@@ -1,5 +1,5 @@
 export class QuoteNotFoundException extends Error {
   constructor() {
-    super('quote.errors.not_found');
+    super('accounting.quotes.errors.not_found');
   }
 }

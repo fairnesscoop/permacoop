@@ -26,7 +26,7 @@ export class ProjectRepository implements IProjectRepository {
   public findOneById(id: string): Promise<Project | undefined> {
     return this.repository
       .createQueryBuilder('project')
-      .select(['project.id', 'project.name', 'customer.id', 'customer.name'])
+      .select(['project.id', 'project.name', 'project.dayDuration' , 'customer.id', 'customer.name'])
       .innerJoin('project.customer', 'customer')
       .where('project.id = :id', {id})
       .getOne();
@@ -38,7 +38,7 @@ export class ProjectRepository implements IProjectRepository {
   ): Promise<[Project[], number]> {
     const query = this.repository
       .createQueryBuilder('project')
-      .select(['project.id', 'project.name', 'customer.id', 'customer.name'])
+      .select(['project.id', 'project.name', 'project.dayDuration', 'customer.id', 'customer.name'])
       .innerJoin('project.customer', 'customer')
       .orderBy('project.name', 'ASC')
       .addOrderBy('customer.name', 'ASC')

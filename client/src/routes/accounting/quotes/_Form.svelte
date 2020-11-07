@@ -1,95 +1,84 @@
 <script>
-  import {createEventDispatcher, onMount} from 'svelte';
-  import {client as axios} from '../../../utils/axios';
+  import { _ } from 'svelte-i18n';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { get } from '../../../utils/axios';
   import QuoteItemsForm from './_QuoteItemsForm.svelte';
+  import Button from '../../../components/inputs/Button.svelte';
   import ProjectsInput from '../../../components/inputs/ProjectsInput.svelte';
-  import {byAlpha2} from 'iso-country-codes';
+  import SelectInput from '../../../components/inputs/SelectInput.svelte';
+  import { byAlpha2 } from 'iso-country-codes';
 
   export let customerId = '';
+  export let loading;
   export let projectId = undefined;
   export let status = 'draft';
 
-  let displayForm = false;
   let items = [
     {
       title: '',
       quantity: '',
-      dailyRate: ''
-    }
+      dailyRate: '',
+    },
   ];
-  let projects = {items: []};
-  let customers = {items: []};
+  let projects = { items: [] };
+  let customers = { items: [] };
 
   onMount(async () => {
-    customers = (await axios.get('customers', {params: {page: 1}})).data;
+    customers = (await get('customers', { params: { page: 1 } })).data;
   });
 
   const onCustomerSelected = async () => {
-    projects = (await axios.get(`projects`, {
-      params: {page: 1, customerId}
-    })).data;
+    projects = (await get(`projects`, { params: { page: 1, customerId } }))
+      .data;
     projectId = undefined;
-    displayForm = true;
   };
 
+  const states = ['draft', 'sent', 'refused', 'canceled', 'accepted'];
   const dispatch = createEventDispatcher();
   const submit = () => {
-    dispatch('save', {customerId, status, items, projectId});
+    dispatch('save', { customerId, status, items, projectId });
   };
 </script>
 
-<form on:submit|preventDefault={submit}>
-  <div class="form-group">
-    <label for="status">Statut</label>
-    <select
-      id="status"
-      required="required"
-      class="form-control"
-      bind:value={status}>
-      <option value="draft">Brouillon</option>
-      <option value="sent">Envoyé</option>
-      <option value="refused">Refusé</option>
-      <option value="canceled">Annulé</option>
-      <option value="accepted">Accepté</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="customerId">Nom du client</label>
+<form
+  on:submit|preventDefault="{submit}"
+  class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <SelectInput
+    label="{$_('accounting.quotes.status.title')}"
+    bind:value="{status}">
+    {#each states as state}
+      <option value="{state}">{$_(`accounting.quotes.status.${state}`)}</option>
+    {/each}
+  </SelectInput>
+  <div class="block mt-4 text-sm">
+    <label
+      class="text-gray-700 dark:text-gray-400"
+      for="{'customerId'}">{$_('accounting.quotes.form.customer')}</label>
     <select
       id="customerId"
-      required="required"
-      class="form-control"
-      bind:value={customerId}
-      on:change={onCustomerSelected}>
-      <option value="">-- Choisir un client --</option>
-      {#each customers.items as customer}
-        <option value={customer.id} selected={customerId === customer.id}>
-          {customer.name} ({customer.address.street} - {customer.address.zipCode}
-          {customer.address.city} - {byAlpha2[customer.address.country].name})
+      class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+      bind:value="{customerId}"
+      on:change="{onCustomerSelected}">
+      <option value="">{$_('crm.customers.form.customer_placeholder')}</option>
+      {#each customers.items as { id, address, name }}
+        <option value="{id}" selected="{customerId === id}">
+          {name}
+          ({address.street}
+          -
+          {address.zipCode}
+          {address.city}
+          -
+          {byAlpha2[address.country].name})
         </option>
       {/each}
     </select>
   </div>
-  {#if displayForm}
-    <div class="form-group">
-      <label for="projectId">Nom du projet</label>
-      <select id="projectId" class="form-control" bind:value={projectId}>
-        <option value={undefined} />
-        {#each projects.items as project}
-          <option value={project.id} selected={projectId === project.id}>
-            {project.name}
-          </option>
-        {/each}
-      </select>
-    </div>
-    <hr />
-    <QuoteItemsForm bind:values={items} />
-    <hr />
+  {#if customerId && status}
+    <ProjectsInput projects="{projects.items}" projectId="{projectId}" />
+    <QuoteItemsForm bind:values="{items}" />
+    <Button
+      value="{$_('common.form.save')}"
+      loading="{loading}"
+      disabled="{!customerId || !status || loading}" />
   {/if}
-  <button
-    type="submit"
-    class="btn btn-primary"
-    disabled={!customerId || !status}>
-    Enregistrer
-  </button>
 </form>

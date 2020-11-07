@@ -17,6 +17,7 @@ Permacoop is an eco-design and open-source ERP solution for cooperatives.
 - [Jest](https://jestjs.io/) / [Ts-mockito](https://github.com/NagRock/ts-mockito)
 - [Svelte](https://svelte.dev/) / [Sapper](https://sapper.svelte.dev/)
 - [PostgreSQL](https://www.postgresql.org/)
+- [Redis](https://redis.io/)
 - [Docker](https://www.docker.com/)
 
 ## Prerequisites
@@ -40,8 +41,8 @@ make start
 
 The server and client will be started:
 
-- API documentation available on http://localhost:8080/api
-- Client avaible on http://localhost:8000
+- API documentation available on http://localhost/api
+- Client avaible on http://localhost/
 
 ## Security
 

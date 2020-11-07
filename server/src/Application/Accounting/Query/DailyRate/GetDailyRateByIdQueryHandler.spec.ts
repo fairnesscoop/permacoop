@@ -80,7 +80,7 @@ describe('GetDailyRateByIdQueryHandler', () => {
       await queryHandler.execute(query);
     } catch (e) {
       expect(e).toBeInstanceOf(DailyRateNotFoundException);
-      expect(e.message).toBe('accounting.errors.daily_rate_not_found');
+      expect(e.message).toBe('accounting.daily_rates.errors.not_found');
       verify(
         dailyrateRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
       ).once();

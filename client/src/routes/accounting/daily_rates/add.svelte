@@ -1,36 +1,35 @@
 <script>
-  import {goto} from '@sapper/app';
+  import { goto } from '@sapper/app';
+  import { _ } from 'svelte-i18n';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import {client as axios} from '../../../utils/axios';
+  import { post } from '../../../utils/axios';
   import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../../normalizer/errors';
+  import { errorNormalizer } from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
-  import SecuredView from '../../../components/SecuredView.svelte';
-  import {ROLE_COOPERATOR, ROLE_EMPLOYEE} from '../../../constants/roles';
+  import H4Title from '../../../components/H4Title.svelte';
 
-  let title = 'Ajouter un TJM';
+  let loading = false;
+  let title = $_('accounting.daily_rates.add.title');
   let errors = [];
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
-      await axios.post('daily_rates', e.detail);
-
-      return goto('/accounting/daily_rates');
+      loading = true;
+      await post('daily_rates', e.detail);
+      goto('/accounting/daily_rates');
     } catch (e) {
+      loading = false;
       errors = errorNormalizer(e);
     }
   };
 </script>
 
 <svelte:head>
-  <title>Permacoop - {title}</title>
+  <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<SecuredView roles={[ROLE_COOPERATOR, ROLE_EMPLOYEE]}>
-  <div class="col-md-12">
-    <Breadcrumb
-      items={[{title: 'Gestion & Comptabilité'}, {title: 'TJM', path: 'accounting/daily_rates'}, {title}]} />
-    <ServerErrors {errors} />
-    <Form on:save={onSave} />
-  </div>
-</SecuredView>
+<Breadcrumb
+  items="{[{ title: $_('accounting.breadcrumb') }, { title: $_('accounting.daily_rates.title'), path: '/accounting/daily_rates' }, { title }]}" />
+<H4Title title="{title}" />
+<ServerErrors errors="{errors}" />
+<Form on:save="{onSave}" loading="{loading}" />

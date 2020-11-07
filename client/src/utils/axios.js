@@ -1,28 +1,36 @@
 import axios from 'axios';
-import {goto} from '@sapper/app';
-import {TokenStorage} from './tokenStorage';
+import Cookies from 'js-cookie';
+import config from '../../config';
 
-export const client = axios.create({
-  baseURL: '/api'
+const client = axios.create({
+  baseURL: process.browser ? config.API_URL : config.API_URL_SSR,
 });
 
-client.interceptors.request.use((conf) => {
-  if ('login' !== conf.url) {
-    conf.headers.Authorization = `Bearer ${TokenStorage.get()}`;
+const authorizationBearerHeader = (token) => {
+  const bearer = token ? token : Cookies.get('permacoop_token');
+  if (!bearer) {
+    return;
   }
 
-  return conf;
-});
+  return {
+    headers: {
+      Authorization: `Bearer ${bearer}`,
+    },
+  };
+};
 
-client.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    const {responseURL} = error.request;
+export const post = (url, payload) => {
+  return client.post(url, payload, authorizationBearerHeader());
+};
 
-    if (401 === error.response.status && -1 === responseURL.indexOf('login')) {
-      return goto('/login');
-    }
+export const put = (url, payload) => {
+  return client.put(url, payload, authorizationBearerHeader());
+};
 
-    return Promise.reject(error);
-  }
-);
+export const del = (url) => {
+  return client.delete(url, authorizationBearerHeader());
+};
+
+export const get = (url, payload, token) => {
+  return client.get(url, { ...payload, ...authorizationBearerHeader(token) });
+};

@@ -63,7 +63,7 @@ describe('UpdateDailyRateCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(DailyRateNotFoundException);
-      expect(e.message).toBe('accounting.errors.daily_rate_not_found');
+      expect(e.message).toBe('accounting.daily_rates.errors.not_found');
       verify(
         dailyRateRepository.findOneById('8a9df044-94a7-4e6c-abd1-ecdd69d788d5')
       ).once();
@@ -105,7 +105,7 @@ describe('UpdateDailyRateCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(UserNotFoundException);
-      expect(e.message).toBe('user.errors.not_found');
+      expect(e.message).toBe('human_resources.users.errors.not_found');
       verify(
         dailyRateRepository.findOneById('8a9df044-94a7-4e6c-abd1-ecdd69d788d5')
       ).once();
@@ -153,7 +153,7 @@ describe('UpdateDailyRateCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(CustomerNotFoundException);
-      expect(e.message).toBe('customer.errors.not_found');
+      expect(e.message).toBe('crm.customers.errors.not_found');
       verify(
         dailyRateRepository.findOneById('8a9df044-94a7-4e6c-abd1-ecdd69d788d5')
       ).once();
@@ -201,7 +201,7 @@ describe('UpdateDailyRateCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(TaskNotFoundException);
-      expect(e.message).toBe('task.errors.not_found');
+      expect(e.message).toBe('accounting.tasks.errors.not_found');
       verify(
         dailyRateRepository.findOneById('8a9df044-94a7-4e6c-abd1-ecdd69d788d5')
       ).once();
@@ -256,7 +256,7 @@ describe('UpdateDailyRateCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(DailyRateAlreadyExistException);
-      expect(e.message).toBe('accounting.errors.daily_rate_already_exist');
+      expect(e.message).toBe('accounting.daily_rates.errors.already_exist');
       verify(
         dailyRateRepository.findOneById('8a9df044-94a7-4e6c-abd1-ecdd69d788d5')
       ).once();

@@ -1,37 +1,51 @@
 <script>
-  import {onMount} from 'svelte';
-  import {goto} from '@sapper/app';
+  import { onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
+  import { goto, stores } from '@sapper/app';
   import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import {client as axios} from '../../utils/axios';
+  import H4Title from '../../components/H4Title.svelte';
+  import { get, put } from '../../utils/axios';
   import Form from './_Form.svelte';
-  import {errorNormalizer} from '../../normalizer/errors';
+  import { errorNormalizer } from '../../normalizer/errors';
   import ServerErrors from '../../components/ServerErrors.svelte';
 
-  let pageTitle = 'Mon profil';
+  const { session } = stores();
+
+  let title = $_('profile.title');
   let errors = [];
+  let loading = false;
   let data = {};
 
   onMount(async () => {
-    ({data} = await axios.get('users/me'));
+    ({ data } = await get('users/me'));
   });
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     try {
-      await axios.put('users/me', e.detail);
-
-      return goto('/');
+      loading = true;
+      const {
+        data: { firstName, lastName, email },
+      } = await put('users/me', e.detail);
+      $session.user = {
+        ...$session.user,
+        firstName,
+        lastName,
+        email,
+      };
+      goto('/');
     } catch (e) {
       errors = errorNormalizer(e);
+    } finally {
+      loading = false;
     }
   };
 </script>
 
 <svelte:head>
-  <title>Permacoop - {pageTitle}</title>
+  <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<div class="col-md-12">
-  <Breadcrumb items={[{title: pageTitle}]} />
-  <ServerErrors {errors} />
-  <Form {...data} on:save={onSave} />
-</div>
+<Breadcrumb items="{[{ title }]}" />
+<H4Title title="{title}" />
+<ServerErrors errors="{errors}" />
+<Form {...data} loading="{loading}" on:save="{onSave}" />

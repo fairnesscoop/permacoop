@@ -1,5 +1,5 @@
 export class HolidayCantBeModeratedException extends Error {
   constructor() {
-    super('human_resource.errors.holiday_cant_be_moderated');
+    super('human_resources.holidays.errors.cant_be_moderated');
   }
 }

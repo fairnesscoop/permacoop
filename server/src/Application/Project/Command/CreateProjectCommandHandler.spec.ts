@@ -17,6 +17,7 @@ describe('CreateProjectCommandHandler', () => {
 
   const command = new CreateProjectCommand(
     'Project',
+    7,
     'b5e8dc18-ca67-4323-bdae-654afe09499f'
   );
 
@@ -41,7 +42,7 @@ describe('CreateProjectCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(CustomerNotFoundException);
-      expect(e.message).toBe('customer.errors.not_found');
+      expect(e.message).toBe('crm.customers.errors.not_found');
       verify(
         customerRepository.findOneById('b5e8dc18-ca67-4323-bdae-654afe09499f')
       ).once();
@@ -60,7 +61,7 @@ describe('CreateProjectCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectAlreadyExistException);
-      expect(e.message).toBe('project.errors.already_exist');
+      expect(e.message).toBe('crm.projects.errors.already_exist');
       verify(
         customerRepository.findOneById('b5e8dc18-ca67-4323-bdae-654afe09499f')
       ).once();
@@ -82,7 +83,7 @@ describe('CreateProjectCommandHandler', () => {
     ).thenResolve(instance(customer));
     when(
       projectRepository.save(
-        deepEqual(new Project('Project', instance(customer)))
+        deepEqual(new Project('Project', 7, instance(customer)))
       )
     ).thenResolve(instance(createdProject));
 
@@ -96,7 +97,7 @@ describe('CreateProjectCommandHandler', () => {
     verify(isProjectAlreadyExist.isSatisfiedBy('Project')).once();
     verify(
       projectRepository.save(
-        deepEqual(new Project('Project', instance(customer)))
+        deepEqual(new Project('Project', 7, instance(customer)))
       )
     ).once();
     verify(createdProject.getId()).once();

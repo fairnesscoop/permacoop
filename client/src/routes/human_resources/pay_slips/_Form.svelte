@@ -1,18 +1,21 @@
 <script>
-  import {createEventDispatcher, onMount} from 'svelte';
-  import {client as axios} from '../../../utils/axios';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
+  import { get } from '../../../utils/axios';
+  import Button from '../../../components/inputs/Button.svelte';
   import UsersInput from '../../../components/inputs/UsersInput.svelte';
   import MonthsInput from '../../../components/inputs/MonthsInput.svelte';
 
   let data = [];
 
   onMount(async () => {
-    ({data} = await axios.get('users'));
+    ({ data } = await get('users'));
   });
 
   export let date = new Date();
   export let userId = '';
   export let files = [];
+  export let loading;
 
   const dispatch = createEventDispatcher();
 
@@ -26,22 +29,27 @@
   };
 </script>
 
-<form on:submit|preventDefault={submit}>
-  <UsersInput users={data} bind:userId />
-  <MonthsInput label={'Période'} bind:date amount={6} />
-  <div class="form-group">
-    <label for="file" class="required">Fiche de paie</label>
+<form
+  on:submit|preventDefault="{submit}"
+  class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <UsersInput users="{data}" bind:userId />
+  <MonthsInput label="{'Période'}" bind:date amount="{6}" />
+  <div class="block mt-4 text-sm">
+    <label class="text-gray-700 dark:text-gray-400">
+      {$_('human_resources.pay_slips.form.file')}
+    </label>
     <input
       type="file"
       id="file"
       required="required"
-      class="form-control"
+      class="block w-full mt-1 text-sm border-green-600 dark:text-gray-300 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green form-input"
       bind:files />
-    <small class="form-text text-muted">Format PDF uniquement</small>
+    <span class="text-xs text-green-600 dark:text-green-400">
+      {$_('human_resources.pay_slips.form.file_helper')}
+    </span>
   </div>
-  <button
-    class="btn btn-primary"
-    disabled={!date || !userId || !files.length > 0}>
-    Enregistrer
-  </button>
+  <Button
+    value="{$_('common.form.save')}"
+    loading="{loading}"
+    disabled="{!date || !userId || !files.length > 0 || loading}" />
 </form>

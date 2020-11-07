@@ -24,7 +24,7 @@ describe('CreateQuoteCommandHandler', () => {
   const quote = mock(Quote);
   const address = mock(Address);
   const customer = new Customer('Customer', instance(address));
-  const project = new Project('Project', customer);
+  const project = new Project('Project', 7, customer);
   const command = new CreateQuoteCommand(
     instance(user),
     QuoteStatus.DRAFT,
@@ -154,7 +154,7 @@ describe('CreateQuoteCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(CustomerNotFoundException);
-      expect(e.message).toBe('customer.errors.not_found');
+      expect(e.message).toBe('crm.customers.errors.not_found');
       verify(
         customerRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
       ).once();
@@ -176,7 +176,7 @@ describe('CreateQuoteCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(InvalidProjectException);
-      expect(e.message).toBe('quote.errors.invalid_project');
+      expect(e.message).toBe('accounting.quotes.errors.invalid_project');
       verify(
         customerRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
       ).once();
@@ -203,7 +203,7 @@ describe('CreateQuoteCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(InvalidProjectException);
-      expect(e.message).toBe('quote.errors.invalid_project');
+      expect(e.message).toBe('accounting.quotes.errors.invalid_project');
       verify(
         customerRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
       ).once();

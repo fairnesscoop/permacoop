@@ -1,5 +1,5 @@
 export class DailyRateNotFoundException extends Error {
   constructor() {
-    super('accounting.errors.daily_rate_not_found');
+    super('accounting.daily_rates.errors.not_found');
   }
 }

@@ -69,7 +69,7 @@ describe('GetPaySlipByIdQueryHandler', () => {
       await queryHandler.execute(query);
     } catch (e) {
       expect(e).toBeInstanceOf(PaySlipNotFoundException);
-      expect(e.message).toBe('human_resource.errors.pay_slip_not_found');
+      expect(e.message).toBe('human_resources.pay_slips.errors.not_found');
       verify(
         payslipRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
       ).once();

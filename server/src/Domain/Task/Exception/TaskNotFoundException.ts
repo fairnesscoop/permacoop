@@ -1,5 +1,5 @@
 export class TaskNotFoundException extends Error {
   constructor() {
-    super('task.errors.not_found');
+    super('accounting.tasks.errors.not_found');
   }
 }

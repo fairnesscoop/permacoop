@@ -1,63 +1,75 @@
 <script>
-  import MoneyInput from '../../../components/inputs/MoneyInput.svelte';
-  import DateInput from '../../../components/inputs/DateInput.svelte';
+  import { _ } from 'svelte-i18n';
+  import Input from '../../../components/inputs/Input.svelte';
   import SelectInput from '../../../components/inputs/SelectInput.svelte';
 
   export let userAdministrative;
+
+  const contracts = [
+    'cdi',
+    'cdd',
+    'ctt',
+    'professionalization',
+    'apprenticeship',
+  ];
 </script>
 
-<h3 class="mt-3">Informations administratives</h3>
-<hr />
-<div class="row">
-  <div class="col-md-4">
+<div class="flex">
+  <div class="w-1/3 pr-2">
     <SelectInput
-      label={'Contrat de travail'}
-      bind:value={userAdministrative.contract}>
-      <option value={'cdi'}>CDI</option>
-      <option value={'cdd'}>CDD</option>
-      <option value={'ctt'}>CTT</option>
-      <option value={'professionalization'}>
-        Contrat de professionalisation
-      </option>
-      <option value={'apprenticeship'}>Contrat de d'apprentisage</option>
+      label="{$_('human_resources.users.form.contract.title')}"
+      bind:value="{userAdministrative.contract}">
+      {#each contracts as contract}
+        <option value="{contract}">
+          {$_(`human_resources.users.form.contract.${contract}`)}
+        </option>
+      {/each}
     </SelectInput>
   </div>
-  <div class="col-md-4">
+  <div class="w-1/3 pr-2">
     <SelectInput
-      label={'Statut cadre'}
-      bind:value={userAdministrative.executivePosition}>
-      <option value={true}>Oui</option>
-      <option value={false}>Non</option>
+      label="{$_('human_resources.users.form.executive_position')}"
+      bind:value="{userAdministrative.executivePosition}">
+      <option value={true}>{$_('common.yes')}</option>
+      <option value={false}>{$_('common.no')}</option>
     </SelectInput>
   </div>
-  <div class="col-md-4">
+  <div class="w-1/3 pr-2">
     <SelectInput
-      label={'Mutuelle'}
-      bind:value={userAdministrative.healthInsurance}>
-      <option value={true}>Oui</option>
-      <option value={false}>Non</option>
+      label="{$_('human_resources.users.form.health_insurance')}"
+      bind:value="{userAdministrative.healthInsurance}">
+      <option value={true}>{$_('common.yes')}</option>
+      <option value={false}>{$_('common.no')}</option>
     </SelectInput>
   </div>
-  <div class="col-md-6">
-    <MoneyInput
-      label={'Salaire annuel brut'}
-      bind:value={userAdministrative.annualEarnings} />
+</div>
+<div class="flex">
+  <div class="w-1/2 pr-2">
+    <Input
+      type="{'money'}"
+      label="{$_('human_resources.users.form.annual_earnings')}"
+      bind:value="{userAdministrative.annualEarnings}" />
   </div>
-  <div class="col-md-6">
-    <MoneyInput
-      label={'Frais de transport'}
-      required={''}
-      bind:value={userAdministrative.transportFee} />
-  </div>
-  <div class="col-md-6">
-    <DateInput
-      label={"Date d'entrée"}
-      bind:value={userAdministrative.joiningDate} />
-  </div>
-  <div class="col-md-6">
-    <DateInput
-      label={'Date de sortie'}
+  <div class="w-1/2 pl-2">
+    <Input
+      type="{'money'}"
+      label="{$_('human_resources.users.form.transport_fee')}"
       required={false}
-      bind:value={userAdministrative.leavingDate} />
+      bind:value="{userAdministrative.transportFee}" />
+  </div>
+</div>
+<div class="flex">
+  <div class="w-1/2 pr-2">
+    <Input
+      type="{'date'}"
+      label="{$_('human_resources.users.form.joining_date')}"
+      bind:value="{userAdministrative.joiningDate}" />
+  </div>
+  <div class="w-1/2 pl-2">
+    <Input
+      type="date"
+      label="{$_('human_resources.users.form.leaving_date')}"
+      required={false}
+      bind:value="{userAdministrative.leavingDate}" />
   </div>
 </div>

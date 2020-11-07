@@ -1,34 +1,32 @@
 <script>
-  import SecuredLink from '../../../components/SecuredLink.svelte';
+  import { _ } from 'svelte-i18n';
+  //import EditLink from '../../../components/links/EditLink.svelte';
 
   export let users;
-  export let roles;
 </script>
 
-<table class="table table-striped table-bordered table-hover">
+<table class="w-full whitespace-no-wrap">
   <thead>
-    <tr>
-      <th>Prénom</th>
-      <th>Nom</th>
-      <th>Email</th>
-      <th>Rôle</th>
-      <th />
+    <tr
+      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+      <th class="px-4 py-3">{$_('human_resources.users.first_name')}</th>
+      <th class="px-4 py-3">{$_('human_resources.users.last_name')}</th>
+      <th class="px-4 py-3">{$_('human_resources.users.email')}</th>
+      <th class="px-4 py-3">{$_('human_resources.users.role')}</th>
+      <th class="px-4 py-3">{$_('common.actions')}</th>
     </tr>
   </thead>
-  <tbody>
-    {#each users as user (user.id)}
-      <tr>
-        <td>{user.firstName}</td>
-        <td>{user.lastName}</td>
-        <td>{user.email}</td>
-        <td>{user.role}</td>
-        <td>
-          <SecuredLink
-            className="btn btn-outline-secondary btn-sm"
-            href={`human_resources/users/${user.id}/edit`}
-            {roles}>
-            Modifier
-          </SecuredLink>
+  <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+    {#each users as { id, firstName, lastName, email, role } (id)}
+      <tr class="text-gray-700 dark:text-gray-400">
+        <td class="px-4 py-3 text-sm">{firstName}</td>
+        <td class="px-4 py-3 text-sm">{lastName}</td>
+        <td class="px-4 py-3 text-sm">{email}</td>
+        <td class="px-4 py-3 text-sm">{$_(`common.roles.${role}`)}</td>
+        <td class="px-4 py-3">
+          <div class="flex items-center space-x-4 text-sm">
+            <!--<EditLink href={`/human_resources/users/${id}/edit`} />-->
+          </div>
         </td>
       </tr>
     {/each}

@@ -3,7 +3,7 @@
   "theme_color": "#343a40",
   "name": "Permacoop",
   "short_name": "Permacoop",
-  "display": "minimal-ui",
+  "display": "standalone",
   "start_url": "/",
   "icons": [
     {

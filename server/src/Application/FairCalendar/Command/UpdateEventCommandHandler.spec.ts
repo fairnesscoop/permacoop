@@ -15,6 +15,7 @@ import {ProjectOrTaskMissingException} from 'src/Domain/FairCalendar/Exception/P
 import {DoesEventBelongToUser} from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
 import {IsMaximumTimeSpentReachedOnEdition} from 'src/Domain/FairCalendar/Specification/IsMaximumTimeSpentReachedOnEdition';
 import {EventNotFoundException} from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
+import { EventDoesntBelongToUserException } from 'src/Domain/FairCalendar/Exception/EventDoesntBelongToUserException';
 
 describe('UpdateEventCommandHandler', () => {
   let taskRepository: TaskRepository;
@@ -67,7 +68,41 @@ describe('UpdateEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(EventNotFoundException);
-      expect(e.message).toBe('fair_calendar.errors.event_not_found');
+      expect(e.message).toBe('faircalendar.errors.event_not_found');
+      verify(
+        eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
+      ).once();
+      verify(
+        doesEventBelongToUser.isSatisfiedBy(anything(), anything())
+      ).never();
+      verify(projectRepository.findOneById(anything())).never();
+      verify(taskRepository.findOneById(anything())).never();
+      verify(
+        isMaximumTimeSpentReachedOnEdition.isSatisfiedBy(anything(), anything())
+      ).never();
+      verify(
+        event.update(anything(), anything(), anything(), anything(), anything())
+      ).never();
+      verify(eventRepository.save(anything())).never();
+    }
+  });
+
+  it('testEventDoesntBelongToUser', async () => {
+    when(
+      eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
+    ).thenResolve(instance(event));
+    when(
+      doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
+    ).thenReturn(false);
+
+    try {
+      await handler.execute(command);
+    } catch (e) {
+      expect(e).toBeInstanceOf(EventDoesntBelongToUserException);
+      expect(e.message).toBe('faircalendar.errors.event_doesnt_belong_to_user');
+      verify(
+        doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
+      ).once();
       verify(
         eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
       ).once();
@@ -87,6 +122,9 @@ describe('UpdateEventCommandHandler', () => {
     when(
       eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
     ).thenResolve(instance(event));
+    when(
+      doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
+    ).thenReturn(true);
 
     try {
       await handler.execute(
@@ -99,7 +137,10 @@ describe('UpdateEventCommandHandler', () => {
       );
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectOrTaskMissingException);
-      expect(e.message).toBe('fair_calendar.errors.project_or_task_missing');
+      expect(e.message).toBe('faircalendar.errors.project_or_task_missing');
+      verify(
+        doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
+      ).once();
       verify(
         eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
       ).once();
@@ -120,6 +161,9 @@ describe('UpdateEventCommandHandler', () => {
       eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
     ).thenResolve(instance(event));
     when(
+      doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
+    ).thenReturn(true);
+    when(
       taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
     ).thenResolve(instance(task));
     when(
@@ -130,9 +174,12 @@ describe('UpdateEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectNotFoundException);
-      expect(e.message).toBe('project.errors.not_found');
+      expect(e.message).toBe('crm.projects.errors.not_found');
       verify(
         eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
+      ).once();
+      verify(
+        doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
       ).once();
       verify(
         projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
@@ -152,6 +199,9 @@ describe('UpdateEventCommandHandler', () => {
       eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
     ).thenResolve(instance(event));
     when(
+      doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
+    ).thenReturn(true);
+    when(
       projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
     ).thenResolve(instance(project));
     when(
@@ -162,9 +212,12 @@ describe('UpdateEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(TaskNotFoundException);
-      expect(e.message).toBe('task.errors.not_found');
+      expect(e.message).toBe('accounting.tasks.errors.not_found');
       verify(
         eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
+      ).once();
+      verify(
+        doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
       ).once();
       verify(
         projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
@@ -187,6 +240,9 @@ describe('UpdateEventCommandHandler', () => {
       eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
     ).thenResolve(instance(event));
     when(
+      doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
+    ).thenReturn(true);
+    when(
       projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
     ).thenResolve(instance(project));
     when(
@@ -200,9 +256,12 @@ describe('UpdateEventCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(MaximumEventReachedException);
-      expect(e.message).toBe('fair_calendar.errors.event_maximum_reached');
+      expect(e.message).toBe('faircalendar.errors.event_maximum_reached');
       verify(
         eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
+      ).once();
+      verify(
+        doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
       ).once();
       verify(
         projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
@@ -225,6 +284,9 @@ describe('UpdateEventCommandHandler', () => {
       eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
     ).thenResolve(instance(event));
     when(
+      doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
+    ).thenReturn(true);
+    when(
       projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
     ).thenResolve(instance(project));
     when(
@@ -241,7 +303,13 @@ describe('UpdateEventCommandHandler', () => {
     );
 
     verify(
+      eventRepository.findOneById('5a18fde0-07d9-4854-a6da-c3ad2de76bd7')
+    ).once();
+    verify(
       projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
+    ).once();
+    verify(
+      doesEventBelongToUser.isSatisfiedBy(instance(event), instance(user))
     ).once();
     verify(
       taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
