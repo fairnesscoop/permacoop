@@ -31,8 +31,6 @@
     'dojo',
     'support',
     'formationConference',
-    'holiday',
-    'medicalLeave',
     'other',
   ];
 

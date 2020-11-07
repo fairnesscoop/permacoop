@@ -19,7 +19,7 @@ import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import { EditEventDTO } from '../DTO/EditEventDTO';
 
 @Controller('events')
-@ApiTags('Event')
+@ApiTags('FairCalendar')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class UpdateEventAction {

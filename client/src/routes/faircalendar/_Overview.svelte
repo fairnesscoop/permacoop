@@ -2,7 +2,7 @@
   import { _ } from 'svelte-i18n';
   import GreenBadge from '../../components/badges/GreenBadge.svelte';
   import OrangeBadge from '../../components/badges/OrangeBadge.svelte';
-  import IndigoBadge from '../../components/badges/OrangeBadge.svelte';
+  import IndigoBadge from '../../components/badges/IndigoBadge.svelte';
   import BlueBadge from '../../components/badges/BlueBadge.svelte';
   import GrayBadge from '../../components/badges/GrayBadge.svelte';
   import YellowBadge from '../../components/badges/YellowBadge.svelte';
@@ -25,8 +25,7 @@
         <th class="text-center py-3">
           {$_('faircalendar.type.formationConference')}
         </th>
-        <th class="text-center py-3">{$_('faircalendar.type.holiday')}</th>
-        <th class="text-center py-3">{$_('faircalendar.type.medicalLeave')}</th>
+        <th class="text-center py-3">{$_('faircalendar.type.leave')}</th>
         <th class="text-center py-3">{$_('faircalendar.type.other')}</th>
         <th class="text-center py-3">{$_('faircalendar.type.meal_tickets')}</th>
       </tr>
@@ -60,13 +59,7 @@
         <td class="py-3 text-center text-sm">
           <YellowBadge
             value="{$_('common.days_duration', {
-              values: { n: overview.holiday },
-            })}" />
-        </td>
-        <td class="py-3 text-center text-sm">
-          <RedBadge
-            value="{$_('common.days_duration', {
-              values: { n: overview.medicalLeave },
+              values: { n: overview.leave },
             })}" />
         </td>
         <td class="py-3 text-center text-sm">
