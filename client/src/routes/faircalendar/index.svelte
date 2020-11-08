@@ -15,7 +15,7 @@
   import { _ } from 'svelte-i18n';
   import { goto } from '@sapper/app';
   import { format, subDays } from 'date-fns';
-  import { fr } from 'date-fns/locale';
+  import { fr, is } from 'date-fns/locale';
   import frLocale from '@fullcalendar/core/locales/fr';
   import '@fullcalendar/core/main.css';
   import '@fullcalendar/daygrid/main.css';
@@ -26,6 +26,7 @@
   import Breadcrumb from '../../components/Breadcrumb.svelte';
   import H4Title from '../../components/H4Title.svelte';
   import ServerErrors from '../../components/ServerErrors.svelte';
+  import { settings } from '../../store';
 
   export let filters;
   export let user;
@@ -33,11 +34,20 @@
   let isLoggedUser = false;
   let errors = [];
   let data = {};
+
+  let isDarkmodeEnabled = false;
+
   $: title = $_('faircalendar.title', {
     values: {
       month: format(new Date(filters.date), 'MMMM yyyy', { locale: fr }),
     },
   });
+
+  settings.subscribe(({ theme }) => {
+    isDarkmodeEnabled = theme === 'theme-dark';
+  });
+
+  console.log({ isDarkmodeEnabled });
 
   const fullCalendar = async (events, date) => {
     const { Calendar } = await import('@fullcalendar/core');
@@ -46,10 +56,9 @@
       '@fullcalendar/interaction'
     );
 
-    const isDarkmodeEnabled = document.querySelector('.theme-dark') !== null;
-
     const dom = document.getElementById('calendar');
     dom.innerHTML = '';
+
     const calendar = new Calendar(dom, {
       locale: frLocale,
       plugins: [dayGridPlugin, interactionPlugin],

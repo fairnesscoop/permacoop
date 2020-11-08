@@ -1,6 +1,13 @@
 @tailwind base;
 @tailwind components;
 
+/* 
+  Write here your custom css 
+  See here : https://tailwindcss.com/docs/functions-and-directives#apply
+*/
+
+/* Fair Calendar custom CSS */
+
 .event-mission {
   @apply border-green-100 text-green-700 bg-green-100 !important;
 }
@@ -58,3 +65,16 @@
 }
 
 @tailwind utilities;
+
+/* 
+  @layer base overrides
+  See here : https://tailwindcss.com/docs/functions-and-directives#layer
+*/
+
+@layer base {
+  /* Overrides for Fair Calaendar */
+  .theme-dark .fc-day-header,
+  .theme-dark .fc-day-grid {
+    color: white;
+  }
+}
