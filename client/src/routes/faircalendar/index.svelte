@@ -35,19 +35,11 @@
   let errors = [];
   let data = {};
 
-  let isDarkmodeEnabled = false;
-
   $: title = $_('faircalendar.title', {
     values: {
       month: format(new Date(filters.date), 'MMMM yyyy', { locale: fr }),
     },
   });
-
-  settings.subscribe(({ theme }) => {
-    isDarkmodeEnabled = theme === 'theme-dark';
-  });
-
-  console.log({ isDarkmodeEnabled });
 
   const fullCalendar = async (events, date) => {
     const { Calendar } = await import('@fullcalendar/core');
@@ -94,9 +86,10 @@
         if (isLoggedUser) {
           data.url = `faircalendar/${id}/edit`;
         }
-        data.className = isDarkmodeEnabled
-          ? `event-${type}--dark`
-          : `event-${type}`;
+        data.className =
+          $settings.theme === 'theme-dark'
+            ? `event-${type}--dark`
+            : `event-${type}`;
         data.tip = summary;
       },
       businessHours: {
