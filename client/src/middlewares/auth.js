@@ -25,8 +25,8 @@ export default async (req, res, next) => {
       email,
       scope: role,
     };
-    next();
+   return next();
   } catch (e) {
-    next();
+   return next();
   }
 };
