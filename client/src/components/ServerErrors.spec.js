@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
-import ServerErrors from './ServerErrors.svelte';
 import { screen, render } from '@testing-library/svelte';
+import ServerErrors from './ServerErrors.svelte';
 
 it('renders nothing with no error.', () => {
   render(ServerErrors, { errors: [] });

@@ -3,7 +3,7 @@ export const errorNormalizer = (e) => {
     return ['Une erreur est survenue'];
   }
 
-  let message = e.response.data.message;
+  const {message} = e.response.data;
 
   if (Array.isArray(message)) {
     return message;
