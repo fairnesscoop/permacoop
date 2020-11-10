@@ -166,12 +166,15 @@
       "project_or_task_missing": "Vous devez saisir un projet et une mission."
     },
     "type": {
-      "mission": "Mission",
-      "support": "Support // Podcast",
-      "dojo": "Dojo",
-      "formationConference": "Formation // Conf // Meetup",
-      "holiday": "Vacances",
-      "medicalLeave": "Congé maladie",
+      "mission": "Missions",
+      "support": "Supports / Podcasts",
+      "dojo": "Dojos",
+      "formationConference": "Formations / Confs / Meetup",
+      "leave": "Congés",
+      "leave_medical": "Congé maladie",
+      "leave_paid": "Congé payé",
+      "leave_unpaid": "Congé sans solde",
+      "leave_special": "Congé exceptionnel",
       "other": "Autres",
       "meal_tickets": "Tickets resto"
     },
@@ -208,38 +211,41 @@
         "title": "Ajouter une fiche de paie"
       }
     },
-    "holidays": {
+    "leaves": {
       "title": "Congés",
-      "users": "Coopérateurs - salariés",
-      "periods": "Périodes",
-      "period": "Du {from} au {to}",
-      "leave_types": "Types de congés",
-      "status": "Etat",
-      "states": {
-        "pending": "En attente",
-        "accepted": "Acceptée",
-        "refused": "Refusée"
-      },
-      "add": {
-        "title": "Demande de congé"
-      },
-      "leave_type": {
-        "title": "Type de congé",
-        "medical": "Congé maladie",
-        "paid": "Congé payé",
-        "unpaid": "Congé sans solde",
-        "special": "Congé exceptionnel"
-      },
-      "errors": {
-        "already_exist_for_this_period": "Des vacances existent déjà sur la période sélectionnée.",
-        "cant_be_moderated": "Vous ne pouvez pas modérer cette demande de congé.",
-        "not_found": "La demande de congé n'existe pas."
-      },
-      "form": {
-        "from_date": "Du",
-        "to_date": "Au",
-        "all_day": "Toute la journée",
-        "comment": "Commentaire"
+      "requests": {
+        "title": "Demandes de congé",
+        "users": "Coopérateurs - salariés",
+        "periods": "Périodes",
+        "period": "Du {from} au {to}",
+        "leave_types": "Types de congés",
+        "status": "Etat",
+        "add": {
+          "title": "Faire une demande de congé"
+        },
+        "states": {
+          "pending": "En attente",
+          "accepted": "Acceptée",
+          "refused": "Refusée"
+        },
+        "leave_type": {
+          "title": "Type de congé",
+          "medical": "Congé maladie",
+          "paid": "Congé payé",
+          "unpaid": "Congé sans solde",
+          "special": "Congé exceptionnel"
+        },
+        "errors": {
+          "already_exist_for_this_period": "Vous avez déjà une demande de congé sur cette période.",
+          "cant_be_moderated": "Vous ne pouvez pas modérer cette demande de congé.",
+          "not_found": "La demande de congé n'existe pas."
+        },
+        "form": {
+          "from_date": "Du",
+          "to_date": "Au",
+          "all_day": "Toute la journée",
+          "comment": "Commentaire"
+        }
       }
     },
     "users": {

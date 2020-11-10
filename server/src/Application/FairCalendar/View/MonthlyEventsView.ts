@@ -1,9 +1,9 @@
-import {EventView} from './EventView';
-import {IEventsOverview} from 'src/Domain/FairCalendar/IEventsOverview';
+import { ICalendarOverview} from 'src/Domain/FairCalendar/ICalendarOverview';
+import { FairCalendarView } from './FairCalendarView';
 
 export class MonthlyEventsView {
   constructor(
-    public readonly events: EventView[],
-    public readonly overview: IEventsOverview
+    public readonly events: FairCalendarView[],
+    public readonly overview: ICalendarOverview
   ) {}
 }
