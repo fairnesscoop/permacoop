@@ -15,7 +15,7 @@
   import { _ } from 'svelte-i18n';
   import { goto } from '@sapper/app';
   import { format, subDays } from 'date-fns';
-  import { fr, is } from 'date-fns/locale';
+  import { fr } from 'date-fns/locale';
   import frLocale from '@fullcalendar/core/locales/fr';
   import '@fullcalendar/core/main.css';
   import '@fullcalendar/daygrid/main.css';
