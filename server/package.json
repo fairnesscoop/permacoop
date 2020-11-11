@@ -12,9 +12,9 @@
     "start:dev": "nest start --watch --debug",
     "start:prod": "node dist/src/main",
     "lint": "tslint -p tsconfig.json -c tslint.json",
-    "test": "jest",
+    "test:unit": "jest",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
+    "test:coverage": "jest --coverage",
     "migration:diff": "ts-node ./node_modules/.bin/typeorm migration:generate -d migrations -n",
     "migration:migrate": "ts-node ./node_modules/.bin/typeorm migration:run",
     "migration:drop": "ts-node ./node_modules/.bin/typeorm schema:drop"

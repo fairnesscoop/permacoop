@@ -1,4 +1,5 @@
 <script>
+  /* eslint import/no-unresolved: 0 */
   import { _ } from 'svelte-i18n';
   import { slide } from 'svelte/transition';
   import Cookies from 'js-cookie';

@@ -8,12 +8,12 @@
     "build:tailwind": "NODE_ENV=production postcss static/css/tailwind.css -o static/css/index.css",
     "build": "npm run build:tailwind && sapper build --legacy",
     "export": "sapper export --legacy",
-    "start": "node __sapper__/build",
+    "start:prod": "npm run build:tailwind && node __sapper__/build",
     "test": "run-p --race dev cy:run",
     "format": "prettier -w src/**/*.{js,svelte}",
     "lint": "eslint ./*.js ./src/**/*.js ./src/components/**/*.svelte",
-    "test-unit": "jest",
-    "coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:unit": "jest"
   },
   "dependencies": {
     "@fullcalendar/core": "^4.4.2",

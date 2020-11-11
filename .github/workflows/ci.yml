@@ -1,15 +1,28 @@
 name: CI
 on: [push]
 jobs:
-  build:
+  api:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Tests
+      - uses: actions/checkout@v2
+      - name: Lint and Test
         run: |
-          cd server && npm install
-          cd .. && make ci
+          cd server && npm i -E
+          cd .. && make ci-api
       - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          name: Coverage
+          name: Get Code Coverage
+  client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint and Test
+        run: |
+          cp client/config.js.dist client/config.js
+          cd client && npm i -E
+          cd .. && make ci-client
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: Get Code Coverage
