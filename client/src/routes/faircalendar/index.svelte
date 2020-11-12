@@ -26,6 +26,7 @@
   import Breadcrumb from '../../components/Breadcrumb.svelte';
   import H4Title from '../../components/H4Title.svelte';
   import ServerErrors from '../../components/ServerErrors.svelte';
+  import { settings } from '../../store';
 
   export let filters;
   export let user;
@@ -33,6 +34,7 @@
   let isLoggedUser = false;
   let errors = [];
   let data = {};
+
   $: title = $_('faircalendar.title', {
     values: {
       month: format(new Date(filters.date), 'MMMM yyyy', { locale: fr }),
@@ -48,6 +50,7 @@
 
     const dom = document.getElementById('calendar');
     dom.innerHTML = '';
+
     const calendar = new Calendar(dom, {
       locale: frLocale,
       plugins: [dayGridPlugin, interactionPlugin],
@@ -83,7 +86,10 @@
           data.id = id;
           data.url = `faircalendar/${id}/edit`;
         }
-        data.className = `event-${type}`;
+        data.className =
+          $settings.theme === 'theme-dark'
+            ? `event-${type}--dark`
+            : `event-${type}`;
         data.tip = summary;
       },
       businessHours: {
