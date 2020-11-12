@@ -40,7 +40,6 @@ import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
     {provide: 'IEventRepository', useClass: EventRepository},
     {provide: 'ITaskRepository', useClass: TaskRepository},
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
-    Date,
     IsMaximumTimeSpentReached,
     AddEventCommandHandler,
     GetMonthlyFairCalendarQueryHandler,

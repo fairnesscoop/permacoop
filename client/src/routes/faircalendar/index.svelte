@@ -135,6 +135,6 @@
   <Overview overview="{data.overview}" />
 {/if}
 
-<div class="px-3  mb-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
+<div class="px-3 mb-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <div id="calendar"></div>
 </div>

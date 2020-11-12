@@ -1,4 +1,4 @@
-import {DateUtilsAdapter} from './DateUtilsAdapter';
+import { DateUtilsAdapter } from './DateUtilsAdapter';
 
 describe('DateUtilsAdapter', () => {
   it('testFormat', () => {
@@ -30,12 +30,10 @@ describe('DateUtilsAdapter', () => {
 
   it('testGetCurrentDate', () => {
     const date = new Date('2020-05-09T11:49:58.706Z');
-    const dateUtils = new DateUtilsAdapter(date);
+    const dateUtils = new DateUtilsAdapter();
 
-    expect(dateUtils.getCurrentDate()).toBe(date);
-    expect(dateUtils.getCurrentDateToISOString()).toBe(
-      '2020-05-09T11:49:58.706Z'
-    );
+    expect(dateUtils.getCurrentDate()).toBeInstanceOf(Date)
+    expect(dateUtils.getCurrentDateToISOString()).toBeDefined();
   });
 
   it('testGetWorkedDaysDuringAPeriod', () => {

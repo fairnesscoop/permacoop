@@ -1,4 +1,5 @@
 const tailwindcss = require('tailwindcss');
+const cssnano = require('cssnano');
 const purgecss = require('@fullhuman/postcss-purgecss')({
   content: ['./src/**/*.svelte', './src/template.html'],
   safelist : {
@@ -11,6 +12,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
 module.exports = {
   plugins: [
     tailwindcss('./tailwind.config.js'),
-    purgecss
+    purgecss,
+    cssnano
   ]
 };

@@ -4,6 +4,7 @@ const plugin = require('tailwindcss/plugin');
 const Color = require('color');
 
 module.exports = {
+  purge: false,
   theme: {
     themeVariants: ['dark'],
     customForms: (theme) => ({

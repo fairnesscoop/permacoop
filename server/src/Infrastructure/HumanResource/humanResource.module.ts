@@ -49,6 +49,8 @@ import { DoesEventsExistForPeriod } from 'src/Domain/FairCalendar/Specification/
 import { LeaveRequestToLeavesConverter } from 'src/Domain/HumanResource/Leave/Converter/LeaveRequestToLeavesConverter';
 import { LeaveRepository } from './Leave/Repository/LeaveRepository';
 import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
+import { GetUsersPresenceAction } from './User/Action/GetUsersPresenceAction';
+import { GetUsersPresenceQueryHandler } from 'src/Application/HumanResource/User/Query/GetUsersPresenceQueryHandler';
 
 @Module({
   imports: [
@@ -70,6 +72,7 @@ import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
     GetMeAction,
     UpdateMeAction,
     GetUsersAction,
+    GetUsersPresenceAction,
     CreatePaySlipAction,
     GetPaySlipsAction,
     DownloadPaySlipAction,
@@ -91,7 +94,6 @@ import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
       provide: 'IUserAdministrativeRepository',
       useClass: UserAdministrativeRepository
     },
-    Date,
     CreatePaySlipCommandHandler,
     IsPaySlipAlreadyExist,
     LoginQueryHandler,
@@ -110,7 +112,8 @@ import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
     AcceptedLeaveRequestEventListener,
     LeaveRequestToLeavesConverter,
     GetLeaveRequestsQueryHandler,
-    DoesEventsExistForPeriod
+    DoesEventsExistForPeriod,
+    GetUsersPresenceQueryHandler
   ]
 })
 export class HumanResourceModule {}

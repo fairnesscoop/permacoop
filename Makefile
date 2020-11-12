@@ -24,9 +24,9 @@ ps: ## List docker containers
 	${compose} ps
 start: ## Start the application
 	make start-container
-	make watch-tailwind
 start-container: ## Start docker containers
 	${compose} up -d
+	${exec} client npm run build:tailwind
 watch-tailwind:
 	${exec} client npm run watch:tailwind
 build-tailwind: ## Build Tailwind in production mode

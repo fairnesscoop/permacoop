@@ -64,7 +64,6 @@ import {UserRepository} from '../HumanResource/User/Repository/UserRepository';
     {provide: 'IProjectRepository', useClass: ProjectRepository},
     {provide: 'ITaskRepository', useClass: TaskRepository},
     {provide: 'ICustomerRepository', useClass: CustomerRepository},
-    Date,
     CreateQuoteCommandHandler,
     CreateQuoteItemsCommandHandler,
     CreateDailyRateCommandHandler,
