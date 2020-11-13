@@ -9,10 +9,17 @@ jobs:
         run: |
           cd server && npm i -E
           cd .. && make ci-api
-      - uses: codecov/codecov-action@v1
+      - name: Cache CodeCov Report
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-codecov-report-api
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          name: Get Code Coverage
+          path: ./server/coverage
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./server/coverage/coverage-final.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
   client:
     runs-on: ubuntu-latest
     steps:
@@ -22,7 +29,25 @@ jobs:
           cp client/config.js.dist client/config.js
           cd client && npm i -E
           cd .. && make ci-client
-      - uses: codecov/codecov-action@v1
+      - name: Cache CodeCov Report
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-codecov-report-client
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          name: Get Code Coverage
+          path: ./client/coverage
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./server/coverage/coverage-final.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+  genererate-coverage:
+    needs:
+      - client
+      - api
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: |
+          npm i -D codecov
+          npx codecov -t ${{ secrets.CODECOV_TOKEN }}
