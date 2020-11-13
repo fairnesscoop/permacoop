@@ -1,28 +1,21 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import {Task} from '../Task/Task.entity';
-import {Project} from '../Project/Project.entity';
-import {User} from '../HumanResource/User/User.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Task } from '../Task/Task.entity';
+import { Project } from '../Project/Project.entity';
+import { User } from '../HumanResource/User/User.entity';
+import { ICalendar } from './ICalendar';
 
 export enum EventType {
   MISSION = 'mission',
   SUPPORT = 'support',
   DOJO = 'dojo',
   FORMATION_CONFERENCE = 'formationConference',
-  HOLIDAY = 'holiday',
-  MEDICAL_LEAVE = 'medicalLeave',
   OTHER = 'other'
 }
 
 @Entity()
-export class Event {
-  // Times spent are stored in base 100
+export class Event implements ICalendar {
+  // Times spent are stored in minutes
   public static readonly MAXIMUM_TIMESPENT_PER_DAY: number = 100;
-  public static readonly WORKED_TYPES: string[] = [
-    EventType.MISSION,
-    EventType.SUPPORT,
-    EventType.DOJO,
-    EventType.FORMATION_CONFERENCE
-  ];
 
   @PrimaryGeneratedColumn('uuid')
   private id: string;

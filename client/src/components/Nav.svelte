@@ -155,7 +155,7 @@
               <li class="{subLinkClass}">
                 <a
                   class="w-full"
-                  href="human_resources/holidays">{$_('human_resources.holidays.title')}</a>
+                  href="human_resources/leaves">{$_('human_resources.leaves.title')}</a>
               </li>
             {/if}
             <li class="{subLinkClass}">

@@ -19,7 +19,7 @@ export class CreateProjectCommandHandler {
   ) {}
 
   public async execute(command: CreateProjectCommand): Promise<string> {
-    const {name, customerId} = command;
+    const {name, dayDuration, customerId} = command;
 
     const customer = await this.customerRepository.findOneById(customerId);
     if (!customer) {
@@ -31,7 +31,7 @@ export class CreateProjectCommandHandler {
     }
 
     const project = await this.projectRepository.save(
-      new Project(name, customer)
+      new Project(name, dayDuration, customer)
     );
 
     return project.getId();

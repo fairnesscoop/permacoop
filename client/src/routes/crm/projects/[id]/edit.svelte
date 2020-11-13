@@ -57,5 +57,6 @@
     loading="{loading}"
     customerId="{project.customer.id}"
     name="{project.name}"
+    dayDuration="{project.dayDuration}"
     on:save="{onSave}" />
 {/if}

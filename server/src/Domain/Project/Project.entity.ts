@@ -1,5 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
-import {Customer} from '../Customer/Customer.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Customer } from '../Customer/Customer.entity';
 
 @Entity()
 export class Project {
@@ -9,14 +9,18 @@ export class Project {
   @Column({type: 'varchar', nullable: false})
   private name: string;
 
+  @Column({type: 'integer', nullable: false, default: 7})
+  private dayDuration: number;
+
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   private createdAt: Date;
 
   @ManyToOne(type => Customer, {nullable: false})
   private customer: Customer;
 
-  constructor(name: string, customer: Customer) {
+  constructor(name: string, dayDuration: number, customer: Customer) {
     this.name = name;
+    this.dayDuration = dayDuration;
     this.customer = customer;
   }
 
@@ -26,6 +30,11 @@ export class Project {
 
   public getName(): string {
     return this.name;
+  }
+
+  public getDayDuration(): number
+  {
+    return this.dayDuration;
   }
 
   public getCreatedAt(): Date {
@@ -40,8 +49,9 @@ export class Project {
     return `[${this.customer.getName()}] ${this.getName()}`;
   }
 
-  public updateCustomerAndName(customer: Customer, name: string): void {
+  public update(customer: Customer, dayDuration: number, name: string): void {
     this.customer = customer;
+    this.dayDuration = dayDuration;
     this.name = name;
   }
 }

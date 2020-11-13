@@ -26,6 +26,7 @@
   import Breadcrumb from '../../components/Breadcrumb.svelte';
   import H4Title from '../../components/H4Title.svelte';
   import ServerErrors from '../../components/ServerErrors.svelte';
+  import { settings } from '../../store';
 
   export let filters;
   export let user;
@@ -33,6 +34,7 @@
   let isLoggedUser = false;
   let errors = [];
   let data = {};
+
   $: title = $_('faircalendar.title', {
     values: {
       month: format(new Date(filters.date), 'MMMM yyyy', { locale: fr }),
@@ -48,6 +50,7 @@
 
     const dom = document.getElementById('calendar');
     dom.innerHTML = '';
+
     const calendar = new Calendar(dom, {
       locale: frLocale,
       plugins: [dayGridPlugin, interactionPlugin],
@@ -78,12 +81,15 @@
           title += $_(`faircalendar.type.${type}`);
         }
 
-        data.id = id;
         data.title = title;
-        if (isLoggedUser) {
+        if (isLoggedUser && id) {
+          data.id = id;
           data.url = `faircalendar/${id}/edit`;
         }
-        data.className = `event-${type}`;
+        data.className =
+          $settings.theme === 'theme-dark'
+            ? `event-${type}--dark`
+            : `event-${type}`;
         data.tip = summary;
       },
       businessHours: {
@@ -99,7 +105,7 @@
       isLoggedUser = userId === user.id;
       filters.date = date;
       filters.userId = userId;
-      ({ data } = await get('events', { params: { userId, date } }));
+      ({ data } = await get('faircalendar', { params: { userId, date } }));
       fullCalendar(data.events, date);
     } catch (e) {
       errors = errorNormalizer(e);
@@ -128,4 +134,7 @@
 {#if data.overview}
   <Overview overview="{data.overview}" />
 {/if}
-<div id="calendar"></div>
+
+<div class="px-3  mb-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <div id="calendar"></div>
+</div>

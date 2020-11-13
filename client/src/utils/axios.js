@@ -7,15 +7,10 @@ const client = axios.create({
 });
 
 const authorizationBearerHeader = (token) => {
-  const bearer = token ? token : Cookies.get('permacoop_token');
-  if (!bearer) {
-    return;
-  }
-
+  const bearer = token || Cookies.get('permacoop_token');
+  const headers = bearer ? { Authorization: `Bearer ${bearer}` } : {};
   return {
-    headers: {
-      Authorization: `Bearer ${bearer}`,
-    },
+    headers,
   };
 };
 

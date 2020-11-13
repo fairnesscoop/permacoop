@@ -11,7 +11,7 @@
     "start": "node __sapper__/build",
     "test": "run-p --race dev cy:run",
     "format": "prettier -w src/**/*.{js,svelte}",
-    "lint": "eslint ./*.js ./src/*.js ./src/components/**/*.svelte",
+    "lint": "eslint ./*.js ./src/**/*.js ./src/components/**/*.svelte",
     "test-unit": "jest",
     "coverage": "jest --coverage"
   },

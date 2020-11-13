@@ -1,14 +1,14 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {EventRepository} from 'src/Infrastructure/FairCalendar/Repository/EventRepository';
-import {Event} from 'src/Domain/FairCalendar/Event.entity';
-import {EventView} from 'src/Application/FairCalendar/View/EventView';
-import {GetEventByIdQueryHandler} from './GetEventByIdQueryHandler';
-import {GetEventByIdQuery} from './GetEventByIdQuery';
-import {EventNotFoundException} from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
-import {Task} from 'src/Domain/Task/Task.entity';
-import {Project} from 'src/Domain/Project/Project.entity';
-import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {TaskView} from 'src/Application/Task/View/TaskView';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { EventRepository } from 'src/Infrastructure/FairCalendar/Repository/EventRepository';
+import { Event } from 'src/Domain/FairCalendar/Event.entity';
+import { EventView } from 'src/Application/FairCalendar/View/EventView';
+import { GetEventByIdQueryHandler } from './GetEventByIdQueryHandler';
+import { GetEventByIdQuery } from './GetEventByIdQuery';
+import { EventNotFoundException } from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
+import { Task } from 'src/Domain/Task/Task.entity';
+import { Project } from 'src/Domain/Project/Project.entity';
+import { ProjectView } from 'src/Application/Project/View/ProjectView';
+import { TaskView } from 'src/Application/Task/View/TaskView';
 
 describe('GetEventByIdQueryHandler', () => {
   const query = new GetEventByIdQuery('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
