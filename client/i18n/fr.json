@@ -215,6 +215,7 @@
       "title": "Congés",
       "requests": {
         "title": "Demandes de congé",
+        "view": "Détail d'une demande",
         "users": "Coopérateurs - salariés",
         "periods": "Périodes",
         "period": "Du {from} au {to}",
@@ -245,6 +246,10 @@
           "to_date": "Au",
           "all_day": "Toute la journée",
           "comment": "Commentaire"
+        },
+        "actions": {
+          "accept": "Accepter",
+          "refuse": "Refuser"
         }
       }
     },

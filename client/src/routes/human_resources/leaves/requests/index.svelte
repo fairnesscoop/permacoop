@@ -9,15 +9,15 @@
 <script>
   import { onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
+  import { get } from '../../../../utils/axios';
+  import { historyPushState } from '../../../../utils/url';
   import { errorNormalizer } from '../../../../normalizer/errors';
   import H4Title from '../../../../components/H4Title.svelte';
   import AddLink from '../../../../components/links/AddLink.svelte';
   import Breadcrumb from '../../../../components/Breadcrumb.svelte';
-  import Table from './_Table.svelte';
-  import { get } from '../../../../utils/axios';
   import ServerErrors from '../../../../components/ServerErrors.svelte';
-  import { historyPushState } from '../../../../utils/url';
   import Pagination from '../../../../components/Pagination.svelte';
+  import Table from './_Table.svelte';
 
   export let page;
 
@@ -30,16 +30,16 @@
   };
 
   onMount(async () => {
-    fetcLeaveRequests();
+    fetchLeaveRequests();
   });
 
   const changePage = async (e) => {
     page = e.detail;
     historyPushState('human_resources/leaves/requests', { page });
-    fetcLeaveRequests();
+    fetchLeaveRequests();
   };
 
-  const fetcLeaveRequests = async () => {
+  const fetchLeaveRequests = async () => {
     try {
       response = (await get('leave-requests', { params: { page } })).data;
     } catch (e) {
@@ -54,8 +54,8 @@
 
 <Breadcrumb
   items="{[
-    { title: $_('human_resources.breadcrumb') }, 
-    { title: $_('human_resources.leaves.title'), path: '/human_resources/leaves' }, 
+    { title: $_('human_resources.breadcrumb') },
+    { title: $_('human_resources.leaves.title'), path: '/human_resources/leaves' },
     { title }
   ]}" />
 <ServerErrors errors="{errors}" />

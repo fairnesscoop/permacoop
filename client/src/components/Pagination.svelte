@@ -2,12 +2,14 @@
   import { _ } from 'svelte-i18n';
   import { createEventDispatcher } from 'svelte';
 
+  const itemsPerPage = 20;
+
   export let currentPage;
   export let pageCount;
   export let totalItems;
 
-  $: start = pageCount > 1 ? pageCount * 20 : 1;
-  $: from = totalItems > 20 ? start + 20 : totalItems;
+  $: start = (currentPage - 1) * itemsPerPage + 1;
+  $: from = Math.min(totalItems, start + itemsPerPage - 1);
   const dispatch = createEventDispatcher();
 
   const range = (size, startAt = 0) => {

@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {
   format as fnsFormat,
   isWeekend as fnsIsWeekend,
@@ -6,7 +6,8 @@ import {
   eachDayOfInterval,
   addDays
 } from 'date-fns';
-import {IDateUtils} from 'src/Application/IDateUtils';
+import { IDateUtils } from 'src/Application/IDateUtils';
+import { ILeavePeriod } from 'src/Domain/HumanResource/Leave/ILeavePeriod';
 
 @Injectable()
 export class DateUtilsAdapter implements IDateUtils {
@@ -40,7 +41,7 @@ export class DateUtilsAdapter implements IDateUtils {
       workedFreeDays.push(...this.getWorkedFreeDays(year));
     }
 
-    for (const day of eachDayOfInterval({start, end})) {
+    for (const day of eachDayOfInterval({ start, end })) {
       if (
         this.isWeekend(day) ||
         workedFreeDays.filter(d => d.toISOString() === day.toISOString())
@@ -94,5 +95,22 @@ export class DateUtilsAdapter implements IDateUtils {
     const p = (n0 % 31) + 1;
 
     return new Date(year, n, p);
+  }
+
+  public getLeaveDuration(leave: ILeavePeriod): number {
+    let duration = this.getWorkedDaysDuringAPeriod(
+      new Date(leave.getStartDate()),
+      new Date(leave.getEndDate())
+    ).length;
+
+    if (false === leave.isStartsAllDay()) {
+      duration -= 0.5;
+    }
+
+    if (false === leave.isEndsAllDay()) {
+      duration -= 0.5;
+    }
+
+    return duration;
   }
 }

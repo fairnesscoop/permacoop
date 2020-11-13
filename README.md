@@ -41,8 +41,8 @@ make start
 
 The server and client will be started:
 
-- API documentation available on http://localhost/api
-- Client avaible on http://localhost/
+- API documentation available on <http://localhost/api>
+- Client avaible on <http://localhost/>
 
 ## Security
 
@@ -83,7 +83,7 @@ make test
 - Calendar (timesheets etc.)
 - Human Resources
   - Pay libs
-  - Holidays
+  - Leaves
   - Cooperators / employee
 - Accounting
   - Quotations

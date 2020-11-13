@@ -26,18 +26,6 @@ export class GetLeaveRequestsQueryHandler {
 
     for (const leave of leaves) {
       const user = leave.getUser();
-      let duration = this.dateUtils.getWorkedDaysDuringAPeriod(
-        new Date(leave.getStartDate()),
-        new Date(leave.getEndDate())
-      ).length;
-
-      if (false === leave.isStartsAllDay()) {
-        duration -= 0.5;
-      }
-
-      if (false === leave.isEndsAllDay()) {
-        duration -= 0.5;
-      }
 
       leaveRequestViews.push(
         new LeaveRequestView(
@@ -46,7 +34,8 @@ export class GetLeaveRequestsQueryHandler {
           leave.getStatus(),
           leave.getStartDate(),
           leave.getEndDate(),
-          duration,
+          this.dateUtils.getLeaveDuration(leave),
+          leave.getComment(),
           new UserSummaryView(
             user.getId(),
             user.getFirstName(),

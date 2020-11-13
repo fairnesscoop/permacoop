@@ -37,6 +37,7 @@ describe('GetLeaveRequestsQueryHandler', () => {
           '2020-05-05',
           '2020-05-15',
           6.5,
+          null,
           new UserSummaryView(
             'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
             'Mathieu',
@@ -50,6 +51,7 @@ describe('GetLeaveRequestsQueryHandler', () => {
           '2020-05-01',
           '2020-05-15',
           8,
+          'Comment on vacations',
           new UserSummaryView(
             'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
             'Mathieu',
@@ -73,6 +75,7 @@ describe('GetLeaveRequestsQueryHandler', () => {
     when(leave1.isStartsAllDay()).thenReturn(false);
     when(leave1.getEndDate()).thenReturn('2020-05-15');
     when(leave1.isEndsAllDay()).thenReturn(true);
+    when(leave1.getComment()).thenReturn(null);
     when(leave1.getUser()).thenReturn(instance(user));
     when(user.getLastName()).thenReturn('MARCHOIS');
 
@@ -84,6 +87,7 @@ describe('GetLeaveRequestsQueryHandler', () => {
     when(leave2.isStartsAllDay()).thenReturn(false);
     when(leave2.getEndDate()).thenReturn('2020-05-15');
     when(leave2.isEndsAllDay()).thenReturn(false);
+    when(leave2.getComment()).thenReturn('Comment on vacations');
     when(leave2.getUser()).thenReturn(instance(user));
 
     when(leaveRequestRepository.findLeaveRequests(1)).thenResolve([
@@ -92,53 +96,19 @@ describe('GetLeaveRequestsQueryHandler', () => {
     ]);
 
     when(
-      dateUtils.getWorkedDaysDuringAPeriod(
-        deepEqual(new Date('2020-05-05T00:00:00.000Z')),
-        deepEqual(new Date('2020-05-15T00:00:00.000Z'))
-      )
-    ).thenReturn([
-      new Date('2020-05-05T00:00:00.000Z'),
-      new Date('2020-05-06T00:00:00.000Z'),
-      new Date('2020-05-07T00:00:00.000Z'),
-      new Date('2020-05-11T00:00:00.000Z'),
-      new Date('2020-05-12T00:00:00.000Z'),
-      new Date('2020-05-13T00:00:00.000Z'),
-      new Date('2020-05-14T00:00:00.000Z')
-    ]);
+      dateUtils.getLeaveDuration(instance(leave1))
+    ).thenReturn(6.5);
 
     when(
-      dateUtils.getWorkedDaysDuringAPeriod(
-        deepEqual(new Date('2020-05-01T00:00:00.000Z')),
-        deepEqual(new Date('2020-05-15T00:00:00.000Z'))
-      )
-    ).thenReturn([
-      new Date('2020-05-01T00:00:00.000Z'),
-      new Date('2020-05-04T00:00:00.000Z'),
-      new Date('2020-05-05T00:00:00.000Z'),
-      new Date('2020-05-06T00:00:00.000Z'),
-      new Date('2020-05-07T00:00:00.000Z'),
-      new Date('2020-05-11T00:00:00.000Z'),
-      new Date('2020-05-12T00:00:00.000Z'),
-      new Date('2020-05-13T00:00:00.000Z'),
-      new Date('2020-05-14T00:00:00.000Z')
-    ]);
+      dateUtils.getLeaveDuration(instance(leave2))
+    ).thenReturn(8);
 
     expect(await queryHandler.execute(new GetLeaveRequestsQuery(1))).toMatchObject(
       expectedResult
     );
 
-    verify(
-      dateUtils.getWorkedDaysDuringAPeriod(
-        deepEqual(new Date('2020-05-05T00:00:00.000Z')),
-        deepEqual(new Date('2020-05-15T00:00:00.000Z'))
-      )
-    ).once();
-    verify(
-      dateUtils.getWorkedDaysDuringAPeriod(
-        deepEqual(new Date('2020-05-01T00:00:00.000Z')),
-        deepEqual(new Date('2020-05-15T00:00:00.000Z'))
-      )
-    ).once();
+    verify(dateUtils.getLeaveDuration(instance(leave1))).once();
+    verify(dateUtils.getLeaveDuration(instance(leave2))).once();
     verify(leaveRequestRepository.findLeaveRequests(1)).once();
   });
 });

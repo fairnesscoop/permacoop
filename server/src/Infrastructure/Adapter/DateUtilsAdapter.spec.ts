@@ -1,4 +1,6 @@
-import {DateUtilsAdapter} from './DateUtilsAdapter';
+import { instance, mock, when } from 'ts-mockito';
+import { DateUtilsAdapter } from './DateUtilsAdapter';
+import { ILeavePeriod } from 'src/Domain/HumanResource/Leave/ILeavePeriod';
 
 describe('DateUtilsAdapter', () => {
   it('testFormat', () => {
@@ -99,6 +101,19 @@ describe('DateUtilsAdapter', () => {
     );
     expect(dateUtils.getEasterDate(2023)).toMatchObject(
       new Date(`2023-04-09T00:00:00.000Z`)
+    );
+  });
+
+  it('testGetLeaveDuration', () => {
+    const dateUtils = new DateUtilsAdapter();
+
+    const leave = mock<ILeavePeriod>();
+    when(leave.getStartDate()).thenReturn('2020-05-05');
+    when(leave.isStartsAllDay()).thenReturn(false);
+    when(leave.getEndDate()).thenReturn('2020-05-15');
+    when(leave.isEndsAllDay()).thenReturn(false);
+    expect(dateUtils.getLeaveDuration(instance(leave))).toBe(
+      7
     );
   });
 });

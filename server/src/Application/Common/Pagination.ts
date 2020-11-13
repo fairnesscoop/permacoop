@@ -1,4 +1,4 @@
-export const MAX_ITEMS_PER_PAGE = 30;
+export const MAX_ITEMS_PER_PAGE = 20;
 
 export class Pagination<PaginationObject> {
   public readonly pageCount: number;
