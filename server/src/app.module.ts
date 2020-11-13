@@ -8,6 +8,7 @@ import {AccountingModule} from './Infrastructure/Accounting/accounting.module';
 import {FairCalendarModule} from './Infrastructure/FairCalendar/faircalendar.module';
 import {FileModule} from './Infrastructure/File/file.module';
 import {HumanResourceModule} from './Infrastructure/HumanResource/humanResource.module';
+import { SettingsModule } from './Infrastructure/Settings/settings.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import {HumanResourceModule} from './Infrastructure/HumanResource/humanResource.
     FileModule,
     HumanResourceModule,
     ProjectModule,
-    TaskModule
+    TaskModule,
+    SettingsModule
   ]
 })
 export class AppModule {}
