@@ -1,6 +1,4 @@
-import { instance, mock, when } from 'ts-mockito';
 import { DateUtilsAdapter } from './DateUtilsAdapter';
-import { ILeavePeriod } from 'src/Domain/HumanResource/Leave/ILeavePeriod';
 
 describe('DateUtilsAdapter', () => {
   it('testFormat', () => {
