@@ -1,8 +1,8 @@
 @tailwind base;
 @tailwind components;
 
-/* 
-  Write here your custom css 
+/*
+  Write here your custom css
   See here : https://tailwindcss.com/docs/functions-and-directives#apply
 */
 
@@ -40,11 +40,11 @@
   @apply px-2 py-1 font-semibold  border-orange-600 text-orange-100 bg-orange-600 !important;
 }
 
-.event-holiday {
-  @apply px-2 py-1 font-semibold  border-yellow-100  text-yellow-700 bg-yellow-100  !important;
+.event-leave {
+  @apply px-2 py-1 font-semibold  border-yellow-100  text-yellow-700 bg-yellow-100 !important;
 }
 
-.event-holiday--dark {
+.event-leave--dark {
   @apply px-2 py-1 font-semibold border-yellow-600 text-yellow-100 bg-yellow-600 !important;
 }
 
@@ -66,7 +66,7 @@
 
 @tailwind utilities;
 
-/* 
+/*
   @layer base overrides
   See here : https://tailwindcss.com/docs/functions-and-directives#layer
 */

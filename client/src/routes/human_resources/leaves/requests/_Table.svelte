@@ -2,7 +2,7 @@
   import { format } from 'date-fns';
   import { _ } from 'svelte-i18n';
   import { fr } from 'date-fns/locale';
-  //import SeeLink from '../../../../components/links/SeeLink.svelte';
+  import SeeLink from '../../../../components/links/SeeLink.svelte';
   import RedBadge from '../../../../components/badges/RedBadge.svelte';
   import OrangeBadge from '../../../../components/badges/OrangeBadge.svelte';
   import GreenBadge from '../../../../components/badges/GreenBadge.svelte';
@@ -57,7 +57,7 @@
         </td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
-            <!--<SeeLink href={`/human_resources/leaves/${id}`} />-->
+            <SeeLink href={`/human_resources/leaves/requests/${id}`} />
           </div>
         </td>
       </tr>

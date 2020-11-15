@@ -3,7 +3,7 @@
   import H4Title from '../../../components/H4Title.svelte';
   import Breadcrumb from '../../../components/Breadcrumb.svelte';
   import AddLink from '../../../components/links/AddLink.svelte';
-  
+
   let title = $_('human_resources.leaves.title');
 </script>
 
@@ -19,3 +19,4 @@
     href="{'/human_resources/leaves/requests/add'}"
     value="{$_('human_resources.leaves.requests.add.title')}" />
 </div>
+<a href="{'/human_resources/leaves/requests'}">{$_('human_resources.leaves.requests.title')}</a>

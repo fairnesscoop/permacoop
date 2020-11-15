@@ -18,9 +18,26 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
   public findOneById(id: string): Promise<LeaveRequest | undefined> {
     return this.repository
       .createQueryBuilder('leaveRequest')
-      .select(['leaveRequest.id', 'leaveRequest.status', 'user.id'])
+      .select([
+        'leaveRequest.id',
+        'leaveRequest.type',
+        'leaveRequest.status',
+        'leaveRequest.startDate',
+        'leaveRequest.startsAllDay',
+        'leaveRequest.endDate',
+        'leaveRequest.endsAllDay',
+        'leaveRequest.comment',
+        'leaveRequest.moderationComment',
+        'user.id',
+        'user.firstName',
+        'user.lastName',
+        'moderator.id',
+        'moderator.firstName',
+        'moderator.lastName',
+      ])
       .where('leaveRequest.id = :id', {id})
       .innerJoin('leaveRequest.user', 'user')
+      .leftJoin('leaveRequest.moderator', 'moderator')
       .getOne();
   }
 
@@ -63,7 +80,7 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
         'user.lastName'
       ])
       .innerJoin('leaveRequest.user', 'user')
-      .orderBy('leaveRequest.startDate', 'ASC')
+      .orderBy('leaveRequest.startDate', 'DESC')
       .limit(MAX_ITEMS_PER_PAGE)
       .offset((page - 1) * MAX_ITEMS_PER_PAGE)
       .getManyAndCount();

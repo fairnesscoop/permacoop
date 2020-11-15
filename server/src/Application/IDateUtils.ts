@@ -7,4 +7,5 @@ export interface IDateUtils {
   getWorkedDaysDuringAPeriod(start: Date, end: Date): Date[];
   getWorkedFreeDays(year: number): Date[];
   getEasterDate(year: number): Date;
+  getLeaveDuration(startDate: string, isStartsAllDay: boolean, endDate: string, isEndsAllDay: boolean): number;
 }

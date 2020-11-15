@@ -1,4 +1,4 @@
-import {DateUtilsAdapter} from './DateUtilsAdapter';
+import { DateUtilsAdapter } from './DateUtilsAdapter';
 
 describe('DateUtilsAdapter', () => {
   it('testFormat', () => {
@@ -99,6 +99,22 @@ describe('DateUtilsAdapter', () => {
     );
     expect(dateUtils.getEasterDate(2023)).toMatchObject(
       new Date(`2023-04-09T00:00:00.000Z`)
+    );
+  });
+
+  it('testGetLeaveDuration', () => {
+    const dateUtils = new DateUtilsAdapter();
+
+    expect(dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', false)).toBe(
+      7
+    );
+  });
+
+  it('testGetMinimumLeaveDuration', () => {
+    const dateUtils = new DateUtilsAdapter();
+
+    expect(dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-05', false)).toBe(
+      0.5
     );
   });
 });

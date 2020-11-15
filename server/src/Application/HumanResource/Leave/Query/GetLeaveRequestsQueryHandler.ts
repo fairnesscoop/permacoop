@@ -20,24 +20,12 @@ export class GetLeaveRequestsQueryHandler {
     query: GetLeaveRequestsQuery
   ): Promise<Pagination<LeaveRequestView>> {
     const leaveRequestViews: LeaveRequestView[] = [];
-    const [ leaves, total ] = await this.leaveRequestRepository.findLeaveRequests(
+    const [leaves, total] = await this.leaveRequestRepository.findLeaveRequests(
       query.page
     );
 
     for (const leave of leaves) {
       const user = leave.getUser();
-      let duration = this.dateUtils.getWorkedDaysDuringAPeriod(
-        new Date(leave.getStartDate()),
-        new Date(leave.getEndDate())
-      ).length;
-
-      if (false === leave.isStartsAllDay()) {
-        duration -= 0.5;
-      }
-
-      if (false === leave.isEndsAllDay()) {
-        duration -= 0.5;
-      }
 
       leaveRequestViews.push(
         new LeaveRequestView(
@@ -46,7 +34,13 @@ export class GetLeaveRequestsQueryHandler {
           leave.getStatus(),
           leave.getStartDate(),
           leave.getEndDate(),
-          duration,
+          this.dateUtils.getLeaveDuration(
+            leave.getStartDate(),
+            leave.isStartsAllDay(),
+            leave.getEndDate(),
+            leave.isEndsAllDay()
+          ),
+          null,
           new UserSummaryView(
             user.getId(),
             user.getFirstName(),

@@ -1,4 +1,4 @@
-import { mock, instance, when, verify, deepEqual } from 'ts-mockito';
+import { mock, instance, when, verify } from 'ts-mockito';
 import { GetLeaveRequestsQueryHandler } from './GetLeaveRequestsQueryHandler';
 import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { LeaveRequestView } from '../View/LeaveRequestView';
@@ -37,6 +37,7 @@ describe('GetLeaveRequestsQueryHandler', () => {
           '2020-05-05',
           '2020-05-15',
           6.5,
+          null,
           new UserSummaryView(
             'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
             'Mathieu',
@@ -50,6 +51,7 @@ describe('GetLeaveRequestsQueryHandler', () => {
           '2020-05-01',
           '2020-05-15',
           8,
+          null,
           new UserSummaryView(
             'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
             'Mathieu',
@@ -92,53 +94,19 @@ describe('GetLeaveRequestsQueryHandler', () => {
     ]);
 
     when(
-      dateUtils.getWorkedDaysDuringAPeriod(
-        deepEqual(new Date('2020-05-05T00:00:00.000Z')),
-        deepEqual(new Date('2020-05-15T00:00:00.000Z'))
-      )
-    ).thenReturn([
-      new Date('2020-05-05T00:00:00.000Z'),
-      new Date('2020-05-06T00:00:00.000Z'),
-      new Date('2020-05-07T00:00:00.000Z'),
-      new Date('2020-05-11T00:00:00.000Z'),
-      new Date('2020-05-12T00:00:00.000Z'),
-      new Date('2020-05-13T00:00:00.000Z'),
-      new Date('2020-05-14T00:00:00.000Z')
-    ]);
+      dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', true)
+    ).thenReturn(6.5);
 
     when(
-      dateUtils.getWorkedDaysDuringAPeriod(
-        deepEqual(new Date('2020-05-01T00:00:00.000Z')),
-        deepEqual(new Date('2020-05-15T00:00:00.000Z'))
-      )
-    ).thenReturn([
-      new Date('2020-05-01T00:00:00.000Z'),
-      new Date('2020-05-04T00:00:00.000Z'),
-      new Date('2020-05-05T00:00:00.000Z'),
-      new Date('2020-05-06T00:00:00.000Z'),
-      new Date('2020-05-07T00:00:00.000Z'),
-      new Date('2020-05-11T00:00:00.000Z'),
-      new Date('2020-05-12T00:00:00.000Z'),
-      new Date('2020-05-13T00:00:00.000Z'),
-      new Date('2020-05-14T00:00:00.000Z')
-    ]);
+      dateUtils.getLeaveDuration('2020-05-01', false, '2020-05-15', false)
+    ).thenReturn(8);
 
     expect(await queryHandler.execute(new GetLeaveRequestsQuery(1))).toMatchObject(
       expectedResult
     );
 
-    verify(
-      dateUtils.getWorkedDaysDuringAPeriod(
-        deepEqual(new Date('2020-05-05T00:00:00.000Z')),
-        deepEqual(new Date('2020-05-15T00:00:00.000Z'))
-      )
-    ).once();
-    verify(
-      dateUtils.getWorkedDaysDuringAPeriod(
-        deepEqual(new Date('2020-05-01T00:00:00.000Z')),
-        deepEqual(new Date('2020-05-15T00:00:00.000Z'))
-      )
-    ).once();
+    verify(dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', true)).once();
+    verify(dateUtils.getLeaveDuration('2020-05-01', false, '2020-05-15', false)).once();
     verify(leaveRequestRepository.findLeaveRequests(1)).once();
   });
 });
