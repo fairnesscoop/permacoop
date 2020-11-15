@@ -1,5 +1,5 @@
 <script context="module">
-  export const preload = async ({ params: { id } }) => {
+  export const preload = ({ params: { id } }) => {
     return { id };
   };
 </script>
@@ -34,24 +34,13 @@
     }
   });
 
-  const onAccept = async e => {
+  const onModerate = async (type, comment) => {
     try {
       loading = true;
-      await put(`leave-requests/${id}/accept`, { comment: e.detail.comment });
+      await put(`leave-requests/${id}/${type}`, { comment });
       goto('/human_resources/leaves/requests');
     } catch (e) {
-      errors = errorNormalizer(e);
-    } finally {
-      loading = false;
-    }
-  };
-
-  const onRefuse = async e => {
-    try {
-      loading = true;
-      await put(`leave-requests/${id}/refuse`, { comment: e.detail.comment });
-      goto('/human_resources/leaves/requests');
-    } catch (e) {
+      console.error(e);
       errors = errorNormalizer(e);
     } finally {
       loading = false;
@@ -93,7 +82,11 @@
 
     {#if 'pending' === leaveRequest.status}
       {#if $session.user.id !== leaveRequest.user.id}
-        <Form on:accept="{onAccept}" on:refuse="{onRefuse}" {loading} />
+        <Form
+          on:accept="{(event) => onModerate('accept', event.detail.comment)}"
+          on:refuse="{(event) => onModerate('refuse', event.detail.comment)}"
+          {loading}
+        />
       {:else}
         <p class="p-2 mt-2 bg-gray-50 dark:text-gray-400 text-center">
           {$_('human_resources.leaves.requests.errors.cant_be_moderated')}
