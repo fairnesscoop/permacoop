@@ -1,6 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { User } from '../User/User.entity';
-import { ILeavePeriod } from './ILeavePeriod';
 
 export enum Status {
   PENDING = 'pending',
@@ -16,7 +15,7 @@ export enum Type {
 }
 
 @Entity()
-export class LeaveRequest implements ILeavePeriod {
+export class LeaveRequest {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 

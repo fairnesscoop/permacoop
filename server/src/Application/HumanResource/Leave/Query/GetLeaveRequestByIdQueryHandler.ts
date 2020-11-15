@@ -1,12 +1,11 @@
-import { QueryHandler } from '@nestjs/cqrs';
 import { Inject } from '@nestjs/common';
-import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRequestRepository';
-import { GetLeaveRequestByIdQuery } from './GetLeaveRequestByIdQuery';
-import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRequestRepository';
-import { LeaveRequestView } from '../View/LeaveRequestView';
-import { LeaveRequestNotFoundException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestNotFoundException';
-import { UserSummaryView } from '../../User/View/UserSummaryView';
+import { QueryHandler } from '@nestjs/cqrs';
 import { IDateUtils } from 'src/Application/IDateUtils';
+import { LeaveRequestNotFoundException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestNotFoundException';
+import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRequestRepository';
+import { UserSummaryView } from '../../User/View/UserSummaryView';
+import { LeaveRequestView } from '../View/LeaveRequestView';
+import { GetLeaveRequestByIdQuery } from './GetLeaveRequestByIdQuery';
 
 @QueryHandler(GetLeaveRequestByIdQuery)
 export class GetLeaveRequestByIdQueryHandler {
@@ -17,8 +16,12 @@ export class GetLeaveRequestByIdQueryHandler {
     private readonly dateUtils: IDateUtils
   ) {}
 
-  public async execute(query: GetLeaveRequestByIdQuery): Promise<LeaveRequestView> {
-    const leaveRequest = await this.leaveRequestRepository.findOneById(query.id);
+  public async execute(
+    query: GetLeaveRequestByIdQuery
+  ): Promise<LeaveRequestView> {
+    const leaveRequest = await this.leaveRequestRepository.findOneById(
+      query.id
+    );
     if (!leaveRequest) {
       throw new LeaveRequestNotFoundException();
     }
@@ -31,7 +34,7 @@ export class GetLeaveRequestByIdQueryHandler {
         moderator.getId(),
         moderator.getFirstName(),
         moderator.getLastName()
-      )
+      );
     }
 
     return new LeaveRequestView(
@@ -40,7 +43,12 @@ export class GetLeaveRequestByIdQueryHandler {
       leaveRequest.getStatus(),
       leaveRequest.getStartDate(),
       leaveRequest.getEndDate(),
-      this.dateUtils.getLeaveDuration(leaveRequest),
+      this.dateUtils.getLeaveDuration(
+        leaveRequest.getStartDate(),
+        leaveRequest.isStartsAllDay(),
+        leaveRequest.getEndDate(),
+        leaveRequest.isEndsAllDay()
+      ),
       leaveRequest.getComment(),
       new UserSummaryView(
         user.getId(),

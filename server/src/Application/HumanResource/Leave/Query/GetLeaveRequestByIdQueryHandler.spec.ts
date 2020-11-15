@@ -74,14 +74,14 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
     when(leaveRequestRepository.findOneById('204522d3-f077-4d21-b3ee-6e0d742fca44')).thenResolve(instance(leave));
 
     when(
-      dateUtils.getLeaveDuration(instance(leave))
+      dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', true)
     ).thenReturn(7.5);
 
     expect(await queryHandler.execute(new GetLeaveRequestByIdQuery('204522d3-f077-4d21-b3ee-6e0d742fca44'))).toMatchObject(
       expectedResult
     );
 
-    verify(dateUtils.getLeaveDuration(instance(leave))).once();
+    verify(dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', true)).once();
     verify(leaveRequestRepository.findOneById('204522d3-f077-4d21-b3ee-6e0d742fca44')).once();
   });
 });

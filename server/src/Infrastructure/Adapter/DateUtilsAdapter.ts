@@ -7,7 +7,6 @@ import {
   addDays
 } from 'date-fns';
 import { IDateUtils } from 'src/Application/IDateUtils';
-import { ILeavePeriod } from 'src/Domain/HumanResource/Leave/ILeavePeriod';
 
 @Injectable()
 export class DateUtilsAdapter implements IDateUtils {
@@ -97,17 +96,17 @@ export class DateUtilsAdapter implements IDateUtils {
     return new Date(year, n, p);
   }
 
-  public getLeaveDuration(leave: ILeavePeriod): number {
+  public getLeaveDuration(startDate: string, isStartsAllDay: boolean, endDate: string, isEndsAllDay: boolean): number {
     let duration = this.getWorkedDaysDuringAPeriod(
-      new Date(leave.getStartDate()),
-      new Date(leave.getEndDate())
+      new Date(startDate),
+      new Date(endDate)
     ).length;
 
-    if (false === leave.isStartsAllDay()) {
+    if (false === isStartsAllDay) {
       duration -= 0.5;
     }
 
-    if (false === leave.isEndsAllDay()) {
+    if (false === isEndsAllDay && duration > 0.5) {
       duration -= 0.5;
     }
 

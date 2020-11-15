@@ -107,13 +107,16 @@ describe('DateUtilsAdapter', () => {
   it('testGetLeaveDuration', () => {
     const dateUtils = new DateUtilsAdapter();
 
-    const leave = mock<ILeavePeriod>();
-    when(leave.getStartDate()).thenReturn('2020-05-05');
-    when(leave.isStartsAllDay()).thenReturn(false);
-    when(leave.getEndDate()).thenReturn('2020-05-15');
-    when(leave.isEndsAllDay()).thenReturn(false);
-    expect(dateUtils.getLeaveDuration(instance(leave))).toBe(
+    expect(dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', false)).toBe(
       7
+    );
+  });
+
+  it('testGetMinimumLeaveDuration', () => {
+    const dateUtils = new DateUtilsAdapter();
+
+    expect(dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-05', false)).toBe(
+      0.5
     );
   });
 });

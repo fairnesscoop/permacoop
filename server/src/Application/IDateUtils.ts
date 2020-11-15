@@ -1,5 +1,3 @@
-import { ILeavePeriod } from 'src/Domain/HumanResource/Leave/ILeavePeriod';
-
 export interface IDateUtils {
   format(date: Date, format: string): string;
   getDaysInMonth(date: Date): number;
@@ -9,5 +7,5 @@ export interface IDateUtils {
   getWorkedDaysDuringAPeriod(start: Date, end: Date): Date[];
   getWorkedFreeDays(year: number): Date[];
   getEasterDate(year: number): Date;
-  getLeaveDuration(leave: ILeavePeriod): number;
+  getLeaveDuration(startDate: string, isStartsAllDay: boolean, endDate: string, isEndsAllDay: boolean): number;
 }
