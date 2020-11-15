@@ -8,7 +8,7 @@ export class ProjectDTO {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsIn([7, 8])
+  @IsIn([420, 480])
   public dayDuration: number;
 
   @ApiProperty()

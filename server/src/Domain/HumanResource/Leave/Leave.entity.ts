@@ -1,9 +1,8 @@
-import { ICalendar } from 'src/Domain/FairCalendar/ICalendar';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { LeaveRequest } from './LeaveRequest.entity';
 
 @Entity()
-export class Leave implements ICalendar {
+export class Leave {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 

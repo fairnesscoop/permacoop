@@ -15,6 +15,7 @@ describe('Event.entity', () => {
       instance(user),
       100,
       '2019-12-12',
+      true,
       instance(project),
       instance(task),
       'Superkaiser development'
@@ -24,6 +25,7 @@ describe('Event.entity', () => {
     expect(event.getType()).toBe(EventType.MISSION);
     expect(event.getUser()).toBe(instance(user));
     expect(event.getTime()).toBe(100);
+    expect(event.isBillable()).toBe(true);
     expect(event.getDate()).toBe('2019-12-12');
     expect(event.getProject()).toBe(instance(project));
     expect(event.getTask()).toBe(instance(task));
@@ -42,6 +44,7 @@ describe('Event.entity', () => {
       instance(user),
       100,
       '2019-12-12',
+      true,
       instance(project),
       instance(task),
       'Superkaiser development'
@@ -49,6 +52,7 @@ describe('Event.entity', () => {
     event.update(
       EventType.DOJO,
       75,
+      false,
       instance(project2),
       instance(task2),
       'Superkaiser'
@@ -58,6 +62,7 @@ describe('Event.entity', () => {
     expect(event.getType()).toBe(EventType.DOJO);
     expect(event.getUser()).toBe(instance(user));
     expect(event.getTime()).toBe(75);
+    expect(event.isBillable()).toBe(false);
     expect(event.getDate()).toBe('2019-12-12');
     expect(event.getProject()).toBe(instance(project2));
     expect(event.getTask()).toBe(instance(task2));

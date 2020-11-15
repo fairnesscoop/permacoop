@@ -39,7 +39,8 @@ describe('AddEventCommandHandler', () => {
   const command = new AddEventCommand(
     EventType.MISSION,
     instance(user),
-    100,
+    420,
+    true,
     new Date('2020-10-19'),
     new Date('2020-10-20'),
     '50e624ef-3609-4053-a437-f74844a2d2de',
@@ -70,7 +71,8 @@ describe('AddEventCommandHandler', () => {
         new AddEventCommand(
           EventType.MISSION,
           instance(user),
-          100,
+          420,
+          true,
           new Date('2020-10-19'),
           new Date('2020-10-20'),
         )
@@ -91,7 +93,8 @@ describe('AddEventCommandHandler', () => {
     const command2 = new AddEventCommand(
       EventType.MISSION,
       instance(user),
-      100,
+      420,
+      true,
       new Date('2020-10-24'),
       new Date('2020-10-25'),
       '50e624ef-3609-4053-a437-f74844a2d2de',
@@ -183,7 +186,8 @@ describe('AddEventCommandHandler', () => {
     const command3 = new AddEventCommand(
       EventType.MISSION,
       instance(user),
-      100,
+      420,
+      true,
       new Date('2020-10-19'),
       new Date('2020-10-19'),
       '50e624ef-3609-4053-a437-f74844a2d2de',
@@ -194,8 +198,9 @@ describe('AddEventCommandHandler', () => {
     const event1 = new Event(
       EventType.MISSION,
       instance(user),
-      100,
+      420,
       '2020-10-19',
+      true,
       instance(project),
       instance(task),
       'RF development'
@@ -241,8 +246,9 @@ describe('AddEventCommandHandler', () => {
     const event1 = new Event(
       EventType.MISSION,
       instance(user),
-      100,
+      420,
       '2020-10-19',
+      true,
       instance(project),
       instance(task),
       'RF development'
@@ -250,8 +256,9 @@ describe('AddEventCommandHandler', () => {
     const event2 = new Event(
       EventType.MISSION,
       instance(user),
-      100,
+      420,
       '2020-10-20',
+      true,
       instance(project),
       instance(task),
       'RF development'

@@ -8,7 +8,8 @@ describe('AddEventDTO', () => {
     dto.type = EventType.MISSION;
     dto.startDate = '2019-12-19T11:20:04.568Z';
     dto.endDate = '2019-12-20T11:20:04.568Z';
-    dto.time = '25';
+    dto.billable = 'true';
+    dto.time = 30;
     dto.projectId = '2218609f-293b-4438-b3a0-cce8961e8acc';
     dto.taskId = 'ff623892-434b-4f2d-945e-775c87bae2ac';
     dto.summary = 'Summary';
@@ -22,7 +23,8 @@ describe('AddEventDTO', () => {
     dto.type = EventType.MISSION;
     dto.startDate = '2019-12-19T11:20:04.568Z';
     dto.endDate = '2019-12-18T11:20:04.568Z';
-    dto.time = '25';
+    dto.time = 480;
+    dto.billable = 'true';
     dto.projectId = '2218609f-293b-4438-b3a0-cce8961e8acc';
     dto.taskId = 'ff623892-434b-4f2d-945e-775c87bae2ac';
     dto.summary = 'Summary';
@@ -39,12 +41,13 @@ describe('AddEventDTO', () => {
     const dto = new AddEventDTO();
     dto.startDate = '2019-12-19';
     dto.endDate = '2019-12-20';
-    dto.time = '30';
+    dto.billable = 'test';
+    dto.time = 12;
     dto.projectId = '1';
     dto.taskId = '2';
 
     const validation = await validate(dto);
-    expect(validation).toHaveLength(6);
+    expect(validation).toHaveLength(7);
     expect(validation[0].constraints).toMatchObject({
       isDateString: 'startDate must be a ISOString'
     });
@@ -56,12 +59,15 @@ describe('AddEventDTO', () => {
       isNotEmpty: 'type should not be empty'
     });
     expect(validation[3].constraints).toMatchObject({
-      isIn: 'time must be one of the following values: 25,50,75,100'
+      isIn: 'time must be one of the following values: 30,60,90,120,150,180,210,240,270,300,330,360,390,420,450,480'
     });
     expect(validation[4].constraints).toMatchObject({
-      isUuid: 'projectId must be an UUID'
+      isBooleanString: 'billable must be a boolean string'
     });
     expect(validation[5].constraints).toMatchObject({
+      isUuid: 'projectId must be an UUID'
+    });
+    expect(validation[6].constraints).toMatchObject({
       isUuid: 'taskId must be an UUID'
     });
   });
@@ -70,10 +76,9 @@ describe('AddEventDTO', () => {
     const dto = new AddEventDTO();
     dto.startDate = '';
     dto.endDate = '';
-    dto.time = '';
 
     const validation = await validate(dto);
-    expect(validation).toHaveLength(4);
+    expect(validation).toHaveLength(5);
     expect(validation[0].constraints).toMatchObject({
       isNotEmpty: 'startDate should not be empty'
     });
@@ -86,6 +91,10 @@ describe('AddEventDTO', () => {
     });
     expect(validation[3].constraints).toMatchObject({
       isNotEmpty: 'time should not be empty'
+    });
+    expect(validation[4].constraints).toMatchObject({
+      isBooleanString: 'billable must be a boolean string',
+      isNotEmpty: 'billable should not be empty'
     });
   });
 });

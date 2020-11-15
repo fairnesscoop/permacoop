@@ -9,6 +9,6 @@
 </script>
 
 <button name={name} type="submit" class="{className}" disabled="{loading || disabled}">
-  {#if loading}...{/if}
   {value}
+  {#if loading}...{/if}
 </button>

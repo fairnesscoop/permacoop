@@ -1,12 +1,25 @@
-import { Type } from '../HumanResource/Leave/LeaveRequest.entity';
+import { Inject } from '@nestjs/common';
+import { FairCalendarView } from 'src/Application/FairCalendar/View/FairCalendarView';
+import { Cooperative } from '../Settings/Cooperative.entity';
+import { CooperativeNotFoundException } from '../Settings/Repository/CooperativeNotFoundException';
+import { ICooperativeRepository } from '../Settings/Repository/ICooperativeRepository';
 import { EventType } from './Event.entity';
-import { ICalendar } from './ICalendar';
 import { ICalendarOverview } from './ICalendarOverview';
 
 export class GetFairCalendarOverview {
-  public index(items: ICalendar[]): ICalendarOverview {
+  constructor(
+    @Inject('ICooperativeRepository')
+    private readonly cooperativeRepository: ICooperativeRepository
+  ) {}
+
+  public async index(items: FairCalendarView[]): Promise<ICalendarOverview> {
+    const cooperative = await this.cooperativeRepository.find();
+    if (!cooperative) {
+      throw new CooperativeNotFoundException();
+    }
+
     const itemsByDate = [];
-    const overview: ICalendarOverview = {
+    const overviewInDays: ICalendarOverview = {
       mission: 0,
       dojo: 0,
       formationConference: 0,
@@ -16,10 +29,11 @@ export class GetFairCalendarOverview {
       mealTicket: 0
     };
 
-    for (const item of items) {
-      const dayIndex = new Date(item.getDate()).getDate() - 1;
-      const time = item.getTime() / 100;
-      const type = item.getType().startsWith('leave_') ? 'leave' : item.getType();
+    for (const {date, time, type: itemType, project} of items) {
+      const dayIndex = new Date(date).getDate() - 1;
+      const type = itemType.startsWith('leave_') ? 'leave' : itemType;
+      const dayDuration = project ? project.dayDuration : cooperative.getDayDuration();
+      const hours = time / dayDuration;
 
       if (itemsByDate[dayIndex]) {
         itemsByDate[dayIndex].push({ time, type });
@@ -27,16 +41,16 @@ export class GetFairCalendarOverview {
         itemsByDate[dayIndex] = [{ time, type }];
       }
 
-      overview[type] += time;
+      overviewInDays[type] = Math.round((overviewInDays[type] + hours) * 100) / 100;
     }
 
     return {
-      ...overview,
-      mealTicket: this.getNumberOfMealTickets(Object.values(itemsByDate))
+      ...overviewInDays,
+      mealTicket: this.calculateNumberOfMealTicketsByDate(cooperative, Object.values(itemsByDate))
     };
   }
 
-  public getNumberOfMealTickets(itemsByDate: any[]): number {
+  private calculateNumberOfMealTicketsByDate(cooperative: Cooperative, itemsByDate: any[]): number {
     let mealTicket = 0;
 
     for (const sortedEvent of itemsByDate) {
@@ -48,7 +62,7 @@ export class GetFairCalendarOverview {
         }
       }
 
-      if (totalPerDay > 0.5) {
+      if (totalPerDay > (cooperative.getDayDuration() / 2)) {
         mealTicket++;
       }
     }

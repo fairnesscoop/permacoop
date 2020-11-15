@@ -37,7 +37,6 @@
       });
       taskId = event.task ? event.task.id : null;
       projectId = event.project ? event.project.id : null;
-      time = String(event.time);
     } catch (e) {
       errors = errorNormalizer(e);
     }
@@ -90,6 +89,6 @@
 {#if event}
   <Form
     on:save="{onSave}"
-    event="{{ ...event, taskId, projectId, time }}"
+    event="{{ ...event, taskId, projectId }}"
     loading="{loading}" />
 {/if}

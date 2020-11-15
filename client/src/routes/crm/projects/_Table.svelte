@@ -1,6 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
   import EditLink from '../../../components/links/EditLink.svelte';
+  import { minutesToHours } from '../../../normalizer/time';
 
   export let items;
 </script>
@@ -19,7 +20,7 @@
     {#each items as { id, name, dayDuration, customer } (id)}
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="px-4 py-3 text-sm">{name}</td>
-        <td class="px-4 py-3 text-sm">{$_('crm.projects.day_duration', { values: { dayDuration }})}</td>
+        <td class="px-4 py-3 text-sm">{minutesToHours(dayDuration)}</td>
         <td class="px-4 py-3 text-sm">{customer.name}</td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">

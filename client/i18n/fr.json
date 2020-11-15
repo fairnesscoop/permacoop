@@ -113,7 +113,6 @@
       "title": "Projets",
       "customers": "Clients",
       "day_durations": "Durée d'une journée",
-      "day_duration": "{dayDuration}h",
       "form": {
         "project_placeholder": "-- Choisir un projet --",
         "day_duration": "Durée d'une journée",
@@ -157,11 +156,12 @@
     "breadcrumb": "FairCalendar",
     "title": "Faircalendar {month}",
     "summary": "Récapitulatif",
+    "not_billable": "* Non facturé",
     "errors": {
       "event_doesnt_belong_to_user": "Cet évènement ne vous appartient pas, vous ne pouvez ni le modifier, ni le supprimer.",
       "event_not_found": "Cet évènement n'existe pas.",
       "events_already_exist_for_this_period": "Un évènement a déjà été créé durant cette période.",
-      "event_maximum_reached": "Vous ne pouvez pas déclarer plus d'une journée.",
+      "event_maximum_reached": "Vous ne pouvez pas déclarer plus de 12h sur une journée.",
       "no_date_during_this_period": "Vous devez sélectionner une période valide.",
       "project_or_task_missing": "Vous devez saisir un projet et une mission."
     },
@@ -188,6 +188,7 @@
     "form": {
       "type": "Type de CRA",
       "time": "Temps passé",
+      "billable": "Facturable",
       "summary": "Commentaire"
     }
   },

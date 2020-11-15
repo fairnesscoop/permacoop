@@ -8,6 +8,7 @@ export class UpdateEventCommand implements ICommand {
     public readonly user: User,
     public readonly type: EventType,
     public readonly time: number,
+    public readonly billable: boolean,
     public readonly projectId?: string,
     public readonly taskId?: string,
     public readonly summary?: string

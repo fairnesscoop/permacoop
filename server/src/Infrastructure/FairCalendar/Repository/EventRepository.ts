@@ -41,6 +41,7 @@ export class EventRepository implements IEventRepository {
         'event.id',
         'event.time',
         'event.summary',
+        'event.billable',
         'event.date',
         'event.type',
         'user.id',
@@ -67,9 +68,11 @@ export class EventRepository implements IEventRepository {
         'event.time',
         'event.summary',
         'event.date',
+        'event.billable',
         'event.type',
         'project.id',
         'project.name',
+        'project.dayDuration',
         'task.id',
         'task.name'
       ])
@@ -79,21 +82,6 @@ export class EventRepository implements IEventRepository {
       .innerJoin('event.user', 'user')
       .leftJoin('event.project', 'project')
       .leftJoin('event.task', 'task')
-      .orderBy('event.date', 'ASC')
-      .getMany();
-  }
-
-  public findMonthlyOverview(date: string, userId: string): Promise<Event[]> {
-    const month = new Date(date).getMonth() + 1;
-    const year = new Date(date).getFullYear();
-
-    return this.repository
-      .createQueryBuilder('event')
-      .select(['event.time', 'event.date', 'event.type'])
-      .where('user.id = :userId', {userId})
-      .andWhere('extract(month FROM event.date) = :month', {month})
-      .andWhere('extract(year FROM event.date) = :year', {year})
-      .innerJoin('event.user', 'user')
       .orderBy('event.date', 'ASC')
       .getMany();
   }

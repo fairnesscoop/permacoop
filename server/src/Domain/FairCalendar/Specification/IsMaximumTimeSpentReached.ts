@@ -1,6 +1,6 @@
-import {Inject} from '@nestjs/common';
-import {IEventRepository} from '../Repository/IEventRepository';
-import {Event} from '../Event.entity';
+import { Inject } from '@nestjs/common';
+import { IEventRepository } from '../Repository/IEventRepository';
+import { Event } from '../Event.entity';
 
 export class IsMaximumTimeSpentReached {
   constructor(
@@ -8,12 +8,15 @@ export class IsMaximumTimeSpentReached {
     private readonly eventRepository: IEventRepository
   ) {}
 
-  public async isSatisfiedBy(event: Event): Promise<boolean> {
+  public async isSatisfiedBy(event: Event, newTime: number = 0): Promise<boolean> {
     const timeSpent = await this.eventRepository.getDayTimeSpentByUser(
       event.getUser(),
       event.getDate()
     );
 
-    return timeSpent + event.getTime() > Event.MAXIMUM_TIMESPENT_PER_DAY;
+    const time = event.getId() ?
+      timeSpent - event.getTime() + newTime : timeSpent + event.getTime()
+
+    return time > Event.MAXIMUM_TIMESPENT_PER_DAY
   }
 }

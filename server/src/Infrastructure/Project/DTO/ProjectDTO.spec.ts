@@ -6,7 +6,7 @@ describe('ProjectDTO', () => {
     const dto = new ProjectDTO();
     dto.name = 'Project';
     dto.customerId = '2218609f-293b-4438-b3a0-cce8961e8acc';
-    dto.dayDuration = 8;
+    dto.dayDuration = 420;
 
     const validation = await validate(dto);
     expect(validation).toHaveLength(0);
@@ -23,7 +23,7 @@ describe('ProjectDTO', () => {
       isNotEmpty: 'name should not be empty'
     });
     expect(validation[1].constraints).toMatchObject({
-      isIn: 'dayDuration must be one of the following values: 7,8',
+      isIn: 'dayDuration must be one of the following values: 420,480',
       isNotEmpty: 'dayDuration should not be empty'
     });
     expect(validation[2].constraints).toMatchObject({
