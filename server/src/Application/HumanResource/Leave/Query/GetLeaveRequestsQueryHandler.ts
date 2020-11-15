@@ -40,7 +40,7 @@ export class GetLeaveRequestsQueryHandler {
             leave.getEndDate(),
             leave.isEndsAllDay()
           ),
-          leave.getComment(),
+          null,
           new UserSummaryView(
             user.getId(),
             user.getFirstName(),

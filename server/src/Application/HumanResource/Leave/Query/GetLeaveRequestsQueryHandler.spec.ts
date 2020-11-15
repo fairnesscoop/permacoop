@@ -1,4 +1,4 @@
-import { mock, instance, when, verify, deepEqual } from 'ts-mockito';
+import { mock, instance, when, verify } from 'ts-mockito';
 import { GetLeaveRequestsQueryHandler } from './GetLeaveRequestsQueryHandler';
 import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { LeaveRequestView } from '../View/LeaveRequestView';
@@ -51,7 +51,7 @@ describe('GetLeaveRequestsQueryHandler', () => {
           '2020-05-01',
           '2020-05-15',
           8,
-          'Comment on vacations',
+          null,
           new UserSummaryView(
             'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
             'Mathieu',
@@ -75,7 +75,6 @@ describe('GetLeaveRequestsQueryHandler', () => {
     when(leave1.isStartsAllDay()).thenReturn(false);
     when(leave1.getEndDate()).thenReturn('2020-05-15');
     when(leave1.isEndsAllDay()).thenReturn(true);
-    when(leave1.getComment()).thenReturn(null);
     when(leave1.getUser()).thenReturn(instance(user));
     when(user.getLastName()).thenReturn('MARCHOIS');
 
@@ -87,7 +86,6 @@ describe('GetLeaveRequestsQueryHandler', () => {
     when(leave2.isStartsAllDay()).thenReturn(false);
     when(leave2.getEndDate()).thenReturn('2020-05-15');
     when(leave2.isEndsAllDay()).thenReturn(false);
-    when(leave2.getComment()).thenReturn('Comment on vacations');
     when(leave2.getUser()).thenReturn(instance(user));
 
     when(leaveRequestRepository.findLeaveRequests(1)).thenResolve([
