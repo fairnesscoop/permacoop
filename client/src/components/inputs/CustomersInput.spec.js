@@ -1,5 +1,5 @@
+import { fireEvent, render, screen } from '@testing-library/svelte';
 import CustomersInput from './CustomersInput.svelte';
-import { screen, render, fireEvent } from '@testing-library/svelte';
 
 it('renders the customers input select with the selected customer', () => {
   const customerId = '8a1dd502-c974-447e-9be3-a18e7abfebe3';
