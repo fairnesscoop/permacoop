@@ -1,5 +1,5 @@
+import { fireEvent, render, screen } from '@testing-library/svelte';
 import TasksInput from './TasksInput.svelte';
-import { screen, render, fireEvent } from '@testing-library/svelte';
 
 it('renders the taks input select with the selected task', () => {
   const taskId = '8a1dd502-c974-447e-9be3-a18e7abfebe3';
