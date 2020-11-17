@@ -52,6 +52,8 @@ import { LeaveRequestToLeavesConverter } from 'src/Domain/HumanResource/Leave/Co
 import { LeaveRepository } from './Leave/Repository/LeaveRepository';
 import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
 import { GetLeaveRequestByIdQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestByIdQueryHandler';
+import { CooperativeRepository } from '../Settings/Repository/CooperativeRepository';
+import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
 
 @Module({
   imports: [
@@ -64,7 +66,8 @@ import { GetLeaveRequestByIdQueryHandler } from 'src/Application/HumanResource/L
       PaySlip,
       LeaveRequest,
       Leave,
-      Event
+      Event,
+      Cooperative
     ])
   ],
   controllers: [
@@ -91,6 +94,7 @@ import { GetLeaveRequestByIdQueryHandler } from 'src/Application/HumanResource/L
     {provide: 'IPaySlipRepository', useClass: PaySlipRepository},
     {provide: 'IFileRepository', useClass: FileRepository},
     {provide: 'IEventRepository', useClass: EventRepository},
+    {provide: 'ICooperativeRepository', useClass: CooperativeRepository},
     {
       provide: 'IUserAdministrativeRepository',
       useClass: UserAdministrativeRepository

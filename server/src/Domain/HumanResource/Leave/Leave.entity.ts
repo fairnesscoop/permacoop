@@ -6,7 +6,7 @@ export class Leave {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'integer', nullable: false})
+  @Column({type: 'integer', nullable: false, comment: 'Stored in minutes'})
   private time: number;
 
   @Column({type: 'date', nullable: false})

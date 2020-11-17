@@ -75,6 +75,7 @@
       eventDataTransform: (data) => {
         const { id, date, time, summary, type, task, billable, project } = data;
         let title = `${minutesToHours(time)}${false === billable && type === 'mission' ? '*': ''} - `;
+        let eventType = type.startsWith('leave_') ? 'leave' : type;
 
         if ('mission' === type && task && project) {
           title += `${project.name} (${task.name})`;
@@ -89,8 +90,8 @@
         }
         data.className =
           $settings.theme === 'theme-dark'
-            ? `event-${type}--dark`
-            : `event-${type}`;
+            ? `event-${eventType}--dark`
+            : `event-${eventType}`;
       },
       businessHours: {
         daysOfWeek: [1, 2, 3, 4, 5],

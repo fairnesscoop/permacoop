@@ -1,6 +1,6 @@
-import {Inject} from '@nestjs/common';
-import {IEventRepository} from '../Repository/IEventRepository';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
+import { Inject } from '@nestjs/common';
+import { IEventRepository } from '../Repository/IEventRepository';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { ILeaveRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRepository';
 
 export class DoesEventsOrLeaveExistForPeriod {

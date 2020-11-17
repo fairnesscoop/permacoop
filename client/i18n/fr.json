@@ -311,5 +311,10 @@
   "dashboard": {
     "title": "Tableau de bord",
     "welcome": "Bonjour {firstName} {lastName} !"
+  },
+  "settings": {
+    "errors": {
+      "cooperative_not_found": "Les paramètres de la coopérative n'ont pas été trouvés."
+    }
   }
 }
