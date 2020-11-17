@@ -47,7 +47,7 @@ import { AcceptLeaveRequestAction } from './Leave/Action/AcceptLeaveRequestActio
 import { GetLeaveRequestsQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestsQueryHandler';
 import { GetLeaveRequestsAction } from './Leave/Action/GetLeaveRequestsAction';
 import { GetLeaveRequestAction } from './Leave/Action/GetLeaveRequestAction';
-import { DoesEventsExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsExistForPeriod';
+import { DoesEventsOrLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsOrLeaveExistForPeriod';
 import { LeaveRequestToLeavesConverter } from 'src/Domain/HumanResource/Leave/Converter/LeaveRequestToLeavesConverter';
 import { LeaveRepository } from './Leave/Repository/LeaveRepository';
 import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
@@ -116,7 +116,7 @@ import { GetLeaveRequestByIdQueryHandler } from 'src/Application/HumanResource/L
     LeaveRequestToLeavesConverter,
     GetLeaveRequestsQueryHandler,
     GetLeaveRequestByIdQueryHandler,
-    DoesEventsExistForPeriod,
+    DoesEventsOrLeaveExistForPeriod,
   ]
 })
 export class HumanResourceModule {}

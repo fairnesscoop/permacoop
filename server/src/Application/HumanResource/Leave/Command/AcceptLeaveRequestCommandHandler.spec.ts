@@ -8,8 +8,8 @@ import { LeaveRequestCantBeModeratedException } from 'src/Domain/HumanResource/L
 import { CanLeaveRequestBeModerated } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeModerated';
 import { EventBusAdapter } from 'src/Infrastructure/Adapter/EventBusAdapter';
 import { AcceptedLeaveRequestEvent } from '../Event/AcceptedLeaveRequestEvent';
-import { DoesEventsExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsExistForPeriod';
-import { EventsAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsAlreadyExistForThisPeriodException';
+import { DoesEventsOrLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsOrLeaveExistForPeriod';
+import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
 import { LeaveRequest } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRequestRepository';
 
@@ -18,7 +18,7 @@ describe('AcceptLeaveRequestCommandHandler', () => {
   let eventBusAdapter: EventBusAdapter;
   let dateUtilsAdapter: DateUtilsAdapter;
   let canLeaveRequestBeModerated: CanLeaveRequestBeModerated;
-  let doesEventsExistForPeriod: DoesEventsExistForPeriod;
+  let doesEventsOrLeaveExistForPeriod: DoesEventsOrLeaveExistForPeriod;
   let handler: AcceptLeaveRequestCommandHandler;
 
   const user = mock(User);
@@ -34,14 +34,14 @@ describe('AcceptLeaveRequestCommandHandler', () => {
     eventBusAdapter = mock(EventBusAdapter);
     dateUtilsAdapter = mock(DateUtilsAdapter);
     canLeaveRequestBeModerated = mock(CanLeaveRequestBeModerated);
-    doesEventsExistForPeriod = mock(DoesEventsExistForPeriod);
+    doesEventsOrLeaveExistForPeriod = mock(DoesEventsOrLeaveExistForPeriod);
 
     handler = new AcceptLeaveRequestCommandHandler(
       instance(leaveRequestRepository),
       instance(eventBusAdapter),
       instance(dateUtilsAdapter),
       instance(canLeaveRequestBeModerated),
-      instance(doesEventsExistForPeriod)
+      instance(doesEventsOrLeaveExistForPeriod)
     );
   });
 
@@ -62,7 +62,7 @@ describe('AcceptLeaveRequestCommandHandler', () => {
         canLeaveRequestBeModerated.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        doesEventsExistForPeriod.isSatisfiedBy(
+        doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
           anything(),
           anything(),
           anything()
@@ -94,7 +94,7 @@ describe('AcceptLeaveRequestCommandHandler', () => {
         leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
       ).once();
       verify(
-        doesEventsExistForPeriod.isSatisfiedBy(
+        doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
           anything(),
           anything(),
           anything()
@@ -118,7 +118,7 @@ describe('AcceptLeaveRequestCommandHandler', () => {
       canLeaveRequestBeModerated.isSatisfiedBy(instance(leaveRequest), instance(user))
     ).thenReturn(true);
     when(
-      doesEventsExistForPeriod.isSatisfiedBy(
+      doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
         instance(user),
         '2019-01-04',
         '2019-01-06'
@@ -128,9 +128,9 @@ describe('AcceptLeaveRequestCommandHandler', () => {
     try {
       await handler.execute(command);
     } catch (e) {
-      expect(e).toBeInstanceOf(EventsAlreadyExistForThisPeriodException);
+      expect(e).toBeInstanceOf(EventsOrLeavesAlreadyExistForThisPeriodException);
       expect(e.message).toBe(
-        'faircalendar.errors.events_already_exist_for_this_period'
+        'faircalendar.errors.events_or_leaves_already_exist_for_this_period'
       );
       verify(
         canLeaveRequestBeModerated.isSatisfiedBy(instance(leaveRequest), instance(user))
@@ -139,7 +139,7 @@ describe('AcceptLeaveRequestCommandHandler', () => {
         leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
       ).once();
       verify(
-        doesEventsExistForPeriod.isSatisfiedBy(
+        doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
           instance(user),
           '2019-01-04',
           '2019-01-06'
@@ -164,7 +164,7 @@ describe('AcceptLeaveRequestCommandHandler', () => {
       canLeaveRequestBeModerated.isSatisfiedBy(instance(leaveRequest), instance(user))
     ).thenReturn(true);
     when(
-      doesEventsExistForPeriod.isSatisfiedBy(
+      doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
         instance(user),
         '2020-09-10',
         '2020-09-15'
@@ -183,7 +183,7 @@ describe('AcceptLeaveRequestCommandHandler', () => {
       canLeaveRequestBeModerated.isSatisfiedBy(instance(leaveRequest), instance(user))
     ).once();
     verify(
-      doesEventsExistForPeriod.isSatisfiedBy(
+      doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
         instance(user),
         '2020-09-10',
         '2020-09-15'

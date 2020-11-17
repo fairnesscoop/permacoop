@@ -5,8 +5,8 @@ import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Reposito
 import { LeaveRequest } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { DoesLeaveRequestExistForPeriod } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestExistForPeriod';
 import { LeaveRequestAlreadyExistForThisPeriodException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestAlreadyExistForThisPeriodException';
-import { DoesEventsExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsExistForPeriod';
-import { EventsAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsAlreadyExistForThisPeriodException';
+import { DoesEventsOrLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsOrLeaveExistForPeriod';
+import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
 
 @CommandHandler(CreateLeaveRequestCommand)
 export class CreateLeaveRequestCommandHandler {
@@ -14,7 +14,7 @@ export class CreateLeaveRequestCommandHandler {
     @Inject('ILeaveRequestRepository')
     private readonly leaveRequestRepository: ILeaveRequestRepository,
     private readonly doesLeaveRequestExistForPeriod: DoesLeaveRequestExistForPeriod,
-    private readonly doesEventsExistForPeriod: DoesEventsExistForPeriod
+    private readonly doesEventsOrLeaveExistForPeriod: DoesEventsOrLeaveExistForPeriod
   ) {}
 
   public async execute(command: CreateLeaveRequestCommand): Promise<string> {
@@ -41,13 +41,13 @@ export class CreateLeaveRequestCommandHandler {
 
     if (
       true ===
-      (await this.doesEventsExistForPeriod.isSatisfiedBy(
+      (await this.doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
         user,
         startDate,
         endDate
       ))
     ) {
-      throw new EventsAlreadyExistForThisPeriodException();
+      throw new EventsOrLeavesAlreadyExistForThisPeriodException();
     }
 
     const leaveRequest = await this.leaveRequestRepository.save(
