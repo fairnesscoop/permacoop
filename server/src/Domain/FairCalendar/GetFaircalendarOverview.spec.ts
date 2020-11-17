@@ -23,7 +23,7 @@ describe('GetFairCalendarOverview', () => {
     when(cooperativeRepository.find()).thenResolve(null);
 
     const project = new ProjectView('bd86391b-4ee2-45db-9fc0-66078845a8b6', 'RadioFrance', 420);
-    const event1 = new FairCalendarView(EventType.MISSION, 300, '2019-12-12', null, true, null, project);
+    const event1 = new FairCalendarView(EventType.MISSION, 300, '2019-12-12', null, true, project);
 
     try {
       await getFairCalendarOverview.index([event1]);
@@ -40,10 +40,10 @@ describe('GetFairCalendarOverview', () => {
 
     const project = new ProjectView('bd86391b-4ee2-45db-9fc0-66078845a8b6', 'RadioFrance', 420);
 
-    const event1 = new FairCalendarView(EventType.MISSION, 300, '2019-12-12', null, true, null, project);
+    const event1 = new FairCalendarView(EventType.MISSION, 300, '2019-12-12', null, true, project);
     const event2 = new FairCalendarView(EventType.DOJO, 120, '2019-12-12');
-    const event3 = new FairCalendarView(EventType.MISSION, 210, '2019-12-13', null, true, null, project);
-    const event5 = new FairCalendarView(EventType.MISSION, 240, '2019-12-10', null, true, null, project);
+    const event3 = new FairCalendarView(EventType.MISSION, 210, '2019-12-13', null, true, project);
+    const event5 = new FairCalendarView(EventType.MISSION, 240, '2019-12-10', null, true, project);
     const event6 = new FairCalendarView(EventType.SUPPORT, 240, '2019-12-10');
     const event7 = new FairCalendarView(EventType.FORMATION_CONFERENCE, 480, '2019-12-03');
     const event8 = new FairCalendarView(EventType.OTHER, 240, '2019-12-04');

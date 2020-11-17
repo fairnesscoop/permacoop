@@ -52,7 +52,6 @@ export class GetMonthlyFairCalendarQueryHandler {
           event.getDate(),
           event.getId(),
           event.isBillable(),
-          event.getSummary(),
           project ? new ProjectView(project.getId(), project.getName(), project.getDayDuration()) : null,
           task ? new TaskView(task.getId(), task.getName()) : null
         )

@@ -32,7 +32,6 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
     when(event1.isBillable()).thenReturn(true);
     when(event1.getTime()).thenReturn(90);
     when(event1.getDate()).thenReturn('2019-12-12');
-    when(event1.getSummary()).thenReturn('Summary');
     when(event1.getTask()).thenReturn(instance(task));
     when(event1.getProject()).thenReturn(instance(project));
 
@@ -42,7 +41,6 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
     when(event2.getTime()).thenReturn(300);
     when(event2.isBillable()).thenReturn(false);
     when(event2.getDate()).thenReturn('2019-12-12');
-    when(event2.getSummary()).thenReturn(null);
     when(event2.getTask()).thenReturn(null);
     when(event2.getProject()).thenReturn(null);
 
@@ -99,7 +97,6 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
           '2019-12-12',
           'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
           true,
-          'Summary',
           new ProjectView(
             'bf4a645c-9754-4943-baec-783361c6d814',
             'RadioFrance',
@@ -113,7 +110,6 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
           '2019-12-12',
           'b9a9b094-5bb2-4d0b-b01e-231b6cb50039',
           false,
-          null,
           null,
           null
         ),

@@ -91,7 +91,6 @@
           $settings.theme === 'theme-dark'
             ? `event-${type}--dark`
             : `event-${type}`;
-        data.tip = summary;
       },
       businessHours: {
         daysOfWeek: [1, 2, 3, 4, 5],

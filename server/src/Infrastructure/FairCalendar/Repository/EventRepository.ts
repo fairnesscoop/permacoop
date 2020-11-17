@@ -66,7 +66,6 @@ export class EventRepository implements IEventRepository {
       .select([
         'event.id',
         'event.time',
-        'event.summary',
         'event.date',
         'event.billable',
         'event.type',

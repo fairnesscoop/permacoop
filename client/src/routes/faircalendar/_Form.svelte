@@ -10,6 +10,9 @@
   import SelectInput from '../../components/inputs/SelectInput.svelte';
   import Button from '../../components/inputs/Button.svelte';
 
+  export let event;
+  export let loading;
+
   const dispatch = createEventDispatcher();
 
   let tasks = { items: [] };
@@ -26,10 +29,8 @@
     tasks = tasksReponse.data;
     projects = projectsReponse.data;
     maxDayDuration = settingsResponse.data.dayDuration;
+    event.time = maxDayDuration;
   });
-
-  export let event;
-  export let loading;
 
   const types = [
     'mission',
