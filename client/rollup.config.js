@@ -71,6 +71,7 @@ export default {
         })
     ],
 
+    context: 'this',
     onwarn
   },
 
