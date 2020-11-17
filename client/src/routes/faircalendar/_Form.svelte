@@ -14,21 +14,23 @@
 
   let tasks = { items: [] };
   let projects = { items: [] };
+  let maxDayDuration;
 
   onMount(async () => {
-    let [tasksReponse, projectsReponse] = await Promise.all([
+    let [tasksReponse, projectsReponse, settingsResponse] = await Promise.all([
       get('tasks', { params: { page: 1 } }),
       get('projects', { params: { page: 1 } }),
+      get('settings/cooperative'),
     ]);
 
     tasks = tasksReponse.data;
     projects = projectsReponse.data;
+    maxDayDuration = settingsResponse.data.dayDuration;
   });
 
   export let event;
   export let loading;
 
-  const times = [...range(30, 420, 30)];
   const types = [
     'mission',
     'dojo',
@@ -36,6 +38,8 @@
     'formationConference',
     'other',
   ];
+
+  $: times = [...range(30, maxDayDuration, 30)].reverse();
 
   const submit = () => {
     dispatch('save', {
@@ -55,6 +59,18 @@
       <option value="{type}">{$_(`faircalendar.type.${type}`)}</option>
     {/each}
   </SelectInput>
+  {#if event.type === 'mission'}
+    <div class="flex">
+      <div class="w-1/2 pr-2">
+        <ProjectsInput
+          projects="{projects.items}"
+          bind:projectId="{event.projectId}" />
+      </div>
+      <div class="w-1/2 pl-2">
+        <TasksInput tasks="{tasks.items}" bind:taskId="{event.taskId}" />
+      </div>
+    </div>
+  {/if}
   <div class="flex">
     <div class="w-1/2 pr-2">
       <SelectInput label="{$_('faircalendar.form.time')}" bind:value="{event.time}">
@@ -72,18 +88,6 @@
       </div>
     {/if}
   </div>
-  {#if event.type === 'mission'}
-    <div class="flex">
-      <div class="w-1/2 pr-2">
-        <ProjectsInput
-          projects="{projects.items}"
-          bind:projectId="{event.projectId}" />
-      </div>
-      <div class="w-1/2 pl-2">
-        <TasksInput tasks="{tasks.items}" bind:taskId="{event.taskId}" />
-      </div>
-    </div>
-  {/if}
   <Input
     label="{$_('faircalendar.form.summary')}"
     bind:value="{event.summary}"

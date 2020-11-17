@@ -36,7 +36,7 @@
     startDate,
     endDate,
     type: 'mission',
-    time: 420,
+    time: null,
     billable: 'true',
     summary: '',
     taskId: null,
