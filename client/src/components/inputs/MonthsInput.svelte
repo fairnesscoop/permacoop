@@ -23,7 +23,7 @@
 </script>
 
 <div class="block mt-4 text-sm">
-  <label for="date" class="text-gray-700 dark:text-gray-400"> {label} </label>
+  <label for="date" class="text-gray-700 dark:text-gray-400">{label}</label>
   <select
     id="date"
     bind:value="{date}"

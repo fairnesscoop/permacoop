@@ -7,7 +7,7 @@ import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRequestRepository';
 import { instance, mock, verify, when } from 'ts-mockito';
 import { UserSummaryView } from '../../User/View/UserSummaryView';
-import { LeaveRequestView } from '../View/LeaveRequestView';
+import { LeaveRequestDetailView } from '../View/LeaveRequestDetailView';
 import { GetLeaveRequestByIdQuery } from './GetLeaveRequestByIdQuery';
 import { GetLeaveRequestByIdQueryHandler } from './GetLeaveRequestByIdQueryHandler';
 
@@ -26,12 +26,14 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
   });
 
   it('testGetLeaveRequestById', async () => {
-    const expectedResult = new LeaveRequestView(
+    const expectedResult = new LeaveRequestDetailView(
       '204522d3-f077-4d21-b3ee-6e0d742fca44',
       Type.PAID,
       Status.ACCEPTED,
       '2020-05-05',
+      false,
       '2020-05-15',
+      true,
       7.5,
       'Country vacation',
       new UserSummaryView(
@@ -113,12 +115,14 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
   });
 
   it('testLeaveWithoutModerator', async () => {
-    const expectedResult = new LeaveRequestView(
+    const expectedResult = new LeaveRequestDetailView(
       'a3753b9c-b711-4e0e-a535-e473161bd612',
       Type.PAID,
       Status.ACCEPTED,
       '2020-05-05',
+      false,
       '2020-05-15',
+      true,
       7.5,
       'Country vacation',
       new UserSummaryView(

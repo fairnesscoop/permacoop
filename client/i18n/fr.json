@@ -216,12 +216,18 @@
       "title": "Congés",
       "requests": {
         "title": "Demandes de congé",
-        "view": "Détail d'une demande",
+        "view": "Demande de {user}",
         "users": "Coopérateurs - salariés",
+        "all_day": "Toute la journée",
         "periods": "Périodes",
         "period": "Du {from} au {to}",
-        "leave_types": "Types de congés",
+        "leave_types": "Type de congé",
         "status": "Etat",
+        "duration": "Durée",
+        "comment": "Commentaire",
+        "moderate_by": "Modéré par",
+        "end_date": "Date de fin",
+        "start_date": "Date de début",
         "add": {
           "title": "Faire une demande de congé"
         },

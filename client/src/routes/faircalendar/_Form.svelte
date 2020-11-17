@@ -29,7 +29,7 @@
     tasks = tasksReponse.data;
     projects = projectsReponse.data;
     maxDayDuration = settingsResponse.data.dayDuration;
-    event.time = maxDayDuration;
+    event.time = event.time ? event.time : maxDayDuration;
   });
 
   const types = [
@@ -76,7 +76,7 @@
     <div class="w-1/2 pr-2">
       <SelectInput label="{$_('faircalendar.form.time')}" bind:value="{event.time}">
         {#each times as minutes}
-          <option value="{minutes}">{minutesToHours(minutes)}</option>
+          <option value="{minutes}" selected={minutes === event.time}>{minutesToHours(minutes)}</option>
         {/each}
       </SelectInput>
     </div>
