@@ -34,7 +34,7 @@ export class LeaveRepository implements ILeaveRepository {
       .getMany();
   }
 
-  public async countExistingLeavesByUserAndPeriod(
+  public async countLeavesByUserAndPeriod(
     user: User,
     startDate: string,
     endDate: string
@@ -42,7 +42,7 @@ export class LeaveRepository implements ILeaveRepository {
     const result = await this.repository
       .createQueryBuilder('leave')
       .select('count(leave.id) as id')
-      .where('user.id = :id', {id: user.getId()})
+      .where('user.id = :id', { id: user.getId() })
       .andWhere('leave.date BETWEEN :startDate AND :endDate', {
         startDate,
         endDate
@@ -52,5 +52,21 @@ export class LeaveRepository implements ILeaveRepository {
       .getRawOne();
 
     return Number(result.id) || 0;
+  }
+
+  public async sumOfDurationLeaveByUserAndDate(
+    user: User,
+    date: string
+  ): Promise<number> {
+    const result = await this.repository
+      .createQueryBuilder('leave')
+      .select('SUM(leave.time) as time')
+      .where('leave.date = :date', { date })
+      .andWhere('user.id = :user', { user: user.getId() })
+      .innerJoin('leave.leaveRequest', 'leaveRequest')
+      .innerJoin('leaveRequest.user', 'user')
+      .getRawOne();
+
+    return Number(result.time) || 0;
   }
 }

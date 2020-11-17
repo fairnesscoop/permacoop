@@ -20,7 +20,7 @@ export class EventRepository implements IEventRepository {
     this.repository.delete(event.getId());
   }
 
-  public async getDayTimeSpentByUser(
+  public async sumOfTimeSpentByUserAndDate(
     user: User,
     date: string
   ): Promise<number> {
@@ -28,7 +28,8 @@ export class EventRepository implements IEventRepository {
       .createQueryBuilder('event')
       .select('SUM(event.time) as time')
       .where('event.date = :date', {date})
-      .andWhere('event.user = :user', {user: user.getId()})
+      .andWhere('user.id = :user', {user: user.getId()})
+      .innerJoin('event.user', 'user')
       .getRawOne();
 
     return Number(result.time) || 0;
@@ -85,7 +86,7 @@ export class EventRepository implements IEventRepository {
       .getMany();
   }
 
-  public async countExistingEventsByUserAndPeriod(
+  public async countEventsByUserAndPeriod(
     user: User,
     startDate: string,
     endDate: string
@@ -93,11 +94,12 @@ export class EventRepository implements IEventRepository {
     const result = await this.repository
       .createQueryBuilder('event')
       .select('count(event.id) as id')
-      .where('event.user = :id', {id: user.getId()})
+      .where('user.id = :id', {id: user.getId()})
       .andWhere('event.date BETWEEN :startDate AND :endDate', {
         startDate,
         endDate
       })
+      .innerJoin('event.user', 'user')
       .getRawOne();
 
     return Number(result.id) || 0;

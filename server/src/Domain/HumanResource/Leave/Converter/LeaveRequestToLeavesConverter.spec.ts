@@ -1,4 +1,4 @@
-import { instance, mock, when, verify, deepEqual, anything, anyOfClass } from 'ts-mockito';
+import { instance, mock, when, verify, deepEqual, anything } from 'ts-mockito';
 import { LeaveRequestToLeavesConverter } from './LeaveRequestToLeavesConverter';
 import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { User } from 'src/Domain/HumanResource/User/User.entity';

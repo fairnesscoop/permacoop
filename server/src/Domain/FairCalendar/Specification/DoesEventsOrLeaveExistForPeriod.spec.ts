@@ -23,14 +23,14 @@ describe('DoesEventsOrLeaveExistForPeriod', () => {
 
   it('testEventAlreadyExistForThisPeriod', async () => {
     when(
-      eventRepository.countExistingEventsByUserAndPeriod(
+      eventRepository.countEventsByUserAndPeriod(
         instance(user),
         startDate,
         endDate
       )
     ).thenResolve(2);
     when(
-      leaveRepository.countExistingLeavesByUserAndPeriod(
+      leaveRepository.countLeavesByUserAndPeriod(
         instance(user),
         startDate,
         endDate
@@ -44,14 +44,14 @@ describe('DoesEventsOrLeaveExistForPeriod', () => {
       )
     ).toBe(true);
     verify(
-      eventRepository.countExistingEventsByUserAndPeriod(
+      eventRepository.countEventsByUserAndPeriod(
         instance(user),
         startDate,
         endDate
       )
     ).once();
     verify(
-      leaveRepository.countExistingLeavesByUserAndPeriod(
+      leaveRepository.countLeavesByUserAndPeriod(
         instance(user),
         startDate,
         endDate
@@ -61,14 +61,14 @@ describe('DoesEventsOrLeaveExistForPeriod', () => {
 
   it('testEventDoesntExistForThisPeriod', async () => {
     when(
-      eventRepository.countExistingEventsByUserAndPeriod(
+      eventRepository.countEventsByUserAndPeriod(
         instance(user),
         startDate,
         endDate
       )
     ).thenResolve(0);
     when(
-      leaveRepository.countExistingLeavesByUserAndPeriod(
+      leaveRepository.countLeavesByUserAndPeriod(
         instance(user),
         startDate,
         endDate
@@ -82,14 +82,14 @@ describe('DoesEventsOrLeaveExistForPeriod', () => {
       )
     ).toBe(false);
     verify(
-      eventRepository.countExistingEventsByUserAndPeriod(
+      eventRepository.countEventsByUserAndPeriod(
         instance(user),
         startDate,
         endDate
       )
     ).once();
     verify(
-      leaveRepository.countExistingLeavesByUserAndPeriod(
+      leaveRepository.countLeavesByUserAndPeriod(
         instance(user),
         startDate,
         endDate
