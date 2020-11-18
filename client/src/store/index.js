@@ -2,6 +2,7 @@ import { writable } from 'svelte/store';
 
 export const settings = writable({
   theme: '',
+  openMobileMenu: false
 });
 
 export const useLocalStorage = (key, store) => {
