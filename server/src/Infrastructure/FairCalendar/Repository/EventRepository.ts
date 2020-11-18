@@ -20,7 +20,7 @@ export class EventRepository implements IEventRepository {
     this.repository.delete(event.getId());
   }
 
-  public async getDayTimeSpentByUser(
+  public async sumOfTimeSpentByUserAndDate(
     user: User,
     date: string
   ): Promise<number> {
@@ -28,7 +28,8 @@ export class EventRepository implements IEventRepository {
       .createQueryBuilder('event')
       .select('SUM(event.time) as time')
       .where('event.date = :date', {date})
-      .andWhere('event.user = :user', {user: user.getId()})
+      .andWhere('user.id = :user', {user: user.getId()})
+      .innerJoin('event.user', 'user')
       .getRawOne();
 
     return Number(result.time) || 0;
@@ -41,6 +42,7 @@ export class EventRepository implements IEventRepository {
         'event.id',
         'event.time',
         'event.summary',
+        'event.billable',
         'event.date',
         'event.type',
         'user.id',
@@ -65,11 +67,12 @@ export class EventRepository implements IEventRepository {
       .select([
         'event.id',
         'event.time',
-        'event.summary',
         'event.date',
+        'event.billable',
         'event.type',
         'project.id',
         'project.name',
+        'project.dayDuration',
         'task.id',
         'task.name'
       ])
@@ -83,22 +86,7 @@ export class EventRepository implements IEventRepository {
       .getMany();
   }
 
-  public findMonthlyOverview(date: string, userId: string): Promise<Event[]> {
-    const month = new Date(date).getMonth() + 1;
-    const year = new Date(date).getFullYear();
-
-    return this.repository
-      .createQueryBuilder('event')
-      .select(['event.time', 'event.date', 'event.type'])
-      .where('user.id = :userId', {userId})
-      .andWhere('extract(month FROM event.date) = :month', {month})
-      .andWhere('extract(year FROM event.date) = :year', {year})
-      .innerJoin('event.user', 'user')
-      .orderBy('event.date', 'ASC')
-      .getMany();
-  }
-
-  public async countExistingEventsByUserAndPeriod(
+  public async countEventsByUserAndPeriod(
     user: User,
     startDate: string,
     endDate: string
@@ -106,11 +94,12 @@ export class EventRepository implements IEventRepository {
     const result = await this.repository
       .createQueryBuilder('event')
       .select('count(event.id) as id')
-      .where('event.user = :id', {id: user.getId()})
+      .where('user.id = :id', {id: user.getId()})
       .andWhere('event.date BETWEEN :startDate AND :endDate', {
         startDate,
         endDate
       })
+      .innerJoin('event.user', 'user')
       .getRawOne();
 
     return Number(result.id) || 0;

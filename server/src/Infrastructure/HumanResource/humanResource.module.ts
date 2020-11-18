@@ -47,11 +47,13 @@ import { AcceptLeaveRequestAction } from './Leave/Action/AcceptLeaveRequestActio
 import { GetLeaveRequestsQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestsQueryHandler';
 import { GetLeaveRequestsAction } from './Leave/Action/GetLeaveRequestsAction';
 import { GetLeaveRequestAction } from './Leave/Action/GetLeaveRequestAction';
-import { DoesEventsExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsExistForPeriod';
+import { DoesEventsOrLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsOrLeaveExistForPeriod';
 import { LeaveRequestToLeavesConverter } from 'src/Domain/HumanResource/Leave/Converter/LeaveRequestToLeavesConverter';
 import { LeaveRepository } from './Leave/Repository/LeaveRepository';
 import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
 import { GetLeaveRequestByIdQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestByIdQueryHandler';
+import { CooperativeRepository } from '../Settings/Repository/CooperativeRepository';
+import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
 
 @Module({
   imports: [
@@ -64,7 +66,8 @@ import { GetLeaveRequestByIdQueryHandler } from 'src/Application/HumanResource/L
       PaySlip,
       LeaveRequest,
       Leave,
-      Event
+      Event,
+      Cooperative
     ])
   ],
   controllers: [
@@ -91,6 +94,7 @@ import { GetLeaveRequestByIdQueryHandler } from 'src/Application/HumanResource/L
     {provide: 'IPaySlipRepository', useClass: PaySlipRepository},
     {provide: 'IFileRepository', useClass: FileRepository},
     {provide: 'IEventRepository', useClass: EventRepository},
+    {provide: 'ICooperativeRepository', useClass: CooperativeRepository},
     {
       provide: 'IUserAdministrativeRepository',
       useClass: UserAdministrativeRepository
@@ -116,7 +120,7 @@ import { GetLeaveRequestByIdQueryHandler } from 'src/Application/HumanResource/L
     LeaveRequestToLeavesConverter,
     GetLeaveRequestsQueryHandler,
     GetLeaveRequestByIdQueryHandler,
-    DoesEventsExistForPeriod,
+    DoesEventsOrLeaveExistForPeriod,
   ]
 })
 export class HumanResourceModule {}

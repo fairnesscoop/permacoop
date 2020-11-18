@@ -36,7 +36,7 @@ export class UpdateEventAction {
     @Body() dto: EditEventDTO,
     @LoggedUser() user: User
   ) {
-    const {type, time, summary, projectId, taskId} = dto;
+    const {type, time, summary, projectId, billable, taskId} = dto;
 
     try {
       const id = await this.commandBus.execute(
@@ -45,6 +45,7 @@ export class UpdateEventAction {
           user,
           type,
           Number(time),
+          billable === 'true',
           projectId,
           taskId,
           summary

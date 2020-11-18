@@ -6,8 +6,8 @@ export interface IEventRepository {
   delete(event: Event): void;
   findOneById(id: string): Promise<Event | undefined>;
   findMonthlyEvents(date: string, userId: string): Promise<Event[]>;
-  getDayTimeSpentByUser(user: User, date: string): Promise<number>;
-  countExistingEventsByUserAndPeriod(
+  sumOfTimeSpentByUserAndDate(user: User, date: string): Promise<number>;
+  countEventsByUserAndPeriod(
     user: User,
     startDate: string,
     endDate: string

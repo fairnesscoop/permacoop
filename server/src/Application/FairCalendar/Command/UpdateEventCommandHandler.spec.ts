@@ -1,28 +1,28 @@
-import {mock, instance, when, verify, anything} from 'ts-mockito';
-import {TaskRepository} from 'src/Infrastructure/Task/Repository/TaskRepository';
-import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
-import {EventRepository} from 'src/Infrastructure/FairCalendar/Repository/EventRepository';
-import {UpdateEventCommandHandler} from './UpdateEventCommandHandler';
-import {UpdateEventCommand} from './UpdateEventCommand';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotFoundException';
-import {Project} from 'src/Domain/Project/Project.entity';
-import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
-import {Task} from 'src/Domain/Task/Task.entity';
-import {MaximumEventReachedException} from 'src/Domain/FairCalendar/Exception/MaximumEventReachedException';
-import {Event, EventType} from 'src/Domain/FairCalendar/Event.entity';
-import {ProjectOrTaskMissingException} from 'src/Domain/FairCalendar/Exception/ProjectOrTaskMissingException';
-import {DoesEventBelongToUser} from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
-import {IsMaximumTimeSpentReachedOnEdition} from 'src/Domain/FairCalendar/Specification/IsMaximumTimeSpentReachedOnEdition';
-import {EventNotFoundException} from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
+import { mock, instance, when, verify, anything } from 'ts-mockito';
+import { TaskRepository } from 'src/Infrastructure/Task/Repository/TaskRepository';
+import { ProjectRepository } from 'src/Infrastructure/Project/Repository/ProjectRepository';
+import { EventRepository } from 'src/Infrastructure/FairCalendar/Repository/EventRepository';
+import { UpdateEventCommandHandler } from './UpdateEventCommandHandler';
+import { UpdateEventCommand } from './UpdateEventCommand';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { ProjectNotFoundException } from 'src/Domain/Project/Exception/ProjectNotFoundException';
+import { Project } from 'src/Domain/Project/Project.entity';
+import { TaskNotFoundException } from 'src/Domain/Task/Exception/TaskNotFoundException';
+import { Task } from 'src/Domain/Task/Task.entity';
+import { MaximumEventReachedException } from 'src/Domain/FairCalendar/Exception/MaximumEventReachedException';
+import { Event, EventType } from 'src/Domain/FairCalendar/Event.entity';
+import { ProjectOrTaskMissingException } from 'src/Domain/FairCalendar/Exception/ProjectOrTaskMissingException';
+import { DoesEventBelongToUser } from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
+import { EventNotFoundException } from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
 import { EventDoesntBelongToUserException } from 'src/Domain/FairCalendar/Exception/EventDoesntBelongToUserException';
+import { IsMaximumTimeSpentReached } from 'src/Domain/FairCalendar/Specification/IsMaximumTimeSpentReached';
 
 describe('UpdateEventCommandHandler', () => {
   let taskRepository: TaskRepository;
   let projectRepository: ProjectRepository;
   let eventRepository: EventRepository;
   let doesEventBelongToUser: DoesEventBelongToUser;
-  let isMaximumTimeSpentReachedOnEdition: IsMaximumTimeSpentReachedOnEdition;
+  let isMaximumTimeSpentReached: IsMaximumTimeSpentReached;
   let handler: UpdateEventCommandHandler;
 
   const event = mock(Event);
@@ -34,7 +34,8 @@ describe('UpdateEventCommandHandler', () => {
     '5a18fde0-07d9-4854-a6da-c3ad2de76bd7',
     instance(user),
     EventType.MISSION,
-    100,
+    420,
+    true,
     '50e624ef-3609-4053-a437-f74844a2d2de',
     'e3fc9666-2932-4dc1-b2b9-d904388293fb',
     'Superkaiser development'
@@ -46,8 +47,8 @@ describe('UpdateEventCommandHandler', () => {
     eventRepository = mock(EventRepository);
     taskRepository = mock(TaskRepository);
     doesEventBelongToUser = mock(DoesEventBelongToUser);
-    isMaximumTimeSpentReachedOnEdition = mock(
-      IsMaximumTimeSpentReachedOnEdition
+    isMaximumTimeSpentReached = mock(
+      IsMaximumTimeSpentReached
     );
 
     handler = new UpdateEventCommandHandler(
@@ -55,7 +56,7 @@ describe('UpdateEventCommandHandler', () => {
       instance(projectRepository),
       instance(eventRepository),
       instance(doesEventBelongToUser),
-      instance(isMaximumTimeSpentReachedOnEdition)
+      instance(isMaximumTimeSpentReached)
     );
   });
 
@@ -78,10 +79,10 @@ describe('UpdateEventCommandHandler', () => {
       verify(projectRepository.findOneById(anything())).never();
       verify(taskRepository.findOneById(anything())).never();
       verify(
-        isMaximumTimeSpentReachedOnEdition.isSatisfiedBy(anything(), anything())
+        isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(anything(), anything(), anything(), anything(), anything())
+        event.update(anything(), anything(), anything(), anything(), anything(), anything())
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -109,10 +110,10 @@ describe('UpdateEventCommandHandler', () => {
       verify(projectRepository.findOneById(anything())).never();
       verify(taskRepository.findOneById(anything())).never();
       verify(
-        isMaximumTimeSpentReachedOnEdition.isSatisfiedBy(anything(), anything())
+        isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(anything(), anything(), anything(), anything(), anything())
+        event.update(anything(), anything(), anything(), anything(), anything(), anything())
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -132,7 +133,8 @@ describe('UpdateEventCommandHandler', () => {
           '5a18fde0-07d9-4854-a6da-c3ad2de76bd7',
           instance(user),
           EventType.MISSION,
-          100
+          420,
+          true
         )
       );
     } catch (e) {
@@ -147,10 +149,10 @@ describe('UpdateEventCommandHandler', () => {
       verify(projectRepository.findOneById(anything())).never();
       verify(taskRepository.findOneById(anything())).never();
       verify(
-        isMaximumTimeSpentReachedOnEdition.isSatisfiedBy(anything(), anything())
+        isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(anything(), anything(), anything(), anything(), anything())
+        event.update(anything(), anything(), anything(), anything(), anything(), anything())
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -188,7 +190,10 @@ describe('UpdateEventCommandHandler', () => {
         taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
       ).once();
       verify(
-        isMaximumTimeSpentReachedOnEdition.isSatisfiedBy(anything(), anything())
+        isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
+      ).never();
+      verify(
+        event.update(anything(), anything(), anything(), anything(), anything(), anything())
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -226,10 +231,10 @@ describe('UpdateEventCommandHandler', () => {
         taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
       ).once();
       verify(
-        isMaximumTimeSpentReachedOnEdition.isSatisfiedBy(anything(), anything())
+        isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(anything(), anything(), anything(), anything(), anything())
+        event.update(anything(), anything(), anything(), anything(), anything(), anything())
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -249,7 +254,7 @@ describe('UpdateEventCommandHandler', () => {
       taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
     ).thenResolve(instance(task));
     when(
-      isMaximumTimeSpentReachedOnEdition.isSatisfiedBy(instance(event), 100)
+      isMaximumTimeSpentReached.isSatisfiedBy(instance(event), 420)
     ).thenResolve(true);
 
     try {
@@ -270,12 +275,12 @@ describe('UpdateEventCommandHandler', () => {
         taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
       ).once();
       verify(
-        isMaximumTimeSpentReachedOnEdition.isSatisfiedBy(instance(event), 100)
+        isMaximumTimeSpentReached.isSatisfiedBy(instance(event), 420)
       ).once();
-      verify(eventRepository.save(anything())).never();
       verify(
-        event.update(anything(), anything(), anything(), anything(), anything())
+        event.update(anything(), anything(), anything(), anything(), anything(), anything())
       ).never();
+      verify(eventRepository.save(anything())).never();
     }
   });
 
@@ -293,7 +298,7 @@ describe('UpdateEventCommandHandler', () => {
       taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
     ).thenResolve(instance(task));
     when(
-      isMaximumTimeSpentReachedOnEdition.isSatisfiedBy(instance(event), 100)
+      isMaximumTimeSpentReached.isSatisfiedBy(instance(event), 420)
     ).thenResolve(false);
     when(event.getId()).thenReturn('a2eaac9c-a118-4502-bc9f-4dbd3b296e73');
     when(eventRepository.save(instance(event))).thenResolve(instance(event));
@@ -315,12 +320,13 @@ describe('UpdateEventCommandHandler', () => {
       taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
     ).once();
     verify(
-      isMaximumTimeSpentReachedOnEdition.isSatisfiedBy(instance(event), 100)
+      isMaximumTimeSpentReached.isSatisfiedBy(instance(event), 420)
     ).once();
     verify(
       event.update(
         EventType.MISSION,
-        100,
+        420,
+        true,
         instance(project),
         instance(task),
         'Superkaiser development'

@@ -21,12 +21,13 @@ import { GetEventAction } from './Action/GetEventAction';
 import { UpdateEventAction } from './Action/UpdateEventAction';
 import { DoesEventBelongToUser } from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
 import { UpdateEventCommandHandler } from 'src/Application/FairCalendar/Command/UpdateEventCommandHandler';
-import { IsMaximumTimeSpentReachedOnEdition } from 'src/Domain/FairCalendar/Specification/IsMaximumTimeSpentReachedOnEdition';
 import { LeaveRepository } from '../HumanResource/Leave/Repository/LeaveRepository';
 import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
+import { CooperativeRepository } from '../Settings/Repository/CooperativeRepository';
+import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
 
 @Module({
-  imports: [BusModule, TypeOrmModule.forFeature([Project, Event, Task, Leave])],
+  imports: [BusModule, TypeOrmModule.forFeature([Project, Event, Task, Leave, Cooperative])],
   controllers: [
     AddEventsAction,
     DeleteEventAction,
@@ -39,6 +40,7 @@ import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
     {provide: 'IProjectRepository', useClass: ProjectRepository},
     {provide: 'IEventRepository', useClass: EventRepository},
     {provide: 'ITaskRepository', useClass: TaskRepository},
+    {provide: 'ICooperativeRepository', useClass: CooperativeRepository},
     {provide: 'IDateUtils', useClass: DateUtilsAdapter},
     Date,
     IsMaximumTimeSpentReached,
@@ -48,7 +50,6 @@ import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
     UpdateEventCommandHandler,
     GetEventByIdQueryHandler,
     DoesEventBelongToUser,
-    IsMaximumTimeSpentReachedOnEdition,
     GetFairCalendarOverview
   ]
 })

@@ -28,7 +28,7 @@ export class AddEventCommandHandler extends AbstractProjectAndTaskGetter {
   }
 
   public async execute(command: AddEventCommand): Promise<AddEventsView> {
-    const {type, startDate, endDate, projectId, taskId, summary, time, user} = command;
+    const {type, startDate, endDate, billable, projectId, taskId, summary, time, user} = command;
     const errors: string[] = [];
 
     if (type === EventType.MISSION && (!projectId || !taskId)) {
@@ -48,6 +48,7 @@ export class AddEventCommandHandler extends AbstractProjectAndTaskGetter {
         user,
         time,
         date,
+        billable && type === EventType.MISSION,
         project,
         task,
         summary

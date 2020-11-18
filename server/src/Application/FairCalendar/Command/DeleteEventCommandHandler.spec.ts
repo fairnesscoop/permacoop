@@ -21,8 +21,9 @@ describe('DeleteEventCommandHandler', () => {
   const event = new Event(
     EventType.MISSION,
     instance(user),
-    100,
+    420,
     '2020-05-15',
+    true,
     instance(project),
     instance(task),
     'summary'

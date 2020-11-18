@@ -2,7 +2,6 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Task } from '../Task/Task.entity';
 import { Project } from '../Project/Project.entity';
 import { User } from '../HumanResource/User/User.entity';
-import { ICalendar } from './ICalendar';
 
 export enum EventType {
   MISSION = 'mission',
@@ -13,9 +12,8 @@ export enum EventType {
 }
 
 @Entity()
-export class Event implements ICalendar {
-  // Times spent are stored in minutes
-  public static readonly MAXIMUM_TIMESPENT_PER_DAY: number = 100;
+export class Event {
+  public static readonly MAXIMUM_TIMESPENT_PER_DAY: number = 720;
 
   @PrimaryGeneratedColumn('uuid')
   private id: string;
@@ -23,11 +21,14 @@ export class Event implements ICalendar {
   @Column('enum', {enum: EventType, nullable: false})
   private type: EventType;
 
-  @Column({type: 'integer', nullable: false})
+  @Column({type: 'integer', nullable: false, comment: 'Stored in minutes'})
   private time: number;
 
   @Column({type: 'date', nullable: false})
   private date: string;
+
+  @Column({type: 'boolean', default: true})
+  private billable: boolean;
 
   @Column({type: 'varchar', nullable: true})
   private summary: string;
@@ -46,6 +47,7 @@ export class Event implements ICalendar {
     user: User,
     time: number,
     date: string,
+    billable: boolean,
     project?: Project,
     task?: Task,
     summary?: string
@@ -54,6 +56,7 @@ export class Event implements ICalendar {
     this.user = user;
     this.time = time;
     this.date = date;
+    this.billable = billable;
     this.project = project;
     this.task = task;
     this.summary = summary;
@@ -75,6 +78,10 @@ export class Event implements ICalendar {
     return this.date;
   }
 
+  public isBillable(): boolean {
+    return this.billable;
+  }
+
   public getSummary(): string | null {
     return this.summary;
   }
@@ -94,12 +101,14 @@ export class Event implements ICalendar {
   public update(
     type: EventType,
     time: number,
+    billable: boolean,
     project?: Project,
     task?: Task,
     summary?: string
   ): void {
     this.type = type;
     this.time = time;
+    this.billable = billable;
     this.project = project;
     this.task = task;
     this.summary = summary;

@@ -5,8 +5,8 @@ import { CanLeaveRequestBeModerated } from 'src/Domain/HumanResource/Leave/Speci
 import { AcceptLeaveRequestCommand } from './AcceptLeaveRequestCommand';
 import { IEventBus } from 'src/Application/IEventBus';
 import { AcceptedLeaveRequestEvent } from '../Event/AcceptedLeaveRequestEvent';
-import { DoesEventsExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsExistForPeriod';
-import { EventsAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsAlreadyExistForThisPeriodException';
+import { DoesEventsOrLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsOrLeaveExistForPeriod';
+import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
 import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRequestRepository';
 import { LeaveRequestNotFoundException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestNotFoundException';
 import { LeaveRequestCantBeModeratedException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestCantBeModeratedException';
@@ -21,7 +21,7 @@ export class AcceptLeaveRequestCommandHandler {
     @Inject('IDateUtils')
     private readonly dateUtils: IDateUtils,
     private readonly canLeaveRequestBeModerated: CanLeaveRequestBeModerated,
-    private readonly doesEventsExistForPeriod: DoesEventsExistForPeriod
+    private readonly doesEventsOrLeaveExistForPeriod: DoesEventsOrLeaveExistForPeriod
   ) {}
 
   public async execute(command: AcceptLeaveRequestCommand): Promise<string> {
@@ -40,16 +40,14 @@ export class AcceptLeaveRequestCommandHandler {
 
     if (
       true ===
-      (await this.doesEventsExistForPeriod.isSatisfiedBy(
+      (await this.doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
         leaveRequest.getUser(),
         leaveRequest.getStartDate(),
         leaveRequest.getEndDate()
       ))
     ) {
-      throw new EventsAlreadyExistForThisPeriodException();
+      throw new EventsOrLeavesAlreadyExistForThisPeriodException();
     }
-
-    // todo : check for leaves presence
 
     leaveRequest.accept(
       moderator,

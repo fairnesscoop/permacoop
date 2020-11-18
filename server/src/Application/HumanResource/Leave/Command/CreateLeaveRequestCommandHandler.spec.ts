@@ -8,14 +8,14 @@ import {
   LeaveRequest
 } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { LeaveRequestAlreadyExistForThisPeriodException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestAlreadyExistForThisPeriodException';
-import { DoesEventsExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsExistForPeriod';
-import { EventsAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsAlreadyExistForThisPeriodException';
+import { DoesEventsOrLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsOrLeaveExistForPeriod';
+import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
 import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRequestRepository';
 
 describe('CreateLeaveRequestCommandHandler', () => {
   let leaveRequestRepository: LeaveRequestRepository;
   let doesLeaveRequestExistForPeriod: DoesLeaveRequestExistForPeriod;
-  let doesEventsExistForPeriod: DoesEventsExistForPeriod;
+  let doesEventsOrLeaveExistForPeriod: DoesEventsOrLeaveExistForPeriod;
   let handler: CreateLeaveRequestCommandHandler;
 
   const user = mock(User);
@@ -32,12 +32,12 @@ describe('CreateLeaveRequestCommandHandler', () => {
   beforeEach(() => {
     leaveRequestRepository = mock(LeaveRequestRepository);
     doesLeaveRequestExistForPeriod = mock(DoesLeaveRequestExistForPeriod);
-    doesEventsExistForPeriod = mock(DoesEventsExistForPeriod);
+    doesEventsOrLeaveExistForPeriod = mock(DoesEventsOrLeaveExistForPeriod);
 
     handler = new CreateLeaveRequestCommandHandler(
       instance(leaveRequestRepository),
       instance(doesLeaveRequestExistForPeriod),
-      instance(doesEventsExistForPeriod)
+      instance(doesEventsOrLeaveExistForPeriod)
     );
   });
 
@@ -65,7 +65,7 @@ describe('CreateLeaveRequestCommandHandler', () => {
         )
       ).once();
       verify(
-        doesEventsExistForPeriod.isSatisfiedBy(
+        doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
           instance(user),
           '2019-01-04',
           '2019-01-06'
@@ -84,7 +84,7 @@ describe('CreateLeaveRequestCommandHandler', () => {
       )
     ).thenResolve(false);
     when(
-      doesEventsExistForPeriod.isSatisfiedBy(
+      doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
         instance(user),
         '2019-01-04',
         '2019-01-06'
@@ -94,9 +94,9 @@ describe('CreateLeaveRequestCommandHandler', () => {
     try {
       await handler.execute(command);
     } catch (e) {
-      expect(e).toBeInstanceOf(EventsAlreadyExistForThisPeriodException);
+      expect(e).toBeInstanceOf(EventsOrLeavesAlreadyExistForThisPeriodException);
       expect(e.message).toBe(
-        'faircalendar.errors.events_already_exist_for_this_period'
+        'faircalendar.errors.events_or_leaves_already_exist_for_this_period'
       );
       verify(
         doesLeaveRequestExistForPeriod.isSatisfiedBy(
@@ -106,7 +106,7 @@ describe('CreateLeaveRequestCommandHandler', () => {
         )
       ).once();
       verify(
-        doesEventsExistForPeriod.isSatisfiedBy(
+        doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
           instance(user),
           '2019-01-04',
           '2019-01-06'
@@ -128,7 +128,7 @@ describe('CreateLeaveRequestCommandHandler', () => {
       )
     ).thenResolve(false);
     when(
-      doesEventsExistForPeriod.isSatisfiedBy(
+      doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
         instance(user),
         '2019-01-04',
         '2019-01-06'
@@ -163,7 +163,7 @@ describe('CreateLeaveRequestCommandHandler', () => {
       )
     ).once();
     verify(
-      doesEventsExistForPeriod.isSatisfiedBy(
+      doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
         instance(user),
         '2019-01-04',
         '2019-01-06'

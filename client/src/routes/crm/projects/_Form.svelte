@@ -6,6 +6,7 @@
   import SelectInput from '../../../components/inputs/SelectInput.svelte';
   import Input from '../../../components/inputs/Input.svelte';
   import Button from '../../../components/inputs/Button.svelte';
+  import { minutesToHours } from '../../../normalizer/time';
 
   let response = {
     items: [],
@@ -17,7 +18,7 @@
 
   export let loading;
   export let name = '';
-  export let dayDuration = 7;
+  export let dayDuration = 480;
   export let customerId = '';
 
   const dispatch = createEventDispatcher();
@@ -38,8 +39,8 @@
   <SelectInput
     label="{$_('crm.projects.form.day_duration')}"
     bind:value="{dayDuration}">
-    {#each [7, 8] as day}
-      <option value={day}>{$_(`crm.projects.day_duration`, { values: { dayDuration: day } })}</option>
+    {#each [420, 480] as minutes}
+      <option value={minutes}>{minutesToHours(minutes)}</option>
     {/each}
   </SelectInput>
   <Button

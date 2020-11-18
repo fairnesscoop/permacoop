@@ -3,16 +3,20 @@ import { LeaveRequest } from '../LeaveRequest.entity';
 import { IDateUtils } from 'src/Application/IDateUtils';
 import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
 import { ILeaveRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRepository';
+import { ICooperativeRepository } from 'src/Domain/Settings/Repository/ICooperativeRepository';
+import { CooperativeNotFoundException } from 'src/Domain/Settings/Repository/CooperativeNotFoundException';
 
 export class LeaveRequestToLeavesConverter {
   constructor(
     @Inject('ILeaveRepository')
     private readonly leaveRepository: ILeaveRepository,
+    @Inject('ICooperativeRepository')
+    private readonly cooperativeRepository: ICooperativeRepository,
     @Inject('IDateUtils')
     private readonly dateUtils: IDateUtils
   ) {}
 
-  public convert(leaveRequest: LeaveRequest): void {
+  public async convert(leaveRequest: LeaveRequest): Promise<void> {
     const leaves: Leave[] = [];
     const dates = this.dateUtils.getWorkedDaysDuringAPeriod(
       new Date(leaveRequest.getStartDate()),
@@ -23,6 +27,12 @@ export class LeaveRequestToLeavesConverter {
       return;
     }
 
+    const cooperative = await this.cooperativeRepository.find();
+    if (!cooperative) {
+      throw new CooperativeNotFoundException();
+    }
+
+    const dayDuration = cooperative.getDayDuration();
     const firstDate = dates[0].toISOString();
     const lastDate = dates[dates.length - 1].toISOString();
 
@@ -30,7 +40,7 @@ export class LeaveRequestToLeavesConverter {
       leaves.push(
         new Leave(
           leaveRequest,
-          this.getTime(leaveRequest, firstDate, lastDate, date.toISOString()),
+          this.getTime(leaveRequest, dayDuration, firstDate, lastDate, date.toISOString()),
           date.toISOString()
         )
       );
@@ -41,13 +51,14 @@ export class LeaveRequestToLeavesConverter {
 
   private getTime(
     leaveRequest: LeaveRequest,
+    dayDuration: number,
     firstDate: string,
     lastDate: string,
     currentDate: string
   ): number {
     return (firstDate === currentDate && false === leaveRequest.isStartsAllDay()) ||
       (lastDate === currentDate && false === leaveRequest.isEndsAllDay())
-      ? 50
-      : 100;
+      ? (dayDuration / 2)
+      : dayDuration;
   }
 }

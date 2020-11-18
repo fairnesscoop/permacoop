@@ -1,83 +1,76 @@
 import { instance, mock, when } from 'ts-mockito';
 import { GetFairCalendarOverview } from './GetFairCalendarOverview';
-import { Event, EventType } from './Event.entity';
+import { EventType } from './Event.entity';
 import { ICalendarOverview } from './ICalendarOverview';
-import { Leave } from '../HumanResource/Leave/Leave.entity';
+import { CooperativeRepository } from 'src/Infrastructure/Settings/Repository/CooperativeRepository';
+import { Cooperative } from '../Settings/Cooperative.entity';
+import { FairCalendarView } from 'src/Application/FairCalendar/View/FairCalendarView';
+import { ProjectView } from 'src/Application/Project/View/ProjectView';
+import { Type } from '../HumanResource/Leave/LeaveRequest.entity';
+import { CooperativeNotFoundException } from '../Settings/Repository/CooperativeNotFoundException';
 
 describe('GetFairCalendarOverview', () => {
   let getFairCalendarOverview: GetFairCalendarOverview;
+  let cooperativeRepository: CooperativeRepository;
+
 
   beforeEach(() => {
-    getFairCalendarOverview = new GetFairCalendarOverview();
+    cooperativeRepository = mock(CooperativeRepository);
+    getFairCalendarOverview = new GetFairCalendarOverview(instance(cooperativeRepository));
+  });
+
+  it('testCooperativeNotFoundOverview', async () => {
+    when(cooperativeRepository.find()).thenResolve(null);
+
+    const project = new ProjectView('bd86391b-4ee2-45db-9fc0-66078845a8b6', 'RadioFrance', 420);
+    const event1 = new FairCalendarView(EventType.MISSION, 300, '2019-12-12', null, true, project);
+
+    try {
+      await getFairCalendarOverview.index([event1]);
+    } catch (e) {
+      expect(e).toBeInstanceOf(CooperativeNotFoundException);
+      expect(e.message).toBe('settings.errors.cooperative_not_found');
+    }
   });
 
   it('testGetOverview', async () => {
-    const event1 = mock(Event);
-    when(event1.getType()).thenReturn(EventType.MISSION);
-    when(event1.getTime()).thenReturn(75);
-    when(event1.getDate()).thenReturn('2019-12-12');
+    const cooperative = mock(Cooperative);
+    when(cooperative.getDayDuration()).thenReturn(480);
+    when(cooperativeRepository.find()).thenResolve(instance(cooperative));
 
-    const event2 = mock(Event);
-    when(event2.getType()).thenReturn(EventType.DOJO);
-    when(event2.getTime()).thenReturn(25);
-    when(event2.getDate()).thenReturn('2019-12-12');
+    const project = new ProjectView('bd86391b-4ee2-45db-9fc0-66078845a8b6', 'RadioFrance', 420);
 
-    const event4 = mock(Event);
-    when(event4.getType()).thenReturn(EventType.MISSION);
-    when(event4.getTime()).thenReturn(50);
-    when(event4.getDate()).thenReturn('2019-12-13');
-
-    const event5 = mock(Event);
-    when(event5.getType()).thenReturn(EventType.MISSION);
-    when(event5.getTime()).thenReturn(25);
-    when(event5.getDate()).thenReturn('2019-12-10');
-
-    const event6 = mock(Event);
-    when(event6.getType()).thenReturn(EventType.SUPPORT);
-    when(event6.getTime()).thenReturn(75);
-    when(event6.getDate()).thenReturn('2019-12-10');
-
-    const event9 = mock(Event);
-    when(event9.getType()).thenReturn(EventType.FORMATION_CONFERENCE);
-    when(event9.getTime()).thenReturn(100);
-    when(event9.getDate()).thenReturn('2019-12-03');
-
-    const event10 = mock(Event);
-    when(event10.getType()).thenReturn(EventType.OTHER);
-    when(event10.getTime()).thenReturn(50);
-    when(event10.getDate()).thenReturn('2019-12-04');
-
-    const leave = mock(Leave);
-    when(leave.getType()).thenReturn('leave_special');
-    when(leave.getTime()).thenReturn(50);
-    when(leave.getDate()).thenReturn('2019-12-05');
-
-    const leave2 = mock(Leave);
-    when(leave2.getType()).thenReturn('leave_paid');
-    when(leave2.getTime()).thenReturn(50);
-    when(leave2.getDate()).thenReturn('2019-12-06');
+    const event1 = new FairCalendarView(EventType.MISSION, 300, '2019-12-12', null, true, project);
+    const event2 = new FairCalendarView(EventType.DOJO, 120, '2019-12-12');
+    const event3 = new FairCalendarView(EventType.MISSION, 210, '2019-12-13', null, true, project);
+    const event5 = new FairCalendarView(EventType.MISSION, 240, '2019-12-10', null, true, project);
+    const event6 = new FairCalendarView(EventType.SUPPORT, 240, '2019-12-10');
+    const event7 = new FairCalendarView(EventType.FORMATION_CONFERENCE, 480, '2019-12-03');
+    const event8 = new FairCalendarView(EventType.OTHER, 240, '2019-12-04');
+    const leave = new FairCalendarView(`leave_${Type.SPECIAL}`, 240, '2019-12-05');
+    const leave2 = new FairCalendarView(`leave_${Type.PAID}`, 240, '2019-12-06');
 
     const expectedResult: ICalendarOverview = {
-      mission: 1.5,
+      mission: 1.78,
       dojo: 0.25,
       formationConference: 1,
       leave: 1,
-      support: 0.75,
+      support: 0.5,
       other: 0.5,
       mealTicket: 3
     };
 
     expect(
       await getFairCalendarOverview.index([
-        instance(event1),
-        instance(event2),
-        instance(event4),
-        instance(event5),
-        instance(event6),
-        instance(event9),
-        instance(event10),
-        instance(leave),
-        instance(leave2),
+        event1,
+        event2,
+        event3,
+        event5,
+        event6,
+        event7,
+        event8,
+        leave,
+        leave2,
       ])
     ).toMatchObject(expectedResult);
   });
