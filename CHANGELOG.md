@@ -1,3 +1,8 @@
+## <small>1.0.1 (2020-11-18)</small>
+
+-   Add CHANGELOG.md ([ff26f78](https://github.com/fairnesscoop/permacoop/commit/ff26f78))
+-   Add missing translation ([2665253](https://github.com/fairnesscoop/permacoop/commit/2665253))
+
 ## 1.0.0 (2020-11-18)
 
 -   [billing] Daily rate by user/project/task (#78) ([5b9c5eb](https://github.com/fairnesscoop/permacoop/commit/5b9c5eb)), closes [#78](https://github.com/fairnesscoop/permacoop/issues/78)
