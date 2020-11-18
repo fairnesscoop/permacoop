@@ -202,6 +202,7 @@
       "download": "Télécharger ({size})",
       "form": {
         "file": "Fiche de paie",
+        "period": "Période",
         "file_helper": "Format PDF uniquement"
       },
       "errors": {
