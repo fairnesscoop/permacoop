@@ -51,7 +51,9 @@
             id="userId"
             class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
             bind:value="{userId}"
-            on:change="{handleFilter}">
+            on:blur="{handleFilter}"
+            on:change="{handleFilter}"
+          >
             {#each data as user}
               <option value="{user.id}" selected="{user.id === userId}">
                 {`${user.firstName} ${user.lastName}`}
