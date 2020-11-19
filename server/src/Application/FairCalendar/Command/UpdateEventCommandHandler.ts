@@ -1,17 +1,17 @@
-import {CommandHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {UpdateEventCommand} from './UpdateEventCommand';
-import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
-import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
-import {IEventRepository} from 'src/Domain/FairCalendar/Repository/IEventRepository';
-import {EventType} from 'src/Domain/FairCalendar/Event.entity';
-import {MaximumEventReachedException} from 'src/Domain/FairCalendar/Exception/MaximumEventReachedException';
-import {ProjectOrTaskMissingException} from 'src/Domain/FairCalendar/Exception/ProjectOrTaskMissingException';
-import {EventNotFoundException} from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
-import {EventDoesntBelongToUserException} from 'src/Domain/FairCalendar/Exception/EventDoesntBelongToUserException';
-import {DoesEventBelongToUser} from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
-import {AbstractProjectAndTaskGetter} from './AbstractProjectAndTaskGetter';
-import {IsMaximumTimeSpentReachedOnEdition} from 'src/Domain/FairCalendar/Specification/IsMaximumTimeSpentReachedOnEdition';
+import { CommandHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { UpdateEventCommand } from './UpdateEventCommand';
+import { ITaskRepository } from 'src/Domain/Task/Repository/ITaskRepository';
+import { IProjectRepository } from 'src/Domain/Project/Repository/IProjectRepository';
+import { IEventRepository } from 'src/Domain/FairCalendar/Repository/IEventRepository';
+import { EventType } from 'src/Domain/FairCalendar/Event.entity';
+import { MaximumEventReachedException } from 'src/Domain/FairCalendar/Exception/MaximumEventReachedException';
+import { ProjectOrTaskMissingException } from 'src/Domain/FairCalendar/Exception/ProjectOrTaskMissingException';
+import { EventNotFoundException } from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
+import { EventDoesntBelongToUserException } from 'src/Domain/FairCalendar/Exception/EventDoesntBelongToUserException';
+import { DoesEventBelongToUser } from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
+import { AbstractProjectAndTaskGetter } from './AbstractProjectAndTaskGetter';
+import { IsMaximumTimeSpentReached } from 'src/Domain/FairCalendar/Specification/IsMaximumTimeSpentReached';
 
 @CommandHandler(UpdateEventCommand)
 export class UpdateEventCommandHandler extends AbstractProjectAndTaskGetter {
@@ -21,13 +21,13 @@ export class UpdateEventCommandHandler extends AbstractProjectAndTaskGetter {
     @Inject('IEventRepository')
     private readonly eventRepository: IEventRepository,
     private readonly doesEventBelongToUser: DoesEventBelongToUser,
-    private readonly isMaximumTimeSpentReachedOnEdition: IsMaximumTimeSpentReachedOnEdition
+    private readonly isMaximumTimeSpentReached: IsMaximumTimeSpentReached
   ) {
     super(taskRepository, projectRepository);
   }
 
   public async execute(command: UpdateEventCommand): Promise<string> {
-    const {id, type, projectId, taskId, summary, time, user} = command;
+    const {id, type, projectId, taskId, summary, time, billable, user} = command;
 
     const event = await this.eventRepository.findOneById(id);
     if (!event) {
@@ -49,12 +49,12 @@ export class UpdateEventCommandHandler extends AbstractProjectAndTaskGetter {
 
     if (
       true ===
-      (await this.isMaximumTimeSpentReachedOnEdition.isSatisfiedBy(event, time))
+      (await this.isMaximumTimeSpentReached.isSatisfiedBy(event, time))
     ) {
       throw new MaximumEventReachedException();
     }
 
-    event.update(type, time, project, task, summary);
+    event.update(type, time, billable && EventType.MISSION === type, project, task, summary);
     await this.eventRepository.save(event);
 
     return event.getId();

@@ -1,5 +1,5 @@
 <script context="module">
-  export const preload = async ({ params: { id } }) => {
+  export const preload = ({ params: { id } }) => {
     return { id };
   };
 </script>

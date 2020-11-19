@@ -1,5 +1,5 @@
+import { fireEvent, render, screen } from '@testing-library/svelte';
 import ProjectsInput from './ProjectsInput.svelte';
-import { screen, render, fireEvent } from '@testing-library/svelte';
 
 it('renders the projects input select with the selected project', () => {
   const projectId = '8a1dd502-c974-447e-9be3-a18e7abfebe3';

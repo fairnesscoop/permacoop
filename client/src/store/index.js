@@ -2,13 +2,14 @@ import { writable } from 'svelte/store';
 
 export const settings = writable({
   theme: '',
+  openMobileMenu: false
 });
 
 export const useLocalStorage = (key, store) => {
-  const current_value = localStorage.getItem(key);
+  const currentValue = localStorage.getItem(key);
 
-  if (current_value) {
-    store.set(JSON.parse(current_value));
+  if (currentValue) {
+    store.set(JSON.parse(currentValue));
   }
 
   store.subscribe((value) => {

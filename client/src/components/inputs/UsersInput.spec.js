@@ -1,5 +1,5 @@
+import { fireEvent, render, screen } from '@testing-library/svelte';
 import UsersInput from './UsersInput.svelte';
-import { screen, render, fireEvent } from '@testing-library/svelte';
 
 it('renders the users input select with the selected user', () => {
   const userId = '8a1dd502-c974-447e-9be3-a18e7abfebe3';

@@ -12,7 +12,7 @@ install: ## Install API and client
 	cp client/config.js.dist client/config.js
 	docker run -it --rm -v ${PWD}/server:/app -w /app node npm i
 	docker run -it --rm -v ${PWD}/client:/app -w /app node npm i
-	make start
+	make start-container
 	make api-build-dist
 	make database-migrate
 	make watch-tailwind
@@ -22,7 +22,10 @@ rm: ## Remove docker containers
 	${compose} rm
 ps: ## List docker containers
 	${compose} ps
-start: ## Start docker containers
+start: ## Start the application
+	make start-container
+	make watch-tailwind
+start-container: ## Start docker containers
 	${compose} up -d
 watch-tailwind:
 	${exec} client npm run watch:tailwind

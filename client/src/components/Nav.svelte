@@ -12,6 +12,7 @@
   import CRMIcon from './icons/CRMIcon.svelte';
   import AccountingIcon from './icons/AccountingIcon.svelte';
   import ChevronDownIcon from './icons/ChevronDownIcon.svelte';
+  import { settings } from '../store';
 
   const { session } = stores();
 
@@ -30,9 +31,20 @@
     'px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200';
 </script>
 
+<style>
+  .open {
+    position: fixed;
+    background: #fff;
+    margin-top: 4rem;
+    height: 100%;
+    display: block;
+  }
+</style>
+
 {#if $session.user}
   <aside
-    class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
+    class="z-20 hidden overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0"
+    class:open={$settings.openMobileMenu}>
     <div class="py-4 text-gray-500 dark:text-gray-400">
       <a
         class="inline-flex ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
@@ -155,7 +167,7 @@
               <li class="{subLinkClass}">
                 <a
                   class="w-full"
-                  href="human_resources/holidays">{$_('human_resources.holidays.title')}</a>
+                  href="human_resources/leaves">{$_('human_resources.leaves.title')}</a>
               </li>
             {/if}
             <li class="{subLinkClass}">

@@ -1,19 +1,18 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { createEventDispatcher } from 'svelte';
+  import { range } from '../utils/array';
+
+  const itemsPerPage = 20;
 
   export let currentPage;
   export let pageCount;
   export let totalItems;
 
-  $: start = pageCount > 1 ? pageCount * 20 : 1;
-  $: from = totalItems > 20 ? start + 20 : totalItems;
+  $: start = (currentPage - 1) * itemsPerPage + 1;
+  $: from = Math.min(totalItems, start + itemsPerPage - 1);
+
   const dispatch = createEventDispatcher();
-
-  const range = (size, startAt = 0) => {
-    return [...Array(size).keys()].map((i) => i + startAt);
-  };
-
   const changePage = (page) => {
     if (page !== currentPage) {
       dispatch('change', page);
@@ -55,7 +54,7 @@
                 </button>
               </li>
             {/if}
-            {#each range(pageCount, 1) as page}
+            {#each range(1, pageCount) as page}
               <li>
                 <button
                   class="{page == currentPage ? activeLink : link}"

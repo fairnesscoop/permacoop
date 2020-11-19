@@ -9,7 +9,7 @@ export class Project {
   @Column({type: 'varchar', nullable: false})
   private name: string;
 
-  @Column({type: 'integer', nullable: false, default: 7})
+  @Column({type: 'integer', nullable: false, default: 420, comment: 'Stored in minutes'})
   private dayDuration: number;
 
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})

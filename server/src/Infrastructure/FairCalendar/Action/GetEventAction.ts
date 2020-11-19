@@ -17,7 +17,7 @@ import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
 import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 
 @Controller('events')
-@ApiTags('Event')
+@ApiTags('FairCalendar')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetEventAction {

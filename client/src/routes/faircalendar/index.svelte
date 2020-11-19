@@ -26,6 +26,8 @@
   import Breadcrumb from '../../components/Breadcrumb.svelte';
   import H4Title from '../../components/H4Title.svelte';
   import ServerErrors from '../../components/ServerErrors.svelte';
+  import { settings } from '../../store';
+  import { minutesToHours } from '../../normalizer/time';
 
   export let filters;
   export let user;
@@ -33,6 +35,7 @@
   let isLoggedUser = false;
   let errors = [];
   let data = {};
+
   $: title = $_('faircalendar.title', {
     values: {
       month: format(new Date(filters.date), 'MMMM yyyy', { locale: fr }),
@@ -48,6 +51,7 @@
 
     const dom = document.getElementById('calendar');
     dom.innerHTML = '';
+
     const calendar = new Calendar(dom, {
       locale: frLocale,
       plugins: [dayGridPlugin, interactionPlugin],
@@ -69,8 +73,9 @@
         goto(`/faircalendar/${info.startStr}_${endDate}/add`);
       },
       eventDataTransform: (data) => {
-        const { id, date, time, summary, type, task, project } = data;
-        let title = `[${$_('common.days_duration', { values: { n: time } })}] `;
+        const { id, date, time, summary, type, task, billable, project } = data;
+        let title = `${minutesToHours(time)}${false === billable && type === 'mission' ? '*': ''} - `;
+        let eventType = type.startsWith('leave_') ? 'leave' : type;
 
         if ('mission' === type && task && project) {
           title += `${project.name} (${task.name})`;
@@ -78,13 +83,15 @@
           title += $_(`faircalendar.type.${type}`);
         }
 
-        data.id = id;
         data.title = title;
-        if (isLoggedUser) {
+        if (isLoggedUser && id) {
+          data.id = id;
           data.url = `faircalendar/${id}/edit`;
         }
-        data.className = `event-${type}`;
-        data.tip = summary;
+        data.className =
+          $settings.theme === 'theme-dark'
+            ? `event-${eventType}--dark`
+            : `event-${eventType}`;
       },
       businessHours: {
         daysOfWeek: [1, 2, 3, 4, 5],
@@ -99,7 +106,7 @@
       isLoggedUser = userId === user.id;
       filters.date = date;
       filters.userId = userId;
-      ({ data } = await get('events', { params: { userId, date } }));
+      ({ data } = await get('faircalendar', { params: { userId, date } }));
       fullCalendar(data.events, date);
     } catch (e) {
       errors = errorNormalizer(e);
@@ -128,4 +135,8 @@
 {#if data.overview}
   <Overview overview="{data.overview}" />
 {/if}
-<div id="calendar"></div>
+
+<div class="px-3 mb-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <div id="calendar"></div>
+  <small class="mt-2 mb-2 font-semibold dark:text-white">{$_('faircalendar.not_billable')}</small>
+</div>

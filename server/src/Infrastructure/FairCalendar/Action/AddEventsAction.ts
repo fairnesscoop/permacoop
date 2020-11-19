@@ -17,7 +17,7 @@ import { RolesGuard } from 'src/Infrastructure/HumanResource/User/Security/Roles
 import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 
 @Controller('events')
-@ApiTags('Event')
+@ApiTags('FairCalendar')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class AddEventsAction {
@@ -31,12 +31,13 @@ export class AddEventsAction {
   @ApiOperation({summary: 'Add new event(s)'})
   public async index(@Body() dto: AddEventDTO, @LoggedUser() user: User) {
     try {
-      const {type, startDate, endDate, projectId, taskId, summary, time} = dto;
+      const {type, billable, startDate, endDate, projectId, taskId, summary, time} = dto;
       const result = await this.commandBus.execute(
         new AddEventCommand(
           type,
           user,
-          Number(time),
+          time,
+          billable === 'true',
           new Date(startDate),
           new Date(endDate),
           projectId,

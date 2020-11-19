@@ -113,7 +113,6 @@
       "title": "Projets",
       "customers": "Clients",
       "day_durations": "Durée d'une journée",
-      "day_duration": "{dayDuration}h",
       "form": {
         "project_placeholder": "-- Choisir un projet --",
         "day_duration": "Durée d'une journée",
@@ -157,21 +156,25 @@
     "breadcrumb": "FairCalendar",
     "title": "Faircalendar {month}",
     "summary": "Récapitulatif",
+    "not_billable": "* Non facturé",
     "errors": {
       "event_doesnt_belong_to_user": "Cet évènement ne vous appartient pas, vous ne pouvez ni le modifier, ni le supprimer.",
       "event_not_found": "Cet évènement n'existe pas.",
-      "events_already_exist_for_this_period": "Un évènement a déjà été créé durant cette période.",
-      "event_maximum_reached": "Vous ne pouvez pas déclarer plus d'une journée.",
+      "events_or_leaves_already_exist_for_this_period": "Vous avez déjà complété un congé ou un CRA sur la période demandée.",
+      "event_maximum_reached": "Vous ne pouvez pas déclarer plus de 12h sur une journée.",
       "no_date_during_this_period": "Vous devez sélectionner une période valide.",
       "project_or_task_missing": "Vous devez saisir un projet et une mission."
     },
     "type": {
-      "mission": "Mission",
-      "support": "Support // Podcast",
-      "dojo": "Dojo",
-      "formationConference": "Formation // Conf // Meetup",
-      "holiday": "Vacances",
-      "medicalLeave": "Congé maladie",
+      "mission": "Missions",
+      "support": "Supports / Podcasts",
+      "dojo": "Dojos",
+      "formationConference": "Formations / Confs / Meetup",
+      "leave": "Congés",
+      "leave_medical": "Congé maladie",
+      "leave_paid": "Congé payé",
+      "leave_unpaid": "Congé sans solde",
+      "leave_special": "Congé exceptionnel",
       "other": "Autres",
       "meal_tickets": "Tickets resto"
     },
@@ -185,6 +188,7 @@
     "form": {
       "type": "Type de CRA",
       "time": "Temps passé",
+      "billable": "Facturable",
       "summary": "Commentaire"
     }
   },
@@ -198,6 +202,7 @@
       "download": "Télécharger ({size})",
       "form": {
         "file": "Fiche de paie",
+        "period": "Période",
         "file_helper": "Format PDF uniquement"
       },
       "errors": {
@@ -208,38 +213,52 @@
         "title": "Ajouter une fiche de paie"
       }
     },
-    "holidays": {
+    "leaves": {
       "title": "Congés",
-      "users": "Coopérateurs - salariés",
-      "periods": "Périodes",
-      "period": "Du {from} au {to}",
-      "leave_types": "Types de congés",
-      "status": "Etat",
-      "states": {
-        "pending": "En attente",
-        "accepted": "Acceptée",
-        "refused": "Refusée"
-      },
-      "add": {
-        "title": "Demande de congé"
-      },
-      "leave_type": {
-        "title": "Type de congé",
-        "medical": "Congé maladie",
-        "paid": "Congé payé",
-        "unpaid": "Congé sans solde",
-        "special": "Congé exceptionnel"
-      },
-      "errors": {
-        "already_exist_for_this_period": "Des vacances existent déjà sur la période sélectionnée.",
-        "cant_be_moderated": "Vous ne pouvez pas modérer cette demande de congé.",
-        "not_found": "La demande de congé n'existe pas."
-      },
-      "form": {
-        "from_date": "Du",
-        "to_date": "Au",
+      "requests": {
+        "title": "Demandes de congé",
+        "view": "Demande de {user}",
+        "users": "Coopérateurs - salariés",
         "all_day": "Toute la journée",
-        "comment": "Commentaire"
+        "periods": "Périodes",
+        "period": "Du {from} au {to}",
+        "leave_types": "Type de congé",
+        "status": "Etat",
+        "duration": "Durée",
+        "comment": "Commentaire",
+        "moderate_by": "Modéré par",
+        "end_date": "Date de fin",
+        "start_date": "Date de début",
+        "add": {
+          "title": "Faire une demande de congé"
+        },
+        "states": {
+          "pending": "En attente",
+          "accepted": "Acceptée",
+          "refused": "Refusée"
+        },
+        "leave_type": {
+          "title": "Type de congé",
+          "medical": "Congé maladie",
+          "paid": "Congé payé",
+          "unpaid": "Congé sans solde",
+          "special": "Congé exceptionnel"
+        },
+        "errors": {
+          "already_exist_for_this_period": "Vous avez déjà une demande de congé sur cette période.",
+          "cant_be_moderated": "Vous ne pouvez pas modérer cette demande de congé.",
+          "not_found": "La demande de congé n'existe pas."
+        },
+        "form": {
+          "from_date": "Du",
+          "to_date": "Au",
+          "all_day": "Toute la journée",
+          "comment": "Commentaire"
+        },
+        "actions": {
+          "accept": "Accepter",
+          "refuse": "Refuser"
+        }
       }
     },
     "users": {
@@ -299,5 +318,10 @@
   "dashboard": {
     "title": "Tableau de bord",
     "welcome": "Bonjour {firstName} {lastName} !"
+  },
+  "settings": {
+    "errors": {
+      "cooperative_not_found": "Les paramètres de la coopérative n'ont pas été trouvés."
+    }
   }
 }

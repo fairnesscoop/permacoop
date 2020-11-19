@@ -1,6 +1,8 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
+  import { range } from '../../utils/array';
+  import { minutesToHours } from '../../normalizer/time';
   import { get } from '../../utils/axios';
   import TasksInput from '../../components/inputs/TasksInput.svelte';
   import ProjectsInput from '../../components/inputs/ProjectsInput.svelte';
@@ -8,39 +10,44 @@
   import SelectInput from '../../components/inputs/SelectInput.svelte';
   import Button from '../../components/inputs/Button.svelte';
 
+  export let event;
+  export let loading;
+
   const dispatch = createEventDispatcher();
 
   let tasks = { items: [] };
   let projects = { items: [] };
+  let maxDayDuration;
 
   onMount(async () => {
-    let [tasksReponse, projectsReponse] = await Promise.all([
+    let [tasksReponse, projectsReponse, settingsResponse] = await Promise.all([
       get('tasks', { params: { page: 1 } }),
       get('projects', { params: { page: 1 } }),
+      get('settings/cooperative'),
     ]);
 
     tasks = tasksReponse.data;
     projects = projectsReponse.data;
+    maxDayDuration = settingsResponse.data.dayDuration;
+    event.time = event.time ? event.time : maxDayDuration;
   });
-
-  export let event;
-  export let loading;
 
   const types = [
     'mission',
     'dojo',
     'support',
     'formationConference',
-    'holiday',
-    'medicalLeave',
     'other',
   ];
+
+  $: times = [...range(30, maxDayDuration, 30)].reverse();
 
   const submit = () => {
     dispatch('save', {
       ...event,
       startDate: new Date(event.startDate),
       endDate: new Date(event.endDate),
+      billable: String(event.billable),
     });
   };
 </script>
@@ -53,18 +60,35 @@
       <option value="{type}">{$_(`faircalendar.type.${type}`)}</option>
     {/each}
   </SelectInput>
-  <SelectInput label="{$_('faircalendar.form.time')}" bind:value="{event.time}">
-    <option value="{'25'}">0.25 jour</option>
-    <option value="{'50'}">0.5 jour</option>
-    <option value="{'75'}">0.75 jour</option>
-    <option value="{'100'}">1 jour</option>
-  </SelectInput>
   {#if event.type === 'mission'}
-    <ProjectsInput
-      projects="{projects.items}"
-      bind:projectId="{event.projectId}" />
-    <TasksInput tasks="{tasks.items}" bind:taskId="{event.taskId}" />
+    <div class="flex">
+      <div class="w-1/2 pr-2">
+        <ProjectsInput
+          projects="{projects.items}"
+          bind:projectId="{event.projectId}" />
+      </div>
+      <div class="w-1/2 pl-2">
+        <TasksInput tasks="{tasks.items}" bind:taskId="{event.taskId}" />
+      </div>
+    </div>
   {/if}
+  <div class="flex">
+    <div class="w-1/2 pr-2">
+      <SelectInput label="{$_('faircalendar.form.time')}" bind:value="{event.time}">
+        {#each times as minutes}
+          <option value="{minutes}" selected={minutes === event.time}>{minutesToHours(minutes)}</option>
+        {/each}
+      </SelectInput>
+    </div>
+    {#if event.type === 'mission'}
+      <div class="w-1/2 pl-2">
+        <SelectInput label="{$_('faircalendar.form.billable')}" bind:value="{event.billable}">
+          <option value={true}>{$_('common.yes')}</option>
+          <option value={false}>{$_('common.no')}</option>
+        </SelectInput>
+      </div>
+    {/if}
+  </div>
   <Input
     label="{$_('faircalendar.form.summary')}"
     bind:value="{event.summary}"

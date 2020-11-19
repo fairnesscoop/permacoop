@@ -4,11 +4,13 @@ import {
   IsUUID,
   IsString,
   IsIn,
-  IsNumberString,
   IsEnum,
-  IsOptional
+  IsOptional,
+  IsNumber,
+  IsBooleanString
 } from 'class-validator';
 import { EventType } from 'src/Domain/FairCalendar/Event.entity';
+import { ArrayUtils } from 'src/Infrastructure/Common/Utils/ArrayUtils';
 
 export abstract class AbstractEventDTO {
   @ApiProperty({enum: EventType})
@@ -18,9 +20,14 @@ export abstract class AbstractEventDTO {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumberString()
-  @IsIn(['25', '50', '75', '100'])
-  public time: string;
+  @IsNumber()
+  @IsIn([...ArrayUtils.range(30, 480, 30)])
+  public time: number;
+
+  @IsNotEmpty()
+  @IsBooleanString()
+  @ApiProperty()
+  public billable: string;
 
   @ApiPropertyOptional()
   @IsOptional()

@@ -1,5 +1,5 @@
 <script context="module">
-  export const preload = async ({ query }) => {
+  export const preload = ({ query }) => {
     return {
       page: query.page || 1,
     };

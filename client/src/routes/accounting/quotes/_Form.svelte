@@ -58,7 +58,9 @@
       id="customerId"
       class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
       bind:value="{customerId}"
-      on:change="{onCustomerSelected}">
+      on:blur="{onCustomerSelected}"
+      on:change="{onCustomerSelected}"
+    >
       <option value="">{$_('crm.customers.form.customer_placeholder')}</option>
       {#each customers.items as { id, address, name }}
         <option value="{id}" selected="{customerId === id}">
