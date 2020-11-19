@@ -1,13 +1,13 @@
-import {Controller, Inject, Param, UseGuards, NotFoundException, Body, Put} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiBearerAuth, ApiOperation, ApiTags} from '@nestjs/swagger';
-import {UserAdministrativeView} from 'src/Application/HumanResource/User/View/UserAdministrativeView';
-import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
-import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
-import {Roles} from '../Decorator/Roles';
-import {ICommandBus} from '@nestjs/cqrs';
-import {UpdateUserCommand} from 'src/Application/HumanResource/User/Command/UpdateUserCommand';
-import {UserAdministrativeDTO} from '../DTO/UserAdministrativeDTO';
+import { Body, Controller, Inject, NotFoundException, Param, Put, UseGuards } from '@nestjs/common';
+import { ICommandBus } from '@nestjs/cqrs';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { UpdateUserCommand } from 'src/Application/HumanResource/User/Command/UpdateUserCommand';
+import { UserAdministrativeView } from 'src/Application/HumanResource/User/View/UserAdministrativeView';
+import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
+import { Roles } from '../Decorator/Roles';
+import { UserAdministrativeDTO } from '../DTO/UserAdministrativeDTO';
 
 @Controller('users')
 @ApiTags('Human Resource')
@@ -23,17 +23,28 @@ export class UpdateUserAction {
   @Roles(UserRole.COOPERATOR)
   @ApiOperation({summary: 'Update user administrative info'})
   public async index(@Param() dto: IdDTO, @Body() userAdministrativeDto: UserAdministrativeDTO): Promise<UserAdministrativeView> {
+    const {
+      role,
+      annualEarnings,
+      contract,
+      executivePosition,
+      healthInsurance,
+      joiningDate,
+      leavingDate,
+      transportFee,
+    } = userAdministrativeDto;
+
     try {
       return await this.commandBus.execute(new UpdateUserCommand(
         dto.id,
-        userAdministrativeDto.role,
-        userAdministrativeDto.annualEarnings,
-        userAdministrativeDto.contract,
-        userAdministrativeDto.executivePosition,
-        userAdministrativeDto.healthInsurance,
-        userAdministrativeDto.joiningDate,
-        userAdministrativeDto.leavingDate,
-        userAdministrativeDto.transportFee,
+        role,
+        annualEarnings,
+        contract,
+        executivePosition,
+        healthInsurance,
+        joiningDate,
+        leavingDate,
+        transportFee,
       ));
     } catch (e) {
       throw new NotFoundException(e.message);

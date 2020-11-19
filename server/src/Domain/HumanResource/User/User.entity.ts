@@ -91,6 +91,10 @@ export class User {
     return this.role;
   }
 
+  public isAdministrativeEditable(): boolean {
+    return this.role !== UserRole.ACCOUNTANT;
+  }
+
   public getFullName(): string {
     return `${this.firstName} ${this.lastName}`;
   }

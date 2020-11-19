@@ -22,11 +22,6 @@ export class UserDTO {
   @ApiProperty()
   public password: string;
 
-  @ApiProperty({enum: UserRole})
-  @IsNotEmpty()
-  @IsEnum(UserRole)
-  public role: UserRole;
-
   @ApiProperty({type: UserAdministrativeDTO})
   @ValidateNested()
   @Type(() => UserAdministrativeDTO)

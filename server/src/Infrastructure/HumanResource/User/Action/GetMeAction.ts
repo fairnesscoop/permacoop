@@ -18,7 +18,8 @@ export class GetMeAction {
       user.getFirstName(),
       user.getLastName(),
       user.getEmail(),
-      user.getRole()
+      user.getRole(),
+      false
     );
   }
 }

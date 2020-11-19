@@ -1,6 +1,6 @@
 <script>
   import { _ } from 'svelte-i18n';
-  //import EditLink from '../../../components/links/EditLink.svelte';
+  import EditLink from '../../../components/links/EditLink.svelte';
 
   export let users;
 </script>
@@ -17,16 +17,18 @@
     </tr>
   </thead>
   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-    {#each users as { id, firstName, lastName, email, role } (id)}
+    {#each users as { id, firstName, lastName, email, role, isAdministrativeEditable } (id)}
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="px-4 py-3 text-sm">{firstName}</td>
         <td class="px-4 py-3 text-sm">{lastName}</td>
         <td class="px-4 py-3 text-sm">{email}</td>
         <td class="px-4 py-3 text-sm">{$_(`common.roles.${role}`)}</td>
         <td class="px-4 py-3">
-          <div class="flex items-center space-x-4 text-sm">
-            <!--<EditLink href={`/human_resources/users/${id}/edit`} />-->
-          </div>
+          {#if isAdministrativeEditable}
+            <div class="flex items-center space-x-4 text-sm">
+              <EditLink href={`/human_resources/users/${id}/edit`} />
+            </div>
+          {/if}
         </td>
       </tr>
     {/each}

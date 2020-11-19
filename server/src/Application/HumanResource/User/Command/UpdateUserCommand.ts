@@ -1,6 +1,6 @@
-import {ICommand} from 'src/Application/ICommand';
-import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
-import {ContractType} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import { ICommand } from 'src/Application/ICommand';
+import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { ContractType } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 
 export class UpdateUserCommand implements ICommand {
   constructor(

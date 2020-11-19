@@ -43,7 +43,7 @@ describe('UpdateProfileCommandHandler', () => {
       await commandHandler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(UserNotFoundException);
-      expect(e.message).toBe('user.errors.not_found');
+      expect(e.message).toBe('human_resources.users.errors.not_found');
       verify(userRepository.findOneById('c07c4d56-5ff1-4ef9-b38e-631a6b9e92ed')).once();
       verify(userRepository.save(anything())).never();
       verify(userAdministrativeRepository.save(anything())).never();
@@ -59,13 +59,13 @@ describe('UpdateProfileCommandHandler', () => {
 
     await commandHandler.execute(command);
     const updatedUserAdministrative = new UserAdministrative(
-      50000,
+      5000000,
       true,
       true,
       ContractType.CDI,
       '2018-01-01',
       null,
-      75.2
+      7520
     );
     verify(userRepository.save(
       deepEqual(new User(

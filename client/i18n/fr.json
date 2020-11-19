@@ -1,6 +1,7 @@
 {
   "app": "Permacoop",
   "error": "Erreur",
+  "error_generic": "Une erreur est survenue",
   "pagination": "Affichage {start}-{from} sur {totalItems}",
   "common": {
     "actions": "Actions",
@@ -269,6 +270,9 @@
       "role": "Rôle",
       "add": {
         "title": "Ajouter un coopérateur - salarié"
+      },
+      "edit": {
+        "title": "Mise à jour des informations administratives de {name}"
       },
       "form": {
         "user_placeholder": "-- Choisir un coopérateur - salarié --",

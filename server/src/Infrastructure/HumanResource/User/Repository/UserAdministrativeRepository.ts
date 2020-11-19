@@ -14,18 +14,18 @@ export class UserAdministrativeRepository
 
   public findOneByUserId(userId: string): Promise<UserAdministrative | undefined> {
     return this.repository
-      .createQueryBuilder('useradministrative')
+      .createQueryBuilder('userAdministrative')
       .select([
-        'useradministrative.id',
-        'useradministrative.joiningDate',
-        'useradministrative.leavingDate',
-        'useradministrative.annualEarnings',
-        'useradministrative.transportFee',
-        'useradministrative.healthInsurance',
-        'useradministrative.executivePosition',
-        'useradministrative.contract',
+        'userAdministrative.id',
+        'userAdministrative.joiningDate',
+        'userAdministrative.leavingDate',
+        'userAdministrative.annualEarnings',
+        'userAdministrative.transportFee',
+        'userAdministrative.healthInsurance',
+        'userAdministrative.executivePosition',
+        'userAdministrative.contract',
       ])
-      .innerJoin('useradministrative.user', 'user')
+      .innerJoin('userAdministrative.user', 'user')
       .where('user.id = :userId', {userId})
       .getOne();
   }

@@ -38,20 +38,21 @@ export class CreateUserAction {
   @ApiOperation({summary: 'Create new user account'})
   public async index(@Body() userDto: UserDTO): Promise<UserView> {
     try {
-      const {firstName, lastName, email, password, role} = userDto;
+      const {firstName, lastName, email, password} = userDto;
       let userAdministrative: IUserAdministrativeCommand = null;
 
-      if (userDto.userAdministrative) {
-        const {
-          annualEarnings,
-          contract,
-          executivePosition,
-          healthInsurance,
-          joiningDate,
-          leavingDate,
-          transportFee
-        } = userDto.userAdministrative;
+      const {
+        role,
+        annualEarnings,
+        contract,
+        executivePosition,
+        healthInsurance,
+        joiningDate,
+        leavingDate,
+        transportFee
+      } = userDto.userAdministrative;
 
+      if (role !== UserRole.ACCOUNTANT) {
         userAdministrative = {
           annualEarnings,
           contract,

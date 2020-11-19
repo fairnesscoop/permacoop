@@ -15,6 +15,7 @@ describe('GetUsersQueryHandler', () => {
     when(user1.getLastName()).thenReturn('MARCHOIS');
     when(user1.getEmail()).thenReturn('mathieu@fairness.coop');
     when(user1.getRole()).thenReturn(UserRole.COOPERATOR);
+    when(user1.isAdministrativeEditable()).thenReturn(true);
 
     const user2 = mock(User);
     when(user2.getId()).thenReturn('0d7fee8a-ce9e-4bff-a93a-9cffafac5f1c');
@@ -22,6 +23,7 @@ describe('GetUsersQueryHandler', () => {
     when(user2.getLastName()).thenReturn('MARCHOIS');
     when(user2.getEmail()).thenReturn('helene@fairness.coop');
     when(user2.getRole()).thenReturn(UserRole.COOPERATOR);
+    when(user2.isAdministrativeEditable()).thenReturn(true);
 
     when(userRepository.findUsers(true)).thenResolve([
       instance(user1),
@@ -35,14 +37,16 @@ describe('GetUsersQueryHandler', () => {
         'Mathieu',
         'MARCHOIS',
         'mathieu@fairness.coop',
-        UserRole.COOPERATOR
+        UserRole.COOPERATOR,
+        true
       ),
       new UserView(
         '0d7fee8a-ce9e-4bff-a93a-9cffafac5f1c',
         'Hélène',
         'MARCHOIS',
         'helene@fairness.coop',
-        UserRole.COOPERATOR
+        UserRole.COOPERATOR,
+        true
       )
     ];
 

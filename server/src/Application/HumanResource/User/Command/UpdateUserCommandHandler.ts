@@ -1,5 +1,6 @@
 import {Inject} from '@nestjs/common';
 import {CommandHandler} from '@nestjs/cqrs';
+import { UserAdministrativeMissingException } from 'src/Domain/HumanResource/User/Exception/UserAdministrativeMissingException';
 import {UserNotFoundException} from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
 import {IUserAdministrativeRepository} from 'src/Domain/HumanResource/User/Repository/IUserAdministrativeRepository';
 import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
@@ -34,15 +35,19 @@ export class UpdateUserCommandHandler {
 
     const userAdministrative = await this.userAdministrativeRepository.findOneByUserId(id);
 
+    if (!userAdministrative) {
+      throw new UserAdministrativeMissingException();
+    }
+
     user.updateRole(role);
     userAdministrative.update(
-      annualEarnings,
+      Math.round(annualEarnings * 100),
       contract,
       executivePosition,
       healthInsurance,
       joiningDate,
       leavingDate,
-      transportFee
+      transportFee ? Math.round(transportFee * 100) : 0
     );
 
     await this.userRepository.save(user);
