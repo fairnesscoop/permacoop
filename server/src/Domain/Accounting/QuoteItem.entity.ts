@@ -18,7 +18,7 @@ export class QuoteItem {
   @ManyToOne(
     type => Quote,
     quote => quote.items,
-    {nullable: false}
+    {nullable: false, onDelete: 'CASCADE'}
   )
   quote: Quote;
 

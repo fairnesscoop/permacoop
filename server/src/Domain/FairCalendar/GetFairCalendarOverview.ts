@@ -33,7 +33,7 @@ export class GetFairCalendarOverview {
       const dayIndex = new Date(date).getDate() - 1;
       const type = itemType.startsWith('leave_') ? 'leave' : itemType;
       const dayDuration = project ? project.dayDuration : cooperative.getDayDuration();
-      const hours = time / dayDuration;
+      const days = time / dayDuration;
 
       if (itemsByDate[dayIndex]) {
         itemsByDate[dayIndex].push({ time, type });
@@ -41,7 +41,7 @@ export class GetFairCalendarOverview {
         itemsByDate[dayIndex] = [{ time, type }];
       }
 
-      overviewInDays[type] = Math.round((overviewInDays[type] + hours) * 100) / 100;
+      overviewInDays[type] = Math.round((overviewInDays[type] + days) * 100) / 100;
     }
 
     return {

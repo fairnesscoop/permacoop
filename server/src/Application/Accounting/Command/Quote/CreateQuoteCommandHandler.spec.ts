@@ -3,11 +3,11 @@ import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/Custome
 import {QuoteRepository} from 'src/Infrastructure/Accounting/Repository/QuoteRepository';
 import {CreateQuoteCommandHandler} from './CreateQuoteCommandHandler';
 import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
-import {QuoteIdGenerator} from 'src/Domain/Accounting/Quote/QuoteIdGenerator';
+import {QuoteIdGenerator} from 'src/Domain/Accounting/Generators/QuoteIdGenerator';
 import {CreateQuoteCommand} from './CreateQuoteCommand';
 import {User} from 'src/Domain/HumanResource/User/User.entity';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {Project} from 'src/Domain/Project/Project.entity';
+import {InvoiceUnits, Project} from 'src/Domain/Project/Project.entity';
 import {Quote, QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 import {InvalidProjectException} from 'src/Domain/Accounting/Exception/InvalidProjectException';
@@ -24,7 +24,7 @@ describe('CreateQuoteCommandHandler', () => {
   const quote = mock(Quote);
   const address = mock(Address);
   const customer = new Customer('Customer', instance(address));
-  const project = new Project('Project', 420, customer);
+  const project = new Project('Project', 420, InvoiceUnits.DAY, customer);
   const command = new CreateQuoteCommand(
     instance(user),
     QuoteStatus.DRAFT,

@@ -7,7 +7,7 @@ import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectReposito
 import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
-import {QuoteIdGenerator} from 'src/Domain/Accounting/Quote/QuoteIdGenerator';
+import {QuoteIdGenerator} from 'src/Domain/Accounting/Generators/QuoteIdGenerator';
 import {InvalidProjectException} from 'src/Domain/Accounting/Exception/InvalidProjectException';
 
 @CommandHandler(CreateQuoteCommand)

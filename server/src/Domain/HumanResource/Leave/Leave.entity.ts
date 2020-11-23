@@ -12,7 +12,7 @@ export class Leave {
   @Column({type: 'date', nullable: false})
   private date: string;
 
-  @ManyToOne(type => LeaveRequest, { nullable: false })
+  @ManyToOne(type => LeaveRequest, { nullable: false, onDelete: 'CASCADE' })
   private leaveRequest: LeaveRequest;
 
   constructor(

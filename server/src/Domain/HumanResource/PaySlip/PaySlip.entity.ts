@@ -10,10 +10,10 @@ export class PaySlip {
   @Column({type: 'timestamp', nullable: false})
   private date: string;
 
-  @ManyToOne(type => File, {nullable: false})
+  @ManyToOne(type => File, {nullable: false, onDelete: 'CASCADE'})
   private file: File;
 
-  @ManyToOne(type => User, {nullable: false})
+  @ManyToOne(type => User, {nullable: false, onDelete: 'CASCADE'})
   private user: User;
 
   constructor(date: string, file: File, user: User) {

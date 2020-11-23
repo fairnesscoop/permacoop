@@ -12,7 +12,7 @@ export class Customer {
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   private createdAt: Date;
 
-  @ManyToOne(type => Address, {nullable: false})
+  @ManyToOne(type => Address, {nullable: true, onDelete: 'SET NULL'})
   private address: Address;
 
   constructor(name: string, address: Address) {

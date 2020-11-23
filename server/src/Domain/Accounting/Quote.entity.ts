@@ -35,10 +35,10 @@ export class Quote {
   @ManyToOne(type => User, {nullable: false})
   private owner: User;
 
-  @ManyToOne(type => Customer, {nullable: false})
+  @ManyToOne(type => Customer, {nullable: false, onDelete: 'CASCADE'})
   private customer: Customer;
 
-  @ManyToOne(type => Project, {nullable: true})
+  @ManyToOne(type => Project, {nullable: true, onDelete: 'CASCADE'})
   private project: Project;
 
   @OneToMany(
