@@ -32,6 +32,8 @@ import {UpdateDailyRateCommandHandler} from 'src/Application/Accounting/Command/
 import {GetQuotesAction} from './Action/Quote/GetQuotesAction';
 import {GetQuotesQueryHandler} from 'src/Application/Accounting/Query/Quote/GetQuotesQueryHandler';
 import {UserRepository} from '../HumanResource/User/Repository/UserRepository';
+import { Billing } from 'src/Domain/Accounting/Billing.entity';
+import { BillingItem } from 'src/Domain/Accounting/BillingItem.entity';
 
 @Module({
   imports: [
@@ -44,7 +46,9 @@ import {UserRepository} from '../HumanResource/User/Repository/UserRepository';
       Customer,
       Task,
       DailyRate,
-      User
+      User,
+      Billing,
+      BillingItem
     ])
   ],
   controllers: [
