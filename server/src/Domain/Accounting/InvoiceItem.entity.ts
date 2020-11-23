@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Billing } from './Billing.entity';
+import { Invoice } from './Invoice.entity';
 
 @Entity()
-export class BillingItem {
+export class InvoiceItem {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
@@ -19,14 +19,14 @@ export class BillingItem {
   private discount: number;
 
   @ManyToOne(
-    type => Billing,
+    type => Invoice,
     billing => billing.items,
     {nullable: false}
   )
-  billing: Billing;
+  billing: Invoice;
 
   constructor(
-    billing: Billing,
+    billing: Invoice,
     title: string,
     quantity: number,
     amount: number,
@@ -59,7 +59,7 @@ export class BillingItem {
     return this.quantity;
   }
 
-  public getBilling(): Billing {
+  public getInvoice(): Invoice {
     return this.billing;
   }
 }

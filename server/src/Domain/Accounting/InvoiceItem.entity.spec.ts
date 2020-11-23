@@ -1,11 +1,11 @@
 import { mock, instance } from 'ts-mockito';
-import { BillingItem } from './BillingItem.entity';
-import { Billing } from './Billing.entity';
+import { InvoiceItem } from './InvoiceItem.entity';
+import { Invoice } from './Invoice.entity';
 
-describe('BillingItem.entity', () => {
+describe('InvoiceItem.entity', () => {
   it('testGetters', () => {
-    const billing = mock(Billing);
-    const billingitem = new BillingItem(
+    const billing = mock(Invoice);
+    const billingitem = new InvoiceItem(
       instance(billing),
       'Développement web',
       18,
@@ -18,6 +18,6 @@ describe('BillingItem.entity', () => {
     expect(billingitem.getDiscount()).toBe(0);
     expect(billingitem.getQuantity()).toBe(18);
     expect(billingitem.getTitle()).toBe('Développement web');
-    expect(billingitem.getBilling()).toBe(instance(billing));
+    expect(billingitem.getInvoice()).toBe(instance(billing));
   });
 });

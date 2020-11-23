@@ -7,10 +7,10 @@ import {
 } from 'typeorm';
 import { Customer } from '../Customer/Customer.entity';
 import { User } from '../HumanResource/User/User.entity';
-import { BillingItem } from './BillingItem.entity';
+import { InvoiceItem } from './InvoiceItem.entity';
 import { Quote } from './Quote.entity';
 
-export enum BillingStatus {
+export enum InvoiceStatus {
   DRAFT = 'draft',
   SENT = 'sent',
   PAYED = 'payed',
@@ -18,12 +18,12 @@ export enum BillingStatus {
 }
 
 @Entity()
-export class Billing {
+export class Invoice {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column('enum', {enum: BillingStatus, nullable: false})
-  private status: BillingStatus;
+  @Column('enum', {enum: InvoiceStatus, nullable: false})
+  private status: InvoiceStatus;
 
   @Column({type: 'varchar', nullable: false, unique: true})
   private billingId: string;
@@ -44,14 +44,14 @@ export class Billing {
   private customer: Customer;
 
   @OneToMany(
-    type => BillingItem,
+    type => InvoiceItem,
     billingItem => billingItem.billing
   )
-  items: BillingItem[];
+  items: InvoiceItem[];
 
   constructor(
     billingId: string,
-    status: BillingStatus,
+    status: InvoiceStatus,
     expiryDate: string,
     owner: User,
     customer: Customer,
@@ -69,7 +69,7 @@ export class Billing {
     return this.id;
   }
 
-  public getBillingId(): string {
+  public getInvoiceId(): string {
     return this.billingId;
   }
 
@@ -77,7 +77,7 @@ export class Billing {
     return this.expiryDate;
   }
 
-  public getStatus(): BillingStatus {
+  public getStatus(): InvoiceStatus {
     return this.status;
   }
 
