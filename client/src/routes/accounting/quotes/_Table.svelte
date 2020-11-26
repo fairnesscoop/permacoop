@@ -16,8 +16,8 @@
   <thead>
     <tr
       class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-      <th class="px-4 py-3">{$_('accounting.quotes.quote_id')}</th>
       <th class="px-4 py-3">{$_('accounting.quotes.date')}</th>
+      <th class="px-4 py-3">{$_('accounting.quotes.quote_id')}</th>
       <th class="px-4 py-3">{$_('accounting.quotes.customer')}</th>
       <th class="px-4 py-3">{$_('accounting.quotes.amount')}</th>
       <th class="px-4 py-3">{$_('accounting.quotes.status.title')}</th>
@@ -27,10 +27,10 @@
   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
     {#each items as { id, quoteId, createdAt, status, customer, amountInclusiveOfTaxe, project } (id)}
       <tr class="text-gray-700 dark:text-gray-400">
-        <td class="px-4 py-3 text-sm">{quoteId}</td>
         <td class="px-4 py-3 text-sm">
           {dateFormat(new Date(createdAt), 'dd/MM/yyyy', { locale: fr })}
         </td>
+        <td class="px-4 py-3 text-sm">{quoteId}</td>
         <td class="px-4 py-3 text-sm">
           {customer.name}
           {#if project}({project.name}){/if}

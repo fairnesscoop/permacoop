@@ -5,7 +5,7 @@ import {
   ManyToOne,
   OneToMany
 } from 'typeorm';
-import { Customer } from '../Customer/Customer.entity';
+import { Project } from '../Project/Project.entity';
 import { User } from '../HumanResource/User/User.entity';
 import { InvoiceItem } from './InvoiceItem.entity';
 import { Quote } from './Quote.entity';
@@ -26,43 +26,41 @@ export class Invoice {
   private status: InvoiceStatus;
 
   @Column({type: 'varchar', nullable: false, unique: true})
-  private billingId: string;
+  private invoiceId: string;
 
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-  private createdAt: Date;
+  private createdAt: string;
 
   @Column({type: 'timestamp'})
   private expiryDate: string;
 
-  @ManyToOne(type => User, {nullable: false})
+  @ManyToOne(type => User, {nullable: true, onDelete: 'SET NULL'})
   private owner: User;
 
-  @ManyToOne(type => Quote, {nullable: true})
+  @ManyToOne(type => Quote, {nullable: true, onDelete: 'SET NULL'})
   private quote: Quote;
 
-  @ManyToOne(type => Customer, {nullable: false})
-  private customer: Customer;
+  @ManyToOne(type => Project, {nullable: true, onDelete: 'SET NULL'})
+  private project: Project;
 
   @OneToMany(
     type => InvoiceItem,
-    billingItem => billingItem.billing
+    invoiceItem => invoiceItem.invoice,
   )
   items: InvoiceItem[];
 
   constructor(
-    billingId: string,
+    invoiceId: string,
     status: InvoiceStatus,
     expiryDate: string,
     owner: User,
-    customer: Customer,
-    quote?: Quote
+    project: Project
   ) {
-    this.billingId = billingId;
+    this.invoiceId = invoiceId;
     this.status = status;
     this.expiryDate = expiryDate;
     this.owner = owner;
-    this.customer = customer;
-    this.quote = quote;
+    this.project = project;
   }
 
   public getId(): string {
@@ -70,7 +68,7 @@ export class Invoice {
   }
 
   public getInvoiceId(): string {
-    return this.billingId;
+    return this.invoiceId;
   }
 
   public getExpiryDate(): string {
@@ -81,12 +79,12 @@ export class Invoice {
     return this.status;
   }
 
-  public getCreatedAt(): Date {
+  public getCreatedAt(): string {
     return this.createdAt;
   }
 
-  public getCustomer(): Customer {
-    return this.customer;
+  public getProject(): Project {
+    return this.project;
   }
 
   public getOwner(): User {

@@ -1,12 +1,12 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
-import {Project} from 'src/Domain/Project/Project.entity';
-import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {GetProjectByIdQueryHandler} from './GetProjectByIdQueryHandler';
-import {GetProjectByIdQuery} from './GetProjectByIdQuery';
-import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotFoundException';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { ProjectRepository } from 'src/Infrastructure/Project/Repository/ProjectRepository';
+import { InvoiceUnits, Project } from 'src/Domain/Project/Project.entity';
+import { ProjectView } from 'src/Application/Project/View/ProjectView';
+import { GetProjectByIdQueryHandler } from './GetProjectByIdQueryHandler';
+import { GetProjectByIdQuery } from './GetProjectByIdQuery';
+import { ProjectNotFoundException } from 'src/Domain/Project/Exception/ProjectNotFoundException';
+import { CustomerView } from 'src/Application/Customer/View/CustomerView';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
 
 describe('GetProjectByIdQueryHandler', () => {
   const query = new GetProjectByIdQuery('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
@@ -24,7 +24,8 @@ describe('GetProjectByIdQueryHandler', () => {
 
     when(project.getId()).thenReturn('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
     when(project.getName()).thenReturn('Project');
-    when(project.getDayDuration()).thenReturn(7);
+    when(project.getDayDuration()).thenReturn(420);
+    when(project.getInvoiceUnit()).thenReturn(InvoiceUnits.DAY);
     when(project.getCustomer()).thenReturn(instance(customer));
     when(
       projectRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
@@ -34,7 +35,8 @@ describe('GetProjectByIdQueryHandler', () => {
       new ProjectView(
         'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
         'Project',
-        7,
+        420,
+        InvoiceUnits.DAY,
         new CustomerView('aeb50974-0dcd-4ef4-af43-d656250e43bc', 'Customer')
       )
     );
@@ -45,6 +47,7 @@ describe('GetProjectByIdQueryHandler', () => {
     verify(project.getId()).once();
     verify(project.getName()).once();
     verify(project.getDayDuration()).once();
+    verify(project.getInvoiceUnit()).once();
     verify(project.getCustomer()).once();
     verify(customer.getId()).once();
     verify(customer.getName()).once();

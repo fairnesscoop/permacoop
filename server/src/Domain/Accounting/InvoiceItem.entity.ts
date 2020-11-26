@@ -9,8 +9,8 @@ export class InvoiceItem {
   @Column({type: 'varchar', nullable: false})
   private title: string;
 
-  @Column({type: 'integer', nullable: false})
-  private quantity: number;
+  @Column({type: 'integer', nullable: false, comment: 'Stored in minutes'})
+  private timeSpent: number;
 
   @Column({type: 'integer', nullable: false})
   private amount: number;
@@ -20,21 +20,21 @@ export class InvoiceItem {
 
   @ManyToOne(
     type => Invoice,
-    billing => billing.items,
-    {nullable: false}
+    invoice => invoice.items,
+    {nullable: false, onDelete: 'CASCADE'}
   )
-  billing: Invoice;
+  invoice: Invoice;
 
   constructor(
-    billing: Invoice,
+    invoice: Invoice,
     title: string,
-    quantity: number,
+    timeSpent: number,
     amount: number,
     discount?: number
   ) {
-    this.billing = billing;
+    this.invoice = invoice;
     this.title = title;
-    this.quantity = quantity;
+    this.timeSpent = timeSpent;
     this.amount = amount;
     this.discount = discount;
   }
@@ -55,11 +55,11 @@ export class InvoiceItem {
     return this.discount;
   }
 
-  public getQuantity(): number {
-    return this.quantity;
+  public getTimeSpent(): number {
+    return this.timeSpent;
   }
 
   public getInvoice(): Invoice {
-    return this.billing;
+    return this.invoice;
   }
 }

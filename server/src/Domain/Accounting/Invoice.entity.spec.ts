@@ -1,31 +1,28 @@
 import { mock, instance } from 'ts-mockito';
 import { User } from '../HumanResource/User/User.entity';
-import { Customer } from '../Customer/Customer.entity';
+import { Project } from '../Project/Project.entity';
 import { Invoice, InvoiceStatus } from './Invoice.entity';
-import { Quote } from './Quote.entity';
 
 describe('Invoice.entity', () => {
   it('testGetters', () => {
     const user = mock(User);
-    const customer = mock(Customer);
-    const quote = mock(Quote);
+    const project = mock(Project);
 
-    const billing = new Invoice(
+    const invoice = new Invoice(
       'FS-2020-0001',
       InvoiceStatus.SENT,
       '2020-11-09',
       instance(user),
-      instance(customer),
-      instance(quote),
+      instance(project)
     );
 
-    expect(billing.getId()).toBe(undefined);
-    expect(billing.getInvoiceId()).toBe('FS-2020-0001');
-    expect(billing.getExpiryDate()).toBe('2020-11-09');
-    expect(billing.getStatus()).toBe(InvoiceStatus.SENT);
-    expect(billing.getCreatedAt()).toBe(undefined);
-    expect(billing.getOwner()).toBe(instance(user));
-    expect(billing.getCustomer()).toBe(instance(customer));
-    expect(billing.getQuote()).toBe(instance(quote));
+    expect(invoice.getId()).toBe(undefined);
+    expect(invoice.getInvoiceId()).toBe('FS-2020-0001');
+    expect(invoice.getExpiryDate()).toBe('2020-11-09');
+    expect(invoice.getStatus()).toBe(InvoiceStatus.SENT);
+    expect(invoice.getCreatedAt()).toBe(undefined);
+    expect(invoice.getOwner()).toBe(instance(user));
+    expect(invoice.getProject()).toBe(instance(project));
+    expect(invoice.getQuote()).toBeUndefined();
   });
 });

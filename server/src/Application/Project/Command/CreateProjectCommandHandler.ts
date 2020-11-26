@@ -1,12 +1,12 @@
-import {Inject} from '@nestjs/common';
-import {CommandHandler} from '@nestjs/cqrs';
-import {CreateProjectCommand} from './CreateProjectCommand';
-import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
-import {Project} from 'src/Domain/Project/Project.entity';
-import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
-import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
-import {ProjectAlreadyExistException} from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
-import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
+import { Inject } from '@nestjs/common';
+import { CommandHandler } from '@nestjs/cqrs';
+import { CreateProjectCommand } from './CreateProjectCommand';
+import { IProjectRepository } from 'src/Domain/Project/Repository/IProjectRepository';
+import { Project } from 'src/Domain/Project/Project.entity';
+import { CustomerNotFoundException } from 'src/Domain/Customer/Exception/CustomerNotFoundException';
+import { IsProjectAlreadyExist } from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
+import { ProjectAlreadyExistException } from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
+import { ICustomerRepository } from 'src/Domain/Customer/Repository/ICustomerRepository';
 
 @CommandHandler(CreateProjectCommand)
 export class CreateProjectCommandHandler {
@@ -19,7 +19,7 @@ export class CreateProjectCommandHandler {
   ) {}
 
   public async execute(command: CreateProjectCommand): Promise<string> {
-    const {name, dayDuration, customerId} = command;
+    const { name, dayDuration, customerId, invoiceUnit } = command;
 
     const customer = await this.customerRepository.findOneById(customerId);
     if (!customer) {
@@ -31,7 +31,7 @@ export class CreateProjectCommandHandler {
     }
 
     const project = await this.projectRepository.save(
-      new Project(name, dayDuration, customer)
+      new Project(name, dayDuration, invoiceUnit, customer)
     );
 
     return project.getId();

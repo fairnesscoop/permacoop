@@ -46,10 +46,10 @@ export class LeaveRequest {
   @Column({type: 'timestamp', nullable: true})
   private moderateAt: string;
 
-  @ManyToOne(type => User, {nullable: true})
+  @ManyToOne(type => User, {nullable: true, onDelete: 'SET NULL'})
   private moderator: User;
 
-  @ManyToOne(type => User, {nullable: false})
+  @ManyToOne(type => User, {nullable: false, onDelete: 'CASCADE'})
   private user: User;
 
   constructor(

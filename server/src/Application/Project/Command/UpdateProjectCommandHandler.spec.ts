@@ -1,7 +1,7 @@
 import {mock, instance, when, verify, anything} from 'ts-mockito';
 import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
 import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
-import {Project} from 'src/Domain/Project/Project.entity';
+import {InvoiceUnits, Project} from 'src/Domain/Project/Project.entity';
 import {UpdateProjectCommand} from './UpdateProjectCommand';
 import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotFoundException';
 import {ProjectAlreadyExistException} from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
@@ -21,7 +21,8 @@ describe('UpdateProjectCommandHandler', () => {
   const command = new UpdateProjectCommand(
     'afda00b1-bf49-4102-9bc2-bce17f3acd48',
     'Project',
-    8,
+    420,
+    InvoiceUnits.HOUR,
     'd4aa560e-d2f7-422e-ae8d-6af5d0455eeb'
   );
 
@@ -50,7 +51,7 @@ describe('UpdateProjectCommandHandler', () => {
     when(updatedProject.getId()).thenReturn(
       'afda00b1-bf49-4102-9bc2-bce17f3acd48'
     );
-    when(updatedProject.getDayDuration()).thenReturn(8);
+    when(updatedProject.getDayDuration()).thenReturn(420);
     when(updatedProject.getName()).thenReturn('Old project');
 
     // Command return nothing
@@ -65,10 +66,10 @@ describe('UpdateProjectCommandHandler', () => {
     ).once();
     verify(projectRepository.save(instance(updatedProject))).once();
     verify(
-      updatedProject.update(instance(customer), 8, 'Project')
+      updatedProject.update(instance(customer), 420, InvoiceUnits.HOUR, 'Project')
     ).once();
     verify(
-      updatedProject.update(instance(customer), 8, 'Project')
+      updatedProject.update(instance(customer), 420, InvoiceUnits.HOUR, 'Project')
     ).calledBefore(projectRepository.save(instance(updatedProject)));
     verify(updatedProject.getName()).once();
   });
@@ -90,7 +91,7 @@ describe('UpdateProjectCommandHandler', () => {
       ).once();
       verify(projectRepository.save(anything())).never();
       verify(
-        updatedProject.update(anything(), anything(), anything())
+        updatedProject.update(anything(), anything(), anything(), anything())
       ).never();
       verify(updatedProject.getName()).never();
     }
@@ -118,7 +119,7 @@ describe('UpdateProjectCommandHandler', () => {
       ).once();
       verify(projectRepository.save(anything())).never();
       verify(
-        updatedProject.update(anything(), anything(), anything())
+        updatedProject.update(anything(), anything(), anything(), anything())
       ).never();
       verify(updatedProject.getName()).never();
     }
@@ -147,7 +148,7 @@ describe('UpdateProjectCommandHandler', () => {
       ).once();
       verify(projectRepository.save(anything())).never();
       verify(
-        updatedProject.update(anything(), anything(), anything())
+        updatedProject.update(anything(), anything(), anything(), anything())
       ).never();
       verify(updatedProject.getName()).once();
     }

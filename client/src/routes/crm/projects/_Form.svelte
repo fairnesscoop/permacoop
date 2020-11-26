@@ -18,13 +18,14 @@
 
   export let loading;
   export let name = '';
-  export let dayDuration = 480;
+  export let dayDuration = 420;
+  export let invoiceUnit = 'day';
   export let customerId = '';
 
   const dispatch = createEventDispatcher();
 
   const submit = () => {
-    dispatch('save', { name, dayDuration, customerId });
+    dispatch('save', { name, dayDuration, customerId, invoiceUnit });
   };
 </script>
 
@@ -41,6 +42,13 @@
     bind:value="{dayDuration}">
     {#each [420, 480] as minutes}
       <option value={minutes}>{minutesToHours(minutes)}</option>
+    {/each}
+  </SelectInput>
+  <SelectInput
+    label="{$_('crm.projects.invoice_unit.title')}"
+    bind:value="{invoiceUnit}">
+    {#each ['day', 'hour'] as unit}
+      <option value={unit}>{$_(`crm.projects.invoice_unit.${unit}`)}</option>
     {/each}
   </SelectInput>
   <Button

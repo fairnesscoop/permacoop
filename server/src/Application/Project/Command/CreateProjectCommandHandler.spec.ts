@@ -6,7 +6,7 @@ import {CreateProjectCommand} from 'src/Application/Project/Command/CreateProjec
 import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 import {Customer} from 'src/Domain/Customer/Customer.entity';
 import {ProjectAlreadyExistException} from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
-import {Project} from 'src/Domain/Project/Project.entity';
+import {InvoiceUnits, Project} from 'src/Domain/Project/Project.entity';
 import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
 
 describe('CreateProjectCommandHandler', () => {
@@ -18,6 +18,7 @@ describe('CreateProjectCommandHandler', () => {
   const command = new CreateProjectCommand(
     'Project',
     420,
+    InvoiceUnits.DAY,
     'b5e8dc18-ca67-4323-bdae-654afe09499f'
   );
 
@@ -83,7 +84,7 @@ describe('CreateProjectCommandHandler', () => {
     ).thenResolve(instance(customer));
     when(
       projectRepository.save(
-        deepEqual(new Project('Project', 420, instance(customer)))
+        deepEqual(new Project('Project', 420, InvoiceUnits.DAY, instance(customer)))
       )
     ).thenResolve(instance(createdProject));
 
@@ -97,7 +98,7 @@ describe('CreateProjectCommandHandler', () => {
     verify(isProjectAlreadyExist.isSatisfiedBy('Project')).once();
     verify(
       projectRepository.save(
-        deepEqual(new Project('Project', 420, instance(customer)))
+        deepEqual(new Project('Project', 420, InvoiceUnits.DAY, instance(customer)))
       )
     ).once();
     verify(createdProject.getId()).once();

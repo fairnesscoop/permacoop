@@ -1,7 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
 
-  export let projectId;
+  export let projectId = '';
   export let projects = [];
 </script>
 

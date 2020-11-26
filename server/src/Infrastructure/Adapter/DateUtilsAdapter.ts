@@ -32,6 +32,10 @@ export class DateUtilsAdapter implements IDateUtils {
     return this.date.toISOString();
   }
 
+  public addDaysToDate(date: Date, days: number): Date {
+    return addDays(date, days);
+  }
+
   public getWorkedDaysDuringAPeriod(start: Date, end: Date): Date[] {
     const dates: Date[] = [];
     const workedFreeDays: Date[] = [];
