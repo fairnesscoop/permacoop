@@ -95,10 +95,10 @@
     },
     "daily_rates": {
       "title": "TJM",
-      "users": "Coopérateurs - salariés",
+      "user": "Coopérateur - salarié",
       "amount": "Montant HT",
-      "tasks": "Mission",
-      "customers": "Nom du client",
+      "task": "Nom de la mission",
+      "customer": "Nom du client",
       "errors": {
         "already_exist": "Ce TJM a déjà été configuré.",
         "not_found": "Le TJM n'existe pas."
@@ -251,11 +251,10 @@
       "requests": {
         "title": "Demandes de congé",
         "view": "Demande de {user}",
-        "users": "Coopérateurs - salariés",
+        "user": "Coopérateur - salarié",
         "all_day": "Toute la journée",
         "periods": "Périodes",
         "period": "Du {from} au {to}",
-        "leave_types": "Type de congé",
         "status": "Etat",
         "duration": "Durée",
         "comment": "Commentaire",

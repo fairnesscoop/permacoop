@@ -5,7 +5,7 @@ import {
   ManyToOne,
   OneToMany
 } from 'typeorm';
-import { Project } from '../Project/Project.entity';
+import { InvoiceUnits, Project } from '../Project/Project.entity';
 import { User } from '../HumanResource/User/User.entity';
 import { InvoiceItem } from './InvoiceItem.entity';
 import { Quote } from './Quote.entity';
@@ -93,5 +93,9 @@ export class Invoice {
 
   public getQuote(): Quote | undefined {
     return this.quote;
+  }
+
+  public getItems(): InvoiceItem[] {
+    return this.items;
   }
 }

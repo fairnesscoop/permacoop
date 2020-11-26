@@ -11,6 +11,7 @@ import { NoBillableEventsFoundException } from 'src/Domain/Accounting/Exception/
 import { IDateUtils } from 'src/Application/IDateUtils';
 import { IProjectRepository } from 'src/Domain/Project/Repository/IProjectRepository';
 import { ProjectNotFoundException } from 'src/Domain/Project/Exception/ProjectNotFoundException';
+import { Project } from 'src/Domain/Project/Project.entity';
 
 @CommandHandler(GenerateInvoiceCommand)
 export class GenerateInvoiceCommandHandler {
@@ -57,7 +58,7 @@ export class GenerateInvoiceCommandHandler {
     );
 
     for (const event of events) {
-      invoiceItems.push(this.buildInvoiceItem(invoice, event));
+      invoiceItems.push(this.buildInvoiceItem(invoice, project, event));
     }
 
     const savedInvoice = await this.invoiceRepository.save(invoice);
@@ -66,20 +67,22 @@ export class GenerateInvoiceCommandHandler {
     return savedInvoice.getId();
   }
 
-  private buildInvoiceItem(invoice: Invoice, {
+  private buildInvoiceItem(invoice: Invoice, project: Project, {
     time_spent,
     billable,
     task_name,
     first_name,
     last_name,
-    amount
+    daily_rate
   }): InvoiceItem {
+    const quantity = Math.round(time_spent / project.getDayDuration() * 100) / 100;
+
     return new InvoiceItem(
       invoice,
       `${task_name} - ${first_name} ${last_name}`,
-      Number(time_spent),
-      amount ? Number(amount) : 0,
-      billable ? 0 : 100
+      Math.round(quantity * 100),
+      daily_rate ? daily_rate : 0,
+      billable ? 0 : 10000
     );
   }
 }

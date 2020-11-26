@@ -24,6 +24,20 @@ export class GetInvoicesQueryHandler {
       const project = invoice.getProject();
       const customer = project.getCustomer();
 
+      let amountExcludingVat = 0;
+
+      for (const item of invoice.getItems()) {
+        const amount = item.getAmount() / 100;
+        const quantity = item.getQuantity() / 100;
+        let totalAmount = amount * quantity;
+
+        if (item.getDiscount() > 0) {
+          totalAmount *= (item.getDiscount() / 10000);
+        }
+
+        amountExcludingVat += totalAmount;
+      }
+
       results.push(
         new InvoiceView(
           invoice.getId(),
@@ -31,7 +45,7 @@ export class GetInvoicesQueryHandler {
           invoice.getStatus(),
           invoice.getCreatedAt(),
           invoice.getExpiryDate(),
-          0,
+          amountExcludingVat * 1.2,
           new ProjectView(
             project.getId(),
             project.getName(),

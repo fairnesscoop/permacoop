@@ -111,7 +111,7 @@ describe('GenerateInvoiceCommandHandler', () => {
         task_name: 'Développement',
         first_name: 'Mathieu',
         last_name: 'MARCHOIS',
-        amount: 60000
+        daily_rate: 60000
       },
       {
         time_spent: '420',
@@ -119,7 +119,7 @@ describe('GenerateInvoiceCommandHandler', () => {
         task_name: 'Architecture',
         first_name: 'Mathieu',
         last_name: 'MARCHOIS',
-        amount: null
+        daily_rate: null
       },
       {
         time_spent: '4200',
@@ -127,7 +127,7 @@ describe('GenerateInvoiceCommandHandler', () => {
         task_name: 'Développement',
         first_name: 'Mathieu',
         last_name: 'MARCHOIS',
-        amount: 60000
+        daily_rate: 60000
       }
     ];
 
@@ -141,11 +141,12 @@ describe('GenerateInvoiceCommandHandler', () => {
 
     const savedInvoice = mock(Invoice);
     when(savedInvoice.getId()).thenReturn('fc8a4cd9-31eb-4fca-814d-b30c05de485d');
+    when(project.getDayDuration()).thenReturn(420);
 
     const invoiceItems = [
-      new InvoiceItem(invoice, 'Développement - Mathieu MARCHOIS', 180, 60000, 100),
-      new InvoiceItem(invoice, 'Architecture - Mathieu MARCHOIS', 420, 0, 0),
-      new InvoiceItem(invoice, 'Développement - Mathieu MARCHOIS', 4200, 60000, 0),
+      new InvoiceItem(invoice, 'Développement - Mathieu MARCHOIS', 43, 60000, 10000),
+      new InvoiceItem(invoice, 'Architecture - Mathieu MARCHOIS', 100, 0, 0),
+      new InvoiceItem(invoice, 'Développement - Mathieu MARCHOIS', 1000, 60000, 0),
     ];
 
     when(
