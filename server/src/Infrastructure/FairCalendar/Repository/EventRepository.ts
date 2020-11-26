@@ -116,7 +116,7 @@ export class EventRepository implements IEventRepository {
           .innerJoin('dailyRate.user', 'd_user')
           .innerJoin('dailyRate.task', 'd_task')
           .innerJoin('dailyRate.customer', 'd_customer')
-      }, 'amount')
+      }, 'daily_rate')
       .innerJoin('event.project', 'project')
       .innerJoin('event.user', 'user')
       .innerJoin('event.task', 'task')

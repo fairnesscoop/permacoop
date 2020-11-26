@@ -8,7 +8,7 @@ export class DailyRate {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'integer', nullable: false})
+  @Column({type: 'integer', nullable: false, comment: 'Stored in base 100'})
   private amount: number;
 
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})

@@ -24,5 +24,6 @@ describe('Invoice.entity', () => {
     expect(invoice.getOwner()).toBe(instance(user));
     expect(invoice.getProject()).toBe(instance(project));
     expect(invoice.getQuote()).toBeUndefined();
+    expect(invoice.getItems()).toBeUndefined();
   });
 });

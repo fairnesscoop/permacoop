@@ -36,8 +36,9 @@ export class InvoiceRepository implements IInvoiceRepository {
         'customer.id',
         'customer.name',
         'invoiceItem.id',
+        'invoiceItem.quantity',
         'invoiceItem.amount',
-        'invoiceItem.timeSpent'
+        'invoiceItem.discount'
       ])
       .where('invoiceItem.discount <> 100')
       .innerJoin('invoice.project', 'project')

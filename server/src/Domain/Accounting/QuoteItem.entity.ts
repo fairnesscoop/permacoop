@@ -9,10 +9,10 @@ export class QuoteItem {
   @Column({type: 'varchar', nullable: false})
   private title: string;
 
-  @Column({type: 'integer', nullable: false})
+  @Column({type: 'integer', nullable: false, comment: 'Stored in base 100'})
   private quantity: number;
 
-  @Column({type: 'integer', nullable: false})
+  @Column({type: 'integer', nullable: false, comment: 'Stored in base 100'})
   private dailyRate: number;
 
   @ManyToOne(
