@@ -33,9 +33,9 @@
   on:submit|preventDefault="{submit}"
   class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <UsersInput users="{data}" bind:userId />
-  <MonthsInput label={$_('human_resources.pay_slips.form.period')} bind:date amount="{6}" />
+  <MonthsInput label={$_('human_resources.pay_slips.form.period')} bind:date addMonth={0} />
   <div class="block mt-4 text-sm">
-    <label class="text-gray-700 dark:text-gray-400">
+    <label class="text-gray-700 dark:text-gray-400" for="file">
       {$_('human_resources.pay_slips.form.file')}
     </label>
     <input

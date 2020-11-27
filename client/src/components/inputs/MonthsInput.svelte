@@ -3,6 +3,7 @@
   import { createEventDispatcher } from 'svelte';
   import {
     subMonths,
+    addMonths,
     format,
     compareDesc,
     eachMonthOfInterval,
@@ -10,7 +11,8 @@
   import { fr } from 'date-fns/locale';
 
   export let label = '';
-  export let amount;
+  export let subMonth = 6;
+  export let addMonth = 6;
   export let date = '';
 
   const dispatch = createEventDispatcher();
@@ -19,8 +21,8 @@
   };
 
   const periods = eachMonthOfInterval({
-    start: subMonths(new Date(), amount - 1),
-    end: new Date(),
+    start: subMonths(new Date(), subMonth),
+    end: addMonths(new Date(), addMonth),
   }).sort(compareDesc);
 </script>
 
