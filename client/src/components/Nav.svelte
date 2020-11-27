@@ -31,16 +31,6 @@
     'px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200';
 </script>
 
-<style>
-  .open {
-    position: fixed;
-    background: #fff;
-    margin-top: 4rem;
-    height: 100%;
-    display: block;
-  }
-</style>
-
 {#if $session.user}
   <aside
     class="z-20 hidden overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0"
