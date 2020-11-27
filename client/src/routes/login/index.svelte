@@ -73,13 +73,14 @@
             loading="{loading}"
             disabled="{!email || !password || loading}" />
           <hr class="my-8" />
-          <p class="mt-4">
+          <!--<p class="mt-4">
             <a
               class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
               href="login/forgot-password">
               {$_('login.password_lost')}
             </a>
           </p>
+          -->
         </div>
       </form>
     </div>

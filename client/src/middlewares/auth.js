@@ -9,8 +9,6 @@ export default async (req, res, next) => {
   const token = req.cookies?.permacoop_token;
 
   if (!token) {
-    req.user = {};
-
     return next();
   }
 
@@ -25,6 +23,7 @@ export default async (req, res, next) => {
       email,
       scope: role,
     };
+
    return next();
   } catch (e) {
    return next();
