@@ -1,3 +1,4 @@
+import { UserAdministrativeMissingException } from 'src/Domain/HumanResource/User/Exception/UserAdministrativeMissingException';
 import {UserNotFoundException} from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
 import {IUserAdministrativeRepository} from 'src/Domain/HumanResource/User/Repository/IUserAdministrativeRepository';
 import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
@@ -74,5 +75,22 @@ describe('UpdateProfileCommandHandler', () => {
       )
     )).once();
     verify(userAdministrativeRepository.save(deepEqual(updatedUserAdministrative))).once();
+  });
+
+  it('testUserAdministrativeMissingException', async () => {
+    const userAdministrative = new UserAdministrative(30000, false, false, ContractType.CTT, '2017-08-01', '2018-12-31', null);
+    const user = new User('John', 'Doe', 'john@email.com', '123456789', 'password', UserRole.EMPLOYEE, userAdministrative);
+
+    when(userRepository.findOneById('c07c4d56-5ff1-4ef9-b38e-631a6b9e92ed')).thenResolve(user);
+    when(userAdministrativeRepository.findOneByUserId('c07c4d56-5ff1-4ef9-b38e-631a6b9e92ed')).thenResolve(null);
+
+    try {
+      await commandHandler.execute(command);
+    } catch (e) {
+      expect(e).toBeInstanceOf(UserAdministrativeMissingException);
+      expect(e.message).toBe('human_resources.users.errors.user_administrative_missing');
+      verify(userRepository.save(anything())).never();
+      verify(userAdministrativeRepository.save(anything())).never();
+    }
   });
 });

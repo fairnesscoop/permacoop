@@ -1,6 +1,4 @@
 <script context="module">
-  import { get, put } from '../../../../utils/axios';
-
   export const preload = ({ params: { id } }) => {
     return { id };
   };
@@ -10,6 +8,7 @@
   import { goto } from '@sapper/app';
   import { onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
+  import { get, put } from '../../../../utils/axios';
   import Breadcrumb from '../../../../components/Breadcrumb.svelte';
   import EditForm from '../_EditForm.svelte';
   import { errorNormalizer } from '../../../../normalizer/errors';
@@ -27,7 +26,9 @@
   onMount(async () => {
     try {
       ({ data: user } = await get(`users/${id}/administrative`));
-      title = $_('human_resources.users.edit.title', { values: { name: `${user.firstName} ${user.lastName}` } });
+      title = $_('human_resources.users.edit.title', {
+        values: { name: `${user.firstName} ${user.lastName}` }
+      });
     } catch (e) {
       errors = errorNormalizer(e);
     }
@@ -58,12 +59,12 @@
     { title }
 ]}" />
 <ServerErrors {errors} />
-<H4Title title={title} />
+<H4Title {title} />
 
 {#if user && user.isAdministrativeEditable}
-<EditForm
-  role={user.role}
-  userAdministrative={user.administrativeView}
-  {loading}
-  on:save={onSave} />
+  <EditForm
+    role="{user.role}"
+    userAdministrative="{user.administrativeView}"
+    {loading}
+    on:save="{onSave}" />
 {/if}
