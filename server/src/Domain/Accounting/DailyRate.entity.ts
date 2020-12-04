@@ -8,19 +8,19 @@ export class DailyRate {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'integer', nullable: false})
+  @Column({type: 'integer', nullable: false, comment: 'Stored in base 100'})
   private amount: number;
 
   @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   private createdAt: Date;
 
-  @ManyToOne(type => User, {nullable: false})
+  @ManyToOne(type => User, {nullable: false, onDelete: 'CASCADE'})
   private user: User;
 
-  @ManyToOne(type => Customer, {nullable: false})
+  @ManyToOne(type => Customer, {nullable: false, onDelete: 'CASCADE'})
   private customer: Customer;
 
-  @ManyToOne(type => Task, {nullable: false})
+  @ManyToOne(type => Task, {nullable: false, onDelete: 'CASCADE'})
   private task: Task;
 
   constructor(amount: number, user: User, customer: Customer, task: Task) {

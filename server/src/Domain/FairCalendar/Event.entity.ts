@@ -33,13 +33,13 @@ export class Event {
   @Column({type: 'varchar', nullable: true})
   private summary: string;
 
-  @ManyToOne(type => Project, {nullable: true})
+  @ManyToOne(type => Project, {nullable: true, onDelete: 'SET NULL'})
   private project: Project;
 
-  @ManyToOne(type => Task, {nullable: true})
+  @ManyToOne(type => Task, {nullable: true, onDelete: 'SET NULL'})
   private task: Task;
 
-  @ManyToOne(type => User, {nullable: false})
+  @ManyToOne(type => User, {nullable: false, onDelete: 'CASCADE'})
   private user: User;
 
   constructor(

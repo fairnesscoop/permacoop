@@ -31,16 +31,6 @@
     'px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200';
 </script>
 
-<style>
-  .open {
-    position: fixed;
-    background: #fff;
-    margin-top: 4rem;
-    height: 100%;
-    display: block;
-  }
-</style>
-
 {#if $session.user}
   <aside
     class="z-20 hidden overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0"
@@ -124,6 +114,11 @@
             <ul
               class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
               aria-label="submenu">
+              <li class="{subLinkClass}">
+                <a
+                  class="w-full"
+                  href="accounting/invoices">{$_('accounting.invoices.title')}</a>
+              </li>
               <li class="{subLinkClass}">
                 <a
                   class="w-full"

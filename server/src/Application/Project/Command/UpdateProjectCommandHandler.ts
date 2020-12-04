@@ -1,12 +1,12 @@
-import {CommandHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {UpdateProjectCommand} from './UpdateProjectCommand';
-import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
-import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotFoundException';
-import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
-import {ProjectAlreadyExistException} from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
-import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
-import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
+import { CommandHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { UpdateProjectCommand } from './UpdateProjectCommand';
+import { IProjectRepository } from 'src/Domain/Project/Repository/IProjectRepository';
+import { ProjectNotFoundException } from 'src/Domain/Project/Exception/ProjectNotFoundException';
+import { IsProjectAlreadyExist } from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
+import { ProjectAlreadyExistException } from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
+import { ICustomerRepository } from 'src/Domain/Customer/Repository/ICustomerRepository';
+import { CustomerNotFoundException } from 'src/Domain/Customer/Exception/CustomerNotFoundException';
 
 @CommandHandler(UpdateProjectCommand)
 export class UpdateProjectCommandHandler {
@@ -19,7 +19,7 @@ export class UpdateProjectCommandHandler {
   ) {}
 
   public async execute(command: UpdateProjectCommand): Promise<void> {
-    const {id, name, dayDuration, customerId} = command;
+    const { id, name, dayDuration, customerId, invoiceUnit } = command;
 
     const project = await this.projectRepository.findOneById(id);
     if (!project) {
@@ -38,7 +38,7 @@ export class UpdateProjectCommandHandler {
       throw new ProjectAlreadyExistException();
     }
 
-    project.update(customer, dayDuration, name);
+    project.update(customer, dayDuration, invoiceUnit, name);
     await this.projectRepository.save(project);
   }
 }

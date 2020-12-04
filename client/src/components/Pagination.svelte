@@ -3,7 +3,7 @@
   import { createEventDispatcher } from 'svelte';
   import { range } from '../utils/array';
 
-  const itemsPerPage = 20;
+  const itemsPerPage = 30;
 
   export let currentPage;
   export let pageCount;

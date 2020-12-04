@@ -76,7 +76,7 @@
     </select>
   </div>
   {#if customerId && status}
-    <ProjectsInput projects="{projects.items}" projectId="{projectId}" />
+    <ProjectsInput projects="{projects.items}" bind:projectId />
     <QuoteItemsForm bind:values="{items}" />
     <Button
       value="{$_('common.form.save')}"

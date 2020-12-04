@@ -1,3 +1,15 @@
+## <small>1.1.1 (2020-11-26)</small>
+
+-   Improve quality code ([344176e](https://github.com/fairnesscoop/permacoop/commit/344176e))
+
+## 1.1.0 (2020-11-26)
+
+-   Add invoice amount on invoices list ([77aa84c](https://github.com/fairnesscoop/permacoop/commit/77aa84c))
+-   Bump highlight.js from 9.18.1 to 9.18.5 in /server ([3d2222c](https://github.com/fairnesscoop/permacoop/commit/3d2222c))
+-   Generate and list invoices from events ([565e00c](https://github.com/fairnesscoop/permacoop/commit/565e00c))
+-   Rename billing to invoice ([f470227](https://github.com/fairnesscoop/permacoop/commit/f470227))
+-   feat: Add billing models ([bdb5681](https://github.com/fairnesscoop/permacoop/commit/bdb5681))
+
 ## <small>1.0.1 (2020-11-18)</small>
 
 -   Add CHANGELOG.md ([ff26f78](https://github.com/fairnesscoop/permacoop/commit/ff26f78))

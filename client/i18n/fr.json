@@ -36,11 +36,36 @@
   },
   "accounting": {
     "breadcrumb": "Gestion & Comptabilité",
+    "invoices": {
+      "title": "Factures",
+      "date": "Date",
+      "project": "Nom du projet",
+      "invoice_id": "Numéro de facture",
+      "expiry_date": "Date d'échéance",
+      "amount": "Montant TTC",
+      "status": {
+        "title": "Statut",
+        "payed": "Payé",
+        "sent": "Envoyé",
+        "draft": "Brouillon",
+        "canceled": "Annulé"
+      },
+      "add": {
+        "title": "Générer une facture"
+      },
+      "errors": {
+        "no_billable_events_found": "Il n'y a rien à facturer sur le projet pour la période sélectionnée."
+      },
+      "form": {
+        "submit": "Générer",
+        "expire_in_days": "Echéance (en jours)"
+      }
+    },
     "quotes": {
       "title": "Devis",
       "quote_id": "Numéro du devis",
       "date": "Date",
-      "customer": "Client",
+      "customer": "Nom du client",
       "amount": "Montant TTC",
       "add": {
         "title": "Créer un devis"
@@ -71,10 +96,10 @@
     },
     "daily_rates": {
       "title": "TJM",
-      "users": "Coopérateurs - salariés",
-      "amount": "Montants HT",
-      "tasks": "Missions",
-      "customers": "Clients",
+      "user": "Coopérateur - salarié",
+      "amount": "Montant HT",
+      "task": "Nom de la mission",
+      "customer": "Nom du client",
       "errors": {
         "already_exist": "Ce TJM a déjà été configuré.",
         "not_found": "Le TJM n'existe pas."
@@ -91,6 +116,7 @@
     },
     "tasks": {
       "title": "Missions",
+      "name": "Nom de la mission",
       "form": {
         "name": "Nom de la mission",
         "task": "Mission",
@@ -112,12 +138,18 @@
     "breadcrumb": "FairCRM",
     "projects": {
       "title": "Projets",
-      "customers": "Clients",
-      "day_durations": "Durée d'une journée",
+      "name": "Nom du projet",
+      "customer": "Nom du client",
+      "day_duration": "Durée d'une journée",
       "form": {
         "project_placeholder": "-- Choisir un projet --",
         "day_duration": "Durée d'une journée",
         "project": "Nom du projet"
+      },
+      "invoice_unit": {
+        "title": "Facturation",
+        "day": "À la journée",
+        "hour": "À l'heure"
       },
       "add": {
         "title": "Ajouter un projet"
@@ -132,7 +164,8 @@
     },
     "customers": {
       "title": "Clients",
-      "addresses": "Adresses",
+      "name": "Nom du client",
+      "addresse": "Adresse",
       "errors": {
         "already_exist": "Ce client existe déjà.",
         "not_found": "Le client n'existe pas."
@@ -219,11 +252,10 @@
       "requests": {
         "title": "Demandes de congé",
         "view": "Demande de {user}",
-        "users": "Coopérateurs - salariés",
+        "user": "Coopérateur - salarié",
         "all_day": "Toute la journée",
         "periods": "Périodes",
         "period": "Du {from} au {to}",
-        "leave_types": "Type de congé",
         "status": "Etat",
         "duration": "Durée",
         "comment": "Commentaire",

@@ -28,6 +28,13 @@ describe('DateUtilsAdapter', () => {
     );
   });
 
+  it('testAddDaysToDate', () => {
+    const dateUtils = new DateUtilsAdapter();
+    expect(dateUtils.addDaysToDate(new Date('2019-12-21T11:49:58.706Z'), 5)).toMatchObject(
+      new Date('2019-12-26T11:49:58.706Z')
+    );
+  });
+
   it('testGetCurrentDate', () => {
     const date = new Date('2020-05-09T11:49:58.706Z');
     const dateUtils = new DateUtilsAdapter(date);

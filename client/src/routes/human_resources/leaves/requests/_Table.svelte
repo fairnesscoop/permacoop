@@ -19,9 +19,9 @@
   <thead>
     <tr
       class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-      <th class="px-4 py-3">{$_('human_resources.leaves.requests.users')}</th>
+      <th class="px-4 py-3">{$_('human_resources.leaves.requests.user')}</th>
       <th class="px-4 py-3">{$_('human_resources.leaves.requests.periods')}</th>
-      <th class="px-4 py-3">{$_('human_resources.leaves.requests.leave_types')}</th>
+      <th class="px-4 py-3">{$_('human_resources.leaves.requests.leave_type.title')}</th>
       <th class="px-4 py-3">{$_('human_resources.leaves.requests.status')}</th>
       <th class="px-4 py-3">{$_('common.actions')}</th>
     </tr>

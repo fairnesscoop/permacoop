@@ -64,9 +64,6 @@
 */
 
 @layer base {
-  .fc th {
-    padding: 5px !important;
-  }
   /* Overrides for Fair Calaendar */
   .theme-dark .fc-day-header,
   .theme-dark .fc-day-grid {
@@ -76,4 +73,17 @@
   .theme-dark .fc-today {
     @apply bg-gray-200  text-gray-900  font-bold !important;
   }
+}
+.fc th {
+  padding: 5px !important;
+}
+.theme-dark .open {
+  background: rgba(26, 28, 35, var(--bg-opacity)) !important;
+}
+.open {
+  position: fixed;
+  margin-top: 4rem;
+  height: 100%;
+  background: #fff;
+  display: block;
 }
