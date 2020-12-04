@@ -1,9 +1,9 @@
-import {QueryHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {UserView} from '../View/UserView';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import {GetUserByIdQuery} from './GetUserByIdQuery';
-import {UserNotFoundException} from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
+import { Inject } from '@nestjs/common';
+import { QueryHandler } from '@nestjs/cqrs';
+import { UserNotFoundException } from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { UserView } from '../View/UserView';
+import { GetUserByIdQuery } from './GetUserByIdQuery';
 
 @QueryHandler(GetUserByIdQuery)
 export class GetUserByIdQueryHandler {
@@ -23,7 +23,8 @@ export class GetUserByIdQueryHandler {
       user.getFirstName(),
       user.getLastName(),
       user.getEmail(),
-      user.getRole()
+      user.getRole(),
+      user.isAdministrativeEditable(),
     );
   }
 }

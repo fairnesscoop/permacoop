@@ -13,7 +13,7 @@
     "start:prod": "node dist/src/main",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watchAll",
     "test:cov": "jest --coverage",
     "migration:diff": "ts-node ./node_modules/.bin/typeorm migration:generate -d migrations -n",
     "migration:migrate": "ts-node ./node_modules/.bin/typeorm migration:run",

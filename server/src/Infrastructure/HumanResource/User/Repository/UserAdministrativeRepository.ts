@@ -12,6 +12,24 @@ export class UserAdministrativeRepository
     private readonly repository: Repository<UserAdministrative>
   ) {}
 
+  public findOneByUserId(userId: string): Promise<UserAdministrative | undefined> {
+    return this.repository
+      .createQueryBuilder('userAdministrative')
+      .select([
+        'userAdministrative.id',
+        'userAdministrative.joiningDate',
+        'userAdministrative.leavingDate',
+        'userAdministrative.annualEarnings',
+        'userAdministrative.transportFee',
+        'userAdministrative.healthInsurance',
+        'userAdministrative.executivePosition',
+        'userAdministrative.contract',
+      ])
+      .innerJoin('userAdministrative.user', 'user')
+      .where('user.id = :userId', {userId})
+      .getOne();
+  }
+
   public save(
     userAdministrative: UserAdministrative
   ): Promise<UserAdministrative> {

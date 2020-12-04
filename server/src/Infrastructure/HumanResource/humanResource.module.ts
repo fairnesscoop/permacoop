@@ -54,6 +54,10 @@ import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
 import { GetLeaveRequestByIdQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestByIdQueryHandler';
 import { CooperativeRepository } from '../Settings/Repository/CooperativeRepository';
 import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
+import { UpdateUserAction } from './User/Action/UpdateUserAction';
+import { GetUserAction } from './User/Action/GetUserAction';
+import { UpdateUserCommandHandler } from 'src/Application/HumanResource/User/Command/UpdateUserCommandHandler';
+import { GetUserAdministrativeByIdQueryHandler } from 'src/Application/HumanResource/User/Query/GetUserAdministrativeByIdQueryHandler';
 
 @Module({
   imports: [
@@ -73,8 +77,10 @@ import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
   controllers: [
     LoginAction,
     CreateUserAction,
+    UpdateUserAction,
     GetMeAction,
     UpdateMeAction,
+    GetUserAction,
     GetUsersAction,
     CreatePaySlipAction,
     GetPaySlipsAction,
@@ -107,8 +113,10 @@ import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
     IsEmailAlreadyExist,
     GetUsersQueryHandler,
     UpdateProfileCommandHandler,
+    UpdateUserCommandHandler,
     BearerStrategy,
     GetUserByIdQueryHandler,
+    GetUserAdministrativeByIdQueryHandler,
     GetPaySlipsQueryHandler,
     GetPaySlipByIdQueryHandler,
     CreateLeaveRequestCommandHandler,

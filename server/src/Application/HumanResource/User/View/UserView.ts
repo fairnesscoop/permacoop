@@ -1,4 +1,5 @@
-import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { UserAdministrativeView } from './UserAdministrativeView';
 
 export class UserView {
   constructor(
@@ -6,6 +7,8 @@ export class UserView {
     public readonly firstName: string,
     public readonly lastName: string,
     public readonly email: string,
-    public readonly role: UserRole
+    public readonly role: UserRole,
+    public readonly isAdministrativeEditable: boolean,
+    public readonly administrativeView: UserAdministrativeView = null,
   ) {}
 }

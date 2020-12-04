@@ -1,4 +1,4 @@
-import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsEnum,
@@ -6,11 +6,17 @@ import {
   IsOptional,
   IsPositive,
   IsInt,
-  IsBooleanString
+  IsBoolean
 } from 'class-validator';
-import {ContractType} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import { ContractType } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 
 export class UserAdministrativeDTO {
+  @ApiProperty({ enum: UserRole })
+  @IsNotEmpty()
+  @IsEnum(UserRole)
+  public role: UserRole;
+
   @IsNotEmpty()
   @IsInt()
   @IsPositive()
@@ -23,14 +29,14 @@ export class UserAdministrativeDTO {
   public transportFee: number;
 
   @IsNotEmpty()
-  @IsBooleanString()
+  @IsBoolean()
   @ApiProperty()
-  public healthInsurance: string;
+  public healthInsurance: boolean;
 
   @IsNotEmpty()
-  @IsBooleanString()
+  @IsBoolean()
   @ApiProperty()
-  public executivePosition: string;
+  public executivePosition: boolean;
 
   @IsNotEmpty()
   @IsDateString()
@@ -42,7 +48,7 @@ export class UserAdministrativeDTO {
   @ApiPropertyOptional()
   public leavingDate: string;
 
-  @ApiProperty({enum: ContractType})
+  @ApiProperty({ enum: ContractType })
   @IsNotEmpty()
   @IsEnum(ContractType)
   public contract: ContractType;

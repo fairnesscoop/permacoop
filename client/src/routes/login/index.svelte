@@ -28,7 +28,6 @@
       });
       goto('/');
     } catch (e) {
-      console.log(e);
       errors = errorNormalizer(e);
     } finally {
       loading = false;

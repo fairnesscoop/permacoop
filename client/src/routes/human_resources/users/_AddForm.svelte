@@ -39,8 +39,8 @@
         lastName,
         email,
         password,
-        role,
         userAdministrative: {
+          role,
           ...userAdministrative,
           joiningDate: new Date(userAdministrative.joiningDate),
           leavingDate: userAdministrative.leavingDate
@@ -95,6 +95,6 @@
   {/if}
   <Button
     value="{$_('common.form.save')}"
-    loading="{loading}"
+    {loading}
     disabled="{!firstName || !lastName || !email || !password || !role || loading}" />
 </form>

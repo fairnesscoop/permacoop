@@ -30,16 +30,16 @@
     <SelectInput
       label="{$_('human_resources.users.form.executive_position')}"
       bind:value="{userAdministrative.executivePosition}">
-      <option value="{'true'}">{$_('common.yes')}</option>
-      <option value="{'false'}">{$_('common.no')}</option>
+      <option value={true}>{$_('common.yes')}</option>
+      <option value={false}>{$_('common.no')}</option>
     </SelectInput>
   </div>
   <div class="w-1/3 pr-2">
     <SelectInput
       label="{$_('human_resources.users.form.health_insurance')}"
       bind:value="{userAdministrative.healthInsurance}">
-      <option value="{'true'}">{$_('common.yes')}</option>
-      <option value="{'false'}">{$_('common.no')}</option>
+      <option value={true}>{$_('common.yes')}</option>
+      <option value={false}>{$_('common.no')}</option>
     </SelectInput>
   </div>
 </div>
@@ -54,7 +54,7 @@
     <Input
       type="{'money'}"
       label="{$_('human_resources.users.form.transport_fee')}"
-      required="{''}"
+      required={false}
       bind:value="{userAdministrative.transportFee}" />
   </div>
 </div>
@@ -67,9 +67,9 @@
   </div>
   <div class="w-1/2 pl-2">
     <Input
-      type="{'date'}"
+      type="date"
       label="{$_('human_resources.users.form.leaving_date')}"
-      required="{''}"
+      required={false}
       bind:value="{userAdministrative.leavingDate}" />
   </div>
 </div>

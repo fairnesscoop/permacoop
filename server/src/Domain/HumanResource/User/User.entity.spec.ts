@@ -19,10 +19,12 @@ describe('User.entity', () => {
     expect(user.getEmail()).toBe('mathieu@fairness.coop');
     expect(user.getFirstName()).toBe('Mathieu');
     expect(user.getLastName()).toBe('MARCHOIS');
+    expect(user.getFullName()).toBe('Mathieu MARCHOIS');
     expect(user.getPassword()).toBe('hashPassword');
     expect(user.getApiToken()).toBe('hashToken');
     expect(user.getRole()).toBe(UserRole.COOPERATOR);
     expect(user.getUserAdministrative()).toBe(instance(admin));
+    expect(user.isAdministrativeEditable()).toBe(true);
   });
 
   it('testUpdate', () => {
@@ -36,6 +38,7 @@ describe('User.entity', () => {
     );
     user.update('firstName', 'lastName', 'email@email.com');
     user.updatePassword('password');
+    user.updateRole(UserRole.ACCOUNTANT);
 
     expect(user.getId()).toBe(undefined);
     expect(user.getEmail()).toBe('email@email.com');
@@ -43,6 +46,7 @@ describe('User.entity', () => {
     expect(user.getLastName()).toBe('lastName');
     expect(user.getPassword()).toBe('password');
     expect(user.getApiToken()).toBe('hashToken');
-    expect(user.getRole()).toBe(UserRole.COOPERATOR);
+    expect(user.getRole()).toBe(UserRole.ACCOUNTANT);
+    expect(user.isAdministrativeEditable()).toBe(false);
   });
 });

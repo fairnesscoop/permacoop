@@ -1,6 +1,10 @@
+import { _ } from 'svelte-i18n';
+
 export const errorNormalizer = (e) => {
   if (!e.response) {
-    return ['Une erreur est survenue'];
+    // eslint-disable-next-line no-console
+    console.error('Non standard error', e);
+    return [_('error_generic')];
   }
 
   const {message} = e.response.data;

@@ -20,6 +20,7 @@ describe('GetUserByIdQueryHandler', () => {
     when(user.getLastName()).thenReturn('MARCHOIS');
     when(user.getEmail()).thenReturn('mathieu@fairness.coop');
     when(user.getRole()).thenReturn(UserRole.COOPERATOR);
+    when(user.isAdministrativeEditable()).thenReturn(true);
     when(
       userRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
     ).thenResolve(instance(user));
@@ -30,7 +31,8 @@ describe('GetUserByIdQueryHandler', () => {
         'Mathieu',
         'MARCHOIS',
         'mathieu@fairness.coop',
-        UserRole.COOPERATOR
+        UserRole.COOPERATOR,
+        true,
       )
     );
 

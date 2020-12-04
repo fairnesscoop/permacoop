@@ -11,7 +11,6 @@ describe('UserDTO', () => {
     dto.firstName = 'Mathieu';
     dto.lastName = 'MARCHOIS';
     dto.password = 'password';
-    dto.role = UserRole.COOPERATOR;
 
     const validation = await validate(dto);
     expect(validation).toHaveLength(0);
@@ -19,10 +18,11 @@ describe('UserDTO', () => {
 
   it('testValidWithAdministrativeDTO', async () => {
     const adminDto = new UserAdministrativeDTO();
+    adminDto.role = UserRole.COOPERATOR;
     adminDto.annualEarnings = 50000;
     adminDto.contract = ContractType.CDI;
-    adminDto.executivePosition = 'true';
-    adminDto.healthInsurance = 'true';
+    adminDto.executivePosition = true;
+    adminDto.healthInsurance = true;
     adminDto.transportFee = 7500;
     adminDto.joiningDate = '2020-12-17T03:24:00';
     adminDto.leavingDate = '2021-12-17T03:24:00';
@@ -32,7 +32,6 @@ describe('UserDTO', () => {
     dto.firstName = 'Mathieu';
     dto.lastName = 'MARCHOIS';
     dto.password = 'password';
-    dto.role = UserRole.COOPERATOR;
     dto.userAdministrative = adminDto;
 
     const validation = await validate(dto);
@@ -53,7 +52,7 @@ describe('UserDTO', () => {
     dto.userAdministrative = adminDto;
 
     const validation = await validate(dto);
-    expect(validation).toHaveLength(6);
+    expect(validation).toHaveLength(5);
     expect(validation[0].constraints).toMatchObject({
       isNotEmpty: 'firstName should not be empty'
     });
@@ -66,7 +65,7 @@ describe('UserDTO', () => {
     expect(validation[3].constraints).toMatchObject({
       isNotEmpty: 'password should not be empty'
     });
-    expect(validation[4].constraints).toMatchObject({
+    expect(validation[4].children[0].constraints).toMatchObject({
       isEnum: 'role must be a valid enum value',
       isNotEmpty: 'role should not be empty'
     });
