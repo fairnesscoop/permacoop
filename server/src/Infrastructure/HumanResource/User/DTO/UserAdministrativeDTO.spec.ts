@@ -22,38 +22,33 @@ describe('UserAdministrativeDTO', () => {
   it('testInvalidDTO', async () => {
     const dto = new UserAdministrativeDTO();
     dto.role = UserRole.COOPERATOR;
-    dto.transportFee = 1.5;
     dto.joiningDate = '';
     dto.leavingDate = '';
-    dto.transportFee = -10;
 
     const validation = await validate(dto);
 
-    expect(validation).toHaveLength(7);
+    expect(validation).toHaveLength(6);
     expect(validation[0].constraints).toMatchObject({
       isInt: 'annualEarnings must be an integer number',
       isNotEmpty: 'annualEarnings should not be empty',
       isPositive: 'annualEarnings must be a positive number'
     });
     expect(validation[1].constraints).toMatchObject({
-      isPositive: 'transportFee must be a positive number'
-    });
-    expect(validation[2].constraints).toMatchObject({
       isBoolean: 'healthInsurance must be a boolean value',
       isNotEmpty: 'healthInsurance should not be empty'
     });
-    expect(validation[3].constraints).toMatchObject({
+    expect(validation[2].constraints).toMatchObject({
       isBoolean: 'executivePosition must be a boolean value',
       isNotEmpty: 'executivePosition should not be empty'
     });
-    expect(validation[4].constraints).toMatchObject({
+    expect(validation[3].constraints).toMatchObject({
       isDateString: 'joiningDate must be a ISOString',
       isNotEmpty: 'joiningDate should not be empty'
     });
-    expect(validation[5].constraints).toMatchObject({
+    expect(validation[4].constraints).toMatchObject({
       isDateString: 'leavingDate must be a ISOString'
     });
-    expect(validation[6].constraints).toMatchObject({
+    expect(validation[5].constraints).toMatchObject({
       isEnum: 'contract must be a valid enum value',
       isNotEmpty: 'contract should not be empty'
     });

@@ -6,7 +6,8 @@ import {
   IsOptional,
   IsPositive,
   IsInt,
-  IsBoolean
+  IsBoolean,
+  IsNumber
 } from 'class-validator';
 import { ContractType } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
@@ -24,7 +25,7 @@ export class UserAdministrativeDTO {
   public annualEarnings: number;
 
   @IsOptional()
-  @IsPositive()
+  @IsNumber()
   @ApiPropertyOptional()
   public transportFee: number;
 
