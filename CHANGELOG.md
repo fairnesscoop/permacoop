@@ -1,3 +1,13 @@
+## <small>1.2.1 (2020-12-06)</small>
+
+-   Allow zero transport fee value ([58a94cc](https://github.com/fairnesscoop/permacoop/commit/58a94cc))
+
+## 1.2.0 (2020-12-04)
+
+-   add fixture to fix John Doe ([9fa9baf](https://github.com/fairnesscoop/permacoop/commit/9fa9baf))
+-   add user administrative update feature ([fafac56](https://github.com/fairnesscoop/permacoop/commit/fafac56))
+-   Allow future dates in faircalendar filter ([fba8150](https://github.com/fairnesscoop/permacoop/commit/fba8150))
+
 ## <small>1.1.1 (2020-11-26)</small>
 
 -   Improve quality code ([344176e](https://github.com/fairnesscoop/permacoop/commit/344176e))
