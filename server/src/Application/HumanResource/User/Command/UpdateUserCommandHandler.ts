@@ -1,10 +1,10 @@
-import {Inject} from '@nestjs/common';
-import {CommandHandler} from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { CommandHandler } from '@nestjs/cqrs';
 import { UserAdministrativeMissingException } from 'src/Domain/HumanResource/User/Exception/UserAdministrativeMissingException';
-import {UserNotFoundException} from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
-import {IUserAdministrativeRepository} from 'src/Domain/HumanResource/User/Repository/IUserAdministrativeRepository';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import {UpdateUserCommand} from './UpdateUserCommand';
+import { UserNotFoundException } from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
+import { IUserAdministrativeRepository } from 'src/Domain/HumanResource/User/Repository/IUserAdministrativeRepository';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { UpdateUserCommand } from './UpdateUserCommand';
 
 @CommandHandler(UpdateUserCommand)
 export class UpdateUserCommandHandler {
@@ -34,7 +34,6 @@ export class UpdateUserCommandHandler {
     }
 
     const userAdministrative = await this.userAdministrativeRepository.findOneByUserId(id);
-
     if (!userAdministrative) {
       throw new UserAdministrativeMissingException();
     }
@@ -50,7 +49,9 @@ export class UpdateUserCommandHandler {
       transportFee ? Math.round(transportFee * 100) : 0
     );
 
-    await this.userRepository.save(user);
-    await this.userAdministrativeRepository.save(userAdministrative);
+    await Promise.all([
+      this.userRepository.save(user),
+      this.userAdministrativeRepository.save(userAdministrative)
+    ]);
   }
 }

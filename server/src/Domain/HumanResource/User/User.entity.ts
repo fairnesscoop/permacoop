@@ -6,7 +6,7 @@ import {
   OneToOne,
   JoinColumn
 } from 'typeorm';
-import {UserAdministrative} from './UserAdministrative.entity';
+import { UserAdministrative } from './UserAdministrative.entity';
 
 export enum UserRole {
   COOPERATOR = 'cooperator',
@@ -89,10 +89,6 @@ export class User {
 
   public getRole(): UserRole {
     return this.role;
-  }
-
-  public isAdministrativeEditable(): boolean {
-    return this.role !== UserRole.ACCOUNTANT;
   }
 
   public getFullName(): string {

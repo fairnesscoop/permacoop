@@ -17,29 +17,13 @@ export class GetUserAdministrativeByIdQueryHandler {
     private readonly userAdministrativeRepository: IUserAdministrativeRepository
   ) {}
 
-  public async execute(
-    query: GetUserByIdQuery
-  ): Promise<UserView> {
-    const user = await this.userRepository.findOneById(query.id);
+  public async execute({ id }: GetUserByIdQuery): Promise<UserView> {
+    const user = await this.userRepository.findOneById(id);
     if (!user) {
       throw new UserNotFoundException();
     }
-    const userAdministrative = await this.userAdministrativeRepository.findOneByUserId(
-      query.id
-    );
 
-    let userAdministrativeView: UserAdministrativeView = null;
-    if (userAdministrative) {
-      userAdministrativeView = new UserAdministrativeView(
-        userAdministrative.getAnnualEarnings() * 0.01,
-        userAdministrative.getContract(),
-        userAdministrative.isExecutivePosition(),
-        userAdministrative.haveHealthInsurance(),
-        userAdministrative.getJoiningDate(),
-        userAdministrative.getLeavingDate(),
-        userAdministrative.getTransportFee() * 0.01
-      );
-    }
+    const userAdmin = await this.userAdministrativeRepository.findOneByUserId(id);
 
     return new UserView(
       user.getId(),
@@ -47,8 +31,17 @@ export class GetUserAdministrativeByIdQueryHandler {
       user.getLastName(),
       user.getEmail(),
       user.getRole(),
-      user.isAdministrativeEditable(),
-      userAdministrativeView
+      userAdmin ?
+        new UserAdministrativeView(
+          userAdmin.getAnnualEarnings() * 0.01,
+          userAdmin.getContract(),
+          userAdmin.isExecutivePosition(),
+          userAdmin.haveHealthInsurance(),
+          userAdmin.getJoiningDate(),
+          userAdmin.getLeavingDate(),
+          userAdmin.getTransportFee() * 0.01
+        )
+      : null
     );
   }
 }

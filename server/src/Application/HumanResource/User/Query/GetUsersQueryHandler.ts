@@ -1,8 +1,10 @@
-import {QueryHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {GetUsersQuery} from './GetUsersQuery';
-import {UserView} from '../View/UserView';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { QueryHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { GetUsersQuery } from './GetUsersQuery';
+import { UserView } from '../View/UserView';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { Pagination } from 'src/Application/Common/Pagination';
+import { UserAdministrativeView } from '../View/UserAdministrativeView';
 
 @QueryHandler(GetUsersQuery)
 export class GetUsersQueryHandler {
@@ -11,11 +13,13 @@ export class GetUsersQueryHandler {
     private readonly userRepository: IUserRepository
   ) {}
 
-  public async execute(query: GetUsersQuery): Promise<UserView[]> {
-    const users = await this.userRepository.findUsers(query.withAccountant);
+  public async execute({ page }: GetUsersQuery): Promise<Pagination<UserView>> {
+    const [ users, total ] = await this.userRepository.findUsers(page);
     const userViews: UserView[] = [];
 
     for (const user of users) {
+      const userAdmin = user.getUserAdministrative();
+
       userViews.push(
         new UserView(
           user.getId(),
@@ -23,11 +27,21 @@ export class GetUsersQueryHandler {
           user.getLastName(),
           user.getEmail(),
           user.getRole(),
-          user.isAdministrativeEditable()
+          userAdmin ?
+            new UserAdministrativeView(
+              userAdmin.getAnnualEarnings() * 0.01,
+              userAdmin.getContract(),
+              userAdmin.isExecutivePosition(),
+              userAdmin.haveHealthInsurance(),
+              userAdmin.getJoiningDate(),
+              '',
+              userAdmin.getTransportFee() * 0.01
+            )
+          : null
         )
       );
     }
 
-    return userViews;
+    return new Pagination<UserView>(userViews, total);
   }
 }

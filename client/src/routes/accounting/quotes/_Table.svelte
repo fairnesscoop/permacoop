@@ -7,7 +7,6 @@
   import RedBadge from '../../../components/badges/RedBadge.svelte';
   import OrangeBadge from '../../../components/badges/OrangeBadge.svelte';
   import GreenBadge from '../../../components/badges/GreenBadge.svelte';
-  import { fr } from 'date-fns/locale';
 
   export let items;
 </script>
@@ -28,7 +27,7 @@
     {#each items as { id, quoteId, createdAt, status, customer, amountInclusiveOfTaxe, project } (id)}
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="px-4 py-3 text-sm">
-          {dateFormat(new Date(createdAt), 'dd/MM/yyyy', { locale: fr })}
+          {dateFormat(new Date(createdAt), 'dd/MM/yyyy')}
         </td>
         <td class="px-4 py-3 text-sm">{quoteId}</td>
         <td class="px-4 py-3 text-sm">

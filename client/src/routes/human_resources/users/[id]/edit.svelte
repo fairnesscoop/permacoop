@@ -10,7 +10,7 @@
   import { _ } from 'svelte-i18n';
   import { get, put } from '../../../../utils/axios';
   import Breadcrumb from '../../../../components/Breadcrumb.svelte';
-  import EditForm from '../_EditForm.svelte';
+  import EditForm from './_EditForm.svelte';
   import { errorNormalizer } from '../../../../normalizer/errors';
   import ServerErrors from '../../../../components/ServerErrors.svelte';
   import { ROLE_COOPERATOR } from '../../../../constants/roles';
@@ -25,7 +25,7 @@
 
   onMount(async () => {
     try {
-      ({ data: user } = await get(`users/${id}/administrative`));
+      ({ data: user } = await get(`users/${id}`));
       title = $_('human_resources.users.edit.title', {
         values: { name: `${user.firstName} ${user.lastName}` }
       });
@@ -38,7 +38,7 @@
   const onSave = async e => {
     loading = true;
     try {
-      await put(`users/${user.id}/administrative`, e.detail);
+      await put(`users/${user.id}`, e.detail);
 
       return goto('/human_resources/users');
     } catch (e) {
@@ -64,7 +64,7 @@
 {#if user && user.isAdministrativeEditable}
   <EditForm
     role="{user.role}"
-    userAdministrative="{user.administrativeView}"
+    userAdministrative="{user.userAdministrative}"
     {loading}
     on:save="{onSave}" />
 {/if}

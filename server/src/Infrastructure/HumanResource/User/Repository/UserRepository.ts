@@ -3,6 +3,7 @@ import {Injectable} from '@nestjs/common';
 import {Repository} from 'typeorm';
 import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
 import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
@@ -55,25 +56,44 @@ export class UserRepository implements IUserRepository {
       .getOne();
   }
 
-  public findUsers(withAccountant: boolean): Promise<User[]> {
-    const query = this.repository
+  public findUsers(page: number): Promise<[User[], number]> {
+    return this.repository
       .createQueryBuilder('user')
       .select([
         'user.id',
         'user.firstName',
         'user.lastName',
         'user.email',
-        'user.role'
+        'user.role',
+        'userAdministrative.annualEarnings',
+        'userAdministrative.transportFee',
+        'userAdministrative.joiningDate',
+        'userAdministrative.contract',
+        'userAdministrative.healthInsurance',
+        'userAdministrative.executivePosition',
       ])
+      .innerJoin('user.userAdministrative', 'userAdministrative')
       .orderBy('user.lastName', 'ASC')
-      .addOrderBy('user.firstName', 'ASC');
-
-    if (false === withAccountant) {
-      query.where('user.role <> :role', {role: UserRole.ACCOUNTANT});
-    }
-
-    return query.getMany();
+      .addOrderBy('user.firstName', 'ASC')
+      .limit(MAX_ITEMS_PER_PAGE)
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
+      .getManyAndCount();
   }
+
+  public findEmployees(): Promise<User[]> {
+    return this.repository
+      .createQueryBuilder('user')
+      .select([
+        'user.id',
+        'user.firstName',
+        'user.lastName',
+      ])
+      .where('user.role <> :role', {role: UserRole.ACCOUNTANT})
+      .orderBy('user.lastName', 'ASC')
+      .addOrderBy('user.firstName', 'ASC')
+      .getMany();
+  }
+
 
   public save(user: User): Promise<User> {
     return this.repository.save(user);

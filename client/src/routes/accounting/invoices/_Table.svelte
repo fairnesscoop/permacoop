@@ -1,6 +1,5 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import { fr } from 'date-fns/locale';
   import { format as dateFormat } from 'date-fns';
   import { format } from '../../../normalizer/money';
   import GrayBadge from '../../../components/badges/GrayBadge.svelte';
@@ -28,7 +27,7 @@
     {#each items as { id, invoiceId, createdAt, expiryDate, status, project, amount } (id)}
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="px-4 py-3 text-sm">
-          {dateFormat(new Date(createdAt), 'dd/MM/yyyy', { locale: fr })}
+          {dateFormat(new Date(createdAt), 'dd/MM/yyyy')}
         </td>
         <td class="px-4 py-3 text-sm">{invoiceId}</td>
         <td class="px-4 py-3 text-sm">{project.name} ({project.customer.name})</td>
@@ -44,7 +43,7 @@
           {/if}
         </td>
         <td class="px-4 py-3">
-          {dateFormat(new Date(expiryDate), 'dd/MM/yyyy', { locale: fr })}
+          {dateFormat(new Date(expiryDate), 'dd/MM/yyyy')}
         </td>
         <td class="px-4 py-3">{format(amount)}</td>
         <td class="px-4 py-3"></td>

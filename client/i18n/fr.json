@@ -296,9 +296,17 @@
     },
     "users": {
       "title": "Coopérateurs - salariés",
-      "first_name": "Prénom",
-      "last_name": "Nom",
-      "email": "Adresse email",
+      "user": "Coopérateur - salarié",
+      "joining_date": "Date d'entrée",
+      "contract": "Type de contract",
+      "executive_position": "cadre",
+      "health_insurance": "Mutuelle",
+      "transport_fee": "Frais de transport",
+      "earning": {
+        "title": "Salaire brut",
+        "annual": "{amount} / an",
+        "monthly": "{amount} / mois"
+      },
       "role": "Rôle",
       "add": {
         "title": "Ajouter un coopérateur - salarié"

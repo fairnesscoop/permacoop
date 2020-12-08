@@ -24,7 +24,6 @@ describe('User.entity', () => {
     expect(user.getApiToken()).toBe('hashToken');
     expect(user.getRole()).toBe(UserRole.COOPERATOR);
     expect(user.getUserAdministrative()).toBe(instance(admin));
-    expect(user.isAdministrativeEditable()).toBe(true);
   });
 
   it('testUpdate', () => {
@@ -47,6 +46,5 @@ describe('User.entity', () => {
     expect(user.getPassword()).toBe('password');
     expect(user.getApiToken()).toBe('hashToken');
     expect(user.getRole()).toBe(UserRole.ACCOUNTANT);
-    expect(user.isAdministrativeEditable()).toBe(false);
   });
 });

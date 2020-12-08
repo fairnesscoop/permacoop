@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, NotFoundException, Param, Put, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Inject, Param, Put, UseGuards } from '@nestjs/common';
 import { ICommandBus } from '@nestjs/cqrs';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -19,10 +19,10 @@ export class UpdateUserAction {
     private readonly commandBus: ICommandBus
   ) {}
 
-  @Put(':id/administrative')
-  @Roles(UserRole.COOPERATOR)
-  @ApiOperation({summary: 'Update user administrative info'})
-  public async index(@Param() dto: IdDTO, @Body() userAdministrativeDto: UserAdministrativeDTO): Promise<UserAdministrativeView> {
+  @Put(':id')
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
+  @ApiOperation({summary: 'Update user info'})
+  public async index(@Param() { id }: IdDTO, @Body() dto: UserAdministrativeDTO): Promise<UserAdministrativeView> {
     const {
       role,
       annualEarnings,
@@ -32,11 +32,11 @@ export class UpdateUserAction {
       joiningDate,
       leavingDate,
       transportFee,
-    } = userAdministrativeDto;
+    } = dto;
 
     try {
       return await this.commandBus.execute(new UpdateUserCommand(
-        dto.id,
+        id,
         role,
         annualEarnings,
         contract,
@@ -47,7 +47,7 @@ export class UpdateUserAction {
         transportFee,
       ));
     } catch (e) {
-      throw new NotFoundException(e.message);
+      throw new BadRequestException(e.message);
     }
   }
 }

@@ -22,7 +22,6 @@
   export let page;
 
   let title = $_('accounting.quotes.title');
-  let loading;
   let errors = [];
   let response = {
     items: [],
