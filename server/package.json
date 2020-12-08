@@ -67,7 +67,8 @@
     "ts-mockito": "^2.5.0",
     "ts-node": "^8.4.1",
     "tsconfig-paths": "^3.9.0",
-    "tslint": "^6.1.1"
+    "tslint": "^6.1.1",
+    "highlight.js": ">=10.4.1"
   },
   "jest": {
     "moduleFileExtensions": [
