@@ -1,3 +1,7 @@
+## <small>1.2.2 (2020-12-08)</small>
+
+-   Fix highlight.js dependency bot alert ([924bdc6](https://github.com/fairnesscoop/permacoop/commit/924bdc6))
+
 ## <small>1.2.1 (2020-12-06)</small>
 
 -   Allow zero transport fee value ([58a94cc](https://github.com/fairnesscoop/permacoop/commit/58a94cc))
