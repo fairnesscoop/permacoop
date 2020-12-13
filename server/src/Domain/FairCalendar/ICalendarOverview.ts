@@ -5,5 +5,4 @@ export interface ICalendarOverview {
   leave: number;
   support: number;
   other: number;
-  mealTicket: number;
 }

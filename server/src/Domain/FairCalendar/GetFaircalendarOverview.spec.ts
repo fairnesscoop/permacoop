@@ -56,8 +56,7 @@ describe('GetFairCalendarOverview', () => {
       formationConference: 1,
       leave: 1,
       support: 0.5,
-      other: 0.5,
-      mealTicket: 3
+      other: 0.5
     };
 
     expect(

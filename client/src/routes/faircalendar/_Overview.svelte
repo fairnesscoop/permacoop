@@ -27,7 +27,6 @@
         </th>
         <th class="text-center py-3">{$_('faircalendar.type.leave')}</th>
         <th class="text-center py-3">{$_('faircalendar.type.other')}</th>
-        <th class="text-center py-3">{$_('faircalendar.type.meal_tickets')}</th>
       </tr>
     </thead>
     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -68,7 +67,6 @@
               values: { n: overview.other },
             })}" />
         </td>
-        <td class="py-3 text-center text-sm"><b>{overview.mealTicket}</b></td>
       </tr>
     </tbody>
   </table>

@@ -209,8 +209,7 @@
       "leave_paid": "Congé payé",
       "leave_unpaid": "Congé sans solde",
       "leave_special": "Congé exceptionnel",
-      "other": "Autres",
-      "meal_tickets": "Tickets resto"
+      "other": "Autres"
     },
     "filter": {
       "title": "Filtres",
