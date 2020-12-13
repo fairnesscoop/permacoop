@@ -1,3 +1,7 @@
+## <small>1.2.3 (2020-12-13)</small>
+
+- Remove meal tickets from faircalendar ([0cf238e](https://github.com/fairnesscoop/permacoop/commit/0cf238e))
+
 ## <small>1.2.2 (2020-12-08)</small>
 
 -   Fix highlight.js dependency bot alert ([924bdc6](https://github.com/fairnesscoop/permacoop/commit/924bdc6))
