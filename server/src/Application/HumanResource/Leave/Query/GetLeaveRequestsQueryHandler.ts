@@ -17,11 +17,12 @@ export class GetLeaveRequestsQueryHandler {
   ) {}
 
   public async execute(
-    query: GetLeaveRequestsQuery
+    { page, status }: GetLeaveRequestsQuery
   ): Promise<Pagination<LeaveRequestView>> {
     const leaveRequestViews: LeaveRequestView[] = [];
     const [ leaveRequests, total ] = await this.leaveRequestRepository.findLeaveRequests(
-      query.page
+      page,
+      status
     );
 
     for (const leaveRequest of leaveRequests) {

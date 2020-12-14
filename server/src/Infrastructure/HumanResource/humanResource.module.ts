@@ -58,6 +58,7 @@ import { UpdateUserAction } from './User/Action/UpdateUserAction';
 import { GetUserAction } from './User/Action/GetUserAction';
 import { UpdateUserCommandHandler } from 'src/Application/HumanResource/User/Command/UpdateUserCommandHandler';
 import { GetUserAdministrativeByIdQueryHandler } from 'src/Application/HumanResource/User/Query/GetUserAdministrativeByIdQueryHandler';
+import { GetLeavesAction } from './Leave/Action/GetLeavesAction';
 
 @Module({
   imports: [
@@ -77,6 +78,7 @@ import { GetUserAdministrativeByIdQueryHandler } from 'src/Application/HumanReso
   controllers: [
     LoginAction,
     CreateUserAction,
+    GetLeavesAction,
     UpdateUserAction,
     GetMeAction,
     UpdateMeAction,

@@ -88,7 +88,7 @@ describe('GetLeaveRequestsQueryHandler', () => {
     when(leave2.isEndsAllDay()).thenReturn(false);
     when(leave2.getUser()).thenReturn(instance(user));
 
-    when(leaveRequestRepository.findLeaveRequests(1)).thenResolve([
+    when(leaveRequestRepository.findLeaveRequests(1, null)).thenResolve([
       [instance(leave1), instance(leave2)],
       2
     ]);
@@ -101,12 +101,12 @@ describe('GetLeaveRequestsQueryHandler', () => {
       dateUtils.getLeaveDuration('2020-05-01', false, '2020-05-15', false)
     ).thenReturn(8);
 
-    expect(await queryHandler.execute(new GetLeaveRequestsQuery(1))).toMatchObject(
+    expect(await queryHandler.execute(new GetLeaveRequestsQuery(1, null))).toMatchObject(
       expectedResult
     );
 
     verify(dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', true)).once();
     verify(dateUtils.getLeaveDuration('2020-05-01', false, '2020-05-15', false)).once();
-    verify(leaveRequestRepository.findLeaveRequests(1)).once();
+    verify(leaveRequestRepository.findLeaveRequests(1, null)).once();
   });
 });

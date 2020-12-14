@@ -27,7 +27,7 @@ export class GetCustomersAction {
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<CustomerView>> {
     return await this.queryBus.execute(
-      new GetCustomersQuery(Number(pagination.page))
+      new GetCustomersQuery(pagination.page)
     );
   }
 }
