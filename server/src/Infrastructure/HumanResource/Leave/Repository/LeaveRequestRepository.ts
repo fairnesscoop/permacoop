@@ -88,7 +88,7 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
       if (status) {
         query.where('leaveRequest.status = :status', { status })
       } else {
-        query.where('leaveRequest.status !== :status', { status: Status.ACCEPTED })
+        query.where('leaveRequest.status != :status', { status: Status.ACCEPTED })
       }
 
       return query.getManyAndCount();

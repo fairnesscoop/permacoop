@@ -4,7 +4,6 @@
   import SeeLink from '../../../../components/links/SeeLink.svelte';
   import RedBadge from '../../../../components/badges/RedBadge.svelte';
   import OrangeBadge from '../../../../components/badges/OrangeBadge.svelte';
-  import GreenBadge from '../../../../components/badges/GreenBadge.svelte';
   import GrayBadge from '../../../../components/badges/GrayBadge.svelte';
 
   const formatDate = (date) => {
@@ -45,9 +44,6 @@
         <td class="px-4 py-3 text-sm">
           {#if 'pending' === status}
             <OrangeBadge
-              value="{$_(`human_resources.leaves.requests.states.${status}`)}" />
-          {:else if 'accepted' === status}
-            <GreenBadge
               value="{$_(`human_resources.leaves.requests.states.${status}`)}" />
           {:else}
             <RedBadge
