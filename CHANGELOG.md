@@ -1,3 +1,7 @@
+## <small>1.2.6 (2020-12-14)</small>
+
+- Fix leave request filter ([ed2f771](https://github.com/fairnesscoop/permacoop/commit/ed2f771))
+
 ## <small>1.2.5 (2020-12-14)</small>
 
 - Display only pending and refused leave requests ([96eea5e](https://github.com/fairnesscoop/permacoop/commit/96eea5e))
