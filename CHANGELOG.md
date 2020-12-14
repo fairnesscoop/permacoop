@@ -1,3 +1,7 @@
+## <small>1.2.5 (2020-12-14)</small>
+
+- Display only pending and refused leave requests ([96eea5e](https://github.com/fairnesscoop/permacoop/commit/96eea5e))
+
 ## <small>1.2.4 (2020-12-14)</small>
 
 - Display leaves & fix pagination limit ([c8f7a33](https://github.com/fairnesscoop/permacoop/commit/c8f7a33))
