@@ -27,7 +27,7 @@ export class GetDailyRatesAction {
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<DailyRateView>> {
     return await this.queryBus.execute(
-      new GetDailyRatesQuery(Number(pagination.page))
+      new GetDailyRatesQuery(pagination.page)
     );
   }
 }

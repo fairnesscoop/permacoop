@@ -1,9 +1,11 @@
-import {ApiProperty} from '@nestjs/swagger';
-import {IsNotEmpty, IsNumberString} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { Max, Min } from 'class-validator';
 
 export class PaginationDTO {
   @ApiProperty()
-  @IsNotEmpty()
-  @IsNumberString()
-  public page: string;
+  @Min(1)
+  @Max(10000)
+  @Type(() => Number)
+  public page: number = 1;
 }

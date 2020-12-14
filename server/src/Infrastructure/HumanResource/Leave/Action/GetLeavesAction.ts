@@ -9,12 +9,13 @@ import { LeaveRequestView } from 'src/Application/HumanResource/Leave/View/Leave
 import { GetLeaveRequestsQuery } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestsQuery';
 import { PaginationDTO } from 'src/Infrastructure/Common/DTO/PaginationDTO';
 import { Pagination } from 'src/Application/Common/Pagination';
+import { Status } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 
-@Controller('leave-requests')
+@Controller('leaves')
 @ApiTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
-export class GetLeaveRequestsAction {
+export class GetLeavesAction {
   constructor(
     @Inject('IQueryBus')
     private readonly queryBus: IQueryBus
@@ -22,12 +23,12 @@ export class GetLeaveRequestsAction {
 
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Get all leave requests'})
+  @ApiOperation({summary: 'Get all leaves'})
   public async index(
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<LeaveRequestView>> {
     return await this.queryBus.execute(
-      new GetLeaveRequestsQuery(pagination.page)
+      new GetLeaveRequestsQuery(pagination.page, Status.ACCEPTED)
     );
   }
 }

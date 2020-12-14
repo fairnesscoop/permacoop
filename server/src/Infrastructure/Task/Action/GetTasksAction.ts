@@ -27,7 +27,7 @@ export class GetTasksAction {
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<TaskView>> {
     return await this.queryBus.execute(
-      new GetTasksQuery(Number(pagination.page))
+      new GetTasksQuery(pagination.page)
     );
   }
 }

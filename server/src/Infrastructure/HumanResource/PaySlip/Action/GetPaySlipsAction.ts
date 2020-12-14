@@ -23,7 +23,7 @@ export class GetPaySlipsAction {
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<PaySlipView>> {
     return await this.queryBus.execute(
-      new GetPaySlipsQuery(Number(pagination.page))
+      new GetPaySlipsQuery(pagination.page)
     );
   }
 }

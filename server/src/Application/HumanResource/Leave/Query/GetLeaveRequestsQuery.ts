@@ -1,5 +1,9 @@
 import { IQuery } from 'src/Application/IQuery';
+import { Status } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 
 export class GetLeaveRequestsQuery implements IQuery {
-  constructor(public readonly page: number) {}
+  constructor(
+    public readonly page: number,
+    public readonly status: Status = null
+  ) {}
 }

@@ -27,7 +27,7 @@ export class GetInvoicesAction {
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<InvoiceView>> {
     return await this.queryBus.execute(
-      new GetInvoicesQuery(Number(pagination.page))
+      new GetInvoicesQuery(pagination.page)
     );
   }
 }

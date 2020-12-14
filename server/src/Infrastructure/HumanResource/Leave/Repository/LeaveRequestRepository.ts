@@ -64,8 +64,8 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
       .getOne();
   }
 
-  public findLeaveRequests(page: number): Promise<[LeaveRequest[], number]> {
-    return this.repository
+  public findLeaveRequests(page: number, status?: Status): Promise<[LeaveRequest[], number]> {
+    const query = this.repository
       .createQueryBuilder('leaveRequest')
       .select([
         'leaveRequest.id',
@@ -80,9 +80,15 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
         'user.lastName'
       ])
       .innerJoin('leaveRequest.user', 'user')
-      .orderBy('leaveRequest.startDate', 'DESC')
+      .orderBy('leaveRequest.status', 'DESC')
+      .addOrderBy('leaveRequest.startDate', 'DESC')
       .limit(MAX_ITEMS_PER_PAGE)
-      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
-      .getManyAndCount();
+      .offset((page - 1) * MAX_ITEMS_PER_PAGE);
+
+      if (status) {
+        query.where('leaveRequest.status = :status', { status })
+      }
+
+      return query.getManyAndCount();
   }
 }
