@@ -1,3 +1,7 @@
+## <small>1.2.4 (2020-12-14)</small>
+
+- Display leaves & fix pagination limit ([c8f7a33](https://github.com/fairnesscoop/permacoop/commit/c8f7a33))
+
 ## <small>1.2.3 (2020-12-13)</small>
 
 - Remove meal tickets from faircalendar ([0cf238e](https://github.com/fairnesscoop/permacoop/commit/0cf238e))
