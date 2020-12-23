@@ -12,7 +12,7 @@ export class CreateMealTicketRemovalCommandHandler {
     @Inject('IMealTicketRemovalRepository')
     private readonly mealTicketRemovalRepository: IMealTicketRemovalRepository,
     private readonly isMealTicketRemovalAlreadyExist: IsMealTicketRemovalAlreadyExist
-  ) {}
+  ) { }
 
   public async execute(
     command: CreateMealTicketRemovalCommand
