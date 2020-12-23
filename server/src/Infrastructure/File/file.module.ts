@@ -19,7 +19,6 @@ import { DownloadFileQueryHandler } from 'src/Application/File/Query/DownloadFil
     { provide: 'IFileStorage', useClass: LocalFileStorageAdapter },
     { provide: 'IDateUtils', useClass: DateUtilsAdapter },
     { provide: 'IFileEncryption', useClass: FileEncryptionAdapter },
-    Date,
     UploadFileCommandHandler,
     FileDirectoryStrategy,
     DownloadFileQueryHandler

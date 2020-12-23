@@ -119,6 +119,10 @@ import { CreateMealTicketRemovalAction } from './MealTicket/Action/CreateMealTic
       useClass: MealTicketRemovalRepository
     },
     {
+      provide: 'IMealTicketRemovalRepository',
+      useClass: MealTicketRemovalRepository
+    },
+    {
       provide: 'IUserAdministrativeRepository',
       useClass: UserAdministrativeRepository
     },

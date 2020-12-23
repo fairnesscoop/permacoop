@@ -21,6 +21,7 @@
     {#each items as { id, name, dayDuration, customer, invoiceUnit } (id)}
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="px-4 py-3 text-sm">{name}</td>
+        <td class="px-4 py-3 text-sm">{customer.name}</td>
         <td class="px-4 py-3 text-sm">
           {$_(`crm.projects.invoice_unit.${invoiceUnit}`)}
         </td>
