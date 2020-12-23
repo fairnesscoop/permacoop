@@ -20,11 +20,15 @@ describe('IsMealTicketRemovalAlreadyExist', () => {
   it('testMealTicketRemovalAlreadyExist', async () => {
     when(
       mealTicketRemovalRepository.findOneByUserAndDate(instance(user), date)
-    ).thenResolve(new MealTicketRemoval('2020-04-29', 'dejeuner offert', instance(user)));
+    ).thenResolve(
+      new MealTicketRemoval('2020-04-29', 'dejeuner offert', instance(user))
+    );
     expect(
       await isMealTicketRemovalAlreadyExist.isSatisfiedBy(instance(user), date)
     ).toBe(true);
-    verify(mealTicketRemovalRepository.findOneByUserAndDate(instance(user), date)).once();
+    verify(
+      mealTicketRemovalRepository.findOneByUserAndDate(instance(user), date)
+    ).once();
   });
 
   it('testMealTicketRemovalDoesntExist', async () => {
@@ -34,6 +38,8 @@ describe('IsMealTicketRemovalAlreadyExist', () => {
     expect(
       await isMealTicketRemovalAlreadyExist.isSatisfiedBy(instance(user), date)
     ).toBe(false);
-    verify(mealTicketRemovalRepository.findOneByUserAndDate(instance(user), date)).once();
+    verify(
+      mealTicketRemovalRepository.findOneByUserAndDate(instance(user), date)
+    ).once();
   });
 });

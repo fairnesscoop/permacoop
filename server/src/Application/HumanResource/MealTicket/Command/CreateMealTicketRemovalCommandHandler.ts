@@ -11,15 +11,20 @@ export class CreateMealTicketRemovalCommandHandler {
   constructor(
     @Inject('IMealTicketRemovalRepository')
     private readonly mealTicketRemovalRepository: IMealTicketRemovalRepository,
-    private readonly isMealTicketRemovalAlreadyExist: IsMealTicketRemovalAlreadyExist,
+    private readonly isMealTicketRemovalAlreadyExist: IsMealTicketRemovalAlreadyExist
   ) {}
 
-  public async execute(command: CreateMealTicketRemovalCommand): Promise<string> {
+  public async execute(
+    command: CreateMealTicketRemovalCommand
+  ): Promise<string> {
     const { date, comment, user } = command;
 
     if (
       true ===
-      (await this.isMealTicketRemovalAlreadyExist.isSatisfiedBy(user, new Date(date)))
+      (await this.isMealTicketRemovalAlreadyExist.isSatisfiedBy(
+        user,
+        new Date(date)
+      ))
     ) {
       throw new MealTicketRemovalAlreadyExistException();
     }

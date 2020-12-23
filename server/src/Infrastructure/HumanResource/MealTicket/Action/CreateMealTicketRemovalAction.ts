@@ -28,7 +28,7 @@ export class CreateMealTicketRemovalAction {
 
   @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Create new meal ticket removal'})
+  @ApiOperation({ summary: 'Create new meal ticket removal' })
   public async index(
     @Body() { date, comment }: MealTicketRemovalDTO,
     @LoggedUser() user: User

@@ -11,8 +11,10 @@ export class IsMealTicketRemovalAlreadyExist {
 
   public async isSatisfiedBy(user: User, date: Date): Promise<boolean> {
     return (
-      (await this.mealTicketRemovalRepository.findOneByUserAndDate(user, date)) instanceof
-      MealTicketRemoval
+      (await this.mealTicketRemovalRepository.findOneByUserAndDate(
+        user,
+        date
+      )) instanceof MealTicketRemoval
     );
   }
 }

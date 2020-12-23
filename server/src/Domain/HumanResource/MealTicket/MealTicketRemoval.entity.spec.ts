@@ -14,6 +14,8 @@ describe('MealTicketRemoval.entity', () => {
     expect(mealTicketRemoval.getId()).toBe(undefined);
     expect(mealTicketRemoval.getDate()).toBe('2020-04-26');
     expect(mealTicketRemoval.getUser()).toBe(instance(user));
-    expect(mealTicketRemoval.getComment()).toBe('Dejeuner offert à la conférence');
+    expect(mealTicketRemoval.getComment()).toBe(
+      'Dejeuner offert à la conférence'
+    );
   });
 });

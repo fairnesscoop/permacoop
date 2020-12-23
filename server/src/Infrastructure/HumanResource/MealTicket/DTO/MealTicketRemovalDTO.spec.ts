@@ -23,7 +23,7 @@ describe('MealTicketRemovalDTO', () => {
       isNotEmpty: 'date should not be empty'
     });
     expect(validation[1].constraints).toMatchObject({
-      isNotEmpty: 'comment should not be empty',
+      isNotEmpty: 'comment should not be empty'
     });
   });
 });
