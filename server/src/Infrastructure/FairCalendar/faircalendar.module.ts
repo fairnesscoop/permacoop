@@ -56,4 +56,4 @@ import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
     GetFairCalendarOverview
   ]
 })
-export class FairCalendarModule {}
+export class FairCalendarModule { }

@@ -227,6 +227,9 @@
   },
   "human_resources": {
     "breadcrumb": "RH",
+    "meal_tickets": {
+      "title": "Tickets restaurant"
+    },
     "pay_slips": {
       "title": "Fiche de paies",
       "periods": "Périodes",
