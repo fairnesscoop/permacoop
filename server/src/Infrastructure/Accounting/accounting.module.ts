@@ -97,4 +97,4 @@ import { GetInvoicesQueryHandler } from 'src/Application/Accounting/Query/Invoic
     GetInvoicesQueryHandler
   ]
 })
-export class AccountingModule {}
+export class AccountingModule { }
