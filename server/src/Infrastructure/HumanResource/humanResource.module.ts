@@ -123,6 +123,10 @@ import { CountMealTicketPerMonthQueryHandler } from 'src/Application/HumanResour
       useClass: MealTicketRemovalRepository
     },
     {
+      provide: 'IMealTicketRemovalRepository',
+      useClass: MealTicketRemovalRepository
+    },
+    {
       provide: 'IUserAdministrativeRepository',
       useClass: UserAdministrativeRepository
     },
