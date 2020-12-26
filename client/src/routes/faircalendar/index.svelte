@@ -84,6 +84,7 @@
         }
 
         data.title = title;
+        data.summary = summary;
         if (isLoggedUser && id) {
           data.id = id;
           data.url = `faircalendar/${id}/edit`;
@@ -92,6 +93,11 @@
           $settings.theme === 'theme-dark'
             ? `event-${eventType}--dark`
             : `event-${eventType}`;
+      },
+      eventRender: (info) => {
+        if (info.event.extendedProps.summary) {
+          info.el.title = info.event.extendedProps.summary;
+        }
       },
       businessHours: {
         daysOfWeek: [1, 2, 3, 4, 5],
