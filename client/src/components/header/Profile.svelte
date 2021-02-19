@@ -13,7 +13,6 @@
     $session.user = null;
     Cookies.remove('permacoop_token');
     goto('/login');
-    await fetch('/proxy/session', { method: 'DELETE' });
   };
 </script>
 
