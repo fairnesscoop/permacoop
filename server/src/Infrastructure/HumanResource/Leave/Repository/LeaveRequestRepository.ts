@@ -15,6 +15,10 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
     return this.repository.save(leaveRequest);
   }
 
+  public remove(leaveRequest: LeaveRequest): void {
+    this.repository.delete(leaveRequest.getId());
+  }
+
   public findOneById(id: string): Promise<LeaveRequest | undefined> {
     return this.repository
       .createQueryBuilder('leaveRequest')

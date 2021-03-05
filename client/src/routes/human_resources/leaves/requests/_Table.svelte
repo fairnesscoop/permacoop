@@ -1,16 +1,22 @@
 <script>
+  import { stores } from '@sapper/app';
   import { format } from 'date-fns';
+  import { createEventDispatcher } from 'svelte';
   import { _ } from 'svelte-i18n';
   import SeeLink from '../../../../components/links/SeeLink.svelte';
   import RedBadge from '../../../../components/badges/RedBadge.svelte';
   import OrangeBadge from '../../../../components/badges/OrangeBadge.svelte';
   import GrayBadge from '../../../../components/badges/GrayBadge.svelte';
+  import DeleteLink from '../../../../components/links/DeleteLink.svelte';
+
+  export let items;
 
   const formatDate = (date) => {
     return format(new Date(date), 'dd/MM/yyyy');
   };
 
-  export let items;
+  const dispatch = createEventDispatcher();
+  const { session } = stores();
 </script>
 
 <table class="w-full whitespace-no-wrap">
@@ -53,6 +59,11 @@
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
             <SeeLink href={`/human_resources/leaves/requests/${id}`} />
+            {#if $session.user && $session.user.id === user.id}
+              <DeleteLink 
+                on:confirm={() => dispatch('delete', id)} 
+                confirmMessage={$_("human_resources.leaves.requests.confirm")} />
+            {/if}
           </div>
         </td>
       </tr>

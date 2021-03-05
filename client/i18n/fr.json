@@ -261,6 +261,7 @@
         "moderate_by": "Modéré par",
         "end_date": "Date de fin",
         "start_date": "Date de début",
+        "confirm": "Etes-vous sûr de vouloir supprimer cette demande de congé ?",
         "add": {
           "title": "Faire une demande de congé"
         },

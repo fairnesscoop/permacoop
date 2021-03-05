@@ -59,6 +59,9 @@ import { GetUserAction } from './User/Action/GetUserAction';
 import { UpdateUserCommandHandler } from 'src/Application/HumanResource/User/Command/UpdateUserCommandHandler';
 import { GetUserAdministrativeByIdQueryHandler } from 'src/Application/HumanResource/User/Query/GetUserAdministrativeByIdQueryHandler';
 import { GetLeavesAction } from './Leave/Action/GetLeavesAction';
+import { CanLeaveRequestBeRemoved } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeRemoved';
+import { DeleteLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/DeleteLeaveRequestCommandHandler';
+import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestAction';
 
 @Module({
   imports: [
@@ -91,7 +94,8 @@ import { GetLeavesAction } from './Leave/Action/GetLeavesAction';
     GetLeaveRequestAction,
     CreateLeaveRequestAction,
     RefuseLeaveRequestAction,
-    AcceptLeaveRequestAction
+    AcceptLeaveRequestAction,
+    DeleteLeaveRequestAction
   ],
   providers: [
     {provide: 'IUserRepository', useClass: UserRepository},
@@ -131,6 +135,8 @@ import { GetLeavesAction } from './Leave/Action/GetLeavesAction';
     GetLeaveRequestsQueryHandler,
     GetLeaveRequestByIdQueryHandler,
     DoesEventsOrLeaveExistForPeriod,
+    CanLeaveRequestBeRemoved,
+    DeleteLeaveRequestCommandHandler
   ]
 })
 export class HumanResourceModule {}
