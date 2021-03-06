@@ -3,6 +3,7 @@ import { User } from '../../User/User.entity';
 
 export interface ILeaveRequestRepository {
   save(leaveRequest: LeaveRequest): Promise<LeaveRequest>;
+  remove(leaveRequest: LeaveRequest): void;
   findOneById(id: string): Promise<LeaveRequest | undefined>;
   findLeaveRequests(page: number, status?: Status): Promise<[LeaveRequest[], number]>;
   findExistingLeaveRequestsByUserAndPeriod(

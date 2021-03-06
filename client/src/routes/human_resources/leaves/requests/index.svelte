@@ -9,7 +9,7 @@
 <script>
   import { onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import { get } from '../../../../utils/axios';
+  import { get, del } from '../../../../utils/axios';
   import { historyPushState } from '../../../../utils/url';
   import { errorNormalizer } from '../../../../normalizer/errors';
   import H4Title from '../../../../components/H4Title.svelte';
@@ -39,6 +39,17 @@
     fetchLeaveRequests();
   };
 
+  const handleDelete = async (event) => {
+    const id = event.detail;
+
+    try {
+      await del(`leave-requests/${id}`);
+      response.items = response.items.filter((leaveRequest) => leaveRequest.id !== id);
+    } catch (e) {
+      errors = errorNormalizer(e);
+    }
+  }
+
   const fetchLeaveRequests = async () => {
     try {
       response = (await get('leave-requests', { params: { page } })).data;
@@ -67,7 +78,7 @@
 </div>
 <div class="w-full overflow-hidden rounded-lg shadow-xs">
   <div class="w-full overflow-x-auto">
-    <Table items="{response.items}" />
+    <Table items="{response.items}" on:delete={handleDelete} />
   </div>
   <Pagination
     on:change="{changePage}"
