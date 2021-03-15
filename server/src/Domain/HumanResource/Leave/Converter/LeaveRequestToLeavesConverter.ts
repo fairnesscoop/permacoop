@@ -46,7 +46,7 @@ export class LeaveRequestToLeavesConverter {
       );
     }
 
-    this.leaveRepository.save(leaves);
+    await this.leaveRepository.save(leaves);
   }
 
   private getTime(
