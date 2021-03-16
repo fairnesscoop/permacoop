@@ -41,6 +41,8 @@ export class AddEventCommandHandler extends AbstractProjectAndTaskGetter {
       this.getTask(taskId)
     ]);
 
+    const savePromises: Promise<any>[] = [];
+
     for (const day of days) {
       const date = this.dateUtils.format(day, 'y-MM-dd');
       const event = new Event(
@@ -63,8 +65,10 @@ export class AddEventCommandHandler extends AbstractProjectAndTaskGetter {
         continue;
       }
 
-      this.eventRepository.save(event);
+      savePromises.push(this.eventRepository.save(event));
     }
+
+    await Promise.all(savePromises);
 
     return new AddEventsView(errors);
   }
