@@ -36,4 +36,13 @@ export class MealTicketRemovalRepository
       .andWhere('extract(day FROM mealTicketRemoval.date) = :day', { day })
       .getOne();
   }
+
+  public getAllByUserGroupedByDate = (user: User) => {
+    return this.repository
+      .createQueryBuilder('mealTicketRemoval')
+      .select(['date', 'count(mealTicketRemoval.id)'])
+      .where('mealTicketRemoval.user = :userId', { userId: user.getId() })
+      .groupBy('date')
+      .getRawMany();
+  };
 }

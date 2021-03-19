@@ -4,7 +4,8 @@ import {
   isWeekend as fnsIsWeekend,
   getDaysInMonth as fnsGetDaysInMonth,
   eachDayOfInterval,
-  addDays
+  addDays,
+  getYear
 } from 'date-fns';
 import { IDateUtils } from 'src/Application/IDateUtils';
 
@@ -27,15 +28,15 @@ export class DateUtilsAdapter implements IDateUtils {
   }
 
   public getYear(date: Date): number {
-    return getYear(date)
+    return getYear(date);
   }
 
   public getLastDayOfYear(date: Date): Date {
-    return new Date(`${getYear(date)}/12/31`)
+    return new Date(`${getYear(date)}/12/31`);
   }
 
   public getFirstDayOfYear(date: Date): Date {
-    return new Date(`${getYear(date)}/01/01`)
+    return new Date(`${getYear(date)}/01/01`);
   }
 
   public getCurrentDateToISOString(): string {
@@ -69,13 +70,16 @@ export class DateUtilsAdapter implements IDateUtils {
     return dates;
   }
 
-
-  public getAllWorkingDayOfYearByMonth = (date: Date): { [key: string]: Date[] } => {
-
+  public getAllWorkingDayOfYearByMonth = (
+    date: Date
+  ): { [key: string]: Date[] } => {
     const lastDayOfYear = this.getLastDayOfYear(date);
-    const firstDayOfYear = this.getFirstDayOfYear(new Date('2021/12/20'));
+    const firstDayOfYear = this.getFirstDayOfYear(date);
 
-    const workedDaysOfYear = this.getWorkedDaysDuringAPeriod(firstDayOfYear, lastDayOfYear);
+    const workedDaysOfYear = this.getWorkedDaysDuringAPeriod(
+      firstDayOfYear,
+      lastDayOfYear
+    );
     return workedDaysOfYear.reduce((prev, current) => {
       const month = current.getMonth() + 1;
       const previousValues = prev[month];
@@ -83,22 +87,16 @@ export class DateUtilsAdapter implements IDateUtils {
       if (previousValues && previousValues.length > 0) {
         return {
           ...prev,
-          [month]: [
-            ...previousValues,
-            current
-          ]
-        }
+          [month]: [...previousValues, current]
+        };
       }
 
       return {
         ...prev,
-        [month]: [
-          current
-        ]
-      }
-
-    }, {})
-  }
+        [month]: [current]
+      };
+    }, {});
+  };
 
   public getWorkedFreeDays(year: number): Date[] {
     const fixedDays: Date[] = [
