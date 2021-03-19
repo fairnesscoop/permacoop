@@ -10,7 +10,7 @@ export class MealTicketRemovalRepository
   constructor(
     @InjectRepository(MealTicketRemoval)
     private readonly repository: Repository<MealTicketRemoval>
-  ) {}
+  ) { }
 
   public save(
     mealTicketRemoval: MealTicketRemoval

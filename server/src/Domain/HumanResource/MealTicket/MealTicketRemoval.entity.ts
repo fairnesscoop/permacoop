@@ -6,13 +6,13 @@ export class MealTicketRemoval {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({ type: 'timestamp', nullable: false })
+  @Column({type: 'timestamp', nullable: false})
   private date: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({type: 'varchar', nullable: false})
   private comment: string;
 
-  @ManyToOne(type => User, { nullable: false, onDelete: 'CASCADE' })
+  @ManyToOne(type => User, {nullable: false, onDelete: 'CASCADE'})
   private user: User;
 
   constructor(date: string, comment: string, user: User) {
