@@ -26,6 +26,18 @@ export class DateUtilsAdapter implements IDateUtils {
     return new Date();
   }
 
+  public getYear(date: Date): number {
+    return getYear(date)
+  }
+
+  public getLastDayOfYear(date: Date): Date {
+    return new Date(`${getYear(date)}/12/31`)
+  }
+
+  public getFirstDayOfYear(date: Date): Date {
+    return new Date(`${getYear(date)}/01/01`)
+  }
+
   public getCurrentDateToISOString(): string {
     return this.getCurrentDate().toISOString();
   }
@@ -55,6 +67,37 @@ export class DateUtilsAdapter implements IDateUtils {
     }
 
     return dates;
+  }
+
+
+  public getAllWorkingDayOfYearByMonth = (date: Date): { [key: string]: Date[] } => {
+
+    const lastDayOfYear = this.getLastDayOfYear(date);
+    const firstDayOfYear = this.getFirstDayOfYear(new Date('2021/12/20'));
+
+    const workedDaysOfYear = this.getWorkedDaysDuringAPeriod(firstDayOfYear, lastDayOfYear);
+    return workedDaysOfYear.reduce((prev, current) => {
+      const month = current.getMonth() + 1;
+      const previousValues = prev[month];
+
+      if (previousValues && previousValues.length > 0) {
+        return {
+          ...prev,
+          [month]: [
+            ...previousValues,
+            current
+          ]
+        }
+      }
+
+      return {
+        ...prev,
+        [month]: [
+          current
+        ]
+      }
+
+    }, {})
   }
 
   public getWorkedFreeDays(year: number): Date[] {

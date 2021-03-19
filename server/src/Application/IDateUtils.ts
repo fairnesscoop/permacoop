@@ -14,4 +14,8 @@ export interface IDateUtils {
     isEndsAllDay: boolean
   ): number;
   addDaysToDate(date: Date, days: number): Date;
+  getYear(date: Date): number
+  getLastDayOfYear(date: Date): Date
+  getFirstDayOfYear(date: Date): Date
+  getAllWorkingDayOfYearByMonth(date: Date): { [key: string]: Date[] }
 }
