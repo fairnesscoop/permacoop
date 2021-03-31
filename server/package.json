@@ -20,7 +20,7 @@
     "migration:drop": "ts-node ./node_modules/.bin/typeorm schema:drop"
   },
   "dependencies": {
-    "@nestjs/common": "^7.0.0",
+    "@nestjs/common": "^7.6.15",
     "@nestjs/config": "^0.4.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/cqrs": "^7.0.0",
