@@ -9,6 +9,7 @@ import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { MealTicketRemoval } from 'src/Domain/HumanResource/MealTicket/MealTicketRemoval.entity';
 import { WorkingDayOfYearByMonth } from 'src/Infrastructure/Adapter/WorkingDayOfYearByMonth';
 import { MealTicketGrouppedByMonthSummary } from 'src/Domain/HumanResource/MealTicket/Strategy/MealTicketGrouppedByMonthSummary';
+import { MealTicketSummaryDTO } from 'src/Infrastructure/HumanResource/MealTicket/DTO/MealTicketSummaryDTO';
 
 
 describe('GetMealTicketCountPerMonthQueryHandler', () => {
@@ -66,10 +67,10 @@ describe('GetMealTicketCountPerMonthQueryHandler', () => {
     ];
 
 
-    const expectedResult = [
-      new MealTicketGrouppedByMonthSummary(1, 2),
-      new MealTicketGrouppedByMonthSummary(2, 0),
-      new MealTicketGrouppedByMonthSummary(3, 2),
+    const expectedResult: MealTicketSummaryDTO[] = [
+      new MealTicketSummaryDTO(1, 3, 1, 2),
+      new MealTicketSummaryDTO(2, 2, 2, 0),
+      new MealTicketSummaryDTO(3, 2, 0, 2),
     ]
 
 
@@ -126,12 +127,11 @@ describe('GetMealTicketCountPerMonthQueryHandler', () => {
     ];
 
 
-    const expectedResult = [
-      new MealTicketGrouppedByMonthSummary(1, 2),
-      new MealTicketGrouppedByMonthSummary(2, 0),
-      new MealTicketGrouppedByMonthSummary(3, 0),
+    const expectedResult: MealTicketSummaryDTO[] = [
+      new MealTicketSummaryDTO(1, 3, 1, 2),
+      new MealTicketSummaryDTO(2, 2, 2, 0),
+      new MealTicketSummaryDTO(3, 1, 4, 0),
     ]
-
 
 
     const ticketRemoval1 = mock(MealTicketRemoval);
