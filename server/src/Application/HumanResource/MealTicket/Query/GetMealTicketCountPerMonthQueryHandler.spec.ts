@@ -7,10 +7,12 @@ import { GetMealTicketCountPerMonthQueryHandler } from './GetMealTicketCountPerM
 import { GetMealTicketCountPerMonthQuery } from './GetMealTicketCountPerMonthQuery';
 import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { MealTicketRemoval } from 'src/Domain/HumanResource/MealTicket/MealTicketRemoval.entity';
+import { WorkingDayOfYearByMonth } from 'src/Infrastructure/Adapter/WorkingDayOfYearByMonth';
+import { MealTicketGrouppedByMonthSummary } from 'src/Domain/HumanResource/MealTicket/Strategy/MealTicketGrouppedByMonthSummary';
+
 
 describe('GetMealTicketCountPerMonthQueryHandler', () => {
   let mealTicketRemovalRepository: MealTicketRemovalRepository;
-  let isMealTicketRemovalAlreadyExist: IsMealTicketRemovalAlreadyExist;
   let handler: GetMealTicketCountPerMonthQueryHandler;
   let dateUtilsAdapter: DateUtilsAdapter;
 
@@ -22,7 +24,6 @@ describe('GetMealTicketCountPerMonthQueryHandler', () => {
 
   beforeEach(() => {
     mealTicketRemovalRepository = mock(MealTicketRemovalRepository);
-    isMealTicketRemovalAlreadyExist = mock(IsMealTicketRemovalAlreadyExist);
     dateUtilsAdapter = mock(DateUtilsAdapter);
 
     handler = new GetMealTicketCountPerMonthQueryHandler(
@@ -32,15 +33,25 @@ describe('GetMealTicketCountPerMonthQueryHandler', () => {
   });
 
   it('should return the MealTicket Count for each month of the current year', async () => {
-    const workingDaysByMonth = {
-      '1': [
-        new Date('1998-01-01'),
-        new Date('1998-01-01'),
-        new Date('1998-01-01')
-      ],
 
-      '2': [new Date('1998-02-01'), new Date('1998-02-01')]
-    };
+    const workingDayByMonth1 = new WorkingDayOfYearByMonth(1, [
+      new Date('1998-01-01'),
+      new Date('1998-01-01'),
+      new Date('1998-01-01')
+    ],
+    )
+
+    const workingDayByMonth2 = new WorkingDayOfYearByMonth(2, [
+      new Date('1998-02-01'),
+      new Date('1998-02-01'),
+    ],
+    )
+
+    const workingDayByMonth3 = new WorkingDayOfYearByMonth(3, [
+      new Date('1998-03-01'),
+      new Date('1998-03-01'),
+    ],
+    )
 
     const meatTicketsExceptions = [
       {
@@ -54,17 +65,81 @@ describe('GetMealTicketCountPerMonthQueryHandler', () => {
       }
     ];
 
-    const expectedResult = {
-      '1': 2,
-      '2': 0
-    };
+
+    const expectedResult = [
+      new MealTicketGrouppedByMonthSummary(1, 2),
+      new MealTicketGrouppedByMonthSummary(2, 0),
+      new MealTicketGrouppedByMonthSummary(3, 2),
+    ]
+
+
 
     const ticketRemoval1 = mock(MealTicketRemoval);
     when(ticketRemoval1.getDate()).thenReturn('2021-12-12');
     const ticketRemoval2 = mock(MealTicketRemoval);
     when(ticketRemoval2.getDate()).thenReturn('2021-11-12');
     when(dateUtilsAdapter.getAllWorkingDayOfYearByMonth(now)).thenReturn(
-      workingDaysByMonth
+      [workingDayByMonth1, workingDayByMonth2, workingDayByMonth3]
+    );
+
+    when(
+      mealTicketRemovalRepository.getAllByUserGroupedByDate(instance(user))
+    ).thenResolve(meatTicketsExceptions);
+
+    expect(await handler.execute(command)).toStrictEqual(expectedResult);
+  });
+
+  it('should return minium 0 available meal ticket even if there are more exceptions', async () => {
+
+    const workingDayByMonth1 = new WorkingDayOfYearByMonth(1, [
+      new Date('1998-01-01'),
+      new Date('1998-01-01'),
+      new Date('1998-01-01')
+    ],
+    )
+
+    const workingDayByMonth2 = new WorkingDayOfYearByMonth(2, [
+      new Date('1998-02-01'),
+      new Date('1998-02-01'),
+    ],
+    )
+
+    const workingDayByMonth3 = new WorkingDayOfYearByMonth(3, [
+      new Date('1998-03-01'),
+    ],
+    )
+
+    const meatTicketsExceptions = [
+      {
+        count: 1,
+        date: new Date('1998-01-01')
+      },
+
+      {
+        count: 2,
+        date: new Date('1998-02-01')
+      },
+      {
+        count: 4,
+        date: new Date('1998-03-01')
+      }
+    ];
+
+
+    const expectedResult = [
+      new MealTicketGrouppedByMonthSummary(1, 2),
+      new MealTicketGrouppedByMonthSummary(2, 0),
+      new MealTicketGrouppedByMonthSummary(3, 0),
+    ]
+
+
+
+    const ticketRemoval1 = mock(MealTicketRemoval);
+    when(ticketRemoval1.getDate()).thenReturn('2021-12-12');
+    const ticketRemoval2 = mock(MealTicketRemoval);
+    when(ticketRemoval2.getDate()).thenReturn('2021-11-12');
+    when(dateUtilsAdapter.getAllWorkingDayOfYearByMonth(now)).thenReturn(
+      [workingDayByMonth1, workingDayByMonth2, workingDayByMonth3]
     );
 
     when(

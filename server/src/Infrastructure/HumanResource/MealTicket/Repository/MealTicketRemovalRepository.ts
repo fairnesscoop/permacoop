@@ -3,13 +3,14 @@ import { Repository } from 'typeorm';
 import { MealTicketRemoval } from 'src/Domain/HumanResource/MealTicket/MealTicketRemoval.entity';
 import { IMealTicketRemovalRepository } from 'src/Domain/HumanResource/MealTicket/Repository/IMealTicketRemovalRepository';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { MealTicketRemovalSummaryDTO } from '../DTO/MealTicketRemovalSummaryDTO';
 
 export class MealTicketRemovalRepository
   implements IMealTicketRemovalRepository {
   constructor(
     @InjectRepository(MealTicketRemoval)
     private readonly repository: Repository<MealTicketRemoval>
-  ) {}
+  ) { }
 
   public save(
     mealTicketRemoval: MealTicketRemoval
@@ -37,7 +38,7 @@ export class MealTicketRemovalRepository
       .getOne();
   }
 
-  public getAllByUserGroupedByDate = (user: User) => {
+  public getAllByUserGroupedByDate = (user: User): Promise<MealTicketRemovalSummaryDTO[]> => {
     return this.repository
       .createQueryBuilder('mealTicketRemoval')
       .select(['date', 'count(mealTicketRemoval.id)'])

@@ -8,6 +8,7 @@ import {
   getYear
 } from 'date-fns';
 import { IDateUtils } from 'src/Application/IDateUtils';
+import { WorkingDayOfYearByMonth } from './WorkingDayOfYearByMonth';
 
 @Injectable()
 export class DateUtilsAdapter implements IDateUtils {
@@ -72,7 +73,7 @@ export class DateUtilsAdapter implements IDateUtils {
 
   public getAllWorkingDayOfYearByMonth = (
     date: Date
-  ): { [key: string]: Date[] } => {
+  ): WorkingDayOfYearByMonth[] => {
     const lastDayOfYear = this.getLastDayOfYear(date);
     const firstDayOfYear = this.getFirstDayOfYear(date);
 
@@ -80,22 +81,27 @@ export class DateUtilsAdapter implements IDateUtils {
       firstDayOfYear,
       lastDayOfYear
     );
-    return workedDaysOfYear.reduce((prev, current) => {
-      const month = current.getMonth() + 1;
-      const previousValues = prev[month];
 
-      if (previousValues && previousValues.length > 0) {
-        return {
-          ...prev,
-          [month]: [...previousValues, current]
-        };
+    const defaultVakues: WorkingDayOfYearByMonth[] = []
+
+    return workedDaysOfYear.reduce((prev, next) => {
+      const currentMonth = next.getMonth() + 1;
+      const itemWithMonth = prev.find(item => item.month === currentMonth);
+
+      if (itemWithMonth) {
+        itemWithMonth.addWorkingDay(next)
+        return prev;
       }
+      const workindDay = new WorkingDayOfYearByMonth(currentMonth);
+      workindDay.addWorkingDay(next)
 
-      return {
+      return [
         ...prev,
-        [month]: [current]
-      };
-    }, {});
+        workindDay
+      ]
+
+    }, defaultVakues)
+
   };
 
   public getWorkedFreeDays(year: number): Date[] {

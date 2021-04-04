@@ -1,3 +1,5 @@
+import { WorkingDayOfYearByMonth } from 'src/Infrastructure/Adapter/WorkingDayOfYearByMonth';
+
 export interface IDateUtils {
   format(date: Date, format: string): string;
   getDaysInMonth(date: Date): number;
@@ -17,5 +19,5 @@ export interface IDateUtils {
   getYear(date: Date): number
   getLastDayOfYear(date: Date): Date
   getFirstDayOfYear(date: Date): Date
-  getAllWorkingDayOfYearByMonth(date: Date): { [key: string]: Date[] }
+  getAllWorkingDayOfYearByMonth(date: Date): WorkingDayOfYearByMonth[]
 }

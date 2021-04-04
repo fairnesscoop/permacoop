@@ -5,6 +5,8 @@ import { GetMealTicketCountPerMonthQuery } from './GetMealTicketCountPerMonthQue
 import { IDateUtils } from 'src/Application/IDateUtils';
 import { AvailableMealTicketStrategy } from 'src/Domain/HumanResource/MealTicket/Strategy/AvailableMealTicketStrategy';
 import { getMonth } from 'date-fns';
+import { MealTicketGrouppedByMonthSummary } from 'src/Domain/HumanResource/MealTicket/Strategy/MealTicketGrouppedByMonthSummary';
+import { MealTicketRemovalSummaryDTO } from 'src/Infrastructure/HumanResource/MealTicket/DTO/MealTicketRemovalSummaryDTO';
 
 @QueryHandler(GetMealTicketCountPerMonthQuery)
 export class GetMealTicketCountPerMonthQueryHandler {
@@ -13,41 +15,35 @@ export class GetMealTicketCountPerMonthQueryHandler {
     private readonly dateUtils: IDateUtils,
     @Inject('IMealTicketRemovalRepository')
     private readonly mealTicketRemovalRepository: IMealTicketRemovalRepository
-  ) {}
+  ) { }
 
   private removeMealTicketsFromYearlyAvailableMealTickets = (
-    yearlyAvailableMealTickets: { [key: string]: number },
-    mealTicketRemovals: any[]
-  ) => {
-    const mealTicketsAvailable = Object.keys(yearlyAvailableMealTickets).reduce(
-      (prev, current) => {
-        const month = parseInt(current, 10);
-        const foundMealTicketRemoval = mealTicketRemovals.find(
-          item => getMonth(item.date) + 1 === month
-        );
+    mealTicketRemovals: MealTicketRemovalSummaryDTO[],
+    mealTicketGrouppedByMonthSummaries: MealTicketGrouppedByMonthSummary[]
+  ): MealTicketGrouppedByMonthSummary[] => {
 
-        if (!foundMealTicketRemoval) {
-          return {
-            ...prev,
-            [current]: yearlyAvailableMealTickets[current]
-          };
+    return mealTicketGrouppedByMonthSummaries.map(summary => {
+      const foudTicketRemoval = mealTicketRemovals.find(item => {
+        const month = getMonth(item.date) + 1;
+        return summary.month === month;
+      })
+      if (foudTicketRemoval) {
+        if (summary.mealTicketCount >= foudTicketRemoval.count) {
+          summary.setMealTicketCount(summary.mealTicketCount - foudTicketRemoval.count)
         }
+        else {
+          summary.setMealTicketCount(0)
+        }
+      }
+      return summary
+    })
 
-        return {
-          ...prev,
-          [current]:
-            yearlyAvailableMealTickets[current] - foundMealTicketRemoval.count
-        };
-      },
-      {}
-    );
+  }
 
-    return mealTicketsAvailable;
-  };
 
   public async execute(
     command: GetMealTicketCountPerMonthQuery
-  ): Promise<{ [month: string]: number }> {
+  ): Promise<MealTicketGrouppedByMonthSummary[]> {
     const { user, currentDate } = command;
     const workingDaysByMonth = this.dateUtils.getAllWorkingDayOfYearByMonth(
       currentDate
@@ -62,9 +58,10 @@ export class GetMealTicketCountPerMonthQueryHandler {
 
     return Promise.resolve(
       this.removeMealTicketsFromYearlyAvailableMealTickets(
+        mealTicketRemovals,
         yearlyAvailableMealTickets,
-        mealTicketRemovals
       )
+
     );
   }
 }

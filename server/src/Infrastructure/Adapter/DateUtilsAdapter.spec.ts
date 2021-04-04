@@ -126,29 +126,7 @@ describe('DateUtilsAdapter', () => {
     const dateUtils = new DateUtilsAdapter();
     const now = new Date('2021-12-12');
     const result = dateUtils.getAllWorkingDayOfYearByMonth(now);
-    expect(Object.keys(result).length).toBe(12);
+    expect(result.length).toBe(12);
 
-    expect(result['1']).toEqual([
-      new Date('2021-01-04T00:00:00.000Z'),
-      new Date('2021-01-05T00:00:00.000Z'),
-      new Date('2021-01-06T00:00:00.000Z'),
-      new Date('2021-01-07T00:00:00.000Z'),
-      new Date('2021-01-08T00:00:00.000Z'),
-      new Date('2021-01-11T00:00:00.000Z'),
-      new Date('2021-01-12T00:00:00.000Z'),
-      new Date('2021-01-13T00:00:00.000Z'),
-      new Date('2021-01-14T00:00:00.000Z'),
-      new Date('2021-01-15T00:00:00.000Z'),
-      new Date('2021-01-18T00:00:00.000Z'),
-      new Date('2021-01-19T00:00:00.000Z'),
-      new Date('2021-01-20T00:00:00.000Z'),
-      new Date('2021-01-21T00:00:00.000Z'),
-      new Date('2021-01-22T00:00:00.000Z'),
-      new Date('2021-01-25T00:00:00.000Z'),
-      new Date('2021-01-26T00:00:00.000Z'),
-      new Date('2021-01-27T00:00:00.000Z'),
-      new Date('2021-01-28T00:00:00.000Z'),
-      new Date('2021-01-29T00:00:00.000Z')
-    ]);
   });
 });
