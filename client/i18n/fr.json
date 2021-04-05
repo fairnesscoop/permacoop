@@ -262,11 +262,11 @@
     },
     "meal_tickets": {
       "title": "Tickets Restaurant",
-      "available_meal_tickets": "Tickets-restaurant disponible",
+      "available_meal_tickets": "Tickets-restaurant disponibles",
       "month": "Mois",
       "base": "base",
       "exceptions": "Exceptions ajoutées",
-      "total": "Total disponible"
+      "total": "Total disponibles"
     },
     "leaves": {
       "title": "Congés",

@@ -29,9 +29,8 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb
-  items="{[{ title: $_('human_resources.breadcrumb') }, { title }]}" />
-<H4Title title="{$_('human_resources.meal_tickets.available_meal_tickets')}" />
+<Breadcrumb items={[{ title: $_('human_resources.breadcrumb') }, { title }]} />
+<H4Title title={$_('human_resources.meal_tickets.available_meal_tickets')} />
 
-<ServerErrors errors="{errors}" />
-<Table mealTicketsSummaries="{mealTicketsSummaries}" />
+<ServerErrors {errors} />
+<Table {mealTicketsSummaries} />
