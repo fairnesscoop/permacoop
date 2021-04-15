@@ -2,12 +2,12 @@
   import { onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
   import { goto, stores } from '@sapper/app';
-  import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import H4Title from '../../components/H4Title.svelte';
-  import { get, put } from '../../utils/axios';
+  import Breadcrumb from 'components/Breadcrumb.svelte';
+  import H4Title from 'components/H4Title.svelte';
+  import { get, put } from 'utils/axios';
   import Form from './_Form.svelte';
-  import { errorNormalizer } from '../../normalizer/errors';
-  import ServerErrors from '../../components/ServerErrors.svelte';
+  import { errorNormalizer } from 'normalizer/errors';
+  import ServerErrors from 'components/ServerErrors.svelte';
 
   const { session } = stores();
 

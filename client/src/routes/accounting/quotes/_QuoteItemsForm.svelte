@@ -1,8 +1,8 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import { format } from '../../../normalizer/money';
-  import TrashIcon from '../../../components/icons/TrashIcon.svelte';
-  import Input from '../../../components/inputs/Input.svelte';
+  import { format } from 'normalizer/money';
+  import TrashIcon from 'components/icons/TrashIcon.svelte';
+  import Input from 'components/inputs/Input.svelte';
   export let values = [];
 
   const addItem = () => {

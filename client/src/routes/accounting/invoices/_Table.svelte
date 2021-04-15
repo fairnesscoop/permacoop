@@ -2,11 +2,11 @@
   import { _ } from 'svelte-i18n';
   import { fr } from 'date-fns/locale';
   import { format as dateFormat } from 'date-fns';
-  import { format } from '../../../normalizer/money';
-  import GrayBadge from '../../../components/badges/GrayBadge.svelte';
-  import RedBadge from '../../../components/badges/RedBadge.svelte';
-  import OrangeBadge from '../../../components/badges/OrangeBadge.svelte';
-  import GreenBadge from '../../../components/badges/GreenBadge.svelte';
+  import { format } from 'normalizer/money';
+  import GrayBadge from 'components/badges/GrayBadge.svelte';
+  import RedBadge from 'components/badges/RedBadge.svelte';
+  import OrangeBadge from 'components/badges/OrangeBadge.svelte';
+  import GreenBadge from 'components/badges/GreenBadge.svelte';
 
   export let items;
 </script>

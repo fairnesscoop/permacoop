@@ -5,14 +5,14 @@
     ROLE_COOPERATOR,
     ROLE_EMPLOYEE,
     ROLE_ACCOUNTANT,
-  } from '../constants/roles';
+  } from 'constants/roles';
   import DashboardIcon from './icons/DashboardIcon.svelte';
   import UsersIcon from './icons/UsersIcon.svelte';
   import CalendarIcon from './icons/CalendarIcon.svelte';
   import CRMIcon from './icons/CRMIcon.svelte';
   import AccountingIcon from './icons/AccountingIcon.svelte';
   import ChevronDownIcon from './icons/ChevronDownIcon.svelte';
-  import { settings } from '../store';
+  import { settings } from 'store';
 
   const { session } = stores();
 

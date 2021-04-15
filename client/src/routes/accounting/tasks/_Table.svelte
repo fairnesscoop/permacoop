@@ -1,6 +1,6 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import EditLink from '../../../components/links/EditLink.svelte';
+  import EditLink from 'components/links/EditLink.svelte';
 
   export let items;
 </script>

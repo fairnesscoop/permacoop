@@ -7,13 +7,13 @@
 <script>
   import { goto } from '@sapper/app';
   import { onMount } from 'svelte';
-  import { get, put } from '../../../../utils/axios';
+  import { get, put } from 'utils/axios';
   import { _ } from 'svelte-i18n';
-  import Breadcrumb from '../../../../components/Breadcrumb.svelte';
-  import H4Title from '../../../../components/H4Title.svelte';
+  import Breadcrumb from 'components/Breadcrumb.svelte';
+  import H4Title from 'components/H4Title.svelte';
   import Form from '../_Form.svelte';
-  import { errorNormalizer } from '../../../../normalizer/errors';
-  import ServerErrors from '../../../../components/ServerErrors.svelte';
+  import { errorNormalizer } from 'normalizer/errors';
+  import ServerErrors from 'components/ServerErrors.svelte';
 
   export let id;
 

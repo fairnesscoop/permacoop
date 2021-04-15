@@ -4,10 +4,10 @@
   import { format } from 'date-fns';
   import { fr } from 'date-fns/locale';
   import { stores } from '@sapper/app';
-  import { errorNormalizer } from '../../../normalizer/errors';
-  import { get } from '../../../utils/axios';
-  import { downloadFile } from '../../../utils/downloadFile';
-  import ServerErrors from '../../../components/ServerErrors.svelte';
+  import { errorNormalizer } from 'normalizer/errors';
+  import { get } from 'utils/axios';
+  import { downloadFile } from 'utils/downloadFile';
+  import ServerErrors from 'components/ServerErrors.svelte';
 
   const { session } = stores();
 

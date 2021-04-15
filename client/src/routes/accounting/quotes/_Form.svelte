@@ -1,11 +1,11 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { createEventDispatcher, onMount } from 'svelte';
-  import { get } from '../../../utils/axios';
+  import { get } from 'utils/axios';
   import QuoteItemsForm from './_QuoteItemsForm.svelte';
-  import Button from '../../../components/inputs/Button.svelte';
-  import ProjectsInput from '../../../components/inputs/ProjectsInput.svelte';
-  import SelectInput from '../../../components/inputs/SelectInput.svelte';
+  import Button from 'components/inputs/Button.svelte';
+  import ProjectsInput from 'components/inputs/ProjectsInput.svelte';
+  import SelectInput from 'components/inputs/SelectInput.svelte';
   import { byAlpha2 } from 'iso-country-codes';
 
   export let customerId = '';

@@ -1,6 +1,8 @@
 /* eslint-disable  */
+import path from 'path';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
+import alias from '@rollup/plugin-alias';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import svelte from 'rollup-plugin-svelte';
@@ -20,6 +22,15 @@ const onwarn = (warning, onwarn) =>
 const dedupe = (importee) =>
   importee === 'svelte' || importee.startsWith('svelte/');
 
+const aliases = [
+  { find: 'src', replacement: path.resolve(__dirname, 'src') },
+  { find: 'components', replacement: path.resolve(__dirname, 'src/components') },
+  { find: 'normalizer', replacement: path.resolve(__dirname, 'src/normalizer') },
+  { find: 'utils', replacement: path.resolve(__dirname, 'src/utils') },
+  { find: 'store', replacement: path.resolve(__dirname, 'src/store') },
+  { find: 'constants', replacement: path.resolve(__dirname, 'src/constants') },
+];
+
 export default {
   client: {
     input: config.client.input(),
@@ -29,6 +40,7 @@ export default {
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode)
       }),
+      alias({ entries: aliases }),
       svelte({
         dev,
         hydratable: true,
@@ -91,7 +103,8 @@ export default {
         dedupe
       }),
       json(),
-      commonjs()
+      commonjs(),
+      alias({ entries: aliases }),
     ],
     external: Object.keys(pkg.dependencies).concat(
       require('module').builtinModules ||

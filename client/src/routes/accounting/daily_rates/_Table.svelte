@@ -1,7 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import { format } from '../../../normalizer/money';
-  import EditLink from '../../../components/links/EditLink.svelte';
+  import { format } from 'normalizer/money';
+  import EditLink from 'components/links/EditLink.svelte';
 
   export let items;
 </script>

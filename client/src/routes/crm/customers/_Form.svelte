@@ -2,9 +2,9 @@
   import { _ } from 'svelte-i18n';
   import { createEventDispatcher } from 'svelte';
   import { codes } from 'iso-country-codes';
-  import Input from '../../../components/inputs/Input.svelte';
-  import SelectInput from '../../../components/inputs/SelectInput.svelte';
-  import Button from '../../../components/inputs/Button.svelte';
+  import Input from 'components/inputs/Input.svelte';
+  import SelectInput from 'components/inputs/SelectInput.svelte';
+  import Button from 'components/inputs/Button.svelte';
 
   export let customer;
   export let loading;

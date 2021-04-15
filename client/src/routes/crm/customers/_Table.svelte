@@ -1,7 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
-  //import SeeLink from '../../../components/links/SeeLink.svelte';
-  import EditLink from '../../../components/links/EditLink.svelte';
+  //import SeeLink from 'components/links/SeeLink.svelte';
+  import EditLink from 'components/links/EditLink.svelte';
   import { byAlpha2 } from 'iso-country-codes';
 
   export let items;

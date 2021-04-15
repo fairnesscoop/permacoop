@@ -3,11 +3,11 @@
   import { format } from 'date-fns';
   import { createEventDispatcher } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import SeeLink from '../../../../components/links/SeeLink.svelte';
-  import RedBadge from '../../../../components/badges/RedBadge.svelte';
-  import OrangeBadge from '../../../../components/badges/OrangeBadge.svelte';
-  import GrayBadge from '../../../../components/badges/GrayBadge.svelte';
-  import DeleteLink from '../../../../components/links/DeleteLink.svelte';
+  import SeeLink from 'components/links/SeeLink.svelte';
+  import RedBadge from 'components/badges/RedBadge.svelte';
+  import OrangeBadge from 'components/badges/OrangeBadge.svelte';
+  import GrayBadge from 'components/badges/GrayBadge.svelte';
+  import DeleteLink from 'components/links/DeleteLink.svelte';
 
   export let items;
 

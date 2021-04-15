@@ -2,10 +2,10 @@
   import { tick } from 'svelte';
   import { stores, goto } from '@sapper/app';
   import { guard } from '@beyonk/sapper-rbac';
-  import { settings } from '../store';
+  import { settings } from 'store';
   import routes from '../routes';
-  import Nav from './../components/Nav.svelte';
-  import Header from './../components/header/Header.svelte';
+  import Nav from 'components/Nav.svelte';
+  import Header from 'components/header/Header.svelte';
 
   export let segment;
 

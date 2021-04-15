@@ -1,8 +1,8 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { createEventDispatcher } from 'svelte';
-  import Button from '../../../components/inputs/Button.svelte';
-  import Input from '../../../components/inputs/Input.svelte';
+  import Button from 'components/inputs/Button.svelte';
+  import Input from 'components/inputs/Input.svelte';
 
   export let name = '';
   export let loading;

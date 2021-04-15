@@ -1,7 +1,7 @@
 <script>
   import { format } from 'date-fns';
   import { _ } from 'svelte-i18n';
-  import GrayBadge from '../../../components/badges/GrayBadge.svelte';
+  import GrayBadge from 'components/badges/GrayBadge.svelte';
 
   const formatDate = (date) => {
     return format(new Date(date), 'dd/MM/yyyy');

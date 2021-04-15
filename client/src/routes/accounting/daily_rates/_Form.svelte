@@ -1,12 +1,12 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { createEventDispatcher, onMount } from 'svelte';
-  import { get } from '../../../utils/axios';
-  import UsersInput from '../../../components/inputs/UsersInput.svelte';
-  import CustomersInput from '../../../components/inputs/CustomersInput.svelte';
-  import TasksInput from '../../../components/inputs/TasksInput.svelte';
-  import Input from '../../../components/inputs/Input.svelte';
-  import Button from '../../../components/inputs/Button.svelte';
+  import { get } from 'utils/axios';
+  import UsersInput from 'components/inputs/UsersInput.svelte';
+  import CustomersInput from 'components/inputs/CustomersInput.svelte';
+  import TasksInput from 'components/inputs/TasksInput.svelte';
+  import Input from 'components/inputs/Input.svelte';
+  import Button from 'components/inputs/Button.svelte';
 
   let users = [];
   let tasks = { items: [] };
