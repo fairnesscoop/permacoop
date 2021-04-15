@@ -1,9 +1,9 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import SelectInput from '../../../../components/inputs/SelectInput.svelte';
-  import Button from '../../../../components/inputs/Button.svelte';
-  import Input from '../../../../components/inputs/Input.svelte';
+  import SelectInput from 'components/inputs/SelectInput.svelte';
+  import Button from 'components/inputs/Button.svelte';
+  import Input from 'components/inputs/Input.svelte';
 
   const dispatch = createEventDispatcher();
   const types = ['paid', 'unpaid', 'medical', 'special'];

@@ -3,7 +3,7 @@
   import Search from './Search.svelte';
   import ThemeToggler from './ThemeToggler.svelte';
   import BurgerIcon from '../icons/BurgerIcon.svelte';
-  import { settings } from '../../store';
+  import { settings } from 'store';
 
 </script>
 

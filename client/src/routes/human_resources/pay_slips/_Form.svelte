@@ -1,10 +1,10 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import { get } from '../../../utils/axios';
-  import Button from '../../../components/inputs/Button.svelte';
-  import UsersInput from '../../../components/inputs/UsersInput.svelte';
-  import MonthsInput from '../../../components/inputs/MonthsInput.svelte';
+  import { get } from 'utils/axios';
+  import Button from 'components/inputs/Button.svelte';
+  import UsersInput from 'components/inputs/UsersInput.svelte';
+  import MonthsInput from 'components/inputs/MonthsInput.svelte';
 
   let data = [];
 

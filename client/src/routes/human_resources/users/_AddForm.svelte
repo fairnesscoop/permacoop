@@ -5,11 +5,11 @@
     ROLE_COOPERATOR,
     ROLE_ACCOUNTANT,
     ROLE_EMPLOYEE,
-  } from '../../../constants/roles';
+  } from 'constants/roles';
   import UserAdministrativeForm from './_UserAdministrativeForm.svelte';
-  import Input from '../../../components/inputs/Input.svelte';
-  import SelectInput from '../../../components/inputs/SelectInput.svelte';
-  import Button from '../../../components/inputs/Button.svelte';
+  import Input from 'components/inputs/Input.svelte';
+  import SelectInput from 'components/inputs/SelectInput.svelte';
+  import Button from 'components/inputs/Button.svelte';
 
   export let loading;
   export let firstName = '';

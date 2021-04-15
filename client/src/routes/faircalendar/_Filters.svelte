@@ -1,9 +1,9 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import { get } from '../../utils/axios';
+  import { get } from 'utils/axios';
   import { format } from 'date-fns';
-  import MonthsInput from '../../components/inputs/MonthsInput.svelte';
+  import MonthsInput from 'components/inputs/MonthsInput.svelte';
 
   const dispatch = createEventDispatcher();
 

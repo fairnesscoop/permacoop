@@ -1,10 +1,10 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { createEventDispatcher, onMount } from 'svelte';
-  import { get } from '../../../utils/axios';
-  import Button from '../../../components/inputs/Button.svelte';
-  import ProjectsInput from '../../../components/inputs/ProjectsInput.svelte';
-  import SelectInput from '../../../components/inputs/SelectInput.svelte';
+  import { get } from 'utils/axios';
+  import Button from 'components/inputs/Button.svelte';
+  import ProjectsInput from 'components/inputs/ProjectsInput.svelte';
+  import SelectInput from 'components/inputs/SelectInput.svelte';
 
   export let loading;
   

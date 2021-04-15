@@ -19,15 +19,15 @@
   import frLocale from '@fullcalendar/core/locales/fr';
   import '@fullcalendar/core/main.css';
   import '@fullcalendar/daygrid/main.css';
-  import { get } from '../../utils/axios';
+  import { get } from 'utils/axios';
   import Filters from './_Filters.svelte';
   import Overview from './_Overview.svelte';
-  import { errorNormalizer } from '../../normalizer/errors';
-  import Breadcrumb from '../../components/Breadcrumb.svelte';
-  import H4Title from '../../components/H4Title.svelte';
-  import ServerErrors from '../../components/ServerErrors.svelte';
-  import { settings } from '../../store';
-  import { minutesToHours } from '../../normalizer/time';
+  import { errorNormalizer } from 'normalizer/errors';
+  import Breadcrumb from 'components/Breadcrumb.svelte';
+  import H4Title from 'components/H4Title.svelte';
+  import ServerErrors from 'components/ServerErrors.svelte';
+  import { settings } from 'store';
+  import { minutesToHours } from 'normalizer/time';
 
   export let filters;
   export let user;

@@ -9,14 +9,14 @@
 <script>
   import { onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import H4Title from '../../../components/H4Title.svelte';
-  import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import Link from '../../../components/links/Link.svelte';
-  import ServerErrors from '../../../components/ServerErrors.svelte';
-  import Pagination from '../../../components/Pagination.svelte';
-  import { get } from '../../../utils/axios';
-  import { historyPushState } from '../../../utils/url';
-  import { errorNormalizer } from '../../../normalizer/errors';
+  import H4Title from 'components/H4Title.svelte';
+  import Breadcrumb from 'components/Breadcrumb.svelte';
+  import Link from 'components/links/Link.svelte';
+  import ServerErrors from 'components/ServerErrors.svelte';
+  import Pagination from 'components/Pagination.svelte';
+  import { get } from 'utils/axios';
+  import { historyPushState } from 'utils/url';
+  import { errorNormalizer } from 'normalizer/errors';
   import Table from './_Table.svelte';
 
   export let page;

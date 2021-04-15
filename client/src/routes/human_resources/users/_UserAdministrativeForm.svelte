@@ -1,7 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import Input from '../../../components/inputs/Input.svelte';
-  import SelectInput from '../../../components/inputs/SelectInput.svelte';
+  import Input from 'components/inputs/Input.svelte';
+  import SelectInput from 'components/inputs/SelectInput.svelte';
 
   export let userAdministrative;
 

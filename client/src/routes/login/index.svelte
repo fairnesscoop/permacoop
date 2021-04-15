@@ -2,11 +2,11 @@
   import { goto, stores } from '@sapper/app';
   import { _ } from 'svelte-i18n';
   import Cookies from 'js-cookie';
-  import { post } from '../../utils/axios';
-  import { errorNormalizer } from '../../normalizer/errors';
-  import ServerErrors from '../../components/ServerErrors.svelte';
-  import Input from '../../components/inputs/Input.svelte';
-  import Button from '../../components/inputs/Button.svelte';
+  import { post } from 'utils/axios';
+  import { errorNormalizer } from 'normalizer/errors';
+  import ServerErrors from 'components/ServerErrors.svelte';
+  import Input from 'components/inputs/Input.svelte';
+  import Button from 'components/inputs/Button.svelte';
 
   let errors = [];
   let email = '';

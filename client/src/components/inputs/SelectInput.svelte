@@ -1,5 +1,5 @@
 <script>
-  import shortid from '../../utils/shortid';
+  import shortid from 'utils/shortid';
 
   export let value;
   export let label;

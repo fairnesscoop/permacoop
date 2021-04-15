@@ -1,12 +1,12 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import GreenBadge from '../../components/badges/GreenBadge.svelte';
-  import OrangeBadge from '../../components/badges/OrangeBadge.svelte';
-  import IndigoBadge from '../../components/badges/IndigoBadge.svelte';
-  import BlueBadge from '../../components/badges/BlueBadge.svelte';
-  import GrayBadge from '../../components/badges/GrayBadge.svelte';
-  import YellowBadge from '../../components/badges/YellowBadge.svelte';
-  import RedBadge from '../../components/badges/RedBadge.svelte';
+  import GreenBadge from 'components/badges/GreenBadge.svelte';
+  import OrangeBadge from 'components/badges/OrangeBadge.svelte';
+  import IndigoBadge from 'components/badges/IndigoBadge.svelte';
+  import BlueBadge from 'components/badges/BlueBadge.svelte';
+  import GrayBadge from 'components/badges/GrayBadge.svelte';
+  import YellowBadge from 'components/badges/YellowBadge.svelte';
+  import RedBadge from 'components/badges/RedBadge.svelte';
 
   export let overview;
 </script>

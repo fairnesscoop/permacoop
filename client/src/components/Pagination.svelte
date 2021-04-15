@@ -1,7 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { createEventDispatcher } from 'svelte';
-  import { range } from '../utils/array';
+  import { range } from 'utils/array';
 
   const itemsPerPage = 30;
 

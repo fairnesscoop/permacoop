@@ -1,12 +1,12 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { createEventDispatcher, onMount } from 'svelte';
-  import { get } from '../../../utils/axios';
-  import CustomersInput from '../../../components/inputs/CustomersInput.svelte';
-  import SelectInput from '../../../components/inputs/SelectInput.svelte';
-  import Input from '../../../components/inputs/Input.svelte';
-  import Button from '../../../components/inputs/Button.svelte';
-  import { minutesToHours } from '../../../normalizer/time';
+  import { get } from 'utils/axios';
+  import CustomersInput from 'components/inputs/CustomersInput.svelte';
+  import SelectInput from 'components/inputs/SelectInput.svelte';
+  import Input from 'components/inputs/Input.svelte';
+  import Button from 'components/inputs/Button.svelte';
+  import { minutesToHours } from 'normalizer/time';
 
   let response = {
     items: [],

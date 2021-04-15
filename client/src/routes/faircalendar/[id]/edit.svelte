@@ -10,12 +10,12 @@
   import { _ } from 'svelte-i18n';
   import { fr } from 'date-fns/locale';
   import { goto } from '@sapper/app';
-  import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import { get, put, del } from '../../../utils/axios';
+  import Breadcrumb from 'components/Breadcrumb.svelte';
+  import { get, put, del } from 'utils/axios';
   import Form from '../_Form.svelte';
-  import { errorNormalizer } from '../../../normalizer/errors';
-  import ServerErrors from '../../../components/ServerErrors.svelte';
-  import H4Title from '../../../components/H4Title.svelte';
+  import { errorNormalizer } from 'normalizer/errors';
+  import ServerErrors from 'components/ServerErrors.svelte';
+  import H4Title from 'components/H4Title.svelte';
 
   export let id;
 
