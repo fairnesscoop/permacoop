@@ -16,14 +16,13 @@ export class GetMealTicketCountPerMonthQueryHandler {
     private readonly dateUtils: IDateUtils,
     @Inject('IMealTicketRemovalRepository')
     private readonly mealTicketRemovalRepository: IMealTicketRemovalRepository
-  ) { }
+  ) {}
 
   private buildMealTicketSummary = (
     mealTicketRemovals: MealTicketRemovalSummaryDTO[],
     mealTicketGrouppedByMonthSummaries: MealTicketGrouppedByMonthSummary[]
   ): MealTicketSummaryDTO[] => {
     return mealTicketGrouppedByMonthSummaries.map(summary => {
-
       const month = summary.month;
       const base = summary.mealTicketCount;
       let total = base;
@@ -32,21 +31,25 @@ export class GetMealTicketCountPerMonthQueryHandler {
       const foudTicketRemoval = mealTicketRemovals.find(item => {
         const _month = getMonth(item.date) + 1;
         return summary.month === _month;
-      })
+      });
 
       if (foudTicketRemoval) {
         mealTicketRemovalCount = foudTicketRemoval.count;
         if (summary.mealTicketCount >= foudTicketRemoval.count) {
-          total = total - foudTicketRemoval.count
-        }
-        else {
-          total = 0
+          total = total - foudTicketRemoval.count;
+        } else {
+          total = 0;
         }
       }
 
-      return new MealTicketSummaryDTO(month, base, mealTicketRemovalCount, total);
-    })
-  }
+      return new MealTicketSummaryDTO(
+        month,
+        base,
+        mealTicketRemovalCount,
+        total
+      );
+    });
+  };
 
   public async execute(
     command: GetMealTicketCountPerMonthQuery
@@ -66,7 +69,7 @@ export class GetMealTicketCountPerMonthQueryHandler {
     return Promise.resolve(
       this.buildMealTicketSummary(
         mealTicketRemovals,
-        yearlyAvailableMealTickets,
+        yearlyAvailableMealTickets
       )
     );
   }

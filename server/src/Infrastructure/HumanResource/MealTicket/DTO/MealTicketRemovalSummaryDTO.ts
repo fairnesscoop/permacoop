@@ -1,4 +1,4 @@
 export class MealTicketRemovalSummaryDTO {
-    public count: number;
-    public date: Date;
+  public count: number;
+  public date: Date;
 }

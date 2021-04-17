@@ -127,7 +127,6 @@ describe('DateUtilsAdapter', () => {
     const now = new Date('2021-12-12');
     const result = dateUtils.getAllWorkingDayOfYearByMonth(now);
     expect(result.length).toBe(12);
-
   });
 
   it('testGetLastDayOfYear', () => {

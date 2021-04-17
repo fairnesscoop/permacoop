@@ -95,13 +95,8 @@ export class DateUtilsAdapter implements IDateUtils {
       const workindDay = new WorkingDayOfYearByMonth(currentMonth);
       workindDay.addWorkingDay(next);
 
-      return [
-        ...prev,
-        workindDay
-      ]
-
-    }, defaultVakues)
-
+      return [...prev, workindDay];
+    }, defaultVakues);
   };
 
   public getWorkedFreeDays(year: number): Date[] {

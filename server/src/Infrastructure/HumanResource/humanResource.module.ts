@@ -161,4 +161,4 @@ import { GetMealTicketCountPerMonthQueryHandler } from 'src/Application/HumanRes
     GetMealTicketCountPerMonthQueryHandler
   ]
 })
-export class HumanResourceModule { }
+export class HumanResourceModule {}
