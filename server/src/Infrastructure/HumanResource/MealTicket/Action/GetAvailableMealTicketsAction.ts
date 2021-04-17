@@ -22,7 +22,7 @@ export class GetAvailableMealTicketsAction {
   constructor(
     @Inject('IQueryBus')
     private readonly queryBus: IQueryBus
-  ) { }
+  ) {}
 
   @Get('count')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
