@@ -129,4 +129,18 @@ describe('DateUtilsAdapter', () => {
     expect(result.length).toBe(12);
 
   });
+
+  it('testGetLastDayOfYear', () => {
+    const dateUtils = new DateUtilsAdapter();
+    const now = new Date('2021-12-12');
+    const result = dateUtils.getLastDayOfYear(now);
+    expect(result).toStrictEqual(new Date('2021-12-31'));
+  });
+
+  it('getFirstDayOfYear', () => {
+    const dateUtils = new DateUtilsAdapter();
+    const now = new Date('2021-12-12');
+    const result = dateUtils.getFirstDayOfYear(now);
+    expect(result).toStrictEqual(new Date('2021-01-01'));
+  });
 });

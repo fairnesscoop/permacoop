@@ -82,18 +82,18 @@ export class DateUtilsAdapter implements IDateUtils {
       lastDayOfYear
     );
 
-    const defaultVakues: WorkingDayOfYearByMonth[] = []
+    const defaultVakues: WorkingDayOfYearByMonth[] = [];
 
     return workedDaysOfYear.reduce((prev, next) => {
       const currentMonth = next.getMonth() + 1;
       const itemWithMonth = prev.find(item => item.month === currentMonth);
 
       if (itemWithMonth) {
-        itemWithMonth.addWorkingDay(next)
+        itemWithMonth.addWorkingDay(next);
         return prev;
       }
       const workindDay = new WorkingDayOfYearByMonth(currentMonth);
-      workindDay.addWorkingDay(next)
+      workindDay.addWorkingDay(next);
 
       return [
         ...prev,

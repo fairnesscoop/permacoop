@@ -1,16 +1,12 @@
-import { mock, instance, when, verify, deepEqual, anything } from 'ts-mockito';
+import { mock, instance, when } from 'ts-mockito';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { MealTicketRemovalRepository } from 'src/Infrastructure/HumanResource/MealTicket/Repository/MealTicketRemovalRepository';
-import { IsMealTicketRemovalAlreadyExist } from 'src/Domain/HumanResource/MealTicket/Specification/IsMealTicketRemovalAlreadyExist';
-
 import { GetMealTicketCountPerMonthQueryHandler } from './GetMealTicketCountPerMonthQueryHandler';
 import { GetMealTicketCountPerMonthQuery } from './GetMealTicketCountPerMonthQuery';
 import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { MealTicketRemoval } from 'src/Domain/HumanResource/MealTicket/MealTicketRemoval.entity';
 import { WorkingDayOfYearByMonth } from 'src/Infrastructure/Adapter/WorkingDayOfYearByMonth';
-import { MealTicketGrouppedByMonthSummary } from 'src/Domain/HumanResource/MealTicket/Strategy/MealTicketGrouppedByMonthSummary';
-import { MealTicketSummaryDTO } from 'src/Infrastructure/HumanResource/MealTicket/DTO/MealTicketSummaryDTO';
-
+import { MealTicketSummaryDTO } from 'src/Domain/HumanResource/MealTicket/DTO/MealTicketSummaryDTO';
 
 describe('GetMealTicketCountPerMonthQueryHandler', () => {
   let mealTicketRemovalRepository: MealTicketRemovalRepository;
@@ -73,8 +69,6 @@ describe('GetMealTicketCountPerMonthQueryHandler', () => {
       new MealTicketSummaryDTO(3, 2, 0, 2),
     ]
 
-
-
     const ticketRemoval1 = mock(MealTicketRemoval);
     when(ticketRemoval1.getDate()).thenReturn('2021-12-12');
     const ticketRemoval2 = mock(MealTicketRemoval);
@@ -126,13 +120,11 @@ describe('GetMealTicketCountPerMonthQueryHandler', () => {
       }
     ];
 
-
     const expectedResult: MealTicketSummaryDTO[] = [
       new MealTicketSummaryDTO(1, 3, 1, 2),
       new MealTicketSummaryDTO(2, 2, 2, 0),
       new MealTicketSummaryDTO(3, 1, 4, 0),
     ]
-
 
     const ticketRemoval1 = mock(MealTicketRemoval);
     when(ticketRemoval1.getDate()).thenReturn('2021-12-12');

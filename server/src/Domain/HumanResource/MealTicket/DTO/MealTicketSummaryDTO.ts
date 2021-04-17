@@ -1,9 +1,9 @@
 
 export class MealTicketSummaryDTO {
-    public total: number;
-    public mealTicketRemovalCount: number
-    public base: number
-    public month: number
+    readonly total: number;
+    readonly mealTicketRemovalCount: number
+    readonly base: number
+    readonly month: number
     constructor(month: number, base: number, mealTicketRemovalCount: number, total: number) {
         this.month = month;
         this.total = total;

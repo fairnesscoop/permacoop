@@ -3,11 +3,10 @@ export class MealTicketGrouppedByMonthSummary {
     mealTicketCount: number
     constructor(month: number, mealTicketCount: number
     ) {
-        this.month = month
-        this.mealTicketCount = mealTicketCount
+        this.month = month;
+        this.mealTicketCount = mealTicketCount;
     }
-
     setMealTicketCount(count: number) {
-        this.mealTicketCount = count
+        this.mealTicketCount = count;
     }
 }

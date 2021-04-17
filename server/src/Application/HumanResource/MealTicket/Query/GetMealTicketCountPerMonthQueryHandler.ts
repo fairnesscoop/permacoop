@@ -7,7 +7,7 @@ import { AvailableMealTicketStrategy } from 'src/Domain/HumanResource/MealTicket
 import { getMonth } from 'date-fns';
 import { MealTicketGrouppedByMonthSummary } from 'src/Domain/HumanResource/MealTicket/Strategy/MealTicketGrouppedByMonthSummary';
 import { MealTicketRemovalSummaryDTO } from 'src/Infrastructure/HumanResource/MealTicket/DTO/MealTicketRemovalSummaryDTO';
-import { MealTicketSummaryDTO } from 'src/Infrastructure/HumanResource/MealTicket/DTO/MealTicketSummaryDTO';
+import { MealTicketSummaryDTO } from 'src/Domain/HumanResource/MealTicket/DTO/MealTicketSummaryDTO';
 
 @QueryHandler(GetMealTicketCountPerMonthQuery)
 export class GetMealTicketCountPerMonthQueryHandler {
@@ -37,18 +37,16 @@ export class GetMealTicketCountPerMonthQueryHandler {
       if (foudTicketRemoval) {
         mealTicketRemovalCount = foudTicketRemoval.count;
         if (summary.mealTicketCount >= foudTicketRemoval.count) {
-          total = summary.mealTicketCount - foudTicketRemoval.count
+          total = total - foudTicketRemoval.count
         }
         else {
           total = 0
         }
       }
 
-      return new MealTicketSummaryDTO(month, base, mealTicketRemovalCount, total)
+      return new MealTicketSummaryDTO(month, base, mealTicketRemovalCount, total);
     })
-
   }
-
 
   public async execute(
     command: GetMealTicketCountPerMonthQuery
@@ -70,7 +68,6 @@ export class GetMealTicketCountPerMonthQueryHandler {
         mealTicketRemovals,
         yearlyAvailableMealTickets,
       )
-
     );
   }
 }

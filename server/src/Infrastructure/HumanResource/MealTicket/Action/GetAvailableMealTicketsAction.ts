@@ -22,17 +22,16 @@ export class GetAvailableMealTicketsAction {
   constructor(
     @Inject('IQueryBus')
     private readonly queryBus: IQueryBus
-  ) {}
+  ) { }
 
   @Get('count')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({ summary: 'Get all avaibale Meal Tickets' })
+  @ApiOperation({ summary: 'Get all available Meal Tickets' })
   public async index(@LoggedUser() user: User) {
     try {
       const result = await this.queryBus.execute(
         new GetMealTicketCountPerMonthQuery(user, new Date())
       );
-
       return result;
     } catch (e) {
       throw new BadRequestException(e.message);
