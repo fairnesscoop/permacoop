@@ -18,7 +18,7 @@ export class RefuseLeaveRequestCommandHandler {
   ) {}
 
   public async execute(command: RefuseLeaveRequestCommand): Promise<string> {
-    const {moderator, id, moderationComment} = command;
+    const { moderator, id, moderationComment } = command;
 
     const leaveRequest = await this.leaveRequestRepository.findOneById(id);
     if (!leaveRequest) {
@@ -26,7 +26,8 @@ export class RefuseLeaveRequestCommandHandler {
     }
 
     if (
-      false === this.canLeaveRequestBeModerated.isSatisfiedBy(leaveRequest, moderator)
+      false ===
+      this.canLeaveRequestBeModerated.isSatisfiedBy(leaveRequest, moderator)
     ) {
       throw new LeaveRequestCantBeModeratedException();
     }

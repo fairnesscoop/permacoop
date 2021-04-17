@@ -28,7 +28,7 @@ export class GetProjectAction {
 
   @Get(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Get project'})
+  @ApiOperation({ summary: 'Get project' })
   public async index(@Param() { id }: IdDTO): Promise<ProjectView> {
     try {
       return await this.queryBus.execute(new GetProjectByIdQuery(id));

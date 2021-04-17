@@ -30,9 +30,9 @@ describe('DateUtilsAdapter', () => {
 
   it('testAddDaysToDate', () => {
     const dateUtils = new DateUtilsAdapter();
-    expect(dateUtils.addDaysToDate(new Date('2019-12-21T11:49:58.706Z'), 5)).toMatchObject(
-      new Date('2019-12-26T11:49:58.706Z')
-    );
+    expect(
+      dateUtils.addDaysToDate(new Date('2019-12-21T11:49:58.706Z'), 5)
+    ).toMatchObject(new Date('2019-12-26T11:49:58.706Z'));
   });
 
   it('testGetCurrentDate', () => {
@@ -112,16 +112,16 @@ describe('DateUtilsAdapter', () => {
   it('testGetLeaveDuration', () => {
     const dateUtils = new DateUtilsAdapter();
 
-    expect(dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', false)).toBe(
-      7
-    );
+    expect(
+      dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', false)
+    ).toBe(7);
   });
 
   it('testGetMinimumLeaveDuration', () => {
     const dateUtils = new DateUtilsAdapter();
 
-    expect(dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-05', false)).toBe(
-      0.5
-    );
+    expect(
+      dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-05', false)
+    ).toBe(0.5);
   });
 });

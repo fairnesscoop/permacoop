@@ -1,4 +1,4 @@
-import {Inject} from '@nestjs/common';
+import { Inject } from '@nestjs/common';
 import { User } from '../../User/User.entity';
 import { LeaveRequest } from '../LeaveRequest.entity';
 import { ILeaveRequestRepository } from '../Repository/ILeaveRequestRepository';

@@ -1,4 +1,4 @@
-import { UserSummaryView} from '../../User/View/UserSummaryView';
+import { UserSummaryView } from '../../User/View/UserSummaryView';
 import {
   Type,
   Status

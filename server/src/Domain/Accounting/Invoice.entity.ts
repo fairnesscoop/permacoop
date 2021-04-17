@@ -22,30 +22,30 @@ export class Invoice {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column('enum', {enum: InvoiceStatus, nullable: false})
+  @Column('enum', { enum: InvoiceStatus, nullable: false })
   private status: InvoiceStatus;
 
-  @Column({type: 'varchar', nullable: false, unique: true})
+  @Column({ type: 'varchar', nullable: false, unique: true })
   private invoiceId: string;
 
-  @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   private createdAt: string;
 
-  @Column({type: 'timestamp'})
+  @Column({ type: 'timestamp' })
   private expiryDate: string;
 
-  @ManyToOne(type => User, {nullable: true, onDelete: 'SET NULL'})
+  @ManyToOne(type => User, { nullable: true, onDelete: 'SET NULL' })
   private owner: User;
 
-  @ManyToOne(type => Quote, {nullable: true, onDelete: 'SET NULL'})
+  @ManyToOne(type => Quote, { nullable: true, onDelete: 'SET NULL' })
   private quote: Quote;
 
-  @ManyToOne(type => Project, {nullable: true, onDelete: 'SET NULL'})
+  @ManyToOne(type => Project, { nullable: true, onDelete: 'SET NULL' })
   private project: Project;
 
   @OneToMany(
     type => InvoiceItem,
-    invoiceItem => invoiceItem.invoice,
+    invoiceItem => invoiceItem.invoice
   )
   items: InvoiceItem[];
 

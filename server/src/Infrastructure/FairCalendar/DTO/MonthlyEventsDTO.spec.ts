@@ -1,5 +1,5 @@
-import {validate} from 'class-validator';
-import {MonthlyEventsDTO} from './MonthlyEventsDTO';
+import { validate } from 'class-validator';
+import { MonthlyEventsDTO } from './MonthlyEventsDTO';
 
 describe('MonthlyEventsDTO', () => {
   it('testValidDTO', async () => {

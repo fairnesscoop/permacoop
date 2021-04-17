@@ -1,11 +1,11 @@
-import {mock, instance, when, verify, deepEqual, anything} from 'ts-mockito';
-import {FileRepository} from 'src/Infrastructure/File/Repository/FileRepository';
-import {UploadFileCommandHandler} from './UploadFileCommandHandler';
-import {LocalFileStorageAdapter} from 'src/Infrastructure/Adapter/LocalFileStorageAdapter';
-import {IUploadedFile} from 'src/Domain/File/IUploadedFile';
-import {UploadFileCommand} from './UploadFileCommand';
-import {File} from 'src/Domain/File/File.entity';
-import {FileNotFoundException} from 'src/Domain/File/Exception/FileNotFoundException';
+import { mock, instance, when, verify, deepEqual, anything } from 'ts-mockito';
+import { FileRepository } from 'src/Infrastructure/File/Repository/FileRepository';
+import { UploadFileCommandHandler } from './UploadFileCommandHandler';
+import { LocalFileStorageAdapter } from 'src/Infrastructure/Adapter/LocalFileStorageAdapter';
+import { IUploadedFile } from 'src/Domain/File/IUploadedFile';
+import { UploadFileCommand } from './UploadFileCommand';
+import { File } from 'src/Domain/File/File.entity';
+import { FileNotFoundException } from 'src/Domain/File/Exception/FileNotFoundException';
 
 describe('UpdateFileCommandHandler', () => {
   let handler: UploadFileCommandHandler;

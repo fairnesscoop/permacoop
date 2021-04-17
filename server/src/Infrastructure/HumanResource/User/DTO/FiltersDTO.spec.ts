@@ -1,5 +1,5 @@
-import {FiltersDTO} from './FiltersDTO';
-import {validate} from 'class-validator';
+import { FiltersDTO } from './FiltersDTO';
+import { validate } from 'class-validator';
 
 describe('FiltersDTO', () => {
   it('testValidDTO', async () => {

@@ -1,9 +1,9 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {PaySlip} from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
-import {IsPaySlipAlreadyExist} from './IsPaySlipAlreadyExist';
-import {PaySlipRepository} from 'src/Infrastructure/HumanResource/PaySlip/Repository/PaySlipRepository';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {File} from 'src/Domain/File/File.entity';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { PaySlip } from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
+import { IsPaySlipAlreadyExist } from './IsPaySlipAlreadyExist';
+import { PaySlipRepository } from 'src/Infrastructure/HumanResource/PaySlip/Repository/PaySlipRepository';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { File } from 'src/Domain/File/File.entity';
 
 describe('IsPaySlipAlreadyExist', () => {
   let paySlipRepository: PaySlipRepository;

@@ -29,8 +29,11 @@ export class GenerateInvoiceAction {
 
   @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Generate new invoice'})
-  public async index(@Body() { projectId, expireInDays }: InvoiceDTO, @LoggedUser() user: User) {
+  @ApiOperation({ summary: 'Generate new invoice' })
+  public async index(
+    @Body() { projectId, expireInDays }: InvoiceDTO,
+    @LoggedUser() user: User
+  ) {
     try {
       const id = await this.commandBus.execute(
         new GenerateInvoiceCommand(

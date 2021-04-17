@@ -1,10 +1,10 @@
-import {Inject} from '@nestjs/common';
-import {CommandHandler} from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { CommandHandler } from '@nestjs/cqrs';
 import { UserAdministrativeMissingException } from 'src/Domain/HumanResource/User/Exception/UserAdministrativeMissingException';
-import {UserNotFoundException} from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
-import {IUserAdministrativeRepository} from 'src/Domain/HumanResource/User/Repository/IUserAdministrativeRepository';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import {UpdateUserCommand} from './UpdateUserCommand';
+import { UserNotFoundException } from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
+import { IUserAdministrativeRepository } from 'src/Domain/HumanResource/User/Repository/IUserAdministrativeRepository';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { UpdateUserCommand } from './UpdateUserCommand';
 
 @CommandHandler(UpdateUserCommand)
 export class UpdateUserCommandHandler {
@@ -33,7 +33,9 @@ export class UpdateUserCommandHandler {
       throw new UserNotFoundException();
     }
 
-    const userAdministrative = await this.userAdministrativeRepository.findOneByUserId(id);
+    const userAdministrative = await this.userAdministrativeRepository.findOneByUserId(
+      id
+    );
 
     if (!userAdministrative) {
       throw new UserAdministrativeMissingException();

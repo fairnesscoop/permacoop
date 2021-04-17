@@ -30,13 +30,13 @@ export class UpdateEventAction {
 
   @Put(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Update event'})
+  @ApiOperation({ summary: 'Update event' })
   public async index(
     @Param() idDto: IdDTO,
     @Body() dto: EditEventDTO,
     @LoggedUser() user: User
   ) {
-    const {type, time, summary, projectId, billable, taskId} = dto;
+    const { type, time, summary, projectId, billable, taskId } = dto;
 
     try {
       const id = await this.commandBus.execute(
@@ -52,7 +52,7 @@ export class UpdateEventAction {
         )
       );
 
-      return {id};
+      return { id };
     } catch (e) {
       throw new BadRequestException(e.message);
     }

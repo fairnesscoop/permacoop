@@ -1,7 +1,7 @@
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
-import {IFileRepository} from 'src/Domain/File/Repository/IFileRepository';
-import {File} from 'src/Domain/File/File.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { IFileRepository } from 'src/Domain/File/Repository/IFileRepository';
+import { File } from 'src/Domain/File/File.entity';
 
 export class FileRepository implements IFileRepository {
   constructor(
@@ -21,7 +21,7 @@ export class FileRepository implements IFileRepository {
     return this.repository
       .createQueryBuilder('file')
       .select(['file.id', 'file.name', 'file.mimeType', 'file.uploadedAt'])
-      .where('file.id = :id', {id})
+      .where('file.id = :id', { id })
       .getOne();
   }
 }

@@ -1,20 +1,20 @@
-import {mock, instance, when, verify, deepEqual, anything} from 'ts-mockito';
-import {UserRepository} from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
-import {PasswordEncoderAdapter} from 'src/Infrastructure/Adapter/PasswordEncoderAdapter';
+import { mock, instance, when, verify, deepEqual, anything } from 'ts-mockito';
+import { UserRepository } from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
+import { PasswordEncoderAdapter } from 'src/Infrastructure/Adapter/PasswordEncoderAdapter';
 import {
   CreateUserCommand,
   IUserAdministrativeCommand
 } from 'src/Application/HumanResource/User/Command/CreateUserCommand';
-import {CreateUserCommandHandler} from 'src/Application/HumanResource/User/Command/CreateUserCommandHandler';
-import {IsEmailAlreadyExist} from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
-import {EmailAlreadyExistException} from 'src/Domain/HumanResource/User/Exception/EmailAlreadyExistException';
-import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
-import {UserAdministrativeRepository} from 'src/Infrastructure/HumanResource/User/Repository/UserAdministrativeRepository';
+import { CreateUserCommandHandler } from 'src/Application/HumanResource/User/Command/CreateUserCommandHandler';
+import { IsEmailAlreadyExist } from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
+import { EmailAlreadyExistException } from 'src/Domain/HumanResource/User/Exception/EmailAlreadyExistException';
+import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { UserAdministrativeRepository } from 'src/Infrastructure/HumanResource/User/Repository/UserAdministrativeRepository';
 import {
   UserAdministrative,
   ContractType
 } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
-import {UserAdministrativeMissingException} from 'src/Domain/HumanResource/User/Exception/UserAdministrativeMissingException';
+import { UserAdministrativeMissingException } from 'src/Domain/HumanResource/User/Exception/UserAdministrativeMissingException';
 
 describe('CreatUserCommandHandler', () => {
   const email = 'mathieu@fairness.coop';
@@ -71,7 +71,9 @@ describe('CreatUserCommandHandler', () => {
       await commandHandler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(EmailAlreadyExistException);
-      expect(e.message).toBe('human_resources.users.errors.email_already_exist');
+      expect(e.message).toBe(
+        'human_resources.users.errors.email_already_exist'
+      );
       verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
       verify(passwordEncoder.hash('plainPassword')).never();
       verify(
@@ -289,7 +291,9 @@ describe('CreatUserCommandHandler', () => {
       await commandHandler.execute(command1);
     } catch (e) {
       expect(e).toBeInstanceOf(UserAdministrativeMissingException);
-      expect(e.message).toBe('human_resources.users.errors.user_administrative_missing');
+      expect(e.message).toBe(
+        'human_resources.users.errors.user_administrative_missing'
+      );
       verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
       verify(passwordEncoder.hash(anything())).never();
       verify(passwordEncoder.hash(anything())).never();

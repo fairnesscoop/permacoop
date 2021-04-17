@@ -30,7 +30,7 @@ export class AcceptLeaveRequestAction {
 
   @Put(':id/accept')
   @Roles(UserRole.COOPERATOR)
-  @ApiOperation({summary: 'Accept leave request'})
+  @ApiOperation({ summary: 'Accept leave request' })
   public async index(
     @Param() dto: IdDTO,
     @Body() moderation: ModerationDTO,
@@ -41,7 +41,7 @@ export class AcceptLeaveRequestAction {
         new AcceptLeaveRequestCommand(user, dto.id, moderation.comment)
       );
 
-      return {id};
+      return { id };
     } catch (e) {
       throw new BadRequestException(e.message);
     }

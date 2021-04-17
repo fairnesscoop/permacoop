@@ -1,7 +1,7 @@
 import * as crypto from 'crypto';
-import {Injectable} from '@nestjs/common';
-import {ConfigService} from '@nestjs/config';
-import {IFileEncryption} from 'src/Application/IFileEncryption';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { IFileEncryption } from 'src/Application/IFileEncryption';
 
 @Injectable()
 export class FileEncryptionAdapter implements IFileEncryption {

@@ -54,9 +54,13 @@ describe('AcceptLeaveRequestCommandHandler', () => {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(LeaveRequestNotFoundException);
-      expect(e.message).toBe('human_resources.leaves.requests.errors.not_found');
+      expect(e.message).toBe(
+        'human_resources.leaves.requests.errors.not_found'
+      );
       verify(
-        leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+        leaveRequestRepository.findOneById(
+          'cfdd06eb-cd71-44b9-82c6-46110b30ce05'
+        )
       ).once();
       verify(
         canLeaveRequestBeModerated.isSatisfiedBy(anything(), anything())
@@ -79,19 +83,29 @@ describe('AcceptLeaveRequestCommandHandler', () => {
       leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(instance(leaveRequest));
     when(
-      canLeaveRequestBeModerated.isSatisfiedBy(instance(leaveRequest), instance(user))
+      canLeaveRequestBeModerated.isSatisfiedBy(
+        instance(leaveRequest),
+        instance(user)
+      )
     ).thenReturn(false);
 
     try {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(LeaveRequestCantBeModeratedException);
-      expect(e.message).toBe('human_resources.leaves.requests.errors.cant_be_moderated');
+      expect(e.message).toBe(
+        'human_resources.leaves.requests.errors.cant_be_moderated'
+      );
       verify(
-        canLeaveRequestBeModerated.isSatisfiedBy(instance(leaveRequest), instance(user))
+        canLeaveRequestBeModerated.isSatisfiedBy(
+          instance(leaveRequest),
+          instance(user)
+        )
       ).once();
       verify(
-        leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+        leaveRequestRepository.findOneById(
+          'cfdd06eb-cd71-44b9-82c6-46110b30ce05'
+        )
       ).once();
       verify(
         doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
@@ -115,7 +129,10 @@ describe('AcceptLeaveRequestCommandHandler', () => {
       leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(instance(leaveRequest));
     when(
-      canLeaveRequestBeModerated.isSatisfiedBy(instance(leaveRequest), instance(user))
+      canLeaveRequestBeModerated.isSatisfiedBy(
+        instance(leaveRequest),
+        instance(user)
+      )
     ).thenReturn(true);
     when(
       doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
@@ -128,15 +145,22 @@ describe('AcceptLeaveRequestCommandHandler', () => {
     try {
       await handler.execute(command);
     } catch (e) {
-      expect(e).toBeInstanceOf(EventsOrLeavesAlreadyExistForThisPeriodException);
+      expect(e).toBeInstanceOf(
+        EventsOrLeavesAlreadyExistForThisPeriodException
+      );
       expect(e.message).toBe(
         'faircalendar.errors.events_or_leaves_already_exist_for_this_period'
       );
       verify(
-        canLeaveRequestBeModerated.isSatisfiedBy(instance(leaveRequest), instance(user))
+        canLeaveRequestBeModerated.isSatisfiedBy(
+          instance(leaveRequest),
+          instance(user)
+        )
       ).once();
       verify(
-        leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+        leaveRequestRepository.findOneById(
+          'cfdd06eb-cd71-44b9-82c6-46110b30ce05'
+        )
       ).once();
       verify(
         doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
@@ -152,7 +176,9 @@ describe('AcceptLeaveRequestCommandHandler', () => {
   });
 
   it('testLeaveSuccessfullyAccepted', async () => {
-    when(leaveRequest.getId()).thenReturn('cfdd06eb-cd71-44b9-82c6-46110b30ce05');
+    when(leaveRequest.getId()).thenReturn(
+      'cfdd06eb-cd71-44b9-82c6-46110b30ce05'
+    );
     when(leaveRequest.getStartDate()).thenReturn('2020-09-10');
     when(leaveRequest.getEndDate()).thenReturn('2020-09-15');
     when(leaveRequest.getUser()).thenReturn(instance(user));
@@ -161,7 +187,10 @@ describe('AcceptLeaveRequestCommandHandler', () => {
       leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(instance(leaveRequest));
     when(
-      canLeaveRequestBeModerated.isSatisfiedBy(instance(leaveRequest), instance(user))
+      canLeaveRequestBeModerated.isSatisfiedBy(
+        instance(leaveRequest),
+        instance(user)
+      )
     ).thenReturn(true);
     when(
       doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
@@ -180,7 +209,10 @@ describe('AcceptLeaveRequestCommandHandler', () => {
     );
 
     verify(
-      canLeaveRequestBeModerated.isSatisfiedBy(instance(leaveRequest), instance(user))
+      canLeaveRequestBeModerated.isSatisfiedBy(
+        instance(leaveRequest),
+        instance(user)
+      )
     ).once();
     verify(
       doesEventsOrLeaveExistForPeriod.isSatisfiedBy(

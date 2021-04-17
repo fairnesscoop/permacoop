@@ -1,4 +1,4 @@
-import {IQuery} from 'src/Application/IQuery';
+import { IQuery } from 'src/Application/IQuery';
 
 export class LoginQuery implements IQuery {
   constructor(

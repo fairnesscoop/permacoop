@@ -1,14 +1,14 @@
-import {CommandHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {CreatePaySlipCommand} from './CreatePaySlipCommand';
-import {IPaySlipRepository} from 'src/Domain/HumanResource/PaySlip/Repository/IPaySlipRepository';
-import {PaySlip} from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import {IFileRepository} from 'src/Domain/File/Repository/IFileRepository';
-import {UserNotFoundException} from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
-import {FileNotFoundException} from 'src/Domain/File/Exception/FileNotFoundException';
-import {IsPaySlipAlreadyExist} from 'src/Domain/HumanResource/PaySlip/Specification/IsPaySlipAlreadyExist';
-import {PaySlipAlreadyExistException} from 'src/Domain/HumanResource/PaySlip/Exception/PaySlipAlreadyExistException';
+import { CommandHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { CreatePaySlipCommand } from './CreatePaySlipCommand';
+import { IPaySlipRepository } from 'src/Domain/HumanResource/PaySlip/Repository/IPaySlipRepository';
+import { PaySlip } from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { IFileRepository } from 'src/Domain/File/Repository/IFileRepository';
+import { UserNotFoundException } from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
+import { FileNotFoundException } from 'src/Domain/File/Exception/FileNotFoundException';
+import { IsPaySlipAlreadyExist } from 'src/Domain/HumanResource/PaySlip/Specification/IsPaySlipAlreadyExist';
+import { PaySlipAlreadyExistException } from 'src/Domain/HumanResource/PaySlip/Exception/PaySlipAlreadyExistException';
 
 @CommandHandler(CreatePaySlipCommand)
 export class CreatePaySlipCommandHandler {
@@ -24,7 +24,7 @@ export class CreatePaySlipCommandHandler {
   ) {}
 
   public async execute(command: CreatePaySlipCommand): Promise<string> {
-    const {date, fileId, userId} = command;
+    const { date, fileId, userId } = command;
 
     const user = await this.userRepository.findOneById(userId);
     if (!user) {

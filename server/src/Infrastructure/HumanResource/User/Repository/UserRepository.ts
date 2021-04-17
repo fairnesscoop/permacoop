@@ -1,8 +1,8 @@
-import {InjectRepository} from '@nestjs/typeorm';
-import {Injectable} from '@nestjs/common';
-import {Repository} from 'typeorm';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
@@ -21,7 +21,7 @@ export class UserRepository implements IUserRepository {
         'user.email',
         'user.role'
       ])
-      .where('user.apiToken = :apiToken', {apiToken})
+      .where('user.apiToken = :apiToken', { apiToken })
       .getOne();
   }
 
@@ -37,7 +37,7 @@ export class UserRepository implements IUserRepository {
         'user.password',
         'user.role'
       ])
-      .where('user.email = :email', {email})
+      .where('user.email = :email', { email })
       .getOne();
   }
 
@@ -51,7 +51,7 @@ export class UserRepository implements IUserRepository {
         'user.email',
         'user.role'
       ])
-      .where('user.id = :id', {id})
+      .where('user.id = :id', { id })
       .getOne();
   }
 
@@ -69,7 +69,7 @@ export class UserRepository implements IUserRepository {
       .addOrderBy('user.firstName', 'ASC');
 
     if (false === withAccountant) {
-      query.where('user.role <> :role', {role: UserRole.ACCOUNTANT});
+      query.where('user.role <> :role', { role: UserRole.ACCOUNTANT });
     }
 
     return query.getMany();

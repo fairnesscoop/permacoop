@@ -1,6 +1,6 @@
-import {EditEventDTO} from './EditEventDTO';
-import {validate} from 'class-validator';
-import {EventType} from 'src/Domain/FairCalendar/Event.entity';
+import { EditEventDTO } from './EditEventDTO';
+import { validate } from 'class-validator';
+import { EventType } from 'src/Domain/FairCalendar/Event.entity';
 
 describe('EditEventDTO', () => {
   it('testValidDTO', async () => {
@@ -30,10 +30,11 @@ describe('EditEventDTO', () => {
       isNotEmpty: 'type should not be empty'
     });
     expect(validation[1].constraints).toMatchObject({
-      isIn: 'time must be one of the following values: 30,60,90,120,150,180,210,240,270,300,330,360,390,420,450,480'
+      isIn:
+        'time must be one of the following values: 30,60,90,120,150,180,210,240,270,300,330,360,390,420,450,480'
     });
     expect(validation[2].constraints).toMatchObject({
-      isBooleanString: 'billable must be a boolean string',
+      isBooleanString: 'billable must be a boolean string'
     });
     expect(validation[3].constraints).toMatchObject({
       isUuid: 'projectId must be an UUID'

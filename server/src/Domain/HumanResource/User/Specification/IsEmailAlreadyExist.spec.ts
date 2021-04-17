@@ -1,7 +1,7 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {UserRepository} from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
-import {IsEmailAlreadyExist} from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
-import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { UserRepository } from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
+import { IsEmailAlreadyExist } from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
+import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
 
 describe('IsEmailAlreadyExist', () => {
   const email = 'mathieu@fairness.coop';

@@ -13,17 +13,30 @@ describe('GetFairCalendarOverview', () => {
   let getFairCalendarOverview: GetFairCalendarOverview;
   let cooperativeRepository: CooperativeRepository;
 
-
   beforeEach(() => {
     cooperativeRepository = mock(CooperativeRepository);
-    getFairCalendarOverview = new GetFairCalendarOverview(instance(cooperativeRepository));
+    getFairCalendarOverview = new GetFairCalendarOverview(
+      instance(cooperativeRepository)
+    );
   });
 
   it('testCooperativeNotFoundOverview', async () => {
     when(cooperativeRepository.find()).thenResolve(null);
 
-    const project = new ProjectView('bd86391b-4ee2-45db-9fc0-66078845a8b6', 'RadioFrance', 420);
-    const event1 = new FairCalendarView(EventType.MISSION, 300, '2019-12-12', null, null, true, project);
+    const project = new ProjectView(
+      'bd86391b-4ee2-45db-9fc0-66078845a8b6',
+      'RadioFrance',
+      420
+    );
+    const event1 = new FairCalendarView(
+      EventType.MISSION,
+      300,
+      '2019-12-12',
+      null,
+      null,
+      true,
+      project
+    );
 
     try {
       await getFairCalendarOverview.index([event1]);
@@ -38,17 +51,57 @@ describe('GetFairCalendarOverview', () => {
     when(cooperative.getDayDuration()).thenReturn(480);
     when(cooperativeRepository.find()).thenResolve(instance(cooperative));
 
-    const project = new ProjectView('bd86391b-4ee2-45db-9fc0-66078845a8b6', 'RadioFrance', 420);
+    const project = new ProjectView(
+      'bd86391b-4ee2-45db-9fc0-66078845a8b6',
+      'RadioFrance',
+      420
+    );
 
-    const event1 = new FairCalendarView(EventType.MISSION, 300, '2019-12-12', null, null, true, project);
+    const event1 = new FairCalendarView(
+      EventType.MISSION,
+      300,
+      '2019-12-12',
+      null,
+      null,
+      true,
+      project
+    );
     const event2 = new FairCalendarView(EventType.DOJO, 120, '2019-12-12');
-    const event3 = new FairCalendarView(EventType.MISSION, 210, '2019-12-13', null, null, true, project);
-    const event5 = new FairCalendarView(EventType.MISSION, 240, '2019-12-10', null, null, true, project);
+    const event3 = new FairCalendarView(
+      EventType.MISSION,
+      210,
+      '2019-12-13',
+      null,
+      null,
+      true,
+      project
+    );
+    const event5 = new FairCalendarView(
+      EventType.MISSION,
+      240,
+      '2019-12-10',
+      null,
+      null,
+      true,
+      project
+    );
     const event6 = new FairCalendarView(EventType.SUPPORT, 240, '2019-12-10');
-    const event7 = new FairCalendarView(EventType.FORMATION_CONFERENCE, 480, '2019-12-03');
+    const event7 = new FairCalendarView(
+      EventType.FORMATION_CONFERENCE,
+      480,
+      '2019-12-03'
+    );
     const event8 = new FairCalendarView(EventType.OTHER, 240, '2019-12-04');
-    const leave = new FairCalendarView(`leave_${Type.SPECIAL}`, 240, '2019-12-05');
-    const leave2 = new FairCalendarView(`leave_${Type.PAID}`, 240, '2019-12-06');
+    const leave = new FairCalendarView(
+      `leave_${Type.SPECIAL}`,
+      240,
+      '2019-12-05'
+    );
+    const leave2 = new FairCalendarView(
+      `leave_${Type.PAID}`,
+      240,
+      '2019-12-06'
+    );
 
     const expectedResult: ICalendarOverview = {
       mission: 1.78,
@@ -69,7 +122,7 @@ describe('GetFairCalendarOverview', () => {
         event7,
         event8,
         leave,
-        leave2,
+        leave2
       ])
     ).toMatchObject(expectedResult);
   });

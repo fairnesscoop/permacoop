@@ -38,7 +38,9 @@ test-watch: ## Run test suite
 	${exec} api npm run test:watch
 linter: ## Linter
 	${exec} api npm run lint
-	${exec} client npm run lint
+	${exec} client npm run lint	
+format: ## Linter
+	${exec} api npm run format
 api-logs: ## Display API logs
 	${logs} api
 api-bash: ## Connect to API container

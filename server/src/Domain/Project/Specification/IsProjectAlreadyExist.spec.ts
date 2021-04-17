@@ -1,8 +1,8 @@
-import {mock, instance, when, verify, anything} from 'ts-mockito';
-import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
-import {InvoiceUnits, Project} from 'src/Domain/Project/Project.entity';
-import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
+import { mock, instance, when, verify, anything } from 'ts-mockito';
+import { ProjectRepository } from 'src/Infrastructure/Project/Repository/ProjectRepository';
+import { InvoiceUnits, Project } from 'src/Domain/Project/Project.entity';
+import { IsProjectAlreadyExist } from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
 
 describe('IsProjectAlreadyExist', () => {
   let projectRepository: ProjectRepository;
@@ -17,7 +17,12 @@ describe('IsProjectAlreadyExist', () => {
 
   it('testProjectAlreadyExist', async () => {
     when(projectRepository.findOneByName('Encom')).thenResolve(
-      new Project('Encom', 420, InvoiceUnits.DAY, new Customer('Radio France', anything()))
+      new Project(
+        'Encom',
+        420,
+        InvoiceUnits.DAY,
+        new Customer('Radio France', anything())
+      )
     );
     expect(await isProjectAlreadyExist.isSatisfiedBy('Encom')).toBe(true);
     verify(projectRepository.findOneByName('Encom')).once();

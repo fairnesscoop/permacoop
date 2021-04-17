@@ -1,14 +1,14 @@
-import {CommandHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {CreateDailyRateCommand} from './CreateDailyRateCommand';
-import {IDailyRateRepository} from 'src/Domain/Accounting/Repository/IDailyRateRepository';
-import {DailyRate} from 'src/Domain/Accounting/DailyRate.entity';
-import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
-import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import {IsDailyRateAlreadyExist} from 'src/Domain/Accounting/Specification/IsDailyRateAlreadyExist';
-import {DailyRateAlreadyExistException} from 'src/Domain/Accounting/Exception/DailyRateAlreadyExistException';
-import {AbstractUserCustomerAndTaskGetter} from './AbstractUserCustomerAndTaskGetter';
+import { CommandHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { CreateDailyRateCommand } from './CreateDailyRateCommand';
+import { IDailyRateRepository } from 'src/Domain/Accounting/Repository/IDailyRateRepository';
+import { DailyRate } from 'src/Domain/Accounting/DailyRate.entity';
+import { ICustomerRepository } from 'src/Domain/Customer/Repository/ICustomerRepository';
+import { ITaskRepository } from 'src/Domain/Task/Repository/ITaskRepository';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { IsDailyRateAlreadyExist } from 'src/Domain/Accounting/Specification/IsDailyRateAlreadyExist';
+import { DailyRateAlreadyExistException } from 'src/Domain/Accounting/Exception/DailyRateAlreadyExistException';
+import { AbstractUserCustomerAndTaskGetter } from './AbstractUserCustomerAndTaskGetter';
 
 @CommandHandler(CreateDailyRateCommand)
 export class CreateDailyRateCommandHandler extends AbstractUserCustomerAndTaskGetter {
@@ -24,7 +24,7 @@ export class CreateDailyRateCommandHandler extends AbstractUserCustomerAndTaskGe
   }
 
   public async execute(command: CreateDailyRateCommand): Promise<string> {
-    const {customerId, userId, taskId, amount} = command;
+    const { customerId, userId, taskId, amount } = command;
 
     const user = await this.getUser(userId);
     const customer = await this.getCustomer(customerId);

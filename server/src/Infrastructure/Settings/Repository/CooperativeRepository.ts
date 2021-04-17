@@ -14,9 +14,7 @@ export class CooperativeRepository implements ICooperativeRepository {
   public find(): Promise<Cooperative> {
     return this.repository
       .createQueryBuilder('cooperative')
-      .select([
-        'cooperative.dayDuration'
-      ])
+      .select(['cooperative.dayDuration'])
       .limit(1)
       .getOne();
   }

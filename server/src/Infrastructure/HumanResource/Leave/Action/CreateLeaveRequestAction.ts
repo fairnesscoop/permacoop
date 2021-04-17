@@ -28,16 +28,9 @@ export class CreateLeaveRequestAction {
 
   @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Create new leave request'})
+  @ApiOperation({ summary: 'Create new leave request' })
   public async index(@Body() dto: LeaveRequestDTO, @LoggedUser() user: User) {
-    const {
-      type,
-      startDate,
-      startsAllDay,
-      endDate,
-      endsAllDay,
-      comment
-    } = dto;
+    const { type, startDate, startsAllDay, endDate, endsAllDay, comment } = dto;
 
     try {
       const id = await this.commandBus.execute(
@@ -52,7 +45,7 @@ export class CreateLeaveRequestAction {
         )
       );
 
-      return {id};
+      return { id };
     } catch (e) {
       throw new BadRequestException(e.message);
     }

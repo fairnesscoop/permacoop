@@ -1,6 +1,6 @@
-import {mock, instance} from 'ts-mockito';
-import {Address} from './Address.entity';
-import {Customer} from './Customer.entity';
+import { mock, instance } from 'ts-mockito';
+import { Address } from './Address.entity';
+import { Customer } from './Customer.entity';
 
 describe('Customer.entity', () => {
   it('testGetters', () => {

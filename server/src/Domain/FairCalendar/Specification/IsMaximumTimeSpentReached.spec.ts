@@ -15,7 +15,7 @@ describe('IsMaximumTimeSpentReached', () => {
     leaveRepository = mock(LeaveRepository);
     isMaximumTimeSpentReached = new IsMaximumTimeSpentReached(
       instance(eventRepository),
-      instance(leaveRepository),
+      instance(leaveRepository)
     );
   });
 
@@ -30,7 +30,10 @@ describe('IsMaximumTimeSpentReached', () => {
       eventRepository.sumOfTimeSpentByUserAndDate(instance(user), '2019-01-01')
     ).thenResolve(80);
     when(
-      leaveRepository.sumOfDurationLeaveByUserAndDate(instance(user), '2019-01-01')
+      leaveRepository.sumOfDurationLeaveByUserAndDate(
+        instance(user),
+        '2019-01-01'
+      )
     ).thenResolve(90);
 
     expect(await isMaximumTimeSpentReached.isSatisfiedBy(instance(event))).toBe(
@@ -56,7 +59,10 @@ describe('IsMaximumTimeSpentReached', () => {
       eventRepository.sumOfTimeSpentByUserAndDate(instance(user), '2019-01-01')
     ).thenResolve(90);
     when(
-      leaveRepository.sumOfDurationLeaveByUserAndDate(instance(user), '2019-01-01')
+      leaveRepository.sumOfDurationLeaveByUserAndDate(
+        instance(user),
+        '2019-01-01'
+      )
     ).thenResolve(210);
 
     expect(await isMaximumTimeSpentReached.isSatisfiedBy(instance(event))).toBe(

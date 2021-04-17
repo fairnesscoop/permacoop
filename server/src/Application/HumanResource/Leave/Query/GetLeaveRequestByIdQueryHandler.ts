@@ -16,7 +16,9 @@ export class GetLeaveRequestByIdQueryHandler {
     private readonly dateUtils: IDateUtils
   ) {}
 
-  public async execute(query: GetLeaveRequestByIdQuery): Promise<LeaveRequestDetailView> {
+  public async execute(
+    query: GetLeaveRequestByIdQuery
+  ): Promise<LeaveRequestDetailView> {
     const leaveRequest = await this.leaveRequestRepository.findOneById(
       query.id
     );

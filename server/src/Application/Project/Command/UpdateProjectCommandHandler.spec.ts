@@ -1,14 +1,14 @@
-import {mock, instance, when, verify, anything} from 'ts-mockito';
-import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
-import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
-import {InvoiceUnits, Project} from 'src/Domain/Project/Project.entity';
-import {UpdateProjectCommand} from './UpdateProjectCommand';
-import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotFoundException';
-import {ProjectAlreadyExistException} from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
-import {UpdateProjectCommandHandler} from './UpdateProjectCommandHandler';
-import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
-import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
+import { mock, instance, when, verify, anything } from 'ts-mockito';
+import { ProjectRepository } from 'src/Infrastructure/Project/Repository/ProjectRepository';
+import { IsProjectAlreadyExist } from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
+import { InvoiceUnits, Project } from 'src/Domain/Project/Project.entity';
+import { UpdateProjectCommand } from './UpdateProjectCommand';
+import { ProjectNotFoundException } from 'src/Domain/Project/Exception/ProjectNotFoundException';
+import { ProjectAlreadyExistException } from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
+import { UpdateProjectCommandHandler } from './UpdateProjectCommandHandler';
+import { CustomerRepository } from 'src/Infrastructure/Customer/Repository/CustomerRepository';
+import { CustomerNotFoundException } from 'src/Domain/Customer/Exception/CustomerNotFoundException';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
 
 describe('UpdateProjectCommandHandler', () => {
   let projectRepository: ProjectRepository;
@@ -66,10 +66,20 @@ describe('UpdateProjectCommandHandler', () => {
     ).once();
     verify(projectRepository.save(instance(updatedProject))).once();
     verify(
-      updatedProject.update(instance(customer), 420, InvoiceUnits.HOUR, 'Project')
+      updatedProject.update(
+        instance(customer),
+        420,
+        InvoiceUnits.HOUR,
+        'Project'
+      )
     ).once();
     verify(
-      updatedProject.update(instance(customer), 420, InvoiceUnits.HOUR, 'Project')
+      updatedProject.update(
+        instance(customer),
+        420,
+        InvoiceUnits.HOUR,
+        'Project'
+      )
     ).calledBefore(projectRepository.save(instance(updatedProject)));
     verify(updatedProject.getName()).once();
   });

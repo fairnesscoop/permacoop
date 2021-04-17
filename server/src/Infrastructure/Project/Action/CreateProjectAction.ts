@@ -27,7 +27,7 @@ export class CreateProjectAction {
 
   @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Create new project'})
+  @ApiOperation({ summary: 'Create new project' })
   public async index(@Body() projectDto: ProjectDTO) {
     try {
       const { name, customerId, dayDuration, invoiceUnit } = projectDto;
@@ -35,7 +35,7 @@ export class CreateProjectAction {
         new CreateProjectCommand(name, dayDuration, invoiceUnit, customerId)
       );
 
-      return {id};
+      return { id };
     } catch (e) {
       throw new BadRequestException(e.message);
     }

@@ -16,6 +16,8 @@ describe('AcceptedLeaveRequestEventListener', () => {
       new AcceptedLeaveRequestEvent(instance(leaveRequest))
     );
 
-    verify(leaveRequestToLeavesConverter.convert(instance(leaveRequest))).once();
+    verify(
+      leaveRequestToLeavesConverter.convert(instance(leaveRequest))
+    ).once();
   });
 });

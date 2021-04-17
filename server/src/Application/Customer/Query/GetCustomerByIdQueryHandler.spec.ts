@@ -1,12 +1,12 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {GetCustomerByIdQueryHandler} from './GetCustomerByIdQueryHandler';
-import {GetCustomerByIdQuery} from './GetCustomerByIdQuery';
-import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
-import {Address} from 'src/Domain/Customer/Address.entity';
-import {AddressView} from '../View/AddressView';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { CustomerRepository } from 'src/Infrastructure/Customer/Repository/CustomerRepository';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
+import { CustomerView } from 'src/Application/Customer/View/CustomerView';
+import { GetCustomerByIdQueryHandler } from './GetCustomerByIdQueryHandler';
+import { GetCustomerByIdQuery } from './GetCustomerByIdQuery';
+import { CustomerNotFoundException } from 'src/Domain/Customer/Exception/CustomerNotFoundException';
+import { Address } from 'src/Domain/Customer/Address.entity';
+import { AddressView } from '../View/AddressView';
 
 describe('GetCustomerByIdQueryHandler', () => {
   const query = new GetCustomerByIdQuery(

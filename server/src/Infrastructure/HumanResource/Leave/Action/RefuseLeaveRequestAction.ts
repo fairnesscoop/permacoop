@@ -30,7 +30,7 @@ export class RefuseLeaveRequestAction {
 
   @Put(':id/refuse')
   @Roles(UserRole.COOPERATOR)
-  @ApiOperation({summary: 'Refuse leave request'})
+  @ApiOperation({ summary: 'Refuse leave request' })
   public async index(
     @Param() dto: IdDTO,
     @Body() moderation: ModerationDTO,
@@ -41,7 +41,7 @@ export class RefuseLeaveRequestAction {
         new RefuseLeaveRequestCommand(user, dto.id, moderation.comment)
       );
 
-      return {id};
+      return { id };
     } catch (e) {
       throw new BadRequestException(e.message);
     }

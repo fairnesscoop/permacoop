@@ -27,7 +27,10 @@ import { CooperativeRepository } from '../Settings/Repository/CooperativeReposit
 import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
 
 @Module({
-  imports: [BusModule, TypeOrmModule.forFeature([Project, Event, Task, Leave, Cooperative])],
+  imports: [
+    BusModule,
+    TypeOrmModule.forFeature([Project, Event, Task, Leave, Cooperative])
+  ],
   controllers: [
     AddEventsAction,
     DeleteEventAction,
@@ -36,12 +39,12 @@ import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
     GetMonthlyFairCalendarAction
   ],
   providers: [
-    {provide: 'ILeaveRepository', useClass: LeaveRepository},
-    {provide: 'IProjectRepository', useClass: ProjectRepository},
-    {provide: 'IEventRepository', useClass: EventRepository},
-    {provide: 'ITaskRepository', useClass: TaskRepository},
-    {provide: 'ICooperativeRepository', useClass: CooperativeRepository},
-    {provide: 'IDateUtils', useClass: DateUtilsAdapter},
+    { provide: 'ILeaveRepository', useClass: LeaveRepository },
+    { provide: 'IProjectRepository', useClass: ProjectRepository },
+    { provide: 'IEventRepository', useClass: EventRepository },
+    { provide: 'ITaskRepository', useClass: TaskRepository },
+    { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
+    { provide: 'IDateUtils', useClass: DateUtilsAdapter },
     Date,
     IsMaximumTimeSpentReached,
     AddEventCommandHandler,

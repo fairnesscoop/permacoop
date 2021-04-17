@@ -1,6 +1,6 @@
 import { instance, mock } from 'ts-mockito';
 import { LeaveRequest, Status, Type } from './LeaveRequest.entity';
-import { User} from '../User/User.entity';
+import { User } from '../User/User.entity';
 
 describe('LeaveRequest.entity', () => {
   it('testGetters', () => {
@@ -40,7 +40,11 @@ describe('LeaveRequest.entity', () => {
       true,
       'H&M wedding'
     );
-    leaverequest.refuse(instance(user2), '2020-01-01', 'Too much leaverequests');
+    leaverequest.refuse(
+      instance(user2),
+      '2020-01-01',
+      'Too much leaverequests'
+    );
 
     expect(leaverequest.getId()).toBe(undefined);
     expect(leaverequest.getUser()).toBe(instance(user));

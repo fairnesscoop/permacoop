@@ -1,9 +1,9 @@
-import {Injectable} from '@nestjs/common';
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
-import {IEventRepository} from 'src/Domain/FairCalendar/Repository/IEventRepository';
-import {Event, EventType} from 'src/Domain/FairCalendar/Event.entity';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { IEventRepository } from 'src/Domain/FairCalendar/Repository/IEventRepository';
+import { Event, EventType } from 'src/Domain/FairCalendar/Event.entity';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { Customer } from 'src/Domain/Customer/Customer.entity';
 import { DailyRate } from 'src/Domain/Accounting/DailyRate.entity';
 import { Project } from 'src/Domain/Project/Project.entity';
@@ -30,8 +30,8 @@ export class EventRepository implements IEventRepository {
     const result = await this.repository
       .createQueryBuilder('event')
       .select('SUM(event.time) as time')
-      .where('event.date = :date', {date})
-      .andWhere('user.id = :user', {user: user.getId()})
+      .where('event.date = :date', { date })
+      .andWhere('user.id = :user', { user: user.getId() })
       .innerJoin('event.user', 'user')
       .getRawOne();
 
@@ -54,7 +54,7 @@ export class EventRepository implements IEventRepository {
         'task.id',
         'task.name'
       ])
-      .where('event.id = :id', {id})
+      .where('event.id = :id', { id })
       .innerJoin('event.user', 'user')
       .leftJoin('event.project', 'project')
       .leftJoin('event.task', 'task')
@@ -80,9 +80,9 @@ export class EventRepository implements IEventRepository {
         'task.id',
         'task.name'
       ])
-      .where('user.id = :userId', {userId})
-      .andWhere('extract(month FROM event.date) = :month', {month})
-      .andWhere('extract(year FROM event.date) = :year', {year})
+      .where('user.id = :userId', { userId })
+      .andWhere('extract(month FROM event.date) = :month', { month })
+      .andWhere('extract(year FROM event.date) = :year', { year })
       .innerJoin('event.user', 'user')
       .leftJoin('event.project', 'project')
       .leftJoin('event.task', 'task')
@@ -90,7 +90,10 @@ export class EventRepository implements IEventRepository {
       .getMany();
   }
 
-  public findBillableEventsByMonthAndProject(date: Date, project: Project): Promise<any[]> {
+  public findBillableEventsByMonthAndProject(
+    date: Date,
+    project: Project
+  ): Promise<any[]> {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
@@ -116,7 +119,7 @@ export class EventRepository implements IEventRepository {
           .andWhere('d_customer.id = customer.id')
           .innerJoin('dailyRate.user', 'd_user')
           .innerJoin('dailyRate.task', 'd_task')
-          .innerJoin('dailyRate.customer', 'd_customer')
+          .innerJoin('dailyRate.customer', 'd_customer');
       }, 'daily_rate')
       .innerJoin('event.project', 'project')
       .innerJoin('event.user', 'user')
@@ -134,7 +137,7 @@ export class EventRepository implements IEventRepository {
     const result = await this.repository
       .createQueryBuilder('event')
       .select('count(event.id) as id')
-      .where('user.id = :id', {id: user.getId()})
+      .where('user.id = :id', { id: user.getId() })
       .andWhere('event.date BETWEEN :startDate AND :endDate', {
         startDate,
         endDate

@@ -23,7 +23,7 @@ export class GetLeavesAction {
 
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Get all leaves'})
+  @ApiOperation({ summary: 'Get all leaves' })
   public async index(
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<LeaveRequestView>> {

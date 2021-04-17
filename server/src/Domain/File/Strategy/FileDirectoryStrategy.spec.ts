@@ -1,6 +1,6 @@
-import {ConfigService} from '@nestjs/config';
-import {mock, instance, when} from 'ts-mockito';
-import {FileDirectoryStrategy} from './FileDirectoryStrategy';
+import { ConfigService } from '@nestjs/config';
+import { mock, instance, when } from 'ts-mockito';
+import { FileDirectoryStrategy } from './FileDirectoryStrategy';
 
 describe('FileDirectoryStrategy', () => {
   it('testFileLocation', async () => {

@@ -1,4 +1,4 @@
-import {User} from '../User.entity';
+import { User } from '../User.entity';
 
 export interface IUserRepository {
   findOneByApiToken(apiToken: string): Promise<User | undefined>;

@@ -74,13 +74,15 @@ describe('AddEventCommandHandler', () => {
           420,
           true,
           new Date('2020-10-19'),
-          new Date('2020-10-20'),
+          new Date('2020-10-20')
         )
       );
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectOrTaskMissingException);
       expect(e.message).toBe('faircalendar.errors.project_or_task_missing');
-      verify(dateUtils.getWorkedDaysDuringAPeriod(anything(), anything())).never();
+      verify(
+        dateUtils.getWorkedDaysDuringAPeriod(anything(), anything())
+      ).never();
       verify(projectRepository.findOneById(anything())).never();
       verify(projectRepository.findOneById(anything())).never();
       verify(taskRepository.findOneById(anything())).never();
@@ -103,7 +105,10 @@ describe('AddEventCommandHandler', () => {
     );
 
     when(
-      dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-24')), deepEqual(new Date('2020-10-25')))
+      dateUtils.getWorkedDaysDuringAPeriod(
+        deepEqual(new Date('2020-10-24')),
+        deepEqual(new Date('2020-10-25'))
+      )
     ).thenReturn([]);
 
     try {
@@ -112,7 +117,10 @@ describe('AddEventCommandHandler', () => {
       expect(e).toBeInstanceOf(NoDateDuringThisPeriodException);
       expect(e.message).toBe('faircalendar.errors.no_date_during_this_period');
       verify(
-        dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-24')), deepEqual(new Date('2020-10-25')))
+        dateUtils.getWorkedDaysDuringAPeriod(
+          deepEqual(new Date('2020-10-24')),
+          deepEqual(new Date('2020-10-25'))
+        )
       ).once();
       verify(projectRepository.findOneById(anything())).never();
       verify(taskRepository.findOneById(anything())).never();
@@ -123,7 +131,10 @@ describe('AddEventCommandHandler', () => {
 
   it('testProjectNotFound', async () => {
     when(
-      dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-20')))
+      dateUtils.getWorkedDaysDuringAPeriod(
+        deepEqual(new Date('2020-10-19')),
+        deepEqual(new Date('2020-10-20'))
+      )
     ).thenReturn([new Date('2020-10-19'), new Date('2020-10-20')]);
     when(
       projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
@@ -138,7 +149,10 @@ describe('AddEventCommandHandler', () => {
       expect(e).toBeInstanceOf(ProjectNotFoundException);
       expect(e.message).toBe('crm.projects.errors.not_found');
       verify(
-        dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-20')))
+        dateUtils.getWorkedDaysDuringAPeriod(
+          deepEqual(new Date('2020-10-19')),
+          deepEqual(new Date('2020-10-20'))
+        )
       ).once();
       verify(
         projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
@@ -153,7 +167,10 @@ describe('AddEventCommandHandler', () => {
 
   it('testTaskNotFound', async () => {
     when(
-      dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-20')))
+      dateUtils.getWorkedDaysDuringAPeriod(
+        deepEqual(new Date('2020-10-19')),
+        deepEqual(new Date('2020-10-20'))
+      )
     ).thenReturn([new Date('2020-10-19'), new Date('2020-10-20')]);
     when(
       projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
@@ -168,7 +185,10 @@ describe('AddEventCommandHandler', () => {
       expect(e).toBeInstanceOf(TaskNotFoundException);
       expect(e.message).toBe('accounting.tasks.errors.not_found');
       verify(
-        dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-20')))
+        dateUtils.getWorkedDaysDuringAPeriod(
+          deepEqual(new Date('2020-10-19')),
+          deepEqual(new Date('2020-10-20'))
+        )
       ).once();
       verify(
         projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
@@ -180,7 +200,6 @@ describe('AddEventCommandHandler', () => {
       verify(eventRepository.save(anything())).never();
     }
   });
-
 
   it('testAddOneMaximumTimeSpentReached', async () => {
     const command3 = new AddEventCommand(
@@ -207,7 +226,10 @@ describe('AddEventCommandHandler', () => {
     );
 
     when(
-      dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-19')))
+      dateUtils.getWorkedDaysDuringAPeriod(
+        deepEqual(new Date('2020-10-19')),
+        deepEqual(new Date('2020-10-19'))
+      )
     ).thenReturn([new Date('2020-10-19')]);
     when(
       projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
@@ -215,12 +237,12 @@ describe('AddEventCommandHandler', () => {
     when(
       taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
     ).thenResolve(instance(task));
-    when(isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(event1))).thenResolve(
-      true
-    );
-    when(dateUtils.format(deepEqual(new Date('2020-10-19')), 'y-MM-dd')).thenReturn(
-      '2020-10-19'
-    );
+    when(
+      isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(event1))
+    ).thenResolve(true);
+    when(
+      dateUtils.format(deepEqual(new Date('2020-10-19')), 'y-MM-dd')
+    ).thenReturn('2020-10-19');
 
     try {
       await handler.execute(command3);
@@ -228,7 +250,10 @@ describe('AddEventCommandHandler', () => {
       expect(e).toBeInstanceOf(MaximumEventReachedException);
       expect(e.message).toBe('faircalendar.errors.event_maximum_reached');
       verify(
-        dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-19')))
+        dateUtils.getWorkedDaysDuringAPeriod(
+          deepEqual(new Date('2020-10-19')),
+          deepEqual(new Date('2020-10-19'))
+        )
       ).once();
       verify(
         projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
@@ -237,7 +262,9 @@ describe('AddEventCommandHandler', () => {
         taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
       ).once();
       verify(isMaximumTimeSpentReached.isSatisfiedBy(anyOfClass(Event))).once();
-      verify(dateUtils.format(deepEqual(new Date('2020-10-19')), 'y-MM-dd')).once();
+      verify(
+        dateUtils.format(deepEqual(new Date('2020-10-19')), 'y-MM-dd')
+      ).once();
       verify(eventRepository.save(anything())).never();
     }
   });
@@ -265,7 +292,10 @@ describe('AddEventCommandHandler', () => {
     );
 
     when(
-      dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-20')))
+      dateUtils.getWorkedDaysDuringAPeriod(
+        deepEqual(new Date('2020-10-19')),
+        deepEqual(new Date('2020-10-20'))
+      )
     ).thenReturn([new Date('2020-10-19'), new Date('2020-10-20')]);
     when(
       projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
@@ -274,25 +304,28 @@ describe('AddEventCommandHandler', () => {
       taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
     ).thenResolve(instance(task));
 
-    when(isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(event1))).thenResolve(
-      true
-    );
-    when(isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(event2))).thenResolve(
-      false
-    );
-    when(dateUtils.format(deepEqual(new Date('2020-10-19')), 'y-MM-dd')).thenReturn(
-      '2020-10-19'
-    );
-    when(dateUtils.format(deepEqual(new Date('2020-10-20')), 'y-MM-dd')).thenReturn(
-      '2020-10-20'
-    );
+    when(
+      isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(event1))
+    ).thenResolve(true);
+    when(
+      isMaximumTimeSpentReached.isSatisfiedBy(deepEqual(event2))
+    ).thenResolve(false);
+    when(
+      dateUtils.format(deepEqual(new Date('2020-10-19')), 'y-MM-dd')
+    ).thenReturn('2020-10-19');
+    when(
+      dateUtils.format(deepEqual(new Date('2020-10-20')), 'y-MM-dd')
+    ).thenReturn('2020-10-20');
 
     expect(await handler.execute(command)).toMatchObject(
       new AddEventsView(['2020-10-19'])
     );
 
     verify(
-      dateUtils.getWorkedDaysDuringAPeriod(deepEqual(new Date('2020-10-19')), deepEqual(new Date('2020-10-20')))
+      dateUtils.getWorkedDaysDuringAPeriod(
+        deepEqual(new Date('2020-10-19')),
+        deepEqual(new Date('2020-10-20'))
+      )
     ).once();
     verify(
       projectRepository.findOneById('50e624ef-3609-4053-a437-f74844a2d2de')
@@ -301,8 +334,12 @@ describe('AddEventCommandHandler', () => {
       taskRepository.findOneById('e3fc9666-2932-4dc1-b2b9-d904388293fb')
     ).once();
     verify(isMaximumTimeSpentReached.isSatisfiedBy(anyOfClass(Event))).twice();
-    verify(dateUtils.format(deepEqual(new Date('2020-10-19')), 'y-MM-dd')).once();
-    verify(dateUtils.format(deepEqual(new Date('2020-10-20')), 'y-MM-dd')).once();
+    verify(
+      dateUtils.format(deepEqual(new Date('2020-10-19')), 'y-MM-dd')
+    ).once();
+    verify(
+      dateUtils.format(deepEqual(new Date('2020-10-20')), 'y-MM-dd')
+    ).once();
     verify(eventRepository.save(deepEqual(event2))).once();
     verify(eventRepository.save(deepEqual(event1))).never();
   });

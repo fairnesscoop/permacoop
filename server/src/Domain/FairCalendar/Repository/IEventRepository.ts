@@ -1,5 +1,5 @@
-import {Event} from '../Event.entity';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
+import { Event } from '../Event.entity';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { Project } from 'src/Domain/Project/Project.entity';
 
 export interface IEventRepository {
@@ -7,7 +7,10 @@ export interface IEventRepository {
   delete(event: Event): void;
   findOneById(id: string): Promise<Event | undefined>;
   findMonthlyEvents(date: string, userId: string): Promise<Event[]>;
-  findBillableEventsByMonthAndProject(date: Date, project: Project): Promise<any[]>;
+  findBillableEventsByMonthAndProject(
+    date: Date,
+    project: Project
+  ): Promise<any[]>;
   sumOfTimeSpentByUserAndDate(user: User, date: string): Promise<number>;
   countEventsByUserAndPeriod(
     user: User,

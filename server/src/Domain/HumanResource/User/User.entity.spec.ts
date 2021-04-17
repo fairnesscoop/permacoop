@@ -1,6 +1,6 @@
-import {mock, instance} from 'ts-mockito';
-import {User, UserRole} from './User.entity';
-import {UserAdministrative} from './UserAdministrative.entity';
+import { mock, instance } from 'ts-mockito';
+import { User, UserRole } from './User.entity';
+import { UserAdministrative } from './UserAdministrative.entity';
 
 describe('User.entity', () => {
   it('testGetters', () => {

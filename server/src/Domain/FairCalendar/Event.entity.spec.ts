@@ -1,8 +1,8 @@
-import {mock, instance} from 'ts-mockito';
-import {Event, EventType} from './Event.entity';
-import {User} from '../HumanResource/User/User.entity';
-import {Project} from '../Project/Project.entity';
-import {Task} from '../Task/Task.entity';
+import { mock, instance } from 'ts-mockito';
+import { Event, EventType } from './Event.entity';
+import { User } from '../HumanResource/User/User.entity';
+import { Project } from '../Project/Project.entity';
+import { Task } from '../Task/Task.entity';
 
 describe('Event.entity', () => {
   it('testGetters', () => {

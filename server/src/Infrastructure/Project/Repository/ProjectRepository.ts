@@ -1,9 +1,9 @@
-import {Injectable} from '@nestjs/common';
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
-import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
-import {Project} from 'src/Domain/Project/Project.entity';
-import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { IProjectRepository } from 'src/Domain/Project/Repository/IProjectRepository';
+import { Project } from 'src/Domain/Project/Project.entity';
+import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 
 @Injectable()
 export class ProjectRepository implements IProjectRepository {
@@ -19,7 +19,7 @@ export class ProjectRepository implements IProjectRepository {
   public findOneByName(name: string): Promise<Project | undefined> {
     return this.repository
       .createQueryBuilder('project')
-      .where('LOWER(project.name) = LOWER(:name)', {name})
+      .where('LOWER(project.name) = LOWER(:name)', { name })
       .getOne();
   }
 
@@ -35,7 +35,7 @@ export class ProjectRepository implements IProjectRepository {
         'customer.name'
       ])
       .innerJoin('project.customer', 'customer')
-      .where('project.id = :id', {id})
+      .where('project.id = :id', { id })
       .getOne();
   }
 
@@ -60,7 +60,7 @@ export class ProjectRepository implements IProjectRepository {
       .offset((page - 1) * MAX_ITEMS_PER_PAGE);
 
     if (customerId) {
-      query.andWhere('customer.id = :customerId', {customerId});
+      query.andWhere('customer.id = :customerId', { customerId });
     }
 
     return query.getManyAndCount();

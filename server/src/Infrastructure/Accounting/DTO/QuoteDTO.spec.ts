@@ -1,7 +1,7 @@
-import {QuoteDTO} from './QuoteDTO';
-import {validate} from 'class-validator';
-import {QuoteItemDTO} from './QuoteItemDTO';
-import {QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
+import { QuoteDTO } from './QuoteDTO';
+import { validate } from 'class-validator';
+import { QuoteItemDTO } from './QuoteItemDTO';
+import { QuoteStatus } from 'src/Domain/Accounting/Quote.entity';
 
 const itemDto = new QuoteItemDTO();
 itemDto.dailyRate = 700;

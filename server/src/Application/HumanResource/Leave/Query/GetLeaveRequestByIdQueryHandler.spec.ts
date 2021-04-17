@@ -1,6 +1,8 @@
 import { LeaveRequestNotFoundException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestNotFoundException';
 import {
-  LeaveRequest, Status, Type
+  LeaveRequest,
+  Status,
+  Type
 } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';

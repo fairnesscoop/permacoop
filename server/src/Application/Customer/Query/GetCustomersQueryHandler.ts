@@ -1,10 +1,10 @@
-import {Inject} from '@nestjs/common';
-import {QueryHandler} from '@nestjs/cqrs';
-import {GetCustomersQuery} from './GetCustomersQuery';
-import {CustomerView} from '../View/CustomerView';
-import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
-import {AddressView} from '../View/AddressView';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { Inject } from '@nestjs/common';
+import { QueryHandler } from '@nestjs/cqrs';
+import { GetCustomersQuery } from './GetCustomersQuery';
+import { CustomerView } from '../View/CustomerView';
+import { ICustomerRepository } from 'src/Domain/Customer/Repository/ICustomerRepository';
+import { AddressView } from '../View/AddressView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetCustomersQuery)
 export class GetCustomersQueryHandler {

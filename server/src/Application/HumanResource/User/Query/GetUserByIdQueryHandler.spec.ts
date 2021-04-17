@@ -1,10 +1,10 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {UserRepository} from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
-import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
-import {UserView} from 'src/Application/HumanResource/User/View/UserView';
-import {GetUserByIdQueryHandler} from './GetUserByIdQueryHandler';
-import {GetUserByIdQuery} from './GetUserByIdQuery';
-import {UserNotFoundException} from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { UserRepository } from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
+import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { UserView } from 'src/Application/HumanResource/User/View/UserView';
+import { GetUserByIdQueryHandler } from './GetUserByIdQueryHandler';
+import { GetUserByIdQuery } from './GetUserByIdQuery';
+import { UserNotFoundException } from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
 
 describe('GetUserByIdQueryHandler', () => {
   const query = new GetUserByIdQuery('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
@@ -32,7 +32,7 @@ describe('GetUserByIdQueryHandler', () => {
         'MARCHOIS',
         'mathieu@fairness.coop',
         UserRole.COOPERATOR,
-        true,
+        true
       )
     );
 

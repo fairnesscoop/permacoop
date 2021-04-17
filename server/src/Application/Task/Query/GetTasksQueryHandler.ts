@@ -1,9 +1,9 @@
-import {Inject} from '@nestjs/common';
-import {QueryHandler} from '@nestjs/cqrs';
-import {GetTasksQuery} from './GetTasksQuery';
-import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
-import {TaskView} from '../View/TaskView';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { Inject } from '@nestjs/common';
+import { QueryHandler } from '@nestjs/cqrs';
+import { GetTasksQuery } from './GetTasksQuery';
+import { ITaskRepository } from 'src/Domain/Task/Repository/ITaskRepository';
+import { TaskView } from '../View/TaskView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetTasksQuery)
 export class GetTasksQueryHandler {

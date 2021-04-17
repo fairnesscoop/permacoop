@@ -47,9 +47,7 @@ describe('UpdateEventCommandHandler', () => {
     eventRepository = mock(EventRepository);
     taskRepository = mock(TaskRepository);
     doesEventBelongToUser = mock(DoesEventBelongToUser);
-    isMaximumTimeSpentReached = mock(
-      IsMaximumTimeSpentReached
-    );
+    isMaximumTimeSpentReached = mock(IsMaximumTimeSpentReached);
 
     handler = new UpdateEventCommandHandler(
       instance(taskRepository),
@@ -82,7 +80,14 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(anything(), anything(), anything(), anything(), anything(), anything())
+        event.update(
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything()
+        )
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -113,7 +118,14 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(anything(), anything(), anything(), anything(), anything(), anything())
+        event.update(
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything()
+        )
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -152,7 +164,14 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(anything(), anything(), anything(), anything(), anything(), anything())
+        event.update(
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything()
+        )
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -193,7 +212,14 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(anything(), anything(), anything(), anything(), anything(), anything())
+        event.update(
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything()
+        )
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -234,7 +260,14 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(anything(), anything(), anything(), anything(), anything(), anything())
+        event.update(
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything()
+        )
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -278,7 +311,14 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(instance(event), 420)
       ).once();
       verify(
-        event.update(anything(), anything(), anything(), anything(), anything(), anything())
+        event.update(
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything(),
+          anything()
+        )
       ).never();
       verify(eventRepository.save(anything())).never();
     }

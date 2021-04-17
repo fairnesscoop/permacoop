@@ -1,11 +1,11 @@
-import {QueryHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {LoginQuery} from './LoginQuery';
-import {AuthenticatedView} from '../View/AuthenticatedView';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import {IPasswordEncoder} from 'src/Application/IPasswordEncoder';
-import {PasswordNotMatchException} from 'src/Domain/HumanResource/User/Exception/PasswordNotMatchException';
-import {UserNotFoundException} from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
+import { QueryHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { LoginQuery } from './LoginQuery';
+import { AuthenticatedView } from '../View/AuthenticatedView';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { IPasswordEncoder } from 'src/Application/IPasswordEncoder';
+import { PasswordNotMatchException } from 'src/Domain/HumanResource/User/Exception/PasswordNotMatchException';
+import { UserNotFoundException } from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
 
 @QueryHandler(LoginQuery)
 export class LoginQueryHandler {
@@ -17,7 +17,7 @@ export class LoginQueryHandler {
   ) {}
 
   public async execute(query: LoginQuery): Promise<AuthenticatedView> {
-    const {password} = query;
+    const { password } = query;
     const email = query.email.toLowerCase();
     const user = await this.userRepository.findOneByEmail(email);
 

@@ -1,7 +1,7 @@
-import {mock, instance, when, verify, anything} from 'ts-mockito';
-import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
-import {IsCustomerAlreadyExist} from 'src/Domain/Customer/Specification/IsCustomerAlreadyExist';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
+import { mock, instance, when, verify, anything } from 'ts-mockito';
+import { CustomerRepository } from 'src/Infrastructure/Customer/Repository/CustomerRepository';
+import { IsCustomerAlreadyExist } from 'src/Domain/Customer/Specification/IsCustomerAlreadyExist';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
 
 describe('IsCustomerAlreadyExist', () => {
   let customerRepository: CustomerRepository;

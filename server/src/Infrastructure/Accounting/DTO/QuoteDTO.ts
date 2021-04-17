@@ -1,5 +1,5 @@
-import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
-import {Type} from 'class-transformer';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsNotEmpty,
   IsUUID,
@@ -9,8 +9,8 @@ import {
   ArrayNotEmpty,
   IsEnum
 } from 'class-validator';
-import {QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
-import {QuoteItemDTO} from './QuoteItemDTO';
+import { QuoteStatus } from 'src/Domain/Accounting/Quote.entity';
+import { QuoteItemDTO } from './QuoteItemDTO';
 
 export class QuoteDTO {
   @ApiPropertyOptional()
@@ -23,15 +23,15 @@ export class QuoteDTO {
   @IsUUID()
   public customerId: string;
 
-  @ApiProperty({enum: QuoteStatus})
+  @ApiProperty({ enum: QuoteStatus })
   @IsNotEmpty()
   @IsEnum(QuoteStatus)
   public status: QuoteStatus;
 
-  @ApiProperty({type: [QuoteItemDTO]})
+  @ApiProperty({ type: [QuoteItemDTO] })
   @IsArray()
   @ArrayNotEmpty()
   @Type(() => QuoteItemDTO)
-  @ValidateNested({each: true})
+  @ValidateNested({ each: true })
   public items: QuoteItemDTO[];
 }

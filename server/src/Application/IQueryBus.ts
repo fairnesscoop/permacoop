@@ -1,4 +1,4 @@
-import {IQuery} from './IQuery';
+import { IQuery } from './IQuery';
 
 export interface IQueryBus {
   execute(query: IQuery): Promise<any>;

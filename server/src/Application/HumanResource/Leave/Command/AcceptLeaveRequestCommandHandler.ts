@@ -33,7 +33,8 @@ export class AcceptLeaveRequestCommandHandler {
     }
 
     if (
-      false === this.canLeaveRequestBeModerated.isSatisfiedBy(leaveRequest, moderator)
+      false ===
+      this.canLeaveRequestBeModerated.isSatisfiedBy(leaveRequest, moderator)
     ) {
       throw new LeaveRequestCantBeModeratedException();
     }

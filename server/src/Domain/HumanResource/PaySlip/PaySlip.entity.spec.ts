@@ -1,7 +1,7 @@
-import {mock, instance} from 'ts-mockito';
-import {PaySlip} from './PaySlip.entity';
-import {User} from '../User/User.entity';
-import {File} from 'src/Domain/File/File.entity';
+import { mock, instance } from 'ts-mockito';
+import { PaySlip } from './PaySlip.entity';
+import { User } from '../User/User.entity';
+import { File } from 'src/Domain/File/File.entity';
 
 describe('PaySlip.entity', () => {
   it('testGetters', () => {

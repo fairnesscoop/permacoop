@@ -1,4 +1,12 @@
-import { Body, Controller, Inject, NotFoundException, Param, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Inject,
+  NotFoundException,
+  Param,
+  Put,
+  UseGuards
+} from '@nestjs/common';
 import { ICommandBus } from '@nestjs/cqrs';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -21,8 +29,11 @@ export class UpdateUserAction {
 
   @Put(':id/administrative')
   @Roles(UserRole.COOPERATOR)
-  @ApiOperation({summary: 'Update user administrative info'})
-  public async index(@Param() dto: IdDTO, @Body() userAdministrativeDto: UserAdministrativeDTO): Promise<UserAdministrativeView> {
+  @ApiOperation({ summary: 'Update user administrative info' })
+  public async index(
+    @Param() dto: IdDTO,
+    @Body() userAdministrativeDto: UserAdministrativeDTO
+  ): Promise<UserAdministrativeView> {
     const {
       role,
       annualEarnings,
@@ -31,21 +42,23 @@ export class UpdateUserAction {
       healthInsurance,
       joiningDate,
       leavingDate,
-      transportFee,
+      transportFee
     } = userAdministrativeDto;
 
     try {
-      return await this.commandBus.execute(new UpdateUserCommand(
-        dto.id,
-        role,
-        annualEarnings,
-        contract,
-        executivePosition,
-        healthInsurance,
-        joiningDate,
-        leavingDate,
-        transportFee,
-      ));
+      return await this.commandBus.execute(
+        new UpdateUserCommand(
+          dto.id,
+          role,
+          annualEarnings,
+          contract,
+          executivePosition,
+          healthInsurance,
+          joiningDate,
+          leavingDate,
+          transportFee
+        )
+      );
     } catch (e) {
       throw new NotFoundException(e.message);
     }

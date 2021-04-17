@@ -1,5 +1,5 @@
-import {PaySlip} from '../PaySlip.entity';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
+import { PaySlip } from '../PaySlip.entity';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
 
 export interface IPaySlipRepository {
   save(paySlip: PaySlip): Promise<PaySlip>;

@@ -1,10 +1,10 @@
-import {CommandHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {UpdateTaskCommand} from './UpdateTaskCommand';
-import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
-import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
-import {IsTaskAlreadyExist} from 'src/Domain/Task/Specification/IsTaskAlreadyExist';
-import {TaskAlreadyExistException} from 'src/Domain/Task/Exception/TaskAlreadyExistException';
+import { CommandHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { UpdateTaskCommand } from './UpdateTaskCommand';
+import { ITaskRepository } from 'src/Domain/Task/Repository/ITaskRepository';
+import { TaskNotFoundException } from 'src/Domain/Task/Exception/TaskNotFoundException';
+import { IsTaskAlreadyExist } from 'src/Domain/Task/Specification/IsTaskAlreadyExist';
+import { TaskAlreadyExistException } from 'src/Domain/Task/Exception/TaskAlreadyExistException';
 
 @CommandHandler(UpdateTaskCommand)
 export class UpdateTaskCommandHandler {
@@ -15,7 +15,7 @@ export class UpdateTaskCommandHandler {
   ) {}
 
   public async execute(command: UpdateTaskCommand): Promise<void> {
-    const {id, name} = command;
+    const { id, name } = command;
 
     const task = await this.taskRepository.findOneById(id);
     if (!task) {

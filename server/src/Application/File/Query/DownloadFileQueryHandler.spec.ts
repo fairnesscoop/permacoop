@@ -1,11 +1,11 @@
-import {mock, instance, when, verify, anything} from 'ts-mockito';
-import {FileRepository} from 'src/Infrastructure/File/Repository/FileRepository';
-import {LocalFileStorageAdapter} from 'src/Infrastructure/Adapter/LocalFileStorageAdapter';
-import {File} from 'src/Domain/File/File.entity';
-import {DownloadFileQueryHandler} from './DownloadFileQueryHandler';
-import {DownloadFileQuery} from './DownloadFileQuery';
-import {DownloadedFileView} from '../View/DownloadedFileView';
-import {FileNotFoundException} from 'src/Domain/File/Exception/FileNotFoundException';
+import { mock, instance, when, verify, anything } from 'ts-mockito';
+import { FileRepository } from 'src/Infrastructure/File/Repository/FileRepository';
+import { LocalFileStorageAdapter } from 'src/Infrastructure/Adapter/LocalFileStorageAdapter';
+import { File } from 'src/Domain/File/File.entity';
+import { DownloadFileQueryHandler } from './DownloadFileQueryHandler';
+import { DownloadFileQuery } from './DownloadFileQuery';
+import { DownloadedFileView } from '../View/DownloadedFileView';
+import { FileNotFoundException } from 'src/Domain/File/Exception/FileNotFoundException';
 
 describe('DownloadFileQueryHandler', () => {
   let handler: DownloadFileQueryHandler;

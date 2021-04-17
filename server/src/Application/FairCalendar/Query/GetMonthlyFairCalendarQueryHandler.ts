@@ -27,15 +27,12 @@ export class GetMonthlyFairCalendarQueryHandler {
     const { date, userId } = query;
     const formatedDate = this.dateUtils.format(date, 'y-MM-dd');
 
-    const [ events, leaves ] = await Promise.all([
+    const [events, leaves] = await Promise.all([
       this.eventRepository.findMonthlyEvents(formatedDate, userId),
       this.leaveRepository.findMonthlyLeaves(formatedDate, userId)
     ]);
 
-    return [
-      ...this.buildEvents(events),
-      ...this.buildLeaves(leaves)
-    ];
+    return [...this.buildEvents(events), ...this.buildLeaves(leaves)];
   }
 
   private buildEvents(events: Event[]): FairCalendarView[] {
@@ -53,7 +50,13 @@ export class GetMonthlyFairCalendarQueryHandler {
           event.getSummary(),
           event.getId(),
           event.isBillable(),
-          project ? new ProjectView(project.getId(), project.getName(), project.getDayDuration()) : null,
+          project
+            ? new ProjectView(
+                project.getId(),
+                project.getName(),
+                project.getDayDuration()
+              )
+            : null,
           task ? new TaskView(task.getId(), task.getName()) : null
         )
       );
@@ -67,11 +70,7 @@ export class GetMonthlyFairCalendarQueryHandler {
 
     for (const leave of leaves) {
       result.push(
-        new FairCalendarView(
-          leave.getType(),
-          leave.getTime(),
-          leave.getDate()
-        )
+        new FairCalendarView(leave.getType(), leave.getTime(), leave.getDate())
       );
     }
 

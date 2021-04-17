@@ -24,7 +24,7 @@ export class GetUserByIdQueryHandler {
       user.getLastName(),
       user.getEmail(),
       user.getRole(),
-      user.isAdministrativeEditable(),
+      user.isAdministrativeEditable()
     );
   }
 }

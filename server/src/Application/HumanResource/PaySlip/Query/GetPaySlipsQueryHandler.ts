@@ -1,11 +1,11 @@
-import {Inject} from '@nestjs/common';
-import {QueryHandler} from '@nestjs/cqrs';
-import {GetPaySlipsQuery} from './GetPaySlipsQuery';
-import {IPaySlipRepository} from 'src/Domain/HumanResource/PaySlip/Repository/IPaySlipRepository';
-import {PaySlipView} from '../View/PaySlipView';
-import {UserSummaryView} from '../../User/View/UserSummaryView';
-import {FileView} from 'src/Application/File/View/FileView';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { Inject } from '@nestjs/common';
+import { QueryHandler } from '@nestjs/cqrs';
+import { GetPaySlipsQuery } from './GetPaySlipsQuery';
+import { IPaySlipRepository } from 'src/Domain/HumanResource/PaySlip/Repository/IPaySlipRepository';
+import { PaySlipView } from '../View/PaySlipView';
+import { UserSummaryView } from '../../User/View/UserSummaryView';
+import { FileView } from 'src/Application/File/View/FileView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetPaySlipsQuery)
 export class GetPaySlipsQueryHandler {

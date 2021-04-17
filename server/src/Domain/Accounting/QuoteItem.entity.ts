@@ -1,24 +1,24 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
-import {Quote} from './Quote.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Quote } from './Quote.entity';
 
 @Entity()
 export class QuoteItem {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'varchar', nullable: false})
+  @Column({ type: 'varchar', nullable: false })
   private title: string;
 
-  @Column({type: 'integer', nullable: false, comment: 'Stored in base 100'})
+  @Column({ type: 'integer', nullable: false, comment: 'Stored in base 100' })
   private quantity: number;
 
-  @Column({type: 'integer', nullable: false, comment: 'Stored in base 100'})
+  @Column({ type: 'integer', nullable: false, comment: 'Stored in base 100' })
   private dailyRate: number;
 
   @ManyToOne(
     type => Quote,
     quote => quote.items,
-    {nullable: false, onDelete: 'CASCADE'}
+    { nullable: false, onDelete: 'CASCADE' }
   )
   quote: Quote;
 

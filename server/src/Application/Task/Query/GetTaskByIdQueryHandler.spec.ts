@@ -1,10 +1,10 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {TaskRepository} from 'src/Infrastructure/Task/Repository/TaskRepository';
-import {Task} from 'src/Domain/Task/Task.entity';
-import {TaskView} from 'src/Application/Task/View/TaskView';
-import {GetTaskByIdQueryHandler} from './GetTaskByIdQueryHandler';
-import {GetTaskByIdQuery} from './GetTaskByIdQuery';
-import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { TaskRepository } from 'src/Infrastructure/Task/Repository/TaskRepository';
+import { Task } from 'src/Domain/Task/Task.entity';
+import { TaskView } from 'src/Application/Task/View/TaskView';
+import { GetTaskByIdQueryHandler } from './GetTaskByIdQueryHandler';
+import { GetTaskByIdQuery } from './GetTaskByIdQuery';
+import { TaskNotFoundException } from 'src/Domain/Task/Exception/TaskNotFoundException';
 
 describe('GetTaskByIdQueryHandler', () => {
   const query = new GetTaskByIdQuery('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');

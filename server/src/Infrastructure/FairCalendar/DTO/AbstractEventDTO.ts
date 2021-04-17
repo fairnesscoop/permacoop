@@ -13,7 +13,7 @@ import { EventType } from 'src/Domain/FairCalendar/Event.entity';
 import { ArrayUtils } from 'src/Infrastructure/Common/Utils/ArrayUtils';
 
 export abstract class AbstractEventDTO {
-  @ApiProperty({enum: EventType})
+  @ApiProperty({ enum: EventType })
   @IsNotEmpty()
   @IsEnum(EventType)
   public type: EventType;

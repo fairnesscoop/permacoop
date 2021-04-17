@@ -38,9 +38,12 @@ export class GenerateInvoiceCommandHandler {
     }
 
     const currentDate = this.dateUtils.getCurrentDate();
-    const [ invoiceId, events ] = await Promise.all([
+    const [invoiceId, events] = await Promise.all([
       this.invoiceIdGenerator.generate(),
-      this.eventRepository.findBillableEventsByMonthAndProject(currentDate, project)
+      this.eventRepository.findBillableEventsByMonthAndProject(
+        currentDate,
+        project
+      )
     ]);
 
     if (0 === events.length) {
@@ -67,15 +70,13 @@ export class GenerateInvoiceCommandHandler {
     return savedInvoice.getId();
   }
 
-  private buildInvoiceItem(invoice: Invoice, project: Project, {
-    time_spent,
-    billable,
-    task_name,
-    first_name,
-    last_name,
-    daily_rate
-  }): InvoiceItem {
-    const quantity = Math.round(time_spent / project.getDayDuration() * 100) / 100;
+  private buildInvoiceItem(
+    invoice: Invoice,
+    project: Project,
+    { time_spent, billable, task_name, first_name, last_name, daily_rate }
+  ): InvoiceItem {
+    const quantity =
+      Math.round((time_spent / project.getDayDuration()) * 100) / 100;
 
     return new InvoiceItem(
       invoice,

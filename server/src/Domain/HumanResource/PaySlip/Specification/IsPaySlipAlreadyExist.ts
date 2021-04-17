@@ -1,7 +1,7 @@
-import {Inject} from '@nestjs/common';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {IPaySlipRepository} from '../Repository/IPaySlipRepository';
-import {PaySlip} from '../PaySlip.entity';
+import { Inject } from '@nestjs/common';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { IPaySlipRepository } from '../Repository/IPaySlipRepository';
+import { PaySlip } from '../PaySlip.entity';
 
 export class IsPaySlipAlreadyExist {
   constructor(

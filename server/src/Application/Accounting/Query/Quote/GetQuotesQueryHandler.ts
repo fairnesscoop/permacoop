@@ -1,11 +1,11 @@
-import {QueryHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {GetQuotesQuery} from './GetQuotesQuery';
-import {IQuoteRepository} from 'src/Domain/Accounting/Repository/IQuoteRepository';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {QuoteView} from '../../View/DailyRate/QuoteView';
-import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { QueryHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { GetQuotesQuery } from './GetQuotesQuery';
+import { IQuoteRepository } from 'src/Domain/Accounting/Repository/IQuoteRepository';
+import { CustomerView } from 'src/Application/Customer/View/CustomerView';
+import { QuoteView } from '../../View/DailyRate/QuoteView';
+import { ProjectView } from 'src/Application/Project/View/ProjectView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetQuotesQuery)
 export class GetQuotesQueryHandler {

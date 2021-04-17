@@ -7,11 +7,7 @@ describe('Leave.entity', () => {
     const leaveRequest = mock(LeaveRequest);
     when(leaveRequest.getType()).thenReturn(Type.PAID);
 
-    const leave = new Leave(
-      instance(leaveRequest),
-      100,
-      '2019-01-06'
-    );
+    const leave = new Leave(instance(leaveRequest), 100, '2019-01-06');
 
     expect(leave.getId()).toBe(undefined);
     expect(leave.getLeaveRequest()).toBe(instance(leaveRequest));

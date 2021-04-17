@@ -16,7 +16,7 @@ export class DoesEventsOrLeaveExistForPeriod {
     startDate: string,
     endDate: string
   ): Promise<boolean> {
-    const [ events, leaves ] = await Promise.all([
+    const [events, leaves] = await Promise.all([
       this.eventRepository.countEventsByUserAndPeriod(user, startDate, endDate),
       this.leaveRepository.countLeavesByUserAndPeriod(user, startDate, endDate)
     ]);

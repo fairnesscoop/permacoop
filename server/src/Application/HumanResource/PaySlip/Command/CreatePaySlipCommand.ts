@@ -1,4 +1,4 @@
-import {ICommand} from 'src/Application/ICommand';
+import { ICommand } from 'src/Application/ICommand';
 
 export class CreatePaySlipCommand implements ICommand {
   constructor(

@@ -1,5 +1,5 @@
-import {ICommand} from 'src/Application/ICommand';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
+import { ICommand } from 'src/Application/ICommand';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
 
 export class UpdateProfileCommand implements ICommand {
   constructor(

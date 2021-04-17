@@ -19,37 +19,37 @@ export class LeaveRequest {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column('enum', {enum: Status, nullable: false})
+  @Column('enum', { enum: Status, nullable: false })
   private status: Status;
 
-  @Column('enum', {enum: Type, nullable: false})
+  @Column('enum', { enum: Type, nullable: false })
   private type: Type;
 
-  @Column({type: 'timestamp', nullable: false})
+  @Column({ type: 'timestamp', nullable: false })
   private startDate: string;
 
-  @Column({type: 'boolean', nullable: false, default: true})
+  @Column({ type: 'boolean', nullable: false, default: true })
   private startsAllDay: boolean;
 
-  @Column({type: 'timestamp', nullable: false})
+  @Column({ type: 'timestamp', nullable: false })
   private endDate: string;
 
-  @Column({type: 'boolean', nullable: false, default: true})
+  @Column({ type: 'boolean', nullable: false, default: true })
   private endsAllDay: boolean;
 
-  @Column({type: 'varchar', nullable: true})
+  @Column({ type: 'varchar', nullable: true })
   private comment: string;
 
-  @Column({type: 'varchar', nullable: true})
+  @Column({ type: 'varchar', nullable: true })
   private moderationComment: string;
 
-  @Column({type: 'timestamp', nullable: true})
+  @Column({ type: 'timestamp', nullable: true })
   private moderateAt: string;
 
-  @ManyToOne(type => User, {nullable: true, onDelete: 'SET NULL'})
+  @ManyToOne(type => User, { nullable: true, onDelete: 'SET NULL' })
   private moderator: User;
 
-  @ManyToOne(type => User, {nullable: false, onDelete: 'CASCADE'})
+  @ManyToOne(type => User, { nullable: false, onDelete: 'CASCADE' })
   private user: User;
 
   constructor(

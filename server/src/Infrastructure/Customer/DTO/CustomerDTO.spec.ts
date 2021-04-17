@@ -1,6 +1,6 @@
-import {CustomerDTO} from './CustomerDTO';
-import {validate} from 'class-validator';
-import {AddressDTO} from './AddressDTO';
+import { CustomerDTO } from './CustomerDTO';
+import { validate } from 'class-validator';
+import { AddressDTO } from './AddressDTO';
 
 describe('CustomerDTO', () => {
   it('testValidDTO', async () => {

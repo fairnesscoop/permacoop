@@ -1,6 +1,6 @@
-import {Inject} from '@nestjs/common';
-import {ICustomerRepository} from '../Repository/ICustomerRepository';
-import {Customer} from '../Customer.entity';
+import { Inject } from '@nestjs/common';
+import { ICustomerRepository } from '../Repository/ICustomerRepository';
+import { Customer } from '../Customer.entity';
 
 export class IsCustomerAlreadyExist {
   constructor(

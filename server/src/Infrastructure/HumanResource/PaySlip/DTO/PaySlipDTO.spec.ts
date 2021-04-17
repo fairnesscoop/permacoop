@@ -1,5 +1,5 @@
-import {PaySlipDTO} from './PaySlipDTO';
-import {validate} from 'class-validator';
+import { PaySlipDTO } from './PaySlipDTO';
+import { validate } from 'class-validator';
 
 describe('PaySlipDTO', () => {
   it('testValidDTO', async () => {

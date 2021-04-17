@@ -1,5 +1,5 @@
-import {validate} from 'class-validator';
-import {DailyRateDTO} from './DailyRateDTO';
+import { validate } from 'class-validator';
+import { DailyRateDTO } from './DailyRateDTO';
 
 describe('DailyRateDTO', () => {
   it('testValidDTO', async () => {

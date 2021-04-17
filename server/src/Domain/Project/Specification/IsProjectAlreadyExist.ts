@@ -1,6 +1,6 @@
-import {Inject} from '@nestjs/common';
-import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
-import {Project} from 'src/Domain/Project/Project.entity';
+import { Inject } from '@nestjs/common';
+import { IProjectRepository } from 'src/Domain/Project/Repository/IProjectRepository';
+import { Project } from 'src/Domain/Project/Project.entity';
 
 export class IsProjectAlreadyExist {
   constructor(

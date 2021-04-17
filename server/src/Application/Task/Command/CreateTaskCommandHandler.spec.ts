@@ -1,10 +1,10 @@
-import {mock, instance, when, verify, deepEqual} from 'ts-mockito';
-import {TaskRepository} from 'src/Infrastructure/Task/Repository/TaskRepository';
-import {IsTaskAlreadyExist} from 'src/Domain/Task/Specification/IsTaskAlreadyExist';
-import {CreateTaskCommandHandler} from 'src/Application/Task/Command/CreateTaskCommandHandler';
-import {CreateTaskCommand} from 'src/Application/Task/Command/CreateTaskCommand';
-import {Task} from 'src/Domain/Task/Task.entity';
-import {TaskAlreadyExistException} from 'src/Domain/Task/Exception/TaskAlreadyExistException';
+import { mock, instance, when, verify, deepEqual } from 'ts-mockito';
+import { TaskRepository } from 'src/Infrastructure/Task/Repository/TaskRepository';
+import { IsTaskAlreadyExist } from 'src/Domain/Task/Specification/IsTaskAlreadyExist';
+import { CreateTaskCommandHandler } from 'src/Application/Task/Command/CreateTaskCommandHandler';
+import { CreateTaskCommand } from 'src/Application/Task/Command/CreateTaskCommand';
+import { Task } from 'src/Domain/Task/Task.entity';
+import { TaskAlreadyExistException } from 'src/Domain/Task/Exception/TaskAlreadyExistException';
 
 describe('CreateTaskCommandHandler', () => {
   let taskRepository: TaskRepository;

@@ -1,6 +1,6 @@
-import {ICommand} from 'src/Application/ICommand';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {EventType} from 'src/Domain/FairCalendar/Event.entity';
+import { ICommand } from 'src/Application/ICommand';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { EventType } from 'src/Domain/FairCalendar/Event.entity';
 
 export class UpdateEventCommand implements ICommand {
   constructor(

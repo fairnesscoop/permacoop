@@ -1,6 +1,6 @@
-import {UserSummaryView} from 'src/Application/HumanResource/User/View/UserSummaryView';
-import {TaskView} from 'src/Application/Task/View/TaskView';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
+import { UserSummaryView } from 'src/Application/HumanResource/User/View/UserSummaryView';
+import { TaskView } from 'src/Application/Task/View/TaskView';
+import { CustomerView } from 'src/Application/Customer/View/CustomerView';
 
 export class DailyRateView {
   constructor(

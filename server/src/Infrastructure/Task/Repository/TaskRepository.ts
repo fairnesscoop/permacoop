@@ -1,9 +1,9 @@
-import {Injectable} from '@nestjs/common';
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
-import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
-import {Task} from 'src/Domain/Task/Task.entity';
-import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { ITaskRepository } from 'src/Domain/Task/Repository/ITaskRepository';
+import { Task } from 'src/Domain/Task/Task.entity';
+import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 
 @Injectable()
 export class TaskRepository implements ITaskRepository {
@@ -19,14 +19,14 @@ export class TaskRepository implements ITaskRepository {
   public findOneByName(name: string): Promise<Task | undefined> {
     return this.repository
       .createQueryBuilder('task')
-      .where('LOWER(task.name) = LOWER(:name)', {name})
+      .where('LOWER(task.name) = LOWER(:name)', { name })
       .getOne();
   }
 
   public findOneById(id: string): Promise<Task | undefined> {
     return this.repository
       .createQueryBuilder('task')
-      .where('task.id = :id', {id})
+      .where('task.id = :id', { id })
       .getOne();
   }
 

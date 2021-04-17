@@ -22,7 +22,7 @@ export class GetLeaveRequestsAction {
 
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Get all leave requests'})
+  @ApiOperation({ summary: 'Get all leave requests' })
   public async index(
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<LeaveRequestView>> {

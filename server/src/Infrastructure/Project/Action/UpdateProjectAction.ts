@@ -29,16 +29,16 @@ export class UpdateProjectAction {
 
   @Put(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Update project'})
+  @ApiOperation({ summary: 'Update project' })
   public async index(@Param() { id }: IdDTO, @Body() projectDto: ProjectDTO) {
     try {
-      const {name, dayDuration, customerId, invoiceUnit} = projectDto;
+      const { name, dayDuration, customerId, invoiceUnit } = projectDto;
 
       await this.commandBus.execute(
         new UpdateProjectCommand(id, name, dayDuration, invoiceUnit, customerId)
       );
 
-      return {id};
+      return { id };
     } catch (e) {
       throw new BadRequestException(e.message);
     }

@@ -1,6 +1,6 @@
-import {mock, instance} from 'ts-mockito';
-import {PDFValidator} from './PDFValidator';
-import {IUploadedFile} from 'src/Domain/File/IUploadedFile';
+import { mock, instance } from 'ts-mockito';
+import { PDFValidator } from './PDFValidator';
+import { IUploadedFile } from 'src/Domain/File/IUploadedFile';
 
 describe('PDFValidator', () => {
   it('testPdfFile', async () => {

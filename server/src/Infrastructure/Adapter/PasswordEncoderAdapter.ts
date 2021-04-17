@@ -1,6 +1,6 @@
-import {Injectable} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import * as argon2 from 'argon2';
-import {IPasswordEncoder} from 'src/Application/IPasswordEncoder';
+import { IPasswordEncoder } from 'src/Application/IPasswordEncoder';
 
 @Injectable()
 export class PasswordEncoderAdapter implements IPasswordEncoder {

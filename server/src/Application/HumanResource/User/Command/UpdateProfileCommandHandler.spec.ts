@@ -1,11 +1,11 @@
-import {mock, instance, when, verify, anything, anyString} from 'ts-mockito';
-import {UserRepository} from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
-import {PasswordEncoderAdapter} from 'src/Infrastructure/Adapter/PasswordEncoderAdapter';
-import {IsEmailAlreadyExist} from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
-import {EmailAlreadyExistException} from 'src/Domain/HumanResource/User/Exception/EmailAlreadyExistException';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {UpdateProfileCommandHandler} from './UpdateProfileCommandHandler';
-import {UpdateProfileCommand} from './UpdateProfileCommand';
+import { mock, instance, when, verify, anything, anyString } from 'ts-mockito';
+import { UserRepository } from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
+import { PasswordEncoderAdapter } from 'src/Infrastructure/Adapter/PasswordEncoderAdapter';
+import { IsEmailAlreadyExist } from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
+import { EmailAlreadyExistException } from 'src/Domain/HumanResource/User/Exception/EmailAlreadyExistException';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { UpdateProfileCommandHandler } from './UpdateProfileCommandHandler';
+import { UpdateProfileCommand } from './UpdateProfileCommand';
 
 describe('UpdateProfileCommandHandler', () => {
   const email = 'mathieu@fairness.coop';
@@ -43,7 +43,9 @@ describe('UpdateProfileCommandHandler', () => {
       await commandHandler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(EmailAlreadyExistException);
-      expect(e.message).toBe('human_resources.users.errors.email_already_exist');
+      expect(e.message).toBe(
+        'human_resources.users.errors.email_already_exist'
+      );
       verify(isEmailAlreadyExist.isSatisfiedBy(email)).once();
       verify(passwordEncoder.hash(anything())).never();
       verify(userRepository.save(anything())).never();

@@ -1,11 +1,11 @@
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
-import {IDailyRateRepository} from 'src/Domain/Accounting/Repository/IDailyRateRepository';
-import {DailyRate} from 'src/Domain/Accounting/DailyRate.entity';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {Task} from 'src/Domain/Task/Task.entity';
-import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { IDailyRateRepository } from 'src/Domain/Accounting/Repository/IDailyRateRepository';
+import { DailyRate } from 'src/Domain/Accounting/DailyRate.entity';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
+import { Task } from 'src/Domain/Task/Task.entity';
+import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 
 export class DailyRateRepository implements IDailyRateRepository {
   constructor(
@@ -58,7 +58,7 @@ export class DailyRateRepository implements IDailyRateRepository {
       .innerJoin('dailyRate.user', 'user')
       .innerJoin('dailyRate.task', 'task')
       .innerJoin('dailyRate.customer', 'customer')
-      .where('dailyRate.id = :id', {id})
+      .where('dailyRate.id = :id', { id })
       .getOne();
   }
 
@@ -70,9 +70,11 @@ export class DailyRateRepository implements IDailyRateRepository {
     return this.repository
       .createQueryBuilder('dailyRate')
       .select('dailyRate.id')
-      .where('dailyRate.user = :user', {user: user.getId()})
-      .andWhere('dailyRate.customer = :customer', {customer: customer.getId()})
-      .andWhere('dailyRate.task = :task', {task: task.getId()})
+      .where('dailyRate.user = :user', { user: user.getId() })
+      .andWhere('dailyRate.customer = :customer', {
+        customer: customer.getId()
+      })
+      .andWhere('dailyRate.task = :task', { task: task.getId() })
       .getOne();
   }
 }
