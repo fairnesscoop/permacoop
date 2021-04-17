@@ -1,5 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn, OneToOne} from 'typeorm';
-import {User} from './User.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import { User } from './User.entity';
 
 export enum ContractType {
   CDI = 'cdi',
@@ -14,28 +14,31 @@ export class UserAdministrative {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'date', nullable: false})
+  @Column({ type: 'date', nullable: false })
   private joiningDate: string;
 
-  @Column({type: 'date', nullable: true})
+  @Column({ type: 'date', nullable: true })
   private leavingDate: string;
 
-  @Column({type: 'integer', nullable: false})
+  @Column({ type: 'integer', nullable: false })
   private annualEarnings: number;
 
-  @Column({type: 'integer', default: 0, nullable: true})
+  @Column({ type: 'integer', default: 0, nullable: true })
   private transportFee: number;
 
-  @Column({type: 'boolean', nullable: false})
+  @Column({ type: 'boolean', nullable: false })
   private healthInsurance: boolean;
 
-  @Column({type: 'boolean', nullable: false})
+  @Column({ type: 'boolean', nullable: false })
   private executivePosition: boolean;
 
-  @Column('enum', {enum: ContractType, nullable: false})
+  @Column('enum', { enum: ContractType, nullable: false })
   private contract: ContractType;
 
-  @OneToOne(type => User, user => user.userAdministrative)
+  @OneToOne(
+    type => User,
+    user => user.userAdministrative
+  )
   public user: User;
 
   constructor(

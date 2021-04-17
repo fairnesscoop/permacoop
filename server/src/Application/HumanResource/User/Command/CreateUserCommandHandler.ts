@@ -1,16 +1,16 @@
-import {CommandHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
+import { CommandHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
 import {
   CreateUserCommand,
   IUserAdministrativeCommand
 } from './CreateUserCommand';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import {IPasswordEncoder} from 'src/Application/IPasswordEncoder';
-import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
-import {IsEmailAlreadyExist} from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
-import {EmailAlreadyExistException} from 'src/Domain/HumanResource/User/Exception/EmailAlreadyExistException';
-import {IUserAdministrativeRepository} from 'src/Domain/HumanResource/User/Repository/IUserAdministrativeRepository';
-import {UserAdministrativeMissingException} from 'src/Domain/HumanResource/User/Exception/UserAdministrativeMissingException';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { IPasswordEncoder } from 'src/Application/IPasswordEncoder';
+import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { IsEmailAlreadyExist } from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
+import { EmailAlreadyExistException } from 'src/Domain/HumanResource/User/Exception/EmailAlreadyExistException';
+import { IUserAdministrativeRepository } from 'src/Domain/HumanResource/User/Repository/IUserAdministrativeRepository';
+import { UserAdministrativeMissingException } from 'src/Domain/HumanResource/User/Exception/UserAdministrativeMissingException';
 import {
   UserAdministrative,
   ContractType
@@ -29,7 +29,7 @@ export class CreateUserCommandHandler {
   ) {}
 
   public async execute(command: CreateUserCommand): Promise<string> {
-    const {firstName, lastName, password, role, userAdministrative} = command;
+    const { firstName, lastName, password, role, userAdministrative } = command;
     const email = command.email.toLowerCase();
 
     if (true === (await this.isEmailAlreadyExist.isSatisfiedBy(email))) {

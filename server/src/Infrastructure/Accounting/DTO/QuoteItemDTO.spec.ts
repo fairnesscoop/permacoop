@@ -1,5 +1,5 @@
-import {validate} from 'class-validator';
-import {QuoteItemDTO} from './QuoteItemDTO';
+import { validate } from 'class-validator';
+import { QuoteItemDTO } from './QuoteItemDTO';
 
 describe('QuoteItemDTO', () => {
   it('testValidDTO', async () => {

@@ -20,11 +20,7 @@ export class LeaveRepository implements ILeaveRepository {
 
     return this.repository
       .createQueryBuilder('leave')
-      .select([
-        'leave.time',
-        'leave.date',
-        'leaveRequest.type',
-      ])
+      .select(['leave.time', 'leave.date', 'leaveRequest.type'])
       .where('user.id = :userId', { userId })
       .andWhere('extract(month FROM leave.date) = :month', { month })
       .andWhere('extract(year FROM leave.date) = :year', { year })

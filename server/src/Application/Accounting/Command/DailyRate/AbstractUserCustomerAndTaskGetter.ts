@@ -1,12 +1,12 @@
-import {Task} from 'src/Domain/Task/Task.entity';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
-import {UserNotFoundException} from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
-import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
-import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
+import { Task } from 'src/Domain/Task/Task.entity';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
+import { CustomerNotFoundException } from 'src/Domain/Customer/Exception/CustomerNotFoundException';
+import { UserNotFoundException } from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
+import { ITaskRepository } from 'src/Domain/Task/Repository/ITaskRepository';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { ICustomerRepository } from 'src/Domain/Customer/Repository/ICustomerRepository';
+import { TaskNotFoundException } from 'src/Domain/Task/Exception/TaskNotFoundException';
 
 export abstract class AbstractUserCustomerAndTaskGetter {
   constructor(

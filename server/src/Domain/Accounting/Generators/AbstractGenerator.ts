@@ -10,7 +10,10 @@ export abstract class AbstractGenerator {
   protected async format(prefix: string, nbItem: number): Promise<string> {
     const pad = await this.configService.get<number>('ACCOUNTING_PAD');
 
-    return `${prefix}-${this.getCurrentYear()}-${String(nbItem + 1).padStart(pad, '0')}`;
+    return `${prefix}-${this.getCurrentYear()}-${String(nbItem + 1).padStart(
+      pad,
+      '0'
+    )}`;
   }
 
   protected getCurrentYear(): number {

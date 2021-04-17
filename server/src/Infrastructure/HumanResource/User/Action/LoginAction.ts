@@ -5,11 +5,11 @@ import {
   Body,
   UnauthorizedException
 } from '@nestjs/common';
-import {ApiTags, ApiOperation} from '@nestjs/swagger';
-import {IQueryBus} from 'src/Application/IQueryBus';
-import {LoginQuery} from 'src/Application/HumanResource/User/Query/LoginQuery';
-import {AuthenticatedView} from 'src/Application/HumanResource/User/View/AuthenticatedView';
-import {LoginDTO} from '../DTO/LoginDTO';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { IQueryBus } from 'src/Application/IQueryBus';
+import { LoginQuery } from 'src/Application/HumanResource/User/Query/LoginQuery';
+import { AuthenticatedView } from 'src/Application/HumanResource/User/View/AuthenticatedView';
+import { LoginDTO } from '../DTO/LoginDTO';
 
 @Controller('login')
 @ApiTags('Human Resource')
@@ -20,7 +20,7 @@ export class LoginAction {
   ) {}
 
   @Post()
-  @ApiOperation({summary: 'User authentication'})
+  @ApiOperation({ summary: 'User authentication' })
   public async index(@Body() loginDto: LoginDTO): Promise<AuthenticatedView> {
     try {
       return await this.queryBus.execute(

@@ -1,12 +1,12 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {GetCustomersQueryHandler} from 'src/Application/Customer/Query/GetCustomersQueryHandler';
-import {GetCustomersQuery} from 'src/Application/Customer/Query/GetCustomersQuery';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
-import {AddressView} from '../View/AddressView';
-import {Address} from 'src/Domain/Customer/Address.entity';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
+import { GetCustomersQueryHandler } from 'src/Application/Customer/Query/GetCustomersQueryHandler';
+import { GetCustomersQuery } from 'src/Application/Customer/Query/GetCustomersQuery';
+import { CustomerView } from 'src/Application/Customer/View/CustomerView';
+import { CustomerRepository } from 'src/Infrastructure/Customer/Repository/CustomerRepository';
+import { AddressView } from '../View/AddressView';
+import { Address } from 'src/Domain/Customer/Address.entity';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 describe('GetCustomersQueryHandler', () => {
   it('testGetCustomers', async () => {

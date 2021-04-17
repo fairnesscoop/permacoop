@@ -15,16 +15,20 @@ export class GetInvoicesQueryHandler {
     private readonly invoiceRepository: IInvoiceRepository
   ) {}
 
-  public async execute(query: GetInvoicesQuery): Promise<Pagination<InvoiceView>> {
+  public async execute(
+    query: GetInvoicesQuery
+  ): Promise<Pagination<InvoiceView>> {
     const results: InvoiceView[] = [];
-    const [ invoices, total ] = await this.invoiceRepository.findInvoices(
+    const [invoices, total] = await this.invoiceRepository.findInvoices(
       query.page
     );
 
     for (const invoice of invoices) {
       const project = invoice.getProject();
       const customer = project.getCustomer();
-      const amountExcludingVat = this.calculateAmountExcludingVat(invoice.getItems());
+      const amountExcludingVat = this.calculateAmountExcludingVat(
+        invoice.getItems()
+      );
 
       results.push(
         new InvoiceView(
@@ -57,7 +61,7 @@ export class GetInvoicesQueryHandler {
       let totalAmount = amount * quantity;
 
       if (item.getDiscount() > 0) {
-        totalAmount *= (item.getDiscount() / 10000);
+        totalAmount *= item.getDiscount() / 10000;
       }
 
       amountExcludingVat += totalAmount;

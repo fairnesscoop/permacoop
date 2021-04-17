@@ -1,20 +1,20 @@
-import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class File {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'varchar', nullable: false})
+  @Column({ type: 'varchar', nullable: false })
   private name: string;
 
-  @Column({type: 'integer', nullable: false})
+  @Column({ type: 'integer', nullable: false })
   private size: number;
 
-  @Column({type: 'varchar', nullable: false})
+  @Column({ type: 'varchar', nullable: false })
   private mimeType: string;
 
-  @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   private uploadedAt: Date;
 
   constructor(name: string, size: number, mimeType: string) {

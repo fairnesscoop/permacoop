@@ -1,4 +1,11 @@
-import { Controller, Inject, UseGuards, Query, Get, BadRequestException } from '@nestjs/common';
+import {
+  Controller,
+  Inject,
+  UseGuards,
+  Query,
+  Get,
+  BadRequestException
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { IQueryBus } from 'src/Application/IQueryBus';
@@ -18,12 +25,12 @@ export class GetMonthlyFairCalendarAction {
   constructor(
     @Inject('IQueryBus')
     private readonly queryBus: IQueryBus,
-    private readonly getFairCalendarOverview: GetFairCalendarOverview,
+    private readonly getFairCalendarOverview: GetFairCalendarOverview
   ) {}
 
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Get monthly faircalendar by user'})
+  @ApiOperation({ summary: 'Get monthly faircalendar by user' })
   public async index(@Query() dto: MonthlyEventsDTO) {
     try {
       const views = await this.queryBus.execute(

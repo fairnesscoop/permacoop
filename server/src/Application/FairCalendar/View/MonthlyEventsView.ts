@@ -1,4 +1,4 @@
-import { ICalendarOverview} from 'src/Domain/FairCalendar/ICalendarOverview';
+import { ICalendarOverview } from 'src/Domain/FairCalendar/ICalendarOverview';
 import { FairCalendarView } from './FairCalendarView';
 
 export class MonthlyEventsView {

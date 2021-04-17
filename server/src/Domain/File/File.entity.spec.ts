@@ -1,4 +1,4 @@
-import {File} from './File.entity';
+import { File } from './File.entity';
 
 describe('File.entity', () => {
   it('testGetters', () => {

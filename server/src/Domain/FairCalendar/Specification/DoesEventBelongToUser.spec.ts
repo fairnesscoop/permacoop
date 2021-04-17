@@ -1,7 +1,7 @@
-import {instance, mock, when} from 'ts-mockito';
-import {DoesEventBelongToUser} from './DoesEventBelongToUser';
-import {Event} from '../Event.entity';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
+import { instance, mock, when } from 'ts-mockito';
+import { DoesEventBelongToUser } from './DoesEventBelongToUser';
+import { Event } from '../Event.entity';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
 
 describe('DoesEventBelongToUser', () => {
   let doesEventBelongToUser: DoesEventBelongToUser;

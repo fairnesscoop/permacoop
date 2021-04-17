@@ -1,10 +1,10 @@
-import {QueryHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {GetCustomerByIdQuery} from './GetCustomerByIdQuery';
-import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
-import {CustomerView} from '../View/CustomerView';
-import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
-import {AddressView} from '../View/AddressView';
+import { QueryHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { GetCustomerByIdQuery } from './GetCustomerByIdQuery';
+import { ICustomerRepository } from 'src/Domain/Customer/Repository/ICustomerRepository';
+import { CustomerView } from '../View/CustomerView';
+import { CustomerNotFoundException } from 'src/Domain/Customer/Exception/CustomerNotFoundException';
+import { AddressView } from '../View/AddressView';
 
 @QueryHandler(GetCustomerByIdQuery)
 export class GetCustomerByIdQueryHandler {

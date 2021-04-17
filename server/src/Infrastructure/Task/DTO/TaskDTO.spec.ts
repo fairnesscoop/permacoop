@@ -1,5 +1,5 @@
-import {TaskDTO} from './TaskDTO';
-import {validate} from 'class-validator';
+import { TaskDTO } from './TaskDTO';
+import { validate } from 'class-validator';
 
 describe('TaskDTO', () => {
   it('testValidDTO', async () => {

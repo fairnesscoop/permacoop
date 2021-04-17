@@ -1,5 +1,5 @@
-import {validate} from 'class-validator';
-import {PaginationDTO} from './PaginationDTO';
+import { validate } from 'class-validator';
+import { PaginationDTO } from './PaginationDTO';
 
 describe('PaginationDTO', () => {
   it('testPaginationDTO', async () => {
@@ -17,7 +17,7 @@ describe('PaginationDTO', () => {
     const validation1 = await validate(dto);
     expect(validation1).toHaveLength(1);
     expect(validation1[0].constraints).toMatchObject({
-       max: 'page must not be greater than 10000'
+      max: 'page must not be greater than 10000'
     });
   });
 
@@ -28,7 +28,7 @@ describe('PaginationDTO', () => {
     const validation1 = await validate(dto);
     expect(validation1).toHaveLength(1);
     expect(validation1[0].constraints).toMatchObject({
-       min: 'page must not be less than 1'
+      min: 'page must not be less than 1'
     });
   });
 });

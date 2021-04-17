@@ -2,7 +2,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRequestRepository';
 import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
-import { LeaveRequest, Status } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
+import {
+  LeaveRequest,
+  Status
+} from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 
 export class LeaveRequestRepository implements ILeaveRequestRepository {
@@ -37,9 +40,9 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
         'user.lastName',
         'moderator.id',
         'moderator.firstName',
-        'moderator.lastName',
+        'moderator.lastName'
       ])
-      .where('leaveRequest.id = :id', {id})
+      .where('leaveRequest.id = :id', { id })
       .innerJoin('leaveRequest.user', 'user')
       .leftJoin('leaveRequest.moderator', 'moderator')
       .getOne();
@@ -53,7 +56,7 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
     return this.repository
       .createQueryBuilder('leaveRequest')
       .select('leaveRequest.id')
-      .where('leaveRequest.user = :id', {id: user.getId()})
+      .where('leaveRequest.user = :id', { id: user.getId() })
       .andWhere(
         '(leaveRequest.startDate BETWEEN :startDate AND :endDate OR leaveRequest.endDate BETWEEN :startDate AND :endDate)',
         {
@@ -61,14 +64,20 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
           endDate
         }
       )
-      .andWhere('(leaveRequest.status = :accepted OR leaveRequest.status = :pending)', {
-        accepted: Status.ACCEPTED,
-        pending: Status.PENDING
-      })
+      .andWhere(
+        '(leaveRequest.status = :accepted OR leaveRequest.status = :pending)',
+        {
+          accepted: Status.ACCEPTED,
+          pending: Status.PENDING
+        }
+      )
       .getOne();
   }
 
-  public findLeaveRequests(page: number, status?: Status): Promise<[LeaveRequest[], number]> {
+  public findLeaveRequests(
+    page: number,
+    status?: Status
+  ): Promise<[LeaveRequest[], number]> {
     const query = this.repository
       .createQueryBuilder('leaveRequest')
       .select([
@@ -89,12 +98,14 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
       .limit(MAX_ITEMS_PER_PAGE)
       .offset((page - 1) * MAX_ITEMS_PER_PAGE);
 
-      if (status) {
-        query.where('leaveRequest.status = :status', { status })
-      } else {
-        query.where('leaveRequest.status != :status', { status: Status.ACCEPTED })
-      }
+    if (status) {
+      query.where('leaveRequest.status = :status', { status });
+    } else {
+      query.where('leaveRequest.status != :status', {
+        status: Status.ACCEPTED
+      });
+    }
 
-      return query.getManyAndCount();
+    return query.getManyAndCount();
   }
 }

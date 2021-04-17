@@ -59,7 +59,8 @@ describe('AddEventDTO', () => {
       isNotEmpty: 'type should not be empty'
     });
     expect(validation[3].constraints).toMatchObject({
-      isIn: 'time must be one of the following values: 30,60,90,120,150,180,210,240,270,300,330,360,390,420,450,480'
+      isIn:
+        'time must be one of the following values: 30,60,90,120,150,180,210,240,270,300,330,360,390,420,450,480'
     });
     expect(validation[4].constraints).toMatchObject({
       isBooleanString: 'billable must be a boolean string'

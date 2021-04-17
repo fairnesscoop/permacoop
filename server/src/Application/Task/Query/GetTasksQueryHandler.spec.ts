@@ -1,10 +1,10 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {GetTasksQueryHandler} from 'src/Application/Task/Query/GetTasksQueryHandler';
-import {TaskRepository} from 'src/Infrastructure/Task/Repository/TaskRepository';
-import {GetTasksQuery} from 'src/Application/Task/Query/GetTasksQuery';
-import {Task} from 'src/Domain/Task/Task.entity';
-import {TaskView} from 'src/Application/Task/View/TaskView';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { GetTasksQueryHandler } from 'src/Application/Task/Query/GetTasksQueryHandler';
+import { TaskRepository } from 'src/Infrastructure/Task/Repository/TaskRepository';
+import { GetTasksQuery } from 'src/Application/Task/Query/GetTasksQuery';
+import { Task } from 'src/Domain/Task/Task.entity';
+import { TaskView } from 'src/Application/Task/View/TaskView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 describe('GetTasksQueryHandler', () => {
   it('testGetTasks', async () => {

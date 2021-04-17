@@ -17,7 +17,7 @@ export class InvoiceIdGenerator extends AbstractGenerator {
   }
 
   public async generate(): Promise<string> {
-    const [ prefix, nbItem ] = await Promise.all([
+    const [prefix, nbItem] = await Promise.all([
       this.configService.get<string>('ACCOUNTING_INVOICE_PREFIX'),
       this.invoiceRepository.countByYear(this.getCurrentYear())
     ]);

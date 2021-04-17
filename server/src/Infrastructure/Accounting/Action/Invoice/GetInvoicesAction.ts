@@ -1,4 +1,4 @@
-import {Controller, Inject, UseGuards, Get, Query} from '@nestjs/common';
+import { Controller, Inject, UseGuards, Get, Query } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { IQueryBus } from 'src/Application/IQueryBus';
@@ -22,12 +22,10 @@ export class GetInvoicesAction {
 
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Get all invoices'})
+  @ApiOperation({ summary: 'Get all invoices' })
   public async index(
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<InvoiceView>> {
-    return await this.queryBus.execute(
-      new GetInvoicesQuery(pagination.page)
-    );
+    return await this.queryBus.execute(new GetInvoicesQuery(pagination.page));
   }
 }

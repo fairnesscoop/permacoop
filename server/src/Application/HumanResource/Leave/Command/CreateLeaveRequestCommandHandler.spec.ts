@@ -94,7 +94,9 @@ describe('CreateLeaveRequestCommandHandler', () => {
     try {
       await handler.execute(command);
     } catch (e) {
-      expect(e).toBeInstanceOf(EventsOrLeavesAlreadyExistForThisPeriodException);
+      expect(e).toBeInstanceOf(
+        EventsOrLeavesAlreadyExistForThisPeriodException
+      );
       expect(e.message).toBe(
         'faircalendar.errors.events_or_leaves_already_exist_for_this_period'
       );
@@ -118,7 +120,9 @@ describe('CreateLeaveRequestCommandHandler', () => {
 
   it('testCreateLeavesSuccessfully', async () => {
     const leaveRequest = mock(LeaveRequest);
-    when(leaveRequest.getId()).thenReturn('cfdd06eb-cd71-44b9-82c6-46110b30ce05');
+    when(leaveRequest.getId()).thenReturn(
+      'cfdd06eb-cd71-44b9-82c6-46110b30ce05'
+    );
 
     when(
       doesLeaveRequestExistForPeriod.isSatisfiedBy(

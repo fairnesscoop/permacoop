@@ -26,7 +26,7 @@ describe('DeleteLeaveRequestCommandHandler', () => {
 
     handler = new DeleteLeaveRequestCommandHandler(
       instance(leaveRequestRepository),
-      instance(canLeaveRequestBeRemoved),
+      instance(canLeaveRequestBeRemoved)
     );
   });
 
@@ -39,9 +39,13 @@ describe('DeleteLeaveRequestCommandHandler', () => {
       expect(await handler.execute(command)).toBeUndefined();
     } catch (e) {
       expect(e).toBeInstanceOf(LeaveRequestNotFoundException);
-      expect(e.message).toBe('human_resources.leaves.requests.errors.not_found');
+      expect(e.message).toBe(
+        'human_resources.leaves.requests.errors.not_found'
+      );
       verify(
-        leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+        leaveRequestRepository.findOneById(
+          'cfdd06eb-cd71-44b9-82c6-46110b30ce05'
+        )
       ).once();
       verify(
         canLeaveRequestBeRemoved.isSatisfiedBy(anything(), anything())
@@ -55,19 +59,29 @@ describe('DeleteLeaveRequestCommandHandler', () => {
       leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(instance(leaveRequest));
     when(
-      canLeaveRequestBeRemoved.isSatisfiedBy(instance(leaveRequest), instance(user))
+      canLeaveRequestBeRemoved.isSatisfiedBy(
+        instance(leaveRequest),
+        instance(user)
+      )
     ).thenReturn(false);
 
     try {
       expect(await handler.execute(command)).toBeUndefined();
     } catch (e) {
       expect(e).toBeInstanceOf(LeaveRequestCantBeRemovedException);
-      expect(e.message).toBe('human_resources.leaves.requests.errors.cant_be_removed');
+      expect(e.message).toBe(
+        'human_resources.leaves.requests.errors.cant_be_removed'
+      );
       verify(
-        canLeaveRequestBeRemoved.isSatisfiedBy(instance(leaveRequest), instance(user))
+        canLeaveRequestBeRemoved.isSatisfiedBy(
+          instance(leaveRequest),
+          instance(user)
+        )
       ).once();
       verify(
-        leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
+        leaveRequestRepository.findOneById(
+          'cfdd06eb-cd71-44b9-82c6-46110b30ce05'
+        )
       ).once();
       verify(leaveRequestRepository.remove(anything())).never();
     }
@@ -78,13 +92,19 @@ describe('DeleteLeaveRequestCommandHandler', () => {
       leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(instance(leaveRequest));
     when(
-      canLeaveRequestBeRemoved.isSatisfiedBy(instance(leaveRequest), instance(user))
+      canLeaveRequestBeRemoved.isSatisfiedBy(
+        instance(leaveRequest),
+        instance(user)
+      )
     ).thenReturn(true);
 
     expect(await handler.execute(command)).toBeUndefined();
 
     verify(
-      canLeaveRequestBeRemoved.isSatisfiedBy(instance(leaveRequest), instance(user))
+      canLeaveRequestBeRemoved.isSatisfiedBy(
+        instance(leaveRequest),
+        instance(user)
+      )
     ).once();
     verify(
       leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')

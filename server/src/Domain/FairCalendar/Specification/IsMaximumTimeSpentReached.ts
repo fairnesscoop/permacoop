@@ -11,7 +11,10 @@ export class IsMaximumTimeSpentReached {
     private readonly leaveRepository: ILeaveRepository
   ) {}
 
-  public async isSatisfiedBy(event: Event, newTime: number = 0): Promise<boolean> {
+  public async isSatisfiedBy(
+    event: Event,
+    newTime: number = 0
+  ): Promise<boolean> {
     const user = event.getUser();
     const date = event.getDate();
 
@@ -21,9 +24,10 @@ export class IsMaximumTimeSpentReached {
     ]);
 
     const timeSpent = eventTime + leaveTime;
-    const dayTime = event.getId() ?
-      timeSpent - event.getTime() + newTime : timeSpent + event.getTime()
+    const dayTime = event.getId()
+      ? timeSpent - event.getTime() + newTime
+      : timeSpent + event.getTime();
 
-    return dayTime > Event.MAXIMUM_TIMESPENT_PER_DAY
+    return dayTime > Event.MAXIMUM_TIMESPENT_PER_DAY;
   }
 }

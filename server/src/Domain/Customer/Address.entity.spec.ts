@@ -1,4 +1,4 @@
-import {Address} from './Address.entity';
+import { Address } from './Address.entity';
 
 describe('Address.entity', () => {
   it('testGetters', () => {

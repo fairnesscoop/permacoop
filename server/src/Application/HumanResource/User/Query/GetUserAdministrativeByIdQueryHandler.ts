@@ -17,9 +17,7 @@ export class GetUserAdministrativeByIdQueryHandler {
     private readonly userAdministrativeRepository: IUserAdministrativeRepository
   ) {}
 
-  public async execute(
-    query: GetUserByIdQuery
-  ): Promise<UserView> {
+  public async execute(query: GetUserByIdQuery): Promise<UserView> {
     const user = await this.userRepository.findOneById(query.id);
     if (!user) {
       throw new UserNotFoundException();

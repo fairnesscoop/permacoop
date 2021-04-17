@@ -1,4 +1,4 @@
-import {mock, instance, when, verify} from 'ts-mockito';
+import { mock, instance, when, verify } from 'ts-mockito';
 import { DoesEventsOrLeaveExistForPeriod } from './DoesEventsOrLeaveExistForPeriod';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { EventRepository } from 'src/Infrastructure/FairCalendar/Repository/EventRepository';
@@ -17,7 +17,7 @@ describe('DoesEventsOrLeaveExistForPeriod', () => {
     leaveRepository = mock(LeaveRepository);
     doesEventsOrLeaveExistForPeriod = new DoesEventsOrLeaveExistForPeriod(
       instance(eventRepository),
-      instance(leaveRepository),
+      instance(leaveRepository)
     );
   });
 

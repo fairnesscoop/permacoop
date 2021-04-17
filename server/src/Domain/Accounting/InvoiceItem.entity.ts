@@ -6,22 +6,27 @@ export class InvoiceItem {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'varchar', nullable: false})
+  @Column({ type: 'varchar', nullable: false })
   private title: string;
 
-  @Column({type: 'integer', nullable: false, comment: 'Stored in base 100'})
+  @Column({ type: 'integer', nullable: false, comment: 'Stored in base 100' })
   private quantity: number;
 
-  @Column({type: 'integer', nullable: false, comment: 'Stored in base 100'})
+  @Column({ type: 'integer', nullable: false, comment: 'Stored in base 100' })
   private amount: number;
 
-  @Column({type: 'integer', nullable: true, default: 0, comment: 'Stored in base 100'})
+  @Column({
+    type: 'integer',
+    nullable: true,
+    default: 0,
+    comment: 'Stored in base 100'
+  })
   private discount: number;
 
   @ManyToOne(
     type => Invoice,
     invoice => invoice.items,
-    {nullable: false, onDelete: 'CASCADE'}
+    { nullable: false, onDelete: 'CASCADE' }
   )
   invoice: Invoice;
 

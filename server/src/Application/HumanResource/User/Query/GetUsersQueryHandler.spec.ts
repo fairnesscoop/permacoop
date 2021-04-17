@@ -1,9 +1,9 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {GetUsersQueryHandler} from './GetUsersQueryHandler';
-import {UserRepository} from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
-import {GetUsersQuery} from './GetUsersQuery';
-import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
-import {UserView} from '../View/UserView';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { GetUsersQueryHandler } from './GetUsersQueryHandler';
+import { UserRepository } from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
+import { GetUsersQuery } from './GetUsersQuery';
+import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { UserView } from '../View/UserView';
 
 describe('GetUsersQueryHandler', () => {
   it('testGetUsers', async () => {

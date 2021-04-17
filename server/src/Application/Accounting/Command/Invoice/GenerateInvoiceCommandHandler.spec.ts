@@ -48,7 +48,7 @@ describe('GenerateInvoiceCommandHandler', () => {
       instance(invoiceRepository),
       instance(invoiceItemRepository),
       instance(dateUtilsAdapter),
-      instance(invoiceIdGenerator),
+      instance(invoiceIdGenerator)
     );
   });
 
@@ -66,7 +66,12 @@ describe('GenerateInvoiceCommandHandler', () => {
         projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
       ).once();
       verify(invoiceIdGenerator.generate()).never();
-      verify(eventRepository.findBillableEventsByMonthAndProject(anything(), anything())).never();
+      verify(
+        eventRepository.findBillableEventsByMonthAndProject(
+          anything(),
+          anything()
+        )
+      ).never();
       verify(dateUtilsAdapter.addDaysToDate(anything(), anything())).never();
       verify(invoiceRepository.save(anything())).never();
       verify(invoiceItemRepository.save(anything())).never();
@@ -81,20 +86,28 @@ describe('GenerateInvoiceCommandHandler', () => {
     when(dateUtilsAdapter.getCurrentDate()).thenReturn(date);
     when(invoiceIdGenerator.generate()).thenResolve('FS-2020-0001');
     when(
-      eventRepository.findBillableEventsByMonthAndProject(date, instance(project))
+      eventRepository.findBillableEventsByMonthAndProject(
+        date,
+        instance(project)
+      )
     ).thenResolve([]);
 
     try {
       await handler.execute(command);
     } catch (e) {
       expect(e).toBeInstanceOf(NoBillableEventsFoundException);
-      expect(e.message).toBe('accounting.invoices.errors.no_billable_events_found');
+      expect(e.message).toBe(
+        'accounting.invoices.errors.no_billable_events_found'
+      );
       verify(
         projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
       ).once();
       verify(invoiceIdGenerator.generate()).once();
       verify(
-        eventRepository.findBillableEventsByMonthAndProject(date, instance(project))
+        eventRepository.findBillableEventsByMonthAndProject(
+          date,
+          instance(project)
+        )
       ).once();
       verify(dateUtilsAdapter.addDaysToDate(anything(), anything())).never();
       verify(dateUtilsAdapter.getCurrentDate()).once();
@@ -140,13 +153,27 @@ describe('GenerateInvoiceCommandHandler', () => {
     );
 
     const savedInvoice = mock(Invoice);
-    when(savedInvoice.getId()).thenReturn('fc8a4cd9-31eb-4fca-814d-b30c05de485d');
+    when(savedInvoice.getId()).thenReturn(
+      'fc8a4cd9-31eb-4fca-814d-b30c05de485d'
+    );
     when(project.getDayDuration()).thenReturn(420);
 
     const invoiceItems = [
-      new InvoiceItem(invoice, 'Développement - Mathieu MARCHOIS', 43, 60000, 10000),
+      new InvoiceItem(
+        invoice,
+        'Développement - Mathieu MARCHOIS',
+        43,
+        60000,
+        10000
+      ),
       new InvoiceItem(invoice, 'Architecture - Mathieu MARCHOIS', 100, 0, 0),
-      new InvoiceItem(invoice, 'Développement - Mathieu MARCHOIS', 1000, 60000, 0),
+      new InvoiceItem(
+        invoice,
+        'Développement - Mathieu MARCHOIS',
+        1000,
+        60000,
+        0
+      )
     ];
 
     when(
@@ -155,19 +182,29 @@ describe('GenerateInvoiceCommandHandler', () => {
     when(dateUtilsAdapter.getCurrentDate()).thenReturn(date);
     when(invoiceIdGenerator.generate()).thenResolve('FS-2020-0001');
     when(
-      eventRepository.findBillableEventsByMonthAndProject(date, instance(project))
+      eventRepository.findBillableEventsByMonthAndProject(
+        date,
+        instance(project)
+      )
     ).thenResolve(events);
     when(dateUtilsAdapter.addDaysToDate(date, 5)).thenReturn(expiryDate);
-    when(invoiceRepository.save(deepEqual(invoice))).thenResolve(instance(savedInvoice));
+    when(invoiceRepository.save(deepEqual(invoice))).thenResolve(
+      instance(savedInvoice)
+    );
 
-    expect(await handler.execute(command)).toBe('fc8a4cd9-31eb-4fca-814d-b30c05de485d');
+    expect(await handler.execute(command)).toBe(
+      'fc8a4cd9-31eb-4fca-814d-b30c05de485d'
+    );
 
     verify(
       projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
     ).once();
     verify(invoiceIdGenerator.generate()).once();
     verify(
-      eventRepository.findBillableEventsByMonthAndProject(date, instance(project))
+      eventRepository.findBillableEventsByMonthAndProject(
+        date,
+        instance(project)
+      )
     ).once();
     verify(dateUtilsAdapter.addDaysToDate(date, 5)).once();
     verify(dateUtilsAdapter.getCurrentDate()).once();

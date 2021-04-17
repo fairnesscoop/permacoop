@@ -100,7 +100,12 @@ export class DateUtilsAdapter implements IDateUtils {
     return new Date(year, n, p);
   }
 
-  public getLeaveDuration(startDate: string, isStartsAllDay: boolean, endDate: string, isEndsAllDay: boolean): number {
+  public getLeaveDuration(
+    startDate: string,
+    isStartsAllDay: boolean,
+    endDate: string,
+    isEndsAllDay: boolean
+  ): number {
     let duration = this.getWorkedDaysDuringAPeriod(
       new Date(startDate),
       new Date(endDate)

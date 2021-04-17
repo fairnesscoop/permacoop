@@ -1,5 +1,5 @@
-import {UserSummaryView} from '../../User/View/UserSummaryView';
-import {FileView} from 'src/Application/File/View/FileView';
+import { UserSummaryView } from '../../User/View/UserSummaryView';
+import { FileView } from 'src/Application/File/View/FileView';
 
 export class PaySlipView {
   constructor(

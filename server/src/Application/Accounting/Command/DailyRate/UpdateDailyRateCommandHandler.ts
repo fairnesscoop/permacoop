@@ -1,14 +1,14 @@
-import {CommandHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {UpdateDailyRateCommand} from './UpdateDailyRateCommand';
-import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
-import {IDailyRateRepository} from 'src/Domain/Accounting/Repository/IDailyRateRepository';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
-import {AbstractUserCustomerAndTaskGetter} from './AbstractUserCustomerAndTaskGetter';
-import {DailyRateNotFoundException} from 'src/Domain/Accounting/Exception/DailyRateNotFoundException';
-import {IsDailyRateAlreadyExist} from 'src/Domain/Accounting/Specification/IsDailyRateAlreadyExist';
-import {DailyRateAlreadyExistException} from 'src/Domain/Accounting/Exception/DailyRateAlreadyExistException';
+import { CommandHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { UpdateDailyRateCommand } from './UpdateDailyRateCommand';
+import { ITaskRepository } from 'src/Domain/Task/Repository/ITaskRepository';
+import { IDailyRateRepository } from 'src/Domain/Accounting/Repository/IDailyRateRepository';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { ICustomerRepository } from 'src/Domain/Customer/Repository/ICustomerRepository';
+import { AbstractUserCustomerAndTaskGetter } from './AbstractUserCustomerAndTaskGetter';
+import { DailyRateNotFoundException } from 'src/Domain/Accounting/Exception/DailyRateNotFoundException';
+import { IsDailyRateAlreadyExist } from 'src/Domain/Accounting/Specification/IsDailyRateAlreadyExist';
+import { DailyRateAlreadyExistException } from 'src/Domain/Accounting/Exception/DailyRateAlreadyExistException';
 
 @CommandHandler(UpdateDailyRateCommand)
 export class UpdateDailyRateCommandHandler extends AbstractUserCustomerAndTaskGetter {
@@ -24,7 +24,7 @@ export class UpdateDailyRateCommandHandler extends AbstractUserCustomerAndTaskGe
   }
 
   public async execute(command: UpdateDailyRateCommand): Promise<string> {
-    const {id, customerId, userId, taskId, amount} = command;
+    const { id, customerId, userId, taskId, amount } = command;
 
     const dailyRate = await this.dailyRateRepository.findOneById(id);
     if (!dailyRate) {

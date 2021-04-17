@@ -1,4 +1,4 @@
-import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 
 export class AuthenticatedView {
   constructor(

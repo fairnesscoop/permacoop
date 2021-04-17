@@ -1,4 +1,4 @@
-import {Project} from '../Project.entity';
+import { Project } from '../Project.entity';
 
 export interface IProjectRepository {
   save(project: Project): Promise<Project>;

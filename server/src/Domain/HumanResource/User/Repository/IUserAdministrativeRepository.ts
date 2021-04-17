@@ -1,4 +1,4 @@
-import {UserAdministrative} from '../UserAdministrative.entity';
+import { UserAdministrative } from '../UserAdministrative.entity';
 
 export interface IUserAdministrativeRepository {
   findOneByUserId(userId: string): Promise<UserAdministrative | undefined>;

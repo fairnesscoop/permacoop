@@ -1,5 +1,5 @@
-import {validate} from 'class-validator';
-import {AddressDTO} from './AddressDTO';
+import { validate } from 'class-validator';
+import { AddressDTO } from './AddressDTO';
 
 describe('AddressDTO', () => {
   it('testValidDTO', async () => {

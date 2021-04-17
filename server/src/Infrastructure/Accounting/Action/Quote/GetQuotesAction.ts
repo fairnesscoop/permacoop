@@ -1,14 +1,14 @@
-import {Controller, Inject, UseGuards, Get, Query} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {IQueryBus} from 'src/Application/IQueryBus';
-import {DailyRateView} from 'src/Application/Accounting/View/DailyRate/DailyRateView';
-import {GetQuotesQuery} from 'src/Application/Accounting/Query/Quote/GetQuotesQuery';
-import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
-import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
-import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
-import {PaginationDTO} from 'src/Infrastructure/Common/DTO/PaginationDTO';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { Controller, Inject, UseGuards, Get, Query } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { IQueryBus } from 'src/Application/IQueryBus';
+import { DailyRateView } from 'src/Application/Accounting/View/DailyRate/DailyRateView';
+import { GetQuotesQuery } from 'src/Application/Accounting/Query/Quote/GetQuotesQuery';
+import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { RolesGuard } from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
+import { PaginationDTO } from 'src/Infrastructure/Common/DTO/PaginationDTO';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @Controller('quotes')
 @ApiTags('Accounting')
@@ -22,12 +22,10 @@ export class GetQuotesAction {
 
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Get all quotes'})
+  @ApiOperation({ summary: 'Get all quotes' })
   public async index(
     @Query() pagination: PaginationDTO
   ): Promise<Pagination<DailyRateView>> {
-    return await this.queryBus.execute(
-      new GetQuotesQuery(pagination.page)
-    );
+    return await this.queryBus.execute(new GetQuotesQuery(pagination.page));
   }
 }

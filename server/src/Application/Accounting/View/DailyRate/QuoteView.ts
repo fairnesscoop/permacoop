@@ -1,6 +1,6 @@
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
+import { CustomerView } from 'src/Application/Customer/View/CustomerView';
+import { ProjectView } from 'src/Application/Project/View/ProjectView';
+import { QuoteStatus } from 'src/Domain/Accounting/Quote.entity';
 
 export class QuoteView {
   constructor(

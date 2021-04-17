@@ -1,9 +1,9 @@
-import {Injectable} from '@nestjs/common';
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
-import {ICustomerRepository} from 'src/Domain/Customer/Repository/ICustomerRepository';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { ICustomerRepository } from 'src/Domain/Customer/Repository/ICustomerRepository';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
+import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 
 @Injectable()
 export class CustomerRepository implements ICustomerRepository {
@@ -19,7 +19,7 @@ export class CustomerRepository implements ICustomerRepository {
   public findOneByName(name: string): Promise<Customer | undefined> {
     return this.repository
       .createQueryBuilder('customer')
-      .where('LOWER(customer.name) = LOWER(:name)', {name})
+      .where('LOWER(customer.name) = LOWER(:name)', { name })
       .getOne();
   }
 
@@ -36,7 +36,7 @@ export class CustomerRepository implements ICustomerRepository {
         'address.country'
       ])
       .innerJoin('customer.address', 'address')
-      .where('customer.id = :id', {id})
+      .where('customer.id = :id', { id })
       .getOne();
   }
 

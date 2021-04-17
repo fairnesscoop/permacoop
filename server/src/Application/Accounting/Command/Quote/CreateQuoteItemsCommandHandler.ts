@@ -1,11 +1,11 @@
-import {CommandHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {CreateQuoteItemsCommand} from './CreateQuoteItemsCommand';
-import {IQuoteItemRepository} from 'src/Domain/Accounting/Repository/IQuoteItemRepository';
-import {QuoteItem} from 'src/Domain/Accounting/QuoteItem.entity';
-import {IQuoteRepository} from 'src/Domain/Accounting/Repository/IQuoteRepository';
-import {Quote} from 'src/Domain/Accounting/Quote.entity';
-import {QuoteNotFoundException} from 'src/Domain/Accounting/Exception/QuoteNotFoundException';
+import { CommandHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { CreateQuoteItemsCommand } from './CreateQuoteItemsCommand';
+import { IQuoteItemRepository } from 'src/Domain/Accounting/Repository/IQuoteItemRepository';
+import { QuoteItem } from 'src/Domain/Accounting/QuoteItem.entity';
+import { IQuoteRepository } from 'src/Domain/Accounting/Repository/IQuoteRepository';
+import { Quote } from 'src/Domain/Accounting/Quote.entity';
+import { QuoteNotFoundException } from 'src/Domain/Accounting/Exception/QuoteNotFoundException';
 
 @CommandHandler(CreateQuoteItemsCommand)
 export class CreateQuoteItemsCommandHandler {
@@ -22,7 +22,7 @@ export class CreateQuoteItemsCommandHandler {
       throw new QuoteNotFoundException();
     }
 
-    for (const {title, quantity, dailyRate} of command.items) {
+    for (const { title, quantity, dailyRate } of command.items) {
       this.quoteItemRepository.save(
         new QuoteItem(
           title,

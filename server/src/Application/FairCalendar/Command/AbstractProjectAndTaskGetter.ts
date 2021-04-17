@@ -1,9 +1,9 @@
-import {Task} from 'src/Domain/Task/Task.entity';
-import {Project} from 'src/Domain/Project/Project.entity';
-import {ITaskRepository} from 'src/Domain/Task/Repository/ITaskRepository';
-import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
-import {TaskNotFoundException} from 'src/Domain/Task/Exception/TaskNotFoundException';
-import {ProjectNotFoundException} from 'src/Domain/Project/Exception/ProjectNotFoundException';
+import { Task } from 'src/Domain/Task/Task.entity';
+import { Project } from 'src/Domain/Project/Project.entity';
+import { ITaskRepository } from 'src/Domain/Task/Repository/ITaskRepository';
+import { IProjectRepository } from 'src/Domain/Project/Repository/IProjectRepository';
+import { TaskNotFoundException } from 'src/Domain/Task/Exception/TaskNotFoundException';
+import { ProjectNotFoundException } from 'src/Domain/Project/Exception/ProjectNotFoundException';
 
 export abstract class AbstractProjectAndTaskGetter {
   constructor(

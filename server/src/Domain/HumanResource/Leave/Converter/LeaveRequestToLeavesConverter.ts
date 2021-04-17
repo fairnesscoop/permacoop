@@ -40,7 +40,13 @@ export class LeaveRequestToLeavesConverter {
       leaves.push(
         new Leave(
           leaveRequest,
-          this.getTime(leaveRequest, dayDuration, firstDate, lastDate, date.toISOString()),
+          this.getTime(
+            leaveRequest,
+            dayDuration,
+            firstDate,
+            lastDate,
+            date.toISOString()
+          ),
           date.toISOString()
         )
       );
@@ -56,9 +62,10 @@ export class LeaveRequestToLeavesConverter {
     lastDate: string,
     currentDate: string
   ): number {
-    return (firstDate === currentDate && false === leaveRequest.isStartsAllDay()) ||
+    return (firstDate === currentDate &&
+      false === leaveRequest.isStartsAllDay()) ||
       (lastDate === currentDate && false === leaveRequest.isEndsAllDay())
-      ? (dayDuration / 2)
+      ? dayDuration / 2
       : dayDuration;
   }
 }

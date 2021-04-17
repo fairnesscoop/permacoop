@@ -27,7 +27,16 @@ export class UpdateEventCommandHandler extends AbstractProjectAndTaskGetter {
   }
 
   public async execute(command: UpdateEventCommand): Promise<string> {
-    const {id, type, projectId, taskId, summary, time, billable, user} = command;
+    const {
+      id,
+      type,
+      projectId,
+      taskId,
+      summary,
+      time,
+      billable,
+      user
+    } = command;
 
     const event = await this.eventRepository.findOneById(id);
     if (!event) {
@@ -48,13 +57,19 @@ export class UpdateEventCommandHandler extends AbstractProjectAndTaskGetter {
     ]);
 
     if (
-      true ===
-      (await this.isMaximumTimeSpentReached.isSatisfiedBy(event, time))
+      true === (await this.isMaximumTimeSpentReached.isSatisfiedBy(event, time))
     ) {
       throw new MaximumEventReachedException();
     }
 
-    event.update(type, time, billable && EventType.MISSION === type, project, task, summary);
+    event.update(
+      type,
+      time,
+      billable && EventType.MISSION === type,
+      project,
+      task,
+      summary
+    );
     await this.eventRepository.save(event);
 
     return event.getId();

@@ -1,4 +1,4 @@
-import {PasswordEncoderAdapter} from './PasswordEncoderAdapter';
+import { PasswordEncoderAdapter } from './PasswordEncoderAdapter';
 
 describe('PasswordEncoderAdapter', () => {
   it('testHash', async () => {

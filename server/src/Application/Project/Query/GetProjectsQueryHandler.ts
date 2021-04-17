@@ -1,10 +1,10 @@
-import {QueryHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {GetProjectsQuery} from './GetProjectsQuery';
-import {ProjectView} from '../View/ProjectView';
-import {IProjectRepository} from 'src/Domain/Project/Repository/IProjectRepository';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { QueryHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { GetProjectsQuery } from './GetProjectsQuery';
+import { ProjectView } from '../View/ProjectView';
+import { IProjectRepository } from 'src/Domain/Project/Repository/IProjectRepository';
+import { CustomerView } from 'src/Application/Customer/View/CustomerView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetProjectsQuery)
 export class GetProjectsQueryHandler {
@@ -16,7 +16,7 @@ export class GetProjectsQueryHandler {
   public async execute(
     query: GetProjectsQuery
   ): Promise<Pagination<ProjectView>> {
-    const {customerId, page} = query;
+    const { customerId, page } = query;
 
     const projectViews: ProjectView[] = [];
     const [projects, total] = await this.projectRepository.findProjects(

@@ -1,15 +1,15 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {QuoteRepository} from 'src/Infrastructure/Accounting/Repository/QuoteRepository';
-import {GetQuotesQueryHandler} from './GetQuotesQueryHandler';
-import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {GetQuotesQuery} from './GetQuotesQuery';
-import {Quote, QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {QuoteView} from '../../View/DailyRate/QuoteView';
-import {Project} from 'src/Domain/Project/Project.entity';
-import {QuoteItem} from 'src/Domain/Accounting/QuoteItem.entity';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { QuoteRepository } from 'src/Infrastructure/Accounting/Repository/QuoteRepository';
+import { GetQuotesQueryHandler } from './GetQuotesQueryHandler';
+import { ProjectView } from 'src/Application/Project/View/ProjectView';
+import { CustomerView } from 'src/Application/Customer/View/CustomerView';
+import { GetQuotesQuery } from './GetQuotesQuery';
+import { Quote, QuoteStatus } from 'src/Domain/Accounting/Quote.entity';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
+import { QuoteView } from '../../View/DailyRate/QuoteView';
+import { Project } from 'src/Domain/Project/Project.entity';
+import { QuoteItem } from 'src/Domain/Accounting/QuoteItem.entity';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 describe('GetQuotesQueryHandler', () => {
   let quoteRepository: QuoteRepository;

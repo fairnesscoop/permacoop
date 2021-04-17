@@ -1,18 +1,18 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
-import {Address} from './Address.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Address } from './Address.entity';
 
 @Entity()
 export class Customer {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'varchar', nullable: false})
+  @Column({ type: 'varchar', nullable: false })
   private name: string;
 
-  @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   private createdAt: Date;
 
-  @ManyToOne(type => Address, {nullable: true, onDelete: 'SET NULL'})
+  @ManyToOne(type => Address, { nullable: true, onDelete: 'SET NULL' })
   private address: Address;
 
   constructor(name: string, address: Address) {

@@ -1,12 +1,12 @@
-import {QueryHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {GetDailyRatesQuery} from './GetDailyRatesQuery';
-import {IDailyRateRepository} from 'src/Domain/Accounting/Repository/IDailyRateRepository';
-import {DailyRateView} from '../../View/DailyRate/DailyRateView';
-import {UserSummaryView} from 'src/Application/HumanResource/User/View/UserSummaryView';
-import {TaskView} from 'src/Application/Task/View/TaskView';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { QueryHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { GetDailyRatesQuery } from './GetDailyRatesQuery';
+import { IDailyRateRepository } from 'src/Domain/Accounting/Repository/IDailyRateRepository';
+import { DailyRateView } from '../../View/DailyRate/DailyRateView';
+import { UserSummaryView } from 'src/Application/HumanResource/User/View/UserSummaryView';
+import { TaskView } from 'src/Application/Task/View/TaskView';
+import { CustomerView } from 'src/Application/Customer/View/CustomerView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 @QueryHandler(GetDailyRatesQuery)
 export class GetDailyRatesQueryHandler {

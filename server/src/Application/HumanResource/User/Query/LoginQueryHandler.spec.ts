@@ -1,12 +1,12 @@
-import {mock, instance, when, verify, anything} from 'ts-mockito';
-import {UserRepository} from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
-import {LoginQueryHandler} from 'src/Application/HumanResource/User/Query/LoginQueryHandler';
-import {PasswordEncoderAdapter} from 'src/Infrastructure/Adapter/PasswordEncoderAdapter';
-import {LoginQuery} from 'src/Application/HumanResource/User/Query/LoginQuery';
-import {PasswordNotMatchException} from 'src/Domain/HumanResource/User/Exception/PasswordNotMatchException';
-import {UserNotFoundException} from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
-import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
-import {AuthenticatedView} from 'src/Application/HumanResource/User/View/AuthenticatedView';
+import { mock, instance, when, verify, anything } from 'ts-mockito';
+import { UserRepository } from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
+import { LoginQueryHandler } from 'src/Application/HumanResource/User/Query/LoginQueryHandler';
+import { PasswordEncoderAdapter } from 'src/Infrastructure/Adapter/PasswordEncoderAdapter';
+import { LoginQuery } from 'src/Application/HumanResource/User/Query/LoginQuery';
+import { PasswordNotMatchException } from 'src/Domain/HumanResource/User/Exception/PasswordNotMatchException';
+import { UserNotFoundException } from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
+import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { AuthenticatedView } from 'src/Application/HumanResource/User/View/AuthenticatedView';
 
 describe('LoginQueryHandler', () => {
   const email = 'mathieu@fairness.coop';

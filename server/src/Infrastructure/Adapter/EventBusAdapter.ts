@@ -1,7 +1,7 @@
-import {Injectable} from '@nestjs/common';
-import {EventBus} from '@nestjs/cqrs';
-import {IEventBus} from 'src/Application/IEventBus';
-import {IEvent} from 'src/Application/IEvent';
+import { Injectable } from '@nestjs/common';
+import { EventBus } from '@nestjs/cqrs';
+import { IEventBus } from 'src/Application/IEventBus';
+import { IEvent } from 'src/Application/IEvent';
 
 @Injectable()
 export class EventBusAdapter implements IEventBus {

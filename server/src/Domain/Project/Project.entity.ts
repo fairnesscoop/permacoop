@@ -11,22 +11,32 @@ export class Project {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'varchar', nullable: false})
+  @Column({ type: 'varchar', nullable: false })
   private name: string;
 
-  @Column({type: 'integer', nullable: false, default: 420, comment: 'Stored in minutes'})
+  @Column({
+    type: 'integer',
+    nullable: false,
+    default: 420,
+    comment: 'Stored in minutes'
+  })
   private dayDuration: number;
 
-  @Column('enum', {enum: InvoiceUnits, nullable: false})
+  @Column('enum', { enum: InvoiceUnits, nullable: false })
   private invoiceUnit: InvoiceUnits;
 
-  @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   private createdAt: Date;
 
-  @ManyToOne(type => Customer, {nullable: false, onDelete: 'CASCADE'})
+  @ManyToOne(type => Customer, { nullable: false, onDelete: 'CASCADE' })
   private customer: Customer;
 
-  constructor(name: string, dayDuration: number, invoiceUnit: InvoiceUnits, customer: Customer) {
+  constructor(
+    name: string,
+    dayDuration: number,
+    invoiceUnit: InvoiceUnits,
+    customer: Customer
+  ) {
     this.name = name;
     this.dayDuration = dayDuration;
     this.invoiceUnit = invoiceUnit;
@@ -41,13 +51,11 @@ export class Project {
     return this.name;
   }
 
-  public getDayDuration(): number
-  {
+  public getDayDuration(): number {
     return this.dayDuration;
   }
 
-  public getInvoiceUnit(): InvoiceUnits
-  {
+  public getInvoiceUnit(): InvoiceUnits {
     return this.invoiceUnit;
   }
 

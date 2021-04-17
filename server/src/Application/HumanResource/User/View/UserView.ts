@@ -9,6 +9,6 @@ export class UserView {
     public readonly email: string,
     public readonly role: UserRole,
     public readonly isAdministrativeEditable: boolean,
-    public readonly administrativeView: UserAdministrativeView = null,
+    public readonly administrativeView: UserAdministrativeView = null
   ) {}
 }

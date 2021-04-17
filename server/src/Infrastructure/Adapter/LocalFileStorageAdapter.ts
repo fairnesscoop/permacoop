@@ -1,12 +1,12 @@
 import * as fs from 'fs';
 import * as shortid from 'shortid';
-import {Injectable, Inject} from '@nestjs/common';
-import {IFileStorage} from 'src/Application/IFileStorage';
-import {IUploadedFile} from 'src/Domain/File/IUploadedFile';
-import {FileDirectoryStrategy} from 'src/Domain/File/Strategy/FileDirectoryStrategy';
-import {IDateUtils} from 'src/Application/IDateUtils';
-import {IFileEncryption} from 'src/Application/IFileEncryption';
-import {File} from 'src/Domain/File/File.entity';
+import { Injectable, Inject } from '@nestjs/common';
+import { IFileStorage } from 'src/Application/IFileStorage';
+import { IUploadedFile } from 'src/Domain/File/IUploadedFile';
+import { FileDirectoryStrategy } from 'src/Domain/File/Strategy/FileDirectoryStrategy';
+import { IDateUtils } from 'src/Application/IDateUtils';
+import { IFileEncryption } from 'src/Application/IFileEncryption';
+import { File } from 'src/Domain/File/File.entity';
 
 @Injectable()
 export class LocalFileStorageAdapter implements IFileStorage {
@@ -26,7 +26,7 @@ export class LocalFileStorageAdapter implements IFileStorage {
 
     try {
       if (!fs.existsSync(directory)) {
-        fs.mkdirSync(directory, {recursive: true});
+        fs.mkdirSync(directory, { recursive: true });
       }
 
       const encryptedBuffer = await this.fileEncryptionAdapter.encrypt(

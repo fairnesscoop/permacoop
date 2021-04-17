@@ -1,8 +1,8 @@
-import {InjectRepository} from '@nestjs/typeorm';
-import {Injectable} from '@nestjs/common';
-import {Repository} from 'typeorm';
-import {UserAdministrative} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
-import {IUserAdministrativeRepository} from 'src/Domain/HumanResource/User/Repository/IUserAdministrativeRepository';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { UserAdministrative } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import { IUserAdministrativeRepository } from 'src/Domain/HumanResource/User/Repository/IUserAdministrativeRepository';
 
 @Injectable()
 export class UserAdministrativeRepository
@@ -12,7 +12,9 @@ export class UserAdministrativeRepository
     private readonly repository: Repository<UserAdministrative>
   ) {}
 
-  public findOneByUserId(userId: string): Promise<UserAdministrative | undefined> {
+  public findOneByUserId(
+    userId: string
+  ): Promise<UserAdministrative | undefined> {
     return this.repository
       .createQueryBuilder('userAdministrative')
       .select([
@@ -23,10 +25,10 @@ export class UserAdministrativeRepository
         'userAdministrative.transportFee',
         'userAdministrative.healthInsurance',
         'userAdministrative.executivePosition',
-        'userAdministrative.contract',
+        'userAdministrative.contract'
       ])
       .innerJoin('userAdministrative.user', 'user')
-      .where('user.id = :userId', {userId})
+      .where('user.id = :userId', { userId })
       .getOne();
   }
 

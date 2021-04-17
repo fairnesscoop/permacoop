@@ -10,7 +10,7 @@ import { Type } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { DateGreaterOrEqualThan } from 'src/Infrastructure/Common/Validator/DateGreaterOrEqualThan';
 
 export class LeaveRequestDTO {
-  @ApiProperty({enum: Type})
+  @ApiProperty({ enum: Type })
   @IsNotEmpty()
   @IsEnum(Type)
   public type: Type;

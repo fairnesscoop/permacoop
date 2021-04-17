@@ -1,8 +1,8 @@
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
-import {IQuoteRepository} from 'src/Domain/Accounting/Repository/IQuoteRepository';
-import {Quote} from 'src/Domain/Accounting/Quote.entity';
-import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { IQuoteRepository } from 'src/Domain/Accounting/Repository/IQuoteRepository';
+import { Quote } from 'src/Domain/Accounting/Quote.entity';
+import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 
 export class QuoteRepository implements IQuoteRepository {
   constructor(
@@ -18,7 +18,7 @@ export class QuoteRepository implements IQuoteRepository {
     return this.repository
       .createQueryBuilder('quote')
       .select('quote.id')
-      .where('extract(year FROM quote.createdAt) = :year', {year})
+      .where('extract(year FROM quote.createdAt) = :year', { year })
       .getCount();
   }
 
@@ -50,7 +50,7 @@ export class QuoteRepository implements IQuoteRepository {
     return this.repository
       .createQueryBuilder('quote')
       .select('quote.id')
-      .where('quote.id = :id', {id})
+      .where('quote.id = :id', { id })
       .getOne();
   }
 }

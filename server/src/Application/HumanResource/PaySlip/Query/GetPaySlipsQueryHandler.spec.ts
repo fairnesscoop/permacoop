@@ -1,14 +1,14 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {PaySlip} from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
-import {PaySlipRepository} from 'src/Infrastructure/HumanResource/PaySlip/Repository/PaySlipRepository';
-import {GetPaySlipsQueryHandler} from './GetPaySlipsQueryHandler';
-import {GetPaySlipsQuery} from './GetPaySlipsQuery';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {File} from 'src/Domain/File/File.entity';
-import {PaySlipView} from '../View/PaySlipView';
-import {FileView} from 'src/Application/File/View/FileView';
-import {UserSummaryView} from '../../User/View/UserSummaryView';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { PaySlip } from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
+import { PaySlipRepository } from 'src/Infrastructure/HumanResource/PaySlip/Repository/PaySlipRepository';
+import { GetPaySlipsQueryHandler } from './GetPaySlipsQueryHandler';
+import { GetPaySlipsQuery } from './GetPaySlipsQuery';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { File } from 'src/Domain/File/File.entity';
+import { PaySlipView } from '../View/PaySlipView';
+import { FileView } from 'src/Application/File/View/FileView';
+import { UserSummaryView } from '../../User/View/UserSummaryView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 describe('GetPaySlipsQueryHandler', () => {
   it('testGetPaySlips', async () => {

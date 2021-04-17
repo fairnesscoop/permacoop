@@ -28,10 +28,19 @@ export class AddEventsAction {
 
   @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Add new event(s)'})
+  @ApiOperation({ summary: 'Add new event(s)' })
   public async index(@Body() dto: AddEventDTO, @LoggedUser() user: User) {
     try {
-      const {type, billable, startDate, endDate, projectId, taskId, summary, time} = dto;
+      const {
+        type,
+        billable,
+        startDate,
+        endDate,
+        projectId,
+        taskId,
+        summary,
+        time
+      } = dto;
       const result = await this.commandBus.execute(
         new AddEventCommand(
           type,

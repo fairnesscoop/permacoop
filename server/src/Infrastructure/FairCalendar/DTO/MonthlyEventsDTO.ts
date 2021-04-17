@@ -1,5 +1,5 @@
-import {ApiProperty} from '@nestjs/swagger';
-import {IsNotEmpty, IsUUID, IsDateString} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsUUID, IsDateString } from 'class-validator';
 
 export class MonthlyEventsDTO {
   @ApiProperty()

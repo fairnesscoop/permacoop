@@ -17,7 +17,7 @@ export class QuoteIdGenerator extends AbstractGenerator {
   }
 
   public async generate(): Promise<string> {
-    const [ prefix, nbItem ] = await Promise.all([
+    const [prefix, nbItem] = await Promise.all([
       this.configService.get<string>('ACCOUNTING_QUOTE_PREFIX'),
       this.quoteRepository.countByYear(this.getCurrentYear())
     ]);

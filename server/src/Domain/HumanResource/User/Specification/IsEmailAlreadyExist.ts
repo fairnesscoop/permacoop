@@ -1,6 +1,6 @@
-import {Inject} from '@nestjs/common';
-import {IUserRepository} from '../Repository/IUserRepository';
-import {User} from '../User.entity';
+import { Inject } from '@nestjs/common';
+import { IUserRepository } from '../Repository/IUserRepository';
+import { User } from '../User.entity';
 
 export class IsEmailAlreadyExist {
   constructor(

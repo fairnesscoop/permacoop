@@ -6,13 +6,18 @@ export class Cooperative {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'varchar', nullable: false})
+  @Column({ type: 'varchar', nullable: false })
   private name: string;
 
-  @Column({type: 'integer', nullable: false, default: 420, comment: 'Stored in minutes'})
+  @Column({
+    type: 'integer',
+    nullable: false,
+    default: 420,
+    comment: 'Stored in minutes'
+  })
   private dayDuration: number;
 
-  @ManyToOne(type => Address, {nullable: false})
+  @ManyToOne(type => Address, { nullable: false })
   private address: Address;
 
   constructor(name: string, dayDuration: number, address: Address) {

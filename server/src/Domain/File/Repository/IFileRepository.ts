@@ -1,4 +1,4 @@
-import {File} from '../File.entity';
+import { File } from '../File.entity';
 
 export interface IFileRepository {
   save(file: File): Promise<File>;

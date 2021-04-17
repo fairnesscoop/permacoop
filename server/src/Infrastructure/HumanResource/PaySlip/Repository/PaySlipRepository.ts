@@ -1,9 +1,9 @@
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
-import {IPaySlipRepository} from 'src/Domain/HumanResource/PaySlip/Repository/IPaySlipRepository';
-import {PaySlip} from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {MAX_ITEMS_PER_PAGE} from 'src/Application/Common/Pagination';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { IPaySlipRepository } from 'src/Domain/HumanResource/PaySlip/Repository/IPaySlipRepository';
+import { PaySlip } from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 
 export class PaySlipRepository implements IPaySlipRepository {
   constructor(
@@ -25,9 +25,9 @@ export class PaySlipRepository implements IPaySlipRepository {
     return this.repository
       .createQueryBuilder('paySlip')
       .select(['paySlip.id'])
-      .where('paySlip.user = :userId', {userId: user.getId()})
-      .andWhere('extract(month FROM paySlip.date) = :month', {month})
-      .andWhere('extract(year FROM paySlip.date) = :year', {year})
+      .where('paySlip.user = :userId', { userId: user.getId() })
+      .andWhere('extract(month FROM paySlip.date) = :month', { month })
+      .andWhere('extract(year FROM paySlip.date) = :year', { year })
       .getOne();
   }
 
@@ -46,7 +46,7 @@ export class PaySlipRepository implements IPaySlipRepository {
       ])
       .innerJoin('paySlip.file', 'file')
       .innerJoin('paySlip.user', 'user')
-      .where('paySlip.id = :id', {id})
+      .where('paySlip.id = :id', { id })
       .getOne();
   }
 

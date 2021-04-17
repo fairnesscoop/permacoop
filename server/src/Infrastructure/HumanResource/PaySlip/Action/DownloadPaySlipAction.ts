@@ -8,17 +8,17 @@ import {
   ForbiddenException,
   Res
 } from '@nestjs/common';
-import {PassThrough} from 'stream';
-import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {AuthGuard} from '@nestjs/passport';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
-import {LoggedUser} from '../../User/Decorator/LoggedUser';
-import {IQueryBus} from 'src/Application/IQueryBus';
-import {DownloadFileQuery} from 'src/Application/File/Query/DownloadFileQuery';
-import {GetPaySlipByIdQuery} from 'src/Application/HumanResource/PaySlip/Query/GetPaySlipByIdQuery';
-import {PaySlipView} from 'src/Application/HumanResource/PaySlip/View/PaySlipView';
-import {DownloadedFileView} from 'src/Application/File/View/DownloadedFileView';
+import { PassThrough } from 'stream';
+import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
+import { LoggedUser } from '../../User/Decorator/LoggedUser';
+import { IQueryBus } from 'src/Application/IQueryBus';
+import { DownloadFileQuery } from 'src/Application/File/Query/DownloadFileQuery';
+import { GetPaySlipByIdQuery } from 'src/Application/HumanResource/PaySlip/Query/GetPaySlipByIdQuery';
+import { PaySlipView } from 'src/Application/HumanResource/PaySlip/View/PaySlipView';
+import { DownloadedFileView } from 'src/Application/File/View/DownloadedFileView';
 
 @Controller('pay_slips')
 @ApiTags('Human Resource')
@@ -31,14 +31,14 @@ export class DownloadPaySlipAction {
   ) {}
 
   @Get(':id/download')
-  @ApiOperation({summary: 'Download payslip'})
+  @ApiOperation({ summary: 'Download payslip' })
   public async index(
     @Param() dto: IdDTO,
     @LoggedUser() loggedUser: User,
     @Res() res
   ) {
     try {
-      const {user, file}: PaySlipView = await this.queryBus.execute(
+      const { user, file }: PaySlipView = await this.queryBus.execute(
         new GetPaySlipByIdQuery(dto.id)
       );
 

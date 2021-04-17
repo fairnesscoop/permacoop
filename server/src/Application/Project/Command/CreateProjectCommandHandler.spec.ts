@@ -1,13 +1,13 @@
-import {instance, mock, when, deepEqual, verify, anything} from 'ts-mockito';
-import {CreateProjectCommandHandler} from 'src/Application/Project/Command/CreateProjectCommandHandler';
-import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
-import {IsProjectAlreadyExist} from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
-import {CreateProjectCommand} from 'src/Application/Project/Command/CreateProjectCommand';
-import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {ProjectAlreadyExistException} from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
-import {InvoiceUnits, Project} from 'src/Domain/Project/Project.entity';
-import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
+import { instance, mock, when, deepEqual, verify, anything } from 'ts-mockito';
+import { CreateProjectCommandHandler } from 'src/Application/Project/Command/CreateProjectCommandHandler';
+import { ProjectRepository } from 'src/Infrastructure/Project/Repository/ProjectRepository';
+import { IsProjectAlreadyExist } from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
+import { CreateProjectCommand } from 'src/Application/Project/Command/CreateProjectCommand';
+import { CustomerNotFoundException } from 'src/Domain/Customer/Exception/CustomerNotFoundException';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
+import { ProjectAlreadyExistException } from 'src/Domain/Project/Exception/ProjectAlreadyExistException';
+import { InvoiceUnits, Project } from 'src/Domain/Project/Project.entity';
+import { CustomerRepository } from 'src/Infrastructure/Customer/Repository/CustomerRepository';
 
 describe('CreateProjectCommandHandler', () => {
   let projectRepository: ProjectRepository;
@@ -84,7 +84,9 @@ describe('CreateProjectCommandHandler', () => {
     ).thenResolve(instance(customer));
     when(
       projectRepository.save(
-        deepEqual(new Project('Project', 420, InvoiceUnits.DAY, instance(customer)))
+        deepEqual(
+          new Project('Project', 420, InvoiceUnits.DAY, instance(customer))
+        )
       )
     ).thenResolve(instance(createdProject));
 
@@ -98,7 +100,9 @@ describe('CreateProjectCommandHandler', () => {
     verify(isProjectAlreadyExist.isSatisfiedBy('Project')).once();
     verify(
       projectRepository.save(
-        deepEqual(new Project('Project', 420, InvoiceUnits.DAY, instance(customer)))
+        deepEqual(
+          new Project('Project', 420, InvoiceUnits.DAY, instance(customer))
+        )
       )
     ).once();
     verify(createdProject.getId()).once();

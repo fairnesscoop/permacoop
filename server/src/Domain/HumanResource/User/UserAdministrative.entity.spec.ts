@@ -1,4 +1,4 @@
-import {UserAdministrative, ContractType} from './UserAdministrative.entity';
+import { UserAdministrative, ContractType } from './UserAdministrative.entity';
 
 describe('UserAdministrative.entity', () => {
   it('testGetters', () => {

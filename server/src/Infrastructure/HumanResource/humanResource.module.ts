@@ -98,15 +98,15 @@ import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestActio
     DeleteLeaveRequestAction
   ],
   providers: [
-    {provide: 'IUserRepository', useClass: UserRepository},
-    {provide: 'ILeaveRepository', useClass: LeaveRepository},
-    {provide: 'ILeaveRequestRepository', useClass: LeaveRequestRepository},
-    {provide: 'IPasswordEncoder', useClass: PasswordEncoderAdapter},
-    {provide: 'IDateUtils', useClass: DateUtilsAdapter},
-    {provide: 'IPaySlipRepository', useClass: PaySlipRepository},
-    {provide: 'IFileRepository', useClass: FileRepository},
-    {provide: 'IEventRepository', useClass: EventRepository},
-    {provide: 'ICooperativeRepository', useClass: CooperativeRepository},
+    { provide: 'IUserRepository', useClass: UserRepository },
+    { provide: 'ILeaveRepository', useClass: LeaveRepository },
+    { provide: 'ILeaveRequestRepository', useClass: LeaveRequestRepository },
+    { provide: 'IPasswordEncoder', useClass: PasswordEncoderAdapter },
+    { provide: 'IDateUtils', useClass: DateUtilsAdapter },
+    { provide: 'IPaySlipRepository', useClass: PaySlipRepository },
+    { provide: 'IFileRepository', useClass: FileRepository },
+    { provide: 'IEventRepository', useClass: EventRepository },
+    { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
     {
       provide: 'IUserAdministrativeRepository',
       useClass: UserAdministrativeRepository

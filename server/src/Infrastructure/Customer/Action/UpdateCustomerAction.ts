@@ -7,15 +7,15 @@ import {
   Put,
   Param
 } from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiTags, ApiBearerAuth, ApiOperation} from '@nestjs/swagger';
-import {ICommandBus} from 'src/Application/ICommandBus';
-import {UpdateCustomerCommand} from 'src/Application/Customer/Command/UpdateCustomerCommand';
-import {CustomerDTO} from '../DTO/CustomerDTO';
-import {IdDTO} from 'src/Infrastructure/Common/DTO/IdDTO';
-import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
-import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
-import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { ICommandBus } from 'src/Application/ICommandBus';
+import { UpdateCustomerCommand } from 'src/Application/Customer/Command/UpdateCustomerCommand';
+import { CustomerDTO } from '../DTO/CustomerDTO';
+import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
+import { RolesGuard } from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
+import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 
 @Controller('customers')
 @ApiTags('Customer')
@@ -29,20 +29,20 @@ export class UpdateCustomerAction {
 
   @Put(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({summary: 'Update customer'})
+  @ApiOperation({ summary: 'Update customer' })
   public async index(@Param() dto: IdDTO, @Body() customerDto: CustomerDTO) {
     try {
       const {
-        address: {street, city, zipCode, country},
+        address: { street, city, zipCode, country },
         name
       } = customerDto;
-      const {id} = dto;
+      const { id } = dto;
 
       await this.commandBus.execute(
         new UpdateCustomerCommand(id, name, street, city, zipCode, country)
       );
 
-      return {id};
+      return { id };
     } catch (e) {
       throw new BadRequestException(e.message);
     }

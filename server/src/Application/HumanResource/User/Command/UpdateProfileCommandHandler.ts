@@ -1,10 +1,10 @@
-import {CommandHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import {IPasswordEncoder} from 'src/Application/IPasswordEncoder';
-import {IsEmailAlreadyExist} from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
-import {EmailAlreadyExistException} from 'src/Domain/HumanResource/User/Exception/EmailAlreadyExistException';
-import {UpdateProfileCommand} from './UpdateProfileCommand';
+import { CommandHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { IPasswordEncoder } from 'src/Application/IPasswordEncoder';
+import { IsEmailAlreadyExist } from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
+import { EmailAlreadyExistException } from 'src/Domain/HumanResource/User/Exception/EmailAlreadyExistException';
+import { UpdateProfileCommand } from './UpdateProfileCommand';
 
 @CommandHandler(UpdateProfileCommand)
 export class UpdateProfileCommandHandler {
@@ -17,7 +17,7 @@ export class UpdateProfileCommandHandler {
   ) {}
 
   public async execute(command: UpdateProfileCommand): Promise<void> {
-    const {firstName, lastName, password, user} = command;
+    const { firstName, lastName, password, user } = command;
     const email = command.email.toLowerCase();
 
     if (

@@ -1,8 +1,8 @@
-import {UserDTO} from './UserDTO';
-import {validate} from 'class-validator';
-import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
-import {UserAdministrativeDTO} from './UserAdministrativeDTO';
-import {ContractType} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import { UserDTO } from './UserDTO';
+import { validate } from 'class-validator';
+import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { UserAdministrativeDTO } from './UserAdministrativeDTO';
+import { ContractType } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 
 describe('UserDTO', () => {
   it('testValidWithoutAdministrativeDTO', async () => {

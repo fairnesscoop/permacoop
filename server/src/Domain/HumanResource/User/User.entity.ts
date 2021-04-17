@@ -6,7 +6,7 @@ import {
   OneToOne,
   JoinColumn
 } from 'typeorm';
-import {UserAdministrative} from './UserAdministrative.entity';
+import { UserAdministrative } from './UserAdministrative.entity';
 
 export enum UserRole {
   COOPERATOR = 'cooperator',
@@ -19,30 +19,34 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column({type: 'varchar', nullable: false})
+  @Column({ type: 'varchar', nullable: false })
   private firstName: string;
 
-  @Column({type: 'varchar', nullable: false})
+  @Column({ type: 'varchar', nullable: false })
   private lastName: string;
 
-  @Column({type: 'varchar', unique: true, nullable: false})
+  @Column({ type: 'varchar', unique: true, nullable: false })
   private email: string;
 
   @Index('api-token')
-  @Column({type: 'varchar', nullable: true})
+  @Column({ type: 'varchar', nullable: true })
   private apiToken: string;
 
-  @Column({type: 'varchar', nullable: false})
+  @Column({ type: 'varchar', nullable: false })
   private password: string;
 
-  @Column('enum', {enum: UserRole, nullable: false})
+  @Column('enum', { enum: UserRole, nullable: false })
   private role: UserRole;
 
-  @OneToOne(type => UserAdministrative, userAdministrative => userAdministrative.user, {nullable: true})
+  @OneToOne(
+    type => UserAdministrative,
+    userAdministrative => userAdministrative.user,
+    { nullable: true }
+  )
   @JoinColumn()
   public userAdministrative: UserAdministrative;
 
-  @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   private createdAt: Date;
 
   constructor(

@@ -1,6 +1,6 @@
-import {UserAdministrativeDTO} from './UserAdministrativeDTO';
-import {validate} from 'class-validator';
-import {ContractType} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import { UserAdministrativeDTO } from './UserAdministrativeDTO';
+import { validate } from 'class-validator';
+import { ContractType } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 
 describe('UserAdministrativeDTO', () => {

@@ -1,7 +1,7 @@
-import {CommandBus} from '@nestjs/cqrs';
-import {Injectable} from '@nestjs/common';
-import {ICommandBus} from 'src/Application/ICommandBus';
-import {ICommand} from 'src/Application/ICommand';
+import { CommandBus } from '@nestjs/cqrs';
+import { Injectable } from '@nestjs/common';
+import { ICommandBus } from 'src/Application/ICommandBus';
+import { ICommand } from 'src/Application/ICommand';
 
 @Injectable()
 export class CommandBusAdapter implements ICommandBus {

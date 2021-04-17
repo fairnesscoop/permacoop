@@ -28,7 +28,7 @@ export class DeleteLeaveRequestAction {
 
   @Delete(':id')
   @Roles(UserRole.COOPERATOR)
-  @ApiOperation({summary: 'Delete leave request'})
+  @ApiOperation({ summary: 'Delete leave request' })
   public async index(@Param() { id }: IdDTO, @LoggedUser() user: User) {
     try {
       await this.commandBus.execute(new DeleteLeaveRequestCommand(id, user));

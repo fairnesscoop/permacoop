@@ -3,7 +3,10 @@ import { LeaveRequestToLeavesConverter } from './LeaveRequestToLeavesConverter';
 import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { LeaveRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRepository';
-import { LeaveRequest, Type } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
+import {
+  LeaveRequest,
+  Type
+} from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
 import { CooperativeRepository } from 'src/Infrastructure/Settings/Repository/CooperativeRepository';
 import { CooperativeNotFoundException } from 'src/Domain/Settings/Repository/CooperativeNotFoundException';
@@ -64,14 +67,16 @@ describe('LeaveRequestToLeavesConverter', () => {
       )
     ).once();
     verify(
-      leaveRepository.save(deepEqual([
-        new Leave(instance(leaveRequest), 210, '2020-12-24T00:00:00.000Z'),
-        new Leave(instance(leaveRequest), 420, '2020-12-28T00:00:00.000Z'),
-        new Leave(instance(leaveRequest), 420, '2020-12-29T00:00:00.000Z'),
-        new Leave(instance(leaveRequest), 420, '2020-12-30T00:00:00.000Z'),
-        new Leave(instance(leaveRequest), 420, '2020-12-31T00:00:00.000Z'),
-        new Leave(instance(leaveRequest), 420, '2021-01-04T00:00:00.000Z'),
-      ]))
+      leaveRepository.save(
+        deepEqual([
+          new Leave(instance(leaveRequest), 210, '2020-12-24T00:00:00.000Z'),
+          new Leave(instance(leaveRequest), 420, '2020-12-28T00:00:00.000Z'),
+          new Leave(instance(leaveRequest), 420, '2020-12-29T00:00:00.000Z'),
+          new Leave(instance(leaveRequest), 420, '2020-12-30T00:00:00.000Z'),
+          new Leave(instance(leaveRequest), 420, '2020-12-31T00:00:00.000Z'),
+          new Leave(instance(leaveRequest), 420, '2021-01-04T00:00:00.000Z')
+        ])
+      )
     ).once();
     verify(cooperativeRepository.find()).once();
   });
@@ -111,14 +116,16 @@ describe('LeaveRequestToLeavesConverter', () => {
     ).once();
     verify(cooperativeRepository.find()).once();
     verify(
-      leaveRepository.save(deepEqual([
-        new Leave(instance(leaveRequest), 420, '2020-12-24T00:00:00.000Z'),
-        new Leave(instance(leaveRequest), 420, '2020-12-28T00:00:00.000Z'),
-        new Leave(instance(leaveRequest), 420, '2020-12-29T00:00:00.000Z'),
-        new Leave(instance(leaveRequest), 420, '2020-12-30T00:00:00.000Z'),
-        new Leave(instance(leaveRequest), 420, '2020-12-31T00:00:00.000Z'),
-        new Leave(instance(leaveRequest), 210, '2021-01-04T00:00:00.000Z'),
-      ]))
+      leaveRepository.save(
+        deepEqual([
+          new Leave(instance(leaveRequest), 420, '2020-12-24T00:00:00.000Z'),
+          new Leave(instance(leaveRequest), 420, '2020-12-28T00:00:00.000Z'),
+          new Leave(instance(leaveRequest), 420, '2020-12-29T00:00:00.000Z'),
+          new Leave(instance(leaveRequest), 420, '2020-12-30T00:00:00.000Z'),
+          new Leave(instance(leaveRequest), 420, '2020-12-31T00:00:00.000Z'),
+          new Leave(instance(leaveRequest), 210, '2021-01-04T00:00:00.000Z')
+        ])
+      )
     ).once();
   });
 

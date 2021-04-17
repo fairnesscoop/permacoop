@@ -1,8 +1,8 @@
-import {mock, instance, verify, when} from 'ts-mockito';
-import {UnauthorizedException} from '@nestjs/common';
-import {UserRepository} from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
-import {BearerStrategy} from 'src/Infrastructure/HumanResource/User/Security/BearerStrategy';
-import {User, UserRole} from 'src/Domain/HumanResource/User/User.entity';
+import { mock, instance, verify, when } from 'ts-mockito';
+import { UnauthorizedException } from '@nestjs/common';
+import { UserRepository } from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
+import { BearerStrategy } from 'src/Infrastructure/HumanResource/User/Security/BearerStrategy';
+import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
 
 describe('BearerStrategy', () => {
   let bearerStrategy: BearerStrategy;

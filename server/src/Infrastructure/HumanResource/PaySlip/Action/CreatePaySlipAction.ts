@@ -14,17 +14,17 @@ import {
   ApiOperation,
   ApiConsumes
 } from '@nestjs/swagger';
-import {FileInterceptor} from '@nestjs/platform-express';
-import {AuthGuard} from '@nestjs/passport';
-import {ICommandBus} from 'src/Application/ICommandBus';
-import {PaySlipDTO} from '../DTO/PaySlipDTO';
-import {IUploadedFile} from 'src/Domain/File/IUploadedFile';
-import {PDFValidator} from 'src/Domain/File/Validator/PDFValidator';
-import {UploadFileCommand} from 'src/Application/File/Command/UploadFileCommand';
-import {CreatePaySlipCommand} from 'src/Application/HumanResource/PaySlip/Command/CreatePaySlipCommand';
-import {UserRole} from 'src/Domain/HumanResource/User/User.entity';
-import {RolesGuard} from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
-import {Roles} from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { AuthGuard } from '@nestjs/passport';
+import { ICommandBus } from 'src/Application/ICommandBus';
+import { PaySlipDTO } from '../DTO/PaySlipDTO';
+import { IUploadedFile } from 'src/Domain/File/IUploadedFile';
+import { PDFValidator } from 'src/Domain/File/Validator/PDFValidator';
+import { UploadFileCommand } from 'src/Application/File/Command/UploadFileCommand';
+import { CreatePaySlipCommand } from 'src/Application/HumanResource/PaySlip/Command/CreatePaySlipCommand';
+import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { RolesGuard } from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
+import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 
 @Controller('pay_slips')
 @ApiTags('Human Resource')
@@ -40,7 +40,7 @@ export class CreatePaySlipAction {
   @Roles(UserRole.COOPERATOR, UserRole.ACCOUNTANT)
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
-  @ApiOperation({summary: 'Create new payslip'})
+  @ApiOperation({ summary: 'Create new payslip' })
   public async index(
     @Body() dto: PaySlipDTO,
     @UploadedFile() file: IUploadedFile
@@ -55,7 +55,7 @@ export class CreatePaySlipAction {
         new CreatePaySlipCommand(dto.date, dto.userId, fileId)
       );
 
-      return {id};
+      return { id };
     } catch (e) {
       throw new BadRequestException(e.message);
     }

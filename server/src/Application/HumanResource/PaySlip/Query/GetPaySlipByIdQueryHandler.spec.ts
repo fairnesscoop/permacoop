@@ -1,14 +1,14 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {GetPaySlipByIdQueryHandler} from './GetPaySlipByIdQueryHandler';
-import {GetPaySlipByIdQuery} from './GetPaySlipByIdQuery';
-import {PaySlipView} from '../View/PaySlipView';
-import {UserSummaryView} from '../../User/View/UserSummaryView';
-import {FileView} from 'src/Application/File/View/FileView';
-import {PaySlipRepository} from 'src/Infrastructure/HumanResource/PaySlip/Repository/PaySlipRepository';
-import {File} from 'src/Domain/File/File.entity';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {PaySlip} from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
-import {PaySlipNotFoundException} from 'src/Domain/HumanResource/PaySlip/Exception/PaySlipNotFoundException';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { GetPaySlipByIdQueryHandler } from './GetPaySlipByIdQueryHandler';
+import { GetPaySlipByIdQuery } from './GetPaySlipByIdQuery';
+import { PaySlipView } from '../View/PaySlipView';
+import { UserSummaryView } from '../../User/View/UserSummaryView';
+import { FileView } from 'src/Application/File/View/FileView';
+import { PaySlipRepository } from 'src/Infrastructure/HumanResource/PaySlip/Repository/PaySlipRepository';
+import { File } from 'src/Domain/File/File.entity';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { PaySlip } from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
+import { PaySlipNotFoundException } from 'src/Domain/HumanResource/PaySlip/Exception/PaySlipNotFoundException';
 
 describe('GetPaySlipByIdQueryHandler', () => {
   const query = new GetPaySlipByIdQuery('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');

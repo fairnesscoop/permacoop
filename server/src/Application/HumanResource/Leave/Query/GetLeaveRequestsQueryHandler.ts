@@ -16,14 +16,15 @@ export class GetLeaveRequestsQueryHandler {
     private readonly dateUtils: IDateUtils
   ) {}
 
-  public async execute(
-    { page, status }: GetLeaveRequestsQuery
-  ): Promise<Pagination<LeaveRequestView>> {
+  public async execute({
+    page,
+    status
+  }: GetLeaveRequestsQuery): Promise<Pagination<LeaveRequestView>> {
     const leaveRequestViews: LeaveRequestView[] = [];
-    const [ leaveRequests, total ] = await this.leaveRequestRepository.findLeaveRequests(
-      page,
-      status
-    );
+    const [
+      leaveRequests,
+      total
+    ] = await this.leaveRequestRepository.findLeaveRequests(page, status);
 
     for (const leaveRequest of leaveRequests) {
       const user = leaveRequest.getUser();

@@ -101,12 +101,16 @@ describe('GetLeaveRequestsQueryHandler', () => {
       dateUtils.getLeaveDuration('2020-05-01', false, '2020-05-15', false)
     ).thenReturn(8);
 
-    expect(await queryHandler.execute(new GetLeaveRequestsQuery(1, null))).toMatchObject(
-      expectedResult
-    );
+    expect(
+      await queryHandler.execute(new GetLeaveRequestsQuery(1, null))
+    ).toMatchObject(expectedResult);
 
-    verify(dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', true)).once();
-    verify(dateUtils.getLeaveDuration('2020-05-01', false, '2020-05-15', false)).once();
+    verify(
+      dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', true)
+    ).once();
+    verify(
+      dateUtils.getLeaveDuration('2020-05-01', false, '2020-05-15', false)
+    ).once();
     verify(leaveRequestRepository.findLeaveRequests(1, null)).once();
   });
 });

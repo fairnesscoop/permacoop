@@ -5,10 +5,10 @@ import {
   ManyToOne,
   OneToMany
 } from 'typeorm';
-import {Customer} from '../Customer/Customer.entity';
-import {Project} from '../Project/Project.entity';
-import {User} from '../HumanResource/User/User.entity';
-import {QuoteItem} from './QuoteItem.entity';
+import { Customer } from '../Customer/Customer.entity';
+import { Project } from '../Project/Project.entity';
+import { User } from '../HumanResource/User/User.entity';
+import { QuoteItem } from './QuoteItem.entity';
 
 export enum QuoteStatus {
   DRAFT = 'draft',
@@ -23,22 +23,22 @@ export class Quote {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column('enum', {enum: QuoteStatus, nullable: false})
+  @Column('enum', { enum: QuoteStatus, nullable: false })
   private status: QuoteStatus;
 
-  @Column({type: 'varchar', nullable: false, unique: true})
+  @Column({ type: 'varchar', nullable: false, unique: true })
   private quoteId: string;
 
-  @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   private createdAt: Date;
 
-  @ManyToOne(type => User, {nullable: false})
+  @ManyToOne(type => User, { nullable: false })
   private owner: User;
 
-  @ManyToOne(type => Customer, {nullable: false, onDelete: 'CASCADE'})
+  @ManyToOne(type => Customer, { nullable: false, onDelete: 'CASCADE' })
   private customer: Customer;
 
-  @ManyToOne(type => Project, {nullable: true, onDelete: 'CASCADE'})
+  @ManyToOne(type => Project, { nullable: true, onDelete: 'CASCADE' })
   private project: Project;
 
   @OneToMany(

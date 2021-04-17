@@ -1,17 +1,17 @@
-import {mock, instance, when, verify, deepEqual, anything} from 'ts-mockito';
-import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
-import {QuoteRepository} from 'src/Infrastructure/Accounting/Repository/QuoteRepository';
-import {CreateQuoteCommandHandler} from './CreateQuoteCommandHandler';
-import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
-import {QuoteIdGenerator} from 'src/Domain/Accounting/Generators/QuoteIdGenerator';
-import {CreateQuoteCommand} from './CreateQuoteCommand';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {InvoiceUnits, Project} from 'src/Domain/Project/Project.entity';
-import {Quote, QuoteStatus} from 'src/Domain/Accounting/Quote.entity';
-import {CustomerNotFoundException} from 'src/Domain/Customer/Exception/CustomerNotFoundException';
-import {InvalidProjectException} from 'src/Domain/Accounting/Exception/InvalidProjectException';
-import {Address} from 'src/Domain/Customer/Address.entity';
+import { mock, instance, when, verify, deepEqual, anything } from 'ts-mockito';
+import { CustomerRepository } from 'src/Infrastructure/Customer/Repository/CustomerRepository';
+import { QuoteRepository } from 'src/Infrastructure/Accounting/Repository/QuoteRepository';
+import { CreateQuoteCommandHandler } from './CreateQuoteCommandHandler';
+import { ProjectRepository } from 'src/Infrastructure/Project/Repository/ProjectRepository';
+import { QuoteIdGenerator } from 'src/Domain/Accounting/Generators/QuoteIdGenerator';
+import { CreateQuoteCommand } from './CreateQuoteCommand';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
+import { InvoiceUnits, Project } from 'src/Domain/Project/Project.entity';
+import { Quote, QuoteStatus } from 'src/Domain/Accounting/Quote.entity';
+import { CustomerNotFoundException } from 'src/Domain/Customer/Exception/CustomerNotFoundException';
+import { InvalidProjectException } from 'src/Domain/Accounting/Exception/InvalidProjectException';
+import { Address } from 'src/Domain/Customer/Address.entity';
 
 describe('CreateQuoteCommandHandler', () => {
   let quoteRepository: QuoteRepository;

@@ -18,7 +18,7 @@ export class InvoiceRepository implements IInvoiceRepository {
     return this.repository
       .createQueryBuilder('invoice')
       .select('invoice.id')
-      .where('extract(year FROM invoice.createdAt) = :year', {year})
+      .where('extract(year FROM invoice.createdAt) = :year', { year })
       .getCount();
   }
 

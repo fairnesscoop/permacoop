@@ -7,7 +7,12 @@ describe('Project.entity', () => {
     const customer = mock(Customer);
     when(customer.getName()).thenReturn('Radio France');
 
-    const project = new Project('Project name', 420, InvoiceUnits.DAY, instance(customer));
+    const project = new Project(
+      'Project name',
+      420,
+      InvoiceUnits.DAY,
+      instance(customer)
+    );
 
     expect(project.getId()).toBe(undefined);
     expect(project.getFullName()).toBe('[Radio France] Project name');
@@ -23,7 +28,12 @@ describe('Project.entity', () => {
     when(customer.getName()).thenReturn('Radio France');
     when(customer2.getName()).thenReturn('RF');
 
-    const project = new Project('Project name', 420, InvoiceUnits.DAY, instance(customer));
+    const project = new Project(
+      'Project name',
+      420,
+      InvoiceUnits.DAY,
+      instance(customer)
+    );
     project.update(instance(customer2), 450, InvoiceUnits.HOUR, 'project');
 
     expect(project.getId()).toBe(undefined);

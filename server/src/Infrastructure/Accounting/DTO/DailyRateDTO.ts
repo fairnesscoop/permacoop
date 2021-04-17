@@ -1,5 +1,5 @@
-import {ApiProperty} from '@nestjs/swagger';
-import {IsNotEmpty, IsUUID, IsOptional, IsPositive} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsUUID, IsOptional, IsPositive } from 'class-validator';
 
 export class DailyRateDTO {
   @ApiProperty()

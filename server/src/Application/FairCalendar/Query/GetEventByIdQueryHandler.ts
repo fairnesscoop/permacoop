@@ -1,11 +1,11 @@
-import {QueryHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {GetEventByIdQuery} from './GetEventByIdQuery';
-import {IEventRepository} from 'src/Domain/FairCalendar/Repository/IEventRepository';
-import {EventView} from '../View/EventView';
-import {EventNotFoundException} from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
-import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {TaskView} from 'src/Application/Task/View/TaskView';
+import { QueryHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { GetEventByIdQuery } from './GetEventByIdQuery';
+import { IEventRepository } from 'src/Domain/FairCalendar/Repository/IEventRepository';
+import { EventView } from '../View/EventView';
+import { EventNotFoundException } from 'src/Domain/FairCalendar/Exception/EventNotFoundException';
+import { ProjectView } from 'src/Application/Project/View/ProjectView';
+import { TaskView } from 'src/Application/Task/View/TaskView';
 
 @QueryHandler(GetEventByIdQuery)
 export class GetEventByIdQueryHandler {

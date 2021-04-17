@@ -27,10 +27,13 @@ export class GetFairCalendarOverview {
 
     for (const { time, type: itemType, project } of items) {
       const type = itemType.startsWith('leave_') ? 'leave' : itemType;
-      const dayDuration = project ? project.dayDuration : cooperative.getDayDuration();
+      const dayDuration = project
+        ? project.dayDuration
+        : cooperative.getDayDuration();
       const days = time / dayDuration;
 
-      overviewInDays[type] = Math.round((overviewInDays[type] + days) * 100) / 100;
+      overviewInDays[type] =
+        Math.round((overviewInDays[type] + days) * 100) / 100;
     }
 
     return overviewInDays;

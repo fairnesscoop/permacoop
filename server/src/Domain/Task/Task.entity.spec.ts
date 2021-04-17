@@ -1,4 +1,4 @@
-import {Task} from './Task.entity';
+import { Task } from './Task.entity';
 
 describe('Task.entity', () => {
   it('testGetters', () => {

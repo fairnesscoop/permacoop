@@ -1,8 +1,8 @@
-import {Strategy} from 'passport-http-bearer';
-import {PassportStrategy} from '@nestjs/passport';
-import {Injectable, UnauthorizedException, Inject} from '@nestjs/common';
-import {User} from 'src/Domain/HumanResource/User/User.entity';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { Strategy } from 'passport-http-bearer';
+import { PassportStrategy } from '@nestjs/passport';
+import { Injectable, UnauthorizedException, Inject } from '@nestjs/common';
+import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
 
 @Injectable()
 export class BearerStrategy extends PassportStrategy(Strategy, 'bearer') {

@@ -1,12 +1,12 @@
-import {mock, instance, when, verify} from 'ts-mockito';
-import {GetProjectsQueryHandler} from 'src/Application/Project/Query/GetProjectsQueryHandler';
-import {ProjectRepository} from 'src/Infrastructure/Project/Repository/ProjectRepository';
-import {GetProjectsQuery} from 'src/Application/Project/Query/GetProjectsQuery';
-import {InvoiceUnits, Project} from 'src/Domain/Project/Project.entity';
-import {ProjectView} from 'src/Application/Project/View/ProjectView';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {CustomerView} from 'src/Application/Customer/View/CustomerView';
-import {Pagination} from 'src/Application/Common/Pagination';
+import { mock, instance, when, verify } from 'ts-mockito';
+import { GetProjectsQueryHandler } from 'src/Application/Project/Query/GetProjectsQueryHandler';
+import { ProjectRepository } from 'src/Infrastructure/Project/Repository/ProjectRepository';
+import { GetProjectsQuery } from 'src/Application/Project/Query/GetProjectsQuery';
+import { InvoiceUnits, Project } from 'src/Domain/Project/Project.entity';
+import { ProjectView } from 'src/Application/Project/View/ProjectView';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
+import { CustomerView } from 'src/Application/Customer/View/CustomerView';
+import { Pagination } from 'src/Application/Common/Pagination';
 
 describe('GetProjectsQueryHandler', () => {
   it('testGetProjects', async () => {

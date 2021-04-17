@@ -1,12 +1,12 @@
-import {mock, instance, when, verify, deepEqual, anything} from 'ts-mockito';
-import {CustomerRepository} from 'src/Infrastructure/Customer/Repository/CustomerRepository';
-import {IsCustomerAlreadyExist} from 'src/Domain/Customer/Specification/IsCustomerAlreadyExist';
-import {Customer} from 'src/Domain/Customer/Customer.entity';
-import {CreateCustomerCommandHandler} from 'src/Application/Customer/Command/CreateCustomerCommandHandler';
-import {CreateCustomerCommand} from 'src/Application/Customer/Command/CreateCustomerCommand';
-import {CustomerAlreadyExistException} from 'src/Domain/Customer/Exception/CustomerAlreadyExistException';
-import {AddressRepository} from 'src/Infrastructure/Customer/Repository/AddressRepository';
-import {Address} from 'src/Domain/Customer/Address.entity';
+import { mock, instance, when, verify, deepEqual, anything } from 'ts-mockito';
+import { CustomerRepository } from 'src/Infrastructure/Customer/Repository/CustomerRepository';
+import { IsCustomerAlreadyExist } from 'src/Domain/Customer/Specification/IsCustomerAlreadyExist';
+import { Customer } from 'src/Domain/Customer/Customer.entity';
+import { CreateCustomerCommandHandler } from 'src/Application/Customer/Command/CreateCustomerCommandHandler';
+import { CreateCustomerCommand } from 'src/Application/Customer/Command/CreateCustomerCommand';
+import { CustomerAlreadyExistException } from 'src/Domain/Customer/Exception/CustomerAlreadyExistException';
+import { AddressRepository } from 'src/Infrastructure/Customer/Repository/AddressRepository';
+import { Address } from 'src/Domain/Customer/Address.entity';
 
 describe('CreateCustomerCommandHandler', () => {
   let customerRepository: CustomerRepository;

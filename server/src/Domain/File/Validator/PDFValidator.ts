@@ -1,4 +1,4 @@
-import {IUploadedFile} from 'src/Domain/File/IUploadedFile';
+import { IUploadedFile } from 'src/Domain/File/IUploadedFile';
 
 export class PDFValidator {
   public static isValid(file: IUploadedFile): boolean {

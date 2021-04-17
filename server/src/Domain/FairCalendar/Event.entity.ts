@@ -18,28 +18,28 @@ export class Event {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column('enum', {enum: EventType, nullable: false})
+  @Column('enum', { enum: EventType, nullable: false })
   private type: EventType;
 
-  @Column({type: 'integer', nullable: false, comment: 'Stored in minutes'})
+  @Column({ type: 'integer', nullable: false, comment: 'Stored in minutes' })
   private time: number;
 
-  @Column({type: 'date', nullable: false})
+  @Column({ type: 'date', nullable: false })
   private date: string;
 
-  @Column({type: 'boolean', default: true})
+  @Column({ type: 'boolean', default: true })
   private billable: boolean;
 
-  @Column({type: 'varchar', nullable: true})
+  @Column({ type: 'varchar', nullable: true })
   private summary: string;
 
-  @ManyToOne(type => Project, {nullable: true, onDelete: 'SET NULL'})
+  @ManyToOne(type => Project, { nullable: true, onDelete: 'SET NULL' })
   private project: Project;
 
-  @ManyToOne(type => Task, {nullable: true, onDelete: 'SET NULL'})
+  @ManyToOne(type => Task, { nullable: true, onDelete: 'SET NULL' })
   private task: Task;
 
-  @ManyToOne(type => User, {nullable: false, onDelete: 'CASCADE'})
+  @ManyToOne(type => User, { nullable: false, onDelete: 'CASCADE' })
   private user: User;
 
   constructor(

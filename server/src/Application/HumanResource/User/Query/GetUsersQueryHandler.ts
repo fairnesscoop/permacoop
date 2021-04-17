@@ -1,8 +1,8 @@
-import {QueryHandler} from '@nestjs/cqrs';
-import {Inject} from '@nestjs/common';
-import {GetUsersQuery} from './GetUsersQuery';
-import {UserView} from '../View/UserView';
-import {IUserRepository} from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { QueryHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
+import { GetUsersQuery } from './GetUsersQuery';
+import { UserView } from '../View/UserView';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
 
 @QueryHandler(GetUsersQuery)
 export class GetUsersQueryHandler {
