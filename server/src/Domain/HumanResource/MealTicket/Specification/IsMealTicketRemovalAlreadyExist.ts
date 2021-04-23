@@ -7,7 +7,7 @@ export class IsMealTicketRemovalAlreadyExist {
   constructor(
     @Inject('IMealTicketRemovalRepository')
     private readonly mealTicketRemovalRepository: IMealTicketRemovalRepository
-  ) { }
+  ) {}
 
   public async isSatisfiedBy(user: User, date: Date): Promise<boolean> {
     return (
