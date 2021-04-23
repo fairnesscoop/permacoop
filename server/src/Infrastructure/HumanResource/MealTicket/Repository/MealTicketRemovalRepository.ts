@@ -38,14 +38,14 @@ export class MealTicketRemovalRepository
       .getOne();
   }
 
-  public getAllByUserGroupedByDate = (
+  public getAllByUserGroupedByDate(
     user: User
-  ): Promise<MealTicketRemovalSummaryDTO[]> => {
+  ): Promise<MealTicketRemovalSummaryDTO[]> {
     return this.repository
       .createQueryBuilder('mealTicketRemoval')
       .select(['date', 'count(mealTicketRemoval.id)'])
       .where('mealTicketRemoval.user = :userId', { userId: user.getId() })
       .groupBy('date')
       .getRawMany();
-  };
+  }
 }

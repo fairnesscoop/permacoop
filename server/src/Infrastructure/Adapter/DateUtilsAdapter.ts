@@ -71,9 +71,7 @@ export class DateUtilsAdapter implements IDateUtils {
     return dates;
   }
 
-  public getAllWorkingDayOfYearByMonth = (
-    date: Date
-  ): WorkingDayOfYearByMonth[] => {
+  public getAllWorkingDayOfYearByMonth(date: Date): WorkingDayOfYearByMonth[] {
     const lastDayOfYear = this.getLastDayOfYear(date);
     const firstDayOfYear = this.getFirstDayOfYear(date);
 
@@ -82,7 +80,7 @@ export class DateUtilsAdapter implements IDateUtils {
       lastDayOfYear
     );
 
-    const defaultVakues: WorkingDayOfYearByMonth[] = [];
+    const defaultValues: WorkingDayOfYearByMonth[] = [];
 
     return workedDaysOfYear.reduce((prev, next) => {
       const currentMonth = next.getMonth() + 1;
@@ -92,12 +90,12 @@ export class DateUtilsAdapter implements IDateUtils {
         itemWithMonth.addWorkingDay(next);
         return prev;
       }
-      const workindDay = new WorkingDayOfYearByMonth(currentMonth);
-      workindDay.addWorkingDay(next);
+      const working = new WorkingDayOfYearByMonth(currentMonth);
+      working.addWorkingDay(next);
 
-      return [...prev, workindDay];
-    }, defaultVakues);
-  };
+      return [...prev, working];
+    }, defaultValues);
+  }
 
   public getWorkedFreeDays(year: number): Date[] {
     const fixedDays: Date[] = [
