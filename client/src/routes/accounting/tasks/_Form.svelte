@@ -14,14 +14,14 @@
 </script>
 
 <form
-  on:submit|preventDefault="{submit}"
+  on:submit|preventDefault={submit}
   class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <Input
-    label="{$_('accounting.tasks.form.name')}"
-    type="{'text'}"
-    bind:value="{name}" />
+    label={$_('accounting.tasks.form.name')}
+    type={'text'}
+    bind:value={name} />
   <Button
-    value="{$_('common.form.save')}"
-    loading="{loading}"
-    disabled="{!name || loading}" />
+    value={$_('common.form.save')}
+    {loading}
+    disabled={!name || loading} />
 </form>

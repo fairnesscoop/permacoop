@@ -26,13 +26,10 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb
-  items="{[{ title: $_('human_resources.breadcrumb') }, { title }]}" />
-<ServerErrors errors="{errors}" />
+<Breadcrumb items={[{ title: $_('human_resources.breadcrumb') }, { title }]} />
+<ServerErrors {errors} />
 <div class="inline-flex items-center">
-  <H4Title title="{title}" />
-  <AddLink
-    href="{'/human_resources/users/add'}"
-    value="{$_('common.form.add')}" />
+  <H4Title {title} />
+  <AddLink href={'/human_resources/users/add'} value={$_('common.form.add')} />
 </div>
-<Table users="{data}" />
+<Table users={data} />

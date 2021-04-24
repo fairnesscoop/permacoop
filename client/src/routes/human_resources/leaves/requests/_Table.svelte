@@ -25,7 +25,9 @@
       class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
       <th class="px-4 py-3">{$_('human_resources.leaves.requests.user')}</th>
       <th class="px-4 py-3">{$_('human_resources.leaves.requests.periods')}</th>
-      <th class="px-4 py-3">{$_('human_resources.leaves.requests.leave_type.title')}</th>
+      <th class="px-4 py-3">
+        {$_('human_resources.leaves.requests.leave_type.title')}
+      </th>
       <th class="px-4 py-3">{$_('human_resources.leaves.requests.status')}</th>
       <th class="px-4 py-3">{$_('common.actions')}</th>
     </tr>
@@ -42,7 +44,7 @@
             },
           })}
           <GrayBadge
-            value="{$_('common.days_duration', { values: { n: duration } })}" />
+            value={$_('common.days_duration', { values: { n: duration } })} />
         </td>
         <td class="px-4 py-3 text-sm">
           {$_(`human_resources.leaves.requests.leave_type.${type}`)}
@@ -50,19 +52,19 @@
         <td class="px-4 py-3 text-sm">
           {#if 'pending' === status}
             <OrangeBadge
-              value="{$_(`human_resources.leaves.requests.states.${status}`)}" />
+              value={$_(`human_resources.leaves.requests.states.${status}`)} />
           {:else}
             <RedBadge
-              value="{$_(`human_resources.leaves.requests.states.${status}`)}" />
+              value={$_(`human_resources.leaves.requests.states.${status}`)} />
           {/if}
         </td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
             <SeeLink href={`/human_resources/leaves/requests/${id}`} />
             {#if $session.user && $session.user.id === user.id}
-              <DeleteLink 
-                on:confirm={() => dispatch('delete', id)} 
-                confirmMessage={$_("human_resources.leaves.requests.confirm")} />
+              <DeleteLink
+                on:confirm={() => dispatch('delete', id)}
+                confirmMessage={$_('human_resources.leaves.requests.confirm')} />
             {/if}
           </div>
         </td>

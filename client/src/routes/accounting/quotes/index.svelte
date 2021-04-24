@@ -53,21 +53,21 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items="{[{ title: $_('accounting.breadcrumb') }, { title }]}" />
-<ServerErrors errors="{errors}" />
+<Breadcrumb items={[{ title: $_('accounting.breadcrumb') }, { title }]} />
+<ServerErrors {errors} />
 <div class="inline-flex items-center">
-  <H4Title title="{title}" />
+  <H4Title {title} />
   <AddLink
-    href="{'/accounting/quotes/add'}"
-    value="{$_('accounting.quotes.add.title')}" />
+    href={'/accounting/quotes/add'}
+    value={$_('accounting.quotes.add.title')} />
 </div>
 <div class="w-full overflow-hidden rounded-lg shadow-xs">
   <div class="w-full overflow-x-auto">
-    <Table items="{response.items}" />
+    <Table items={response.items} />
   </div>
   <Pagination
-    on:change="{changePage}"
-    currentPage="{page}"
-    totalItems="{response.totalItems}"
-    pageCount="{response.pageCount}" />
+    on:change={changePage}
+    currentPage={page}
+    totalItems={response.totalItems}
+    pageCount={response.pageCount} />
 </div>

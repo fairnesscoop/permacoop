@@ -10,7 +10,10 @@ it('renders nothing with no error.', () => {
 });
 
 it('renders the given errors', () => {
-  addMessages('fr', {'first_error': 'Fichier non trouvé', 'second_error': 'Saisie invalide'});
+  addMessages('fr', {
+    first_error: 'Fichier non trouvé',
+    second_error: 'Saisie invalide',
+  });
 
   const errors = ['first_error', 'second_error'];
   render(ServerErrors, { errors });

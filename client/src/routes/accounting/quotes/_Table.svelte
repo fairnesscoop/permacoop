@@ -38,13 +38,13 @@
         <td class="px-4 py-3 text-sm">{format(amountInclusiveOfTaxe)}</td>
         <td class="px-4 py-3 text-sm">
           {#if 'draft' === status}
-            <OrangeBadge value="{$_(`accounting.quotes.status.${status}`)}" />
+            <OrangeBadge value={$_(`accounting.quotes.status.${status}`)} />
           {:else if 'accepted' === status}
-            <GreenBadge value="{$_(`accounting.quotes.status.${status}`)}" />
+            <GreenBadge value={$_(`accounting.quotes.status.${status}`)} />
           {:else if 'sent' === status}
-            <GrayBadge value="{$_(`accounting.quotes.status.${status}`)}" />
+            <GrayBadge value={$_(`accounting.quotes.status.${status}`)} />
           {:else}
-            <RedBadge value="{$_(`accounting.quotes.status.${status}`)}" />
+            <RedBadge value={$_(`accounting.quotes.status.${status}`)} />
           {/if}
         </td>
         <td class="px-4 py-3">

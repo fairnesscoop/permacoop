@@ -33,39 +33,39 @@
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="py-3 text-center text-sm">
           <GreenBadge
-            value="{$_('common.days_duration', {
+            value={$_('common.days_duration', {
               values: { n: overview.mission },
-            })}" />
+            })} />
         </td>
         <td class="py-3 text-center text-sm">
           <IndigoBadge
-            value="{$_('common.days_duration', {
+            value={$_('common.days_duration', {
               values: { n: overview.support },
-            })}" />
+            })} />
         </td>
         <td class="py-3 text-center text-sm">
           <BlueBadge
-            value="{$_('common.days_duration', {
+            value={$_('common.days_duration', {
               values: { n: overview.dojo },
-            })}" />
+            })} />
         </td>
         <td class="py-3 text-center text-sm">
           <OrangeBadge
-            value="{$_('common.days_duration', {
+            value={$_('common.days_duration', {
               values: { n: overview.formationConference },
-            })}" />
+            })} />
         </td>
         <td class="py-3 text-center text-sm">
           <YellowBadge
-            value="{$_('common.days_duration', {
+            value={$_('common.days_duration', {
               values: { n: overview.leave },
-            })}" />
+            })} />
         </td>
         <td class="py-3 text-center text-sm">
           <GrayBadge
-            value="{$_('common.days_duration', {
+            value={$_('common.days_duration', {
               values: { n: overview.other },
-            })}" />
+            })} />
         </td>
       </tr>
     </tbody>

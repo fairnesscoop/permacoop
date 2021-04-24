@@ -1,7 +1,7 @@
 export const minutesToHours = (value) => {
   const hours = Math.floor(value / 60);
   const minutes = value % 60;
-  
+
   if (0 === hours) {
     return `${value}m`;
   }
@@ -11,4 +11,4 @@ export const minutesToHours = (value) => {
   }
 
   return `${hours}h${minutes}`;
-}
+};

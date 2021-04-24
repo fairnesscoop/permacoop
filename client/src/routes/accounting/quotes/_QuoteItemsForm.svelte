@@ -38,7 +38,7 @@
       <th class="px-4 py-3">{$_('accounting.quotes.form.description')}</th>
       <th class="px-4 py-3">{$_('accounting.quotes.form.quantity')}</th>
       <th class="px-4 py-3">{$_('accounting.quotes.form.daily_rate')}</th>
-      <th class="px-4 py-3"></th>
+      <th class="px-4 py-3" />
     </tr>
   </thead>
   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -46,30 +46,30 @@
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="px-4 py-3 text-sm">
           <Input
-            placeholder="{$_('accounting.quotes.form.description_placeholder')}"
-            marginClass="{''}"
-            bind:value="{value.title}"
-            required="{true}" />
+            placeholder={$_('accounting.quotes.form.description_placeholder')}
+            marginClass={''}
+            bind:value={value.title}
+            required={true} />
         </td>
         <td class="px-4 py-3 text-sm">
           <Input
-            type="{'money'}"
-            bind:value="{value.quantity}"
-            marginClass="{''}"
-            required="{true}" />
+            type={'money'}
+            bind:value={value.quantity}
+            marginClass={''}
+            required={true} />
         </td>
         <td class="px-4 py-3 text-sm">
           <Input
-            type="{'money'}"
-            bind:value="{value.dailyRate}"
-            marginClass="{''}"
-            required="{true}" />
+            type={'money'}
+            bind:value={value.dailyRate}
+            marginClass={''}
+            required={true} />
         </td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
             {#if values.length > 1}
-              <button type="button" on:click="{() => removeItem(index)}">
-                <TrashIcon className="{'w-5 h-5'}" />
+              <button type="button" on:click={() => removeItem(index)}>
+                <TrashIcon className={'w-5 h-5'} />
               </button>
             {/if}
           </div>
@@ -81,7 +81,7 @@
         <button
           type="button"
           class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple mt-2 mb-2"
-          on:click="{addItem}">
+          on:click={addItem}>
           {$_('accounting.quotes.form.add_new')}
         </button>
       </td>

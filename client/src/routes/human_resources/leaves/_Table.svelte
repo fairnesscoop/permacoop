@@ -16,7 +16,9 @@
       class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
       <th class="px-4 py-3">{$_('human_resources.leaves.requests.user')}</th>
       <th class="px-4 py-3">{$_('human_resources.leaves.requests.periods')}</th>
-      <th class="px-4 py-3">{$_('human_resources.leaves.requests.leave_type.title')}</th>
+      <th class="px-4 py-3">
+        {$_('human_resources.leaves.requests.leave_type.title')}
+      </th>
     </tr>
   </thead>
   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -31,7 +33,7 @@
             },
           })}
           <GrayBadge
-            value="{$_('common.days_duration', { values: { n: duration } })}" />
+            value={$_('common.days_duration', { values: { n: duration } })} />
         </td>
         <td class="px-4 py-3 text-sm">
           {$_(`human_resources.leaves.requests.leave_type.${type}`)}

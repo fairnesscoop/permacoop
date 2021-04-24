@@ -11,16 +11,16 @@
 
   const submit = (event) => {
     dispatch(event.submitter.name, {
-      comment
+      comment,
     });
   };
 </script>
 
-<form on:submit|preventDefault="{submit}">
+<form on:submit|preventDefault={submit}>
   <Input
     type="text"
     required={false}
-    label="{$_('human_resources.leaves.requests.form.comment')}"
+    label={$_('human_resources.leaves.requests.form.comment')}
     bind:value={comment} />
 
   <div class="flex">
@@ -28,14 +28,14 @@
       <Button
         name="accept"
         value={$_('human_resources.leaves.requests.actions.accept')}
-        loading={loading}
+        {loading}
         disabled={loading} />
     </div>
     <div class="w-1/2 pl-2">
       <Button
         name="refuse"
         value={$_('human_resources.leaves.requests.actions.refuse')}
-        loading={loading}
+        {loading}
         disabled={loading} />
     </div>
   </div>

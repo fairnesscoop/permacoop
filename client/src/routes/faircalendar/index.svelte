@@ -74,7 +74,9 @@
       },
       eventDataTransform: (data) => {
         const { id, date, time, summary, type, task, billable, project } = data;
-        let title = `${minutesToHours(time)}${false === billable && type === 'mission' ? '*': ''} - `;
+        let title = `${minutesToHours(time)}${
+          false === billable && type === 'mission' ? '*' : ''
+        } - `;
         let eventType = type.startsWith('leave_') ? 'leave' : type;
 
         if ('mission' === type && task && project) {
@@ -134,15 +136,16 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items="{[{ title: $_('faircalendar.breadcrumb') }]}" />
-<ServerErrors errors="{errors}" />
-<H4Title title="{title}" />
-<Filters {...filters} on:filter="{onFilter}" />
+<Breadcrumb items={[{ title: $_('faircalendar.breadcrumb') }]} />
+<ServerErrors {errors} />
+<H4Title {title} />
+<Filters {...filters} on:filter={onFilter} />
 {#if data.overview}
-  <Overview overview="{data.overview}" />
+  <Overview overview={data.overview} />
 {/if}
 
 <div class="px-3 mb-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
-  <div id="calendar"></div>
-  <small class="mt-2 mb-2 font-semibold dark:text-white">{$_('faircalendar.not_billable')}</small>
+  <div id="calendar" />
+  <small
+    class="mt-2 mb-2 font-semibold dark:text-white">{$_('faircalendar.not_billable')}</small>
 </div>

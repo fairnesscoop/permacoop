@@ -7,7 +7,7 @@ export const errorNormalizer = (e) => {
     return [_('error_generic')];
   }
 
-  const {message} = e.response.data;
+  const { message } = e.response.data;
 
   if (Array.isArray(message)) {
     return message;

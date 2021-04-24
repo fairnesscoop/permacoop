@@ -4,7 +4,6 @@
   import ThemeToggler from './ThemeToggler.svelte';
   import BurgerIcon from '../icons/BurgerIcon.svelte';
   import { settings } from 'store';
-
 </script>
 
 <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
@@ -14,10 +13,10 @@
       id="burger"
       class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
       aria-label="Menu"
-      on:click="{() => {
+      on:click={() => {
         $settings.openMobileMenu = !$settings.openMobileMenu;
-      }}">
-      <BurgerIcon className="{'w-6 h-6'}" />
+      }}>
+      <BurgerIcon className={'w-6 h-6'} />
     </button>
     <div class="flex justify-center flex-1 lg:mr-32">
       <Search />

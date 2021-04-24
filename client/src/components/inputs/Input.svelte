@@ -13,25 +13,25 @@
     'block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input';
 </script>
 
-<div class="{`block text-sm ${marginClass}`}">
+<div class={`block text-sm ${marginClass}`}>
   {#if label}
-    <label class="text-gray-700 dark:text-gray-400" for="{id}">{label}</label>
+    <label class="text-gray-700 dark:text-gray-400" for={id}>{label}</label>
   {/if}
   {#if type === 'email'}
     <input
       type="email"
-      id="{id}"
-      required="{required}"
-      placeholder="{placeholder}"
-      class="{className}"
+      {id}
+      {required}
+      {placeholder}
+      class={className}
       bind:value />
   {:else if type === 'password'}
     <input
       type="password"
-      id="{id}"
-      required="{required}"
-      placeholder="{placeholder}"
-      class="{className}"
+      {id}
+      {required}
+      {placeholder}
+      class={className}
       bind:value />
   {:else if type === 'money'}
     <input
@@ -39,25 +39,25 @@
       min="0"
       placeholder="0,00"
       step="0.01"
-      id="{id}"
-      required="{required}"
-      class="{className}"
+      {id}
+      {required}
+      class={className}
       bind:value />
   {:else if type === 'date'}
     <input
       type="date"
-      id="{id}"
-      required="{required}"
-      placeholder="{placeholder}"
-      class="{className}"
+      {id}
+      {required}
+      {placeholder}
+      class={className}
       bind:value />
   {:else}
     <input
       type="text"
-      id="{id}"
-      required="{required}"
-      placeholder="{placeholder}"
-      class="{className}"
+      {id}
+      {required}
+      {placeholder}
+      class={className}
       bind:value />
   {/if}
 </div>

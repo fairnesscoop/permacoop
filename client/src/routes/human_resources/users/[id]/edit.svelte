@@ -27,7 +27,7 @@
     try {
       ({ data: user } = await get(`users/${id}/administrative`));
       title = $_('human_resources.users.edit.title', {
-        values: { name: `${user.firstName} ${user.lastName}` }
+        values: { name: `${user.firstName} ${user.lastName}` },
       });
     } catch (e) {
       errors = errorNormalizer(e);
@@ -35,7 +35,7 @@
     loading = false;
   });
 
-  const onSave = async e => {
+  const onSave = async (e) => {
     loading = true;
     try {
       await put(`users/${user.id}/administrative`, e.detail);
@@ -53,18 +53,14 @@
 </svelte:head>
 
 <Breadcrumb
-  items="{[
-    { title: $_('human_resources.breadcrumb') },
-    { title: $_('human_resources.users.title'), path: 'human_resources/users' },
-    { title }
-]}" />
+  items={[{ title: $_('human_resources.breadcrumb') }, { title: $_('human_resources.users.title'), path: 'human_resources/users' }, { title }]} />
 <ServerErrors {errors} />
 <H4Title {title} />
 
 {#if user && user.isAdministrativeEditable}
   <EditForm
-    role="{user.role}"
-    userAdministrative="{user.administrativeView}"
+    role={user.role}
+    userAdministrative={user.administrativeView}
     {loading}
-    on:save="{onSave}" />
+    on:save={onSave} />
 {/if}

@@ -31,7 +31,7 @@
   };
 </script>
 
-<ServerErrors errors="{errors}" />
+<ServerErrors {errors} />
 <table class="w-full whitespace-no-wrap">
   <thead>
     <tr
@@ -39,7 +39,7 @@
       <th class="px-4 py-3">{$_('human_resources.pay_slips.periods')}</th>
       <th class="px-4 py-3">{$_('human_resources.pay_slips.users')}</th>
       <th class="px-4 py-3">{$_('human_resources.pay_slips.files')}</th>
-      <th class="px-4 py-3"></th>
+      <th class="px-4 py-3" />
     </tr>
   </thead>
   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -54,8 +54,8 @@
           <div class="flex items-center space-x-4 text-sm">
             {#if $session.user.id === user.id}
               <button
-                disabled="{disableDownloadableButton}"
-                on:click="{download(id, file.originalName)}"
+                disabled={disableDownloadableButton}
+                on:click={download(id, file.originalName)}
                 class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                 {$_('human_resources.pay_slips.download', {
                   values: { size: filesize(file.size) },
