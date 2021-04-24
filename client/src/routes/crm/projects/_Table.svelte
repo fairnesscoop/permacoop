@@ -22,11 +22,13 @@
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="px-4 py-3 text-sm">{customer.name}</td>
         <td class="px-4 py-3 text-sm">{name}</td>
-        <td class="px-4 py-3 text-sm">{$_(`crm.projects.invoice_unit.${invoiceUnit}`)}</td>
+        <td class="px-4 py-3 text-sm">
+          {$_(`crm.projects.invoice_unit.${invoiceUnit}`)}
+        </td>
         <td class="px-4 py-3 text-sm">{minutesToHours(dayDuration)}</td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
-            <EditLink href="{`/crm/projects/${id}/edit`}" />
+            <EditLink href={`/crm/projects/${id}/edit`} />
           </div>
         </td>
       </tr>

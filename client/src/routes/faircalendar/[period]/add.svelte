@@ -67,7 +67,7 @@
 </svelte:head>
 
 <Breadcrumb
-  items="{[{ title: $_('faircalendar.breadcrumb'), path: 'faircalendar' }, { title }]}" />
-<ServerErrors errors="{errors}" />
-<H4Title title="{title}" />
-<Form loading="{loading}" on:save="{onSave}" event="{event}" />
+  items={[{ title: $_('faircalendar.breadcrumb'), path: 'faircalendar' }, { title }]} />
+<ServerErrors {errors} />
+<H4Title {title} />
+<Form {loading} on:save={onSave} {event} />

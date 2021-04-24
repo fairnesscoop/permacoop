@@ -29,13 +29,13 @@
 </script>
 
 <form
-  on:submit|preventDefault="{submit}"
+  on:submit|preventDefault={submit}
   class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <SelectInput
-    label="{$_('human_resources.leaves.requests.leave_type.title')}"
-    bind:value="{type}">
+    label={$_('human_resources.leaves.requests.leave_type.title')}
+    bind:value={type}>
     {#each types as type}
-      <option value="{type}">
+      <option value={type}>
         {$_(`human_resources.leaves.requests.leave_type.${type}`)}
       </option>
     {/each}
@@ -43,41 +43,41 @@
   <div class="flex">
     <div class="w-1/2 pr-2">
       <Input
-        type="{'date'}"
-        label="{$_('human_resources.leaves.requests.form.from_date')}"
-        bind:value="{startDate}" />
+        type={'date'}
+        label={$_('human_resources.leaves.requests.form.from_date')}
+        bind:value={startDate} />
     </div>
     <div class="w-1/2 pl-2">
       <SelectInput
-        label="{$_('human_resources.leaves.requests.form.all_day')}"
-        bind:value="{startsAllDay}">
-        <option value="{'true'}">{$_('common.yes')}</option>
-        <option value="{'false'}">{$_('common.no')}</option>
+        label={$_('human_resources.leaves.requests.form.all_day')}
+        bind:value={startsAllDay}>
+        <option value={'true'}>{$_('common.yes')}</option>
+        <option value={'false'}>{$_('common.no')}</option>
       </SelectInput>
     </div>
   </div>
   <div class="flex">
     <div class="w-1/2 pr-2">
       <Input
-        type="{'date'}"
-        label="{$_('human_resources.leaves.requests.form.to_date')}"
-        bind:value="{endDate}" />
+        type={'date'}
+        label={$_('human_resources.leaves.requests.form.to_date')}
+        bind:value={endDate} />
     </div>
     <div class="w-1/2 pl-2">
       <SelectInput
-        label="{$_('human_resources.leaves.requests.form.all_day')}"
-        bind:value="{endsAllDay}">
-        <option value="{'true'}">{$_('common.yes')}</option>
-        <option value="{'false'}">{$_('common.no')}</option>
+        label={$_('human_resources.leaves.requests.form.all_day')}
+        bind:value={endsAllDay}>
+        <option value={'true'}>{$_('common.yes')}</option>
+        <option value={'false'}>{$_('common.no')}</option>
       </SelectInput>
     </div>
   </div>
   <Input
-    label="{$_('human_resources.leaves.requests.form.comment')}"
-    required="{''}"
-    bind:value="{comment}" />
+    label={$_('human_resources.leaves.requests.form.comment')}
+    required={''}
+    bind:value={comment} />
   <Button
-    value="{$_('common.form.save')}"
-    loading="{loading}"
-    disabled="{!startDate || !endDate || loading}" />
+    value={$_('common.form.save')}
+    {loading}
+    disabled={!startDate || !endDate || loading} />
 </form>

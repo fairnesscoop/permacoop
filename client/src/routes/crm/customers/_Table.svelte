@@ -31,7 +31,7 @@
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
             <!--<SeeLink href={`/crm/customers/${id}`} />-->
-            <EditLink href="{`/crm/customers/${id}/edit`}" />
+            <EditLink href={`/crm/customers/${id}/edit`} />
           </div>
         </td>
       </tr>

@@ -10,7 +10,7 @@
   <ol class="list-reset flex">
     <li>
       <a href="/" class="font-semibold text-grey-dark inline-flex">
-        <DashboardIcon className="{'w-4 h-4 mr-1'}" />
+        <DashboardIcon className={'w-4 h-4 mr-1'} />
         {$_('app')}
       </a>
     </li>
@@ -21,7 +21,7 @@
       {:else}
         <li>
           <a
-            href="{item.path}"
+            href={item.path}
             class="font-semibold text-grey-dark">{item.title}</a>
         </li>
       {/if}

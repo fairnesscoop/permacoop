@@ -51,9 +51,9 @@
 </svelte:head>
 
 <Breadcrumb
-  items="{[{ title: $_('crm.breadcrumb') }, { title: $_('crm.customers.title'), path: '/crm/customers' }, { title }]}" />
-<H4Title title="{title}" />
-<ServerErrors errors="{errors}" />
+  items={[{ title: $_('crm.breadcrumb') }, { title: $_('crm.customers.title'), path: '/crm/customers' }, { title }]} />
+<H4Title {title} />
+<ServerErrors {errors} />
 {#if customer}
-  <Form loading="{loading}" customer="{customer}" on:save="{onSave}" />
+  <Form {loading} {customer} on:save={onSave} />
 {/if}

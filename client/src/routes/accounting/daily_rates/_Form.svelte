@@ -38,17 +38,17 @@
 </script>
 
 <form
-  on:submit|preventDefault="{submit}"
+  on:submit|preventDefault={submit}
   class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-  <CustomersInput customers="{customers.items}" bind:customerId />
-  <UsersInput users="{users}" bind:userId />
-  <TasksInput tasks="{tasks.items}" bind:taskId />
+  <CustomersInput customers={customers.items} bind:customerId />
+  <UsersInput {users} bind:userId />
+  <TasksInput tasks={tasks.items} bind:taskId />
   <Input
-    type="{'money'}"
-    label="{$_('accounting.daily_rates.form.daily_rate')}"
-    bind:value="{amount}" />
+    type={'money'}
+    label={$_('accounting.daily_rates.form.daily_rate')}
+    bind:value={amount} />
   <Button
-    value="{$_('common.form.save')}"
-    loading="{loading}"
-    disabled="{!taskId || !customerId || !userId || !amount || loading}" />
+    value={$_('common.form.save')}
+    {loading}
+    disabled={!taskId || !customerId || !userId || !amount || loading} />
 </form>

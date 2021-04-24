@@ -7,7 +7,7 @@
   import SelectInput from 'components/inputs/SelectInput.svelte';
 
   export let loading;
-  
+
   let projectId;
   let expireInDays = 30;
   let projects = { items: [] };
@@ -23,18 +23,18 @@
 </script>
 
 <form
-  on:submit|preventDefault="{submit}"
+  on:submit|preventDefault={submit}
   class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-    <ProjectsInput projects="{projects.items}" bind:projectId />
-    <SelectInput
-      label="{$_('accounting.invoices.form.expire_in_days')}"
-      bind:value="{expireInDays}">
-      {#each [30, 60, 90] as day}
-        <option value="{day}">{day}</option>
-      {/each}
-    </SelectInput>
-    <Button
-      value="{$_('accounting.invoices.form.submit')}"
-      loading="{loading}"
-      disabled="{!projectId || !expireInDays || loading}" />
+  <ProjectsInput projects={projects.items} bind:projectId />
+  <SelectInput
+    label={$_('accounting.invoices.form.expire_in_days')}
+    bind:value={expireInDays}>
+    {#each [30, 60, 90] as day}
+      <option value={day}>{day}</option>
+    {/each}
+  </SelectInput>
+  <Button
+    value={$_('accounting.invoices.form.submit')}
+    {loading}
+    disabled={!projectId || !expireInDays || loading} />
 </form>

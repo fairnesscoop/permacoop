@@ -45,7 +45,7 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items="{[{ title }]}" />
-<H4Title title="{title}" />
-<ServerErrors errors="{errors}" />
-<Form {...data} loading="{loading}" on:save="{onSave}" />
+<Breadcrumb items={[{ title }]} />
+<H4Title {title} />
+<ServerErrors {errors} />
+<Form {...data} {loading} on:save={onSave} />

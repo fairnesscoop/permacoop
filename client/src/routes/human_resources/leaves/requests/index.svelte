@@ -44,11 +44,13 @@
 
     try {
       await del(`leave-requests/${id}`);
-      response.items = response.items.filter((leaveRequest) => leaveRequest.id !== id);
+      response.items = response.items.filter(
+        (leaveRequest) => leaveRequest.id !== id
+      );
     } catch (e) {
       errors = errorNormalizer(e);
     }
-  }
+  };
 
   const fetchLeaveRequests = async () => {
     try {
@@ -64,25 +66,21 @@
 </svelte:head>
 
 <Breadcrumb
-  items="{[
-    { title: $_('human_resources.breadcrumb') },
-    { title: $_('human_resources.leaves.title'), path: '/human_resources/leaves' },
-    { title }
-  ]}" />
-<ServerErrors errors="{errors}" />
+  items={[{ title: $_('human_resources.breadcrumb') }, { title: $_('human_resources.leaves.title'), path: '/human_resources/leaves' }, { title }]} />
+<ServerErrors {errors} />
 <div class="inline-flex items-center">
-  <H4Title title="{title}" />
+  <H4Title {title} />
   <AddLink
-    href="{'/human_resources/leaves/requests/add'}"
-    value="{$_('human_resources.leaves.requests.add.title')}" />
+    href={'/human_resources/leaves/requests/add'}
+    value={$_('human_resources.leaves.requests.add.title')} />
 </div>
 <div class="w-full overflow-hidden rounded-lg shadow-xs">
   <div class="w-full overflow-x-auto">
-    <Table items="{response.items}" on:delete={handleDelete} />
+    <Table items={response.items} on:delete={handleDelete} />
   </div>
   <Pagination
-    on:change="{changePage}"
-    currentPage="{page}"
-    totalItems="{response.totalItems}"
-    pageCount="{response.pageCount}" />
+    on:change={changePage}
+    currentPage={page}
+    totalItems={response.totalItems}
+    pageCount={response.pageCount} />
 </div>

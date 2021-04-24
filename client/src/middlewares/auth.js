@@ -24,8 +24,8 @@ export default async (req, res, next) => {
       scope: role,
     };
 
-   return next();
+    return next();
   } catch (e) {
-   return next();
+    return next();
   }
 };

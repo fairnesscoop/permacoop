@@ -31,23 +31,26 @@
           {dateFormat(new Date(createdAt), 'dd/MM/yyyy', { locale: fr })}
         </td>
         <td class="px-4 py-3 text-sm">{invoiceId}</td>
-        <td class="px-4 py-3 text-sm">{project.name} ({project.customer.name})</td>
+        <td class="px-4 py-3 text-sm">
+          {project.name}
+          ({project.customer.name})
+        </td>
         <td class="px-4 py-3 text-sm">
           {#if 'draft' === status}
-            <OrangeBadge value="{$_(`accounting.invoices.status.${status}`)}" />
+            <OrangeBadge value={$_(`accounting.invoices.status.${status}`)} />
           {:else if 'payed' === status}
-            <GreenBadge value="{$_(`accounting.invoices.status.${status}`)}" />
+            <GreenBadge value={$_(`accounting.invoices.status.${status}`)} />
           {:else if 'sent' === status}
-            <GrayBadge value="{$_(`accounting.invoices.status.${status}`)}" />
+            <GrayBadge value={$_(`accounting.invoices.status.${status}`)} />
           {:else}
-            <RedBadge value="{$_(`accounting.invoices.status.${status}`)}" />
+            <RedBadge value={$_(`accounting.invoices.status.${status}`)} />
           {/if}
         </td>
         <td class="px-4 py-3">
           {dateFormat(new Date(expiryDate), 'dd/MM/yyyy', { locale: fr })}
         </td>
         <td class="px-4 py-3">{format(amount)}</td>
-        <td class="px-4 py-3"></td>
+        <td class="px-4 py-3" />
       </tr>
     {/each}
   </tbody>

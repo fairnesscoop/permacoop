@@ -32,13 +32,7 @@
     event.time = event.time ? event.time : maxDayDuration;
   });
 
-  const types = [
-    'mission',
-    'dojo',
-    'support',
-    'formationConference',
-    'other',
-  ];
+  const types = ['mission', 'dojo', 'support', 'formationConference', 'other'];
 
   $: times = [...range(30, maxDayDuration, 30)].reverse();
 
@@ -53,36 +47,40 @@
 </script>
 
 <form
-  on:submit|preventDefault="{submit}"
+  on:submit|preventDefault={submit}
   class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-  <SelectInput label="{$_('faircalendar.form.type')}" bind:value="{event.type}">
+  <SelectInput label={$_('faircalendar.form.type')} bind:value={event.type}>
     {#each types as type}
-      <option value="{type}">{$_(`faircalendar.type.${type}`)}</option>
+      <option value={type}>{$_(`faircalendar.type.${type}`)}</option>
     {/each}
   </SelectInput>
   {#if event.type === 'mission'}
     <div class="flex">
       <div class="w-1/2 pr-2">
         <ProjectsInput
-          projects="{projects.items}"
-          bind:projectId="{event.projectId}" />
+          projects={projects.items}
+          bind:projectId={event.projectId} />
       </div>
       <div class="w-1/2 pl-2">
-        <TasksInput tasks="{tasks.items}" bind:taskId="{event.taskId}" />
+        <TasksInput tasks={tasks.items} bind:taskId={event.taskId} />
       </div>
     </div>
   {/if}
   <div class="flex">
     <div class="w-1/2 pr-2">
-      <SelectInput label="{$_('faircalendar.form.time')}" bind:value="{event.time}">
+      <SelectInput label={$_('faircalendar.form.time')} bind:value={event.time}>
         {#each times as minutes}
-          <option value="{minutes}" selected={minutes === event.time}>{minutesToHours(minutes)}</option>
+          <option value={minutes} selected={minutes === event.time}>
+            {minutesToHours(minutes)}
+          </option>
         {/each}
       </SelectInput>
     </div>
     {#if event.type === 'mission'}
       <div class="w-1/2 pl-2">
-        <SelectInput label="{$_('faircalendar.form.billable')}" bind:value="{event.billable}">
+        <SelectInput
+          label={$_('faircalendar.form.billable')}
+          bind:value={event.billable}>
           <option value={true}>{$_('common.yes')}</option>
           <option value={false}>{$_('common.no')}</option>
         </SelectInput>
@@ -90,11 +88,11 @@
     {/if}
   </div>
   <Input
-    label="{$_('faircalendar.form.summary')}"
-    bind:value="{event.summary}"
-    required="{''}" />
+    label={$_('faircalendar.form.summary')}
+    bind:value={event.summary}
+    required={''} />
   <Button
-    value="{$_('common.form.save')}"
-    loading="{loading}"
-    disabled="{!event.time || !event.type || loading}" />
+    value={$_('common.form.save')}
+    {loading}
+    disabled={!event.time || !event.type || loading} />
 </form>

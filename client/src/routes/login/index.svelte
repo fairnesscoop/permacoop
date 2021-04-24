@@ -51,26 +51,26 @@
           alt="Office" />
       </div>
       <form
-        on:submit|preventDefault="{handleSubmit}"
+        on:submit|preventDefault={handleSubmit}
         class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
         <div class="w-full">
           <h1
             class="mb-5 text-xl font-semibold text-center text-gray-700 dark:text-gray-200">
             {$_('login.sub_title')}
           </h1>
-          <ServerErrors errors="{errors}" />
+          <ServerErrors {errors} />
           <Input
-            type="{'email'}"
-            label="{$_('login.form.email')}"
-            bind:value="{email}" />
+            type={'email'}
+            label={$_('login.form.email')}
+            bind:value={email} />
           <Input
-            type="{'password'}"
-            label="{$_('login.form.password')}"
-            bind:value="{password}" />
+            type={'password'}
+            label={$_('login.form.password')}
+            bind:value={password} />
           <Button
-            value="{$_('login.form.button')}"
-            loading="{loading}"
-            disabled="{!email || !password || loading}" />
+            value={$_('login.form.button')}
+            {loading}
+            disabled={!email || !password || loading} />
           <hr class="my-8" />
           <!--<p class="mt-4">
             <a

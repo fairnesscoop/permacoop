@@ -30,7 +30,9 @@
     try {
       leaveRequest = (await get(`leave-requests/${id}`)).data;
       user = leaveRequest.user;
-      title = $_('human_resources.leaves.requests.view', { values: { user: `${user.firstName} ${user.lastName}` }})
+      title = $_('human_resources.leaves.requests.view', {
+        values: { user: `${user.firstName} ${user.lastName}` },
+      });
     } catch (e) {
       errors = errorNormalizer(e);
     }
@@ -55,7 +57,7 @@
 </svelte:head>
 
 <Breadcrumb
-  items="{[{ title: $_('human_resources.breadcrumb') }, { title: $_('human_resources.leaves.title'), path: '/human_resources/leaves' }, { title: $_('human_resources.leaves.requests.title'), path: '/human_resources/leaves/requests' }, { title }]}" />
+  items={[{ title: $_('human_resources.breadcrumb') }, { title: $_('human_resources.leaves.title'), path: '/human_resources/leaves' }, { title: $_('human_resources.leaves.requests.title'), path: '/human_resources/leaves/requests' }, { title }]} />
 <H4Title {title} />
 <ServerErrors {errors} />
 {#if leaveRequest}
@@ -67,10 +69,9 @@
     <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
       {#if $session.user && $session.user.id !== leaveRequest.user.id}
         <Form
-          on:accept="{(event) => onModerate('accept', event.detail.comment)}"
-          on:refuse="{(event) => onModerate('refuse', event.detail.comment)}"
-          {loading}
-        />
+          on:accept={(event) => onModerate('accept', event.detail.comment)}
+          on:refuse={(event) => onModerate('refuse', event.detail.comment)}
+          {loading} />
       {:else}
         <p class="p-2 dark:text-white text-center">
           {$_('human_resources.leaves.requests.errors.cant_be_moderated')}

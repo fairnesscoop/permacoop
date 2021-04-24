@@ -19,7 +19,7 @@
         <td class="px-4 py-3 text-sm">{name}</td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
-            <EditLink href="{`/accounting/tasks/${id}/edit`}" />
+            <EditLink href={`/accounting/tasks/${id}/edit`} />
           </div>
         </td>
       </tr>

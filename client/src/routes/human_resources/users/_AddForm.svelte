@@ -55,46 +55,44 @@
 </script>
 
 <form
-  on:submit|preventDefault="{submit}"
+  on:submit|preventDefault={submit}
   class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-  <SelectInput
-    label="{$_('human_resources.users.form.role')}"
-    bind:value="{role}">
-    <option value="{ROLE_COOPERATOR}">{$_('common.roles.cooperator')}</option>
-    <option value="{ROLE_EMPLOYEE}">{$_('common.roles.employee')}</option>
-    <option value="{ROLE_ACCOUNTANT}">{$_('common.roles.accountant')}</option>
+  <SelectInput label={$_('human_resources.users.form.role')} bind:value={role}>
+    <option value={ROLE_COOPERATOR}>{$_('common.roles.cooperator')}</option>
+    <option value={ROLE_EMPLOYEE}>{$_('common.roles.employee')}</option>
+    <option value={ROLE_ACCOUNTANT}>{$_('common.roles.accountant')}</option>
   </SelectInput>
   <div class="flex">
     <div class="w-1/2 pr-2">
       <Input
-        label="{$_('human_resources.users.form.first_name')}"
-        bind:value="{firstName}" />
+        label={$_('human_resources.users.form.first_name')}
+        bind:value={firstName} />
     </div>
     <div class="w-1/2 pl-2">
       <Input
-        label="{$_('human_resources.users.form.last_name')}"
-        bind:value="{lastName}" />
+        label={$_('human_resources.users.form.last_name')}
+        bind:value={lastName} />
     </div>
   </div>
   <div class="flex">
     <div class="w-1/2 pr-2">
       <Input
-        type="{'email'}"
-        label="{$_('human_resources.users.form.email')}"
-        bind:value="{email}" />
+        type={'email'}
+        label={$_('human_resources.users.form.email')}
+        bind:value={email} />
     </div>
     <div class="w-1/2 pl-2">
       <Input
-        type="{'password'}"
-        label="{$_('human_resources.users.form.password')}"
-        bind:value="{password}" />
+        type={'password'}
+        label={$_('human_resources.users.form.password')}
+        bind:value={password} />
     </div>
   </div>
   {#if role !== ROLE_ACCOUNTANT}
     <UserAdministrativeForm bind:userAdministrative />
   {/if}
   <Button
-    value="{$_('common.form.save')}"
+    value={$_('common.form.save')}
     {loading}
-    disabled="{!firstName || !lastName || !email || !password || !role || loading}" />
+    disabled={!firstName || !lastName || !email || !password || !role || loading} />
 </form>

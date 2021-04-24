@@ -49,14 +49,14 @@
 </svelte:head>
 
 <Breadcrumb
-  items="{[{ title: $_('crm.breadcrumb') }, { title: $_('crm.projects.title'), path: '/crm/projects' }, { title }]}" />
-<H4Title title="{title}" />
-<ServerErrors errors="{errors}" />
+  items={[{ title: $_('crm.breadcrumb') }, { title: $_('crm.projects.title'), path: '/crm/projects' }, { title }]} />
+<H4Title {title} />
+<ServerErrors {errors} />
 {#if project}
   <Form
-    loading="{loading}"
-    customerId="{project.customer.id}"
-    name="{project.name}"
-    dayDuration="{project.dayDuration}"
-    on:save="{onSave}" />
+    {loading}
+    customerId={project.customer.id}
+    name={project.name}
+    dayDuration={project.dayDuration}
+    on:save={onSave} />
 {/if}

@@ -21,10 +21,10 @@
   });
 </script>
 
-<div class="{$settings.theme}">
+<div class={$settings.theme}>
   {#if segment !== 'login'}
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900 dark-theme">
-      <Nav segment="{segment}" />
+      <Nav {segment} />
       <div class="flex flex-col flex-1 w-full">
         <Header />
         <main class="h-full overflow-y-auto">

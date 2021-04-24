@@ -30,29 +30,29 @@
 </script>
 
 <form
-  on:submit|preventDefault="{submit}"
+  on:submit|preventDefault={submit}
   class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <Input
-    label="{$_('crm.projects.form.project')}"
-    type="{'text'}"
-    bind:value="{name}" />
-  <CustomersInput customers="{response.items}" bind:customerId />
+    label={$_('crm.projects.form.project')}
+    type={'text'}
+    bind:value={name} />
+  <CustomersInput customers={response.items} bind:customerId />
   <SelectInput
-    label="{$_('crm.projects.form.day_duration')}"
-    bind:value="{dayDuration}">
+    label={$_('crm.projects.form.day_duration')}
+    bind:value={dayDuration}>
     {#each [420, 480] as minutes}
       <option value={minutes}>{minutesToHours(minutes)}</option>
     {/each}
   </SelectInput>
   <SelectInput
-    label="{$_('crm.projects.invoice_unit.title')}"
-    bind:value="{invoiceUnit}">
+    label={$_('crm.projects.invoice_unit.title')}
+    bind:value={invoiceUnit}>
     {#each ['day', 'hour'] as unit}
       <option value={unit}>{$_(`crm.projects.invoice_unit.${unit}`)}</option>
     {/each}
   </SelectInput>
   <Button
-    value="{$_('common.form.save')}"
-    loading="{loading}"
-    disabled="{!name || !customerId || loading}" />
+    value={$_('common.form.save')}
+    {loading}
+    disabled={!name || !customerId || loading} />
 </form>

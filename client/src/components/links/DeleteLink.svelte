@@ -10,7 +10,7 @@
     if (confirm($_(confirmMessage))) {
       dispatch('confirm');
     }
-  }
+  };
 </script>
 
 <button

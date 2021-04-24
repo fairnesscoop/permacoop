@@ -31,7 +31,7 @@
     <span class="flex items-center col-span-3">
       {$_('pagination', { values: { start, from, totalItems } })}
     </span>
-    <span class="col-span-2"></span>
+    <span class="col-span-2" />
     {#if pageCount > 1}
       <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
         <nav aria-label="Table navigation">
@@ -39,7 +39,7 @@
             {#if currentPage > 1}
               <li>
                 <button
-                  on:click="{() => changePage(currentPage - 1)}"
+                  on:click={() => changePage(currentPage - 1)}
                   class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
                   aria-label="Précédent">
                   <svg
@@ -49,7 +49,7 @@
                     <path
                       d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                       clip-rule="evenodd"
-                      fill-rule="evenodd"></path>
+                      fill-rule="evenodd" />
                   </svg>
                 </button>
               </li>
@@ -57,8 +57,8 @@
             {#each range(1, pageCount) as page}
               <li>
                 <button
-                  class="{page == currentPage ? activeLink : link}"
-                  on:click="{() => changePage(page)}">
+                  class={page == currentPage ? activeLink : link}
+                  on:click={() => changePage(page)}>
                   {page}
                 </button>
               </li>
@@ -66,7 +66,7 @@
             {#if currentPage < pageCount}
               <li>
                 <button
-                  on:click="{() => changePage(currentPage + 1)}"
+                  on:click={() => changePage(currentPage + 1)}
                   class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
                   aria-label="Suivant">
                   <svg
@@ -76,7 +76,7 @@
                     <path
                       d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                       clip-rule="evenodd"
-                      fill-rule="evenodd"></path>
+                      fill-rule="evenodd" />
                   </svg>
                 </button>
               </li>

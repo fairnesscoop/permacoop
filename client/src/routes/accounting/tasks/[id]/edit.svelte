@@ -51,9 +51,9 @@
 </svelte:head>
 
 <Breadcrumb
-  items="{[{ title: $_('accounting.breadcrumb') }, { title: $_('accounting.tasks.title'), path: '/accounting/tasks' }, { title }]}" />
-<H4Title title="{title}" />
-<ServerErrors errors="{errors}" />
+  items={[{ title: $_('accounting.breadcrumb') }, { title: $_('accounting.tasks.title'), path: '/accounting/tasks' }, { title }]} />
+<H4Title {title} />
+<ServerErrors {errors} />
 {#if task}
-  <Form name="{task.name}" on:save="{onSave}" loading="{loading}" />
+  <Form name={task.name} on:save={onSave} {loading} />
 {/if}

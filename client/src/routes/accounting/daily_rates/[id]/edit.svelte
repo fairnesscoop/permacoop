@@ -57,15 +57,15 @@
 </svelte:head>
 
 <Breadcrumb
-  items="{[{ title: $_('accounting.breadcrumb') }, { title: 'TJM', path: 'accounting/daily_rates' }, { title }]}" />
-<H4Title title="{title}" />
-<ServerErrors errors="{errors}" />
+  items={[{ title: $_('accounting.breadcrumb') }, { title: 'TJM', path: 'accounting/daily_rates' }, { title }]} />
+<H4Title {title} />
+<ServerErrors {errors} />
 {#if dailyRate}
   <Form
-    on:save="{onSave}"
-    amount="{dailyRate.amount}"
-    taskId="{taskId}"
-    customerId="{customerId}"
-    userId="{userId}"
-    loading="{loading}" />
+    on:save={onSave}
+    amount={dailyRate.amount}
+    {taskId}
+    {customerId}
+    {userId}
+    {loading} />
 {/if}
