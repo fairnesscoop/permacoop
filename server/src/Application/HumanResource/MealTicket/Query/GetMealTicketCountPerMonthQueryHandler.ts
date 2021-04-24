@@ -16,7 +16,7 @@ export class GetMealTicketCountPerMonthQueryHandler {
     private readonly dateUtils: IDateUtils,
     @Inject('IMealTicketRemovalRepository')
     private readonly mealTicketRemovalRepository: IMealTicketRemovalRepository
-  ) {}
+  ) { }
 
   private buildMealTicketSummary = (
     mealTicketRemovals: MealTicketRemovalSummaryDTO[],
@@ -28,15 +28,15 @@ export class GetMealTicketCountPerMonthQueryHandler {
       let total = base;
       let mealTicketRemovalCount = 0;
 
-      const foudTicketRemoval = mealTicketRemovals.find(item => {
+      const foundTicketRemoval = mealTicketRemovals.find(item => {
         const _month = getMonth(item.date) + 1;
         return summary.month === _month;
       });
 
-      if (foudTicketRemoval) {
-        mealTicketRemovalCount = foudTicketRemoval.count;
-        if (summary.mealTicketCount >= foudTicketRemoval.count) {
-          total = total - foudTicketRemoval.count;
+      if (foundTicketRemoval) {
+        mealTicketRemovalCount = foundTicketRemoval.count;
+        if (summary.mealTicketCount >= foundTicketRemoval.count) {
+          total = total - foundTicketRemoval.count;
         } else {
           total = 0;
         }

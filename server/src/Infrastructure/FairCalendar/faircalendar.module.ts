@@ -45,6 +45,7 @@ import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
     { provide: 'ITaskRepository', useClass: TaskRepository },
     { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
     { provide: 'IDateUtils', useClass: DateUtilsAdapter },
+    Date,
     IsMaximumTimeSpentReached,
     AddEventCommandHandler,
     GetMonthlyFairCalendarQueryHandler,
@@ -55,4 +56,4 @@ import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
     GetFairCalendarOverview
   ]
 })
-export class FairCalendarModule {}
+export class FairCalendarModule { }

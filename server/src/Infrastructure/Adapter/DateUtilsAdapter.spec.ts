@@ -122,6 +122,15 @@ describe('DateUtilsAdapter', () => {
     ).toBe(0.5);
   });
 
+  it('testGetYear', () => {
+    const dateUtils = new DateUtilsAdapter();
+
+    expect(
+      dateUtils.getYear(new Date('2020-05-05'))
+    ).toBe(2020);
+  });
+
+
   it('testGetAllWorkingDayOfYearByMonth', () => {
     const dateUtils = new DateUtilsAdapter();
     const now = new Date('2021-12-12');
