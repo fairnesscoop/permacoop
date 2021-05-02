@@ -20,13 +20,12 @@ export class GetMealTicketCountPerMonthQueryHandler {
 
   private buildMealTicketSummary = (
     mealTicketRemovals: MealTicketRemovalSummaryDTO[],
-    mealTicketGrouppedByMonthSummaries: MealTicketGrouppedByMonthSummary[]
+    mealTicketGroupedByMonthSummaries: MealTicketGroupedByMonthSummary[]
   ): MealTicketSummaryDTO[] => {
-    return mealTicketGrouppedByMonthSummaries.map(summary => {
+    return mealTicketGroupedByMonthSummaries.map(summary => {
       const month = summary.month;
       const base = summary.mealTicketCount;
       let total = base;
-      let mealTicketRemovalCount = 0;
 
       const foundTicketRemoval = mealTicketRemovals.find(item => {
         const _month = getMonth(item.date) + 1;
@@ -34,18 +33,13 @@ export class GetMealTicketCountPerMonthQueryHandler {
       });
 
       if (foundTicketRemoval) {
-        mealTicketRemovalCount = foundTicketRemoval.count;
-        if (summary.mealTicketCount >= foundTicketRemoval.count) {
-          total = total - foundTicketRemoval.count;
-        } else {
-          total = 0;
-        }
+        total = total - foundTicketRemoval.count;
       }
 
       return new MealTicketSummaryDTO(
         month,
         base,
-        mealTicketRemovalCount,
+        foundTicketRemoval ? foundTicketRemoval.count : 0,
         total
       );
     });
@@ -62,15 +56,13 @@ export class GetMealTicketCountPerMonthQueryHandler {
       workingDaysByMonth
     );
 
-    const mealTicketRemovals = await this.mealTicketRemovalRepository.getAllByUserGroupedByDate(
+    const mealTicketRemovals = await this.mealTicketRemovalRepository.getAllByUserGroupedByMonth(
       user
     );
 
-    return Promise.resolve(
-      this.buildMealTicketSummary(
-        mealTicketRemovals,
-        yearlyAvailableMealTickets
-      )
+    return this.buildMealTicketSummary(
+      mealTicketRemovals,
+      yearlyAvailableMealTickets
     );
   }
 }

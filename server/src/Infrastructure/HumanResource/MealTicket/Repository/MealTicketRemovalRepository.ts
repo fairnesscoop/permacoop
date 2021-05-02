@@ -10,7 +10,7 @@ export class MealTicketRemovalRepository
   constructor(
     @InjectRepository(MealTicketRemoval)
     private readonly repository: Repository<MealTicketRemoval>
-  ) {}
+  ) { }
 
   public save(
     mealTicketRemoval: MealTicketRemoval
@@ -38,12 +38,12 @@ export class MealTicketRemovalRepository
       .getOne();
   }
 
-  public getAllByUserGroupedByDate(
+  public getAllByUserGroupedByMonth(
     user: User
   ): Promise<MealTicketRemovalSummaryDTO[]> {
     return this.repository
       .createQueryBuilder('mealTicketRemoval')
-      .select(['date', 'count(mealTicketRemoval.id)'])
+      .select(["date_trunc('month', date) date, count(id)"])
       .where('mealTicketRemoval.user = :userId', { userId: user.getId() })
       .groupBy('date')
       .getRawMany();

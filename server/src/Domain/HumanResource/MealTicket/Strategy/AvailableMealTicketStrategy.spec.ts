@@ -4,13 +4,11 @@ import { MealTicketGrouppedByMonthSummary } from './MealTicketGrouppedByMonthSum
 
 describe('AvailableMealTicketStrategy', () => {
   it('testGetMealTicketCountForEachMonthOfTheYear', () => {
-    const workedDaysOfYearByMonth1 = new WorkingDayOfYearByMonth(1, [
-      new Date('2021-01-01'),
-      new Date('2021-01-01'),
-      new Date('2021-01-01')
-    ]);
+    const workedDaysOfYearByMonth1 = new WorkingDayOfYearByMonth(1);
 
-    const expectedResult = new MealTicketGrouppedByMonthSummary(1, 3);
+    workedDaysOfYearByMonth1.addOneWorkingDay()
+
+    const expectedResult = new MealTicketGrouppedByMonthSummary(1, 1);
 
     expect(
       AvailableMealTicketStrategy.getMealTicketCountForEachMonthOfTheYear([

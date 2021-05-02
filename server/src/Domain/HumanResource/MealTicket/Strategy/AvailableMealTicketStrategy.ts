@@ -8,7 +8,7 @@ export class AvailableMealTicketStrategy {
     return workingDayOfYearByMonth.map(item => {
       return new MealTicketGrouppedByMonthSummary(
         item.month,
-        item.workingDays.length
+        item.workingDaysCount
       );
     });
   }

@@ -136,6 +136,11 @@ describe('DateUtilsAdapter', () => {
     const now = new Date('2021-12-12');
     const result = dateUtils.getAllWorkingDayOfYearByMonth(now);
     expect(result.length).toBe(12);
+
+    const WorkingDaysOfMarch = result.find((item) => {
+      return item.month === 3
+    })
+    expect(WorkingDaysOfMarch.workingDaysCount).toBe(23);
   });
 
   it('testGetLastDayOfYear', () => {

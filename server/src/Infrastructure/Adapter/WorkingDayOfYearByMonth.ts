@@ -1,12 +1,12 @@
 export class WorkingDayOfYearByMonth {
   readonly month: number;
-  readonly workingDays: Date[];
-  constructor(month: number, workedDays: Date[] = []) {
+  workingDaysCount: number
+  constructor(month: number, workedDaysOfYear = 0) {
     this.month = month;
-    this.workingDays = workedDays;
+    this.workingDaysCount = workedDaysOfYear
   }
 
-  addWorkingDay(date: Date) {
-    this.workingDays.push(date);
+  addOneWorkingDay() {
+    this.workingDaysCount += 1;
   }
 }

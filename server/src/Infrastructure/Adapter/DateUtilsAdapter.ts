@@ -87,14 +87,15 @@ export class DateUtilsAdapter implements IDateUtils {
       const itemWithMonth = prev.find(item => item.month === currentMonth);
 
       if (itemWithMonth) {
-        itemWithMonth.addWorkingDay(next);
+        itemWithMonth.addOneWorkingDay();
         return prev;
       }
       const working = new WorkingDayOfYearByMonth(currentMonth);
-      working.addWorkingDay(next);
+      working.addOneWorkingDay();
 
       return [...prev, working];
     }, defaultValues);
+
   }
 
   public getWorkedFreeDays(year: number): Date[] {
