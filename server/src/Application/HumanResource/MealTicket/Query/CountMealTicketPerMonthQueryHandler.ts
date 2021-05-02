@@ -7,7 +7,7 @@ import { AvailableMealTicketStrategy } from 'src/Domain/HumanResource/MealTicket
 import { getMonth } from 'date-fns';
 import { MealTicketGroupedByMonthSummary } from 'src/Domain/HumanResource/MealTicket/Strategy/MealTicketGroupedByMonthSummary';
 import { MealTicketRemovalSummaryDTO } from 'src/Infrastructure/HumanResource/MealTicket/DTO/MealTicketRemovalSummaryDTO';
-import { MealTicketSummaryDTO } from 'src/Domain/HumanResource/MealTicket/DTO/MealTicketSummaryDTO';
+import { MealTicketSummaryView } from '../Views/MealTicketSummaryView';
 
 @QueryHandler(CountMealTicketPerMonthQuery)
 export class CountMealTicketPerMonthQueryHandler {
@@ -21,7 +21,7 @@ export class CountMealTicketPerMonthQueryHandler {
   private buildMealTicketSummary = (
     mealTicketRemovals: MealTicketRemovalSummaryDTO[],
     mealTicketGroupedByMonthSummaries: MealTicketGroupedByMonthSummary[]
-  ): MealTicketSummaryDTO[] => {
+  ): MealTicketSummaryView[] => {
     return mealTicketGroupedByMonthSummaries.map(summary => {
       const month = summary.month;
       const base = summary.mealTicketCount;
@@ -36,7 +36,7 @@ export class CountMealTicketPerMonthQueryHandler {
         total = total - foundTicketRemoval.count;
       }
 
-      return new MealTicketSummaryDTO(
+      return new MealTicketSummaryView(
         month,
         base,
         foundTicketRemoval ? foundTicketRemoval.count : 0,
@@ -47,7 +47,7 @@ export class CountMealTicketPerMonthQueryHandler {
 
   public async execute(
     command: CountMealTicketPerMonthQuery
-  ): Promise<MealTicketSummaryDTO[]> {
+  ): Promise<MealTicketSummaryView[]> {
     const { user, currentDate } = command;
     const workingDaysByMonth = this.dateUtils.getAllWorkingDayOfYearByMonth(
       currentDate
