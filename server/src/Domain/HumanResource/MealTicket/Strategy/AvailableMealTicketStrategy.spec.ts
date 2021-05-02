@@ -1,6 +1,6 @@
 import { WorkingDayOfYearByMonth } from 'src/Infrastructure/Adapter/WorkingDayOfYearByMonth';
 import { AvailableMealTicketStrategy } from './AvailableMealTicketStrategy';
-import { MealTicketGrouppedByMonthSummary } from './MealTicketGrouppedByMonthSummary';
+import { MealTicketGroupedByMonthSummary } from './MealTicketGroupedByMonthSummary';
 
 describe('AvailableMealTicketStrategy', () => {
   it('testGetMealTicketCountForEachMonthOfTheYear', () => {
@@ -8,7 +8,7 @@ describe('AvailableMealTicketStrategy', () => {
 
     workedDaysOfYearByMonth1.addOneWorkingDay()
 
-    const expectedResult = new MealTicketGrouppedByMonthSummary(1, 1);
+    const expectedResult = new MealTicketGroupedByMonthSummary(1, 1);
 
     expect(
       AvailableMealTicketStrategy.getMealTicketCountForEachMonthOfTheYear([

@@ -1,12 +1,12 @@
 import { WorkingDayOfYearByMonth } from 'src/Infrastructure/Adapter/WorkingDayOfYearByMonth';
-import { MealTicketGrouppedByMonthSummary } from './MealTicketGrouppedByMonthSummary';
+import { MealTicketGroupedByMonthSummary } from './MealTicketGroupedByMonthSummary';
 
 export class AvailableMealTicketStrategy {
   public static getMealTicketCountForEachMonthOfTheYear(
     workingDayOfYearByMonth: WorkingDayOfYearByMonth[]
-  ): MealTicketGrouppedByMonthSummary[] {
+  ): MealTicketGroupedByMonthSummary[] {
     return workingDayOfYearByMonth.map(item => {
-      return new MealTicketGrouppedByMonthSummary(
+      return new MealTicketGroupedByMonthSummary(
         item.month,
         item.workingDaysCount
       );

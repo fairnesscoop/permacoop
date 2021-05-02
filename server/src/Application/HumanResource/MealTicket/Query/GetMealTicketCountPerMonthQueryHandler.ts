@@ -5,7 +5,7 @@ import { GetMealTicketCountPerMonthQuery } from './GetMealTicketCountPerMonthQue
 import { IDateUtils } from 'src/Application/IDateUtils';
 import { AvailableMealTicketStrategy } from 'src/Domain/HumanResource/MealTicket/Strategy/AvailableMealTicketStrategy';
 import { getMonth } from 'date-fns';
-import { MealTicketGrouppedByMonthSummary } from 'src/Domain/HumanResource/MealTicket/Strategy/MealTicketGrouppedByMonthSummary';
+import { MealTicketGroupedByMonthSummary } from 'src/Domain/HumanResource/MealTicket/Strategy/MealTicketGroupedByMonthSummary';
 import { MealTicketRemovalSummaryDTO } from 'src/Infrastructure/HumanResource/MealTicket/DTO/MealTicketRemovalSummaryDTO';
 import { MealTicketSummaryDTO } from 'src/Domain/HumanResource/MealTicket/DTO/MealTicketSummaryDTO';
 

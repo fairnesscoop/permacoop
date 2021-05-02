@@ -1,4 +1,4 @@
-export class MealTicketGrouppedByMonthSummary {
+export class MealTicketGroupedByMonthSummary {
   month: number;
   mealTicketCount: number;
   constructor(month: number, mealTicketCount: number) {
