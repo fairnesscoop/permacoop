@@ -6,7 +6,7 @@ export class WorkingDayOfYearByMonth {
     this.workingDaysCount = workedDaysOfYear
   }
 
-  addOneWorkingDay() {
+  public addOneWorkingDay() {
     this.workingDaysCount += 1;
   }
 }

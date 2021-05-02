@@ -5,7 +5,7 @@ import { GetMealTicketCountPerMonthQueryHandler } from './GetMealTicketCountPerM
 import { GetMealTicketCountPerMonthQuery } from './GetMealTicketCountPerMonthQuery';
 import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { MealTicketRemoval } from 'src/Domain/HumanResource/MealTicket/MealTicketRemoval.entity';
-import { WorkingDayOfYearByMonth } from 'src/Infrastructure/Adapter/WorkingDayOfYearByMonth';
+import { WorkingDayOfYearByMonth } from 'src/Domain/HumanResource/MealTicket/Strategy/WorkingDayOfYearByMonth';
 import { MealTicketSummaryDTO } from 'src/Domain/HumanResource/MealTicket/DTO/MealTicketSummaryDTO';
 
 describe('GetMealTicketCountPerMonthQueryHandler', () => {

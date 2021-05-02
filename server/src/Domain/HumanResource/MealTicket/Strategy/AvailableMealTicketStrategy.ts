@@ -1,4 +1,4 @@
-import { WorkingDayOfYearByMonth } from 'src/Infrastructure/Adapter/WorkingDayOfYearByMonth';
+import { WorkingDayOfYearByMonth } from './WorkingDayOfYearByMonth';
 import { MealTicketGroupedByMonthSummary } from './MealTicketGroupedByMonthSummary';
 
 export class AvailableMealTicketStrategy {

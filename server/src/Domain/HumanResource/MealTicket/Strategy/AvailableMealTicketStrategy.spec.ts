@@ -1,4 +1,4 @@
-import { WorkingDayOfYearByMonth } from 'src/Infrastructure/Adapter/WorkingDayOfYearByMonth';
+import { WorkingDayOfYearByMonth } from 'src/Domain/HumanResource/MealTicket/Strategy/WorkingDayOfYearByMonth';
 import { AvailableMealTicketStrategy } from './AvailableMealTicketStrategy';
 import { MealTicketGroupedByMonthSummary } from './MealTicketGroupedByMonthSummary';
 

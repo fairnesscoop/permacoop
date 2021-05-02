@@ -8,7 +8,7 @@ import {
   getYear
 } from 'date-fns';
 import { IDateUtils } from 'src/Application/IDateUtils';
-import { WorkingDayOfYearByMonth } from './WorkingDayOfYearByMonth';
+import { WorkingDayOfYearByMonth } from 'src/Domain/HumanResource/MealTicket/Strategy/WorkingDayOfYearByMonth';
 
 @Injectable()
 export class DateUtilsAdapter implements IDateUtils {
