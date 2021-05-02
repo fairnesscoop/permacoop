@@ -36,7 +36,7 @@ describe('GetMealTicketCountPerMonthQueryHandler', () => {
 
     const workingDayByMonth3 = new WorkingDayOfYearByMonth(3, 23);
 
-    const meatTicketsExceptions = [
+    const mealTicketsExceptions = [
 
       /*
         There are 2 meal exceptions for the month of January
@@ -65,7 +65,7 @@ describe('GetMealTicketCountPerMonthQueryHandler', () => {
 
     when(
       mealTicketRemovalRepository.getAllByUserGroupedByMonth(instance(user))
-    ).thenResolve(meatTicketsExceptions);
+    ).thenResolve(mealTicketsExceptions);
 
     expect(await handler.execute(command)).toStrictEqual(expectedResult);
   });
@@ -77,7 +77,7 @@ describe('GetMealTicketCountPerMonthQueryHandler', () => {
 
     const workingDayByMonth3 = new WorkingDayOfYearByMonth(3, 23);
 
-    const meatTicketsExceptions = [
+    const mealTicketsExceptions = [
 
 
       /*
@@ -126,7 +126,7 @@ describe('GetMealTicketCountPerMonthQueryHandler', () => {
 
     when(
       mealTicketRemovalRepository.getAllByUserGroupedByMonth(instance(user))
-    ).thenResolve(meatTicketsExceptions);
+    ).thenResolve(mealTicketsExceptions);
 
     expect(await handler.execute(command)).toStrictEqual(expectedResult);
   });
