@@ -25,4 +25,4 @@ import { DownloadFileQueryHandler } from 'src/Application/File/Query/DownloadFil
     DownloadFileQueryHandler
   ]
 })
-export class FileModule { }
+export class FileModule {}

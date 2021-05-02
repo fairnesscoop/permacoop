@@ -95,7 +95,6 @@ export class DateUtilsAdapter implements IDateUtils {
 
       return [...prev, working];
     }, defaultValues);
-
   }
 
   public getWorkedFreeDays(year: number): Date[] {

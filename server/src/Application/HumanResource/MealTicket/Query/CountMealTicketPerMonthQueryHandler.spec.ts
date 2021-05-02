@@ -37,7 +37,6 @@ describe('CountMealTicketPerMonthQueryHandler', () => {
     const workingDayByMonth3 = new WorkingDayOfYearByMonth(3, 23);
 
     const mealTicketsExceptions = [
-
       /*
         There are 2 meal exceptions for the month of January
       */
@@ -70,7 +69,7 @@ describe('CountMealTicketPerMonthQueryHandler', () => {
     expect(await handler.execute(command)).toStrictEqual(expectedResult);
   });
 
-  it('should return minium 0 available meal ticket even if there are more exceptions', async () => {
+  it('should return a minimum of 0  meal ticket even if there are more exceptions', async () => {
     const workingDayByMonth1 = new WorkingDayOfYearByMonth(1, 20);
 
     const workingDayByMonth2 = new WorkingDayOfYearByMonth(2, 21);
@@ -78,8 +77,6 @@ describe('CountMealTicketPerMonthQueryHandler', () => {
     const workingDayByMonth3 = new WorkingDayOfYearByMonth(3, 23);
 
     const mealTicketsExceptions = [
-
-
       /*
         There is 1 meal exceptions for the month of january
       */
@@ -87,7 +84,6 @@ describe('CountMealTicketPerMonthQueryHandler', () => {
         count: 1,
         date: new Date('1998-01-01')
       },
-
 
       /*
         There are 2 meal exceptions for the month of February
@@ -97,7 +93,6 @@ describe('CountMealTicketPerMonthQueryHandler', () => {
         count: 2,
         date: new Date('1998-02-01')
       },
-
 
       /*
         There are 6 meal exceptions for the month of March

@@ -125,11 +125,8 @@ describe('DateUtilsAdapter', () => {
   it('testGetYear', () => {
     const dateUtils = new DateUtilsAdapter();
 
-    expect(
-      dateUtils.getYear(new Date('2020-05-05'))
-    ).toBe(2020);
+    expect(dateUtils.getYear(new Date('2020-05-05'))).toBe(2020);
   });
-
 
   it('testGetAllWorkingDayOfYearByMonth', () => {
     const dateUtils = new DateUtilsAdapter();
@@ -137,9 +134,9 @@ describe('DateUtilsAdapter', () => {
     const result = dateUtils.getAllWorkingDayOfYearByMonth(now);
     expect(result.length).toBe(12);
 
-    const WorkingDaysOfMarch = result.find((item) => {
-      return item.month === 3
-    })
+    const WorkingDaysOfMarch = result.find(item => {
+      return item.month === 3;
+    });
     expect(WorkingDaysOfMarch.workingDaysCount).toBe(23);
   });
 

@@ -6,7 +6,7 @@ describe('AvailableMealTicketStrategy', () => {
   it('testGetMealTicketCountForEachMonthOfTheYear', () => {
     const workedDaysOfYearByMonth1 = new WorkingDayOfYearByMonth(1);
 
-    workedDaysOfYearByMonth1.addOneWorkingDay()
+    workedDaysOfYearByMonth1.addOneWorkingDay();
 
     const expectedResult = new MealTicketGroupedByMonthSummary(1, 1);
 
