@@ -68,7 +68,7 @@ import { CanLeaveRequestBeRemoved } from 'src/Domain/HumanResource/Leave/Specifi
 import { DeleteLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/DeleteLeaveRequestCommandHandler';
 import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestAction';
 import { GetAvailableMealTicketsAction } from './MealTicket/Action/GetAvailableMealTicketsAction';
-import { GetMealTicketCountPerMonthQueryHandler } from 'src/Application/HumanResource/MealTicket/Query/GetMealTicketCountPerMonthQueryHandler';
+import { CountMealTicketPerMonthQueryHandler } from 'src/Application/HumanResource/MealTicket/Query/CountMealTicketPerMonthQueryHandler';
 
 @Module({
   imports: [
@@ -158,7 +158,7 @@ import { GetMealTicketCountPerMonthQueryHandler } from 'src/Application/HumanRes
     DeleteLeaveRequestCommandHandler,
     IsMealTicketRemovalAlreadyExist,
     CreateMealTicketRemovalCommandHandler,
-    GetMealTicketCountPerMonthQueryHandler
+    CountMealTicketPerMonthQueryHandler
   ]
 })
-export class HumanResourceModule {}
+export class HumanResourceModule { }

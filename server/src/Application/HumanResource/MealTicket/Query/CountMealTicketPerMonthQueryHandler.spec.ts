@@ -1,29 +1,29 @@
 import { mock, instance, when } from 'ts-mockito';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { MealTicketRemovalRepository } from 'src/Infrastructure/HumanResource/MealTicket/Repository/MealTicketRemovalRepository';
-import { GetMealTicketCountPerMonthQueryHandler } from './GetMealTicketCountPerMonthQueryHandler';
-import { GetMealTicketCountPerMonthQuery } from './GetMealTicketCountPerMonthQuery';
+import { CountMealTicketPerMonthQueryHandler } from './CountMealTicketPerMonthQueryHandler';
+import { CountMealTicketPerMonthQuery } from './CountMealTicketPerMonthQuery';
 import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { MealTicketRemoval } from 'src/Domain/HumanResource/MealTicket/MealTicketRemoval.entity';
 import { WorkingDayOfYearByMonth } from 'src/Domain/HumanResource/MealTicket/Strategy/WorkingDayOfYearByMonth';
 import { MealTicketSummaryDTO } from 'src/Domain/HumanResource/MealTicket/DTO/MealTicketSummaryDTO';
 
-describe('GetMealTicketCountPerMonthQueryHandler', () => {
+describe('CountMealTicketPerMonthQueryHandler', () => {
   let mealTicketRemovalRepository: MealTicketRemovalRepository;
-  let handler: GetMealTicketCountPerMonthQueryHandler;
+  let handler: CountMealTicketPerMonthQueryHandler;
   let dateUtilsAdapter: DateUtilsAdapter;
 
   const now = new Date();
 
   const user = mock(User);
 
-  const command = new GetMealTicketCountPerMonthQuery(instance(user), now);
+  const command = new CountMealTicketPerMonthQuery(instance(user), now);
 
   beforeEach(() => {
     mealTicketRemovalRepository = mock(MealTicketRemovalRepository);
     dateUtilsAdapter = mock(DateUtilsAdapter);
 
-    handler = new GetMealTicketCountPerMonthQueryHandler(
+    handler = new CountMealTicketPerMonthQueryHandler(
       instance(dateUtilsAdapter),
       instance(mealTicketRemovalRepository)
     );

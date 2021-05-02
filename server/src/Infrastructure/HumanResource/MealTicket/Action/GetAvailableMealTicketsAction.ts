@@ -12,7 +12,7 @@ import { RolesGuard } from 'src/Infrastructure/HumanResource/User/Security/Roles
 import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import { LoggedUser } from '../../User/Decorator/LoggedUser';
 import { IQueryBus } from '@nestjs/cqrs';
-import { GetMealTicketCountPerMonthQuery } from 'src/Application/HumanResource/MealTicket/Query/GetMealTicketCountPerMonthQuery';
+import { CountMealTicketPerMonthQuery } from 'src/Application/HumanResource/MealTicket/Query/CountMealTicketPerMonthQuery';
 
 @Controller('meal-tickets')
 @ApiTags('Human Resource')
@@ -22,7 +22,7 @@ export class GetAvailableMealTicketsAction {
   constructor(
     @Inject('IQueryBus')
     private readonly queryBus: IQueryBus
-  ) {}
+  ) { }
 
   @Get('count')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
@@ -30,7 +30,7 @@ export class GetAvailableMealTicketsAction {
   public async index(@LoggedUser() user: User) {
     try {
       const result = await this.queryBus.execute(
-        new GetMealTicketCountPerMonthQuery(user, new Date())
+        new CountMealTicketPerMonthQuery(user, new Date())
       );
       return result;
     } catch (e) {

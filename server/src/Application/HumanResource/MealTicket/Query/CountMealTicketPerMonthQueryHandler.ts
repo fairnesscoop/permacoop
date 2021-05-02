@@ -1,7 +1,7 @@
 import { QueryHandler } from '@nestjs/cqrs';
 import { Inject } from '@nestjs/common';
 import { IMealTicketRemovalRepository } from 'src/Domain/HumanResource/MealTicket/Repository/IMealTicketRemovalRepository';
-import { GetMealTicketCountPerMonthQuery } from './GetMealTicketCountPerMonthQuery';
+import { CountMealTicketPerMonthQuery } from './CountMealTicketPerMonthQuery';
 import { IDateUtils } from 'src/Application/IDateUtils';
 import { AvailableMealTicketStrategy } from 'src/Domain/HumanResource/MealTicket/Strategy/AvailableMealTicketStrategy';
 import { getMonth } from 'date-fns';
@@ -9,8 +9,8 @@ import { MealTicketGroupedByMonthSummary } from 'src/Domain/HumanResource/MealTi
 import { MealTicketRemovalSummaryDTO } from 'src/Infrastructure/HumanResource/MealTicket/DTO/MealTicketRemovalSummaryDTO';
 import { MealTicketSummaryDTO } from 'src/Domain/HumanResource/MealTicket/DTO/MealTicketSummaryDTO';
 
-@QueryHandler(GetMealTicketCountPerMonthQuery)
-export class GetMealTicketCountPerMonthQueryHandler {
+@QueryHandler(CountMealTicketPerMonthQuery)
+export class CountMealTicketPerMonthQueryHandler {
   constructor(
     @Inject('IDateUtils')
     private readonly dateUtils: IDateUtils,
@@ -46,7 +46,7 @@ export class GetMealTicketCountPerMonthQueryHandler {
   };
 
   public async execute(
-    command: GetMealTicketCountPerMonthQuery
+    command: CountMealTicketPerMonthQuery
   ): Promise<MealTicketSummaryDTO[]> {
     const { user, currentDate } = command;
     const workingDaysByMonth = this.dateUtils.getAllWorkingDayOfYearByMonth(
