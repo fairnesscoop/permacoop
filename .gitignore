@@ -2,6 +2,8 @@
 node_modules
 yarn-error.log*
 
+/docker-compose.override.yml
+
 # OS
 .DS_Store
 
