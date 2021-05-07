@@ -9,7 +9,7 @@
 <script>
   import { goto } from '@sapper/app';
   import { _ } from 'svelte-i18n';
-  import { format } from 'date-fns';
+  import { format, formatISO } from 'date-fns';
   import { fr } from 'date-fns/locale';
   import Breadcrumb from 'components/Breadcrumb.svelte';
   import { post } from 'utils/axios';
@@ -53,6 +53,16 @@
     try {
       loading = true;
       await post('events', e.detail);
+
+      const mealTicket = e.detail.mealTicket;
+
+      if (!mealTicket.canRecieve) {
+        await post('meal-tickets-removals', {
+          date: formatISO(Date.now()),
+          comment: mealTicket.comment,
+        });
+      }
+
       goto(`/faircalendar?date=${startDate}`);
     } catch (e) {
       errors = errorNormalizer(e);
