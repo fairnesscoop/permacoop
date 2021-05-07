@@ -1,5 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
+  import { format } from 'date-fns';
+  import { fr } from 'date-fns/locale';
   export let mealTicketsSummaries = [];
 </script>
 
@@ -17,7 +19,9 @@
   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
     {#each mealTicketsSummaries as { month, total, base, mealTicketRemovalCount }}
       <tr class="text-gray-700 dark:text-gray-400">
-        <td class="px-4 py-3 text-sm">{$_(`common.month.${month}`)}</td>
+        <td class="px-4 py-3 text-sm">
+          {format(new Date(2014, month, 11), 'MMMM', { locale: fr })}
+        </td>
         <td class="px-4 py-3 text-sm">{base}</td>
         <td class="px-4 py-3 text-sm">{mealTicketRemovalCount}</td>
         <td
