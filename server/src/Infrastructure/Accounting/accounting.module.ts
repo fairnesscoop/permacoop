@@ -83,7 +83,6 @@ import { GetInvoicesQueryHandler } from 'src/Application/Accounting/Query/Invoic
     { provide: 'IEventRepository', useClass: EventRepository },
     { provide: 'IInvoiceRepository', useClass: InvoiceRepository },
     { provide: 'IInvoiceItemRepository', useClass: InvoiceItemRepository },
-    Date,
     CreateQuoteCommandHandler,
     CreateQuoteItemsCommandHandler,
     CreateDailyRateCommandHandler,
