@@ -9,6 +9,7 @@ export interface IMealTicketRemovalRepository {
     date: Date
   ): Promise<MealTicketRemoval | undefined>;
   getAllByUserGroupedByMonth(
-    user: User
+    user: User,
+    date: Date,
   ): Promise<MealTicketRemovalSummaryDTO[]>;
 }

@@ -42,7 +42,7 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - 81:80
+      - 80:80
     depends_on:
       - 'client'
       - 'api'

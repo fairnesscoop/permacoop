@@ -1,4 +1,4 @@
 export class MealTicketRemovalSummaryDTO {
-  public date: Date;
+  public monthnumber: number;
   public count: number;
 }
