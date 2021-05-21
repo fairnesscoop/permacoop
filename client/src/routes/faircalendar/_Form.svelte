@@ -6,18 +6,12 @@
   import { get } from 'utils/axios';
   import TasksInput from 'components/inputs/TasksInput.svelte';
   import ProjectsInput from 'components/inputs/ProjectsInput.svelte';
-  import Input from 'components/inputs/Input.svelte';
   import SelectInput from 'components/inputs/SelectInput.svelte';
   import Button from 'components/inputs/Button.svelte';
-  import Checkbox from 'components/inputs/Checkbox.svelte';
+  import Input from 'components/inputs/Input.svelte';
 
   export let event;
   export let loading;
-
-  export let mealTicket = {
-    canRecieve: true,
-    comment: null,
-  };
 
   const dispatch = createEventDispatcher();
 
@@ -98,16 +92,6 @@
     label={$_('faircalendar.form.summary')}
     bind:value={event.summary}
     required={''} />
-  <Checkbox
-    label={$_('faircalendar.form.can_have_meal_ticket')}
-    bind:checked={mealTicket.canRecieve} />
-
-  {#if !mealTicket.canRecieve}
-    <Input
-      label={$_('faircalendar.form.cant_have_meal_ticket_comment')}
-      bind:value={mealTicket.comment}
-      required={''} />
-  {/if}
 
   <Button
     value={$_('common.form.save')}

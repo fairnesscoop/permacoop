@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 volumes:
   database: {}
@@ -15,6 +15,7 @@ services:
       PGUSER: docker
       PGPASSWORD: docker
     volumes:
+<<<<<<< HEAD
       - 'database:/var/lib/postgresql/data'
     ports:
       - 5432:5432
@@ -35,6 +36,27 @@ services:
     volumes:
       - './client:/var/www'
       - '/var/www/node_modules'
+=======
+      - "database:/var/lib/postgresql/data"
+
+  api:
+    image: node:14.3
+    working_dir: "/var/www"
+    depends_on:
+      - database
+    volumes:
+      - "./server:/var/www:cached"
+      - "uploads:/var/www/uploads"
+    command: npm run start:dev
+
+  client:
+    image: node:14.3
+    working_dir: "/var/www"
+    depends_on:
+      - api
+    volumes:
+      - "./client:/var/www:cached"
+>>>>>>> Update fr.json to fix typo
     ports:
       - 5000:5000
       - 10000:10000
@@ -42,9 +64,9 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - 80:80
+      - 3000:80
     depends_on:
-      - 'client'
-      - 'api'
+      - "client"
+      - "api"
     volumes:
       - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro

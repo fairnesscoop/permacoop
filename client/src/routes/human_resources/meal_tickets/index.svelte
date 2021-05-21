@@ -7,6 +7,7 @@
   import ServerErrors from '../../../components/ServerErrors.svelte';
   import { get } from '../../../utils/axios';
   import Table from './_Table.svelte';
+  import Form from './_Form.svelte';
   let title = $_('human_resources.meal_tickets.title');
 
   let mealTicketsSummaries = [];
@@ -33,4 +34,9 @@
 <H4Title title={$_('human_resources.meal_tickets.available_meal_tickets')} />
 
 <ServerErrors {errors} />
+
 <Table {mealTicketsSummaries} />
+
+<H4Title title={'ne pas recevoir de ticket restaurant pour une journée'} />
+
+<Form />
