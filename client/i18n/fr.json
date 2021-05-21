@@ -222,7 +222,9 @@
       "type": "Type de CRA",
       "time": "Temps passé",
       "billable": "Facturable",
-      "summary": "Commentaire"
+      "summary": "Commentaire",
+      "can_have_meal_ticket": "Je reçois un ticket restaurant pour cette évenement",
+      "cant_have_meal_ticket_comment": "Pour quelle raison ne voulez-vous pas en reçevoir ?"
     }
   },
   "human_resources": {
@@ -245,6 +247,14 @@
       "add": {
         "title": "Ajouter une fiche de paie"
       }
+    },
+    "meal_tickets": {
+      "title": "Tickets Restaurant",
+      "available_meal_tickets": "Tickets-restaurant disponibles",
+      "month": "Mois",
+      "base": "base",
+      "exceptions": "Exceptions ajoutées",
+      "total": "Total disponibles"
     },
     "leaves": {
       "title": "Congés",

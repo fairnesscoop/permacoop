@@ -59,9 +59,16 @@ import { GetUserAction } from './User/Action/GetUserAction';
 import { UpdateUserCommandHandler } from 'src/Application/HumanResource/User/Command/UpdateUserCommandHandler';
 import { GetUserAdministrativeByIdQueryHandler } from 'src/Application/HumanResource/User/Query/GetUserAdministrativeByIdQueryHandler';
 import { GetLeavesAction } from './Leave/Action/GetLeavesAction';
+import { MealTicketRemoval } from 'src/Domain/HumanResource/MealTicket/MealTicketRemoval.entity';
+import { MealTicketRemovalRepository } from './MealTicket/Repository/MealTicketRemovalRepository';
+import { IsMealTicketRemovalAlreadyExist } from 'src/Domain/HumanResource/MealTicket/Specification/IsMealTicketRemovalAlreadyExist';
+import { CreateMealTicketRemovalCommandHandler } from 'src/Application/HumanResource/MealTicket/Command/CreateMealTicketRemovalCommandHandler';
+import { CreateMealTicketRemovalAction } from './MealTicket/Action/CreateMealTicketRemovalAction';
 import { CanLeaveRequestBeRemoved } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeRemoved';
 import { DeleteLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/DeleteLeaveRequestCommandHandler';
 import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestAction';
+import { GetAvailableMealTicketsAction } from './MealTicket/Action/GetAvailableMealTicketsAction';
+import { CountMealTicketPerMonthQueryHandler } from 'src/Application/HumanResource/MealTicket/Query/CountMealTicketPerMonthQueryHandler';
 
 @Module({
   imports: [
@@ -75,7 +82,8 @@ import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestActio
       LeaveRequest,
       Leave,
       Event,
-      Cooperative
+      Cooperative,
+      MealTicketRemoval
     ])
   ],
   controllers: [
@@ -95,7 +103,10 @@ import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestActio
     CreateLeaveRequestAction,
     RefuseLeaveRequestAction,
     AcceptLeaveRequestAction,
-    DeleteLeaveRequestAction
+    CreateMealTicketRemovalAction,
+    GetAvailableMealTicketsAction,
+    DeleteLeaveRequestAction,
+    CreateMealTicketRemovalAction
   ],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
@@ -108,8 +119,16 @@ import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestActio
     { provide: 'IEventRepository', useClass: EventRepository },
     { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
     {
+      provide: 'IMealTicketRemovalRepository',
+      useClass: MealTicketRemovalRepository
+    },
+    {
       provide: 'IUserAdministrativeRepository',
       useClass: UserAdministrativeRepository
+    },
+    {
+      provide: 'IMealTicketRemovalRepository',
+      useClass: MealTicketRemovalRepository
     },
     Date,
     CreatePaySlipCommandHandler,
@@ -136,7 +155,10 @@ import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestActio
     GetLeaveRequestByIdQueryHandler,
     DoesEventsOrLeaveExistForPeriod,
     CanLeaveRequestBeRemoved,
-    DeleteLeaveRequestCommandHandler
+    DeleteLeaveRequestCommandHandler,
+    IsMealTicketRemovalAlreadyExist,
+    CreateMealTicketRemovalCommandHandler,
+    CountMealTicketPerMonthQueryHandler
   ]
 })
 export class HumanResourceModule {}

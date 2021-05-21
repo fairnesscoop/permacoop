@@ -25,6 +25,9 @@ ps: ## List docker containers
 start: ## Start the application
 	make start-container
 	make watch-tailwind
+restart: ## Restart containers
+	make stop
+	make start
 start-container: ## Start docker containers
 	${compose} up -d
 watch-tailwind:

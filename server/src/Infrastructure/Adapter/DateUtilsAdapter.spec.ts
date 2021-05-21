@@ -36,13 +36,10 @@ describe('DateUtilsAdapter', () => {
   });
 
   it('testGetCurrentDate', () => {
-    const date = new Date('2020-05-09T11:49:58.706Z');
-    const dateUtils = new DateUtilsAdapter(date);
+    const dateUtils = new DateUtilsAdapter();
 
-    expect(dateUtils.getCurrentDate()).toBe(date);
-    expect(dateUtils.getCurrentDateToISOString()).toBe(
-      '2020-05-09T11:49:58.706Z'
-    );
+    expect(dateUtils.getCurrentDate()).toBeInstanceOf(Date);
+    expect(dateUtils.getCurrentDateToISOString()).toBeDefined();
   });
 
   it('testGetWorkedDaysDuringAPeriod', () => {
@@ -123,5 +120,37 @@ describe('DateUtilsAdapter', () => {
     expect(
       dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-05', false)
     ).toBe(0.5);
+  });
+
+  it('testGetYear', () => {
+    const dateUtils = new DateUtilsAdapter();
+
+    expect(dateUtils.getYear(new Date('2020-05-05'))).toBe(2020);
+  });
+
+  it('testGetAllWorkingDayOfYearByMonth', () => {
+    const dateUtils = new DateUtilsAdapter();
+    const now = new Date('2021-12-12');
+    const result = dateUtils.getAllWorkingDayOfYearByMonth(now);
+    expect(result.length).toBe(12);
+
+    const WorkingDaysOfMarch = result.find(item => {
+      return item.month === 3;
+    });
+    expect(WorkingDaysOfMarch.workingDaysCount).toBe(23);
+  });
+
+  it('testGetLastDayOfYear', () => {
+    const dateUtils = new DateUtilsAdapter();
+    const now = new Date('2021-12-12');
+    const result = dateUtils.getLastDayOfYear(now);
+    expect(result).toStrictEqual(new Date('2021-12-31'));
+  });
+
+  it('getFirstDayOfYear', () => {
+    const dateUtils = new DateUtilsAdapter();
+    const now = new Date('2021-12-12');
+    const result = dateUtils.getFirstDayOfYear(now);
+    expect(result).toStrictEqual(new Date('2021-01-01'));
   });
 });

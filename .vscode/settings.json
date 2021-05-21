@@ -7,5 +7,15 @@
 		"editor.formatOnSave": true
 	},
 	"eslint.format.enable": true,
-	"eslint.lintTask.enable": true
+	"eslint.lintTask.enable": true,
+	"eslint.workingDirectories": [
+        {
+            "directory": "./client",
+            "changeProcessCWD": true
+        },
+		{
+            "directory": "./server",
+            "changeProcessCWD": true
+        }
+    ],
 }
