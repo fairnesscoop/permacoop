@@ -6,24 +6,25 @@ import { RolesGuard } from 'src/Infrastructure/HumanResource/User/Security/Roles
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import { GetOnLeaveUsersQuery } from 'src/Application/HumanResource/Leave/Query/GetOnLeaveUsersQuery';
-import {OnLeaveUserView} from "../../../../Application/HumanResource/Leave/View/OnLeaveUserView";
+import { OnLeaveUserView } from "src/Application/HumanResource/Leave/View/OnLeaveUserView";
 
 @Controller('on-leave')
 @ApiTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
 export class GetOnLeaveUsersAction {
-    constructor(
-        @Inject('IQueryBus')
-        private readonly queryBus: IQueryBus
-    ) {}
+  constructor(
+    @Inject('IQueryBus')
+    private readonly queryBus: IQueryBus
+  ) {
+  }
 
-    @Get()
-    @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-    @ApiOperation({ summary: 'Get today on leave users' })
-    public async index(): Promise<Array<OnLeaveUserView>> {
-        return await this.queryBus.execute(
-            new GetOnLeaveUsersQuery()
-        );
-    }
+  @Get()
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
+  @ApiOperation({summary: 'Get today on leave users'})
+  public async index(): Promise<Array<OnLeaveUserView>> {
+    return await this.queryBus.execute(
+      new GetOnLeaveUsersQuery()
+    );
+  }
 }
