@@ -9,6 +9,7 @@ import { FairCalendarModule } from './Infrastructure/FairCalendar/faircalendar.m
 import { FileModule } from './Infrastructure/File/file.module';
 import { HumanResourceModule } from './Infrastructure/HumanResource/humanResource.module';
 import { SettingsModule } from './Infrastructure/Settings/settings.module';
+import { ContactModule } from './Infrastructure/Contact/contact.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { SettingsModule } from './Infrastructure/Settings/settings.module';
     HumanResourceModule,
     ProjectModule,
     TaskModule,
-    SettingsModule
+    SettingsModule,
+    ContactModule
   ]
 })
 export class AppModule {}
