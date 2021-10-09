@@ -5,7 +5,7 @@
   import { onMount } from 'svelte';
   import { errorNormalizer } from '../../../normalizer/errors';
   import ServerErrors from '../../../components/ServerErrors.svelte';
-  import { get } from '../../../utils/axios';
+  import { get, post } from '../../../utils/axios';
   import Table from './_Table.svelte';
   import Form from './_Form.svelte';
   let title = $_('human_resources.meal_tickets.title');
@@ -21,6 +21,16 @@
     }
   };
 
+  const saveMealTicketException = async (e) => {
+    try {
+      await post('meal-tickets-removals', {
+        date: e.detail.exceptionDate,
+      });
+    } catch (e) {
+      errors = errorNormalizer(e);
+    }
+  };
+
   onMount(async () => {
     await fetchMealTicketsSummaries();
   });
@@ -31,12 +41,13 @@
 </svelte:head>
 
 <Breadcrumb items={[{ title: $_('human_resources.breadcrumb') }, { title }]} />
-<H4Title title={$_('human_resources.meal_tickets.available_meal_tickets')} />
 
 <ServerErrors {errors} />
 
+<H4Title title={$_('human_resources.meal_tickets.available_meal_tickets')} />
 <Table {mealTicketsSummaries} />
 
-<H4Title title={'ne pas recevoir de ticket restaurant pour une journée'} />
+<H4Title
+  title={$_('human_resources.meal_tickets.do_not_want_to_receive_meal_ticket')} />
 
-<Form />
+<Form on:save={saveMealTicketException} />

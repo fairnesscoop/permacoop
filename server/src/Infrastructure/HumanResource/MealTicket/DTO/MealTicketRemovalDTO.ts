@@ -8,6 +8,5 @@ export class MealTicketRemovalDTO {
   public date: string;
 
   @ApiProperty()
-  @IsNotEmpty()
   public comment: string;
 }

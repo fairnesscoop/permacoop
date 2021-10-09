@@ -101,16 +101,6 @@
           info.el.title = info.event.extendedProps.summary;
         }
       },
-      dayRender: ({ el, date }) => {
-        const p = document.createElement('span');
-        p.style.width = '12px';
-        p.style.height = '12px';
-        p.style.marginLeft = '5px';
-        p.style.marginTop = '5px';
-        p.classList = 'block rounded-full bg-red-500';
-
-        el.appendChild(p);
-      },
       businessHours: {
         daysOfWeek: [1, 2, 3, 4, 5],
       },
@@ -156,13 +146,6 @@
 
 <div class="px-3 mb-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <div id="calendar" />
-
-  <div class="pt-2 dark:text-white">
-    {$_('faircalendar.legend')}
-    <div class="flex items-center content-center">
-      <span class="h-4 w-4 mr-2  block rounded-full bg-red-500" />
-      <p class="text-sm">{$_('faircalendar.no_meal_ticket_for_this_day')}</p>
-    </div>
-    <p class="text-sm font-semibold">{$_('faircalendar.not_billable')}</p>
-  </div>
+  <small
+    class="mt-2 mb-2 font-semibold dark:text-white">{$_('faircalendar.not_billable')}</small>
 </div>

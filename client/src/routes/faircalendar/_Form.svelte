@@ -6,9 +6,9 @@
   import { get } from 'utils/axios';
   import TasksInput from 'components/inputs/TasksInput.svelte';
   import ProjectsInput from 'components/inputs/ProjectsInput.svelte';
+  import Input from 'components/inputs/Input.svelte';
   import SelectInput from 'components/inputs/SelectInput.svelte';
   import Button from 'components/inputs/Button.svelte';
-  import Input from 'components/inputs/Input.svelte';
 
   export let event;
   export let loading;

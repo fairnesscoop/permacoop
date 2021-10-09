@@ -79,6 +79,5 @@
 <Breadcrumb
   items={[{ title: $_('faircalendar.breadcrumb'), path: 'faircalendar' }, { title }]} />
 <ServerErrors {errors} />
-
 <H4Title {title} />
 <Form {loading} on:save={onSave} {event} />

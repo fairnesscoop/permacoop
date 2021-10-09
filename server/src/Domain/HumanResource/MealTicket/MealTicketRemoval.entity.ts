@@ -9,7 +9,7 @@ export class MealTicketRemoval {
   @Column({ type: 'timestamp', nullable: false })
   private date: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: true })
   private comment: string;
 
   @ManyToOne(type => User, { nullable: false, onDelete: 'CASCADE' })

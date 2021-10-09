@@ -54,7 +54,7 @@ client-bash: ## Connect to client container
 database-migrate: ## Database migrations
 	${exec} api npm run migration:migrate
 database-diff: ## Generate database diff
-	${exec} api npm run migration:diff $(MIGRATION_NAME)
+	${exec} api npm run migration:diff -n $(MIGRATION_NAME)
 database-connect: ## Connect to the database container
 	${exec} database psql -h database -d permacoop
 ci: ## Run CI checks

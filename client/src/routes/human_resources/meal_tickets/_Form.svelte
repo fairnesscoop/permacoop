@@ -1,29 +1,16 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import SelectInput from 'components/inputs/SelectInput.svelte';
   import Button from 'components/inputs/Button.svelte';
   import Input from 'components/inputs/Input.svelte';
 
   const dispatch = createEventDispatcher();
-  const types = ['paid', 'unpaid', 'medical', 'special'];
 
-  export let type = 'paid';
-  export let startDate = '';
-  export let startsAllDay = 'true';
-  export let endDate = '';
-  export let endsAllDay = 'true';
-  export let comment = '';
-  export let loading;
+  export let exceptionDate;
 
   const submit = () => {
     dispatch('save', {
-      type,
-      startDate: new Date(startDate),
-      startsAllDay,
-      endDate: new Date(endDate),
-      endsAllDay,
-      comment,
+      exceptionDate: new Date(exceptionDate),
     });
   };
 </script>
@@ -32,19 +19,14 @@
   on:submit|preventDefault={submit}
   class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <div class="flex">
-    <div class="w-1/2 pr-2">
-      <Input
-        type={'date'}
-        label={$_('human_resources.leaves.requests.form.to_date')}
-        bind:value={endDate} />
+    <div class="flex items-center">
+      <span class="block mr-5">
+        {$_('human_resources.meal_tickets.do_not_want_to_receive_meal_ticket_this_day')}
+      </span>
+
+      <Input marginClass="mt-0" type={'date'} bind:value={exceptionDate} />
     </div>
   </div>
-  <Input
-    label={$_('human_resources.leaves.requests.form.comment')}
-    required={''}
-    bind:value={comment} />
-  <Button
-    value={$_('common.form.save')}
-    {loading}
-    disabled={!startDate || !endDate || loading} />
+
+  <Button value={$_('common.form.save')} disabled={!exceptionDate} />
 </form>

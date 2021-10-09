@@ -275,7 +275,9 @@
       "month": "Mois",
       "base": "base",
       "exceptions": "Exceptions ajoutées",
-      "total": "Total disponible"
+      "total": "Total disponible",
+      "do_not_want_to_receive_meal_ticket_this_day": "Je ne souhaite pas recevoir de ticket restaurant pour la date du",
+      "do_not_want_to_receive_meal_ticket": "Indiquer ne pas vouloir recevoir de ticket restaurant"
     },
     "leaves": {
       "title": "Congés",

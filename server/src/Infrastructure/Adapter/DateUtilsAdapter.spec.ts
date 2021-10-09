@@ -135,9 +135,21 @@ describe('DateUtilsAdapter', () => {
     expect(result.length).toBe(12);
 
     const WorkingDaysOfMarch = result.find(item => {
-      return item.month === 3;
+      return item.month === 12;
     });
     expect(WorkingDaysOfMarch.workingDaysCount).toBe(23);
+  });
+
+  it('testGetAllWorkingDayOfYearByMonth -- month with public holiday', () => {
+    const dateUtils = new DateUtilsAdapter();
+    const now = new Date('2022-01-01');
+    const result = dateUtils.getAllWorkingDayOfYearByMonth(now);
+    expect(result.length).toBe(12);
+
+    const WorkingDaysOfMarch = result.find(item => {
+      return item.month === 1;
+    });
+    expect(WorkingDaysOfMarch.workingDaysCount).toBe(21);
   });
 
   it('testGetLastDayOfYear', () => {
