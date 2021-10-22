@@ -1,41 +1,46 @@
 import {
   Body,
-  Post,
   Controller,
   Inject,
   BadRequestException,
-  UseGuards
+  UseGuards,
+  Put,
+  Param,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { ICommandBus } from 'src/Application/ICommandBus';
 import { LeaveRequestDTO } from '../DTO/LeaveRequestDTO';
 import { RolesGuard } from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
-import { UserRole, User } from 'src/Domain/HumanResource/User/User.entity';
+import { UserRole, } from 'src/Domain/HumanResource/User/User.entity';
 import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
-import { CreateLeaveRequestCommand } from 'src/Application/HumanResource/Leave/Command/CreateLeaveRequestCommand';
-import { LoggedUser } from '../../User/Decorator/LoggedUser';
+import { UpdateLeaveRequestCommand } from 'src/Application/HumanResource/Leave/Command/UpdateLeaveRequestCommand';
 
 @Controller('leave-requests')
 @ApiTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
-export class CreateLeaveRequestAction {
+export class UpdateLeaveRequestAction {
   constructor(
     @Inject('ICommandBus')
     private readonly commandBus: ICommandBus
   ) { }
 
-  @Post()
+  @Put(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
-  @ApiOperation({ summary: 'Create new leave request' })
-  public async index(@Body() dto: LeaveRequestDTO, @LoggedUser() user: User) {
+  @ApiOperation({ summary: 'Update existing leave request' })
+  public async index(
+    @Param() { id },
+    @Body() dto: LeaveRequestDTO,
+  ) {
     const { type, startDate, startsAllDay, endDate, endsAllDay, comment } = dto;
 
+
+
     try {
-      const id = await this.commandBus.execute(
-        new CreateLeaveRequestCommand(
-          user,
+      await this.commandBus.execute(
+        new UpdateLeaveRequestCommand(
+          id,
           type,
           startDate,
           startsAllDay,

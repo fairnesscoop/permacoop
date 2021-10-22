@@ -15,7 +15,6 @@
   import ServerErrors from 'components/ServerErrors.svelte';
   import H4Title from 'components/H4Title.svelte';
   import EditOrUpdateForm from '../_Form.svelte';
-  import Detail from './_Detail.svelte';
 
   export let id;
 
@@ -24,8 +23,6 @@
   let loading = false;
   let title = '';
   let user;
-
-  const { session } = stores();
 
   const onSave = async (e) => {
     try {

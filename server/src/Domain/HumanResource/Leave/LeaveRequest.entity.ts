@@ -140,4 +140,20 @@ export class LeaveRequest {
     this.moderateAt = date;
     this.moderationComment = moderationComment;
   }
+
+  public update(
+    type: Type,
+    startDate: string,
+    startsAllDay: boolean,
+    endDate: string,
+    endsAllDay: boolean,
+    comment?: string
+  ): void {
+    this.type = type;
+    this.startDate = startDate;
+    this.startsAllDay = startsAllDay;
+    this.endDate = endDate;
+    this.endsAllDay = endsAllDay;
+    this.comment = comment;
+  }
 }

@@ -8,9 +8,9 @@ describe('LeaveRequestDTO', () => {
     dto.type = Type.PAID;
     dto.comment = 'H&M wedding';
     dto.startDate = '2019-01-04T03:24:00';
-    dto.startsAllDay = 'true';
+    dto.startsAllDay = true;
     dto.endDate = '2019-01-06T03:24:00';
-    dto.endsAllDay = 'true';
+    dto.endsAllDay = true;
 
     const validation = await validate(dto);
     expect(validation).toHaveLength(0);
@@ -21,9 +21,9 @@ describe('LeaveRequestDTO', () => {
     dto.type = Type.PAID;
     dto.comment = 'H&M wedding';
     dto.startDate = '2019-01-04T03:24:00';
-    dto.startsAllDay = 'true';
+    dto.startsAllDay = true;
     dto.endDate = '2019-01-03T03:24:00';
-    dto.endsAllDay = 'true';
+    dto.endsAllDay = true;
 
     const validation = await validate(dto);
     expect(validation).toHaveLength(1);
@@ -47,7 +47,7 @@ describe('LeaveRequestDTO', () => {
       isNotEmpty: 'startDate should not be empty'
     });
     expect(validation[2].constraints).toMatchObject({
-      isBooleanString: 'startsAllDay must be a boolean string',
+      isBoolean: 'startsAllDay must be a boolean value',
       isNotEmpty: 'startsAllDay should not be empty'
     });
     expect(validation[3].constraints).toMatchObject({
@@ -55,7 +55,7 @@ describe('LeaveRequestDTO', () => {
       isNotEmpty: 'endDate should not be empty'
     });
     expect(validation[4].constraints).toMatchObject({
-      isBooleanString: 'endsAllDay must be a boolean string',
+      isBoolean: 'endsAllDay must be a boolean value',
       isNotEmpty: 'endsAllDay should not be empty'
     });
   });

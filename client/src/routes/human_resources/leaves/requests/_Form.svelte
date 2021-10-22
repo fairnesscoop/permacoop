@@ -10,9 +10,9 @@
 
   export let type = 'paid';
   export let startDate = '';
-  export let startsAllDay = 'true';
+  export let startsAllDay = true;
   export let endDate = '';
-  export let endsAllDay = 'true';
+  export let endsAllDay = true;
   export let comment = '';
   export let loading;
 
@@ -51,8 +51,8 @@
       <SelectInput
         label={$_('human_resources.leaves.requests.form.all_day')}
         bind:value={startsAllDay}>
-        <option value={'true'}>{$_('common.yes')}</option>
-        <option value={'false'}>{$_('common.no')}</option>
+        <option value={true}>{$_('common.yes')}</option>
+        <option value={false}>{$_('common.no')}</option>
       </SelectInput>
     </div>
   </div>
@@ -67,8 +67,8 @@
       <SelectInput
         label={$_('human_resources.leaves.requests.form.all_day')}
         bind:value={endsAllDay}>
-        <option value={'true'}>{$_('common.yes')}</option>
-        <option value={'false'}>{$_('common.no')}</option>
+        <option value={true}>{$_('common.yes')}</option>
+        <option value={false}>{$_('common.no')}</option>
       </SelectInput>
     </div>
   </div>
