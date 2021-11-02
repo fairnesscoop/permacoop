@@ -1,9 +1,9 @@
 import { mock, instance, when, verify, deepEqual, anything } from 'ts-mockito';
 import { ContactRepository } from 'src/Infrastructure/Contact/Repository/ContactRepository';
 import { Contact } from 'src/Domain/Contact/Contact.entity';
+import { EmptyContactException } from 'src/Domain/Contact/Exception/EmptyContactException';
 import { CreateContactCommandHandler } from 'src/Application/Contact/Command/CreateContactCommandHandler';
 import { CreateContactCommand } from './CreateContactCommand';
-import { ro } from 'date-fns/locale';
 
 describe('CreateContactCommandHandler', () => {
   let contactRepository: ContactRepository;
@@ -12,6 +12,7 @@ describe('CreateContactCommandHandler', () => {
 
   beforeEach(() => {
     contactRepository = mock(ContactRepository);
+    createdContact = mock(Contact);
     handler = new CreateContactCommandHandler(instance(contactRepository));
   });
 
@@ -65,7 +66,7 @@ describe('CreateContactCommandHandler', () => {
   });
 
   it('testEmptyContact', async () => {
-    expect(
+    try {
       await handler.execute(
         new CreateContactCommand(
           null,
@@ -75,9 +76,12 @@ describe('CreateContactCommandHandler', () => {
           '0612345678',
           'Lorem ipsum'
         )
-      )
-    ).toThrow(EmptyContactException);
-
-    verify(contactRepository.save(anything())).never();
+      );
+    } catch (e) {
+      expect(e).toBeInstanceOf(EmptyContactException);
+      expect(e.message).toBe('crm.contacts.errors.empty');
+      verify(contactRepository.save(anything())).never();
+      verify(createdContact.getId()).never();
+    }
   });
 });

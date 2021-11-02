@@ -6,7 +6,7 @@ export class CreateContactCommand implements ICommand {
     public readonly lastName?: string,
     public readonly company?: string,
     public readonly email?: string,
-    public readonly notes?: string,
-    public readonly phoneNumber?: string
+    public readonly phoneNumber?: string,
+    public readonly notes?: string
   ) {}
 }

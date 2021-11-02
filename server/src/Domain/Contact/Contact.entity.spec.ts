@@ -16,7 +16,7 @@ describe('Contact.entity', () => {
     expect(contact.getLastName()).toBe('Conor');
     expect(contact.getCompany()).toBe('Aperture Science');
     expect(contact.getEmail()).toBe('sarah.conor@aperture.org');
-    expect(contact.getPhoneNumber()).toBe('012345678');
+    expect(contact.getPhoneNumber()).toBe('0612345678');
     expect(contact.getNotes()).toBe('Lorem ipsum');
   });
 });
