@@ -1,6 +1,6 @@
 <script>
   import { _ } from 'svelte-i18n';
-  // import SeeLink from 'components/links/SeeLink.svelte';
+  import SeeLink from 'components/links/SeeLink.svelte';
   // import EditLink from 'components/links/EditLink.svelte';
 
   export let items;
@@ -28,7 +28,7 @@
         <td class="px-4 py-3 text-sm">{phoneNumber}</td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
-            <!-- <SeeLink href={`/crm/contacts/${id}`} /> -->
+            <SeeLink href={`/crm/contacts/${id}/view`} />
             <!-- <EditLink href={`/crm/contacts/${id}/edit`} /> -->
           </div>
         </td>
