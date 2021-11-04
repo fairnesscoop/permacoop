@@ -136,6 +136,11 @@
   },
   "crm": {
     "breadcrumb": "FairCRM",
+    "contacts": {
+      "errors": {
+        "empty": "Le nom, prénom ou organisation est obligatoire."
+      }
+    },
     "projects": {
       "title": "Projets",
       "name": "Nom du projet",
