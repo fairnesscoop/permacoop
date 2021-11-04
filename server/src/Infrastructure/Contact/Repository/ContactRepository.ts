@@ -16,6 +16,22 @@ export class ContactRepository implements IContactRepository {
     return this.repository.save(contact);
   }
 
+  public findOneById(id: string): Promise<Contact | undefined> {
+    return this.repository
+      .createQueryBuilder('contact')
+      .select([
+        'contact.id',
+        'contact.firstName',
+        'contact.lastName',
+        'contact.company',
+        'contact.email',
+        'contact.phoneNumber',
+        'contact.notes'
+      ])
+      .where('contact.id = :id', { id })
+      .getOne();
+  }
+
   public findContacts(page: number): Promise<[Contact[], number]> {
     return this.repository
       .createQueryBuilder('contact')

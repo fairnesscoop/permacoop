@@ -7,14 +7,17 @@ import { ContactRepository } from './Repository/ContactRepository';
 import { CreateContactCommandHandler } from 'src/Application/Contact/Command/CreateContactCommandHandler';
 import { GetContactsQueryHandler } from 'src/Application/Contact/Query/GetContactsQueryHandler';
 import { GetContactsAction } from './Action/GetContactsAction';
+import { GetContactAction } from './Action/GetContactAction';
+import { GetContactByIdQueryHandler } from 'src/Application/Contact/Query/GetContactByIdQueryHandler';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Contact])],
-  controllers: [CreateContactAction, GetContactsAction],
+  controllers: [CreateContactAction, GetContactsAction, GetContactAction],
   providers: [
     { provide: 'IContactRepository', useClass: ContactRepository },
     CreateContactCommandHandler,
-    GetContactsQueryHandler
+    GetContactsQueryHandler,
+    GetContactByIdQueryHandler
   ]
 })
 export class ContactModule {}
