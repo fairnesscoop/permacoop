@@ -137,6 +137,12 @@
   "crm": {
     "breadcrumb": "FairCRM",
     "contacts": {
+      "title": "Contacts",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "company": "Société",
+      "email": "Adresse email",
+      "phone_number": "Téléphone",
       "errors": {
         "empty": "Le nom, prénom ou organisation est obligatoire."
       }
