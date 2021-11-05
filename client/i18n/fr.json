@@ -145,6 +145,9 @@
       "email": "Adresse email",
       "phone_number": "Téléphone",
       "notes": "Notes",
+      "add": {
+        "title": "Ajouter un contact"
+      },
       "errors": {
         "empty": "Le nom, prénom ou organisation est obligatoire."
       }

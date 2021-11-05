@@ -15,6 +15,16 @@ describe('ContactDTO', () => {
     expect(validation).toHaveLength(0);
   });
 
+  it('testValidDTOEmailOrPhoneNumberEmpty', async () => {
+    const contactDTO = new ContactDTO();
+    contactDTO.firstName = 'John';
+    contactDTO.email = '';
+    contactDTO.phoneNumber = '';
+
+    const validation = await validate(contactDTO);
+    expect(validation).toHaveLength(0);
+  });
+
   it('testInvalidDTO', async () => {
     const contactDTO = new ContactDTO();
     contactDTO.email = 'obviously not a valid email';
@@ -23,10 +33,10 @@ describe('ContactDTO', () => {
     const validation = await validate(contactDTO);
     expect(validation).toHaveLength(2);
     expect(validation[0].constraints).toMatchObject({
-      isEmail: 'email must be an email'
+      isEmailOrEmpty: 'email must be an email'
     });
     expect(validation[1].constraints).toMatchObject({
-      isPhoneNumber: 'phoneNumber must be a valid phone number'
+      isPhoneNumberOrEmpty: 'phoneNumber must be a valid phone number'
     });
   });
 });
