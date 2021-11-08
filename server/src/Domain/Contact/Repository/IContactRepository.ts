@@ -4,4 +4,5 @@ export interface IContactRepository {
   save(contact: Contact): Promise<Contact>;
   findOneById(id: string): Promise<Contact | undefined>;
   findContacts(page: number): Promise<[Contact[], number]>;
+  remove(contact: Contact): Promise<void>;
 }

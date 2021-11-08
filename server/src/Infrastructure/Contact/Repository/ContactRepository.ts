@@ -16,6 +16,10 @@ export class ContactRepository implements IContactRepository {
     return this.repository.save(contact);
   }
 
+  public async remove(contact: Contact): Promise<void> {
+    await this.repository.delete(contact.getId());
+  }
+
   public findOneById(id: string): Promise<Contact | undefined> {
     return this.repository
       .createQueryBuilder('contact')

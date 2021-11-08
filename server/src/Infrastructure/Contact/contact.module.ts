@@ -9,15 +9,23 @@ import { GetContactsQueryHandler } from 'src/Application/Contact/Query/GetContac
 import { GetContactsAction } from './Action/GetContactsAction';
 import { GetContactAction } from './Action/GetContactAction';
 import { GetContactByIdQueryHandler } from 'src/Application/Contact/Query/GetContactByIdQueryHandler';
+import { DeleteContactCommandHandler } from 'src/Application/Contact/Command/DeleteContactCommandHandler';
+import { DeleteContactAction } from './Action/DeleteContactAction';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Contact])],
-  controllers: [CreateContactAction, GetContactsAction, GetContactAction],
+  controllers: [
+    CreateContactAction,
+    GetContactsAction,
+    GetContactAction,
+    DeleteContactAction
+  ],
   providers: [
     { provide: 'IContactRepository', useClass: ContactRepository },
     CreateContactCommandHandler,
     GetContactsQueryHandler,
-    GetContactByIdQueryHandler
+    GetContactByIdQueryHandler,
+    DeleteContactCommandHandler
   ]
 })
 export class ContactModule {}
