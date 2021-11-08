@@ -5,9 +5,10 @@
 </script>
 
 <script>
+  import { goto } from '@sapper/app';
   import { _ } from 'svelte-i18n';
   import { onMount } from 'svelte';
-  import { get } from 'utils/axios';
+  import { get, put } from 'utils/axios';
   import Breadcrumb from 'components/Breadcrumb.svelte';
   import { errorNormalizer } from 'normalizer/errors';
   import ServerErrors from 'components/ServerErrors.svelte';
@@ -34,6 +35,18 @@
       loading = false;
     }
   });
+
+  const onSave = async (e) => {
+    try {
+      loading = true;
+      await put(`contacts/${id}`, e.detail);
+      goto('/crm/contacts');
+    } catch (e) {
+      errors = errorNormalizer(e);
+    } finally {
+      loading = false;
+    }
+  };
 </script>
 
 <svelte:head>
@@ -45,5 +58,5 @@
 <H4Title {title} />
 <ServerErrors {errors} />
 {#if contact}
-  <Form {loading} {contact} editable={false} />
+  <Form {loading} {contact} on:save={onSave} />
 {/if}

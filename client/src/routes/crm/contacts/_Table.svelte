@@ -1,8 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { createEventDispatcher } from 'svelte';
-  import SeeLink from 'components/links/SeeLink.svelte';
-  // import EditLink from 'components/links/EditLink.svelte';
+  import EditLink from 'components/links/EditLink.svelte';
   import DeleteLink from 'components/links/DeleteLink.svelte';
 
   export let items;
@@ -34,8 +33,7 @@
         <td class="px-4 py-3 text-sm">{phoneNumber}</td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
-            <SeeLink href={`/crm/contacts/${id}/view`} />
-            <!-- <EditLink href={`/crm/contacts/${id}/edit`} /> -->
+            <EditLink href={`/crm/contacts/${id}/edit`} />
             <DeleteLink
               on:confirm={() => handleConfirmDelete(id)}
               confirmMessage={$_('crm.contacts.delete.confirm')} />

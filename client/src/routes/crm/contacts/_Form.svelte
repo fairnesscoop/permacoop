@@ -6,7 +6,6 @@
 
   export let contact;
   export let loading;
-  export let editable = true;
 
   const dispatch = createEventDispatcher();
 
@@ -45,10 +44,8 @@
     label={$_('crm.contacts.notes')}
     required={false}
     bind:value={contact.notes} />
-  {#if editable}
-    <Button
-      value={$_('common.form.save')}
-      {loading}
-      disabled={loading || !isFormValid} />
-  {/if}
+  <Button
+    value={$_('common.form.save')}
+    {loading}
+    disabled={loading || !isFormValid} />
 </form>
