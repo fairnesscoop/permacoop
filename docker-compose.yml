@@ -17,7 +17,7 @@ services:
     volumes:
       - 'database:/var/lib/postgresql/data'
     ports:
-      - 5454:5432
+      - 5432:5432
 
   api:
     image: node:14.3
