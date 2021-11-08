@@ -11,6 +11,8 @@ import { GetContactAction } from './Action/GetContactAction';
 import { GetContactByIdQueryHandler } from 'src/Application/Contact/Query/GetContactByIdQueryHandler';
 import { DeleteContactCommandHandler } from 'src/Application/Contact/Command/DeleteContactCommandHandler';
 import { DeleteContactAction } from './Action/DeleteContactAction';
+import { UpdateContactAction } from './Action/UpdateContactAction';
+import { UpdateContactCommandHandler } from 'src/Application/Contact/Command/UpdateContactCommandHandler';
 
 @Module({
   imports: [BusModule, TypeOrmModule.forFeature([Contact])],
@@ -18,6 +20,7 @@ import { DeleteContactAction } from './Action/DeleteContactAction';
     CreateContactAction,
     GetContactsAction,
     GetContactAction,
+    UpdateContactAction,
     DeleteContactAction
   ],
   providers: [
@@ -25,6 +28,7 @@ import { DeleteContactAction } from './Action/DeleteContactAction';
     CreateContactCommandHandler,
     GetContactsQueryHandler,
     GetContactByIdQueryHandler,
+    UpdateContactCommandHandler,
     DeleteContactCommandHandler
   ]
 })
