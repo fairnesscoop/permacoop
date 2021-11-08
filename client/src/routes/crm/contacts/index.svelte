@@ -9,7 +9,7 @@
 <script>
   import { onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import { get } from 'utils/axios';
+  import { get, del } from 'utils/axios';
   import { errorNormalizer } from 'normalizer/errors';
   import H4Title from 'components/H4Title.svelte';
   import Breadcrumb from 'components/Breadcrumb.svelte';
@@ -46,6 +46,17 @@
       errors = errorNormalizer(e);
     }
   };
+
+  const handleDelete = async (event) => {
+    const id = event.detail;
+
+    try {
+      await del(`contacts/${id}`);
+      response.items = response.items.filter((contact) => contact.id !== id);
+    } catch (e) {
+      errors = errorNormalizer(e);
+    }
+  };
 </script>
 
 <svelte:head>
@@ -60,7 +71,7 @@
 </div>
 <div class="w-full overflow-hidden rounded-lg shadow-xs">
   <div class="w-full overflow-x-auto">
-    <Table items={response.items} />
+    <Table items={response.items} on:delete={handleDelete} />
   </div>
   <Pagination
     on:change={changePage}

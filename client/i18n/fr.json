@@ -148,6 +148,9 @@
       "add": {
         "title": "Ajouter un contact"
       },
+      "delete": {
+        "confirm": "Etes-vous sûr de vouloir supprimer ce contact ?"
+      },
       "errors": {
         "empty": "Le nom, prénom ou organisation est obligatoire."
       }

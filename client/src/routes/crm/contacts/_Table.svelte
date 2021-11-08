@@ -1,9 +1,15 @@
 <script>
   import { _ } from 'svelte-i18n';
+  import { createEventDispatcher } from 'svelte';
   import SeeLink from 'components/links/SeeLink.svelte';
   // import EditLink from 'components/links/EditLink.svelte';
+  import DeleteLink from 'components/links/DeleteLink.svelte';
 
   export let items;
+
+  const dispatch = createEventDispatcher();
+
+  const handleConfirmDelete = (id) => dispatch('delete', id);
 </script>
 
 <table class="w-full whitespace-no-wrap">
@@ -30,6 +36,9 @@
           <div class="flex items-center space-x-4 text-sm">
             <SeeLink href={`/crm/contacts/${id}/view`} />
             <!-- <EditLink href={`/crm/contacts/${id}/edit`} /> -->
+            <DeleteLink
+              on:confirm={() => handleConfirmDelete(id)}
+              confirmMessage={$_('crm.contacts.delete.confirm')} />
           </div>
         </td>
       </tr>
