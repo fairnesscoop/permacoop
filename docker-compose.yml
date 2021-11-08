@@ -16,6 +16,8 @@ services:
       PGPASSWORD: docker
     volumes:
       - 'database:/var/lib/postgresql/data'
+    ports:
+      - 5432:5432
 
   api:
     image: node:14.3
