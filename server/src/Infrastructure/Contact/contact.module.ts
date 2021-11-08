@@ -4,6 +4,7 @@ import { BusModule } from '../bus.module';
 import { Contact } from 'src/Domain/Contact/Contact.entity';
 import { CreateContactAction } from './Action/CreateContactAction';
 import { ContactRepository } from './Repository/ContactRepository';
+import { IsContactEmpty } from 'src/Domain/Contact/Specification/IsContactEmpty';
 import { CreateContactCommandHandler } from 'src/Application/Contact/Command/CreateContactCommandHandler';
 import { GetContactsQueryHandler } from 'src/Application/Contact/Query/GetContactsQueryHandler';
 import { GetContactsAction } from './Action/GetContactsAction';
@@ -25,6 +26,7 @@ import { UpdateContactCommandHandler } from 'src/Application/Contact/Command/Upd
   ],
   providers: [
     { provide: 'IContactRepository', useClass: ContactRepository },
+    IsContactEmpty,
     CreateContactCommandHandler,
     GetContactsQueryHandler,
     GetContactByIdQueryHandler,

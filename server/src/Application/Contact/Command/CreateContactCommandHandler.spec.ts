@@ -2,6 +2,7 @@ import { mock, instance, when, verify, deepEqual, anything } from 'ts-mockito';
 import { ContactRepository } from 'src/Infrastructure/Contact/Repository/ContactRepository';
 import { Contact } from 'src/Domain/Contact/Contact.entity';
 import { EmptyContactException } from 'src/Domain/Contact/Exception/EmptyContactException';
+import { IsContactEmpty } from 'src/Domain/Contact/Specification/IsContactEmpty';
 import { CreateContactCommandHandler } from 'src/Application/Contact/Command/CreateContactCommandHandler';
 import { CreateContactCommand } from './CreateContactCommand';
 
@@ -13,7 +14,10 @@ describe('CreateContactCommandHandler', () => {
   beforeEach(() => {
     contactRepository = mock(ContactRepository);
     createdContact = mock(Contact);
-    handler = new CreateContactCommandHandler(instance(contactRepository));
+    handler = new CreateContactCommandHandler(
+      instance(contactRepository),
+      new IsContactEmpty()
+    );
   });
 
   it('testContactCreatedSuccessfully', async () => {
