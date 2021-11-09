@@ -1,5 +1,7 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsPhoneNumber, IsEmail } from 'class-validator';
+import { IsOptional } from 'class-validator';
+import { IsEmailOrEmpty } from 'src/Infrastructure/Common/Validator/IsEmailOrEmpty';
+import { IsPhoneNumberOrEmpty } from 'src/Infrastructure/Common/Validator/IsPhoneNumberOrEmpty';
 
 export class ContactDTO {
   @ApiPropertyOptional()
@@ -15,12 +17,12 @@ export class ContactDTO {
   public company: string;
 
   @ApiPropertyOptional()
-  @IsEmail()
+  @IsEmailOrEmpty()
   @IsOptional()
   public email: string;
 
   @ApiPropertyOptional()
-  @IsPhoneNumber('FR')
+  @IsPhoneNumberOrEmpty('FR')
   @IsOptional()
   public phoneNumber: string;
 

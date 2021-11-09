@@ -73,4 +73,20 @@ export class Contact {
   public getNotes(): string {
     return this.notes;
   }
+
+  public update(
+    firstName: string,
+    lastName: string,
+    company: string,
+    email: string,
+    phoneNumber: string,
+    notes: string
+  ): void {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.company = company;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
+    this.notes = notes;
+  }
 }

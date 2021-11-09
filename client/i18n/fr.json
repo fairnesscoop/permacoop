@@ -137,6 +137,20 @@
   "crm": {
     "breadcrumb": "FairCRM",
     "contacts": {
+      "title": "Contacts",
+      "view": "Détail du contact \"{name}\"",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "company": "Société",
+      "email": "Adresse email",
+      "phone_number": "Téléphone",
+      "notes": "Notes",
+      "add": {
+        "title": "Ajouter un contact"
+      },
+      "delete": {
+        "confirm": "Etes-vous sûr de vouloir supprimer ce contact ?"
+      },
       "errors": {
         "empty": "Le nom, prénom ou organisation est obligatoire."
       }
