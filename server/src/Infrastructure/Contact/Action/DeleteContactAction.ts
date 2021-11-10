@@ -26,7 +26,7 @@ export class DeleteContactAction {
   ) {}
 
   @Delete(':id')
-  @Roles(UserRole.COOPERATOR)
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({ summary: 'Delete contact' })
   public async index(@Param() dto: IdDTO) {
     try {
