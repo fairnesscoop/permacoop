@@ -17,7 +17,9 @@
   import AddLink from 'components/links/AddLink.svelte';
   import H4Title from 'components/H4Title.svelte';
   import Table from './_Table.svelte';
+  import PayrollButton from './_PayrollButton.svelte';
   import Pagination from 'components/Pagination.svelte';
+  import { downloadFile, getFilename } from 'utils/downloadFile';
 
   export let page;
 
@@ -46,6 +48,23 @@
       errors = errorNormalizer(e);
     }
   };
+
+  let downloadPayrollElementsDisabled = false;
+
+  const downloadPayrollElements = async () => {
+    try {
+      downloadPayrollElementsDisabled = true;
+      const { data, headers } = await get('payroll_elements', {
+        responseType: 'blob',
+      });
+      const fileName = getFilename(headers['content-disposition']);
+      downloadFile(data, fileName);
+    } catch (e) {
+      errors = errorNormalizer(e);
+    } finally {
+      downloadPayrollElementsDisabled = false;
+    }
+  };
 </script>
 
 <svelte:head>
@@ -59,6 +78,9 @@
   <AddLink
     href={'/human_resources/pay_slips/add'}
     value={$_('common.form.add')} />
+  <PayrollButton
+    disabled={downloadPayrollElementsDisabled}
+    on:click={downloadPayrollElements} />
 </div>
 <div class="w-full overflow-hidden rounded-lg shadow-xs">
   <div class="w-full overflow-x-auto">

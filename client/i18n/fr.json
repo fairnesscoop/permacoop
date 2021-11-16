@@ -254,6 +254,7 @@
       "users": "Coopérateurs - salariés",
       "files": "Fichiers",
       "download": "Télécharger ({size})",
+      "download_payroll_elements": "Générer les éléments de paie",
       "form": {
         "file": "Fiche de paie",
         "period": "Période",

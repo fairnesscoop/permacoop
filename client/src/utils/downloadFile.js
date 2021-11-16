@@ -12,3 +12,12 @@ export const downloadFile = (data, fileName) => {
   link.click();
   link.remove();
 };
+
+export const getFilename = (contentDisposition) => {
+  // attachment; filename=<...> => <...>
+  return contentDisposition
+    .split(';')[1]
+    .split('filename')[1]
+    .split('=')[1]
+    .trim();
+};

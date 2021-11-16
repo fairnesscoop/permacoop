@@ -1,6 +1,8 @@
+import * as path from 'path';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
+import { PDFModule } from '@t00nday/nestjs-pdf';
 import { BusModule } from '../bus.module';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { File } from 'src/Domain/File/File.entity';
@@ -31,6 +33,8 @@ import { CreatePaySlipAction } from './PaySlip/Action/CreatePaySlipAction';
 import { GetPaySlipsAction } from './PaySlip/Action/GetPaySlipsAction';
 import { DownloadPaySlipAction } from './PaySlip/Action/DownloadPaySlipAction';
 import { GetPaySlipByIdQueryHandler } from 'src/Application/HumanResource/PaySlip/Query/GetPaySlipByIdQueryHandler';
+import { DownloadPayrollElementsAction } from './PayrollElements/Action/DownloadPayrollElementsAction';
+import { GetPayrollElementsQueryHandler } from 'src/Application/HumanResource/PayrollElements/Query/GetPayrollElementsQueryHandler';
 import { LeaveRequest } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { LeaveRequestRepository } from './Leave/Repository/LeaveRequestRepository';
 import { CreateLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/CreateLeaveRequestCommandHandler';
@@ -74,6 +78,12 @@ import { CountMealTicketPerMonthQueryHandler } from 'src/Application/HumanResour
   imports: [
     BusModule,
     PassportModule,
+    PDFModule.register({
+      view: {
+        root: path.join(__dirname, 'Templates'),
+        engine: 'pug'
+      }
+    }),
     TypeOrmModule.forFeature([
       User,
       UserAdministrative,
@@ -98,6 +108,7 @@ import { CountMealTicketPerMonthQueryHandler } from 'src/Application/HumanResour
     CreatePaySlipAction,
     GetPaySlipsAction,
     DownloadPaySlipAction,
+    DownloadPayrollElementsAction,
     GetLeaveRequestsAction,
     GetLeaveRequestAction,
     CreateLeaveRequestAction,
@@ -144,6 +155,7 @@ import { CountMealTicketPerMonthQueryHandler } from 'src/Application/HumanResour
     GetUserAdministrativeByIdQueryHandler,
     GetPaySlipsQueryHandler,
     GetPaySlipByIdQueryHandler,
+    GetPayrollElementsQueryHandler,
     CreateLeaveRequestCommandHandler,
     DoesLeaveRequestExistForPeriod,
     RefuseLeaveRequestCommandHandler,
