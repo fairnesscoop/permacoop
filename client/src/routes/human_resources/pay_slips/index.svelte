@@ -56,6 +56,7 @@
       downloadPayrollElementsDisabled = true;
       const { data, headers } = await get('payroll_elements', {
         responseType: 'blob',
+        params: { format: 'docx' },
       });
       const fileName = getFilename(headers['content-disposition']);
       downloadFile(data, fileName);

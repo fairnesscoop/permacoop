@@ -35,6 +35,7 @@
     "class-validator": "^0.12.2",
     "crypto": "^1.0.1",
     "date-fns": "^2.8.1",
+    "docx": "^7.1.2",
     "helmet": "^3.22.0",
     "lodash": ">=4.17.19",
     "passport": "^0.4.1",

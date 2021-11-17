@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { PDFModule } from '@t00nday/nestjs-pdf';
 import { BusModule } from '../bus.module';
+import { DocxModule } from '../docx.module';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { File } from 'src/Domain/File/File.entity';
 import { PaySlip } from 'src/Domain/HumanResource/PaySlip/PaySlip.entity';
@@ -84,6 +85,7 @@ import { CountMealTicketPerMonthQueryHandler } from 'src/Application/HumanResour
         engine: 'pug'
       }
     }),
+    DocxModule.register({ root: path.join(__dirname, 'Templates') }),
     TypeOrmModule.forFeature([
       User,
       UserAdministrative,
