@@ -12,7 +12,8 @@ import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
 import { UserAdministrativeRepository } from 'src/Infrastructure/HumanResource/User/Repository/UserAdministrativeRepository';
 import {
   UserAdministrative,
-  ContractType
+  ContractType,
+  WorkingTimeType
 } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import { UserAdministrativeMissingException } from 'src/Domain/HumanResource/User/Exception/UserAdministrativeMissingException';
 
@@ -30,6 +31,7 @@ describe('CreatUserCommandHandler', () => {
     healthInsurance: true,
     executivePosition: true,
     contract: ContractType.CDI,
+    workingTime: WorkingTimeType.FULL_TIME,
     joiningDate: '2018-04-09',
     leavingDate: null,
     transportFee: 75.2
@@ -39,6 +41,7 @@ describe('CreatUserCommandHandler', () => {
     true,
     true,
     ContractType.CDI,
+    WorkingTimeType.FULL_TIME,
     '2018-04-09',
     null,
     7520

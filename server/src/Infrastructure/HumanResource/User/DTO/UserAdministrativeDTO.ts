@@ -9,7 +9,10 @@ import {
   IsBoolean,
   IsNumber
 } from 'class-validator';
-import { ContractType } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import {
+  ContractType,
+  WorkingTimeType
+} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 
 export class UserAdministrativeDTO {
@@ -53,4 +56,9 @@ export class UserAdministrativeDTO {
   @IsNotEmpty()
   @IsEnum(ContractType)
   public contract: ContractType;
+
+  @ApiProperty({ enum: WorkingTimeType })
+  @IsNotEmpty()
+  @IsEnum(WorkingTimeType)
+  public workingTime: WorkingTimeType;
 }

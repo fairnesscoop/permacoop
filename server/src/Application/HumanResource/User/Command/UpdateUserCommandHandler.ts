@@ -21,6 +21,7 @@ export class UpdateUserCommandHandler {
       role,
       annualEarnings,
       contract,
+      workingTime,
       executivePosition,
       healthInsurance,
       joiningDate,
@@ -45,6 +46,7 @@ export class UpdateUserCommandHandler {
     userAdministrative.update(
       Math.round(annualEarnings * 100),
       contract,
+      workingTime,
       executivePosition,
       healthInsurance,
       joiningDate,

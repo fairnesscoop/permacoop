@@ -2,7 +2,10 @@ import { UserDTO } from './UserDTO';
 import { validate } from 'class-validator';
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 import { UserAdministrativeDTO } from './UserAdministrativeDTO';
-import { ContractType } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import {
+  ContractType,
+  WorkingTimeType
+} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 
 describe('UserDTO', () => {
   it('testValidWithoutAdministrativeDTO', async () => {
@@ -21,6 +24,7 @@ describe('UserDTO', () => {
     adminDto.role = UserRole.COOPERATOR;
     adminDto.annualEarnings = 50000;
     adminDto.contract = ContractType.CDI;
+    adminDto.workingTime = WorkingTimeType.FULL_TIME;
     adminDto.executivePosition = true;
     adminDto.healthInsurance = true;
     adminDto.transportFee = 7500;

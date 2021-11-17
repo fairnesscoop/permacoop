@@ -1,10 +1,14 @@
 import { ICommand } from 'src/Application/ICommand';
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
-import { ContractType } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import {
+  ContractType,
+  WorkingTimeType
+} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 
 export interface IUserAdministrativeCommand {
   annualEarnings: number;
   contract: ContractType;
+  workingTime: WorkingTimeType;
   executivePosition: boolean;
   healthInsurance: boolean;
   joiningDate: string;

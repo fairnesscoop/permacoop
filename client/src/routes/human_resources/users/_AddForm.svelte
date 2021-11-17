@@ -19,6 +19,7 @@
   export let role = ROLE_COOPERATOR;
   export let userAdministrative = {
     contract: 'cdi',
+    workingTime: 'full_time',
     executivePosition: 'true',
     healthInsurance: 'true',
     annualEarnings: null,

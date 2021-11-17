@@ -1,4 +1,8 @@
-import { UserAdministrative, ContractType } from './UserAdministrative.entity';
+import {
+  UserAdministrative,
+  ContractType,
+  WorkingTimeType
+} from './UserAdministrative.entity';
 
 describe('UserAdministrative.entity', () => {
   it('testGetters', () => {
@@ -7,6 +11,7 @@ describe('UserAdministrative.entity', () => {
       true,
       true,
       ContractType.CDD,
+      WorkingTimeType.FULL_TIME,
       '2020-01-01',
       '2021-01-01',
       7550
@@ -15,6 +20,7 @@ describe('UserAdministrative.entity', () => {
     expect(admin.getId()).toBe(undefined);
     expect(admin.getAnnualEarnings()).toBe(5000000);
     expect(admin.getContract()).toBe(ContractType.CDD);
+    expect(admin.getWorkingTime()).toBe(WorkingTimeType.FULL_TIME);
     expect(admin.getJoiningDate()).toBe('2020-01-01');
     expect(admin.getLeavingDate()).toBe('2021-01-01');
     expect(admin.getTransportFee()).toBe(7550);
@@ -28,6 +34,7 @@ describe('UserAdministrative.entity', () => {
       true,
       true,
       ContractType.CDD,
+      WorkingTimeType.FULL_TIME,
       '2020-01-01',
       null,
       7550
@@ -36,6 +43,7 @@ describe('UserAdministrative.entity', () => {
     admin.update(
       3000000,
       ContractType.APPRENTICESHIP,
+      WorkingTimeType.PART_TIME,
       false,
       false,
       '2020-01-02',
@@ -44,6 +52,7 @@ describe('UserAdministrative.entity', () => {
     );
     expect(admin.getAnnualEarnings()).toBe(3000000);
     expect(admin.getContract()).toBe(ContractType.APPRENTICESHIP);
+    expect(admin.getWorkingTime()).toBe(WorkingTimeType.PART_TIME);
     expect(admin.isExecutivePosition()).toBe(false);
     expect(admin.haveHealthInsurance()).toBe(false);
     expect(admin.getJoiningDate()).toBe('2020-01-02');
