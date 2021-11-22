@@ -4,17 +4,13 @@ import { IQueryBus } from '@nestjs/cqrs';
 import { AuthGuard } from '@nestjs/passport';
 import { PassThrough } from 'stream';
 import { Response } from 'express';
-import { PDFService } from '@t00nday/nestjs-pdf';
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 import { RolesGuard } from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
 import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import { IDateUtils } from 'src/Application/IDateUtils';
 import { IDocxService } from 'src/Application/IDocxService';
 import { GetPayrollElementsQuery } from 'src/Application/HumanResource/PayrollElements/Query/GetPayrollElementsQuery';
-import {
-  PayrollElementsDTO,
-  PayrollElementsLocals
-} from '../DTO/PayrollElementsDTO';
+import { PayrollElementsLocals } from '../DTO/PayrollElementsDTO';
 
 const formatMoney = (amount: number): string => {
   return new Intl.NumberFormat('fr-FR', {
@@ -31,7 +27,6 @@ export class DownloadPayrollElementsAction {
   constructor(
     @Inject('IQueryBus')
     private readonly queryBus: IQueryBus,
-    private readonly pdfService: PDFService,
     @Inject('IDocxService')
     private readonly docxService: IDocxService,
     @Inject('IDateUtils')
@@ -41,7 +36,7 @@ export class DownloadPayrollElementsAction {
   @Get()
   @Roles(UserRole.COOPERATOR, UserRole.ACCOUNTANT)
   @ApiOperation({ summary: 'Download payroll elements' })
-  public async index(@Query() dto: PayrollElementsDTO, @Res() res: Response) {
+  public async index(@Res() res: Response) {
     const elements = await this.queryBus.execute(new GetPayrollElementsQuery());
     const now = new Date();
 
@@ -55,30 +50,7 @@ export class DownloadPayrollElementsAction {
     const yearMonth = this.dateUtils.format(now, 'y-MM');
     const fileStem = `${yearMonth}-elements-paie-fairness`;
 
-    const { format } = dto;
-
-    if (format == 'docx') {
-      await this.respondDocx(locals, fileStem, res);
-    } else {
-      await this.respondPdf(locals, fileStem, res);
-    }
-  }
-
-  private async respondPdf(
-    locals: any,
-    fileStem: string,
-    res: Response
-  ): Promise<void> {
-    const buffer = await this.pdfService
-      .toBuffer('PayrollElements', { locals })
-      .toPromise();
-    res.set('Content-Disposition', `attachment; filename=${fileStem}.pdf`);
-    res.set('Content-Type', 'application/pdf');
-    res.set('Content-Length', buffer.length.toString());
-
-    const stream = new PassThrough();
-    stream.end(buffer);
-    stream.pipe(res);
+    await this.respondDocx(locals, fileStem, res);
   }
 
   private async respondDocx(

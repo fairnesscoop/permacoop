@@ -2,7 +2,6 @@ import * as path from 'path';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
-import { PDFModule } from '@t00nday/nestjs-pdf';
 import { BusModule } from '../bus.module';
 import { DocxModule } from '../docx.module';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
@@ -79,12 +78,6 @@ import { CountMealTicketPerMonthQueryHandler } from 'src/Application/HumanResour
   imports: [
     BusModule,
     PassportModule,
-    PDFModule.register({
-      view: {
-        root: path.join(__dirname, 'Templates'),
-        engine: 'pug'
-      }
-    }),
     DocxModule.register({ root: path.join(__dirname, 'Templates') }),
     TypeOrmModule.forFeature([
       User,
