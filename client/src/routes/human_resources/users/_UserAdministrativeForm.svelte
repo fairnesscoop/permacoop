@@ -12,10 +12,12 @@
     'professionalization',
     'apprenticeship',
   ];
+
+  const workingTimes = ['full_time', 'part_time'];
 </script>
 
 <div class="flex">
-  <div class="w-1/3 pr-2">
+  <div class="w-1/4 pr-2">
     <SelectInput
       label={$_('human_resources.users.form.contract.title')}
       bind:value={userAdministrative.contract}>
@@ -26,7 +28,18 @@
       {/each}
     </SelectInput>
   </div>
-  <div class="w-1/3 pr-2">
+  <div class="w-1/4 pr-2">
+    <SelectInput
+      label={$_('human_resources.users.form.working_time.title')}
+      bind:value={userAdministrative.workingTime}>
+      {#each workingTimes as workingTime}
+        <option value={workingTime}>
+          {$_(`human_resources.users.form.working_time.${workingTime}`)}
+        </option>
+      {/each}
+    </SelectInput>
+  </div>
+  <div class="w-1/4 pr-2">
     <SelectInput
       label={$_('human_resources.users.form.executive_position')}
       bind:value={userAdministrative.executivePosition}>
@@ -34,7 +47,7 @@
       <option value={false}>{$_('common.no')}</option>
     </SelectInput>
   </div>
-  <div class="w-1/3 pr-2">
+  <div class="w-1/4 pr-2">
     <SelectInput
       label={$_('human_resources.users.form.health_insurance')}
       bind:value={userAdministrative.healthInsurance}>

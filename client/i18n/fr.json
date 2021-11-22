@@ -346,6 +346,11 @@
           "professionalization": "Contrat de professionalisation",
           "apprenticeship": "Contrat d'apprentisage"
         },
+        "working_time": {
+          "title": "Temps de travail",
+          "full_time": "Temps complet",
+          "part_time": "Temps partiel"
+        },
         "executive_position": "Statut cadre",
         "health_insurance": "Mutuelle",
         "annual_earnings": "Salaire annuel brut",

@@ -9,6 +9,11 @@ export enum ContractType {
   PROFESSIONALIZATION = 'professionalization'
 }
 
+export enum WorkingTimeType {
+  FULL_TIME = 'full_time',
+  PART_TIME = 'part_time'
+}
+
 @Entity()
 export class UserAdministrative {
   @PrimaryGeneratedColumn('uuid')
@@ -35,6 +40,9 @@ export class UserAdministrative {
   @Column('enum', { enum: ContractType, nullable: false })
   private contract: ContractType;
 
+  @Column('enum', { enum: WorkingTimeType, nullable: false })
+  private workingTime: WorkingTimeType;
+
   @OneToOne(
     type => User,
     user => user.userAdministrative
@@ -46,6 +54,7 @@ export class UserAdministrative {
     healthInsurance: boolean,
     executivePosition: boolean,
     contract: ContractType,
+    workingTime: WorkingTimeType,
     joiningDate: string,
     leavingDate?: string,
     transportFee?: number
@@ -54,6 +63,7 @@ export class UserAdministrative {
     this.healthInsurance = healthInsurance;
     this.executivePosition = executivePosition;
     this.contract = contract;
+    this.workingTime = workingTime;
     this.joiningDate = joiningDate;
     this.leavingDate = leavingDate;
     this.transportFee = transportFee;
@@ -91,9 +101,14 @@ export class UserAdministrative {
     return this.contract;
   }
 
+  public getWorkingTime(): WorkingTimeType {
+    return this.workingTime;
+  }
+
   public update(
     annualEarnings: number,
     contract: ContractType,
+    workingTime: WorkingTimeType,
     executivePosition: boolean,
     healthInsurance: boolean,
     joiningDate: string,
@@ -102,6 +117,7 @@ export class UserAdministrative {
   ): void {
     this.annualEarnings = annualEarnings;
     this.contract = contract;
+    this.workingTime = workingTime;
     this.executivePosition = executivePosition;
     this.healthInsurance = healthInsurance;
     this.joiningDate = joiningDate;

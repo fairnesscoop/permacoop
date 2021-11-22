@@ -11,10 +11,7 @@ import { IsEmailAlreadyExist } from 'src/Domain/HumanResource/User/Specification
 import { EmailAlreadyExistException } from 'src/Domain/HumanResource/User/Exception/EmailAlreadyExistException';
 import { IUserAdministrativeRepository } from 'src/Domain/HumanResource/User/Repository/IUserAdministrativeRepository';
 import { UserAdministrativeMissingException } from 'src/Domain/HumanResource/User/Exception/UserAdministrativeMissingException';
-import {
-  UserAdministrative,
-  ContractType
-} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import { UserAdministrative } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 
 @CommandHandler(CreateUserCommand)
 export class CreateUserCommandHandler {
@@ -73,6 +70,7 @@ export class CreateUserCommandHandler {
     const {
       annualEarnings,
       contract,
+      workingTime,
       executivePosition,
       healthInsurance,
       joiningDate,
@@ -86,6 +84,7 @@ export class CreateUserCommandHandler {
         healthInsurance,
         executivePosition,
         contract,
+        workingTime,
         joiningDate,
         leavingDate,
         transportFee ? Math.round(transportFee * 100) : 0

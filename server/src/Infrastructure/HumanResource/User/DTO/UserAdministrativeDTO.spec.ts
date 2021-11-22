@@ -1,6 +1,9 @@
 import { UserAdministrativeDTO } from './UserAdministrativeDTO';
 import { validate } from 'class-validator';
-import { ContractType } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import {
+  ContractType,
+  WorkingTimeType
+} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 
 describe('UserAdministrativeDTO', () => {
@@ -9,6 +12,7 @@ describe('UserAdministrativeDTO', () => {
     dto.role = UserRole.COOPERATOR;
     dto.annualEarnings = 50000;
     dto.contract = ContractType.CDI;
+    dto.workingTime = WorkingTimeType.FULL_TIME;
     dto.executivePosition = true;
     dto.healthInsurance = true;
     dto.transportFee = 75.2;
@@ -27,7 +31,7 @@ describe('UserAdministrativeDTO', () => {
 
     const validation = await validate(dto);
 
-    expect(validation).toHaveLength(6);
+    expect(validation).toHaveLength(7);
     expect(validation[0].constraints).toMatchObject({
       isInt: 'annualEarnings must be an integer number',
       isNotEmpty: 'annualEarnings should not be empty',
@@ -51,6 +55,10 @@ describe('UserAdministrativeDTO', () => {
     expect(validation[5].constraints).toMatchObject({
       isEnum: 'contract must be a valid enum value',
       isNotEmpty: 'contract should not be empty'
+    });
+    expect(validation[6].constraints).toMatchObject({
+      isEnum: 'workingTime must be a valid enum value',
+      isNotEmpty: 'workingTime should not be empty'
     });
   });
 });

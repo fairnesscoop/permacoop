@@ -31,6 +31,7 @@ export class GetUserAdministrativeByIdQueryHandler {
       userAdministrativeView = new UserAdministrativeView(
         userAdministrative.getAnnualEarnings() * 0.01,
         userAdministrative.getContract(),
+        userAdministrative.getWorkingTime(),
         userAdministrative.isExecutivePosition(),
         userAdministrative.haveHealthInsurance(),
         userAdministrative.getJoiningDate(),

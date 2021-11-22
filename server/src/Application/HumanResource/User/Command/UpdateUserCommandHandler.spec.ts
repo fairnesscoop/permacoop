@@ -5,6 +5,7 @@ import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserR
 import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
 import {
   ContractType,
+  WorkingTimeType,
   UserAdministrative
 } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import { UserAdministrativeRepository } from 'src/Infrastructure/HumanResource/User/Repository/UserAdministrativeRepository';
@@ -24,6 +25,7 @@ describe('UpdateProfileCommandHandler', () => {
     UserRole.COOPERATOR,
     50000,
     ContractType.CDI,
+    WorkingTimeType.FULL_TIME,
     true,
     true,
     '2018-01-01',
@@ -67,6 +69,7 @@ describe('UpdateProfileCommandHandler', () => {
       false,
       false,
       ContractType.CTT,
+      WorkingTimeType.PART_TIME,
       '2017-08-01',
       '2018-12-31',
       null
@@ -96,6 +99,7 @@ describe('UpdateProfileCommandHandler', () => {
       true,
       true,
       ContractType.CDI,
+      WorkingTimeType.FULL_TIME,
       '2018-01-01',
       null,
       7520
@@ -126,6 +130,7 @@ describe('UpdateProfileCommandHandler', () => {
       false,
       false,
       ContractType.CTT,
+      WorkingTimeType.PART_TIME,
       '2017-08-01',
       '2018-12-31',
       null
