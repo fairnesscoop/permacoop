@@ -12,7 +12,7 @@ export class PayrollElementsView {
     public readonly leavingDate: Date | null,
     public readonly annualEarnings: number,
     public readonly monthlyEarnings: number,
-    public readonly schedule: string,
+    public readonly workingTime: string,
     public readonly transportFee: number,
     public readonly mealTickets: number,
     public readonly healthInsurance: boolean,

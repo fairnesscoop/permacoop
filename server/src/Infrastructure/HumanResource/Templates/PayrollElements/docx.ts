@@ -97,6 +97,11 @@ export const fn: DocxFunction = (locals: PayrollElementsLocals) => {
             }),
             new Paragraph({
               children: [
+                new TextRun({ text: 'Statut', bold: true }),
+                new TextRun({
+                  text: `: ${el.executivePosition ? 'Cadre' : 'Non-cadre'}`
+                }),
+                new TextRun({ text: '\t' }),
                 new TextRun({ text: 'Salaire brut annuel', bold: true }),
                 new TextRun({
                   text: `: ${formatMoney(el.annualEarnings)}`
@@ -111,7 +116,9 @@ export const fn: DocxFunction = (locals: PayrollElementsLocals) => {
             new Paragraph({
               children: [
                 new TextRun({ text: 'TC/TP', bold: true }),
-                new TextRun({ text: `: ${el.schedule}` }),
+                new TextRun({
+                  text: `: ${el.workingTime === 'full_time' ? 'TC' : 'TP'}`
+                }),
                 new TextRun({ text: '\t' }),
                 new TextRun({ text: 'Transport', bold: true }),
                 new TextRun({
@@ -156,7 +163,7 @@ export const fn: DocxFunction = (locals: PayrollElementsLocals) => {
                   bold: true
                 }),
                 new TextRun(' :'),
-                ...(el.leaves.length === 0 ? [new Paragraph('/')] : [])
+                ...(el.leaves.length === 0 ? [new TextRun('/')] : [])
               ]
             }),
             ...(el.leaves.length === 0

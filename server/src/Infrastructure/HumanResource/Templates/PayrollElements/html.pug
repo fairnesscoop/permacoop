@@ -77,12 +77,14 @@ html(lang='en')
             p #[strong Date d'entrée] : #{dateUtils.format(el.joiningDate, 'dd/MM/y')}
             p #[strong Date de sortie] : #{el.leavingDate ? dateUtils.format(el.leavingDate, 'dd/MM/y') : '/'}
 
-          .cols-2
+          .cols-4
+            p #[strong Statut] : #{el.executivePosition ? 'Cadre' : 'Non-cadre'}
             p #[strong Salaire brut annuel] : #{formatMoney(el.annualEarnings)}
             p #[strong Salaire brut mensuel] : #{formatMoney(el.monthlyEarnings)}
+            p
 
           .cols-4
-            p #[strong TC/TP] : #{el.schedule}
+            p #[strong TC/TP] : #{el.workingTime === 'full_time' ? 'TC' : 'TP'}
             p #[strong Transport] : #{formatMoney(el.transportFee)}
             p #[strong Tickets resto] : #{el.mealTickets}
             p #[strong Mutuelle] : #{el.healthInsurance ? 'Oui' : 'Non'}
