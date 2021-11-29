@@ -25,6 +25,8 @@ Permacoop is an open source and eco design ERP solution reserved for worker-owne
 
 You must have **[Docker](https://www.docker.com/)** and **[Docker Compose](https://docs.docker.com/compose/)**.
 
+Ensure you have [Node.js](https://nodejs.org) v14.3 and `node-gyp` installed globally (`npm install -g node-gyp`). (Node version should match to avoid any build issues with binary dependencies such as `argon2`.)
+
 ## Installation
 
 At **the first launch**, just execute this command to install your application :
