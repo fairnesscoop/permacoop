@@ -15,7 +15,7 @@
     "lint:fix": "eslint src/**/*.ts --fix",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "test:cov": "jest --coverage",
+    "test:cov": "jest --coverage --runInBand",
     "migration:diff": "ts-node ./node_modules/.bin/typeorm migration:generate -d migrations -n",
     "migration:migrate": "ts-node ./node_modules/.bin/typeorm migration:run",
     "migration:drop": "ts-node ./node_modules/.bin/typeorm schema:drop"
