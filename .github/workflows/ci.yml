@@ -7,8 +7,8 @@ jobs:
       - uses: actions/checkout@v1
       - name: Tests
         run: |
-          cd server && npm install
-          cd .. && make ci
+          docker-compose build api
+          make ci
       - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
