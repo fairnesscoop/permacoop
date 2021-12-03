@@ -6,9 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Tests
-        run: |
-          docker-compose build api
-          make ci
+        run: make ci
       - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

@@ -11,6 +11,7 @@ install: ## Install API and client
 	cp server/.env.dist server/.env
 	cp client/config.js.dist client/config.js
 	make start-container
+	make api-build-dist
 	make database-migrate
 	make watch-tailwind
 stop: ## Stop docker containers
