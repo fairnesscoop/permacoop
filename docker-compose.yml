@@ -20,26 +20,24 @@ services:
       - 5432:5432
 
   api:
-    image: node:14.3
-    working_dir: '/var/www'
+    build: ./server
     depends_on:
       - database
     volumes:
-      - './server:/var/www:cached'
+      - './server:/var/www'
+      - '/var/www/node_modules'
       - 'uploads:/var/www/uploads'
-    command: npm run start:dev
 
   client:
-    image: node:14.3
-    working_dir: '/var/www'
+    build: ./client
     depends_on:
       - api
     volumes:
-      - './client:/var/www:cached'
+      - './client:/var/www'
+      - '/var/www/node_modules'
     ports:
       - 5000:5000
       - 10000:10000
-    command: npm run dev
 
   nginx:
     image: nginx:latest

@@ -10,10 +10,7 @@ install: ## Install API and client
 	cp server/ormconfig.json.dist server/ormconfig.json
 	cp server/.env.dist server/.env
 	cp client/config.js.dist client/config.js
-	docker run -it --rm -v ${PWD}/server:/app -w /app node npm i
-	docker run -it --rm -v ${PWD}/client:/app -w /app node npm i
 	make start-container
-	make api-build-dist
 	make database-migrate
 	make watch-tailwind
 stop: ## Stop docker containers
