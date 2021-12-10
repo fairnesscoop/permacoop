@@ -27,6 +27,7 @@
       await post('meal-tickets-removals', {
         date: e.detail.exceptionDate,
       });
+      await fetchMealTicketsSummaries();
     } catch (e) {
       exceptionErrors = errorNormalizer(e);
     }
