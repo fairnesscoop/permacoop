@@ -12,6 +12,7 @@
 
   let mealTicketsSummaries = [];
   let errors;
+  let exceptionErrors;
 
   const fetchMealTicketsSummaries = async () => {
     try {
@@ -27,7 +28,7 @@
         date: e.detail.exceptionDate,
       });
     } catch (e) {
-      errors = errorNormalizer(e);
+      exceptionErrors = errorNormalizer(e);
     }
   };
 
@@ -49,5 +50,7 @@
 
 <H4Title
   title={$_('human_resources.meal_tickets.do_not_want_to_receive_meal_ticket')} />
+
+<ServerErrors errors={exceptionErrors} />
 
 <Form on:save={saveMealTicketException} />
