@@ -42,7 +42,6 @@
       startDate: new Date(event.startDate),
       endDate: new Date(event.endDate),
       billable: String(event.billable),
-      mealTicket,
     });
   };
 </script>
