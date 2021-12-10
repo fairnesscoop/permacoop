@@ -13,12 +13,12 @@ export class UpdateLeaveRequestCommandHandler {
 
   public async execute(command: UpdateLeaveRequestCommand): Promise<string> {
     const {
-      endDate,
-      endsAllDay,
       id,
       type,
       startDate,
       startsAllDay,
+      endDate,
+      endsAllDay,
       comment
     } = command;
 

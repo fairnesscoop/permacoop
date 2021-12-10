@@ -14,7 +14,7 @@
   import { errorNormalizer } from 'normalizer/errors';
   import ServerErrors from 'components/ServerErrors.svelte';
   import H4Title from 'components/H4Title.svelte';
-  import EditOrUpdateForm from '../_Form.svelte';
+  import Form from '../_Form.svelte';
 
   export let id;
 
@@ -35,6 +35,8 @@
       loading = false;
     }
   };
+
+  const formatDate = (date) => format(new Date(date), 'Y-MM-dd');
 
   onMount(async () => {
     try {
@@ -58,11 +60,11 @@
 <H4Title {title} />
 <ServerErrors {errors} />
 {#if leaveRequest}
-  <EditOrUpdateForm
+  <Form
     on:save={onSave}
     {loading}
-    startDate={format(new Date(leaveRequest.startDate), 'Y-MM-dd')}
-    endDate={format(new Date(leaveRequest.endDate), 'Y-MM-dd')}
+    startDate={formatDate(leaveRequest.startDate)}
+    endDate={formatDate(leaveRequest.endDate)}
     startsAllDay={leaveRequest.startsAllDay}
     endsAllDay={leaveRequest.endsAllDay}
     comment={leaveRequest.comment}

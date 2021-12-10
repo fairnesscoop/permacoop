@@ -15,10 +15,10 @@ describe('UpdateLeaveRequestCommandHandler', () => {
   let user: User;
   let commandHandler: UpdateLeaveRequestCommandHandler;
 
-  const type = Type.MEDICAL;
   const id = 'fakeId';
-  const endDate = '2022-01-05';
+  const type = Type.MEDICAL;
   const startDate = '2022-01-05';
+  const endDate = '2022-01-05';
 
   const command = new UpdateLeaveRequestCommand(
     id,
@@ -37,7 +37,7 @@ describe('UpdateLeaveRequestCommandHandler', () => {
     );
   });
 
-  it('testUserNotFound', async () => {
+  it('testLeaveRequestNotFound', async () => {
     when(leaveRequestRepository.findOneById(id)).thenResolve(null);
 
     try {
@@ -50,7 +50,10 @@ describe('UpdateLeaveRequestCommandHandler', () => {
     }
   });
 
-  it('testUserUpdated', async () => {
+  it('testLeaveRequestUpdated', async () => {
+    const startsAllDay = true;
+    const endsAllDay = true;
+
     const leaveRequest = new LeaveRequest(
       instance(user),
       Type.PAID,
@@ -67,7 +70,7 @@ describe('UpdateLeaveRequestCommandHandler', () => {
     verify(
       leaveRequestRepository.save(
         deepEqual(
-          new LeaveRequest(instance(user), type, startDate, true, endDate, true)
+          new LeaveRequest(instance(user), type, startDate, startsAllDay, endDate, endsAllDay)
         )
       )
     ).once();

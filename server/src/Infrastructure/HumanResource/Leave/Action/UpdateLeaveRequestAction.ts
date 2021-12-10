@@ -35,8 +35,6 @@ export class UpdateLeaveRequestAction {
   ) {
     const { type, startDate, startsAllDay, endDate, endsAllDay, comment } = dto;
 
-
-
     try {
       await this.commandBus.execute(
         new UpdateLeaveRequestCommand(
