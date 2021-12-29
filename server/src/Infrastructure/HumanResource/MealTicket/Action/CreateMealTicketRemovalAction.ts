@@ -35,7 +35,7 @@ export class CreateMealTicketRemovalAction {
   ) {
     try {
       const id = await this.commandBus.execute(
-        new CreateMealTicketRemovalCommand(date, comment, user)
+        new CreateMealTicketRemovalCommand(date, user, comment)
       );
 
       return { id };

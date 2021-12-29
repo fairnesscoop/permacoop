@@ -10,7 +10,7 @@ export class MealTicketRemovalRepository
   constructor(
     @InjectRepository(MealTicketRemoval)
     private readonly repository: Repository<MealTicketRemoval>
-  ) { }
+  ) {}
 
   public save(
     mealTicketRemoval: MealTicketRemoval
@@ -40,13 +40,13 @@ export class MealTicketRemovalRepository
 
   public getAllByUserGroupedByMonth(
     user: User,
-    date: Date,
+    date: Date
   ): Promise<MealTicketRemovalSummaryDTO[]> {
     const year = new Date(date).getFullYear();
 
     return this.repository
       .createQueryBuilder('mealTicketRemoval')
-      .select(["EXTRACT(month FROM date) as monthnumber", "COUNT(id)"])
+      .select(['EXTRACT(month FROM date) as monthnumber', 'COUNT(id)'])
       .where('mealTicketRemoval.user = :userId', { userId: user.getId() })
       .andWhere('extract(year FROM mealTicketRemoval.date) = :year', { year })
       .groupBy('monthnumber')

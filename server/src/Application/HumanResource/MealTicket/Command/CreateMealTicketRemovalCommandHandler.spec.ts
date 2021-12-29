@@ -16,8 +16,8 @@ describe('CreateMealTicketRemovalCommandHandler', () => {
   const mealTicketRemoval = mock(MealTicketRemoval);
   const command = new CreateMealTicketRemovalCommand(
     '2020-04-29',
+    instance(user),
     'dejeuner offert',
-    instance(user)
   );
 
   beforeEach(() => {

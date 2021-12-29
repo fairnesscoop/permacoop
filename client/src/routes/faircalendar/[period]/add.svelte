@@ -53,16 +53,6 @@
     try {
       loading = true;
       await post('events', e.detail);
-
-      const mealTicket = e.detail.mealTicket;
-
-      if (!mealTicket.canRecieve) {
-        await post('meal-tickets-removals', {
-          date: formatISO(Date.now()),
-          comment: mealTicket.comment,
-        });
-      }
-
       goto(`/faircalendar?date=${startDate}`);
     } catch (e) {
       errors = errorNormalizer(e);

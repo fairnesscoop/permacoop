@@ -9,15 +9,9 @@
   import Input from 'components/inputs/Input.svelte';
   import SelectInput from 'components/inputs/SelectInput.svelte';
   import Button from 'components/inputs/Button.svelte';
-  import Checkbox from 'components/inputs/Checkbox.svelte';
 
   export let event;
   export let loading;
-
-  export let mealTicket = {
-    canRecieve: true,
-    comment: null,
-  };
 
   const dispatch = createEventDispatcher();
 
@@ -48,7 +42,6 @@
       startDate: new Date(event.startDate),
       endDate: new Date(event.endDate),
       billable: String(event.billable),
-      mealTicket,
     });
   };
 </script>
@@ -98,16 +91,6 @@
     label={$_('faircalendar.form.summary')}
     bind:value={event.summary}
     required={''} />
-  <Checkbox
-    label={$_('faircalendar.form.can_have_meal_ticket')}
-    bind:checked={mealTicket.canRecieve} />
-
-  {#if !mealTicket.canRecieve}
-    <Input
-      label={$_('faircalendar.form.cant_have_meal_ticket_comment')}
-      bind:value={mealTicket.comment}
-      required={''} />
-  {/if}
 
   <Button
     value={$_('common.form.save')}

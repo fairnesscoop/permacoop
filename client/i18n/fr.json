@@ -206,10 +206,12 @@
     }
   },
   "faircalendar": {
+    "legend": "Légende:",
     "breadcrumb": "FairCalendar",
     "title": "Faircalendar {month}",
     "summary": "Récapitulatif",
     "not_billable": "* Non facturé",
+    "no_meal_ticket_for_this_day": "Pas de ticket restaurant pour cette journée",
     "errors": {
       "event_doesnt_belong_to_user": "Cet évènement ne vous appartient pas, vous ne pouvez ni le modifier, ni le supprimer.",
       "event_not_found": "Cet évènement n'existe pas.",
@@ -273,7 +275,9 @@
       "month": "Mois",
       "base": "base",
       "exceptions": "Exceptions ajoutées",
-      "total": "Total disponible"
+      "total": "Total disponible",
+      "do_not_want_to_receive_meal_ticket_this_day": "Je ne souhaite pas recevoir de ticket restaurant pour la date du",
+      "do_not_want_to_receive_meal_ticket": "Indiquer ne pas vouloir recevoir de ticket restaurant"
     },
     "leaves": {
       "title": "Congés",

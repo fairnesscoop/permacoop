@@ -17,13 +17,10 @@ describe('MealTicketRemovalDTO', () => {
     dto.comment = '';
 
     const validation = await validate(dto);
-    expect(validation).toHaveLength(2);
+    expect(validation).toHaveLength(1);
     expect(validation[0].constraints).toMatchObject({
       isDateString: 'date must be a ISOString',
       isNotEmpty: 'date should not be empty'
-    });
-    expect(validation[1].constraints).toMatchObject({
-      isNotEmpty: 'comment should not be empty'
     });
   });
 });
