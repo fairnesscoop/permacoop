@@ -69,6 +69,8 @@ import { DeleteLeaveRequestCommandHandler } from 'src/Application/HumanResource/
 import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestAction';
 import { GetAvailableMealTicketsAction } from './MealTicket/Action/GetAvailableMealTicketsAction';
 import { CountMealTicketPerMonthQueryHandler } from 'src/Application/HumanResource/MealTicket/Query/CountMealTicketPerMonthQueryHandler';
+import { UpdateLeaveRequestAction } from './Leave/Action/UpdateLeaveRequestAction';
+import { UpdateLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/UpdateLeaveRequestCommandHandler';
 
 @Module({
   imports: [
@@ -106,7 +108,8 @@ import { CountMealTicketPerMonthQueryHandler } from 'src/Application/HumanResour
     CreateMealTicketRemovalAction,
     GetAvailableMealTicketsAction,
     DeleteLeaveRequestAction,
-    CreateMealTicketRemovalAction
+    CreateMealTicketRemovalAction,
+    UpdateLeaveRequestAction
   ],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
@@ -158,7 +161,8 @@ import { CountMealTicketPerMonthQueryHandler } from 'src/Application/HumanResour
     DeleteLeaveRequestCommandHandler,
     IsMealTicketRemovalAlreadyExist,
     CreateMealTicketRemovalCommandHandler,
-    CountMealTicketPerMonthQueryHandler
+    CountMealTicketPerMonthQueryHandler,
+    UpdateLeaveRequestCommandHandler
   ]
 })
-export class HumanResourceModule {}
+export class HumanResourceModule { }

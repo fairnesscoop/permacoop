@@ -4,7 +4,7 @@ import {
   IsEnum,
   IsDateString,
   IsOptional,
-  IsBooleanString
+  IsBoolean
 } from 'class-validator';
 import { Type } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { DateGreaterOrEqualThan } from 'src/Infrastructure/Common/Validator/DateGreaterOrEqualThan';
@@ -21,9 +21,9 @@ export class LeaveRequestDTO {
   public startDate: string;
 
   @IsNotEmpty()
-  @IsBooleanString()
+  @IsBoolean()
   @ApiProperty()
-  public startsAllDay: string;
+  public startsAllDay: boolean;
 
   @IsNotEmpty()
   @IsDateString()
@@ -32,9 +32,9 @@ export class LeaveRequestDTO {
   public endDate: string;
 
   @IsNotEmpty()
-  @IsBooleanString()
+  @IsBoolean()
   @ApiProperty()
-  public endsAllDay: string;
+  public endsAllDay: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()

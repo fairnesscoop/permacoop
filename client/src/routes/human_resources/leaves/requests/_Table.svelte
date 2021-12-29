@@ -8,6 +8,7 @@
   import OrangeBadge from 'components/badges/OrangeBadge.svelte';
   import GrayBadge from 'components/badges/GrayBadge.svelte';
   import DeleteLink from 'components/links/DeleteLink.svelte';
+  import EditLink from 'components/links/EditLink.svelte';
 
   export let items;
 
@@ -60,7 +61,8 @@
         </td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
-            <SeeLink href={`/human_resources/leaves/requests/${id}`} />
+            <SeeLink href={`/human_resources/leaves/requests/${id}/view`} />
+            <EditLink href={`/human_resources/leaves/requests/${id}/edit`} />
             {#if $session.user && $session.user.id === user.id}
               <DeleteLink
                 on:confirm={() => dispatch('delete', id)}
