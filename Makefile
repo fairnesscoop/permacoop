@@ -32,14 +32,16 @@ watch-tailwind:
 	${exec} client npm run watch:tailwind
 build-tailwind: ## Build Tailwind in production mode
 	${exec} client npm run build:tailwind
-test: ## Run test suite
+test: test-api test-client## Run test suite
+test-api: ## Run test suite
 	${exec} api npm run test
+test-client: ## Run test suite
 	${exec} client npm run test-unit
 test-watch: ## Run test suite
 	${exec} api npm run test:watch
 linter: ## Linter
 	${exec} api npm run lint
-	${exec} client npm run lint	
+	${exec} client npm run lint
 format: ## Linter
 	${exec} api npm run format
 api-logs: ## Display API logs
