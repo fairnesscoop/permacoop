@@ -21,7 +21,10 @@ it('renders the projects input select with the selected project', () => {
   const options = screen.getAllByRole('option');
   expect(select.value).toBe('8a1dd502-c974-447e-9be3-a18e7abfebe3');
   expect(options[select.selectedIndex].textContent).toContain(
-    'Project 1 (Customer 1)'
+    'Project 1'
+  );
+  expect(options[select.selectedIndex].textContent).toContain(
+    '(Customer 1)'
   );
 });
 
