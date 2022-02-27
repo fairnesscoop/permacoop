@@ -13,8 +13,8 @@ describe('UserAdministrativeDTO', () => {
     dto.annualEarnings = 50000;
     dto.contract = ContractType.CDI;
     dto.workingTime = WorkingTimeType.FULL_TIME;
-    dto.executivePosition = true;
-    dto.healthInsurance = true;
+    dto.executivePosition = "true";
+    dto.healthInsurance = "true";
     dto.transportFee = 75.2;
     dto.joiningDate = '2020-12-17T03:24:00';
     dto.leavingDate = '2021-12-17T03:24:00';
@@ -38,11 +38,11 @@ describe('UserAdministrativeDTO', () => {
       isPositive: 'annualEarnings must be a positive number'
     });
     expect(validation[1].constraints).toMatchObject({
-      isBoolean: 'healthInsurance must be a boolean value',
+      isBooleanString: 'healthInsurance must be a boolean string',
       isNotEmpty: 'healthInsurance should not be empty'
     });
     expect(validation[2].constraints).toMatchObject({
-      isBoolean: 'executivePosition must be a boolean value',
+      isBooleanString: 'executivePosition must be a boolean string',
       isNotEmpty: 'executivePosition should not be empty'
     });
     expect(validation[3].constraints).toMatchObject({
