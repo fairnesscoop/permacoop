@@ -1,4 +1,4 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional, IsBooleanString } from 'class-validator';
 
 export class FiltersDTO {
@@ -6,4 +6,9 @@ export class FiltersDTO {
   @IsOptional()
   @IsBooleanString()
   public withAccountant;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsBooleanString()
+  public activeOnly;
 }
