@@ -1,9 +1,9 @@
 <script>
-  import shortid from 'utils/shortid';
+  import shortid from '../../utils/shortid';
   export let label;
 
   export let checked = false;
-  export let name = `checkobx-${shortid()}`;
+  export let name = `checkbox-${shortid()}`;
   const className = 'block w-full text-sm  focus:border-purple-400';
 </script>
 
