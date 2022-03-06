@@ -54,8 +54,8 @@ export class UpdateUserAction {
           annualEarnings,
           contract,
           workingTime,
-          executivePosition,
-          healthInsurance,
+          executivePosition === 'true',
+          healthInsurance === 'true',
           joiningDate,
           leavingDate,
           transportFee

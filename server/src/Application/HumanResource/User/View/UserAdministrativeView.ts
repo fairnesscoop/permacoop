@@ -8,8 +8,8 @@ export class UserAdministrativeView {
     public readonly annualEarnings: number,
     public readonly contract: ContractType,
     public readonly workingTime: WorkingTimeType,
-    public readonly executivePosition: boolean,
-    public readonly healthInsurance: boolean,
+    public readonly executivePosition: string,
+    public readonly healthInsurance: string,
     public readonly joiningDate: string,
     public readonly leavingDate: string,
     public readonly transportFee: number

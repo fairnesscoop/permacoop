@@ -58,8 +58,8 @@ export class CreateUserAction {
           annualEarnings,
           contract,
           workingTime,
-          executivePosition,
-          healthInsurance,
+          executivePosition: executivePosition === 'true',
+          healthInsurance: healthInsurance === 'true',
           joiningDate,
           leavingDate,
           transportFee

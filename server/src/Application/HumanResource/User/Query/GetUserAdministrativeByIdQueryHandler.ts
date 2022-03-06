@@ -32,8 +32,8 @@ export class GetUserAdministrativeByIdQueryHandler {
         userAdministrative.getAnnualEarnings() * 0.01,
         userAdministrative.getContract(),
         userAdministrative.getWorkingTime(),
-        userAdministrative.isExecutivePosition(),
-        userAdministrative.haveHealthInsurance(),
+        userAdministrative.isExecutivePosition() ? 'true' : 'false',
+        userAdministrative.haveHealthInsurance() ? 'true' : 'false',
         userAdministrative.getJoiningDate(),
         userAdministrative.getLeavingDate(),
         userAdministrative.getTransportFee() * 0.01
