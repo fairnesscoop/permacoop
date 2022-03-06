@@ -43,16 +43,16 @@
     <SelectInput
       label={$_('human_resources.users.form.executive_position')}
       bind:value={userAdministrative.executivePosition}>
-      <option value={true}>{$_('common.yes')}</option>
-      <option value={false}>{$_('common.no')}</option>
+      <option value="true">{$_('common.yes')}</option>
+      <option value="false">{$_('common.no')}</option>
     </SelectInput>
   </div>
   <div class="w-1/4 pr-2">
     <SelectInput
       label={$_('human_resources.users.form.health_insurance')}
       bind:value={userAdministrative.healthInsurance}>
-      <option value={true}>{$_('common.yes')}</option>
-      <option value={false}>{$_('common.no')}</option>
+      <option value="true">{$_('common.yes')}</option>
+      <option value="false">{$_('common.no')}</option>
     </SelectInput>
   </div>
 </div>

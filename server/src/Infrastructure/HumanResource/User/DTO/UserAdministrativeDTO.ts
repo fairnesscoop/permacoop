@@ -6,7 +6,7 @@ import {
   IsOptional,
   IsPositive,
   IsInt,
-  IsBoolean,
+  IsBooleanString,
   IsNumber
 } from 'class-validator';
 import {
@@ -33,14 +33,14 @@ export class UserAdministrativeDTO {
   public transportFee: number;
 
   @IsNotEmpty()
-  @IsBoolean()
+  @IsBooleanString()
   @ApiProperty()
-  public healthInsurance: boolean;
+  public healthInsurance: string;
 
   @IsNotEmpty()
-  @IsBoolean()
+  @IsBooleanString()
   @ApiProperty()
-  public executivePosition: boolean;
+  public executivePosition: string;
 
   @IsNotEmpty()
   @IsDateString()
