@@ -26,7 +26,8 @@ export class GetContactByIdQueryHandler {
       contact.getCompany(),
       contact.getEmail(),
       contact.getPhoneNumber(),
-      contact.getNotes()
+      contact.getNotes(),
+      contact.getContactedBy()?.getId()
     );
   }
 }

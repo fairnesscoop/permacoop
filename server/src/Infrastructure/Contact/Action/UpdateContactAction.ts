@@ -39,7 +39,8 @@ export class UpdateContactAction {
         company,
         email,
         phoneNumber,
-        notes
+        notes,
+        contactedById
       } = contactDto;
 
       await this.commandBus.execute(
@@ -50,7 +51,8 @@ export class UpdateContactAction {
           company,
           email,
           phoneNumber,
-          notes
+          notes,
+          contactedById
         )
       );
 

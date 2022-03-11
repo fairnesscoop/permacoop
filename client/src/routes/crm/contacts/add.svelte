@@ -19,6 +19,7 @@
     email: '',
     phoneNumber: '',
     notes: '',
+    contactedById: null
   };
 
   const onSave = async (e) => {

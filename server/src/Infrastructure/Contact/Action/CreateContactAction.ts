@@ -35,7 +35,8 @@ export class CreateContactAction {
       company,
       email,
       phoneNumber,
-      notes
+      notes,
+      contactedById
     } = contactDto;
 
     try {
@@ -46,7 +47,8 @@ export class CreateContactAction {
           company,
           email,
           phoneNumber,
-          notes
+          notes,
+          contactedById
         )
       );
 

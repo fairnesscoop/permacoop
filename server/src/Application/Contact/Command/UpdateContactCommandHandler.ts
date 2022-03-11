@@ -5,12 +5,16 @@ import { IContactRepository } from 'src/Domain/Contact/Repository/IContactReposi
 import { ContactNotFoundException } from 'src/Domain/Contact/Exception/ContactNotFoundException';
 import { IsContactEmpty } from 'src/Domain/Contact/Specification/IsContactEmpty';
 import { EmptyContactException } from 'src/Domain/Contact/Exception/EmptyContactException';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { UserNotFoundException } from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
 
 @CommandHandler(UpdateContactCommand)
 export class UpdateContactCommandHandler {
   constructor(
     @Inject('IContactRepository')
     private readonly contactRepository: IContactRepository,
+    @Inject('IUserRepository')
+    private readonly userRepository: IUserRepository,
     private readonly isContactEmpty: IsContactEmpty
   ) {}
 
@@ -22,7 +26,8 @@ export class UpdateContactCommandHandler {
       company,
       email,
       phoneNumber,
-      notes
+      notes,
+      contactedById
     } = command;
 
     const contact = await this.contactRepository.findOneById(id);
@@ -35,7 +40,15 @@ export class UpdateContactCommandHandler {
       throw new EmptyContactException();
     }
 
-    contact.update(firstName, lastName, company, email, phoneNumber, notes);
+    let contactedBy = null;
+    if (contactedById) {
+      contactedBy = await this.userRepository.findOneById(contactedById);
+      if (!contactedBy) {
+        throw new UserNotFoundException();
+      }
+    }
+
+    contact.update(firstName, lastName, company, email, phoneNumber, notes, contactedBy);
 
     await this.contactRepository.save(contact);
   }

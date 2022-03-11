@@ -8,6 +8,7 @@ export class UpdateContactCommand implements ICommand {
     public readonly company: string,
     public readonly email: string,
     public readonly phoneNumber: string,
-    public readonly notes: string
+    public readonly notes: string,
+    public readonly contactedById: string
   ) {}
 }

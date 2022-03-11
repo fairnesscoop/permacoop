@@ -29,7 +29,9 @@ export class GetContactsQueryHandler {
           contact.getCompany(),
           contact.getEmail(),
           contact.getPhoneNumber(),
-          contact.getNotes()
+          contact.getNotes(),
+          contact.getContactedBy()?.getId(),
+          contact.getContactedBy()?.getFirstName()
         )
       );
     }
