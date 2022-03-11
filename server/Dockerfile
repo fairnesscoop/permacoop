@@ -6,9 +6,8 @@ WORKDIR /var/www
 COPY ./package.json ./package-lock.json ./
 RUN npm install
 
-# Bundle app and run default build
+# Bundle app
 COPY ./ ./
-RUN npm run build
 
 EXPOSE 3000
 
