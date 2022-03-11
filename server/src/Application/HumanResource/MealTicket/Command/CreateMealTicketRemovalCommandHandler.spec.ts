@@ -6,14 +6,16 @@ import { CreateMealTicketRemovalCommandHandler } from './CreateMealTicketRemoval
 import { CreateMealTicketRemovalCommand } from './CreateMealTicketRemovalCommand';
 import { MealTicketRemoval } from 'src/Domain/HumanResource/MealTicket/MealTicketRemoval.entity';
 import { MealTicketRemovalAlreadyExistException } from 'src/Domain/HumanResource/MealTicket/Exception/MealTicketRemovalAlreadyExistException';
+import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
+import { NotAWorkingDateException } from 'src/Domain/HumanResource/MealTicket/Exception/NotAWorkingDateException';
 
 describe('CreateMealTicketRemovalCommandHandler', () => {
   let mealTicketRemovalRepository: MealTicketRemovalRepository;
   let isMealTicketRemovalAlreadyExist: IsMealTicketRemovalAlreadyExist;
+  let dateUtilsAdapter: DateUtilsAdapter;
   let handler: CreateMealTicketRemovalCommandHandler;
 
   const user = mock(User);
-  const mealTicketRemoval = mock(MealTicketRemoval);
   const command = new CreateMealTicketRemovalCommand(
     '2020-04-29',
     instance(user),
@@ -23,10 +25,12 @@ describe('CreateMealTicketRemovalCommandHandler', () => {
   beforeEach(() => {
     mealTicketRemovalRepository = mock(MealTicketRemovalRepository);
     isMealTicketRemovalAlreadyExist = mock(IsMealTicketRemovalAlreadyExist);
+    dateUtilsAdapter = mock(DateUtilsAdapter);
 
     handler = new CreateMealTicketRemovalCommandHandler(
       instance(mealTicketRemovalRepository),
-      instance(isMealTicketRemovalAlreadyExist)
+      instance(dateUtilsAdapter),
+      instance(isMealTicketRemovalAlreadyExist),
     );
   });
 
@@ -37,20 +41,11 @@ describe('CreateMealTicketRemovalCommandHandler', () => {
         deepEqual(new Date('2020-04-29'))
       )
     ).thenResolve(false);
-    when(mealTicketRemoval.getId()).thenReturn(
-      '7c35d37c-b0e3-480d-bf6c-3dc1e094886f'
-    );
     when(
-      mealTicketRemovalRepository.save(
-        deepEqual(
-          new MealTicketRemoval('2020-04-29', 'dejeuner offert', instance(user))
-        )
-      )
-    ).thenResolve(instance(mealTicketRemoval));
+      dateUtilsAdapter.isAWorkingDay(deepEqual(new Date('2020-04-29')))
+    ).thenReturn(true)
 
-    expect(await handler.execute(command)).toBe(
-      '7c35d37c-b0e3-480d-bf6c-3dc1e094886f'
-    );
+    expect(await handler.execute(command)).toBeUndefined();
 
     verify(
       isMealTicketRemovalAlreadyExist.isSatisfiedBy(
@@ -59,10 +54,13 @@ describe('CreateMealTicketRemovalCommandHandler', () => {
       )
     ).once();
     verify(
+      dateUtilsAdapter.isAWorkingDay(deepEqual(new Date('2020-04-29')))
+    ).once();
+    verify(
       mealTicketRemovalRepository.save(
-        deepEqual(
-          new MealTicketRemoval('2020-04-29', 'dejeuner offert', instance(user))
-        )
+        deepEqual([
+          new MealTicketRemoval('2020-04-29', instance(user), 'dejeuner offert')
+        ])
       )
     ).once();
   });
@@ -74,20 +72,54 @@ describe('CreateMealTicketRemovalCommandHandler', () => {
         deepEqual(new Date('2020-04-29'))
       )
     ).thenResolve(true);
+    when(
+      dateUtilsAdapter.isAWorkingDay(deepEqual(new Date('2020-04-29')))
+    ).thenReturn(true)
 
     try {
-      await handler.execute(command);
+      expect(await handler.execute(command)).toBeUndefined();
     } catch (e) {
       expect(e).toBeInstanceOf(MealTicketRemovalAlreadyExistException);
       expect(e.message).toBe(
-        'human_resources.meal_ticket.meal_ticket_removal.errors.already_exist'
+        'human_resources.meal_tickets.errors.already_exist'
       );
+      verify(
+        dateUtilsAdapter.isAWorkingDay(deepEqual(new Date('2020-04-29')))
+      ).once();
       verify(
         isMealTicketRemovalAlreadyExist.isSatisfiedBy(
           instance(user),
           deepEqual(new Date('2020-04-29'))
         )
       ).once();
+      verify(mealTicketRemovalRepository.save(anything())).never();
+    }
+  });
+
+  it('testNotAWorkingDay', async () => {
+    when(
+      isMealTicketRemovalAlreadyExist.isSatisfiedBy(
+        instance(user),
+        deepEqual(new Date('2020-04-29'))
+      )
+    ).thenResolve(true);
+    when(
+      dateUtilsAdapter.isAWorkingDay(deepEqual(new Date('2020-04-29')))
+    ).thenReturn(false)
+
+    try {
+      expect(await handler.execute(command)).toBeUndefined();
+    } catch (e) {
+      expect(e).toBeInstanceOf(NotAWorkingDateException);
+      expect(e.message).toBe(
+        'human_resources.meal_tickets.errors.not_a_working_date'
+      );
+      verify(
+        dateUtilsAdapter.isAWorkingDay(deepEqual(new Date('2020-04-29')))
+      ).once();
+      verify(
+        isMealTicketRemovalAlreadyExist.isSatisfiedBy(anything(), anything())
+      ).never();
       verify(mealTicketRemovalRepository.save(anything())).never();
     }
   });

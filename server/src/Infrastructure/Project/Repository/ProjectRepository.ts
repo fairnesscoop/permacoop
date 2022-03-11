@@ -54,8 +54,8 @@ export class ProjectRepository implements IProjectRepository {
         'customer.name'
       ])
       .innerJoin('project.customer', 'customer')
-      .orderBy('project.name', 'ASC')
-      .addOrderBy('customer.name', 'ASC')
+      .orderBy('customer.name', 'ASC')
+      .addOrderBy('project.name', 'ASC')
       .limit(MAX_ITEMS_PER_PAGE)
       .offset((page - 1) * MAX_ITEMS_PER_PAGE);
 

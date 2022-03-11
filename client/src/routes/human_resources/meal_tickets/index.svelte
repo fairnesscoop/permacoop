@@ -1,40 +1,31 @@
 <script>
-  import Breadcrumb from '../../../components/Breadcrumb.svelte';
-  import { _ } from 'svelte-i18n';
-  import H4Title from '../../../components/H4Title.svelte';
   import { onMount } from 'svelte';
-  import { errorNormalizer } from '../../../normalizer/errors';
-  import ServerErrors from '../../../components/ServerErrors.svelte';
-  import { get, post } from '../../../utils/axios';
+  import { _ } from 'svelte-i18n';
+  import { format } from 'date-fns';
+  import { fr } from 'date-fns/locale';
+  import Breadcrumb from 'components/Breadcrumb.svelte';
+  import H4Title from 'components/H4Title.svelte';
+  import { errorNormalizer } from 'normalizer/errors';
+  import ServerErrors from 'components/ServerErrors.svelte';
+  import AddLink from 'components/links/AddLink.svelte';
+  import { get } from 'utils/axios';
   import Table from './_Table.svelte';
-  import Form from './_Form.svelte';
-  let title = $_('human_resources.meal_tickets.title');
 
-  let mealTicketsSummaries = [];
+  const title = $_('human_resources.meal_tickets.title', {
+    values: {
+      month: format(new Date(), 'MMMM yyyy', { locale: fr }),
+    },
+  });
+
   let errors;
-  let exceptionErrors;
+  let mealTicketsRemovals = [];
 
-  const fetchMealTicketsSummaries = async () => {
+  onMount(async () => {
     try {
-      mealTicketsSummaries = (await get('meal-tickets/count')).data;
+      mealTicketsRemovals = (await get('meal-tickets')).data;
     } catch (e) {
       errors = errorNormalizer(e);
     }
-  };
-
-  const saveMealTicketException = async (e) => {
-    try {
-      await post('meal-tickets-removals', {
-        date: e.detail.exceptionDate,
-      });
-      await fetchMealTicketsSummaries();
-    } catch (e) {
-      exceptionErrors = errorNormalizer(e);
-    }
-  };
-
-  onMount(async () => {
-    await fetchMealTicketsSummaries();
   });
 </script>
 
@@ -42,16 +33,10 @@
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{ title: $_('human_resources.breadcrumb') }, { title }]} />
-
+<Breadcrumb items={[{ title: $_('human_resources.breadcrumb') }, { title: $_('human_resources.meal_tickets.breadcrumb') }]} />
 <ServerErrors {errors} />
-
-<H4Title title={$_('human_resources.meal_tickets.available_meal_tickets')} />
-<Table {mealTicketsSummaries} />
-
-<H4Title
-  title={$_('human_resources.meal_tickets.do_not_want_to_receive_meal_ticket')} />
-
-<ServerErrors errors={exceptionErrors} />
-
-<Form on:save={saveMealTicketException} />
+<div class="inline-flex items-center">
+  <H4Title {title} />
+  <AddLink href={'/human_resources/meal_tickets/add'} value={$_('human_resources.meal_tickets.add.title')} />
+</div>
+<Table items={mealTicketsRemovals} />

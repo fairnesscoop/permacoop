@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { IEventRepository } from 'src/Domain/FairCalendar/Repository/IEventRepository';
+import { FindAllEventsByMonth, IEventRepository } from 'src/Domain/FairCalendar/Repository/IEventRepository';
 import { Event, EventType } from 'src/Domain/FairCalendar/Event.entity';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
-import { Customer } from 'src/Domain/Customer/Customer.entity';
 import { DailyRate } from 'src/Domain/Accounting/DailyRate.entity';
 import { Project } from 'src/Domain/Project/Project.entity';
 
@@ -146,5 +145,23 @@ export class EventRepository implements IEventRepository {
       .getRawOne();
 
     return Number(result.id) || 0;
+  }
+
+  public findAllEventsByMonth(date: Date): Promise<FindAllEventsByMonth[]> {
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    return this.repository
+      .createQueryBuilder('event')
+      .select([
+        'event.date as date',
+        'user.id as user',
+        'SUM(event.time)::int as duration'
+      ])
+      .where('extract(month FROM event.date) = :month', { month })
+      .andWhere('extract(year FROM event.date) = :year', { year })      
+      .innerJoin('event.user', 'user')
+      .groupBy('event.date, user.id')
+      .getRawMany();
   }
 }

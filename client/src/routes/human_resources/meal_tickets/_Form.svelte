@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, onMount } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import { _ } from 'svelte-i18n';
   import Button from 'components/inputs/Button.svelte';
   import Input from 'components/inputs/Input.svelte';

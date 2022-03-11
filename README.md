@@ -83,13 +83,14 @@ make test
 - Customers management
 - Calendar (timesheets etc.)
 - Human Resources
-  - Pay libs
+  - Meal tickets
   - Leaves
   - Cooperators / employee
 - Accounting
   - Quotations
   - Daily rates
   - Invoicing
+- Contacts managment
 
 ## Credits
 

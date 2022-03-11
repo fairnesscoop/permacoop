@@ -7,8 +7,8 @@ describe('MealTicketRemoval.entity', () => {
     const user = mock(User);
     const mealTicketRemoval = new MealTicketRemoval(
       '2020-04-26',
-      'Dejeuner offert à la conférence',
-      instance(user)
+      instance(user),
+      'Dejeuner offert à la conférence'
     );
 
     expect(mealTicketRemoval.getId()).toBe(undefined);

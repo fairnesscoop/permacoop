@@ -15,10 +15,10 @@ export class MealTicketRemoval {
   @ManyToOne(type => User, { nullable: false, onDelete: 'CASCADE' })
   private user: User;
 
-  constructor(date: string, comment: string, user: User) {
+  constructor(date: string, user: User, comment?: string) {
     this.date = date;
-    this.comment = comment;
     this.user = user;
+    this.comment = comment;
   }
 
   public getId(): string {

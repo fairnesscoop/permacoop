@@ -11,8 +11,8 @@
   import { fr } from 'date-fns/locale';
 
   export let label = '';
-  export let subMonth = 6;
-  export let addMonth = 6;
+  export let subMonth = 3;
+  export let addMonth = 3;
   export let date = '';
 
   const dispatch = createEventDispatcher();
