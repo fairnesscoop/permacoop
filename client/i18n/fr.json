@@ -250,25 +250,6 @@
   },
   "human_resources": {
     "breadcrumb": "RH",
-    "pay_slips": {
-      "title": "Fiche de paies",
-      "periods": "Périodes",
-      "users": "Coopérateurs - salariés",
-      "files": "Fichiers",
-      "download": "Télécharger ({size})",
-      "form": {
-        "file": "Fiche de paie",
-        "period": "Période",
-        "file_helper": "Format PDF uniquement"
-      },
-      "errors": {
-        "already_exist": "Cette fiche de paie a déjà été créée pour la période donnée.",
-        "not_found": "La fiche de paie n'existe pas."
-      },
-      "add": {
-        "title": "Ajouter une fiche de paie"
-      }
-    },
     "meal_tickets": {
       "title": "Tickets Restaurant",
       "available_meal_tickets": "Tickets-restaurant disponibles",
