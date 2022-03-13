@@ -173,11 +173,6 @@
                   href="human_resources/leaves">{$_('human_resources.leaves.title')}</a>
               </li>
             {/if}
-            <li class={subLinkClass}>
-              <a
-                class="w-full"
-                href="human_resources/pay_slips">{$_('human_resources.pay_slips.title')}</a>
-            </li>
           </ul>
         </li>
       </ul>
