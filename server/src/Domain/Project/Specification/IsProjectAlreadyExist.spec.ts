@@ -19,7 +19,6 @@ describe('IsProjectAlreadyExist', () => {
     when(projectRepository.findOneByName('Encom')).thenResolve(
       new Project(
         'Encom',
-        420,
         InvoiceUnits.DAY,
         new Customer('Radio France', anything())
       )

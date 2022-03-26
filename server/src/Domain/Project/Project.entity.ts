@@ -14,14 +14,6 @@ export class Project {
   @Column({ type: 'varchar', nullable: false })
   private name: string;
 
-  @Column({
-    type: 'integer',
-    nullable: false,
-    default: 420,
-    comment: 'Stored in minutes'
-  })
-  private dayDuration: number;
-
   @Column('enum', { enum: InvoiceUnits, nullable: false })
   private invoiceUnit: InvoiceUnits;
 
@@ -33,12 +25,10 @@ export class Project {
 
   constructor(
     name: string,
-    dayDuration: number,
     invoiceUnit: InvoiceUnits,
     customer: Customer
   ) {
     this.name = name;
-    this.dayDuration = dayDuration;
     this.invoiceUnit = invoiceUnit;
     this.customer = customer;
   }
@@ -49,10 +39,6 @@ export class Project {
 
   public getName(): string {
     return this.name;
-  }
-
-  public getDayDuration(): number {
-    return this.dayDuration;
   }
 
   public getInvoiceUnit(): InvoiceUnits {
@@ -73,12 +59,10 @@ export class Project {
 
   public update(
     customer: Customer,
-    dayDuration: number,
     invoiceUnit: InvoiceUnits,
     name: string
   ): void {
     this.customer = customer;
-    this.dayDuration = dayDuration;
     this.invoiceUnit = invoiceUnit;
     this.name = name;
   }

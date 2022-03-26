@@ -88,7 +88,6 @@ describe('GetInvoicesQueryHandler', () => {
             'deffa668-b9af-4a52-94dd-61a35401b917',
             'Plateforme web',
             null,
-            null,
             new CustomerView(
               'c6434c49-216b-41b3-a30a-79a3eb1198ec',
               'Radio France'
@@ -105,7 +104,6 @@ describe('GetInvoicesQueryHandler', () => {
           new ProjectView(
             'deffa668-b9af-4a52-94dd-61a35401b917',
             'Plateforme web',
-            null,
             null,
             new CustomerView(
               'c6434c49-216b-41b3-a30a-79a3eb1198ec',

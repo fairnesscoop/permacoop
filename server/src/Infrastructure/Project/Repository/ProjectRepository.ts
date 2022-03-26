@@ -30,7 +30,6 @@ export class ProjectRepository implements IProjectRepository {
         'project.id',
         'project.name',
         'project.invoiceUnit',
-        'project.dayDuration',
         'customer.id',
         'customer.name'
       ])
@@ -48,7 +47,6 @@ export class ProjectRepository implements IProjectRepository {
       .select([
         'project.id',
         'project.name',
-        'project.dayDuration',
         'project.invoiceUnit',
         'customer.id',
         'customer.name'

@@ -13,9 +13,13 @@ import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { Project } from 'src/Domain/Project/Project.entity';
 import { NoBillableEventsFoundException } from 'src/Domain/Accounting/Exception/NoBillableEventsFoundException';
 import { InvoiceItem } from 'src/Domain/Accounting/InvoiceItem.entity';
+import { CooperativeRepository } from 'src/Infrastructure/Settings/Repository/CooperativeRepository';
+import { CooperativeNotFoundException } from 'src/Domain/Settings/Repository/CooperativeNotFoundException';
+import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
 
 describe('GenerateInvoiceCommandHandler', () => {
   let projectRepository: ProjectRepository;
+  let cooperativeRepository: CooperativeRepository;
   let eventRepository: EventRepository;
   let invoiceRepository: InvoiceRepository;
   let invoiceItemRepository: InvoiceItemRepository;
@@ -27,6 +31,7 @@ describe('GenerateInvoiceCommandHandler', () => {
   const project = mock(Project);
   const date = new Date('2020-11-23T17:43:14.299Z');
   const expiryDate = new Date('2020-11-28T17:43:14.299Z');
+  const cooperative = mock(Cooperative);
   const command = new GenerateInvoiceCommand(
     'a491ccc9-df7c-4fc6-8e90-db816208f689',
     InvoiceStatus.DRAFT,
@@ -36,6 +41,7 @@ describe('GenerateInvoiceCommandHandler', () => {
 
   beforeEach(() => {
     projectRepository = mock(ProjectRepository);
+    cooperativeRepository = mock(CooperativeRepository);
     invoiceIdGenerator = mock(InvoiceIdGenerator);
     eventRepository = mock(EventRepository);
     invoiceRepository = mock(InvoiceRepository);
@@ -44,6 +50,7 @@ describe('GenerateInvoiceCommandHandler', () => {
 
     handler = new GenerateInvoiceCommandHandler(
       instance(projectRepository),
+      instance(cooperativeRepository),
       instance(eventRepository),
       instance(invoiceRepository),
       instance(invoiceItemRepository),
@@ -52,16 +59,48 @@ describe('GenerateInvoiceCommandHandler', () => {
     );
   });
 
+  it('testCooperativeNotFound', async () => {
+    when(
+      cooperativeRepository.find()
+    ).thenResolve(null);
+
+    try {
+      expect(await handler.execute(command)).toBeUndefined();
+    } catch (e) {
+      expect(e).toBeInstanceOf(CooperativeNotFoundException);
+      expect(e.message).toBe('settings.errors.cooperative_not_found');
+      verify(cooperativeRepository.find()).once();
+      verify(
+        projectRepository.findOneById(anything())
+      ).never();
+      verify(invoiceIdGenerator.generate()).never();
+      verify(
+        eventRepository.findBillableEventsByMonthAndProject(
+          anything(),
+          anything()
+        )
+      ).never();
+      verify(dateUtilsAdapter.addDaysToDate(anything(), anything())).never();
+      verify(invoiceRepository.save(anything())).never();
+      verify(invoiceItemRepository.save(anything())).never();
+      verify(dateUtilsAdapter.getCurrentDate()).never();
+    }
+  });
+
   it('testProjectNotFound', async () => {
+    when(
+      cooperativeRepository.find()
+    ).thenResolve(instance(cooperative));
     when(
       projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
     ).thenResolve(null);
 
     try {
-      await handler.execute(command);
+      expect(await handler.execute(command)).toBeUndefined();
     } catch (e) {
       expect(e).toBeInstanceOf(ProjectNotFoundException);
       expect(e.message).toBe('crm.projects.errors.not_found');
+      verify(cooperativeRepository.find()).once();
       verify(
         projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
       ).once();
@@ -81,6 +120,9 @@ describe('GenerateInvoiceCommandHandler', () => {
 
   it('testNoBillableEventsFound', async () => {
     when(
+      cooperativeRepository.find()
+    ).thenResolve(instance(cooperative));
+    when(
       projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
     ).thenResolve(instance(project));
     when(dateUtilsAdapter.getCurrentDate()).thenReturn(date);
@@ -93,12 +135,13 @@ describe('GenerateInvoiceCommandHandler', () => {
     ).thenResolve([]);
 
     try {
-      await handler.execute(command);
+      expect(await handler.execute(command)).toBeUndefined();
     } catch (e) {
       expect(e).toBeInstanceOf(NoBillableEventsFoundException);
       expect(e.message).toBe(
         'accounting.invoices.errors.no_billable_events_found'
       );
+      verify(cooperativeRepository.find()).once();
       verify(
         projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
       ).once();
@@ -156,7 +199,6 @@ describe('GenerateInvoiceCommandHandler', () => {
     when(savedInvoice.getId()).thenReturn(
       'fc8a4cd9-31eb-4fca-814d-b30c05de485d'
     );
-    when(project.getDayDuration()).thenReturn(420);
 
     const invoiceItems = [
       new InvoiceItem(
@@ -177,6 +219,10 @@ describe('GenerateInvoiceCommandHandler', () => {
     ];
 
     when(
+      cooperativeRepository.find()
+    ).thenResolve(instance(cooperative));
+    when(cooperative.getDayDuration()).thenReturn(420);
+    when(
       projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
     ).thenResolve(instance(project));
     when(dateUtilsAdapter.getCurrentDate()).thenReturn(date);
@@ -196,6 +242,9 @@ describe('GenerateInvoiceCommandHandler', () => {
       'fc8a4cd9-31eb-4fca-814d-b30c05de485d'
     );
 
+    verify(
+      cooperativeRepository.find()
+    ).once();
     verify(
       projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
     ).once();

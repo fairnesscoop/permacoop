@@ -30,9 +30,9 @@ export class CreateProjectAction {
   @ApiOperation({ summary: 'Create new project' })
   public async index(@Body() projectDto: ProjectDTO) {
     try {
-      const { name, customerId, dayDuration, invoiceUnit } = projectDto;
+      const { name, customerId, invoiceUnit } = projectDto;
       const id = await this.commandBus.execute(
-        new CreateProjectCommand(name, dayDuration, invoiceUnit, customerId)
+        new CreateProjectCommand(name, invoiceUnit, customerId)
       );
 
       return { id };

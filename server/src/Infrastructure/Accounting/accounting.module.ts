@@ -43,6 +43,8 @@ import { InvoiceIdGenerator } from 'src/Domain/Accounting/Generators/InvoiceIdGe
 import { GenerateInvoiceAction } from './Action/Invoice/GenerateInvoiceAction';
 import { GetInvoicesAction } from './Action/Invoice/GetInvoicesAction';
 import { GetInvoicesQueryHandler } from 'src/Application/Accounting/Query/Invoice/GetInvoicesQueryHandler';
+import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
+import { CooperativeRepository } from '../Settings/Repository/CooperativeRepository';
 
 @Module({
   imports: [
@@ -58,7 +60,8 @@ import { GetInvoicesQueryHandler } from 'src/Application/Accounting/Query/Invoic
       User,
       Invoice,
       InvoiceItem,
-      Event
+      Event,
+      Cooperative
     ])
   ],
   controllers: [
@@ -72,6 +75,7 @@ import { GetInvoicesQueryHandler } from 'src/Application/Accounting/Query/Invoic
     GenerateInvoiceAction
   ],
   providers: [
+    { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
     { provide: 'IQuoteRepository', useClass: QuoteRepository },
     { provide: 'IDateUtils', useClass: DateUtilsAdapter },
     { provide: 'IQuoteItemRepository', useClass: QuoteItemRepository },

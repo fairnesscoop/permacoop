@@ -17,7 +17,6 @@ describe('CreateProjectCommandHandler', () => {
 
   const command = new CreateProjectCommand(
     'Project',
-    420,
     InvoiceUnits.DAY,
     'b5e8dc18-ca67-4323-bdae-654afe09499f'
   );
@@ -85,7 +84,7 @@ describe('CreateProjectCommandHandler', () => {
     when(
       projectRepository.save(
         deepEqual(
-          new Project('Project', 420, InvoiceUnits.DAY, instance(customer))
+          new Project('Project', InvoiceUnits.DAY, instance(customer))
         )
       )
     ).thenResolve(instance(createdProject));
@@ -101,7 +100,7 @@ describe('CreateProjectCommandHandler', () => {
     verify(
       projectRepository.save(
         deepEqual(
-          new Project('Project', 420, InvoiceUnits.DAY, instance(customer))
+          new Project('Project', InvoiceUnits.DAY, instance(customer))
         )
       )
     ).once();

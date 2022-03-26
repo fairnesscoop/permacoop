@@ -9,7 +9,6 @@ describe('Project.entity', () => {
 
     const project = new Project(
       'Project name',
-      420,
       InvoiceUnits.DAY,
       instance(customer)
     );
@@ -17,7 +16,6 @@ describe('Project.entity', () => {
     expect(project.getId()).toBe(undefined);
     expect(project.getFullName()).toBe('[Radio France] Project name');
     expect(project.getName()).toBe('Project name');
-    expect(project.getDayDuration()).toBe(420);
     expect(project.getInvoiceUnit()).toBe(InvoiceUnits.DAY);
     expect(project.getCustomer()).toBe(instance(customer));
   });
@@ -30,16 +28,14 @@ describe('Project.entity', () => {
 
     const project = new Project(
       'Project name',
-      420,
       InvoiceUnits.DAY,
       instance(customer)
     );
-    project.update(instance(customer2), 450, InvoiceUnits.HOUR, 'project');
+    project.update(instance(customer2), InvoiceUnits.HOUR, 'project');
 
     expect(project.getId()).toBe(undefined);
     expect(project.getFullName()).toBe('[RF] project');
     expect(project.getName()).toBe('project');
-    expect(project.getDayDuration()).toBe(450);
     expect(project.getInvoiceUnit()).toBe(InvoiceUnits.HOUR);
     expect(project.getCustomer()).toBe(instance(customer2));
   });
