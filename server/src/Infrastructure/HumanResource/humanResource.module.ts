@@ -62,7 +62,6 @@ import { GetAvailableMealTicketsAction } from './MealTicket/Action/GetAvailableM
 import { GetMealTicketsPerMonthQueryHandler } from 'src/Application/HumanResource/MealTicket/Query/GetMealTicketsPerMonthQueryHandler';
 import { UpdateLeaveRequestAction } from './Leave/Action/UpdateLeaveRequestAction';
 import { UpdateLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/UpdateLeaveRequestCommandHandler';
-import { LeaveRequestToMealTicketRemovalConverter } from 'src/Domain/HumanResource/MealTicket/Converter/LeaveRequestToMealTicketRemovalConverter';
 
 @Module({
   imports: [
@@ -145,8 +144,7 @@ import { LeaveRequestToMealTicketRemovalConverter } from 'src/Domain/HumanResour
     IsMealTicketRemovalAlreadyExist,
     CreateMealTicketRemovalCommandHandler,
     GetMealTicketsPerMonthQueryHandler,
-    UpdateLeaveRequestCommandHandler,
-    LeaveRequestToMealTicketRemovalConverter
+    UpdateLeaveRequestCommandHandler
   ]
 })
 export class HumanResourceModule { }
