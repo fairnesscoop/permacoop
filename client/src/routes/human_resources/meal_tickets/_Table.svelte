@@ -1,8 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import { format } from 'date-fns';
-  import { fr } from 'date-fns/locale';
-  export let mealTicketsSummaries = [];
+
+  export let items;
 </script>
 
 <table
@@ -10,25 +9,20 @@
   <thead>
     <tr
       class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-      <th class="px-4 py-3">{$_('human_resources.meal_tickets.month')}</th>
-      <th class="px-4 py-3">{$_('human_resources.meal_tickets.base')}</th>
-      <th class="px-4 py-3">{$_('human_resources.meal_tickets.exceptions')}</th>
-      <th class="px-4 py-3">{$_('human_resources.meal_tickets.total')}</th>
+      <th class="px-4 py-3">{$_('human_resources.meal_tickets.user')}</th>
+      <th class="px-4 py-3">{$_('human_resources.meal_tickets.nb_meal_tickets')}</th>
+      <th class="px-4 py-3">{$_('human_resources.meal_tickets.nb_meal_tickets_removals')}</th>
     </tr>
   </thead>
 
   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-    {#each mealTicketsSummaries as { month, total, base, mealTicketRemovalCount }}
+    {#each items as { firstName, lastName, mealTickets, mealTicketRemovals}}
       <tr class="text-gray-700 dark:text-gray-400">
         <td class="px-4 py-3 text-sm">
-          {format(new Date(2014, month - 1, 11), 'MMMM', { locale: fr })}
+          {firstName} {lastName}
         </td>
-        <td class="px-4 py-3 text-sm">{base}</td>
-        <td class="px-4 py-3 text-sm">{mealTicketRemovalCount}</td>
-        <td
-          class="px-4 py-3 text-gray-50 font-bold dark:bg-indigo-600 bg-indigo-400 text-md">
-          {total}
-        </td>
+        <td class="px-4 py-3 text-sm">{mealTickets}</td>
+        <td class="px-4 py-3 text-sm">{mealTicketRemovals}</td>
       </tr>
     {/each}
   </tbody>

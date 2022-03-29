@@ -6,7 +6,6 @@
   import BlueBadge from 'components/badges/BlueBadge.svelte';
   import GrayBadge from 'components/badges/GrayBadge.svelte';
   import YellowBadge from 'components/badges/YellowBadge.svelte';
-  import RedBadge from 'components/badges/RedBadge.svelte';
 
   export let overview;
 </script>

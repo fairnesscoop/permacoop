@@ -38,7 +38,6 @@
       <div class="w-1/2 pr-2">
         <MonthsInput
           label={$_('faircalendar.filter.month')}
-          amount={6}
           bind:date
           on:change={handleFilter} />
       </div>

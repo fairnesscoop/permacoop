@@ -1,5 +1,3 @@
-import { WorkingDayOfYearByMonth } from 'src/Domain/HumanResource/MealTicket/Strategy/WorkingDayOfYearByMonth';
-
 export interface IDateUtils {
   format(date: Date, format: string): string;
   getDaysInMonth(date: Date): number;
@@ -7,6 +5,7 @@ export interface IDateUtils {
   getCurrentDate(): Date;
   getCurrentDateToISOString(): string;
   getWorkedDaysDuringAPeriod(start: Date, end: Date): Date[];
+  isAWorkingDay(date: Date): boolean;
   getWorkedFreeDays(year: number): Date[];
   getEasterDate(year: number): Date;
   getLeaveDuration(
@@ -19,5 +18,4 @@ export interface IDateUtils {
   getYear(date: Date): number;
   getLastDayOfYear(date: Date): Date;
   getFirstDayOfYear(date: Date): Date;
-  getAllWorkingDayOfYearByMonth(date: Date): WorkingDayOfYearByMonth[];
 }

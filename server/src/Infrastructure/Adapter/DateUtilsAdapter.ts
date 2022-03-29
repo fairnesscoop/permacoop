@@ -8,7 +8,6 @@ import {
   getYear
 } from 'date-fns';
 import { IDateUtils } from 'src/Application/IDateUtils';
-import { WorkingDayOfYearByMonth } from 'src/Domain/HumanResource/MealTicket/Strategy/WorkingDayOfYearByMonth';
 
 @Injectable()
 export class DateUtilsAdapter implements IDateUtils {
@@ -22,6 +21,25 @@ export class DateUtilsAdapter implements IDateUtils {
 
   public isWeekend(date: Date): boolean {
     return fnsIsWeekend(date);
+  }
+
+  public isAWorkingDay(date: Date): boolean {
+    if (this.isWeekend(date)) {
+      return false;
+    }
+
+    const workedFreeDays = this.getWorkedFreeDays(date.getFullYear());
+    const formatedDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+
+    for (const day of workedFreeDays) {
+      const formatedDay = `${day.getFullYear()}-${day.getMonth()}-${day.getDate()}`;
+
+      if (formatedDate === formatedDay) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   public getCurrentDate(): Date {
@@ -69,32 +87,6 @@ export class DateUtilsAdapter implements IDateUtils {
     }
 
     return dates;
-  }
-
-  public getAllWorkingDayOfYearByMonth(date: Date): WorkingDayOfYearByMonth[] {
-    const lastDayOfYear = this.getLastDayOfYear(date);
-    const firstDayOfYear = this.getFirstDayOfYear(date);
-
-    const workedDaysOfYear = this.getWorkedDaysDuringAPeriod(
-      firstDayOfYear,
-      lastDayOfYear
-    );
-
-    const defaultValues: WorkingDayOfYearByMonth[] = [];
-
-    return workedDaysOfYear.reduce((prev, next) => {
-      const currentMonth = next.getMonth() + 1;
-      const itemWithMonth = prev.find(item => item.month === currentMonth);
-
-      if (itemWithMonth) {
-        itemWithMonth.addOneWorkingDay();
-        return prev;
-      }
-      const working = new WorkingDayOfYearByMonth(currentMonth);
-      working.addOneWorkingDay();
-
-      return [...prev, working];
-    }, defaultValues);
   }
 
   public getWorkedFreeDays(year: number): Date[] {

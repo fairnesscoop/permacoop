@@ -4,22 +4,20 @@
   import {
     ROLE_COOPERATOR,
     ROLE_EMPLOYEE,
-    ROLE_ACCOUNTANT,
   } from 'constants/roles';
+  import { settings } from 'store';
   import DashboardIcon from './icons/DashboardIcon.svelte';
   import UsersIcon from './icons/UsersIcon.svelte';
   import CalendarIcon from './icons/CalendarIcon.svelte';
   import CRMIcon from './icons/CRMIcon.svelte';
   import AccountingIcon from './icons/AccountingIcon.svelte';
   import ChevronDownIcon from './icons/ChevronDownIcon.svelte';
-  import { settings } from 'store';
 
   const { session } = stores();
 
   export let segment;
 
-  let userRoles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
-  let accountantRoles = [ROLE_COOPERATOR, ROLE_ACCOUNTANT];
+  const userRoles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
   const activeClass =
     'absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg';
@@ -54,11 +52,11 @@
       <ul>
         {#if userRoles.includes($session.user.scope)}
           <li class="relative px-6 py-3">
-            {#if 'faircalendar' === segment}
+            {#if segment === 'faircalendar'}
               <span class={activeClass} aria-hidden="true" />
             {/if}
             <a
-              class={'faircalendar' === segment ? activeLinkClass : linkClass}
+              class={segment === 'faircalendar' ? activeLinkClass : linkClass}
               href="/faircalendar">
               <CalendarIcon className={'w-5 h-5'} />
               <span class="ml-4">{$_('faircalendar.breadcrumb')}</span>
@@ -67,9 +65,9 @@
         {/if}
         <li class="relative px-6 py-3">
           <button
-            class={'crm' === segment ? activeLinkClass : linkClass}
+            class={segment === 'crm' ? activeLinkClass : linkClass}
             aria-haspopup="true">
-            {#if 'crm' === segment}
+            {#if segment === 'crm'}
               <span class={activeClass} aria-hidden="true" />
             {/if}
             <span class="inline-flex items-center">
@@ -102,11 +100,11 @@
         </li>
         {#if userRoles.includes($session.user.scope)}
           <li class="relative px-6 py-3">
-            {#if 'accounting' === segment}
+            {#if segment === 'accounting'}
               <span class={activeClass} aria-hidden="true" />
             {/if}
             <button
-              class={'accounting' === segment ? activeLinkClass : linkClass}
+              class={segment === 'accounting' ? activeLinkClass : linkClass}
               aria-haspopup="true">
               <span class="inline-flex items-center">
                 <AccountingIcon className={'w-5 h-5'} />
@@ -142,9 +140,9 @@
         {/if}
         <li class="relative px-6 py-3">
           <button
-            class={'human_resources' === segment ? activeLinkClass : linkClass}
+            class={segment === 'human_resources' ? activeLinkClass : linkClass}
             aria-haspopup="true">
-            {#if 'human_resources' === segment}
+            {#if segment === 'human_resources'}
               <span class={activeClass} aria-hidden="true" />
             {/if}
             <span class="inline-flex items-center">
@@ -160,7 +158,7 @@
               <li class={subLinkClass}>
                 <a
                   class="w-full"
-                  href="human_resources/meal_tickets">{$_('human_resources.meal_tickets.title')}</a>
+                  href="human_resources/meal_tickets">{$_('human_resources.meal_tickets.breadcrumb')}</a>
               </li>
               <li class={subLinkClass}>
                 <a

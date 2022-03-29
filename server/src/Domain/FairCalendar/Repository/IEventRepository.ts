@@ -2,6 +2,12 @@ import { Event } from '../Event.entity';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { Project } from 'src/Domain/Project/Project.entity';
 
+export type FindAllEventsByMonth = {
+  date: string;
+  user: string;
+  duration: number;
+}
+
 export interface IEventRepository {
   save(event: Event): Promise<Event>;
   delete(event: Event): void;
@@ -17,4 +23,5 @@ export interface IEventRepository {
     startDate: string,
     endDate: string
   ): Promise<number>;
+  findAllEventsByMonth(date: Date): Promise<FindAllEventsByMonth[]>;
 }

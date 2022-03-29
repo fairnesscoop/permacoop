@@ -1,55 +1,50 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MealTicketRemoval } from 'src/Domain/HumanResource/MealTicket/MealTicketRemoval.entity';
-import { IMealTicketRemovalRepository } from 'src/Domain/HumanResource/MealTicket/Repository/IMealTicketRemovalRepository';
+import { FindByMonth, IMealTicketRemovalRepository } from 'src/Domain/HumanResource/MealTicket/Repository/IMealTicketRemovalRepository';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
-import { MealTicketRemovalSummaryDTO } from '../DTO/MealTicketRemovalSummaryDTO';
 
-export class MealTicketRemovalRepository
-  implements IMealTicketRemovalRepository {
+export class MealTicketRemovalRepository implements IMealTicketRemovalRepository {
   constructor(
     @InjectRepository(MealTicketRemoval)
     private readonly repository: Repository<MealTicketRemoval>
   ) {}
 
-  public save(
-    mealTicketRemoval: MealTicketRemoval
-  ): Promise<MealTicketRemoval> {
-    return this.repository.save(mealTicketRemoval);
+  public save(mealTicketRemovals: MealTicketRemoval[]): void {
+    this.repository.save(mealTicketRemovals);
   }
 
   public findOneByUserAndDate(
     user: User,
     date: Date
   ): Promise<MealTicketRemoval | undefined> {
-    const month = new Date(date).getMonth() + 1;
-    const year = new Date(date).getFullYear();
-    const day = new Date(date).getDay();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const day = date.getDate();
 
     return this.repository
-      .createQueryBuilder('mealTicketRemoval')
-      .select(['mealTicketRemoval.id'])
-      .where('mealTicketRemoval.user = :userId', { userId: user.getId() })
-      .andWhere('extract(month FROM mealTicketRemoval.date) = :month', {
+      .createQueryBuilder('m')
+      .select(['m.id'])
+      .where('m.user = :userId', { userId: user.getId() })
+      .andWhere('extract(month FROM m.date) = :month', {
         month
       })
-      .andWhere('extract(year FROM mealTicketRemoval.date) = :year', { year })
-      .andWhere('extract(day FROM mealTicketRemoval.date) = :day', { day })
+      .andWhere('extract(year FROM m.date) = :year', { year })
+      .andWhere('extract(day FROM m.date) = :day', { day })
       .getOne();
   }
 
-  public getAllByUserGroupedByMonth(
-    user: User,
-    date: Date
-  ): Promise<MealTicketRemovalSummaryDTO[]> {
-    const year = new Date(date).getFullYear();
+  public findByMonth(date: Date): Promise<FindByMonth[]> {
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
 
     return this.repository
       .createQueryBuilder('mealTicketRemoval')
-      .select(['EXTRACT(month FROM date) as monthnumber', 'COUNT(id)'])
-      .where('mealTicketRemoval.user = :userId', { userId: user.getId() })
+      .select(['user.id, COUNT(mealTicketRemoval.id)::int as count'])
+      .where('extract(month FROM mealTicketRemoval.date) = :month', { month })
       .andWhere('extract(year FROM mealTicketRemoval.date) = :year', { year })
-      .groupBy('monthnumber')
+      .innerJoin('mealTicketRemoval.user', 'user')
+      .groupBy('user.id')
       .getRawMany();
   }
 }

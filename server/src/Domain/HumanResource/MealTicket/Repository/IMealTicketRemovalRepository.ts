@@ -1,15 +1,16 @@
-import { MealTicketRemovalSummaryDTO } from 'src/Infrastructure/HumanResource/MealTicket/DTO/MealTicketRemovalSummaryDTO';
 import { User } from '../../User/User.entity';
 import { MealTicketRemoval } from '../MealTicketRemoval.entity';
 
+export type FindByMonth = {
+  id: string;
+  count: number;
+}
+
 export interface IMealTicketRemovalRepository {
-  save(MealTicketRemoval: MealTicketRemoval): Promise<MealTicketRemoval>;
+  save(mealTicketRemovals: MealTicketRemoval[]): void;
   findOneByUserAndDate(
     user: User,
     date: Date
   ): Promise<MealTicketRemoval | undefined>;
-  getAllByUserGroupedByMonth(
-    user: User,
-    date: Date
-  ): Promise<MealTicketRemovalSummaryDTO[]>;
+  findByMonth(date: Date): Promise<FindByMonth[]>;
 }

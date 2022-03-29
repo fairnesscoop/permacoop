@@ -9,14 +9,14 @@
 <script>
   import { goto } from '@sapper/app';
   import { _ } from 'svelte-i18n';
-  import { format, formatISO } from 'date-fns';
+  import { format } from 'date-fns';
   import { fr } from 'date-fns/locale';
   import Breadcrumb from 'components/Breadcrumb.svelte';
   import { post } from 'utils/axios';
-  import Form from '../_Form.svelte';
   import { errorNormalizer } from 'normalizer/errors';
   import ServerErrors from 'components/ServerErrors.svelte';
   import H4Title from 'components/H4Title.svelte';
+  import Form from '../_Form.svelte';
 
   export let period;
 
@@ -24,8 +24,8 @@
     return format(new Date(date), 'EE dd MMMM', { locale: fr });
   };
 
-  let startDate = period.split('_')[0];
-  let endDate = period.split('_')[1];
+  const startDate = period.split('_')[0];
+  const endDate = period.split('_')[1];
   let title = $_('faircalendar.from_date', {
     values: { date: formatDate(startDate) },
   });

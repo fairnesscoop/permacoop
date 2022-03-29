@@ -16,7 +16,7 @@ import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import { LoggedUser } from '../../User/Decorator/LoggedUser';
 import { CreateMealTicketRemovalCommand } from 'src/Application/HumanResource/MealTicket/Command/CreateMealTicketRemovalCommand';
 
-@Controller('meal-tickets-removals')
+@Controller('meal-tickets')
 @ApiTags('Human Resource')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('bearer'), RolesGuard)
@@ -26,7 +26,7 @@ export class CreateMealTicketRemovalAction {
     private readonly commandBus: ICommandBus
   ) {}
 
-  @Post()
+  @Post('removals')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({ summary: 'Create new meal ticket removal' })
   public async index(
@@ -34,11 +34,11 @@ export class CreateMealTicketRemovalAction {
     @LoggedUser() user: User
   ) {
     try {
-      const id = await this.commandBus.execute(
+      await this.commandBus.execute(
         new CreateMealTicketRemovalCommand(date, user, comment)
       );
 
-      return { id };
+      return { date };
     } catch (e) {
       throw new BadRequestException(e.message);
     }

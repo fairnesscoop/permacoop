@@ -21,7 +21,7 @@ describe('IsMealTicketRemovalAlreadyExist', () => {
     when(
       mealTicketRemovalRepository.findOneByUserAndDate(instance(user), date)
     ).thenResolve(
-      new MealTicketRemoval('2020-04-29', 'dejeuner offert', instance(user))
+      new MealTicketRemoval('2020-04-29', instance(user))
     );
     expect(
       await isMealTicketRemovalAlreadyExist.isSatisfiedBy(instance(user), date)

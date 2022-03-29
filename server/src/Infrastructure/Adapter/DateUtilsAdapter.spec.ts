@@ -28,6 +28,19 @@ describe('DateUtilsAdapter', () => {
     );
   });
 
+  it('testIsAWorkingDay', () => {
+    const dateUtils = new DateUtilsAdapter();
+    expect(dateUtils.isAWorkingDay(new Date('2020-05-01T11:49:58.706Z'))).toBe(
+      false
+    );
+    expect(dateUtils.isAWorkingDay(new Date('2019-12-21T11:49:58.706Z'))).toBe(
+      false
+    );
+    expect(dateUtils.isAWorkingDay(new Date('2019-12-23T11:49:58.706Z'))).toBe(
+      true
+    );
+  });
+
   it('testAddDaysToDate', () => {
     const dateUtils = new DateUtilsAdapter();
     expect(
@@ -126,30 +139,6 @@ describe('DateUtilsAdapter', () => {
     const dateUtils = new DateUtilsAdapter();
 
     expect(dateUtils.getYear(new Date('2020-05-05'))).toBe(2020);
-  });
-
-  it('testGetAllWorkingDayOfYearByMonth', () => {
-    const dateUtils = new DateUtilsAdapter();
-    const now = new Date('2021-12-12');
-    const result = dateUtils.getAllWorkingDayOfYearByMonth(now);
-    expect(result.length).toBe(12);
-
-    const WorkingDaysOfMarch = result.find(item => {
-      return item.month === 12;
-    });
-    expect(WorkingDaysOfMarch.workingDaysCount).toBe(23);
-  });
-
-  it('testGetAllWorkingDayOfYearByMonth -- month with public holiday', () => {
-    const dateUtils = new DateUtilsAdapter();
-    const now = new Date('2022-01-01');
-    const result = dateUtils.getAllWorkingDayOfYearByMonth(now);
-    expect(result.length).toBe(12);
-
-    const WorkingDaysOfMarch = result.find(item => {
-      return item.month === 1;
-    });
-    expect(WorkingDaysOfMarch.workingDaysCount).toBe(21);
   });
 
   it('testGetLastDayOfYear', () => {
