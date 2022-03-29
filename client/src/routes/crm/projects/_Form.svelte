@@ -6,7 +6,6 @@
   import SelectInput from 'components/inputs/SelectInput.svelte';
   import Input from 'components/inputs/Input.svelte';
   import Button from 'components/inputs/Button.svelte';
-  import { minutesToHours } from 'normalizer/time';
 
   let response = {
     items: [],
@@ -18,14 +17,13 @@
 
   export let loading;
   export let name = '';
-  export let dayDuration = 420;
   export let invoiceUnit = 'day';
   export let customerId = '';
 
   const dispatch = createEventDispatcher();
 
   const submit = () => {
-    dispatch('save', { name, dayDuration, customerId, invoiceUnit });
+    dispatch('save', { name, customerId, invoiceUnit });
   };
 </script>
 
@@ -37,13 +35,6 @@
     type={'text'}
     bind:value={name} />
   <CustomersInput customers={response.items} bind:customerId />
-  <SelectInput
-    label={$_('crm.projects.form.day_duration')}
-    bind:value={dayDuration}>
-    {#each [420, 480] as minutes}
-      <option value={minutes}>{minutesToHours(minutes)}</option>
-    {/each}
-  </SelectInput>
   <SelectInput
     label={$_('crm.projects.invoice_unit.title')}
     bind:value={invoiceUnit}>

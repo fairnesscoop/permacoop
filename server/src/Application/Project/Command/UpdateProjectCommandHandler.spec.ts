@@ -21,7 +21,6 @@ describe('UpdateProjectCommandHandler', () => {
   const command = new UpdateProjectCommand(
     'afda00b1-bf49-4102-9bc2-bce17f3acd48',
     'Project',
-    420,
     InvoiceUnits.HOUR,
     'd4aa560e-d2f7-422e-ae8d-6af5d0455eeb'
   );
@@ -51,7 +50,6 @@ describe('UpdateProjectCommandHandler', () => {
     when(updatedProject.getId()).thenReturn(
       'afda00b1-bf49-4102-9bc2-bce17f3acd48'
     );
-    when(updatedProject.getDayDuration()).thenReturn(420);
     when(updatedProject.getName()).thenReturn('Old project');
 
     // Command return nothing
@@ -68,7 +66,6 @@ describe('UpdateProjectCommandHandler', () => {
     verify(
       updatedProject.update(
         instance(customer),
-        420,
         InvoiceUnits.HOUR,
         'Project'
       )
@@ -76,7 +73,6 @@ describe('UpdateProjectCommandHandler', () => {
     verify(
       updatedProject.update(
         instance(customer),
-        420,
         InvoiceUnits.HOUR,
         'Project'
       )
@@ -101,7 +97,7 @@ describe('UpdateProjectCommandHandler', () => {
       ).once();
       verify(projectRepository.save(anything())).never();
       verify(
-        updatedProject.update(anything(), anything(), anything(), anything())
+        updatedProject.update(anything(), anything(), anything())
       ).never();
       verify(updatedProject.getName()).never();
     }
@@ -129,7 +125,7 @@ describe('UpdateProjectCommandHandler', () => {
       ).once();
       verify(projectRepository.save(anything())).never();
       verify(
-        updatedProject.update(anything(), anything(), anything(), anything())
+        updatedProject.update(anything(), anything(), anything())
       ).never();
       verify(updatedProject.getName()).never();
     }
@@ -158,7 +154,7 @@ describe('UpdateProjectCommandHandler', () => {
       ).once();
       verify(projectRepository.save(anything())).never();
       verify(
-        updatedProject.update(anything(), anything(), anything(), anything())
+        updatedProject.update(anything(), anything(), anything())
       ).never();
       verify(updatedProject.getName()).once();
     }

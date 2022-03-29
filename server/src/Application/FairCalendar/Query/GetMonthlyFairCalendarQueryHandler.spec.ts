@@ -22,7 +22,6 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
 
     when(project.getId()).thenReturn('bf4a645c-9754-4943-baec-783361c6d814');
     when(project.getName()).thenReturn('RadioFrance');
-    when(project.getDayDuration()).thenReturn(420);
     when(task.getId()).thenReturn('7fb77f06-2d0b-4758-886a-42bba5445fcd');
     when(task.getName()).thenReturn('Development');
 
@@ -101,8 +100,7 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
         true,
         new ProjectView(
           'bf4a645c-9754-4943-baec-783361c6d814',
-          'RadioFrance',
-          420
+          'RadioFrance'
         ),
         new TaskView('7fb77f06-2d0b-4758-886a-42bba5445fcd', 'Development')
       ),

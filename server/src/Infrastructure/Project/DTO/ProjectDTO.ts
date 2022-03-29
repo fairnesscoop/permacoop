@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsIn, IsNotEmpty, IsUUID } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsUUID } from 'class-validator';
 import { InvoiceUnits } from 'src/Domain/Project/Project.entity';
 
 export class ProjectDTO {
@@ -11,11 +11,6 @@ export class ProjectDTO {
   @IsNotEmpty()
   @IsEnum(InvoiceUnits)
   public invoiceUnit: InvoiceUnits;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsIn([420, 480])
-  public dayDuration: number;
 
   @ApiProperty()
   @IsNotEmpty()

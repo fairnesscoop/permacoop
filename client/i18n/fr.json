@@ -159,10 +159,8 @@
       "title": "Projets",
       "name": "Nom du projet",
       "customer": "Nom du client",
-      "day_duration": "Durée d'une journée",
       "form": {
         "project_placeholder": "-- Choisir un projet --",
-        "day_duration": "Durée d'une journée",
         "project": "Nom du projet"
       },
       "invoice_unit": {

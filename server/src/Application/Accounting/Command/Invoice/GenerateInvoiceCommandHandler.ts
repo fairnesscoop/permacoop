@@ -12,12 +12,17 @@ import { IDateUtils } from 'src/Application/IDateUtils';
 import { IProjectRepository } from 'src/Domain/Project/Repository/IProjectRepository';
 import { ProjectNotFoundException } from 'src/Domain/Project/Exception/ProjectNotFoundException';
 import { Project } from 'src/Domain/Project/Project.entity';
+import { ICooperativeRepository } from 'src/Domain/Settings/Repository/ICooperativeRepository';
+import { CooperativeNotFoundException } from 'src/Domain/Settings/Repository/CooperativeNotFoundException';
+import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
 
 @CommandHandler(GenerateInvoiceCommand)
 export class GenerateInvoiceCommandHandler {
   constructor(
     @Inject('IProjectRepository')
     private readonly projectRepository: IProjectRepository,
+    @Inject('ICooperativeRepository')
+    private readonly cooperativeRepository: ICooperativeRepository,
     @Inject('IEventRepository')
     private readonly eventRepository: IEventRepository,
     @Inject('IInvoiceRepository')
@@ -31,6 +36,11 @@ export class GenerateInvoiceCommandHandler {
 
   public async execute(command: GenerateInvoiceCommand): Promise<string> {
     const { projectId, status, user, expireInDays } = command;
+
+    const cooperative = await this.cooperativeRepository.find();
+    if (!cooperative) {
+      throw new CooperativeNotFoundException();
+    }
 
     const project = await this.projectRepository.findOneById(projectId);
     if (!project) {
@@ -61,7 +71,7 @@ export class GenerateInvoiceCommandHandler {
     );
 
     for (const event of events) {
-      invoiceItems.push(this.buildInvoiceItem(invoice, project, event));
+      invoiceItems.push(this.buildInvoiceItem(invoice, cooperative, event));
     }
 
     const savedInvoice = await this.invoiceRepository.save(invoice);
@@ -72,11 +82,11 @@ export class GenerateInvoiceCommandHandler {
 
   private buildInvoiceItem(
     invoice: Invoice,
-    project: Project,
+    cooperative: Cooperative,
     { time_spent, billable, task_name, first_name, last_name, daily_rate }
   ): InvoiceItem {
     const quantity =
-      Math.round((time_spent / project.getDayDuration()) * 100) / 100;
+      Math.round((time_spent / cooperative.getDayDuration()) * 100) / 100;
 
     return new InvoiceItem(
       invoice,

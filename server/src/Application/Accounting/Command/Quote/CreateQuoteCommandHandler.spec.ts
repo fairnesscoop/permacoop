@@ -24,7 +24,7 @@ describe('CreateQuoteCommandHandler', () => {
   const quote = mock(Quote);
   const address = mock(Address);
   const customer = new Customer('Customer', instance(address));
-  const project = new Project('Project', 420, InvoiceUnits.DAY, customer);
+  const project = new Project('Project', InvoiceUnits.DAY, customer);
   const command = new CreateQuoteCommand(
     instance(user),
     QuoteStatus.DRAFT,

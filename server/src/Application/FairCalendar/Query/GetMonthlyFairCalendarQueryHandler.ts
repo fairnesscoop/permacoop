@@ -53,8 +53,7 @@ export class GetMonthlyFairCalendarQueryHandler {
           project
             ? new ProjectView(
                 project.getId(),
-                project.getName(),
-                project.getDayDuration()
+                project.getName()
               )
             : null,
           task ? new TaskView(task.getId(), task.getName()) : null

@@ -31,7 +31,6 @@ export class GetProjectsQueryHandler {
         new ProjectView(
           project.getId(),
           project.getName(),
-          project.getDayDuration(),
           project.getInvoiceUnit(),
           new CustomerView(customer.getId(), customer.getName())
         )

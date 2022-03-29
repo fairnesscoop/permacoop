@@ -76,7 +76,6 @@ export class EventRepository implements IEventRepository {
         'event.type',
         'project.id',
         'project.name',
-        'project.dayDuration',
         'task.id',
         'task.name'
       ])

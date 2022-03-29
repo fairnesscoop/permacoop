@@ -42,7 +42,6 @@ export class GetInvoicesQueryHandler {
             project.getId(),
             project.getName(),
             null,
-            null,
             new CustomerView(customer.getId(), customer.getName())
           )
         )

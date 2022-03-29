@@ -25,8 +25,7 @@ describe('GetFairCalendarOverview', () => {
 
     const project = new ProjectView(
       'bd86391b-4ee2-45db-9fc0-66078845a8b6',
-      'RadioFrance',
-      420
+      'RadioFrance'
     );
     const event1 = new FairCalendarView(
       EventType.MISSION,
@@ -53,8 +52,7 @@ describe('GetFairCalendarOverview', () => {
 
     const project = new ProjectView(
       'bd86391b-4ee2-45db-9fc0-66078845a8b6',
-      'RadioFrance',
-      420
+      'RadioFrance'
     );
 
     const event1 = new FairCalendarView(
@@ -104,7 +102,7 @@ describe('GetFairCalendarOverview', () => {
     );
 
     const expectedResult: ICalendarOverview = {
-      mission: 1.78,
+      mission: 1.57,
       dojo: 0.25,
       formationConference: 1,
       leave: 1,
