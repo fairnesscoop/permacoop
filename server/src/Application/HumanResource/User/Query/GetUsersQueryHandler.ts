@@ -12,7 +12,12 @@ export class GetUsersQueryHandler {
   ) {}
 
   public async execute(query: GetUsersQuery): Promise<UserView[]> {
-    const users = await this.userRepository.findUsers(query.withAccountant);
+    let noLeavingDate = false;
+    if (query.activeOnly) {
+      noLeavingDate = true;
+    }
+
+    const users = await this.userRepository.findUsers(query.withAccountant, noLeavingDate);
     const userViews: UserView[] = [];
 
     for (const user of users) {

@@ -10,10 +10,10 @@
   export let userId;
   export let date;
 
-  let data = [];
+  let users = [];
 
   onMount(async () => {
-    ({ data } = await get('users'));
+    ({ data: users } = await get('users', { params: {activeOnly: true} }));
   });
 
   const handleFilter = () => {
@@ -52,7 +52,7 @@
             bind:value={userId}
             on:blur={handleFilter}
             on:change={handleFilter}>
-            {#each data as user}
+            {#each users as user}
               <option value={user.id} selected={user.id === userId}>
                 {`${user.firstName} ${user.lastName}`}
               </option>
