@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { User } from '../HumanResource/User/User.entity';
 
 @Entity()
 export class Contact {
@@ -26,13 +27,17 @@ export class Contact {
   @Column({ type: 'varchar', nullable: true })
   private notes: string;
 
+  @ManyToOne(type => User, { nullable: true, onDelete: 'SET NULL' })
+  private contactedBy?: User;
+
   constructor(
     firstName: string,
     lastName: string,
     company: string,
     email: string,
     phoneNumber: string,
-    notes: string
+    notes: string,
+    contactedBy?: User
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -40,6 +45,7 @@ export class Contact {
     this.email = email;
     this.phoneNumber = phoneNumber;
     this.notes = notes;
+    this.contactedBy = contactedBy;
   }
 
   public getId(): string | null {
@@ -74,13 +80,18 @@ export class Contact {
     return this.notes;
   }
 
+  public getContactedBy(): User | null {
+    return this.contactedBy;
+  }
+
   public update(
     firstName: string,
     lastName: string,
     company: string,
     email: string,
     phoneNumber: string,
-    notes: string
+    notes: string,
+    contactedBy?: User
   ): void {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -88,5 +99,6 @@ export class Contact {
     this.email = email;
     this.phoneNumber = phoneNumber;
     this.notes = notes;
+    this.contactedBy = contactedBy;
   }
 }

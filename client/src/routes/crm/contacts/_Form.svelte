@@ -1,11 +1,19 @@
 <script>
   import { _ } from 'svelte-i18n';
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
+  import { get } from 'utils/axios';
   import Input from 'components/inputs/Input.svelte';
   import Button from 'components/inputs/Button.svelte';
+  import UsersInput from 'components/inputs/UsersInput.svelte';
 
   export let contact;
   export let loading;
+  let users = [];
+
+  onMount(async () => {
+    const userResponse = await get('users');
+    users = userResponse.data;
+  });
 
   const dispatch = createEventDispatcher();
 
@@ -44,6 +52,7 @@
     label={$_('crm.contacts.notes')}
     required={false}
     bind:value={contact.notes} />
+  <UsersInput {users} bind:userId={contact.contactedById} />
   <Button
     value={$_('common.form.save')}
     {loading}

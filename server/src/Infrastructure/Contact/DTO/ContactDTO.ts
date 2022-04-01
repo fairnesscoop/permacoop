@@ -29,4 +29,8 @@ export class ContactDTO {
   @ApiPropertyOptional()
   @IsOptional()
   public notes: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  public contactedById: string;
 }

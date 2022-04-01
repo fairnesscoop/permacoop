@@ -145,6 +145,7 @@
       "email": "Adresse email",
       "phone_number": "Téléphone",
       "notes": "Notes",
+      "contacted_by": "Contacté par",
       "add": {
         "title": "Ajouter un contact"
       },

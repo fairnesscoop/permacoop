@@ -30,8 +30,10 @@ export class ContactRepository implements IContactRepository {
         'contact.company',
         'contact.email',
         'contact.phoneNumber',
-        'contact.notes'
+        'contact.notes',
+        'contactedBy.id'
       ])
+      .leftJoin('contact.contactedBy', 'contactedBy')
       .where('contact.id = :id', { id })
       .getOne();
   }
@@ -46,8 +48,11 @@ export class ContactRepository implements IContactRepository {
         'contact.company',
         'contact.email',
         'contact.phoneNumber',
-        'contact.notes'
+        'contact.notes',
+        'contactedBy.id',
+        'contactedBy.firstName'
       ])
+      .leftJoin('contact.contactedBy', 'contactedBy')
       .orderBy('contact.lastName', 'ASC')
       .addOrderBy('contact.firstName', 'ASC')
       .limit(MAX_ITEMS_PER_PAGE)
