@@ -5,7 +5,7 @@ import { CanLeaveRequestBeModerated } from 'src/Domain/HumanResource/Leave/Speci
 import { AcceptLeaveRequestCommand } from './AcceptLeaveRequestCommand';
 import { IEventBus } from 'src/Application/IEventBus';
 import { AcceptedLeaveRequestEvent } from '../Event/AcceptedLeaveRequestEvent';
-import { DoesEventsOrLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsOrLeaveExistForPeriod';
+import { DoesLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesLeaveExistForPeriod';
 import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
 import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRequestRepository';
 import { LeaveRequestNotFoundException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestNotFoundException';
@@ -21,7 +21,7 @@ export class AcceptLeaveRequestCommandHandler {
     @Inject('IDateUtils')
     private readonly dateUtils: IDateUtils,
     private readonly canLeaveRequestBeModerated: CanLeaveRequestBeModerated,
-    private readonly doesEventsOrLeaveExistForPeriod: DoesEventsOrLeaveExistForPeriod
+    private readonly doesLeaveExistForPeriod: DoesLeaveExistForPeriod
   ) {}
 
   public async execute(command: AcceptLeaveRequestCommand): Promise<string> {
@@ -41,7 +41,7 @@ export class AcceptLeaveRequestCommandHandler {
 
     if (
       true ===
-      (await this.doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
+      (await this.doesLeaveExistForPeriod.isSatisfiedBy(
         leaveRequest.getUser(),
         leaveRequest.getStartDate(),
         leaveRequest.getEndDate()

@@ -8,14 +8,14 @@ import {
   LeaveRequest
 } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { LeaveRequestAlreadyExistForThisPeriodException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestAlreadyExistForThisPeriodException';
-import { DoesEventsOrLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsOrLeaveExistForPeriod';
+import { DoesLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesLeaveExistForPeriod';
 import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
 import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRequestRepository';
 
 describe('CreateLeaveRequestCommandHandler', () => {
   let leaveRequestRepository: LeaveRequestRepository;
   let doesLeaveRequestExistForPeriod: DoesLeaveRequestExistForPeriod;
-  let doesEventsOrLeaveExistForPeriod: DoesEventsOrLeaveExistForPeriod;
+  let doesLeaveExistForPeriod: DoesLeaveExistForPeriod;
   let handler: CreateLeaveRequestCommandHandler;
 
   const user = mock(User);
@@ -32,12 +32,12 @@ describe('CreateLeaveRequestCommandHandler', () => {
   beforeEach(() => {
     leaveRequestRepository = mock(LeaveRequestRepository);
     doesLeaveRequestExistForPeriod = mock(DoesLeaveRequestExistForPeriod);
-    doesEventsOrLeaveExistForPeriod = mock(DoesEventsOrLeaveExistForPeriod);
+    doesLeaveExistForPeriod = mock(DoesLeaveExistForPeriod);
 
     handler = new CreateLeaveRequestCommandHandler(
       instance(leaveRequestRepository),
       instance(doesLeaveRequestExistForPeriod),
-      instance(doesEventsOrLeaveExistForPeriod)
+      instance(doesLeaveExistForPeriod)
     );
   });
 
@@ -65,7 +65,7 @@ describe('CreateLeaveRequestCommandHandler', () => {
         )
       ).once();
       verify(
-        doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
+        doesLeaveExistForPeriod.isSatisfiedBy(
           instance(user),
           '2019-01-04',
           '2019-01-06'
@@ -84,7 +84,7 @@ describe('CreateLeaveRequestCommandHandler', () => {
       )
     ).thenResolve(false);
     when(
-      doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
+      doesLeaveExistForPeriod.isSatisfiedBy(
         instance(user),
         '2019-01-04',
         '2019-01-06'
@@ -108,7 +108,7 @@ describe('CreateLeaveRequestCommandHandler', () => {
         )
       ).once();
       verify(
-        doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
+        doesLeaveExistForPeriod.isSatisfiedBy(
           instance(user),
           '2019-01-04',
           '2019-01-06'
@@ -132,7 +132,7 @@ describe('CreateLeaveRequestCommandHandler', () => {
       )
     ).thenResolve(false);
     when(
-      doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
+      doesLeaveExistForPeriod.isSatisfiedBy(
         instance(user),
         '2019-01-04',
         '2019-01-06'
@@ -167,7 +167,7 @@ describe('CreateLeaveRequestCommandHandler', () => {
       )
     ).once();
     verify(
-      doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
+      doesLeaveExistForPeriod.isSatisfiedBy(
         instance(user),
         '2019-01-04',
         '2019-01-06'
