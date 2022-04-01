@@ -17,7 +17,7 @@
 
 <form
   on:submit|preventDefault={submit}
-  class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+  class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-300">
   <div class="flex">
     <div class="flex items-center">
       <span class="block mr-5">
