@@ -71,7 +71,7 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
     when(user2.getFirstName()).thenReturn('Hélène');
     when(user2.getLastName()).thenReturn('MARCHOIS');
 
-    when(userRepository.findUsers(false))
+    when(userRepository.findUsers(false, true))
       .thenResolve([instance(user), instance(user2)]);
 
     when(mealTicketRemovalRepository.findByMonth(date))
@@ -122,7 +122,7 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
     );
     
     verify(
-      userRepository.findUsers(false)
+      userRepository.findUsers(false, true)
     ).once();
     verify(
       mealTicketRemovalRepository.findByMonth(date)
