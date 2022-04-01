@@ -11,7 +11,7 @@
   let users = [];
 
   onMount(async () => {
-    const userResponse = await get('users');
+    const userResponse = await get('users', { params: {activeOnly: true} });
     users = userResponse.data;
   });
 
