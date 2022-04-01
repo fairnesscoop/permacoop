@@ -38,7 +38,7 @@ import { AcceptLeaveRequestAction } from './Leave/Action/AcceptLeaveRequestActio
 import { GetLeaveRequestsQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestsQueryHandler';
 import { GetLeaveRequestsAction } from './Leave/Action/GetLeaveRequestsAction';
 import { GetLeaveRequestAction } from './Leave/Action/GetLeaveRequestAction';
-import { DoesEventsOrLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsOrLeaveExistForPeriod';
+import { DoesLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesLeaveExistForPeriod';
 import { LeaveRequestToLeavesConverter } from 'src/Domain/HumanResource/Leave/Converter/LeaveRequestToLeavesConverter';
 import { LeaveRepository } from './Leave/Repository/LeaveRepository';
 import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
@@ -138,7 +138,7 @@ import { UpdateLeaveRequestCommandHandler } from 'src/Application/HumanResource/
     LeaveRequestToLeavesConverter,
     GetLeaveRequestsQueryHandler,
     GetLeaveRequestByIdQueryHandler,
-    DoesEventsOrLeaveExistForPeriod,
+    DoesLeaveExistForPeriod,
     CanLeaveRequestBeRemoved,
     DeleteLeaveRequestCommandHandler,
     IsMealTicketRemovalAlreadyExist,

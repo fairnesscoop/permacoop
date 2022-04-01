@@ -3,10 +3,8 @@ import { IEventRepository } from '../Repository/IEventRepository';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { ILeaveRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRepository';
 
-export class DoesEventsOrLeaveExistForPeriod {
+export class DoesLeaveExistForPeriod {
   constructor(
-    @Inject('IEventRepository')
-    private readonly eventRepository: IEventRepository,
     @Inject('ILeaveRepository')
     private readonly leaveRepository: ILeaveRepository
   ) {}
@@ -16,11 +14,8 @@ export class DoesEventsOrLeaveExistForPeriod {
     startDate: string,
     endDate: string
   ): Promise<boolean> {
-    const [events, leaves] = await Promise.all([
-      this.eventRepository.countEventsByUserAndPeriod(user, startDate, endDate),
-      this.leaveRepository.countLeavesByUserAndPeriod(user, startDate, endDate)
-    ]);
+    const leaves = await this.leaveRepository.countLeavesByUserAndPeriod(user, startDate, endDate)
 
-    return events + leaves > 0;
+    return leaves > 0;
   }
 }

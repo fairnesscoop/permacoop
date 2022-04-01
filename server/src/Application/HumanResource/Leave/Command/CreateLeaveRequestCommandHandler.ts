@@ -5,7 +5,7 @@ import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Reposito
 import { LeaveRequest } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { DoesLeaveRequestExistForPeriod } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestExistForPeriod';
 import { LeaveRequestAlreadyExistForThisPeriodException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestAlreadyExistForThisPeriodException';
-import { DoesEventsOrLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesEventsOrLeaveExistForPeriod';
+import { DoesLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesLeaveExistForPeriod';
 import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
 
 @CommandHandler(CreateLeaveRequestCommand)
@@ -14,7 +14,7 @@ export class CreateLeaveRequestCommandHandler {
     @Inject('ILeaveRequestRepository')
     private readonly leaveRequestRepository: ILeaveRequestRepository,
     private readonly doesLeaveRequestExistForPeriod: DoesLeaveRequestExistForPeriod,
-    private readonly doesEventsOrLeaveExistForPeriod: DoesEventsOrLeaveExistForPeriod
+    private readonly doesLeaveExistForPeriod: DoesLeaveExistForPeriod
   ) {}
 
   public async execute(command: CreateLeaveRequestCommand): Promise<string> {
@@ -41,7 +41,7 @@ export class CreateLeaveRequestCommandHandler {
 
     if (
       true ===
-      (await this.doesEventsOrLeaveExistForPeriod.isSatisfiedBy(
+      (await this.doesLeaveExistForPeriod.isSatisfiedBy(
         user,
         startDate,
         endDate
