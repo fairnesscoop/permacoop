@@ -107,12 +107,14 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
     expect(await queryHandler.execute(query)).toMatchObject(
       [
         new MealTicketsPerMonthView(
+          'b1e67870-f2bd-4cdc-8467-e13568550eb8',
           'Mathieu',
           'MARCHOIS',
           1,
           1
         ),
         new MealTicketsPerMonthView(
+          '86ca8576-3283-4702-84b1-ee0d8c5f5ca8',
           'Hélène',
           'MARCHOIS',
           1,
@@ -120,7 +122,7 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
         )
       ]
     );
-    
+
     verify(
       userRepository.findUsers(false, true)
     ).once();

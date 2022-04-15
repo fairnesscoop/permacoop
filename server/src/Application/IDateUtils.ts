@@ -1,3 +1,5 @@
+import { MonthDate } from './Common/MonthDate';
+
 export interface IDateUtils {
   format(date: Date, format: string): string;
   getDaysInMonth(date: Date): number;
@@ -16,6 +18,7 @@ export interface IDateUtils {
   ): number;
   addDaysToDate(date: Date, days: number): Date;
   getYear(date: Date): number;
+  getMonth(date: Date): MonthDate;
   getLastDayOfYear(date: Date): Date;
   getFirstDayOfYear(date: Date): Date;
 }

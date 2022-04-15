@@ -7,6 +7,7 @@ import {
   addDays,
   getYear
 } from 'date-fns';
+import { MonthDate } from 'src/Application/Common/MonthDate';
 import { IDateUtils } from 'src/Application/IDateUtils';
 
 @Injectable()
@@ -48,6 +49,10 @@ export class DateUtilsAdapter implements IDateUtils {
 
   public getYear(date: Date): number {
     return getYear(date);
+  }
+
+  public getMonth(date: Date): MonthDate {
+    return new MonthDate(date.getFullYear(), date.getMonth() + 1);
   }
 
   public getLastDayOfYear(date: Date): Date {

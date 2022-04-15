@@ -38,14 +38,14 @@ export class GetMealTicketsPerMonthQueryHandler {
 
     let mealTicketsByUser = [];
     let mealTicketsRemovalsByUser = [];
-    let mealTicketsPerMonthView: MealTicketsPerMonthView[] = []
+    let mealTicketsPerMonthView: MealTicketsPerMonthView[] = [];
 
     for (const { duration, user } of events) {
       if (duration > (cooperative.getDayDuration() / 2)) {
         mealTicketsByUser[user] = mealTicketsByUser[user] + 1 || 1;
       }
     }
-  
+
     for (const { id, count } of mealTicketRemovals) {
       mealTicketsRemovalsByUser[id] = count;
     }
@@ -54,14 +54,13 @@ export class GetMealTicketsPerMonthQueryHandler {
       const mealTicketRemoval = mealTicketsRemovalsByUser[user.getId()] || 0;
       const mealTicket = mealTicketsByUser[user.getId()] - mealTicketRemoval || 0;
 
-      mealTicketsPerMonthView.push(
-        new MealTicketsPerMonthView(
-          user.getFirstName(),
-          user.getLastName(),
-          mealTicket <= 0 ? 0 : mealTicket,
-          mealTicketRemoval,
-        )
-      );
+      mealTicketsPerMonthView.push(new MealTicketsPerMonthView(
+        user.getId(),
+        user.getFirstName(),
+        user.getLastName(),
+        mealTicket <= 0 ? 0 : mealTicket,
+        mealTicketRemoval,
+      ));
     }
 
     return mealTicketsPerMonthView;

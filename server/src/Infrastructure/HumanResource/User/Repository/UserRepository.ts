@@ -79,6 +79,31 @@ export class UserRepository implements IUserRepository {
     return query.getMany();
   }
 
+  public findUsersWithPayslipInfo(): Promise<User[]> {
+    const query = this.repository
+      .createQueryBuilder('user')
+      .select([
+        'user.id',
+        'user.firstName',
+        'user.lastName',
+        'userAdministrative.joiningDate',
+        'userAdministrative.leavingDate',
+        'userAdministrative.annualEarnings',
+        'userAdministrative.transportFee',
+        'userAdministrative.healthInsurance',
+        'userAdministrative.executivePosition',
+        'userAdministrative.contract',
+        'userAdministrative.workingTime'
+      ])
+    query.innerJoin("user.userAdministrative" ,"userAdministrative");
+    query.andWhere('user.role <> :role', { role: UserRole.ACCOUNTANT });
+    query.andWhere('userAdministrative.leavingDate IS NULL');
+    query.orderBy('user.lastName', 'ASC');
+    query.addOrderBy('user.firstName', 'ASC');
+
+    return query.getMany();
+  }
+
   public save(user: User): Promise<User> {
     return this.repository.save(user);
   }

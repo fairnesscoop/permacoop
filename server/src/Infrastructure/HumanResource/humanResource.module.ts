@@ -68,6 +68,8 @@ import { IncreaseUserSavingsRecordCommandHandler } from 'src/Application/HumanRe
 import { IncreaseUserSavingsRecordAction } from './Savings/Action/IncreaseUserSavingsRecordAction';
 import { InterestRate } from 'src/Domain/HumanResource/Savings/InterestRate.entity';
 import { InterestRateRepository } from './Savings/Repository/InterestRateRepository';
+import { GetUsersElementsAction } from './Payslip/Action/GetUsersElementsAction';
+import { GetUsersElementsQueryHandler } from 'src/Application/HumanResource/Payslip/Query/GetUsersElementsQueryHandler';
 
 @Module({
   imports: [
@@ -95,6 +97,7 @@ import { InterestRateRepository } from './Savings/Repository/InterestRateReposit
     UpdateMeAction,
     GetUserAction,
     GetUsersAction,
+    GetUsersElementsAction,
     GetLeaveRequestsAction,
     GetLeaveRequestAction,
     CreateLeaveRequestAction,
@@ -140,6 +143,7 @@ import { InterestRateRepository } from './Savings/Repository/InterestRateReposit
     BearerStrategy,
     GetUserByIdQueryHandler,
     GetUserAdministrativeByIdQueryHandler,
+    GetUsersElementsQueryHandler,
     CreateLeaveRequestCommandHandler,
     DoesLeaveRequestExistForPeriod,
     RefuseLeaveRequestCommandHandler,
