@@ -12,10 +12,19 @@
   import CRMIcon from './icons/CRMIcon.svelte';
   import AccountingIcon from './icons/AccountingIcon.svelte';
   import ChevronDownIcon from './icons/ChevronDownIcon.svelte';
+  import ChevronUpIcon from './icons/ChevronUpIcon.svelte';
 
   const { session } = stores();
 
   export let segment;
+
+  const dropdowns = {
+    fairCalendar: true,
+    accounting: true,
+    human_resources: true,
+  };
+
+  const toggleDropdown = (key) => dropdowns[key] = !dropdowns[key];
 
   const userRoles = [ROLE_COOPERATOR, ROLE_EMPLOYEE];
 
@@ -66,7 +75,9 @@
         <li class="relative px-6 py-3">
           <button
             class={segment === 'crm' ? activeLinkClass : linkClass}
-            aria-haspopup="true">
+            aria-haspopup="true"
+            on:click={toggleDropdown("fairCalendar")}
+          >
             {#if segment === 'crm'}
               <span class={activeClass} aria-hidden="true" />
             {/if}
@@ -74,10 +85,15 @@
               <CRMIcon className={'w-5 h-5'} />
               <span class="ml-4">{$_('crm.breadcrumb')}</span>
             </span>
-            <ChevronDownIcon className={'w-4 h-4'} />
+            {#if dropdowns.accounting}
+              <ChevronDownIcon className={'w-4 h-4'} />
+            {:else}
+              <ChevronUpIcon className={'w-4 h-4'} />
+            {/if}
           </button>
           <ul
             class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+            class:hidden={!dropdowns.fairCalendar}
             aria-label="submenu">
             {#if userRoles.includes($session.user.scope)}
               <li class={subLinkClass}>
@@ -105,15 +121,22 @@
             {/if}
             <button
               class={segment === 'accounting' ? activeLinkClass : linkClass}
-              aria-haspopup="true">
+              aria-haspopup="true"
+              on:click={toggleDropdown("accounting")}
+            >
               <span class="inline-flex items-center">
                 <AccountingIcon className={'w-5 h-5'} />
                 <span class="ml-4">{$_('accounting.breadcrumb')}</span>
               </span>
-              <ChevronDownIcon className={'w-4 h-4'} />
+              {#if dropdowns.accounting}
+                <ChevronDownIcon className={'w-4 h-4'} />
+              {:else}
+                <ChevronUpIcon className={'w-4 h-4'} />
+              {/if}
             </button>
             <ul
               class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+              class:hidden={!dropdowns.accounting}
               aria-label="submenu">
               <li class={subLinkClass}>
                 <a
@@ -141,7 +164,9 @@
         <li class="relative px-6 py-3">
           <button
             class={segment === 'human_resources' ? activeLinkClass : linkClass}
-            aria-haspopup="true">
+            aria-haspopup="true"
+            on:click={toggleDropdown("human_resources")}
+          >
             {#if segment === 'human_resources'}
               <span class={activeClass} aria-hidden="true" />
             {/if}
@@ -149,10 +174,15 @@
               <UsersIcon className={'w-5 h-5'} />
               <span class="ml-4">{$_('human_resources.breadcrumb')}</span>
             </span>
-            <ChevronDownIcon className={'w-4 h-4'} />
+            {#if dropdowns.human_resources}
+              <ChevronDownIcon className={'w-4 h-4'} />
+            {:else}
+              <ChevronUpIcon className={'w-4 h-4'} />
+            {/if}
           </button>
           <ul
             class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+            class:hidden={!dropdowns.human_resources}
             aria-label="submenu">
             {#if userRoles.includes($session.user.scope)}
               <li class={subLinkClass}>
