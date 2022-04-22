@@ -62,6 +62,7 @@ import { GetAvailableMealTicketsAction } from './MealTicket/Action/GetAvailableM
 import { GetMealTicketsPerMonthQueryHandler } from 'src/Application/HumanResource/MealTicket/Query/GetMealTicketsPerMonthQueryHandler';
 import { UpdateLeaveRequestAction } from './Leave/Action/UpdateLeaveRequestAction';
 import { UpdateLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/UpdateLeaveRequestCommandHandler';
+import { UserSavingsRecord } from 'src/Domain/HumanResource/Savings/UserSavingsRecord.entity';
 
 @Module({
   imports: [
@@ -75,7 +76,8 @@ import { UpdateLeaveRequestCommandHandler } from 'src/Application/HumanResource/
       Leave,
       Event,
       Cooperative,
-      MealTicketRemoval
+      MealTicketRemoval,
+      UserSavingsRecord
     ])
   ],
   controllers: [
