@@ -76,7 +76,7 @@
           <button
             class={segment === 'crm' ? activeLinkClass : linkClass}
             aria-haspopup="true"
-            on:click={toggleDropdown("fairCalendar")}
+            on:click={() => toggleDropdown("fairCalendar")}
           >
             {#if segment === 'crm'}
               <span class={activeClass} aria-hidden="true" />
@@ -122,7 +122,7 @@
             <button
               class={segment === 'accounting' ? activeLinkClass : linkClass}
               aria-haspopup="true"
-              on:click={toggleDropdown("accounting")}
+              on:click={() => toggleDropdown("accounting")}
             >
               <span class="inline-flex items-center">
                 <AccountingIcon className={'w-5 h-5'} />
@@ -165,7 +165,7 @@
           <button
             class={segment === 'human_resources' ? activeLinkClass : linkClass}
             aria-haspopup="true"
-            on:click={toggleDropdown("human_resources")}
+            on:click={() => toggleDropdown("human_resources")}
           >
             {#if segment === 'human_resources'}
               <span class={activeClass} aria-hidden="true" />
