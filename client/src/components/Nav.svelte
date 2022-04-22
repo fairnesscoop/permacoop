@@ -174,7 +174,7 @@
               <UsersIcon className={'w-5 h-5'} />
               <span class="ml-4">{$_('human_resources.breadcrumb')}</span>
             </span>
-            {#if dropdowns.accounting}
+            {#if dropdowns.human_resources}
               <ChevronDownIcon className={'w-4 h-4'} />
             {:else}
               <ChevronUpIcon className={'w-4 h-4'} />
