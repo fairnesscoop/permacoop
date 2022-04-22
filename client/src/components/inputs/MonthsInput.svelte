@@ -1,5 +1,4 @@
 <script>
-  import { _ } from 'svelte-i18n';
   import { createEventDispatcher } from 'svelte';
   import {
     subMonths,

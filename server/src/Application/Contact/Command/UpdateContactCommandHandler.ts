@@ -48,7 +48,15 @@ export class UpdateContactCommandHandler {
       }
     }
 
-    contact.update(firstName, lastName, company, email, phoneNumber, notes, contactedBy);
+    contact.update(
+      firstName,
+      lastName,
+      company,
+      email,
+      phoneNumber,
+      notes,
+      contactedBy
+    );
 
     await this.contactRepository.save(contact);
   }

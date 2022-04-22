@@ -1,10 +1,14 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MealTicketRemoval } from 'src/Domain/HumanResource/MealTicket/MealTicketRemoval.entity';
-import { FindByMonth, IMealTicketRemovalRepository } from 'src/Domain/HumanResource/MealTicket/Repository/IMealTicketRemovalRepository';
+import {
+  FindByMonth,
+  IMealTicketRemovalRepository
+} from 'src/Domain/HumanResource/MealTicket/Repository/IMealTicketRemovalRepository';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 
-export class MealTicketRemovalRepository implements IMealTicketRemovalRepository {
+export class MealTicketRemovalRepository
+  implements IMealTicketRemovalRepository {
   constructor(
     @InjectRepository(MealTicketRemoval)
     private readonly repository: Repository<MealTicketRemoval>

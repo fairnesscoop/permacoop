@@ -1,5 +1,6 @@
 <script>
   import shortid from '../../utils/shortid';
+
   export let label;
 
   export let checked = false;

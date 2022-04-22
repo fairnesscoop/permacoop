@@ -83,9 +83,7 @@ describe('CreateProjectCommandHandler', () => {
     ).thenResolve(instance(customer));
     when(
       projectRepository.save(
-        deepEqual(
-          new Project('Project', InvoiceUnits.DAY, instance(customer))
-        )
+        deepEqual(new Project('Project', InvoiceUnits.DAY, instance(customer)))
       )
     ).thenResolve(instance(createdProject));
 
@@ -99,9 +97,7 @@ describe('CreateProjectCommandHandler', () => {
     verify(isProjectAlreadyExist.isSatisfiedBy('Project')).once();
     verify(
       projectRepository.save(
-        deepEqual(
-          new Project('Project', InvoiceUnits.DAY, instance(customer))
-        )
+        deepEqual(new Project('Project', InvoiceUnits.DAY, instance(customer)))
       )
     ).once();
     verify(createdProject.getId()).once();

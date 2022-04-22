@@ -6,7 +6,7 @@ export type FindAllEventsByMonth = {
   date: string;
   user: string;
   duration: number;
-}
+};
 
 export interface IEventRepository {
   save(event: Event): Promise<Event>;

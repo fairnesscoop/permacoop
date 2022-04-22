@@ -23,11 +23,7 @@ export class Project {
   @ManyToOne(type => Customer, { nullable: false, onDelete: 'CASCADE' })
   private customer: Customer;
 
-  constructor(
-    name: string,
-    invoiceUnit: InvoiceUnits,
-    customer: Customer
-  ) {
+  constructor(name: string, invoiceUnit: InvoiceUnits, customer: Customer) {
     this.name = name;
     this.invoiceUnit = invoiceUnit;
     this.customer = customer;

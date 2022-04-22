@@ -63,3 +63,4 @@ database-connect: ## Connect to the database container
 ci: ## Run CI checks
 	${run} api npm run test:cov
 	${run} api npm run lint
+	${run} client npm run lint

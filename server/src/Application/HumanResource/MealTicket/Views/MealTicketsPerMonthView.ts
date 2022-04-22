@@ -4,6 +4,6 @@ export class MealTicketsPerMonthView {
     public readonly firstName: string,
     public readonly lastName: string,
     public readonly mealTickets: number,
-    public readonly mealTicketRemovals: number,
+    public readonly mealTicketRemovals: number
   ) {}
 }

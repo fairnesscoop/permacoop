@@ -167,4 +167,4 @@ import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leav
     IncreaseUserSavingsRecordCommandHandler
   ]
 })
-export class HumanResourceModule { }
+export class HumanResourceModule {}

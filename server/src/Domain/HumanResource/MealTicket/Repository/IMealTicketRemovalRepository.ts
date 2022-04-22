@@ -4,7 +4,7 @@ import { MealTicketRemoval } from '../MealTicketRemoval.entity';
 export type FindByMonth = {
   id: string;
   count: number;
-}
+};
 
 export interface IMealTicketRemovalRepository {
   save(mealTicketRemovals: MealTicketRemoval[]): void;

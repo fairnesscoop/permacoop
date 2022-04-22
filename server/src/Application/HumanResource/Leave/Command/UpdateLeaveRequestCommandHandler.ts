@@ -9,7 +9,7 @@ export class UpdateLeaveRequestCommandHandler {
   constructor(
     @Inject('ILeaveRequestRepository')
     private readonly leaveRequestRepository: ILeaveRequestRepository
-  ) { }
+  ) {}
 
   public async execute(command: UpdateLeaveRequestCommand): Promise<string> {
     const {

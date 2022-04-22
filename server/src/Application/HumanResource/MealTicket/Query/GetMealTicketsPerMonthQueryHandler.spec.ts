@@ -34,7 +34,7 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
       instance(mealTicketRemovalRepository),
       instance(userRepository),
       instance(eventRepository),
-      instance(cooperativeRepository),
+      instance(cooperativeRepository)
     );
   });
 
@@ -46,15 +46,9 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
     } catch (e) {
       expect(e).toBeInstanceOf(CooperativeNotFoundException);
       expect(e.message).toBe('settings.errors.cooperative_not_found');
-      verify(
-        userRepository.findUsers(anything(), anything())
-      ).never();
-      verify(
-        mealTicketRemovalRepository.findByMonth(anything())
-      ).never();
-      verify(
-        eventRepository.findAllEventsByMonth(anything(), anything())
-      ).never();
+      verify(userRepository.findUsers(anything(), anything())).never();
+      verify(mealTicketRemovalRepository.findByMonth(anything())).never();
+      verify(eventRepository.findAllEventsByMonth(anything(), anything())).never();
     }
   });
 
@@ -62,8 +56,7 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
     const cooperative = mock(Cooperative);
     when(cooperative.getDayDuration()).thenReturn(420); // One day
 
-    when(cooperativeRepository.find())
-      .thenResolve(instance(cooperative));
+    when(cooperativeRepository.find()).thenResolve(instance(cooperative));
 
     const user = mock(User);
     when(user.getId()).thenReturn('b1e67870-f2bd-4cdc-8467-e13568550eb8');
@@ -75,13 +68,14 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
     when(user2.getFirstName()).thenReturn('Hélène');
     when(user2.getLastName()).thenReturn('MARCHOIS');
 
-    when(userRepository.findUsers(false, true))
-      .thenResolve([instance(user), instance(user2)]);
+    when(userRepository.findUsers(false, true)).thenResolve([
+      instance(user),
+      instance(user2)
+    ]);
 
-    when(mealTicketRemovalRepository.findByMonth(date))
-      .thenResolve([
-        { id: 'b1e67870-f2bd-4cdc-8467-e13568550eb8', count: 1 },
-      ]);
+    when(mealTicketRemovalRepository.findByMonth(date)).thenResolve([
+      { id: 'b1e67870-f2bd-4cdc-8467-e13568550eb8', count: 1 }
+    ]);
 
     when(eventRepository.findAllEventsByMonth(date, anything()))
       .thenResolve([
@@ -108,33 +102,27 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
         },
       ]);
 
-    expect(await queryHandler.execute(query)).toMatchObject(
-      [
-        new MealTicketsPerMonthView(
-          'b1e67870-f2bd-4cdc-8467-e13568550eb8',
-          'Mathieu',
-          'MARCHOIS',
-          1,
-          1
-        ),
-        new MealTicketsPerMonthView(
-          '86ca8576-3283-4702-84b1-ee0d8c5f5ca8',
-          'Hélène',
-          'MARCHOIS',
-          1,
-          0
-        )
-      ]
-    );
+      expect(await queryHandler.execute(query)).toMatchObject(
+        [
+          new MealTicketsPerMonthView(
+            'b1e67870-f2bd-4cdc-8467-e13568550eb8',
+            'Mathieu',
+            'MARCHOIS',
+            1,
+            1
+          ),
+          new MealTicketsPerMonthView(
+            '86ca8576-3283-4702-84b1-ee0d8c5f5ca8',
+            'Hélène',
+            'MARCHOIS',
+            1,
+            0
+          )
+        ]
+      );
 
-    verify(
-      userRepository.findUsers(false, true)
-    ).once();
-    verify(
-      mealTicketRemovalRepository.findByMonth(date)
-    ).once();
-    verify(
-      eventRepository.findAllEventsByMonth(date, anything())
-    ).once();
-  });
+      verify(userRepository.findUsers(false, true)).once();
+      verify(mealTicketRemovalRepository.findByMonth(date)).once();
+      verify(eventRepository.findAllEventsByMonth(date, anything())).once();
+    });
 });

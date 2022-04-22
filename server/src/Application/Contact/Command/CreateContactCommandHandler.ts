@@ -19,7 +19,15 @@ export class CreateContactCommandHandler {
   ) {}
 
   public async execute(command: CreateContactCommand): Promise<string> {
-    const { firstName, lastName, company, email, phoneNumber, notes, contactedById } = command;
+    const {
+      firstName,
+      lastName,
+      company,
+      email,
+      phoneNumber,
+      notes,
+      contactedById
+    } = command;
 
     if (this.isContactEmpty.isSatisfiedBy(firstName, lastName, company)) {
       throw new EmptyContactException();

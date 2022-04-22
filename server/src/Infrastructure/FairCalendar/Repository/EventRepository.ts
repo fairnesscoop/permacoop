@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { FindAllEventsByMonth, IEventRepository } from 'src/Domain/FairCalendar/Repository/IEventRepository';
+import {
+  FindAllEventsByMonth,
+  IEventRepository
+} from 'src/Domain/FairCalendar/Repository/IEventRepository';
 import { Event, EventType } from 'src/Domain/FairCalendar/Event.entity';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { DailyRate } from 'src/Domain/Accounting/DailyRate.entity';

@@ -31,7 +31,7 @@ export class GetMealTicketsPerMonthQueryHandler {
     }
 
     const { date } = query;
-    const [ users, mealTicketRemovals ] = await Promise.all([
+    const [users, mealTicketRemovals] = await Promise.all([
       this.userRepository.findUsers(false, true),
       this.mealTicketRemovalRepository.findByMonth(date)
     ]);
@@ -43,7 +43,7 @@ export class GetMealTicketsPerMonthQueryHandler {
     const mealTicketsPerMonthView: MealTicketsPerMonthView[] = [];
 
     for (const { duration, user } of events) {
-      if (duration > (cooperative.getDayDuration() / 2)) {
+      if (duration > cooperative.getDayDuration() / 2) {
         mealTicketsByUser[user] = mealTicketsByUser[user] + 1 || 1;
       }
     }
@@ -54,15 +54,18 @@ export class GetMealTicketsPerMonthQueryHandler {
 
     for (const user of users) {
       const mealTicketRemoval = mealTicketsRemovalsByUser[user.getId()] || 0;
-      const mealTicket = mealTicketsByUser[user.getId()] - mealTicketRemoval || 0;
+      const mealTicket =
+        mealTicketsByUser[user.getId()] - mealTicketRemoval || 0;
 
-      mealTicketsPerMonthView.push(new MealTicketsPerMonthView(
-        user.getId(),
-        user.getFirstName(),
-        user.getLastName(),
-        mealTicket <= 0 ? 0 : mealTicket,
-        mealTicketRemoval,
-      ));
+      mealTicketsPerMonthView.push(
+        new MealTicketsPerMonthView(
+          user.getId(),
+          user.getFirstName(),
+          user.getLastName(),
+          mealTicket <= 0 ? 0 : mealTicket,
+          mealTicketRemoval,
+        )
+      );
     }
 
     return mealTicketsPerMonthView;

@@ -24,7 +24,7 @@ export class CreateLeaveRequestAction {
   constructor(
     @Inject('ICommandBus')
     private readonly commandBus: ICommandBus
-  ) { }
+  ) {}
 
   @Post()
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)

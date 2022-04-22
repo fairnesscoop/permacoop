@@ -14,7 +14,11 @@ export class DoesLeaveExistForPeriod {
     startDate: string,
     endDate: string
   ): Promise<boolean> {
-    const leaves = await this.leaveRepository.countLeavesByUserAndPeriod(user, startDate, endDate)
+    const leaves = await this.leaveRepository.countLeavesByUserAndPeriod(
+      user,
+      startDate,
+      endDate
+    );
 
     return leaves > 0;
   }
