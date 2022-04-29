@@ -6,7 +6,7 @@
   import Input from 'components/inputs/Input.svelte';
 
   const dispatch = createEventDispatcher();
-  const types = ['paid', 'unpaid', 'medical', 'special'];
+  const types = ['paid', 'unpaid', 'medical', 'special', 'illimited'];
 
   export let type = 'paid';
   export let startDate = '';

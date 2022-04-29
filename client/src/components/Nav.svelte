@@ -188,17 +188,17 @@
               <li class={subLinkClass}>
                 <a
                   class="w-full"
+                  href="human_resources/leaves">{$_('human_resources.leaves.title')}</a>
+              </li>
+              <li class={subLinkClass}>
+                <a
+                  class="w-full"
                   href="human_resources/meal_tickets">{$_('human_resources.meal_tickets.breadcrumb')}</a>
               </li>
               <li class={subLinkClass}>
                 <a
                   class="w-full"
                   href="human_resources/users">{$_('human_resources.users.title')}</a>
-              </li>
-              <li class={subLinkClass}>
-                <a
-                  class="w-full"
-                  href="human_resources/leaves">{$_('human_resources.leaves.title')}</a>
               </li>
             {/if}
           </ul>

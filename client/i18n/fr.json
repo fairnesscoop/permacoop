@@ -35,7 +35,7 @@
     }
   },
   "accounting": {
-    "breadcrumb": "Gestion & Comptabilité",
+    "breadcrumb": "FairGestion",
     "invoices": {
       "title": "Factures",
       "date": "Date",
@@ -229,6 +229,7 @@
       "leave_paid": "Congé payé",
       "leave_unpaid": "Congé sans solde",
       "leave_special": "Congé exceptionnel",
+      "leave_illimited": "Congé illimité",
       "other": "Autres"
     },
     "filter": {
@@ -248,7 +249,7 @@
     }
   },
   "human_resources": {
-    "breadcrumb": "RH",
+    "breadcrumb": "FairRH",
     "meal_tickets": {
       "breadcrumb": "Tickets Restaurant",
       "title": "Tickets Restaurant - {month}",
@@ -292,6 +293,7 @@
           "title": "Type de congé",
           "medical": "Congé maladie",
           "paid": "Congé payé",
+          "illimited": "Congé illimité",
           "unpaid": "Congé sans solde",
           "special": "Congé exceptionnel"
         },

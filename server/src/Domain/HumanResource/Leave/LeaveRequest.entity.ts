@@ -11,7 +11,8 @@ export enum Type {
   PAID = 'paid',
   UNPAID = 'unpaid',
   SPECIAL = 'special',
-  MEDICAL = 'medical'
+  MEDICAL = 'medical',
+  ILLIMITED = 'illimited',
 }
 
 @Entity()
