@@ -63,6 +63,9 @@ import { GetMealTicketsPerMonthQueryHandler } from 'src/Application/HumanResourc
 import { UpdateLeaveRequestAction } from './Leave/Action/UpdateLeaveRequestAction';
 import { UpdateLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/UpdateLeaveRequestCommandHandler';
 import { UserSavingsRecord } from 'src/Domain/HumanResource/Savings/UserSavingsRecord.entity';
+import { UserSavingsRecordRepository } from './Savings/Repository/UserSavingsRecordRepository';
+import { IncreaseUserSavingsRecordCommandHandler } from 'src/Application/HumanResource/Savings/Command/IncreaseUserSavingsRecordCommandHandler';
+import { IncreaseUserSavingsRecordAction } from './Savings/Action/IncreaseUserSavingsRecordAction';
 
 @Module({
   imports: [
@@ -98,7 +101,8 @@ import { UserSavingsRecord } from 'src/Domain/HumanResource/Savings/UserSavingsR
     GetAvailableMealTicketsAction,
     DeleteLeaveRequestAction,
     CreateMealTicketRemovalAction,
-    UpdateLeaveRequestAction
+    UpdateLeaveRequestAction,
+    IncreaseUserSavingsRecordAction
   ],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
@@ -109,6 +113,7 @@ import { UserSavingsRecord } from 'src/Domain/HumanResource/Savings/UserSavingsR
     { provide: 'IFileRepository', useClass: FileRepository },
     { provide: 'IEventRepository', useClass: EventRepository },
     { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
+    { provide: 'IUserSavingsRecordRepository', useClass: UserSavingsRecordRepository },
     {
       provide: 'IMealTicketRemovalRepository',
       useClass: MealTicketRemovalRepository
@@ -146,7 +151,8 @@ import { UserSavingsRecord } from 'src/Domain/HumanResource/Savings/UserSavingsR
     IsMealTicketRemovalAlreadyExist,
     CreateMealTicketRemovalCommandHandler,
     GetMealTicketsPerMonthQueryHandler,
-    UpdateLeaveRequestCommandHandler
+    UpdateLeaveRequestCommandHandler,
+    IncreaseUserSavingsRecordCommandHandler
   ]
 })
 export class HumanResourceModule { }

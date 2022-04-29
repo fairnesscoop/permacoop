@@ -198,6 +198,11 @@
               <li class={subLinkClass}>
                 <a
                   class="w-full"
+                  href="human_resources/savings_records">{$_('human_resources.savings_records.title')}</a>
+              </li>
+              <li class={subLinkClass}>
+                <a
+                  class="w-full"
                   href="human_resources/users">{$_('human_resources.users.title')}</a>
               </li>
             {/if}
