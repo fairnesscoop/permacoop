@@ -16,7 +16,7 @@
     const [customerResponse, taskResponse, userResponse] = await Promise.all([
       get('customers', { params: { page: 1 } }),
       get('tasks', { params: { page: 1 } }),
-      get('users'),
+      get('users', { params: {activeOnly: true} }),
     ]);
 
     users = userResponse.data;

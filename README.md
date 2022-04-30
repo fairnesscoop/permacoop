@@ -88,6 +88,7 @@ make test
   - Meal tickets
   - Leaves
   - Cooperators / employee
+  - Savings records
 - Accounting
   - Quotations
   - Daily rates

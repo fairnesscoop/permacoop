@@ -251,8 +251,8 @@
   "human_resources": {
     "breadcrumb": "FairRH",
     "meal_tickets": {
-      "breadcrumb": "Tickets Restaurant",
-      "title": "Tickets Restaurant - {month}",
+      "breadcrumb": "Tickets restaurant",
+      "title": "Tickets restaurant - {month}",
       "user": "Coopérateur - salarié",
       "nb_meal_tickets": "Nb. ticket(s) restaurant",
       "nb_meal_tickets_removals": "Nb. exception(s)",
@@ -359,6 +359,15 @@
         "email_already_exist": "Cette adresse email est déjà utilisée.",
         "user_administrative_missing": "Veuillez saisir les informations administratives.",
         "not_found": "Adresse email ou mot de passe incorrect."
+      }
+    },
+    "savings_records": {
+      "title": "Épargne salariale",
+      "add": {
+        "title": "Ajouter une prime de participation"
+      },
+      "form": {
+        "amount": "Montant"
       }
     }
   },
