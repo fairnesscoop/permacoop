@@ -1,8 +1,5 @@
-export const range = function* (start, end, step = 1) {
-  let i = start;
-
-  while (i <= end) {
-    yield i;
-    i += step;
-  }
-};
+export const range = (from, to, step = 1, offset = 0) => (
+  [...Array(to).keys()]
+    .map((i) => (i + 1) * step + offset)
+    .filter((i) => Boolean(i >= from && i <= to))
+);
