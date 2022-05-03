@@ -34,8 +34,8 @@ export class DailyRateRepository implements IDailyRateRepository {
       .innerJoin('dailyRate.user', 'user')
       .innerJoin('dailyRate.task', 'task')
       .innerJoin('dailyRate.customer', 'customer')
-      .orderBy('user.lastName', 'ASC')
-      .addOrderBy('user.firstName', 'ASC')
+      .orderBy('customer.name', 'ASC')
+      .addOrderBy('task.name', 'ASC')
       .limit(MAX_ITEMS_PER_PAGE)
       .offset((page - 1) * MAX_ITEMS_PER_PAGE)
       .getManyAndCount();
