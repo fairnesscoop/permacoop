@@ -363,6 +363,8 @@
     },
     "savings_records": {
       "title": "Épargne salariale",
+      "user": "Coopérateur - salarié",
+      "balance": "Épargne",
       "add": {
         "title": "Ajouter une prime de participation"
       },

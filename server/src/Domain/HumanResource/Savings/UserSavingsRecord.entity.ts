@@ -52,6 +52,14 @@ export class UserSavingsRecord {
     return this.amount;
   }
 
+  public getAmountWithInterestRate(): number | null {
+    if (!this.interestRate) {
+      return null;
+    }
+
+    return Math.round(this.amount * (1 + this.interestRate.getRate() / 10000));
+  }
+
   public getType(): SavingsRecordType {
     return this.type;
   }

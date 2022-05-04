@@ -68,6 +68,9 @@ import { IncreaseUserSavingsRecordCommandHandler } from 'src/Application/HumanRe
 import { IncreaseUserSavingsRecordAction } from './Savings/Action/IncreaseUserSavingsRecordAction';
 import { InterestRate } from 'src/Domain/HumanResource/Savings/InterestRate.entity';
 import { InterestRateRepository } from './Savings/Repository/InterestRateRepository';
+import { GetUsersSavingsRecordsBalanceQueryHandler } from 'src/Application/HumanResource/Savings/Query/GetUsersSavingsRecordsBalanceQueryHandler';
+import { GetUsersSavingsRecordsAction } from './Savings/Action/GetUsersSavingsRecordsAction';
+import { GetUserSavingsRecordBalance } from 'src/Domain/HumanResource/Savings/GetUserSavingsRecordBalance';
 
 @Module({
   imports: [
@@ -105,6 +108,7 @@ import { InterestRateRepository } from './Savings/Repository/InterestRateReposit
     DeleteLeaveRequestAction,
     CreateMealTicketRemovalAction,
     UpdateLeaveRequestAction,
+    GetUsersSavingsRecordsAction,
     IncreaseUserSavingsRecordAction
   ],
   providers: [
@@ -156,7 +160,9 @@ import { InterestRateRepository } from './Savings/Repository/InterestRateReposit
     CreateMealTicketRemovalCommandHandler,
     GetMealTicketsPerMonthQueryHandler,
     UpdateLeaveRequestCommandHandler,
-    IncreaseUserSavingsRecordCommandHandler
+    IncreaseUserSavingsRecordCommandHandler,
+    GetUsersSavingsRecordsBalanceQueryHandler,
+    GetUserSavingsRecordBalance
   ]
 })
 export class HumanResourceModule { }
