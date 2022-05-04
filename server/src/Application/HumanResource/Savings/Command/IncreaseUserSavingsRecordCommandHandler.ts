@@ -5,6 +5,8 @@ import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserR
 import { SavingsRecordType, UserSavingsRecord } from 'src/Domain/HumanResource/Savings/UserSavingsRecord.entity';
 import { UserNotFoundException } from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
 import { IUserSavingsRecordRepository } from 'src/Domain/HumanResource/Savings/Repository/IUserSavingsRecordRepository';
+import { IInterestRateRepository } from 'src/Domain/HumanResource/Savings/Repository/IInterestRateRepository';
+import { InterestRateNotFoundException } from 'src/Domain/HumanResource/Savings/Exception/InterestRateNotFoundException';
 
 @CommandHandler(IncreaseUserSavingsRecordCommand)
 export class IncreaseUserSavingsRecordCommandHandler {
@@ -13,6 +15,8 @@ export class IncreaseUserSavingsRecordCommandHandler {
     private readonly userRepository: IUserRepository,
     @Inject('IUserSavingsRecordRepository')
     private readonly userSavingsRecordRepository: IUserSavingsRecordRepository,
+    @Inject('IInterestRateRepository')
+    private readonly interestRateRepository: IInterestRateRepository,
   ) {}
 
   public async execute(command: IncreaseUserSavingsRecordCommand): Promise<string> {
@@ -23,11 +27,17 @@ export class IncreaseUserSavingsRecordCommandHandler {
       throw new UserNotFoundException();
     }
 
+    const interestRate = await this.interestRateRepository.findLatestInterestRate();
+    if (!interestRate) {
+      throw new InterestRateNotFoundException();
+    }
+
     const userSavingsRecord = await this.userSavingsRecordRepository.save(
       new UserSavingsRecord(
         Math.round(amount * 100),
         SavingsRecordType.INPUT,
         user,
+        interestRate
       )
     );
 

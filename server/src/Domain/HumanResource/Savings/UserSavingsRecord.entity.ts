@@ -5,6 +5,7 @@ import {
   ManyToOne
 } from 'typeorm';
 import { User } from '../User/User.entity';
+import { InterestRate } from './InterestRate.entity';
 
 export enum SavingsRecordType {
   INPUT = 'input',
@@ -25,6 +26,9 @@ export class UserSavingsRecord {
   @ManyToOne(type => User, { nullable: false, onDelete: 'CASCADE' })
   private user: User;
 
+  @ManyToOne(type => InterestRate, { nullable: true })
+  private interestRate: InterestRate;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   private createdAt: Date;
 
@@ -32,10 +36,12 @@ export class UserSavingsRecord {
     amount: number,
     type: SavingsRecordType,
     user: User,
+    interestRate?: InterestRate
   ) {
     this.amount = amount;
     this.type = type;
     this.user = user;
+    this.interestRate = interestRate;
   }
 
   public getId(): string {
@@ -48,6 +54,10 @@ export class UserSavingsRecord {
 
   public getType(): SavingsRecordType {
     return this.type;
+  }
+
+  public getInterestRate(): InterestRate {
+    return this.interestRate;
   }
 
   public getUser(): User {
