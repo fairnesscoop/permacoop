@@ -66,6 +66,8 @@ import { UserSavingsRecord } from 'src/Domain/HumanResource/Savings/UserSavingsR
 import { UserSavingsRecordRepository } from './Savings/Repository/UserSavingsRecordRepository';
 import { IncreaseUserSavingsRecordCommandHandler } from 'src/Application/HumanResource/Savings/Command/IncreaseUserSavingsRecordCommandHandler';
 import { IncreaseUserSavingsRecordAction } from './Savings/Action/IncreaseUserSavingsRecordAction';
+import { InterestRate } from 'src/Domain/HumanResource/Savings/InterestRate.entity';
+import { InterestRateRepository } from './Savings/Repository/InterestRateRepository';
 
 @Module({
   imports: [
@@ -80,7 +82,8 @@ import { IncreaseUserSavingsRecordAction } from './Savings/Action/IncreaseUserSa
       Event,
       Cooperative,
       MealTicketRemoval,
-      UserSavingsRecord
+      UserSavingsRecord,
+      InterestRate
     ])
   ],
   controllers: [
@@ -114,6 +117,7 @@ import { IncreaseUserSavingsRecordAction } from './Savings/Action/IncreaseUserSa
     { provide: 'IEventRepository', useClass: EventRepository },
     { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
     { provide: 'IUserSavingsRecordRepository', useClass: UserSavingsRecordRepository },
+    { provide: 'IInterestRateRepository', useClass: InterestRateRepository },
     {
       provide: 'IMealTicketRemovalRepository',
       useClass: MealTicketRemovalRepository

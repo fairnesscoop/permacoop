@@ -368,6 +368,9 @@
       },
       "form": {
         "amount": "Montant"
+      },
+      "errors": {
+        "interest_rate_not_found": "Aucun taux d'intérêt n'est applicable."
       }
     }
   },
