@@ -1,4 +1,4 @@
-import { Event } from '../Event.entity';
+import { Event, EventType } from '../Event.entity';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { Project } from 'src/Domain/Project/Project.entity';
 
@@ -23,5 +23,5 @@ export interface IEventRepository {
     startDate: string,
     endDate: string
   ): Promise<number>;
-  findAllEventsByMonth(date: Date): Promise<FindAllEventsByMonth[]>;
+  findAllEventsByMonth(date: Date, excludedTypes?: EventType[]): Promise<FindAllEventsByMonth[]>;
 }

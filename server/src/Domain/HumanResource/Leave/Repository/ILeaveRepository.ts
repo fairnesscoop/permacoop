@@ -10,5 +10,4 @@ export interface ILeaveRepository {
     endDate: string
   ): Promise<number>;
   sumOfDurationLeaveByUserAndDate(user: User, date: string): Promise<number>;
-  findAllMonthlyLeaves(date: Date): Promise<Leave[]>;
 }

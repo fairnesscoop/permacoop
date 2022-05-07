@@ -7,11 +7,16 @@ import {
   Status
 } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { IDateUtils } from 'src/Application/IDateUtils';
+import { Inject } from '@nestjs/common';
+import { MonthDate } from 'src/Application/Common/MonthDate';
 
 export class LeaveRequestRepository implements ILeaveRequestRepository {
   constructor(
     @InjectRepository(LeaveRequest)
-    private readonly repository: Repository<LeaveRequest>
+    private readonly repository: Repository<LeaveRequest>,
+    @Inject('IDateUtils')
+    private readonly dateUtils: IDateUtils,
   ) {}
 
   public save(leaveRequest: LeaveRequest): Promise<LeaveRequest> {
@@ -107,5 +112,36 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
     }
 
     return query.getManyAndCount();
+  }
+
+  public findAcceptedLeaveRequestsByMonth(
+    date: Date
+  ): Promise<LeaveRequest[]> {
+    const monthDate: MonthDate = this.dateUtils.getMonth(date);
+
+    const query = this.repository
+      .createQueryBuilder('leaveRequest')
+      .select([
+        'leaveRequest.id',
+        'leaveRequest.type',
+        'leaveRequest.startDate',
+        'leaveRequest.startsAllDay',
+        'leaveRequest.endDate',
+        'leaveRequest.endsAllDay',
+        'user.id'
+      ])
+      .where('status = :status')
+      .setParameter('status', Status.ACCEPTED)
+      .andWhere('leaveRequest.startDate <= :lastDayOfMonth')
+      .setParameter('lastDayOfMonth', monthDate.getLastDay())
+      .andWhere('leaveRequest.endDate >= :firstDayOfMonth')
+      .setParameter('firstDayOfMonth', monthDate.getFirstDay())
+      .innerJoin('leaveRequest.user', 'user')
+      .innerJoin('user.userAdministrative', 'userAdministrative')
+      .andWhere('userAdministrative.leavingDate IS NULL')
+      .addOrderBy('leaveRequest.startDate', 'ASC')
+    ;
+
+    return query.getMany();
   }
 }

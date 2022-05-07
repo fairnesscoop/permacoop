@@ -70,6 +70,7 @@ import { InterestRate } from 'src/Domain/HumanResource/Savings/InterestRate.enti
 import { InterestRateRepository } from './Savings/Repository/InterestRateRepository';
 import { GetUsersElementsAction } from './Payslip/Action/GetUsersElementsAction';
 import { GetUsersElementsQueryHandler } from 'src/Application/HumanResource/Payslip/Query/GetUsersElementsQueryHandler';
+import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesByMonthQueryHandler';
 
 @Module({
   imports: [
@@ -138,6 +139,7 @@ import { GetUsersElementsQueryHandler } from 'src/Application/HumanResource/Pays
     CreateUserCommandHandler,
     IsEmailAlreadyExist,
     GetUsersQueryHandler,
+    GetLeavesByMonthQueryHandler,
     UpdateProfileCommandHandler,
     UpdateUserCommandHandler,
     BearerStrategy,

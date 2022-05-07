@@ -9,12 +9,16 @@ import { CooperativeNotFoundException } from 'src/Domain/Settings/Repository/Coo
 import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { MealTicketsPerMonthView } from '../Views/MealTicketsPerMonthView';
+import { EventType } from 'src/Domain/FairCalendar/Event.entity';
+import { IEventRepository } from 'src/Domain/FairCalendar/Repository/IEventRepository';
+import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
+import { ICooperativeRepository } from 'src/Domain/Settings/Repository/ICooperativeRepository';
 
 describe('GetMealTicketsPerMonthQueryHandler', () => {
   let mealTicketRemovalRepository: MealTicketRemovalRepository;
-  let userRepository: UserRepository;
-  let eventRepository: EventRepository;
-  let cooperativeRepository: CooperativeRepository;
+  let userRepository: IUserRepository;
+  let eventRepository: IEventRepository;
+  let cooperativeRepository: ICooperativeRepository;
   let queryHandler: GetMealTicketsPerMonthQueryHandler;
 
   const date = new Date();
@@ -43,13 +47,13 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
       expect(e).toBeInstanceOf(CooperativeNotFoundException);
       expect(e.message).toBe('settings.errors.cooperative_not_found');
       verify(
-        userRepository.findUsers(anything())
+        userRepository.findUsers(anything(), anything())
       ).never();
       verify(
         mealTicketRemovalRepository.findByMonth(anything())
       ).never();
       verify(
-        eventRepository.findAllEventsByMonth(anything())
+        eventRepository.findAllEventsByMonth(anything(), anything())
       ).never();
     }
   });
@@ -79,7 +83,7 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
         { id: 'b1e67870-f2bd-4cdc-8467-e13568550eb8', count: 1 },
       ]);
 
-    when(eventRepository.findAllEventsByMonth(date))
+    when(eventRepository.findAllEventsByMonth(date, anything()))
       .thenResolve([
         {
           date: '2022-03-22',
@@ -130,7 +134,7 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
       mealTicketRemovalRepository.findByMonth(date)
     ).once();
     verify(
-      eventRepository.findAllEventsByMonth(date)
+      eventRepository.findAllEventsByMonth(date, anything())
     ).once();
   });
 });

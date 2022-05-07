@@ -68,26 +68,4 @@ export class LeaveRepository implements ILeaveRepository {
 
     return Number(result.time) || 0;
   }
-
-  public async findAllMonthlyLeaves(date: Date): Promise<Leave[]> {
-    const { month, year } = this.dateUtils.getMonth(date);
-
-    const leaves = await this.repository
-      .createQueryBuilder('leave')
-      .select(['MIN(leave.date) as start', 'MAX(leave.date) as end', 'SUM(leave.time) as time', 'leaveRequest.type', 'user.id'])
-      .where('extract(month FROM leave.date) = :month', { month })
-      .andWhere('extract(year FROM leave.date) = :year', { year })
-      .innerJoin('leave.leaveRequest', 'leaveRequest')
-      .innerJoin('leaveRequest.user', 'user')
-      .andWhere('user.role <> :role', { role: UserRole.ACCOUNTANT })
-      .innerJoin('user.userAdministrative', 'userAdministrative')
-      .andWhere('userAdministrative.leavingDate IS NULL')
-      .groupBy('leaveRequest.id, leaveRequest.type, user.id')
-      .getRawMany();
-
-    return leaves.reduce((previous: any, current: any) => {
-      previous[current.user_id] = current;
-      return previous;
-    }, {});
-  }
 }

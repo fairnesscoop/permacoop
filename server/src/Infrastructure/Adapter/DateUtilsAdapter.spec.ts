@@ -1,3 +1,4 @@
+import { MonthDate } from 'src/Application/Common/MonthDate';
 import { DateUtilsAdapter } from './DateUtilsAdapter';
 
 describe('DateUtilsAdapter', () => {
@@ -153,5 +154,12 @@ describe('DateUtilsAdapter', () => {
     const now = new Date('2021-12-12');
     const result = dateUtils.getFirstDayOfYear(now);
     expect(result).toStrictEqual(new Date('2021-01-01'));
+  });
+
+  it('getMonth', () => {
+    const dateUtils = new DateUtilsAdapter();
+    const now = new Date('2021-12-12');
+    const result = dateUtils.getMonth(now);
+    expect(result).toStrictEqual(new MonthDate(2021, 12));
   });
 });

@@ -2,7 +2,6 @@ import { mock, instance, when, verify, deepEqual } from 'ts-mockito';
 import { UserRepository } from 'src/Infrastructure/HumanResource/User/Repository/UserRepository';
 import { GetUsersElementsQuery } from './GetUsersElementsQuery';
 import { GetUsersElementsQueryHandler } from './GetUsersElementsQueryHandler';
-import { LeaveRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRepository';
 import { MealTicketsPerMonthView } from '../../MealTicket/Views/MealTicketsPerMonthView';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { ContractType, UserAdministrative, WorkingTimeType } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
@@ -10,12 +9,22 @@ import { UserElementsView } from '../View/UserElementsView';
 import { MealTicketRemovalRepository } from 'src/Infrastructure/HumanResource/MealTicket/Repository/MealTicketRemovalRepository';
 import { GetMealTicketsPerMonthQueryHandler } from '../../MealTicket/Query/GetMealTicketsPerMonthQueryHandler';
 import { GetMealTicketsPerMonthQuery } from '../../MealTicket/Query/GetMealTicketsPerMonthQuery';
+import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
+import { IDateUtils } from 'src/Application/IDateUtils';
+import { GetLeavesByMonthQueryHandler } from '../../Leave/Query/GetLeavesByMonthQueryHandler';
+import { GetLeavesByMonthQuery } from '../../Leave/Query/GetLeavesByMonthQuery';
+import { UserLeavesView } from '../View/UserLeavesView';
+import { LeavesCollection } from 'src/Domain/HumanResource/Leave/LeavesCollection';
+import { LeaveRequest, Type } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
+import { MonthDate } from 'src/Application/Common/MonthDate';
+import { LeaveRequestSlotView } from '../../Leave/View/LeaveRequestSlotView';
 
 describe('GetUserElementsQueryHandler', () => {
   let mealTicketRemovalRepository: MealTicketRemovalRepository;
   let userRepository: UserRepository;
-  let leaveRepository: LeaveRepository;
+  let leavesByMonthQueryHandler: GetLeavesByMonthQueryHandler;
   let mealTicketsQueryHandler: GetMealTicketsPerMonthQueryHandler;
+  let dateUtilsAdapter: IDateUtils;
   let queryHandler: GetUsersElementsQueryHandler;
 
   const date = new Date();
@@ -24,13 +33,15 @@ describe('GetUserElementsQueryHandler', () => {
   beforeEach(() => {
     mealTicketRemovalRepository = mock(MealTicketRemovalRepository);
     userRepository = mock(UserRepository);
-    leaveRepository = mock(LeaveRepository);
+    leavesByMonthQueryHandler = mock(GetLeavesByMonthQueryHandler);
     mealTicketsQueryHandler = mock(GetMealTicketsPerMonthQueryHandler);
+    dateUtilsAdapter = mock(DateUtilsAdapter);
 
     queryHandler = new GetUsersElementsQueryHandler(
       instance(userRepository),
-      instance(leaveRepository),
+      instance(leavesByMonthQueryHandler),
       instance(mealTicketsQueryHandler),
+      instance(dateUtilsAdapter)
     );
   });
 
@@ -59,7 +70,35 @@ describe('GetUserElementsQueryHandler', () => {
         instance(user)
       ]
     );
-    when(leaveRepository.findAllMonthlyLeaves(date)).thenResolve(null);
+
+    when(dateUtilsAdapter.getMonth(date)).thenReturn(new MonthDate(2022, 5));
+
+    const createLeaveRequestMock = (startDate: string, endDate: string): LeaveRequest => {
+      const leaveRequest = mock(LeaveRequest);
+      when(leaveRequest.getUser()).thenReturn(instance(user));
+      when(leaveRequest.getType()).thenReturn(Type.PAID);
+      when(leaveRequest.getStartDate()).thenReturn(startDate);
+      when(leaveRequest.isStartsAllDay()).thenReturn(false);
+      when(leaveRequest.getEndDate()).thenReturn(endDate);
+      when(leaveRequest.isEndsAllDay()).thenReturn(false);
+
+      return leaveRequest;
+    }
+    const startDate1 = '2022-05-09';
+    const endDate1 ='2022-05-11';
+    const leaveRequest1 = createLeaveRequestMock(startDate1, endDate1);
+    const leaveRequestSlot1 = new LeaveRequestSlotView(startDate1, endDate1);
+    const startDate2 = '2022-04-025';
+    const endDate2 ='2022-05-02';
+    const leaveRequest2 = createLeaveRequestMock(startDate2, endDate2);
+    const leaveRequestSlot2 = new LeaveRequestSlotView('2022-05-01T00:00:00.000Z', endDate2);
+    const startDate3 = '2022-05-29';
+    const endDate3 ='2022-06-05';
+    const leaveRequest3 = createLeaveRequestMock(startDate3, endDate3);
+    const leaveRequestSlot3 = new LeaveRequestSlotView(startDate3, '2022-05-31T00:00:00.000Z');
+
+    when(leavesByMonthQueryHandler.execute(deepEqual(new GetLeavesByMonthQuery(date))))
+      .thenResolve(new LeavesCollection([instance(leaveRequest1), instance(leaveRequest2), instance(leaveRequest3)]));
     when(mealTicketsQueryHandler.execute(deepEqual(new GetMealTicketsPerMonthQuery(date))))
       .thenResolve(
         [
@@ -90,10 +129,10 @@ describe('GetUserElementsQueryHandler', () => {
           transportFee,
           5,
           'yes',
-          0,
-          0,
-          0,
-          0,
+          new UserLeavesView(0, [leaveRequestSlot1, leaveRequestSlot2, leaveRequestSlot3]),
+          new UserLeavesView(0, []),
+          new UserLeavesView(0, []),
+          new UserLeavesView(0, [])
         )
       ]);
 
@@ -102,11 +141,11 @@ describe('GetUserElementsQueryHandler', () => {
       ).once();
 
       verify(
-        leaveRepository.findAllMonthlyLeaves(date)
+        leavesByMonthQueryHandler.execute(deepEqual(new GetLeavesByMonthQuery(date)))
       ).once();
 
       verify(
-        mealTicketsQueryHandler.execute(deepEqual(new GetMealTicketsPerMonthQuery (date)))
+        mealTicketsQueryHandler.execute(deepEqual(new GetMealTicketsPerMonthQuery(date)))
       ).once();
   });
 });

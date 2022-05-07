@@ -1,6 +1,7 @@
 <script>
   import { _ } from 'svelte-i18n';
   import { format } from 'normalizer/money';
+  import Leave from './_Leave.svelte';
 
   export let items;
 </script>
@@ -42,10 +43,10 @@
         <td class="px-4 py-3 text-sm">{format(transportFee)}</td>
         <td class="px-4 py-3 text-sm">{mealTickets}</td>
         <td class="px-4 py-3 text-sm">{$_(`common.${healthInsurance}`)}</td>
-        <td class="px-4 py-3 text-sm">{paidLeaves}</td>
-        <td class="px-4 py-3 text-sm">{unpaidLeaves}</td>
-        <td class="px-4 py-3 text-sm">{sickLeaves}</td>
-        <td class="px-4 py-3 text-sm">{exceptionalLeaves}</td>
+        <td class="px-4 py-3 text-sm"><Leave userLeaves={paidLeaves}></Leave></td>
+        <td class="px-4 py-3 text-sm"><Leave userLeaves={unpaidLeaves}></Leave></td>
+        <td class="px-4 py-3 text-sm"><Leave userLeaves={sickLeaves}></Leave></td>
+        <td class="px-4 py-3 text-sm"><Leave userLeaves={exceptionalLeaves}></Leave></td>
       </tr>
     {/each}
   </tbody>
