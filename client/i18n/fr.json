@@ -265,6 +265,26 @@
         "not_a_working_date": "Ce jour n'est pas travaillé"
       }
     },
+    "payslips": {
+      "breadcrumb": "Fiches de paies",
+      "title": "Éléments pour les fiches de paie",
+      "user": "Salairé / stagiaire",
+      "contract": "Type de contrat",
+      "executive_position": "Cadre",
+      "joining_date": "Date d'entrée",
+      "annual_earnings": "Salaire brut annuel",
+      "monthly_earnings": "Salaire brut mensuel",
+      "working_time": "TC/TP",
+      "transport_fee": "Transport",
+      "meal_tickets": "Tickets resto",
+      "full_time": "Temps complet",
+      "partial_time": "Temps partiel",
+      "health_insurance": "Mutuelle",
+      "paid_leaves": "Congés payés",
+      "unpaid_leaves": "Congés sans solde",
+      "sick_leaves": "Congés maladie",
+      "exceptional_leaves": "Congés exceptionnels"
+    },
     "leaves": {
       "title": "Congés",
       "requests": {

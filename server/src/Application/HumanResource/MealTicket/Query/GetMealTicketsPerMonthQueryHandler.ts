@@ -3,10 +3,11 @@ import { Inject } from '@nestjs/common';
 import { IMealTicketRemovalRepository } from 'src/Domain/HumanResource/MealTicket/Repository/IMealTicketRemovalRepository';
 import { GetMealTicketsPerMonthQuery } from './GetMealTicketsPerMonthQuery';
 import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import { IEventRepository } from 'src/Domain/FairCalendar/Repository/IEventRepository';
+import { FindAllEventsByMonth, IEventRepository } from 'src/Domain/FairCalendar/Repository/IEventRepository';
 import { ICooperativeRepository } from 'src/Domain/Settings/Repository/ICooperativeRepository';
 import { CooperativeNotFoundException } from 'src/Domain/Settings/Repository/CooperativeNotFoundException';
 import { MealTicketsPerMonthView } from '../Views/MealTicketsPerMonthView';
+import { EventType } from 'src/Domain/FairCalendar/Event.entity';
 
 @QueryHandler(GetMealTicketsPerMonthQuery)
 export class GetMealTicketsPerMonthQueryHandler {
@@ -30,22 +31,23 @@ export class GetMealTicketsPerMonthQueryHandler {
     }
 
     const { date } = query;
-    const [ users, mealTicketRemovals, events ] = await Promise.all([
+    const [ users, mealTicketRemovals ] = await Promise.all([
       this.userRepository.findUsers(false, true),
-      this.mealTicketRemovalRepository.findByMonth(date),
-      this.eventRepository.findAllEventsByMonth(date)
+      this.mealTicketRemovalRepository.findByMonth(date)
     ]);
 
-    let mealTicketsByUser = [];
-    let mealTicketsRemovalsByUser = [];
-    let mealTicketsPerMonthView: MealTicketsPerMonthView[] = []
+    const events: FindAllEventsByMonth[] = await this.eventRepository.findAllEventsByMonth(date, [EventType.OTHER]);
+
+    const mealTicketsByUser = [];
+    const mealTicketsRemovalsByUser = [];
+    const mealTicketsPerMonthView: MealTicketsPerMonthView[] = [];
 
     for (const { duration, user } of events) {
       if (duration > (cooperative.getDayDuration() / 2)) {
         mealTicketsByUser[user] = mealTicketsByUser[user] + 1 || 1;
       }
     }
-  
+
     for (const { id, count } of mealTicketRemovals) {
       mealTicketsRemovalsByUser[id] = count;
     }
@@ -54,14 +56,13 @@ export class GetMealTicketsPerMonthQueryHandler {
       const mealTicketRemoval = mealTicketsRemovalsByUser[user.getId()] || 0;
       const mealTicket = mealTicketsByUser[user.getId()] - mealTicketRemoval || 0;
 
-      mealTicketsPerMonthView.push(
-        new MealTicketsPerMonthView(
-          user.getFirstName(),
-          user.getLastName(),
-          mealTicket <= 0 ? 0 : mealTicket,
-          mealTicketRemoval,
-        )
-      );
+      mealTicketsPerMonthView.push(new MealTicketsPerMonthView(
+        user.getId(),
+        user.getFirstName(),
+        user.getLastName(),
+        mealTicket <= 0 ? 0 : mealTicket,
+        mealTicketRemoval,
+      ));
     }
 
     return mealTicketsPerMonthView;

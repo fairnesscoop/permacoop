@@ -68,6 +68,9 @@ import { IncreaseUserSavingsRecordCommandHandler } from 'src/Application/HumanRe
 import { IncreaseUserSavingsRecordAction } from './Savings/Action/IncreaseUserSavingsRecordAction';
 import { InterestRate } from 'src/Domain/HumanResource/Savings/InterestRate.entity';
 import { InterestRateRepository } from './Savings/Repository/InterestRateRepository';
+import { GetUsersElementsAction } from './Payslip/Action/GetUsersElementsAction';
+import { GetUsersElementsQueryHandler } from 'src/Application/HumanResource/Payslip/Query/GetUsersElementsQueryHandler';
+import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesByMonthQueryHandler';
 
 @Module({
   imports: [
@@ -95,6 +98,7 @@ import { InterestRateRepository } from './Savings/Repository/InterestRateReposit
     UpdateMeAction,
     GetUserAction,
     GetUsersAction,
+    GetUsersElementsAction,
     GetLeaveRequestsAction,
     GetLeaveRequestAction,
     CreateLeaveRequestAction,
@@ -135,11 +139,13 @@ import { InterestRateRepository } from './Savings/Repository/InterestRateReposit
     CreateUserCommandHandler,
     IsEmailAlreadyExist,
     GetUsersQueryHandler,
+    GetLeavesByMonthQueryHandler,
     UpdateProfileCommandHandler,
     UpdateUserCommandHandler,
     BearerStrategy,
     GetUserByIdQueryHandler,
     GetUserAdministrativeByIdQueryHandler,
+    GetUsersElementsQueryHandler,
     CreateLeaveRequestCommandHandler,
     DoesLeaveRequestExistForPeriod,
     RefuseLeaveRequestCommandHandler,

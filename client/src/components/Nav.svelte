@@ -40,7 +40,7 @@
 
 {#if $session.user}
   <aside
-    class="z-20 hidden overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0"
+    class="z-20 flex-shrink-0 hidden overflow-y-auto bg-white dark:bg-gray-800 md:block"
     class:open={$settings.openMobileMenu}>
     <div class="py-4 text-gray-500 dark:text-gray-400">
       <a
@@ -188,7 +188,7 @@
               <li class={subLinkClass}>
                 <a
                   class="w-full"
-                  href="human_resources/leaves">{$_('human_resources.leaves.title')}</a>
+                  href="human_resources/payslips">{$_('human_resources.payslips.breadcrumb')}</a>
               </li>
               <li class={subLinkClass}>
                 <a

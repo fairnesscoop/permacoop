@@ -1,13 +1,17 @@
+import { Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ILeaveRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRepository';
 import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
-import { User } from 'src/Domain/HumanResource/User/User.entity';
+import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { IDateUtils } from 'src/Application/IDateUtils';
 
 export class LeaveRepository implements ILeaveRepository {
   constructor(
     @InjectRepository(Leave)
-    private readonly repository: Repository<Leave>
+    private readonly repository: Repository<Leave>,
+    @Inject('IDateUtils')
+    private readonly dateUtils: IDateUtils,
   ) {}
 
   public save(leaves: Leave[]): void {
@@ -15,8 +19,7 @@ export class LeaveRepository implements ILeaveRepository {
   }
 
   public findMonthlyLeaves(date: string, userId: string): Promise<Leave[]> {
-    const month = new Date(date).getMonth() + 1;
-    const year = new Date(date).getFullYear();
+    const { month, year } = this.dateUtils.getMonth(new Date(date));
 
     return this.repository
       .createQueryBuilder('leave')

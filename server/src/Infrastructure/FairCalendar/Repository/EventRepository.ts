@@ -146,11 +146,11 @@ export class EventRepository implements IEventRepository {
     return Number(result.id) || 0;
   }
 
-  public findAllEventsByMonth(date: Date): Promise<FindAllEventsByMonth[]> {
+  public findAllEventsByMonth(date: Date, excludedTypes?: EventType[]): Promise<FindAllEventsByMonth[]> {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
-    return this.repository
+    const query = this.repository
       .createQueryBuilder('event')
       .select([
         'event.date as date',
@@ -158,9 +158,14 @@ export class EventRepository implements IEventRepository {
         'SUM(event.time)::int as duration'
       ])
       .where('extract(month FROM event.date) = :month', { month })
-      .andWhere('extract(year FROM event.date) = :year', { year })      
+      .andWhere('extract(year FROM event.date) = :year', { year })
       .innerJoin('event.user', 'user')
-      .groupBy('event.date, user.id')
-      .getRawMany();
+      .groupBy('event.date, user.id');
+
+      if (excludedTypes) {
+        query.andWhere('event.type NOT IN (:...excludedTypes)', { excludedTypes });
+      }
+
+      return query.getRawMany();
   }
 }
