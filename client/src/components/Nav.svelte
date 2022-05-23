@@ -188,6 +188,11 @@
               <li class={subLinkClass}>
                 <a
                   class="w-full"
+                  href="human_resources/leaves">{$_('human_resources.leaves.title')}</a>
+              </li>
+              <li class={subLinkClass}>
+                <a
+                  class="w-full"
                   href="human_resources/payslips">{$_('human_resources.payslips.breadcrumb')}</a>
               </li>
               <li class={subLinkClass}>
