@@ -283,7 +283,8 @@
       "paid_leaves": "Congés payés",
       "unpaid_leaves": "Congés sans solde",
       "sick_leaves": "Congés maladie",
-      "exceptional_leaves": "Congés exceptionnels"
+      "exceptional_leaves": "Congés exceptionnels",
+      "download": "Télécharger"
     },
     "leaves": {
       "title": "Congés",

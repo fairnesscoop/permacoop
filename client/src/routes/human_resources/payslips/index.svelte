@@ -10,9 +10,11 @@
   import { get } from 'utils/axios';
   import Table from './_Table.svelte';
 
+  const month = format(new Date(), 'MMMM yyyy', { locale: fr });
+
   const title = $_('human_resources.payslips.title', {
     values: {
-      month: format(new Date(), 'MMMM yyyy', { locale: fr }),
+      month,
     },
   });
 
@@ -26,6 +28,13 @@
       errors = errorNormalizer(e);
     }
   });
+
+  const getCsvAsbase64 = async () => {
+    const csv = await get('payslips.csv');
+    const csvFile = new Blob([csv.data], { type: "text/csv" });
+
+    return window.URL.createObjectURL(csvFile);
+  }
 </script>
 
 <svelte:head>
@@ -36,5 +45,14 @@
 <ServerErrors {errors} />
 <div class="inline-flex items-center">
   <H4Title {title} />
+  {#await getCsvAsbase64() then csvObjectUrl}
+    <a
+      href={csvObjectUrl}
+      download={`payslips-${month.replace(' ', '-')}.csv`}
+      class="px-2 py-1 mb-6 ml-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+      {$_('human_resources.payslips.download')}
+    </a>
+  {/await}
+
 </div>
 <Table items={payslipElements} />
