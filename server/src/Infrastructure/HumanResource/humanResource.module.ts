@@ -69,6 +69,7 @@ import { IncreaseUserSavingsRecordAction } from './Savings/Action/IncreaseUserSa
 import { InterestRate } from 'src/Domain/HumanResource/Savings/InterestRate.entity';
 import { InterestRateRepository } from './Savings/Repository/InterestRateRepository';
 import { GetUsersElementsAction } from './Payslip/Action/GetUsersElementsAction';
+import { GetUsersElementsCsvAction } from './Payslip/Action/GetUsersElementsCsvAction';
 import { GetUsersElementsQueryHandler } from 'src/Application/HumanResource/Payslip/Query/GetUsersElementsQueryHandler';
 import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesByMonthQueryHandler';
 
@@ -99,6 +100,7 @@ import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leav
     GetUserAction,
     GetUsersAction,
     GetUsersElementsAction,
+    GetUsersElementsCsvAction,
     GetLeaveRequestsAction,
     GetLeaveRequestAction,
     CreateLeaveRequestAction,
