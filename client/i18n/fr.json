@@ -288,6 +288,7 @@
     },
     "leaves": {
       "title": "Congés",
+      "confirm_cancel": "Etes-vous sûr de vouloir annuler ces congés ?",
       "requests": {
         "title": "Demandes de congé",
         "view": "Demande de {user}",
