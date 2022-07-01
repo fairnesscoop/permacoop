@@ -12,9 +12,8 @@
   import H4Title from 'components/H4Title.svelte';
   import Breadcrumb from 'components/Breadcrumb.svelte';
   import Link from 'components/links/Link.svelte';
-  import ServerErrors from 'components/ServerErrors.svelte';
   import Pagination from 'components/Pagination.svelte';
-  import { get } from 'utils/axios';
+  import { get, del } from 'utils/axios';
   import { historyPushState } from 'utils/url';
   import { errorNormalizer } from 'normalizer/errors';
   import Table from './_Table.svelte';
@@ -46,6 +45,20 @@
       errors = errorNormalizer(e);
     }
   };
+
+  const handleDelete = async (event) => {
+    const id = event.detail;
+
+    try {
+      await del(`leave-requests/${id}`);
+      response.items = response.items.filter(
+        (leaveRequest) => leaveRequest.id !== id
+      );
+    } catch (e) {
+      errors = errorNormalizer(e);
+    }
+  };
+
 </script>
 
 <svelte:head>
@@ -61,7 +74,7 @@
 </div>
 <div class="w-full overflow-hidden rounded-lg shadow-xs">
   <div class="w-full overflow-x-auto">
-    <Table items={response.items} />
+    <Table items={response.items} on:delete={handleDelete} />
   </div>
   <Pagination
     on:change={changePage}
