@@ -68,7 +68,7 @@
     "rollup-plugin-svelte": "^5.2.3",
     "rollup-plugin-terser": "^7.0.2",
     "sapper": "^0.27.16",
-    "svelte": "^3.24.0",
+    "svelte": "^3.49.0",
     "svelte-jester": "^1.0.6",
     "tailwindcss": "^1.9.2",
     "tailwindcss-multi-theme": "^1.0.3"
