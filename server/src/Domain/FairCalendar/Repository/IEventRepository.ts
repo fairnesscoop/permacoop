@@ -23,5 +23,8 @@ export interface IEventRepository {
     startDate: string,
     endDate: string
   ): Promise<number>;
-  findAllEventsByMonth(date: Date, excludedTypes?: EventType[]): Promise<FindAllEventsByMonth[]>;
+  findAllEventsByMonth(
+    date: Date,
+    excludedTypes?: EventType[]
+  ): Promise<FindAllEventsByMonth[]>;
 }

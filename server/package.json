@@ -11,7 +11,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch --debug",
     "start:prod": "node dist/src/main",
-    "lint": "eslint src/**/*.ts",
+    "lint": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\" && eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "test": "jest",
     "test:watch": "jest --watchAll",

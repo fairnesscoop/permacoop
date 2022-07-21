@@ -4,7 +4,11 @@ import { GetUsersElementsQuery } from './GetUsersElementsQuery';
 import { GetUsersElementsQueryHandler } from './GetUsersElementsQueryHandler';
 import { MealTicketsPerMonthView } from '../../MealTicket/Views/MealTicketsPerMonthView';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
-import { ContractType, UserAdministrative, WorkingTimeType } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
+import {
+  ContractType,
+  UserAdministrative,
+  WorkingTimeType
+} from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import { UserElementsView } from '../View/UserElementsView';
 import { MealTicketRemovalRepository } from 'src/Infrastructure/HumanResource/MealTicket/Repository/MealTicketRemovalRepository';
 import { GetMealTicketsPerMonthQueryHandler } from '../../MealTicket/Query/GetMealTicketsPerMonthQueryHandler';
@@ -15,7 +19,10 @@ import { GetLeavesByMonthQueryHandler } from '../../Leave/Query/GetLeavesByMonth
 import { GetLeavesByMonthQuery } from '../../Leave/Query/GetLeavesByMonthQuery';
 import { UserLeavesView } from '../View/UserLeavesView';
 import { LeavesCollection } from 'src/Domain/HumanResource/Leave/LeavesCollection';
-import { LeaveRequest, Type } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
+import {
+  LeaveRequest,
+  Type
+} from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { MonthDate } from 'src/Application/Common/MonthDate';
 import { LeaveRequestSlotView } from '../../Leave/View/LeaveRequestSlotView';
 
@@ -55,25 +62,28 @@ describe('GetUserElementsQueryHandler', () => {
     when(userAdministrative.getJoiningDate()).thenReturn(date.toISOString());
     when(userAdministrative.getAnnualEarnings()).thenReturn(earnings);
     when(userAdministrative.getAnnualEarnings()).thenReturn(earnings);
-    when(userAdministrative.getWorkingTime()).thenReturn(WorkingTimeType.FULL_TIME);
+    when(userAdministrative.getWorkingTime()).thenReturn(
+      WorkingTimeType.FULL_TIME
+    );
     when(userAdministrative.getTransportFee()).thenReturn(rawTransportFee);
     when(userAdministrative.haveHealthInsurance()).thenReturn(true);
 
-    when(user.getId()).thenReturn("3b8a1954-2ade-44a2-a03c-338985c327ef");
-    when(user.getFirstName()).thenReturn("John");
-    when(user.getLastName()).thenReturn("Doe");
+    when(user.getId()).thenReturn('3b8a1954-2ade-44a2-a03c-338985c327ef');
+    when(user.getFirstName()).thenReturn('John');
+    when(user.getLastName()).thenReturn('Doe');
 
     when(user.getUserAdministrative()).thenReturn(instance(userAdministrative));
 
-    when(userRepository.findUsersWithPayslipInfo()).thenResolve(
-      [
-        instance(user)
-      ]
-    );
+    when(userRepository.findUsersWithPayslipInfo()).thenResolve([
+      instance(user)
+    ]);
 
     when(dateUtilsAdapter.getMonth(date)).thenReturn(new MonthDate(2022, 5));
 
-    const createLeaveRequestMock = (startDate: string, endDate: string): LeaveRequest => {
+    const createLeaveRequestMock = (
+      startDate: string,
+      endDate: string
+    ): LeaveRequest => {
       const leaveRequest = mock(LeaveRequest);
       when(leaveRequest.getUser()).thenReturn(instance(user));
       when(leaveRequest.getType()).thenReturn(Type.PAID);
@@ -83,69 +93,91 @@ describe('GetUserElementsQueryHandler', () => {
       when(leaveRequest.isEndsAllDay()).thenReturn(false);
 
       return leaveRequest;
-    }
+    };
     const startDate1 = '2022-05-09';
-    const endDate1 ='2022-05-11';
+    const endDate1 = '2022-05-11';
     const leaveRequest1 = createLeaveRequestMock(startDate1, endDate1);
     const leaveRequestSlot1 = new LeaveRequestSlotView(startDate1, endDate1);
     const startDate2 = '2022-04-025';
-    const endDate2 ='2022-05-02';
+    const endDate2 = '2022-05-02';
     const leaveRequest2 = createLeaveRequestMock(startDate2, endDate2);
-    const leaveRequestSlot2 = new LeaveRequestSlotView('2022-05-01T00:00:00.000Z', endDate2);
+    const leaveRequestSlot2 = new LeaveRequestSlotView(
+      '2022-05-01T00:00:00.000Z',
+      endDate2
+    );
     const startDate3 = '2022-05-29';
-    const endDate3 ='2022-06-05';
+    const endDate3 = '2022-06-05';
     const leaveRequest3 = createLeaveRequestMock(startDate3, endDate3);
-    const leaveRequestSlot3 = new LeaveRequestSlotView(startDate3, '2022-05-31T00:00:00.000Z');
+    const leaveRequestSlot3 = new LeaveRequestSlotView(
+      startDate3,
+      '2022-05-31T00:00:00.000Z'
+    );
 
-    when(leavesByMonthQueryHandler.execute(deepEqual(new GetLeavesByMonthQuery(date))))
-      .thenResolve(new LeavesCollection([instance(leaveRequest1), instance(leaveRequest2), instance(leaveRequest3)]));
-    when(mealTicketsQueryHandler.execute(deepEqual(new GetMealTicketsPerMonthQuery(date))))
-      .thenResolve(
-        [
-          new MealTicketsPerMonthView(
-            "3b8a1954-2ade-44a2-a03c-338985c327ef",
-            "John",
-            "Doe",
-            5,
-            0
-          )
-        ]
+    when(
+      leavesByMonthQueryHandler.execute(
+        deepEqual(new GetLeavesByMonthQuery(date))
       )
+    ).thenResolve(
+      new LeavesCollection([
+        instance(leaveRequest1),
+        instance(leaveRequest2),
+        instance(leaveRequest3)
+      ])
+    );
+    when(
+      mealTicketsQueryHandler.execute(
+        deepEqual(new GetMealTicketsPerMonthQuery(date))
+      )
+    ).thenResolve([
+      new MealTicketsPerMonthView(
+        '3b8a1954-2ade-44a2-a03c-338985c327ef',
+        'John',
+        'Doe',
+        5,
+        0
+      )
+    ]);
 
-      const monthlyEarnings = earnings / 1200;
-      const yearlyEarning = earnings * 0.01;
-      const transportFee = rawTransportFee * 0.01;
+    const monthlyEarnings = earnings / 1200;
+    const yearlyEarning = earnings * 0.01;
+    const transportFee = rawTransportFee * 0.01;
 
-      expect(await queryHandler.execute(query)).toMatchObject([
-        new UserElementsView(
-          "John",
-          "Doe",
-          ContractType.CDI,
-          true,
-          date.toISOString(),
-          yearlyEarning,
-          monthlyEarnings,
-          WorkingTimeType.FULL_TIME,
-          transportFee,
-          5,
-          'yes',
-          new UserLeavesView(0, [leaveRequestSlot1, leaveRequestSlot2, leaveRequestSlot3]),
-          new UserLeavesView(0, []),
-          new UserLeavesView(0, []),
-          new UserLeavesView(0, [])
-        )
-      ]);
+    expect(await queryHandler.execute(query)).toMatchObject([
+      new UserElementsView(
+        'John',
+        'Doe',
+        ContractType.CDI,
+        true,
+        date.toISOString(),
+        yearlyEarning,
+        monthlyEarnings,
+        WorkingTimeType.FULL_TIME,
+        transportFee,
+        5,
+        'yes',
+        new UserLeavesView(0, [
+          leaveRequestSlot1,
+          leaveRequestSlot2,
+          leaveRequestSlot3
+        ]),
+        new UserLeavesView(0, []),
+        new UserLeavesView(0, []),
+        new UserLeavesView(0, [])
+      )
+    ]);
 
-      verify(
-        userRepository.findUsersWithPayslipInfo()
-      ).once();
+    verify(userRepository.findUsersWithPayslipInfo()).once();
 
-      verify(
-        leavesByMonthQueryHandler.execute(deepEqual(new GetLeavesByMonthQuery(date)))
-      ).once();
+    verify(
+      leavesByMonthQueryHandler.execute(
+        deepEqual(new GetLeavesByMonthQuery(date))
+      )
+    ).once();
 
-      verify(
-        mealTicketsQueryHandler.execute(deepEqual(new GetMealTicketsPerMonthQuery(date)))
-      ).once();
+    verify(
+      mealTicketsQueryHandler.execute(
+        deepEqual(new GetMealTicketsPerMonthQuery(date))
+      )
+    ).once();
   });
 });

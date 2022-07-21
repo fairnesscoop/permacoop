@@ -3,7 +3,10 @@ import { Inject } from '@nestjs/common';
 import { IMealTicketRemovalRepository } from 'src/Domain/HumanResource/MealTicket/Repository/IMealTicketRemovalRepository';
 import { GetMealTicketsPerMonthQuery } from './GetMealTicketsPerMonthQuery';
 import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
-import { FindAllEventsByMonth, IEventRepository } from 'src/Domain/FairCalendar/Repository/IEventRepository';
+import {
+  FindAllEventsByMonth,
+  IEventRepository
+} from 'src/Domain/FairCalendar/Repository/IEventRepository';
 import { ICooperativeRepository } from 'src/Domain/Settings/Repository/ICooperativeRepository';
 import { CooperativeNotFoundException } from 'src/Domain/Settings/Repository/CooperativeNotFoundException';
 import { MealTicketsPerMonthView } from '../Views/MealTicketsPerMonthView';
@@ -36,7 +39,10 @@ export class GetMealTicketsPerMonthQueryHandler {
       this.mealTicketRemovalRepository.findByMonth(date)
     ]);
 
-    const events: FindAllEventsByMonth[] = await this.eventRepository.findAllEventsByMonth(date, [EventType.OTHER]);
+    const events: FindAllEventsByMonth[] = await this.eventRepository.findAllEventsByMonth(
+      date,
+      [EventType.OTHER]
+    );
 
     const mealTicketsByUser = [];
     const mealTicketsRemovalsByUser = [];
@@ -63,7 +69,7 @@ export class GetMealTicketsPerMonthQueryHandler {
           user.getFirstName(),
           user.getLastName(),
           mealTicket <= 0 ? 0 : mealTicket,
-          mealTicketRemoval,
+          mealTicketRemoval
         )
       );
     }

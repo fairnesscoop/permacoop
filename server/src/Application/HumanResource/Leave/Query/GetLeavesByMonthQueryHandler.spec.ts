@@ -27,9 +27,7 @@ describe('GetLeavesByMonthQueryHandler', () => {
     const expectedResult = new LeavesCollection([instance(leave)]);
 
     expect(
-      await queryHandler.execute(
-        new GetLeavesByMonthQuery(date)
-      )
+      await queryHandler.execute(new GetLeavesByMonthQuery(date))
     ).toMatchObject(expectedResult);
 
     verify(

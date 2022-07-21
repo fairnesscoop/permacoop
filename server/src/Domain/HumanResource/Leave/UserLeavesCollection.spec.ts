@@ -3,33 +3,25 @@ import { LeaveRequest, Type } from './LeaveRequest.entity';
 import { UserLeavesCollection } from './UserLeavesCollection';
 
 describe('UserLeavesCollection', () => {
-    it('testDistributeLeavesByType', () => {
-      const paidLeave = mock(LeaveRequest);
-      when(paidLeave.getType()).thenReturn(Type.PAID);
-      const unpaidLeave = mock(LeaveRequest);
-      when(unpaidLeave.getType()).thenReturn(Type.UNPAID);
-      const specialLeave = mock(LeaveRequest);
-      when(specialLeave.getType()).thenReturn(Type.SPECIAL);
-      const medicalLeave = mock(LeaveRequest);
-      when(medicalLeave.getType()).thenReturn(Type.MEDICAL);
+  it('testDistributeLeavesByType', () => {
+    const paidLeave = mock(LeaveRequest);
+    when(paidLeave.getType()).thenReturn(Type.PAID);
+    const unpaidLeave = mock(LeaveRequest);
+    when(unpaidLeave.getType()).thenReturn(Type.UNPAID);
+    const specialLeave = mock(LeaveRequest);
+    when(specialLeave.getType()).thenReturn(Type.SPECIAL);
+    const medicalLeave = mock(LeaveRequest);
+    when(medicalLeave.getType()).thenReturn(Type.MEDICAL);
 
-      const userLeaves = new UserLeavesCollection([
-        instance(paidLeave),
-        instance(unpaidLeave),
-        instance(specialLeave),
-        instance(medicalLeave)
-      ]);
-      expect(
-        userLeaves.paid[0].getType()
-      ).toBe(Type.PAID);
-      expect(
-        userLeaves.unpaid[0].getType()
-      ).toBe(Type.UNPAID);
-      expect(
-        userLeaves.special[0].getType()
-      ).toBe(Type.SPECIAL);
-      expect(
-        userLeaves.medical[0].getType()
-      ).toBe(Type.MEDICAL);
-    });
+    const userLeaves = new UserLeavesCollection([
+      instance(paidLeave),
+      instance(unpaidLeave),
+      instance(specialLeave),
+      instance(medicalLeave)
+    ]);
+    expect(userLeaves.paid[0].getType()).toBe(Type.PAID);
+    expect(userLeaves.unpaid[0].getType()).toBe(Type.UNPAID);
+    expect(userLeaves.special[0].getType()).toBe(Type.SPECIAL);
+    expect(userLeaves.medical[0].getType()).toBe(Type.MEDICAL);
+  });
 });

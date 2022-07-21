@@ -27,9 +27,12 @@ export class GetUsersElementsCsvAction {
 
     res.attachment(`playslips-${month}.csv`);
 
-    const payslips = await this.queryBus.execute(new GetUsersElementsQuery(date));
+    const payslips = await this.queryBus.execute(
+      new GetUsersElementsQuery(date)
+    );
 
-    const rows: string[] = payslips.map((payslip: UserElementsView) => [
+    const rows: string[] = payslips.map((payslip: UserElementsView) =>
+      [
         payslip.firstName,
         payslip.lastName,
         payslip.contract,
@@ -43,30 +46,28 @@ export class GetUsersElementsCsvAction {
         this.formatLeaves(payslip.paidLeaves),
         payslip.unpaidLeaves.totalDays,
         payslip.sickLeaves.totalDays,
-        payslip.exceptionalLeaves.totalDays,
-    ].join(','));
+        payslip.exceptionalLeaves.totalDays
+      ].join(',')
+    );
 
     const headers = [
-        'firstName',
-        'lastName',
-        'contract',
-        'joiningDate',
-        'annualEarnings',
-        'monthlyEarnings',
-        'workingTime',
-        'transportFee',
-        'mealTickets',
-        'healthInsurance',
-        'paidLeaves',
-        'unpaidLeaves',
-        'sickLeaves',
-        'exceptionalLeaves',
+      'firstName',
+      'lastName',
+      'contract',
+      'joiningDate',
+      'annualEarnings',
+      'monthlyEarnings',
+      'workingTime',
+      'transportFee',
+      'mealTickets',
+      'healthInsurance',
+      'paidLeaves',
+      'unpaidLeaves',
+      'sickLeaves',
+      'exceptionalLeaves'
     ];
 
-    const csv: string = [
-        headers.join(','),
-        ...rows
-    ].join("\n");
+    const csv: string = [headers.join(','), ...rows].join('\n');
 
     return res.send(csv);
   }
@@ -74,11 +75,14 @@ export class GetUsersElementsCsvAction {
   private formatLeaves(leaves: UserLeavesView): string {
     if (leaves.totalDays === 0) return '';
 
-    const formatDate = (dateString: string): string => format(new Date(dateString), 'dd/MM/yyyy');
+    const formatDate = (dateString: string): string =>
+      format(new Date(dateString), 'dd/MM/yyyy');
 
-    const formattedSlots = leaves.leaves.map((leave) => formatDate(leave.startDate) + ' - ' + formatDate(leave.endDate));
+    const formattedSlots = leaves.leaves.map(
+      leave => formatDate(leave.startDate) + ' - ' + formatDate(leave.endDate)
+    );
 
-    const row = leaves.totalDays + "\n" + formattedSlots.join("\n");
+    const row = leaves.totalDays + '\n' + formattedSlots.join('\n');
 
     return `"${row}"`;
   }

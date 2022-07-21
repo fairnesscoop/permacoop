@@ -11,7 +11,7 @@ export class LeaveRepository implements ILeaveRepository {
     @InjectRepository(Leave)
     private readonly repository: Repository<Leave>,
     @Inject('IDateUtils')
-    private readonly dateUtils: IDateUtils,
+    private readonly dateUtils: IDateUtils
   ) {}
 
   public save(leaves: Leave[]): void {

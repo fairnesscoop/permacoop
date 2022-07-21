@@ -103,7 +103,9 @@ describe('GetLeaveRequestsQueryHandler', () => {
       2
     ]);
 
-    when(userRepository.findOneById('abcffaa9-cdc5-40fa-a71c-0e93eadd61fd')).thenResolve(instance(loggedUser));
+    when(
+      userRepository.findOneById('abcffaa9-cdc5-40fa-a71c-0e93eadd61fd')
+    ).thenResolve(instance(loggedUser));
 
     when(
       dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', true)
@@ -114,7 +116,13 @@ describe('GetLeaveRequestsQueryHandler', () => {
     ).thenReturn(8);
 
     expect(
-      await queryHandler.execute(new GetLeaveRequestsQuery('abcffaa9-cdc5-40fa-a71c-0e93eadd61fd', 1, null))
+      await queryHandler.execute(
+        new GetLeaveRequestsQuery(
+          'abcffaa9-cdc5-40fa-a71c-0e93eadd61fd',
+          1,
+          null
+        )
+      )
     ).toMatchObject(expectedResult);
 
     verify(
@@ -193,12 +201,13 @@ describe('GetLeaveRequestsQueryHandler', () => {
     when(leave2.isEndsAllDay()).thenReturn(false);
     when(leave2.getUser()).thenReturn(instance(user));
 
-    when(leaveRequestRepository.findLeaveRequests(1, Status.ACCEPTED)).thenResolve([
-      [instance(leave1), instance(leave2)],
-      2
-    ]);
+    when(
+      leaveRequestRepository.findLeaveRequests(1, Status.ACCEPTED)
+    ).thenResolve([[instance(leave1), instance(leave2)], 2]);
 
-    when(userRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')).thenResolve(instance(loggedUser));
+    when(
+      userRepository.findOneById('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2')
+    ).thenResolve(instance(loggedUser));
 
     when(
       dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', true)
@@ -211,7 +220,13 @@ describe('GetLeaveRequestsQueryHandler', () => {
     when(dateUtils.getCurrentDate()).thenReturn(new Date('2020-05-02'));
 
     expect(
-      await queryHandler.execute(new GetLeaveRequestsQuery('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2', 1, Status.ACCEPTED))
+      await queryHandler.execute(
+        new GetLeaveRequestsQuery(
+          'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
+          1,
+          Status.ACCEPTED
+        )
+      )
     ).toMatchObject(expectedResult);
 
     verify(leaveRequestRepository.findLeaveRequests(1, Status.ACCEPTED)).once();

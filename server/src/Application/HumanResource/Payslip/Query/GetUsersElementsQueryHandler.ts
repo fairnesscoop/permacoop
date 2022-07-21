@@ -27,14 +27,15 @@ export class GetUsersElementsQueryHandler {
   public async execute(
     query: GetUsersElementsQuery
   ): Promise<UserElementsView[]> {
-
     const userViews: UserElementsView[] = [];
 
     const date = query.date;
 
-    const [ users, leaves, mealTickets ] = await Promise.all([
+    const [users, leaves, mealTickets] = await Promise.all([
       this.userRepository.findUsersWithPayslipInfo(),
-      this.getLeavesByMonthQueryHandler.execute(new GetLeavesByMonthQuery(date)),
+      this.getLeavesByMonthQueryHandler.execute(
+        new GetLeavesByMonthQuery(date)
+      ),
       this.getMealTicketsPerMonth.execute(new GetMealTicketsPerMonthQuery(date))
     ]);
 
@@ -44,31 +45,36 @@ export class GetUsersElementsQueryHandler {
     });
 
     for (const user of users) {
-        const userLeaves = leaves.getLeavesByUser(user);
+      const userLeaves = leaves.getLeavesByUser(user);
 
-        userViews.push(new UserElementsView(
-            user.getFirstName(),
-            user.getLastName(),
-            user.getUserAdministrative().getContract(),
-            user.getUserAdministrative().isExecutivePosition(),
-            user.getUserAdministrative().getJoiningDate(),
-            user.getUserAdministrative().getAnnualEarnings() * 0.01,
-            user.getUserAdministrative().getAnnualEarnings() / 1200,
-            user.getUserAdministrative().getWorkingTime(),
-            user.getUserAdministrative().getTransportFee() * 0.01,
-            mealTicketsByUser[user.getId()],
-            user.getUserAdministrative().haveHealthInsurance() ? 'yes' : 'no',
-            this.createUserLeavesView(userLeaves.paid, date),
-            this.createUserLeavesView(userLeaves.unpaid, date),
-            this.createUserLeavesView(userLeaves.medical, date),
-            this.createUserLeavesView(userLeaves.special, date)
-        ));
+      userViews.push(
+        new UserElementsView(
+          user.getFirstName(),
+          user.getLastName(),
+          user.getUserAdministrative().getContract(),
+          user.getUserAdministrative().isExecutivePosition(),
+          user.getUserAdministrative().getJoiningDate(),
+          user.getUserAdministrative().getAnnualEarnings() * 0.01,
+          user.getUserAdministrative().getAnnualEarnings() / 1200,
+          user.getUserAdministrative().getWorkingTime(),
+          user.getUserAdministrative().getTransportFee() * 0.01,
+          mealTicketsByUser[user.getId()],
+          user.getUserAdministrative().haveHealthInsurance() ? 'yes' : 'no',
+          this.createUserLeavesView(userLeaves.paid, date),
+          this.createUserLeavesView(userLeaves.unpaid, date),
+          this.createUserLeavesView(userLeaves.medical, date),
+          this.createUserLeavesView(userLeaves.special, date)
+        )
+      );
     }
 
     return userViews;
   }
 
-  private createUserLeavesView(leaves: LeaveRequest[], date: Date): UserLeavesView {
+  private createUserLeavesView(
+    leaves: LeaveRequest[],
+    date: Date
+  ): UserLeavesView {
     const monthDate = this.dateUtils.getMonth(date);
 
     let leaveCount = 0;
@@ -83,14 +89,21 @@ export class GetUsersElementsQueryHandler {
         monthScopedLeave.endDate,
         monthScopedLeave.endsAllDay
       );
-      leavesSlotViews.push(new LeaveRequestSlotView(monthScopedLeave.startDate, monthScopedLeave.endDate));
+      leavesSlotViews.push(
+        new LeaveRequestSlotView(
+          monthScopedLeave.startDate,
+          monthScopedLeave.endDate
+        )
+      );
     }
 
     return new UserLeavesView(leaveCount, leavesSlotViews);
   }
 
-  private getMonthScopedLeave(leave: LeaveRequest, month: MonthDate): LeaveSlot
-  {
+  private getMonthScopedLeave(
+    leave: LeaveRequest,
+    month: MonthDate
+  ): LeaveSlot {
     const scopedLeave = new LeaveSlot();
 
     if (new Date(leave.getStartDate()) >= month.getFirstDay()) {

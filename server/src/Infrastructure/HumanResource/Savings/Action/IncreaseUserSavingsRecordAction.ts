@@ -28,9 +28,7 @@ export class IncreaseUserSavingsRecordAction {
   @Post('increase')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({ summary: 'Increase user savings record' })
-  public async index(
-    @Body() { userId, amount }: UserSavingsRecordDTO,
-  ) {
+  public async index(@Body() { userId, amount }: UserSavingsRecordDTO) {
     try {
       const id = await this.commandBus.execute(
         new IncreaseUserSavingsRecordCommand(amount, userId)

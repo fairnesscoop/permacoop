@@ -17,12 +17,13 @@ describe('UserSavingsRecordDTO', () => {
 
     expect(validation).toHaveLength(2);
     expect(validation[0].constraints).toMatchObject({
-      isNotEmpty: "userId should not be empty",
-      isUuid: "userId must be an UUID"
+      isNotEmpty: 'userId should not be empty',
+      isUuid: 'userId must be an UUID'
     });
     expect(validation[1].constraints).toMatchObject({
-      isNotEmpty: "amount should not be empty",
-      isNumber: "amount must be a number conforming to the specified constraints"
+      isNotEmpty: 'amount should not be empty',
+      isNumber:
+        'amount must be a number conforming to the specified constraints'
     });
   });
 });
