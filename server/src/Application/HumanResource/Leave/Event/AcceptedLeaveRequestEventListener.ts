@@ -5,7 +5,7 @@ import { LeaveRequestToLeavesConverter } from 'src/Domain/HumanResource/Leave/Co
 @EventsHandler(AcceptedLeaveRequestEvent)
 export class AcceptedLeaveRequestEventListener {
   constructor(
-    private readonly leaveRequestToLeavesConverter: LeaveRequestToLeavesConverter,
+    private readonly leaveRequestToLeavesConverter: LeaveRequestToLeavesConverter
   ) {}
 
   public handle(event: AcceptedLeaveRequestEvent): void {

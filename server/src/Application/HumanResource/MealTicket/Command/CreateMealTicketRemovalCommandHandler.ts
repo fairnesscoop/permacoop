@@ -15,12 +15,10 @@ export class CreateMealTicketRemovalCommandHandler {
     private readonly mealTicketRemovalRepository: IMealTicketRemovalRepository,
     @Inject('IDateUtils')
     private readonly dateUtils: IDateUtils,
-    private readonly isMealTicketRemovalAlreadyExist: IsMealTicketRemovalAlreadyExist,
+    private readonly isMealTicketRemovalAlreadyExist: IsMealTicketRemovalAlreadyExist
   ) {}
 
-  public async execute(
-    command: CreateMealTicketRemovalCommand
-  ): Promise<void> {
+  public async execute(command: CreateMealTicketRemovalCommand): Promise<void> {
     const { date, comment, user } = command;
 
     if (false === this.dateUtils.isAWorkingDay(new Date(date))) {
@@ -37,6 +35,8 @@ export class CreateMealTicketRemovalCommandHandler {
       throw new MealTicketRemovalAlreadyExistException();
     }
 
-    await this.mealTicketRemovalRepository.save([new MealTicketRemoval(date, user, comment)]);
+    await this.mealTicketRemovalRepository.save([
+      new MealTicketRemoval(date, user, comment)
+    ]);
   }
 }

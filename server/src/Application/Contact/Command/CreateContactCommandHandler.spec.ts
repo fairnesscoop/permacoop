@@ -64,7 +64,9 @@ describe('CreateContactCommandHandler', () => {
       )
     ).toBe('2d5fb4da-12c2-11ea-8d71-362b9e155667');
 
-    verify(userRepository.findOneById('e470e89e-83a4-46ca-a407-8a3905ae52e9')).once();
+    verify(
+      userRepository.findOneById('e470e89e-83a4-46ca-a407-8a3905ae52e9')
+    ).once();
 
     verify(
       contactRepository.save(
@@ -180,11 +182,12 @@ describe('CreateContactCommandHandler', () => {
       expect(e).toBeInstanceOf(UserNotFoundException);
       expect(e.message).toBe('human_resources.users.errors.not_found');
 
-      verify(userRepository.findOneById('e470e89e-83a4-46ca-a407-8a3905ae52e9')).once();
+      verify(
+        userRepository.findOneById('e470e89e-83a4-46ca-a407-8a3905ae52e9')
+      ).once();
 
       verify(contactRepository.save(anything())).never();
       verify(createdContact.getId()).never();
     }
   });
-
 });

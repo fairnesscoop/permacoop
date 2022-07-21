@@ -98,10 +98,7 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
         'lorem ipsum',
         'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
         true,
-        new ProjectView(
-          'bf4a645c-9754-4943-baec-783361c6d814',
-          'RadioFrance'
-        ),
+        new ProjectView('bf4a645c-9754-4943-baec-783361c6d814', 'RadioFrance'),
         new TaskView('7fb77f06-2d0b-4758-886a-42bba5445fcd', 'Development')
       ),
       new FairCalendarView(

@@ -7,7 +7,7 @@
   const dispatch = createEventDispatcher();
 
   const handleClick = () => {
-    if (confirm($_(confirmMessage))) {
+    if (confirm($_(confirmMessage))) { // eslint-disable-line no-alert, no-restricted-globals
       dispatch('confirm');
     }
   };

@@ -6,7 +6,7 @@ export type FindAllEventsByMonth = {
   date: string;
   user: string;
   duration: number;
-}
+};
 
 export interface IEventRepository {
   save(event: Event): Promise<Event>;
@@ -23,5 +23,8 @@ export interface IEventRepository {
     startDate: string,
     endDate: string
   ): Promise<number>;
-  findAllEventsByMonth(date: Date, excludedTypes?: EventType[]): Promise<FindAllEventsByMonth[]>;
+  findAllEventsByMonth(
+    date: Date,
+    excludedTypes?: EventType[]
+  ): Promise<FindAllEventsByMonth[]>;
 }

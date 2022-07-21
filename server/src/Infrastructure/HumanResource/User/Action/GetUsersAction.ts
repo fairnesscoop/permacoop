@@ -19,6 +19,8 @@ export class GetUsersAction {
   @Get()
   @ApiOperation({ summary: 'Get all users' })
   public async index(@Query() query: FiltersDTO): Promise<UserView[]> {
-    return await this.queryBus.execute(new GetUsersQuery(query.withAccountant, query.activeOnly));
+    return await this.queryBus.execute(
+      new GetUsersQuery(query.withAccountant, query.activeOnly)
+    );
   }
 }

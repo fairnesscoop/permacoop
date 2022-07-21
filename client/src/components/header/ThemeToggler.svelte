@@ -1,7 +1,7 @@
 <script>
+  import { settings } from '../../store';
   import DarkThemeIcon from '../icons/DarkThemeIcon.svelte';
   import LightThemeIcon from '../icons/LightThemeIcon.svelte';
-  import { settings } from 'store';
 
   const onToggle = () => {
     if ($settings.theme) {

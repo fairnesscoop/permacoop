@@ -70,7 +70,14 @@ describe('UpdateLeaveRequestCommandHandler', () => {
     verify(
       leaveRequestRepository.save(
         deepEqual(
-          new LeaveRequest(instance(user), type, startDate, startsAllDay, endDate, endsAllDay)
+          new LeaveRequest(
+            instance(user),
+            type,
+            startDate,
+            startsAllDay,
+            endDate,
+            endsAllDay
+          )
         )
       )
     ).once();

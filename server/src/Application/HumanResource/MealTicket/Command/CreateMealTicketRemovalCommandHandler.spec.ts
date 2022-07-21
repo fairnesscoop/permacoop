@@ -19,7 +19,7 @@ describe('CreateMealTicketRemovalCommandHandler', () => {
   const command = new CreateMealTicketRemovalCommand(
     '2020-04-29',
     instance(user),
-    'dejeuner offert',
+    'dejeuner offert'
   );
 
   beforeEach(() => {
@@ -30,7 +30,7 @@ describe('CreateMealTicketRemovalCommandHandler', () => {
     handler = new CreateMealTicketRemovalCommandHandler(
       instance(mealTicketRemovalRepository),
       instance(dateUtilsAdapter),
-      instance(isMealTicketRemovalAlreadyExist),
+      instance(isMealTicketRemovalAlreadyExist)
     );
   });
 
@@ -43,7 +43,7 @@ describe('CreateMealTicketRemovalCommandHandler', () => {
     ).thenResolve(false);
     when(
       dateUtilsAdapter.isAWorkingDay(deepEqual(new Date('2020-04-29')))
-    ).thenReturn(true)
+    ).thenReturn(true);
 
     expect(await handler.execute(command)).toBeUndefined();
 
@@ -74,7 +74,7 @@ describe('CreateMealTicketRemovalCommandHandler', () => {
     ).thenResolve(true);
     when(
       dateUtilsAdapter.isAWorkingDay(deepEqual(new Date('2020-04-29')))
-    ).thenReturn(true)
+    ).thenReturn(true);
 
     try {
       expect(await handler.execute(command)).toBeUndefined();
@@ -105,7 +105,7 @@ describe('CreateMealTicketRemovalCommandHandler', () => {
     ).thenResolve(true);
     when(
       dateUtilsAdapter.isAWorkingDay(deepEqual(new Date('2020-04-29')))
-    ).thenReturn(false)
+    ).thenReturn(false);
 
     try {
       expect(await handler.execute(command)).toBeUndefined();

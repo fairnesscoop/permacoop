@@ -9,7 +9,7 @@ describe('AcceptedLeaveRequestEventListener', () => {
     const leaveRequest = mock(LeaveRequest);
     const leaveRequestToLeavesConverter = mock(LeaveRequestToLeavesConverter);
     const acceptedLeaveEventListener = new AcceptedLeaveRequestEventListener(
-      instance(leaveRequestToLeavesConverter),
+      instance(leaveRequestToLeavesConverter)
     );
 
     await acceptedLeaveEventListener.handle(

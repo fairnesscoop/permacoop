@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { FindAllEventsByMonth, IEventRepository } from 'src/Domain/FairCalendar/Repository/IEventRepository';
+import {
+  FindAllEventsByMonth,
+  IEventRepository
+} from 'src/Domain/FairCalendar/Repository/IEventRepository';
 import { Event, EventType } from 'src/Domain/FairCalendar/Event.entity';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { DailyRate } from 'src/Domain/Accounting/DailyRate.entity';
@@ -146,7 +149,10 @@ export class EventRepository implements IEventRepository {
     return Number(result.id) || 0;
   }
 
-  public findAllEventsByMonth(date: Date, excludedTypes?: EventType[]): Promise<FindAllEventsByMonth[]> {
+  public findAllEventsByMonth(
+    date: Date,
+    excludedTypes?: EventType[]
+  ): Promise<FindAllEventsByMonth[]> {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
@@ -162,10 +168,12 @@ export class EventRepository implements IEventRepository {
       .innerJoin('event.user', 'user')
       .groupBy('event.date, user.id');
 
-      if (excludedTypes) {
-        query.andWhere('event.type NOT IN (:...excludedTypes)', { excludedTypes });
-      }
+    if (excludedTypes) {
+      query.andWhere('event.type NOT IN (:...excludedTypes)', {
+        excludedTypes
+      });
+    }
 
-      return query.getRawMany();
+    return query.getRawMany();
   }
 }

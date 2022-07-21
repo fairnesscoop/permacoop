@@ -17,7 +17,10 @@ export class GetUsersQueryHandler {
       noLeavingDate = true;
     }
 
-    const users = await this.userRepository.findUsers(query.withAccountant, noLeavingDate);
+    const users = await this.userRepository.findUsers(
+      query.withAccountant,
+      noLeavingDate
+    );
     const userViews: UserView[] = [];
 
     for (const user of users) {

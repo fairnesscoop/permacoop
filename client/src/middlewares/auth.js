@@ -1,4 +1,4 @@
-import { get } from 'utils/axios';
+import { get } from '../utils/axios';
 
 export default async (req, res, next) => {
   // Catch only sapper routing

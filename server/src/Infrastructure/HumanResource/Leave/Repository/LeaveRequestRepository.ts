@@ -16,7 +16,7 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
     @InjectRepository(LeaveRequest)
     private readonly repository: Repository<LeaveRequest>,
     @Inject('IDateUtils')
-    private readonly dateUtils: IDateUtils,
+    private readonly dateUtils: IDateUtils
   ) {}
 
   public save(leaveRequest: LeaveRequest): Promise<LeaveRequest> {
@@ -114,9 +114,7 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
     return query.getManyAndCount();
   }
 
-  public findAcceptedLeaveRequestsByMonth(
-    date: Date
-  ): Promise<LeaveRequest[]> {
+  public findAcceptedLeaveRequestsByMonth(date: Date): Promise<LeaveRequest[]> {
     const monthDate: MonthDate = this.dateUtils.getMonth(date);
 
     const query = this.repository
@@ -139,8 +137,7 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
       .innerJoin('leaveRequest.user', 'user')
       .innerJoin('user.userAdministrative', 'userAdministrative')
       .andWhere('userAdministrative.leavingDate IS NULL')
-      .addOrderBy('leaveRequest.startDate', 'ASC')
-    ;
+      .addOrderBy('leaveRequest.startDate', 'ASC');
 
     return query.getMany();
   }

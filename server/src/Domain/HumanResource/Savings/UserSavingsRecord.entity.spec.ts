@@ -1,7 +1,10 @@
 import { mock, instance } from 'ts-mockito';
 import { User } from '../User/User.entity';
 import { InterestRate } from './InterestRate.entity';
-import { SavingsRecordType, UserSavingsRecord } from './UserSavingsRecord.entity';
+import {
+  SavingsRecordType,
+  UserSavingsRecord
+} from './UserSavingsRecord.entity';
 
 describe('UserSavingsRecord.entity', () => {
   it('testGetters', () => {
@@ -11,7 +14,7 @@ describe('UserSavingsRecord.entity', () => {
       100000,
       SavingsRecordType.INPUT,
       instance(user),
-      instance(interestRate),
+      instance(interestRate)
     );
 
     expect(userSavingsRecord.getId()).toBe(undefined);

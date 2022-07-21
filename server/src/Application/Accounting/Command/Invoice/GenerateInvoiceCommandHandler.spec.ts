@@ -60,9 +60,7 @@ describe('GenerateInvoiceCommandHandler', () => {
   });
 
   it('testCooperativeNotFound', async () => {
-    when(
-      cooperativeRepository.find()
-    ).thenResolve(null);
+    when(cooperativeRepository.find()).thenResolve(null);
 
     try {
       expect(await handler.execute(command)).toBeUndefined();
@@ -70,9 +68,7 @@ describe('GenerateInvoiceCommandHandler', () => {
       expect(e).toBeInstanceOf(CooperativeNotFoundException);
       expect(e.message).toBe('settings.errors.cooperative_not_found');
       verify(cooperativeRepository.find()).once();
-      verify(
-        projectRepository.findOneById(anything())
-      ).never();
+      verify(projectRepository.findOneById(anything())).never();
       verify(invoiceIdGenerator.generate()).never();
       verify(
         eventRepository.findBillableEventsByMonthAndProject(
@@ -88,9 +84,7 @@ describe('GenerateInvoiceCommandHandler', () => {
   });
 
   it('testProjectNotFound', async () => {
-    when(
-      cooperativeRepository.find()
-    ).thenResolve(instance(cooperative));
+    when(cooperativeRepository.find()).thenResolve(instance(cooperative));
     when(
       projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
     ).thenResolve(null);
@@ -119,9 +113,7 @@ describe('GenerateInvoiceCommandHandler', () => {
   });
 
   it('testNoBillableEventsFound', async () => {
-    when(
-      cooperativeRepository.find()
-    ).thenResolve(instance(cooperative));
+    when(cooperativeRepository.find()).thenResolve(instance(cooperative));
     when(
       projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
     ).thenResolve(instance(project));
@@ -218,9 +210,7 @@ describe('GenerateInvoiceCommandHandler', () => {
       )
     ];
 
-    when(
-      cooperativeRepository.find()
-    ).thenResolve(instance(cooperative));
+    when(cooperativeRepository.find()).thenResolve(instance(cooperative));
     when(cooperative.getDayDuration()).thenReturn(420);
     when(
       projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
@@ -242,9 +232,7 @@ describe('GenerateInvoiceCommandHandler', () => {
       'fc8a4cd9-31eb-4fca-814d-b30c05de485d'
     );
 
-    verify(
-      cooperativeRepository.find()
-    ).once();
+    verify(cooperativeRepository.find()).once();
     verify(
       projectRepository.findOneById('a491ccc9-df7c-4fc6-8e90-db816208f689')
     ).once();

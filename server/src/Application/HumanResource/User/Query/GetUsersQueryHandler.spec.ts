@@ -63,7 +63,9 @@ describe('GetUsersQueryHandler', () => {
 
     const handler = new GetUsersQueryHandler(instance(userRepository));
 
-    expect(await handler.execute(new GetUsersQuery(false, false))).toMatchObject([]);
+    expect(
+      await handler.execute(new GetUsersQuery(false, false))
+    ).toMatchObject([]);
     verify(userRepository.findUsers(false, false)).once();
   });
 

@@ -122,7 +122,10 @@ import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leav
     { provide: 'IFileRepository', useClass: FileRepository },
     { provide: 'IEventRepository', useClass: EventRepository },
     { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
-    { provide: 'IUserSavingsRecordRepository', useClass: UserSavingsRecordRepository },
+    {
+      provide: 'IUserSavingsRecordRepository',
+      useClass: UserSavingsRecordRepository
+    },
     { provide: 'IInterestRateRepository', useClass: InterestRateRepository },
     {
       provide: 'IMealTicketRemovalRepository',
@@ -167,4 +170,4 @@ import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leav
     IncreaseUserSavingsRecordCommandHandler
   ]
 })
-export class HumanResourceModule { }
+export class HumanResourceModule {}

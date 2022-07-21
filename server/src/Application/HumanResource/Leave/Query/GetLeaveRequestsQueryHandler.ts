@@ -73,7 +73,9 @@ export class GetLeaveRequestsQueryHandler {
       return false;
     }
 
-    if (new Date(leaveRequest.getStartDate()) < this.dateUtils.getCurrentDate()) {
+    if (
+      new Date(leaveRequest.getStartDate()) < this.dateUtils.getCurrentDate()
+    ) {
       return false;
     }
 
