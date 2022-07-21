@@ -1,6 +1,8 @@
-FROM node:14.3
+FROM node:16
 
 WORKDIR /var/www
+
+RUN npm install --location=global npm@8.15.0
 
 # Install dependencies
 COPY ./package.json ./package-lock.json ./

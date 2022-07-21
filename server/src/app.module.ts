@@ -10,10 +10,12 @@ import { FileModule } from './Infrastructure/File/file.module';
 import { HumanResourceModule } from './Infrastructure/HumanResource/humanResource.module';
 import { SettingsModule } from './Infrastructure/Settings/settings.module';
 import { ContactModule } from './Infrastructure/Contact/contact.module';
+import { DataSource } from 'typeorm';
+import { AppDataSource } from './data-source';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot(AppDataSource.options),
     ConfigModule.forRoot(),
     AccountingModule,
     CustomerModule,
@@ -26,4 +28,6 @@ import { ContactModule } from './Infrastructure/Contact/contact.module';
     ContactModule
   ]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource) {}
+}

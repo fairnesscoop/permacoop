@@ -1,0 +1,17 @@
+import 'reflect-metadata';
+import { DataSource } from 'typeorm';
+
+export const AppDataSource = new DataSource({
+  type: 'postgres',
+  host: 'database',
+  port: 5432,
+  username: 'docker',
+  password: 'docker',
+  database: 'permacoop',
+  synchronize: false,
+  logging: ['error'],
+  entities: ['dist/src/Domain/**/*.entity{.ts,.js}'],
+  subscribers: [],
+  migrations: ['dist/migrations/**/*{.ts,.js}'],
+  migrationsTableName: 'migrations'
+});

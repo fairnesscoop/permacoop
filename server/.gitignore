@@ -3,6 +3,7 @@
 /uploads
 /node_modules
 ormconfig.json
+/src/data-source.ts
 .env
 # Logs
 logs

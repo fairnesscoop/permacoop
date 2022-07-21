@@ -6,10 +6,12 @@ exec = ${compose} exec
 run = ${compose} run
 logs = ${compose} logs -f
 
-install: ## Install API and client
-	cp server/ormconfig.json.dist server/ormconfig.json
+config-files:
+	cp server/src/data-source.ts.dist server/src/data-source.ts
 	cp server/.env.dist server/.env
 	cp client/config.js.dist client/config.js
+
+install: config-files ## Install API and client
 	make start-container
 	make api-build-dist
 	make database-migrate
@@ -60,8 +62,7 @@ database-diff: ## Generate database diff
 	${exec} api npm run migration:diff -n $(MIGRATION_NAME)
 database-connect: ## Connect to the database container
 	${exec} database psql -h database -d permacoop
-ci: ## Run CI checks
-	cp client/config.js.dist client/config.js
+ci: config-files ## Run CI checks
 	${run} api npm run build
 	${run} api npm run test:cov
 	${run} api npm run lint
