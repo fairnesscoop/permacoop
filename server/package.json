@@ -63,7 +63,7 @@
     "eslint-plugin-import": "2.22.1",
     "highlight.js": ">=10.4.1",
     "jest": "^25.2.7",
-    "minimist": ">=1.2.2",
+    "minimist": ">=1.2.6",
     "prettier": "^1.18.2",
     "serialize-javascript": ">=3.1.0",
     "supertest": "^4.0.2",
