@@ -1,0 +1,17 @@
+[program:client]
+directory={{ workdir }}/client
+command=node ./__sapper__/build
+environment=HOST=127.0.0.1,NODE_ENV=production,PORT="{{ client_port }}"
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/client.err.log
+stdout_logfile=/var/log/client.out.log
+
+[program:api]
+directory={{ workdir }}/server
+command=node ./dist/src/main.js
+environment=HOST=127.0.0.1,NODE_ENV=production,PORT="{{ api_port }}"
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/api.err.log
+stdout_logfile=/var/log/api.out.log

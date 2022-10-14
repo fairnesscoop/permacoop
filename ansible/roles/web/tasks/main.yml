@@ -1,0 +1,23 @@
+- name: Deploy web
+  tags: deploy
+  block:
+  - name: Sync Nginx
+    import_tasks: nginx.yml
+
+  - name: Sync repository
+    import_tasks: git.yml
+
+  - name: Sync environment variables
+    import_tasks: dotenv.yml
+
+  - name: Sync Node dependencies
+    import_tasks: node.yml
+
+  - name: Sync build
+    import_tasks: build.yml
+
+  - name: Sync DB
+    import_tasks: db.yml
+
+  - name: Sync supervisor
+    import_tasks: supervisor.yml

@@ -1,0 +1,9 @@
+- name: Ensure server build is up to date
+  shell:
+    cmd: npm run build
+    chdir: "{{ workdir }}/server"
+
+- name: Ensure client build is up to date
+  shell:
+    cmd: npm run build
+    chdir: "{{ workdir }}/client"

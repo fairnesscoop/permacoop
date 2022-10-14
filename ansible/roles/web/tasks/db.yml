@@ -1,0 +1,6 @@
+- name: Ensure migrations are up to date
+  shell:
+    cmd: npm run migration:migrate
+    chdir: "{{ workdir }}/server"
+  register: migrate
+  changed_when: "'migrations are new migrations' in migrate.stdout"

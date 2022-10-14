@@ -1,0 +1,8 @@
+- name: Ensure server .env file is up to date
+  template:
+    src: .env.j2
+    dest: "{{ workdir }}/.env"
+    owner: root
+    group: root
+    mode: 0644
+  become: true

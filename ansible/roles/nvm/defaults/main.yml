@@ -1,0 +1,10 @@
+---
+# Installation paths
+nvm_home: "{{ ansible_env.HOME }}"
+nvm_root: "{{ ansible_env.HOME }}/.nvm"
+
+# nvm version to install
+nvm_version: "v0.39.2"
+
+# Node.js version to install
+nvm_node_version: "v14.15.4"

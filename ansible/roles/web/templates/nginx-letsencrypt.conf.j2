@@ -1,0 +1,13 @@
+server {
+    listen 80 default_server;
+    server_name {{ domain_name }};
+
+    location /.well-known/acme-challenge {
+        root /var/www/letsencrypt;
+        try_files $uri $uri/ =404;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}

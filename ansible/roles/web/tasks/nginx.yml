@@ -1,0 +1,74 @@
+- name: Ensure default Nginx site is removed
+  file:
+    name: /etc/nginx/sites-enabled/default
+    state: absent
+  become: true
+
+- name: Ensure Nginx config is present and up to date
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  notify: reload nginx
+
+- name: Configure certificates
+  block:
+  - name: Ensure LetsEncrypt webroot is present
+    file:
+      name: /var/www/letsencrypt
+      state: directory
+    become: true
+
+  - name: Ensure app Nginx site is disabled while certs get configured
+    file:
+      name: /etc/nginx/sites-enabled/permacoop.conf
+      state: absent
+    become: true
+
+  - name: Ensure LetsEncrypt Nginx site is configured
+    template:
+      src: nginx-letsencrypt.conf.j2
+      dest: /etc/nginx/sites-enabled/letsencrypt.conf
+      owner: root
+      group: root
+      mode: 0644
+    become: true
+    register: letsencrypt_site
+
+  - name: Ensure LetsEncrypt site is active
+    service: name=nginx state=reloaded
+    when: letsencrypt_site is changed
+
+  - name: Configure dhparams
+    shell: curl https://ssl-config.mozilla.org/ffdhe2048.txt > /etc/nginx/dhparams.pem
+    args:
+      creates: /etc/nginx/dhparams.pem
+    become: true
+    notify: reload nginx
+
+  - name: Create certificates
+    shell: certbot certonly -n --webroot -w /var/www/letsencrypt --agree-tos --email "{{ letsencrypt_email }}" -d "{{ domain_name }}"
+    args:
+      creates: "/etc/letsencrypt/live/{{ domain_name }}"
+    become: true
+    notify: reload nginx
+
+  - name: Ensure certs get renewed
+    cron:
+      name: certs_renewal
+      special_time: weekly
+      job: "certbot renew -q"
+      state: present
+
+- name: Ensure Nginx site is configured and up to date
+  template:
+    src: nginx-permacoop.conf.j2
+    dest: /etc/nginx/sites-enabled/permacoop.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  notify: reload nginx
