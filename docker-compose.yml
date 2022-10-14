@@ -2,8 +2,6 @@ version: '3'
 
 volumes:
   database: {}
-  uploads: {}
-  redis: {}
 
 services:
   database:
@@ -18,33 +16,3 @@ services:
       - 'database:/var/lib/postgresql/data'
     ports:
       - 5432:5432
-
-  api:
-    build: ./server
-    depends_on:
-      - database
-    volumes:
-      - './server:/var/www'
-      - '/var/www/node_modules'
-      - 'uploads:/var/www/uploads'
-
-  client:
-    build: ./client
-    depends_on:
-      - api
-    volumes:
-      - './client:/var/www'
-      - '/var/www/node_modules'
-    ports:
-      - 5000:5000
-      - 10000:10000
-
-  nginx:
-    image: nginx:latest
-    ports:
-      - 80:80
-    depends_on:
-      - 'client'
-      - 'api'
-    volumes:
-      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro

@@ -83,9 +83,6 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "modulePaths": [
-      "/var/www"
-    ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   }
