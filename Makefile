@@ -2,46 +2,34 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 compose = docker-compose -p permacoop
-exec = ${compose} exec
-run = ${compose} run
-logs = ${compose} logs -f
-prefix = ./tools/colorize_prefix.sh
+client_port = 3001
 
-start: ## Serve API, client, Tailwind and DB in parallel
-	make -j 4 start-api start-client start-tailwind start-db
-
-start-api: ## Run API
-	${prefix} [api] 30 "cd server && npm run start:dev"
-
-start-client: ## Run client
-	PORT=3001 ${prefix} [client] 31 "cd client && npm run dev"
-
-start-tailwind:
-	${prefix} [tailwind] 36 "cd client && npm run watch:tailwind"
-
-start-db:
-	${prefix} [db] 34 "${compose} up -d -- database"
-
-stop-db:
-	${prefix} [db] 34 "${compose} stop -- database"
-
-install: ## Install API and client and setup database
+install: ## Install API and client
 	make install-api
 	make install-client
-	make build-api
-	make database-migrate
-	make build-tailwind
 
 install-api: ## Install API
-	cp server/ormconfig.json.dist server/ormconfig.json
-	cp server/.env.dist server/.env
+	cp -n server/ormconfig.json.dist server/ormconfig.json
+	cp -n server/.env.dist server/.env
 	cd server && npm ci
 
 install-client: ## Install client
-	cp client/config.js.dist client/config.js
+	cp -n client/config.js.dist client/config.js
 	cd client && npm ci
 
-build: build-api build-client  # Build all
+start: ## Serve API, client and Tailwind in parallel
+	make -j 3 start-api start-client start-tailwind
+
+start-api: ## Run API
+	./tools/colorize_prefix.sh [api] 30 "cd server && npm run start:dev"
+
+start-client: ## Run client
+	PORT=${client_port} ./tools/colorize_prefix.sh [client] 31 "cd client && npm run dev"
+
+start-tailwind:
+	./tools/colorize_prefix.sh [tailwind] 36 "cd client && npm run watch:tailwind"
+
+build: build-api build-client ## Build API and client
 
 build-api: ## Build API dist
 	cd server && npm run build
@@ -51,6 +39,15 @@ build-client: ## Build client
 
 build-tailwind: ## Build Tailwind in production mode
 	cd client && npm run build:tailwind
+
+start-dist: ## Serve built API and client
+	make -j 2 start-dist-api start-dist-client
+
+start-dist-api: ## Serve built API
+	./tools/colorize_prefix.sh [api] 30 "cd server && npm run start"
+
+start-dist-client: ## Serve built client
+	PORT=${client_port} ./tools/colorize_prefix.sh [client] 31 "cd client && npm run start"
 
 test: test-api test-client-unit ## Run test suite
 
@@ -79,6 +76,12 @@ format: format-api ## Run code formatting
 format-api: ## Run API code formatting
 	cd server && npm run format
 
+database-start: ## Start database container
+	./tools/colorize_prefix.sh [db] 34 "${compose} up -d -- database"
+
+database-stop: ## Stop database container
+	./tools/colorize_prefix.sh [db] 34 "${compose} stop -- database"
+
 database-migrate: ## Database migrations
 	cd server && npm run migration:migrate
 
@@ -86,12 +89,10 @@ database-diff: ## Generate database diff
 	cd server && npm run migration:diff -n $(MIGRATION_NAME)
 
 database-connect: ## Connect to the database container
-	${exec} database psql -h database -d permacoop
+	${compose} exec database psql -h database -d permacoop
 
 ci: ## Run CI checks
-	make install-api
-	make install-client
-	make build-api
-	make build-client
+	make install
+	make build
 	make test-api-cov
 	make linter
