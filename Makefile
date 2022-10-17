@@ -17,16 +17,19 @@ install-client: ## Install client
 	cp -n client/config.js.dist client/config.js
 	cd client && npm ci
 
-start: ## Serve API, client and Tailwind in parallel
-	make -j 3 start-api start-client start-tailwind
+start: ## Serve API and client in parallel
+	make -j 2 start-api start-client
 
 start-api: ## Run API
 	./tools/colorize_prefix.sh [api] 30 "cd server && npm run start:dev"
 
 start-client: ## Run client
+	make -j 2 start-client-dev start-client-tailwind
+
+start-client-dev:
 	PORT=${client_port} ./tools/colorize_prefix.sh [client] 31 "cd client && npm run dev"
 
-start-tailwind:
+start-client-tailwind:
 	./tools/colorize_prefix.sh [tailwind] 36 "cd client && npm run watch:tailwind"
 
 build: build-api build-client ## Build API and client
@@ -37,14 +40,11 @@ build-api: ## Build API dist
 build-client: ## Build client
 	cd client && npm run build
 
-build-tailwind: ## Build Tailwind in production mode
-	cd client && npm run build:tailwind
-
 start-dist: ## Serve built API and client
 	make -j 2 start-dist-api start-dist-client
 
 start-dist-api: ## Serve built API
-	./tools/colorize_prefix.sh [api] 30 "cd server && npm run start"
+	./tools/colorize_prefix.sh [api] 30 "cd server && npm run start:prod"
 
 start-dist-client: ## Serve built client
 	PORT=${client_port} ./tools/colorize_prefix.sh [client] 31 "cd client && npm run start"
