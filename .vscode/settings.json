@@ -9,7 +9,11 @@
 	"eslint.lintTask.enable": true,
 	"eslint.workingDirectories": [
         {
-            "directory": "./client",
+            "directory": "./client/legacy",
+            "changeProcessCWD": true
+        },
+        {
+            "directory": "./client/kit",
             "changeProcessCWD": true
         },
 		{

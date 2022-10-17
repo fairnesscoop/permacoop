@@ -18,7 +18,7 @@ The current deployment process is manual. It is as follows.
 
     ```
     cd server && npm run build
-    cd client && npm run build
+    cd client/legacy && npm run build
     ```
 
 1. Restart `pm2` if need be: if `pm2 status` shows an instance as `error`, restart it using:
@@ -39,5 +39,5 @@ Restart `pm2`:
 $ pwd
 /var/www/permacoop
 $ cd server && pm2 start server.config.js
-$ cd client && pm2 start server.config.js
+$ cd client/legacy && pm2 start server.config.js
 ```
