@@ -25,7 +25,7 @@ Permacoop is an open source and eco design ERP solution reserved for worker-owne
 
 You must have **[PostgreSQL](https://www.postgresql.org/)** installed, or **[Docker](https://www.docker.com/)** and **[Docker Compose](https://docs.docker.com/compose/)** to run PostgreSQL using the provided `docker-compose.yml`.
 
-Ensure you have [Node.js](https://nodejs.org) v14.3 and `node-gyp` installed globally (`npm install -g node-gyp`). (Node version should match to avoid any build issues with binary dependencies such as `argon2`.)
+Ensure you have [Node.js](https://nodejs.org) v16 and `node-gyp` installed globally (`npm install -g node-gyp`).
 
 ## Quickstart
 

@@ -103,8 +103,13 @@ test-client-legacy-unit: ## Run legacy client unit tests
 test-client-kit-unit: ## Run SvelteKit client unit tests
 	cd client/kit && npm run test:unit
 
-test-client-e2e: ## Run client E2E tests
+test-client-e2e: ## Run client E2E tests (servers must be running)
 	cd client/kit && npm run test:e2e
+
+test-client-ci: test-client test-client-e2e-ci
+
+test-client-e2e-ci: ## Run client E2E tests
+	cd client/kit && npm run test:e2e:ci
 
 linter: linter-api linter-client ## Run linters
 
@@ -148,5 +153,5 @@ ci: ## Run CI checks
 	make install
 	make build
 	make test-api-cov
-	make test-client
+	make test-client-ci
 	make linter
