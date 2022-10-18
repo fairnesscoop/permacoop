@@ -23,29 +23,69 @@ Permacoop is an open source and eco design ERP solution reserved for worker-owne
 
 ## Prerequisites
 
-You must have **[Docker](https://www.docker.com/)** and **[Docker Compose](https://docs.docker.com/compose/)**.
+You must have **[PostgreSQL](https://www.postgresql.org/)** installed, or **[Docker](https://www.docker.com/)** and **[Docker Compose](https://docs.docker.com/compose/)** to run PostgreSQL using the provided `docker-compose.yml`.
 
-Ensure you have [Node.js](https://nodejs.org) v14.3 and `node-gyp` installed globally (`npm install -g node-gyp`). (Node version should match to avoid any build issues with binary dependencies such as `argon2`.)
+Ensure you have [Node.js](https://nodejs.org) v14 and `node-gyp` installed globally (`npm install -g node-gyp`).
 
-## Installation
+## Quickstart
 
-At **the first launch**, just execute this command to install your application :
+First, install dependencies:
 
 ```bash
 make install
 ```
 
-For the **next times** you just need to execute this command to start your application :
+Then ensure your database is running:
+
+* Start the PostgreSQL Docker container using `make database-start`. You can later stop it with `make database-stop`.
+* If you are using a PostgreSQL database on your host, edit `server/ormconfig.json` to fit your setup.
+
+You can now run database migrations:
+
+```
+make database-migrate
+```
+
+Finally, run an initial build:
+
+```
+make build
+```
+
+You can now start the application using:
 
 ```bash
 make start
-
 ```
 
 The server and client will be started:
 
-- API documentation available on <http://localhost/api>
-- Client avaible on <http://localhost/>
+- API documentation available on <http://localhost:3000/api>
+- Client available on <http://localhost:3001/>
+
+To serve the built server and client locally, run `$ make build`, then:
+
+```
+make start-dist
+```
+
+To run tests, use:
+
+```
+make test
+```
+
+To run automatic code formatting, run:
+
+```
+make format
+```
+
+To run linters and code checks, use:
+
+```
+make linter
+```
 
 ## Security
 

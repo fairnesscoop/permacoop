@@ -79,14 +79,15 @@
       "ts"
     ],
     "rootDir": "src",
+    "modulePaths": ["<rootDir>/../"],
     "testRegex": ".spec.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "modulePaths": [
-      "/var/www"
-    ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "engines": {
+    "node": "14.3"
   }
 }

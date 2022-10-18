@@ -1,3 +1,5 @@
+// Production pm2 configuration
+// See: https://pm2.keymetrics.io/docs/usage/application-declaration/
 module.exports = {
   apps: [
     {

@@ -2,68 +2,97 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 compose = docker-compose -p permacoop
-exec = ${compose} exec
-run = ${compose} run
-logs = ${compose} logs -f
+client_port = 3001
 
 install: ## Install API and client
-	cp server/ormconfig.json.dist server/ormconfig.json
-	cp server/.env.dist server/.env
-	cp client/config.js.dist client/config.js
-	make start-container
-	make api-build-dist
-	make database-migrate
-	make watch-tailwind
-stop: ## Stop docker containers
-	${compose} stop
-rm: ## Remove docker containers
-	${compose} rm
-ps: ## List docker containers
-	${compose} ps
-start: ## Start the application
-	make start-container
-	make watch-tailwind
-restart: ## Restart containers
-	make stop
-	make start
-start-container: ## Start docker containers
-	${compose} up -d
-watch-tailwind:
-	${exec} client npm run watch:tailwind
-build-tailwind: ## Build Tailwind in production mode
-	${exec} client npm run build:tailwind
-test: test-api test-client## Run test suite
-test-api: ## Run test suite
-	${exec} api npm run test
-test-client: ## Run test suite
-	${exec} client npm run test-unit
-test-watch: ## Run test suite
-	${exec} api npm run test:watch
-linter: ## Linter
-	${exec} api npm run lint
-	${exec} client npm run lint
-format: ## Linter
-	${exec} api npm run format
-api-logs: ## Display API logs
-	${logs} api
-api-bash: ## Connect to API container
-	${exec} api bash
-api-build-dist: ## Build API dist
-	${exec} api npm run build
-client-logs: ## Display Client logs
-	${logs} client
-client-bash: ## Connect to client container
-	${exec} client bash
+	make install-api
+	make install-client
+
+install-api: ## Install API
+	cp -n server/ormconfig.json.dist server/ormconfig.json
+	cp -n server/.env.dist server/.env
+	cd server && npm ci
+
+install-client: ## Install client
+	cp -n client/config.js.dist client/config.js
+	cd client && npm ci
+
+start: ## Serve API and client in parallel
+	make -j 2 start-api start-client
+
+start-api: ## Run API
+	./tools/colorize_prefix.sh [api] 30 "cd server && npm run start:dev"
+
+start-client: ## Run client
+	make -j 2 start-client-dev start-client-tailwind
+
+start-client-dev:
+	PORT=${client_port} ./tools/colorize_prefix.sh [client] 31 "cd client && npm run dev"
+
+start-client-tailwind:
+	./tools/colorize_prefix.sh [tailwind] 36 "cd client && npm run watch:tailwind"
+
+build: build-api build-client ## Build API and client
+
+build-api: ## Build API dist
+	cd server && npm run build
+
+build-client: ## Build client
+	cd client && npm run build
+
+start-dist: ## Serve built API and client
+	make -j 2 start-dist-api start-dist-client
+
+start-dist-api: ## Serve built API
+	./tools/colorize_prefix.sh [api] 30 "cd server && npm run start:prod"
+
+start-dist-client: ## Serve built client
+	PORT=${client_port} ./tools/colorize_prefix.sh [client] 31 "cd client && npm run start"
+
+test: test-api test-client-unit ## Run test suite
+
+test-api: ## Run API tests
+	cd server && npm run test
+
+test-api-watch: ## Run API tests in watch mode
+	cd server && npm run test:watch
+
+test-api-cov: ## Run API tests with coverage enabled
+	cd server && npm run test:cov
+
+test-client-unit: ## Run client unit tests
+	cd client && npm run test-unit
+
+linter: linter-api linter-client ## Run linters
+
+linter-api: ## Run API linters
+	cd server && npm run lint
+
+linter-client: ## Run client linters
+	cd client && npm run lint
+
+format: format-api ## Run code formatting
+
+format-api: ## Run API code formatting
+	cd server && npm run format
+
+database-start: ## Start database container
+	./tools/colorize_prefix.sh [db] 34 "${compose} up -d -- database"
+
+database-stop: ## Stop database container
+	./tools/colorize_prefix.sh [db] 34 "${compose} stop -- database"
+
 database-migrate: ## Database migrations
-	${exec} api npm run migration:migrate
+	cd server && npm run migration:migrate
+
 database-diff: ## Generate database diff
-	${exec} api npm run migration:diff -n $(MIGRATION_NAME)
+	cd server && npm run migration:diff -n $(MIGRATION_NAME)
+
 database-connect: ## Connect to the database container
-	${exec} database psql -h database -d permacoop
+	${compose} exec database psql -h database -d permacoop
+
 ci: ## Run CI checks
-	cp client/config.js.dist client/config.js
-	${run} api npm run build
-	${run} api npm run test:cov
-	${run} api npm run lint
-	${run} client npm run build
-	${run} client npm run lint
+	make install
+	make build
+	make test-api-cov
+	make linter
