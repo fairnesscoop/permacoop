@@ -11,7 +11,7 @@ COMMAND="$3"
 
 # Apply ANSI terminal color
 # See: http://jafrog.com/2013/11/23/colors-in-terminal.html
-PREFIX_COLORIZED=$(echo "\e[${COLOR_CODE}m${PREFIX_TEXT}\e[0m")
+PREFIX_COLORIZED=$(echo "\033[${COLOR_CODE}m${PREFIX_TEXT}\033[0m")
 
 # script ... preserves color output
 # See: https://stackoverflow.com/a/3515296
