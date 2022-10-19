@@ -151,6 +151,7 @@ database-connect: ## Connect to the database container
 
 ci: ## Run CI checks
 	make install
+	make database-migrate
 	make build
 	make test-api-cov
 	make test-client-ci

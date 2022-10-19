@@ -10,7 +10,7 @@
     "start": "node ./build",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
-    "test:e2e:ci": "start-server-and-test e2e-start '3001/login|3000' test-e2e",
+    "test:e2e:ci": "start-server-and-test e2e-start '3000/api|3001/login' test:e2e",
     "e2e-start": "cd ../../ && make start-dist",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
