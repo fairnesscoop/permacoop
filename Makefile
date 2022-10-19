@@ -56,7 +56,7 @@ start-client-legacy-tailwind:
 start-client-kit: ## Run SvelteKit client
 	PORT=${client_kit_port} ${run_client_kit} "cd client/kit && npm run dev"
 
-build: build-api build-client-legacy ## Build API and legacy client
+build: build-api build-client ## Build API and client
 
 build-api: ## Build API dist
 	cd server && npm run build
@@ -101,15 +101,15 @@ test-client-legacy-unit: ## Run legacy client unit tests
 	cd client/legacy && npm run test-unit
 
 test-client-kit-unit: ## Run SvelteKit client unit tests
-	cd client/kit && npm run test:unit
+	cd client/kit && npm run test:coverage
 
 test-client-e2e: ## Run client E2E tests (servers must be running)
-	cd client/kit && npm run test:e2e
+	cd client/kit && npm run test-e2e
 
 test-client-ci: test-client test-client-e2e-ci
 
 test-client-e2e-ci: ## Run client E2E tests
-	cd client/kit && npm run test:e2e:ci
+	cd client/kit && npm run test-e2e:ci
 
 linter: linter-api linter-client ## Run linters
 
