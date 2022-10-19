@@ -4,6 +4,14 @@
   - name: Update system
     apt: update_cache=yes
     become: true
+  
+  - name: Ensure {{ item }} is installed
+    apt: name={{ item }} state=present
+    with_items:
+      - curl
+      - git
+      - make
+    become: true
 
   - name: Setup Node
     # Use nvm to be able to install a specific Node version.

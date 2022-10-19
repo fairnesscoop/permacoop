@@ -14,7 +14,6 @@ install-api: ## Install API
 	cd server && npm ci
 
 install-client: ## Install client
-	cp -n client/config.js.dist client/config.js
 	cd client && npm ci
 
 start: ## Serve API and client in parallel

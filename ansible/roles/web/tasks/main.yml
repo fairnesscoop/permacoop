@@ -7,11 +7,11 @@
   - name: Sync repository
     import_tasks: git.yml
 
+  - name: Sync installation
+    import_tasks: install.yml
+
   - name: Sync environment variables
     import_tasks: dotenv.yml
-
-  - name: Sync Node dependencies
-    import_tasks: node.yml
 
   - name: Sync build
     import_tasks: build.yml

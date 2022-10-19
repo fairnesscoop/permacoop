@@ -46,6 +46,6 @@ server {
 
     location /api/ {
         include proxy_params;
-        proxy_pass http://api/;
+        proxy_pass http://api$request_uri;
     }
 }

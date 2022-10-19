@@ -15,6 +15,7 @@
   notify: reload nginx
 
 - name: Configure certificates
+  when: tls_enabled
   block:
   - name: Ensure LetsEncrypt webroot is present
     file:
@@ -62,6 +63,14 @@
       special_time: weekly
       job: "certbot renew -q"
       state: present
+
+- name: Ensure LetsEncrypt is disabled
+  when: not tls_enabled
+  file:
+    name: /etc/nginx/sites-enabled/letsencrypt.conf
+    state: absent
+  become: true
+  notify: reload nginx
 
 - name: Ensure Nginx site is configured and up to date
   template:

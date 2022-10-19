@@ -1,7 +1,8 @@
 venv = ./venv
 bin = ${venv}/bin/
+env-opts=-i environments/$(env)/hosts
 
-export ANSIBLE_CONFIG = ansible/ansible.cfg
+export ANSIBLE_CONFIG = ./ansible.cfg
 
 install:
 	python3 -m venv ${venv}
@@ -9,8 +10,11 @@ install:
 	${bin}pip install -r requirements.txt
 	@echo $(${bin}ansible --version)
 
+ping:
+	${bin}ansible ${env-opts} web -m ping
+
 provision:
-	${bin}ansible-playbook -i ansible/hosts -t provision ansible/playbook.yml
+	${bin}ansible-playbook ${env-opts} -t provision ./playbook.yml
 
 deploy:
-	${bin}ansible-playbook -i ansible/hosts -t deploy ansible/playbook.yml
+	${bin}ansible-playbook ${env-opts} -t deploy ./playbook.yml

@@ -1,9 +1,11 @@
-workdir: "/var/www/permacoop"
+workdir: "{{ ansible_env.HOME }}/permacoop"
 
 git_repo: "https://github.com/fairnesscoop/permacoop.git"
 
-api_port: 3579
-client_port: 3000
+api_port: 3000
+client_port: 3001
 
 domain_name: "{{ inventory_hostname }}"
 letsencrypt_email: "equipe@fairness.coop"
+
+tls_enabled: false

@@ -1,0 +1,13 @@
+{
+  "type": "postgres",
+  "host": "{{ db_host }}",
+  "port": {{ db_port }},
+  "username": "{{ db_username }}",
+  "password": "{{ db_password }}",
+  "database": "{{ db_name }}",
+  "synchronize": false,
+  "logging": ["error"],
+  "entities": ["dist/src/Domain/**/*.entity{.ts,.js}"],
+  "migrations": ["dist/migrations/**/*{.ts,.js}"],
+  "migrationsTableName": "migrations"
+}
