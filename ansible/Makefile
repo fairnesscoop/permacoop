@@ -1,6 +1,8 @@
 venv = ./venv
 bin = ${venv}/bin/
-env-opts=-i environments/$(env)/hosts
+
+vault-password=--vault-password-file ./vault-password
+env-opts=-i environments/$(env)/hosts -e @environments/$(env)/secrets
 
 export ANSIBLE_CONFIG = ./ansible.cfg
 
@@ -11,10 +13,13 @@ install:
 	@echo $(${bin}ansible --version)
 
 ping:
-	${bin}ansible ${env-opts} web -m ping
+	${bin}ansible ${vault-password} ${env-opts} web -m ping
+
+secrets:
+	${bin}ansible-vault edit ${vault-password} environments/$(env)/secrets
 
 provision:
-	${bin}ansible-playbook ${env-opts} -t provision ./playbook.yml
+	${bin}ansible-playbook ${vault-password} ${env-opts} -t provision ./playbook.yml
 
 deploy:
-	${bin}ansible-playbook ${env-opts} -t deploy ./playbook.yml
+	${bin}ansible-playbook ${vault-password} ${env-opts} -t deploy ./playbook.yml

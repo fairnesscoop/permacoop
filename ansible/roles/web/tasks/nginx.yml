@@ -15,7 +15,7 @@
   notify: reload nginx
 
 - name: Configure certificates
-  when: tls_enabled
+  when: letsencrypt_enabled
   block:
   - name: Ensure LetsEncrypt webroot is present
     file:
@@ -65,7 +65,7 @@
       state: present
 
 - name: Ensure LetsEncrypt is disabled
-  when: not tls_enabled
+  when: not letsencrypt_enabled
   file:
     name: /etc/nginx/sites-enabled/letsencrypt.conf
     state: absent
