@@ -1,0 +1,4 @@
+- name: Ensure installation is up to date
+  shell:
+    cmd: make install
+    chdir: "{{ workdir }}"
