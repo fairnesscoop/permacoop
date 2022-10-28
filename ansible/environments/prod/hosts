@@ -1,2 +1,2 @@
 [web]
-permacoop2.fairness.coop ansible_user=root
+permacoop.fairness.coop ansible_user=root

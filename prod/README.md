@@ -46,6 +46,7 @@ Deployment must be performed in the terminal.
 **Prerequisites**
 
 * You must have SSH access to the production server.
+* Ensure Python 3.8+ is installed on your machine (on Linux: `apt install python3.8-venv`).
 * You must have the Vault password in `ansible/vault-password` (this file is ignored by git). Ask a team member to share it with you securely.
 
 Move to the Ansible directory:
