@@ -216,8 +216,13 @@ vagrant ssh -- -R 5432:localhost:5432 -L 3080:localhost:80
 - `hosts` :
 
     ```
-    cd server && npm run build
-    cd client/legacy && npm run build
+    [web]
+    localhost ansible_host=192.168.56.11 ansible_user=vagrant
+    ```
+
+- `secrets` :
+    ```yaml
+    {}  # Nothing secret
     ```
 
 - `group_vars/web.yml` :
