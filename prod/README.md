@@ -3,7 +3,7 @@
 _This document describes Fairness' production deployment of Permacoop. It is meant for Fairness team members._
 
 * [Architecture overview](#architecture-overview)
-* [How to deplpy](#how-to-deploy)
+* [How to deploy](#how-to-deploy)
   * [Install](#install)
   * [Deploying an environment](#deploying-an-environment)
 * [Environments](#environnements)
@@ -12,7 +12,7 @@ _This document describes Fairness' production deployment of Permacoop. It is mea
   * [Secrets](#secrets)
   * [Decommisionning an environment](#decommissioning-an-environment)
 * [Tools](#tools)
-  * [Testing on a Vagrant VM]()
+  * [Testing on a Vagrant VM](#testing-on-a-vagrant-vm)
 * [Troubleshooting](#troubleshooting)
 
 ## Architecture overview

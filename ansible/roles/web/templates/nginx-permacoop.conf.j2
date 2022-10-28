@@ -11,7 +11,7 @@ upstream api {
 }
 
 server {
-    {% if tls_enabled %}
+    {% if letsencrypt_enabled %}
     {# Adapted from: https://ssl-config.mozilla.org/ #}
     listen 443 ssl;
     server_name {{ domain_name }};

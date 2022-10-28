@@ -2,7 +2,6 @@ workdir: "{{ ansible_env.HOME }}/permacoop"
 
 git_repo: "https://github.com/fairnesscoop/permacoop.git"
 
-letsencrypt_enabled: false
 letsencrypt_email: "equipe@fairness.coop"
 
 api_port: 3000
