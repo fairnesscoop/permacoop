@@ -221,6 +221,7 @@ vagrant ssh -- -R 5432:localhost:5432 -L 3080:localhost:80
     ```
 
 - `secrets` :
+
     ```yaml
     {}  # Nothing secret
     ```
@@ -235,7 +236,10 @@ vagrant ssh -- -R 5432:localhost:5432 -L 3080:localhost:80
     db_username: docker
     db_password: docker
     db_name: permacoop
+    file_encryption_key: secret
     ```
+
+    Optionally define `git_version: "<some-branch>"` to deploy from a specific branch, e.g. from a PR branch.
 
 Check the configuration with a `ping`:
 
