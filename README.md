@@ -75,6 +75,12 @@ To run tests, use:
 make test
 ```
 
+For E2E tests, you will need to install additional dependencies first:
+
+```
+make install-client-e2e
+```
+
 To run automatic code formatting, run:
 
 ```

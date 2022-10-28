@@ -29,7 +29,10 @@ install-client-legacy: ## Install legacy client
 	cd client/legacy && npm ci
 
 install-client-kit: ## Install SvelteKit client
-	cd client/kit && npm ci && npx playwright install firefox
+	cd client/kit && npm ci
+
+install-client-e2e: ## Install E2E client dependencies
+	cd client/kit && npx playwright install firefox
 
 start: ## Serve API and client in parallel
 	make -j 2 start-api start-client
@@ -150,6 +153,7 @@ database-connect: ## Connect to the database container
 
 ci: ## Run CI checks
 	make install
+	make install-client-e2e
 	make database-migrate
 	make build
 	make test-api-cov
