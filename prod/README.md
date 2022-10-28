@@ -68,7 +68,7 @@ permacoop/ansible $ make ping env=prod
 
 Example output:
 
-```json
+```
 permacoop.fairness.coop | SUCCESS => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python3"
@@ -88,17 +88,17 @@ permacoop/ansible $ make deploy env="<ENV>"
 
 See [Troubleshooting](#troubleshooting) if you encounter issues.
 
-### Ansible setup
-
 ## Environnements
 
 ### Deployed environments
 
 Environments are copies of the Permacoop infrastructure. Currently the deployed environments are:
 
-| Nom     | Description | URL | À déployer depuis |
-|---------|-------------|-----|-------------------|
-| prod    | Production environment | https://permacoop.fairness.coop | `master` |
+| Name | Description            | URL                             | Deploy branch |
+|------|------------------------|---------------------------------|---------------|
+| prod | Production environment | https://permacoop.fairness.coop | `master`      |
+
+### Computing resources
 
 Each environment makes use of several computing resources, listed below:
 
@@ -110,7 +110,7 @@ Each environment makes use of several computing resources, listed below:
 
 ### Adding an environment
 
-To add a new environment, first allocate computing resources to it as described in [Deployed environments](#deployed-environments).
+To add a new environment, first create its [computing resources](#computing-resources).
 
 Create a directory for the environment in `ansible/environments/`, using existing environments as a reference.
 
@@ -143,7 +143,7 @@ Secret values in environments are managed with [Ansible Vault](https://docs.ansi
 To modify the secrets file of an environment, use:
 
 ```bash
-cd ansible && make secrets env=prod
+cd ansible && make secrets env="<ENV>"
 ```
 
 The following secret values are **REQUIRED**:
@@ -163,7 +163,7 @@ If an environment is not used anymore, it should be decommissioned to remove unu
 * Open, review and merge a PR with the following changes:
   * Drop the corresponding environment directory in `ansible/environments`
   * Drop the environment from the environment list in this file.
-* Drop the computing resources allocated to the environment (see [Deployed environments](#deployed-environments)).
+* Drop the [computing resources](#computing-resources) allocated to the environment.
 
 ## Tools
 
