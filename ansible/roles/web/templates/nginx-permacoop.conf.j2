@@ -50,7 +50,7 @@ server {
 
     location /kit/ {
         include proxy_params;
-        proxy_pass http://client-kit/;
+        proxy_pass http://client-kit$request_uri;
     }
 
     location /api/ {
