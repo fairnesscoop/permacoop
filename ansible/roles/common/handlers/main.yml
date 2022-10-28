@@ -1,0 +1,7 @@
+- name: reload nginx
+  service: name=nginx state=reloaded
+  become: true
+
+- name: reload supervisor
+  service: name=supervisor state=reloaded
+  become: true

@@ -1,0 +1,10 @@
+- name: "Git checkout {{ git_version }}"
+  git:
+    repo: "{{ git_repo }}"
+    version: "{{ git_version }}"
+    dest: "{{ workdir }}"
+    force: true
+  environment:
+    GIT_TERMINAL_PROMPT: "0"
+  # Code may have changed, so restart the servers.
+  notify: reload supervisor

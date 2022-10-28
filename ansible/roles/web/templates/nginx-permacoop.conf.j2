@@ -1,0 +1,51 @@
+add_header X-Frame-Options "DENY";
+add_header X-Content-Type-Options "nosniff";
+add_header X-XSS-Protection "1; mode=block";
+
+upstream client {
+    server 127.0.0.1:{{ client_port }};
+}
+
+upstream api {
+    server 127.0.0.1:{{ api_port }};
+}
+
+server {
+    {% if letsencrypt_enabled %}
+    {# Adapted from: https://ssl-config.mozilla.org/ #}
+    listen 443 ssl;
+    server_name {{ domain_name }};
+
+    ssl_certificate /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ domain_name }}/privkey.pem;
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:MozSSL:10m;  # about 40000 sessions
+    ssl_session_tickets off;
+
+    # From: https://ssl-config.mozilla.org/ffdhe2048.txt
+    ssl_dhparam /etc/nginx/dhparams.pem;
+
+    # intermediate configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
+    ssl_prefer_server_ciphers off;
+    {% else %}
+    listen 80 default_server;
+    server_name {{ domain_name }};
+    {% endif %}
+
+    location /favicon.ico {
+        access_log off;
+        log_not_found off;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://client/;
+    }
+
+    location /api/ {
+        include proxy_params;
+        proxy_pass http://api$request_uri;
+    }
+}

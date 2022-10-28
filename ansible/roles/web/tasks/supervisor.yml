@@ -1,0 +1,20 @@
+- name: Ensure supervisor configuration is up to date
+  template:
+    src: supervisor.conf.j2
+    dest: /etc/supervisor/conf.d/supervisor.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  # Config or dependencies may have changed, so restart the server.
+  notify: reload supervisor
+
+- name: Ensure api is running
+  supervisorctl: name=api state=present
+  become: true
+  notify: reload nginx
+
+- name: Ensure client is running
+  supervisorctl: name=client state=present
+  become: true
+  notify: reload nginx

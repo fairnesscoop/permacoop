@@ -1,0 +1,5 @@
+- name: Install nvm
+  import_tasks: install.yml
+
+- name: Install Node version
+  import_tasks: node.yml
