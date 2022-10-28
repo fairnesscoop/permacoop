@@ -1,11 +1,20 @@
-[program:client]
-directory={{ workdir }}/client
+[program:client-legacy]
+directory={{ workdir }}/client/legacy
 command=node ./__sapper__/build
-environment=HOST=127.0.0.1,NODE_ENV=production,PORT="{{ client_port }}"
+environment=HOST=127.0.0.1,NODE_ENV=production,PORT="{{ client_legacy_port }}"
 autostart=true
 autorestart=true
-stderr_logfile=/var/log/client.err.log
-stdout_logfile=/var/log/client.out.log
+stderr_logfile=/var/log/client-legacy.err.log
+stdout_logfile=/var/log/client-legacy.out.log
+
+[program:client-kit]
+directory={{ workdir }}/client/kit
+command=node ./build
+environment=HOST=127.0.0.1,NODE_ENV=production,PORT="{{ client_kit_port }}"
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/client-kit.err.log
+stdout_logfile=/var/log/client-kit.out.log
 
 [program:api]
 directory={{ workdir }}/server

@@ -26,7 +26,6 @@ install-api: ## Install API
 install-client: install-client-legacy install-client-kit ## Install client
 
 install-client-legacy: ## Install legacy client
-	cp -n client/legacy/config.js.dist client/legacy/config.js
 	cd client/legacy && npm ci
 
 install-client-kit: ## Install SvelteKit client
