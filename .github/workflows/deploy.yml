@@ -1,0 +1,33 @@
+name: Deployment
+on:
+  push:
+    branches:
+       - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+      - name: Init vault password
+        run: cd ansible && echo "$VAULT_PASSWORD" > ./vault-password
+        env:
+          VAULT_PASSWORD: ${{secrets.VAULT_PASSWORD}}
+        shell: bash
+
+      - name: Install Ansible
+        run: cd ansible && make install
+
+      - name: Prod deployment
+        run: cd ansible && make deploy env=prod
