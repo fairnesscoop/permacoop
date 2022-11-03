@@ -230,6 +230,7 @@
       "leave_unpaid": "Congé sans solde",
       "leave_special": "Congé exceptionnel",
       "leave_illimited": "Congé illimité",
+      "holiday": "Jour férié",
       "other": "Autres"
     },
     "filter": {
