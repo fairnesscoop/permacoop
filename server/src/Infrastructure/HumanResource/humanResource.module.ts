@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { BusModule } from '../bus.module';
@@ -78,6 +79,7 @@ import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Lea
 @Module({
   imports: [
     BusModule,
+    ConfigModule,
     PassportModule,
     TypeOrmModule.forFeature([
       User,

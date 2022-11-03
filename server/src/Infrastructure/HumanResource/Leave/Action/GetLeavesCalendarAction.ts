@@ -3,15 +3,19 @@ import {
   Inject,
   BadRequestException,
   Get,
-  Res
+  Res,
+  UseGuards
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { GetLeavesCalendarQuery } from 'src/Application/HumanResource/Leave/Query/GetLeavesCalendarQuery';
+import { ApiTags, ApiOperation, ApiSecurity } from '@nestjs/swagger';
 import { IQueryBus } from 'src/Application/IQueryBus';
+import { CalendarSecretGuard } from 'src/Infrastructure/HumanResource/User/Security/CalendarSecretGuard';
+import { GetLeavesCalendarQuery } from 'src/Application/HumanResource/Leave/Query/GetLeavesCalendarQuery';
 
 @Controller('leaves')
 @ApiTags('Human Resource')
+@ApiSecurity('calendar_secret')
+@UseGuards(CalendarSecretGuard)
 export class GetLeavesCalendarAction {
   constructor(
     @Inject('IQueryBus')
