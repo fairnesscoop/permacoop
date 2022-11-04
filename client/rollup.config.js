@@ -1,5 +1,6 @@
 /* eslint-disable  */
 import path from 'path';
+import dotenv from 'dotenv';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import alias from '@rollup/plugin-alias';
@@ -10,6 +11,8 @@ import babel from 'rollup-plugin-babel';
 import {terser} from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+
+dotenv.config();
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -31,6 +34,11 @@ const aliases = [
   { find: 'constants', replacement: path.resolve(__dirname, 'src/constants') },
 ];
 
+const environmentVariables = {
+  'process.env.CLIENT_API_URL': JSON.stringify(process.env.CLIENT_API_URL),
+  'process.env.CLIENT_API_URL_SSR': JSON.stringify(process.env.CLIENT_API_URL_SSR),
+};
+
 export default {
   client: {
     input: config.client.input(),
@@ -38,7 +46,8 @@ export default {
     plugins: [
       replace({
         'process.browser': true,
-        'process.env.NODE_ENV': JSON.stringify(mode)
+        'process.env.NODE_ENV': JSON.stringify(mode),
+        ...environmentVariables
       }),
       alias({ entries: aliases }),
       svelte({
@@ -93,7 +102,8 @@ export default {
     plugins: [
       replace({
         'process.browser': false,
-        'process.env.NODE_ENV': JSON.stringify(mode)
+        'process.env.NODE_ENV': JSON.stringify(mode),
+        ...environmentVariables,
       }),
       svelte({
         generate: 'ssr',

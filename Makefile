@@ -14,6 +14,7 @@ install-api: ## Install API
 	cd server && npm ci
 
 install-client: ## Install client
+	cp -n client/.env.dist client/.env
 	cd client && npm ci
 
 start: ## Serve API and client in parallel

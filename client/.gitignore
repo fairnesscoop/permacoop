@@ -4,3 +4,4 @@
 /__sapper__/
 /coverage
 static/css/index.css
+.env
