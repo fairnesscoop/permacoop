@@ -25,6 +25,7 @@
     "cookie-parser": "^1.4.5",
     "cssnano": "^4.1.10",
     "date-fns": "^2.14.0",
+    "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "filesize": "^6.1.0",
     "iso-country-codes": "0.0.5",

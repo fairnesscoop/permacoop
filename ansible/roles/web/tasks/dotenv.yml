@@ -1,7 +1,16 @@
 - name: Ensure server .env file is up to date
   template:
-    src: .env.j2
+    src: .env-server.j2
     dest: "{{ workdir }}/server/.env"
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+
+- name: Ensure client .env file is up to date
+  template:
+    src: .env-client.j2
+    dest: "{{ workdir }}/client/.env"
     owner: root
     group: root
     mode: 0644
