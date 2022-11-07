@@ -1,26 +1,14 @@
-import { lastDayOfMonth } from 'date-fns';
+import { lastDayOfMonth, format } from 'date-fns';
 
 export class MonthDate {
   constructor(public readonly year: number, public readonly month: number) {}
 
   getFirstDay(): Date {
-    const date = new Date();
-    date.setFullYear(this.year);
-    date.setMonth(this.month - 1);
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0);
-    date.setMilliseconds(0);
-    date.setDate(1);
-
-    return date;
+    return new Date(`${this.year}-${String(this.month).padStart(2, '0')}-01`);
   }
 
   getLastDay(): Date {
-    const date = new Date();
-    date.setFullYear(this.year);
-    date.setMonth(this.month - 1);
-
-    return lastDayOfMonth(date);
+    const localDate = lastDayOfMonth(this.getFirstDay());
+    return new Date(format(localDate, 'yyyy-MM-dd'));
   }
 }

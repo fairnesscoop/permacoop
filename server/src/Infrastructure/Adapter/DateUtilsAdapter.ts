@@ -4,14 +4,49 @@ import {
   isWeekend as fnsIsWeekend,
   getDaysInMonth as fnsGetDaysInMonth,
   eachDayOfInterval,
-  addDays,
-  getYear
+  addDays
 } from 'date-fns';
 import { MonthDate } from 'src/Application/Common/MonthDate';
 import { IDateUtils } from 'src/Application/IDateUtils';
 
 @Injectable()
 export class DateUtilsAdapter implements IDateUtils {
+  private makeDate(year: number, month: number, day: number): Date {
+    /**
+     * This creates a date in UTC timezone.
+     *
+     * The intent is to remedy possible timezone issues.
+     *
+     * Indeed, you might be tempted to write code like this:
+     *
+     * ```js
+     * const d = new Date(year, month, day);
+     * ```
+     *
+     * Sadly, this is wrong.
+     *
+     * Indeed, if your computer's (or the server's) timezone is not UTC, then
+     * the actual `day` stored in `d` might be different.
+     *
+     * For example, if your computer is on UTC+1 (Paris time), then..
+     *
+     * ```js
+     * > new Date(2022, 11, 14).toISOString() // Dec 14th, 2022
+     * 2022-12-13T23:00:00.000Z // Oops, it was stored as Dec 13th!
+     * ```
+     *
+     * (Yes, timezones are a bit of a pain.)
+     *
+     * To remedy this, we create a date from an ISO date string (yyyy-mm-dd),
+     * with leading zero padding and all that.
+     *
+     * JavaScript's `Date()` will properly interpret this as an UTC-timezoned date.
+     */
+    const fMonth = String(month).padStart(2, '0');
+    const fDay = String(day).padStart(2, '0');
+    return new Date(`${year}-${fMonth}-${fDay}`);
+  }
+
   public format(date: Date, format: string): string {
     return fnsFormat(date, format);
   }
@@ -29,11 +64,11 @@ export class DateUtilsAdapter implements IDateUtils {
       return false;
     }
 
-    const workedFreeDays = this.getWorkedFreeDays(date.getFullYear());
-    const formatedDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    const workedFreeDays = this.getWorkedFreeDays(this.getYear(date));
+    const formatedDate = this.format(date, 'yyyy-MM-dd');
 
     for (const day of workedFreeDays) {
-      const formatedDay = `${day.getFullYear()}-${day.getMonth()}-${day.getDate()}`;
+      const formatedDay = this.format(day, 'yyyy-MM-dd');
 
       if (formatedDate === formatedDay) {
         return false;
@@ -48,19 +83,19 @@ export class DateUtilsAdapter implements IDateUtils {
   }
 
   public getYear(date: Date): number {
-    return getYear(date);
+    return date.getUTCFullYear();
   }
 
   public getMonth(date: Date): MonthDate {
-    return new MonthDate(date.getFullYear(), date.getMonth() + 1);
+    return new MonthDate(date.getUTCFullYear(), date.getUTCMonth() + 1);
   }
 
   public getLastDayOfYear(date: Date): Date {
-    return new Date(`${getYear(date)}/12/31`);
+    return this.makeDate(this.getYear(date), 12, 31);
   }
 
   public getFirstDayOfYear(date: Date): Date {
-    return new Date(`${getYear(date)}/01/01`);
+    return this.makeDate(this.getYear(date), 1, 1);
   }
 
   public getCurrentDateToISOString(): string {
@@ -75,11 +110,15 @@ export class DateUtilsAdapter implements IDateUtils {
     const dates: Date[] = [];
     const workedFreeDays: Date[] = [];
 
-    for (let year = start.getFullYear(); year <= end.getFullYear(); year++) {
+    for (let year = this.getYear(start); year <= this.getYear(end); year++) {
       workedFreeDays.push(...this.getWorkedFreeDays(year));
     }
 
-    for (const day of eachDayOfInterval({ start, end })) {
+    for (let day of eachDayOfInterval({ start, end })) {
+      // date-fns returns local-timezone dates. Be sure to convert to
+      // UTC-timezoned dates for ISO string comparison with work-free days.
+      day = new Date(this.format(day, 'yyyy-MM-dd'));
+
       if (
         this.isWeekend(day) ||
         workedFreeDays.filter(d => d.toISOString() === day.toISOString())
@@ -96,14 +135,14 @@ export class DateUtilsAdapter implements IDateUtils {
 
   public getWorkedFreeDays(year: number): Date[] {
     const fixedDays: Date[] = [
-      new Date(`${year}-01-01`), // New Year's Day
-      new Date(`${year}-05-01`), // Labour Day
-      new Date(`${year}-05-08`), // Victory in 1945
-      new Date(`${year}-07-14`), // National Day
-      new Date(`${year}-08-15`), // Assumption
-      new Date(`${year}-11-01`), // All Saints' Day
-      new Date(`${year}-11-11`), // The Armistice
-      new Date(`${year}-12-25`) // Christmas
+      this.makeDate(year, 1, 1), // New Year's Day
+      this.makeDate(year, 5, 1), // Labour Day
+      this.makeDate(year, 5, 8), // Victory in 1945
+      this.makeDate(year, 7, 14), // National Day
+      this.makeDate(year, 8, 15), // Assumption
+      this.makeDate(year, 11, 1), // All Saints' Day
+      this.makeDate(year, 11, 11), // The Armistice
+      this.makeDate(year, 12, 25) // Christmas
     ];
 
     const easterDate = this.getEasterDate(year);
@@ -129,10 +168,10 @@ export class DateUtilsAdapter implements IDateUtils {
     const l = (32 + 2 * e + 2 * i - h - k) % 7;
     const m = Math.floor((a + 11 * h + 22 * l) / 451);
     const n0 = h + l + 7 * m + 114;
-    const n = Math.floor(n0 / 31) - 1;
+    const n = Math.floor(n0 / 31);
     const p = (n0 % 31) + 1;
 
-    return new Date(year, n, p);
+    return this.makeDate(year, n, p);
   }
 
   public getLeaveDuration(
