@@ -48,6 +48,14 @@
   @apply px-1 py-1 font-semibold border-yellow-600 text-yellow-100 bg-yellow-600 !important;
 }
 
+.event-holiday {
+  @apply px-1 py-1 font-semibold border-purple-100  text-purple-700 bg-purple-100 !important;
+}
+
+.event-holiday--dark {
+  @apply px-1 py-1 font-semibold border-purple-600 text-purple-100 bg-purple-600 !important;
+}
+
 .event-other {
   @apply px-1 py-1 font-semibold border-gray-100  text-gray-700 bg-gray-100  !important;
 }
