@@ -57,19 +57,19 @@ describe('DateUtilsAdapter', () => {
   });
 
   it('testGetWorkedDaysDuringAPeriod', () => {
-    const startDate = new Date('2020-12-24');
-    const endDate = new Date('2021-01-04');
+    const startDate = new Date('2020-12-24T00:00:00.000Z');
+    const endDate = new Date('2021-01-04T00:00:00.000Z');
     const dateUtils = new DateUtilsAdapter();
 
     expect(
       dateUtils.getWorkedDaysDuringAPeriod(startDate, endDate)
     ).toMatchObject([
-      new Date('2020-12-24'),
-      new Date('2020-12-28'),
-      new Date('2020-12-29'),
-      new Date('2020-12-30'),
-      new Date('2020-12-31'),
-      new Date('2021-01-04')
+      new Date('2020-12-24T00:00:00.000Z'),
+      new Date('2020-12-28T00:00:00.000Z'),
+      new Date('2020-12-29T00:00:00.000Z'),
+      new Date('2020-12-30T00:00:00.000Z'),
+      new Date('2020-12-31T00:00:00.000Z'),
+      new Date('2021-01-04T00:00:00.000Z')
     ]);
   });
 
@@ -144,9 +144,9 @@ describe('DateUtilsAdapter', () => {
 
   it('testGetLastDayOfYear', () => {
     const dateUtils = new DateUtilsAdapter();
-    const now = new Date('2021-12-12');
+    const now = new Date('2021-12-12T00:00:00.000Z');
     const result = dateUtils.getLastDayOfYear(now);
-    expect(result).toStrictEqual(new Date('2021-12-31'));
+    expect(result).toStrictEqual(new Date('2021-12-31T00:00:00.000Z'));
   });
 
   it('getFirstDayOfYear', () => {

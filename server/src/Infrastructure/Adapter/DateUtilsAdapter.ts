@@ -3,10 +3,10 @@ import {
   format as fnsFormat,
   isWeekend as fnsIsWeekend,
   getDaysInMonth as fnsGetDaysInMonth,
-  eachDayOfInterval,
   addDays,
   getYear
 } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 import { MonthDate } from 'src/Application/Common/MonthDate';
 import { IDateUtils } from 'src/Application/IDateUtils';
 
@@ -56,11 +56,11 @@ export class DateUtilsAdapter implements IDateUtils {
   }
 
   public getLastDayOfYear(date: Date): Date {
-    return new Date(`${getYear(date)}/12/31`);
+    return new Date(`${date.getFullYear()}-12-31T00:00:00.000Z`);
   }
 
   public getFirstDayOfYear(date: Date): Date {
-    return new Date(`${getYear(date)}/01/01`);
+    return new Date(`${date.getFullYear()}-01-01T00:00:00.000Z`);
   }
 
   public getCurrentDateToISOString(): string {
@@ -79,7 +79,7 @@ export class DateUtilsAdapter implements IDateUtils {
       workedFreeDays.push(...this.getWorkedFreeDays(year));
     }
 
-    for (const day of eachDayOfInterval({ start, end })) {
+    for (const day of this.getEachDayOfInterval(start, end)) {
       if (
         this.isWeekend(day) ||
         workedFreeDays.filter(d => d.toISOString() === day.toISOString())
@@ -94,16 +94,36 @@ export class DateUtilsAdapter implements IDateUtils {
     return dates;
   }
 
+  private getEachDayOfInterval(start: Date, end: Date): Date[] {
+    const dates: Date[] = [];
+    const dateTime: Date = start;
+
+    for (dateTime; dateTime <= end; dateTime.setDate(dateTime.getDate() + 1)) {
+      dates.push(
+        new Date(
+          dateTime.getFullYear(),
+          dateTime.getMonth(),
+          dateTime.getDate(),
+          dateTime.getHours(),
+          dateTime.getMinutes(),
+          dateTime.getSeconds()
+        )
+      );
+    }
+
+    return dates;
+  }
+
   public getWorkedFreeDays(year: number): Date[] {
     const fixedDays: Date[] = [
-      new Date(`${year}-01-01`), // New Year's Day
-      new Date(`${year}-05-01`), // Labour Day
-      new Date(`${year}-05-08`), // Victory in 1945
-      new Date(`${year}-07-14`), // National Day
-      new Date(`${year}-08-15`), // Assumption
-      new Date(`${year}-11-01`), // All Saints' Day
-      new Date(`${year}-11-11`), // The Armistice
-      new Date(`${year}-12-25`) // Christmas
+      new Date(`${year}-01-01T00:00:00.000Z`), // New Year's Day
+      new Date(`${year}-05-01T00:00:00.000Z`), // Labour Day
+      new Date(`${year}-05-08T00:00:00.000Z`), // Victory in 1945
+      new Date(`${year}-07-14T00:00:00.000Z`), // National Day
+      new Date(`${year}-08-15T00:00:00.000Z`), // Assumption
+      new Date(`${year}-11-01T00:00:00.000Z`), // All Saints' Day
+      new Date(`${year}-11-11T00:00:00.000Z`), // The Armistice
+      new Date(`${year}-12-25T00:00:00.000Z`) // Christmas
     ];
 
     const easterDate = this.getEasterDate(year);
@@ -132,7 +152,7 @@ export class DateUtilsAdapter implements IDateUtils {
     const n = Math.floor(n0 / 31) - 1;
     const p = (n0 % 31) + 1;
 
-    return new Date(year, n, p);
+    return zonedTimeToUtc(new Date(year, n, p), 'Etc/GMT');
   }
 
   public getLeaveDuration(
