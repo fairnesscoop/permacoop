@@ -136,10 +136,13 @@ describe('DateUtilsAdapter', () => {
     ).toBe(0.5);
   });
 
-  it('testGetYear', () => {
+  test.each([
+    [new Date('2020-05-05'), 2020],
+    [new Date('2020-01-01T00:00:01.000Z'), 2020],
+    [new Date('2020-12-31T23:59:59.000Z'), 2020]
+  ])('testGetYear when date = %s', (date, expectedYear) => {
     const dateUtils = new DateUtilsAdapter();
-
-    expect(dateUtils.getYear(new Date('2020-05-05'))).toBe(2020);
+    expect(dateUtils.getYear(date)).toBe(expectedYear);
   });
 
   it('testGetLastDayOfYear', () => {
@@ -156,10 +159,13 @@ describe('DateUtilsAdapter', () => {
     expect(result).toStrictEqual(new Date('2021-01-01'));
   });
 
-  it('getMonth', () => {
+  test.each([
+    [new Date('2021-12-12'), new MonthDate(2021, 12)],
+    [new Date('2021-12-31T23:59:59.000Z'), new MonthDate(2021, 12)],
+    [new Date('2022-01-01T00:00:01.000Z'), new MonthDate(2022, 1)]
+  ])('getMonth when date = %s', (date, expectedResult) => {
     const dateUtils = new DateUtilsAdapter();
-    const now = new Date('2021-12-12');
-    const result = dateUtils.getMonth(now);
-    expect(result).toStrictEqual(new MonthDate(2021, 12));
+    const result = dateUtils.getMonth(date);
+    expect(result).toStrictEqual(expectedResult);
   });
 });

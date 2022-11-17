@@ -32,7 +32,11 @@ export class GetMonthlyFairCalendarQueryHandler {
       this.leaveRepository.findMonthlyLeaves(formatedDate, userId)
     ]);
 
-    return [...this.buildEvents(events), ...this.buildLeaves(leaves)];
+    return [
+      ...this.buildEvents(events),
+      ...this.buildLeaves(leaves),
+      ...this.buildWorkedFreeDays(date)
+    ];
   }
 
   private buildEvents(events: Event[]): FairCalendarView[] {
@@ -65,6 +69,30 @@ export class GetMonthlyFairCalendarQueryHandler {
     for (const leave of leaves) {
       result.push(
         new FairCalendarView(leave.getType(), leave.getTime(), leave.getDate())
+      );
+    }
+
+    return result;
+  }
+
+  private buildWorkedFreeDays(date: Date): FairCalendarView[] {
+    const result: FairCalendarView[] = [];
+
+    const workedFreeDays = this.dateUtils.getWorkedFreeDays(date.getFullYear());
+
+    const monthWorkedFreeDays = workedFreeDays.filter(
+      d => d.getMonth() === date.getMonth()
+    );
+
+    const sevenHoursInMinutesTime = 7 * 60;
+
+    for (const day of monthWorkedFreeDays) {
+      result.push(
+        new FairCalendarView(
+          'holiday',
+          sevenHoursInMinutesTime,
+          this.dateUtils.format(day, 'yyyy-MM-dd')
+        )
       );
     }
 

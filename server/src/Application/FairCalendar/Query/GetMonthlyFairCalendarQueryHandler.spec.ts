@@ -64,6 +64,15 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
         'y-MM-dd'
       )
     ).thenReturn(`2019-12-12`);
+
+    when(dateUtils.getWorkedFreeDays(2019)).thenReturn([
+      new Date('2019-12-25')
+    ]);
+
+    when(
+      dateUtils.format(deepEqual(new Date('2019-12-25')), 'yyyy-MM-dd')
+    ).thenReturn('2019-12-25');
+
     when(
       eventRepository.findMonthlyEvents(
         '2019-12-12',
@@ -112,7 +121,8 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
         null
       ),
       new FairCalendarView('paid', 420, '2019-12-13'),
-      new FairCalendarView('special', 300, '2019-12-14')
+      new FairCalendarView('special', 300, '2019-12-14'),
+      new FairCalendarView('holiday', 420, '2019-12-25')
     ]);
     verify(
       dateUtils.format(
@@ -121,12 +131,19 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
       )
     ).once();
 
+    verify(dateUtils.getWorkedFreeDays(2019)).once();
+
+    verify(
+      dateUtils.format(deepEqual(new Date('2019-12-25')), 'yyyy-MM-dd')
+    ).once();
+
     verify(
       eventRepository.findMonthlyEvents(
         '2019-12-12',
         '00bef1e1-cb52-4914-8887-568b17d99964'
       )
     ).once();
+
     verify(
       leaveRepository.findMonthlyLeaves(
         '2019-12-12',
