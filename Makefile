@@ -8,8 +8,6 @@ run_api = ./tools/colorize_prefix.sh [api] 30
 run_client_legacy = ./tools/colorize_prefix.sh [client:legacy] 31
 run_client_legacy_tailwind = ./tools/colorize_prefix.sh [client:legacy:tailwind] "38;5;52"
 run_client_kit = ./tools/colorize_prefix.sh [client:kit] "38;5;202"
-run_nginx = ./tools/colorize_prefix.sh [nginx] 32 
-run_db = ./tools/colorize_prefix.sh [db] 34
 
 client_legacy_port = 3002
 client_kit_port = 3003
@@ -35,17 +33,14 @@ install-client-kit: ## Install SvelteKit client
 install-client-e2e: ## Install E2E client dependencies
 	cd client/kit && npx playwright install firefox
 
-start: ## Serve API and client in parallel
+start: compose-up ## Start containers, API and client
 	make -j 2 start-api start-client
 
 start-api: ## Run API
 	${run_api} "cd server && npm run start:dev"
 
-start-client: start-client-proxy ## Run client
+start-client: ## Run client
 	make -j 2 start-client-legacy start-client-kit
-
-start-client-proxy: ## Run client proxy
-	${run_nginx} "${compose} up -d -- nginx"
 
 start-client-legacy: ## Run legacy client
 	make -j 2 start-client-legacy-dev start-client-legacy-tailwind
@@ -58,6 +53,18 @@ start-client-legacy-tailwind:
 
 start-client-kit: ## Run SvelteKit client
 	PORT=${client_kit_port} ${run_client_kit} "cd client/kit && npm run dev"
+
+compose-up: ## Start containers
+	${compose} up -d
+
+compose-stop: ## Stop containers
+	${compose} stop
+
+compose-rm: stop-containers  ## Stop and remove containers
+	${compose} rm
+
+compose-ps: ## Show running containers
+	${compose} ps
 
 build: build-api build-client ## Build API and client
 
@@ -72,7 +79,7 @@ build-client-legacy: ## Build legacy client
 build-client-kit: ## Build SvelteKit client
 	cd client/kit && npm run build
 
-start-dist: start-client-proxy ## Serve built API and client
+start-dist: ## Serve built API and client
 	make -j 2 start-dist-api start-dist-client
 
 start-dist-api: ## Serve built API
@@ -136,12 +143,6 @@ format-client: format-client-kit ## Run client code formatting
 
 format-client-kit: ## Run SvelteKit client code formatting
 	cd client/kit && npm run format
-
-database-start: ## Start database container
-	${run_db} "${compose} up -d -- database"
-
-database-stop: ## Stop database container
-	${run_db} "${compose} stop -- database"
 
 database-migrate: ## Database migrations
 	cd server && npm run migration:migrate
