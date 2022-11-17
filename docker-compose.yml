@@ -19,11 +19,6 @@ services:
 
   nginx:
     image: nginx:latest
-    extra_hosts:
-      # Make localhost on the host machine available to Nginx inside the container.
-      # See: https://www.howtogeek.com/devops/how-to-connect-to-localhost-within-a-docker-container/
-      - host.docker.internal:host-gateway
-    ports:
-      - 3001:3001
+    network_mode: host
     volumes:
       - ./client/proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
