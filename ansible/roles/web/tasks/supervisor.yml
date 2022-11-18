@@ -14,9 +14,9 @@
   become: true
   notify: reload nginx
 
-# Drop 'client' process from before client facade
+# Drop 'client' process which ran before implementing sapper/sveltekit facade
 - name: Ensure client is stopped
-  supervisorctl: name=client state=absent
+  supervisorctl: name=client state=stopped
   become: true
   notify: reload nginx
 
