@@ -12,6 +12,12 @@ install:
 	${bin}pip install -r requirements.txt
 	@echo $(${bin}ansible --version)
 
+vagrant:
+	cd environments/vagrant && vagrant ${CMD}
+
+vagrant-ssh:
+	make vagrant CMD="ssh -- -R 5432:localhost:5432 -L 3080:localhost:80"
+
 ping:
 	${bin}ansible ${vault-password} ${env-opts} web -m ping
 

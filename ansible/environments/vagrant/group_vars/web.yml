@@ -1,0 +1,9 @@
+db_host: localhost
+db_port: 5432
+db_username: docker
+db_password: docker
+db_name: permacoop
+
+file_encryption_key: secret
+
+git_version: master # Edit to deploy from a PR branch, e.g. feat/myfeature

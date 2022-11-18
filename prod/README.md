@@ -95,9 +95,12 @@ See [Troubleshooting](#troubleshooting) if you encounter issues.
 
 Environments are copies of the Permacoop infrastructure. Currently the deployed environments are:
 
-| Name | Description            | URL                             | Deploy branch |
-|------|------------------------|---------------------------------|---------------|
-| prod | Production environment | https://permacoop.fairness.coop | `master`      |
+| Name    | Description               | URL                             | Deploy branch |
+|---------|---------------------------|---------------------------------|---------------|
+| prod    | Production environment    | https://permacoop.fairness.coop | `master`      |
+| vagrant | [Vagrant test VM] (local) | http://localhost:3080           | `git_version` in `ansible/environments/vagrant/group_vars/web.yml` |
+
+[Vagrant test VM]: #testing-on-a-vagrant-vm
 
 ### Computing resources
 
@@ -170,96 +173,48 @@ If an environment is not used anymore, it should be decommissioned to remove unu
 
 ### Testing on a Vagrant VM
 
-You can test the Ansible setup on a local VM using [Vagrant](https://www.vagrantup.com/docs/installation). This is useful to quickly iterate on changes to the Ansible setup.
+You can test the Ansible setup on a local VM using Vagrant. This is useful to quickly iterate on changes to the Ansible setup.
 
-Create a Vagrant box with the following configuration:
+First [install Vagrant](https://www.vagrantup.com/docs/installation), then start the VM:
 
-```ruby
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
-Vagrant.configure("2") do |config|
-  # Configure VM
-  config.vm.box = "debian/bullseye64"
-  config.vm.network "private_network", ip: "192.168.56.11"
-  config.vm.provider "virtualbox" do |v|
-    v.memory = 2048
-    v.cpus = 1
-  end
-
-  # Share host SSH public key with VM, so Ansible can execute commands over SSH.
-  config.ssh.insert_key = false
-  config.vm.provision "shell" do |s|
-    ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
-    s.inline = <<-SHELL
-    echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
-    echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
-    SHELL
-  end
-end
-```
-
-Start the VM:
-
-```bash
-vagrant up
+```console
+permacoop $ cd ansible
+permacoop/ansible $ make vagrant CMD=up
 ```
 
 Enter the VM with SSH. The following command also creates an SSH tunnel between your host machine and the VM for PostgreSQL and Nginx. This allows you to access the deployed service at http://localhost:3080, while allowing the deployed service to access the database on your host ([credit](https://stackoverflow.com/a/28506841)).
 
-```bash
-vagrant ssh -- -R 5432:localhost:5432 -L 3080:localhost:80
+```console
+permacoop/ansible $ vagrant ssh -- -R 5432:localhost:5432 -L 3080:localhost:80
 ```
 
-[Create an environment](#adding-an-environment) named `test` (this environment is ignored by git):
+Check with a `ping`:
 
-- `hosts` :
-
-    ```
-    [web]
-    localhost ansible_host=192.168.56.11 ansible_user=vagrant
-    ```
-
-- `secrets` :
-
-    ```yaml
-    {}  # Nothing secret
-    ```
-
-- `group_vars/web.yml` :
-
-    _Edit as necessary_
-
-    ```yaml
-    db_host: localhost
-    db_port: 5432
-    db_username: docker
-    db_password: docker
-    db_name: permacoop
-    file_encryption_key: secret
-    ```
-
-    Optionally define `git_version: "<some-branch>"` to deploy from a specific branch, e.g. from a PR branch.
-
-Check the configuration with a `ping`:
-
-```bash
-permacoop/ansible $ make ping env=test
+```console
+permacoop/ansible $ make ping env=vagrant
 ```
 
-Then provision the environment into the VM:
+In a separate terminal, open SSH tunnels (database, deployed nginx):
 
-```bash
-permacoop/ansible $ make provision env=test
+```console
+permacoop/ansible $ make vagrant-ssh
+```
+
+Provision the VM:
+
+```console
+permacoop/ansible $ make provision env=vagrant
 ```
 
 Deploy:
 
-```bash
-permacoop/ansible $ make deploy env=test
+```console
+permacoop/ansible $ make deploy env=vagrant
 ```
 
 Access the deployed service at http://localhost:3080.
+
+You can define `git_version: "<some-branch>"` in `environments/vagrant/group_vars/web.yml` to deploy from a specific branch, e.g. from a PR branch.
 
 ## Troubleshooting
 
