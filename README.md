@@ -25,7 +25,7 @@ Permacoop is an open source and eco design ERP solution reserved for worker-owne
 
 You must have **[PostgreSQL](https://www.postgresql.org/)** installed, or **[Docker](https://www.docker.com/)** and **[Docker Compose](https://docs.docker.com/compose/)** to run PostgreSQL using the provided `docker-compose.yml`.
 
-Ensure you have [Node.js](https://nodejs.org) v16 and `node-gyp` installed globally (`npm install -g node-gyp`).
+Ensure you have [Node.js](https://nodejs.org) **16.x** and `node-gyp` installed globally (`npm install -g node-gyp`).
 
 ## Quickstart
 
@@ -35,21 +35,16 @@ First, install dependencies:
 make install
 ```
 
-Then ensure your database is running:
+Then start the database and other services:
 
-* Start the PostgreSQL Docker container using `make database-start`. You can later stop it with `make database-stop`.
-* If you are using a PostgreSQL database on your host, edit `server/ormconfig.json` to fit your setup.
+```
+make compose-up
+```
 
 You can now run database migrations:
 
 ```
 make database-migrate
-```
-
-Finally, run an initial build:
-
-```
-make build
 ```
 
 You can now start the application using:
@@ -63,9 +58,10 @@ The server and client will be started:
 - API documentation available on <http://localhost:3000/api>
 - Client available on <http://localhost:3001/>
 
-To serve the built server and client locally, run `$ make build`, then:
+To serve the built server and client locally, run:
 
 ```
+make build
 make start-dist
 ```
 
@@ -79,6 +75,12 @@ For E2E tests, you will need to install additional dependencies first:
 
 ```
 make install-client-e2e
+```
+
+Run E2E tests using:
+
+```
+make test-client-e2e
 ```
 
 To run automatic code formatting, run:

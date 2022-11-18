@@ -54,17 +54,20 @@ start-client-legacy-tailwind:
 start-client-kit: ## Run SvelteKit client
 	PORT=${client_kit_port} ${run_client_kit} "cd client/kit && npm run dev"
 
+compose: ## Run Docker compose command (args: CMD)
+	${compose} ${CMD}
+
 compose-up: ## Start containers
-	${compose} up -d
+	make compose CMD="up -d"
 
 compose-stop: ## Stop containers
-	${compose} stop
+	make compose CMD=stop
 
-compose-rm: stop-containers  ## Stop and remove containers
-	${compose} rm
+compose-rm: compose-stop  ## Stop and remove containers
+	make compose CMD=rm
 
 compose-ps: ## Show running containers
-	${compose} ps
+	make compose CMD=ps
 
 build: build-api build-client ## Build API and client
 
