@@ -1,0 +1,50 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "author": "Fairness",
+  "private": true,
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node ./build",
+    "test": "vitest run",
+    "test:coverage": "npm run test -- --coverage",
+    "test:watch": "vitest watch",
+    "test-e2e": "playwright test",
+    "test-e2e:ci": "start-server-and-test e2e-start '3000/api|3001/login' test-e2e",
+    "e2e-start": "cd ../../ && make start-dist",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "lint": "prettier --plugin-search-dir . --check . && eslint .",
+    "format": "prettier --plugin-search-dir . --write ."
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.25.0",
+    "@sveltejs/adapter-node": "^1.0.0-next.98",
+    "@sveltejs/kit": "next",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/svelte": "^3.2.2",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "@vitest/coverage-c8": "^0.24.3",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "jsdom": "^20.0.1",
+    "prettier": "^2.6.2",
+    "prettier-plugin-svelte": "^2.7.0",
+    "start-server-and-test": "^1.14.0",
+    "svelte": "^3.44.0",
+    "svelte-check": "^2.7.1",
+    "svelte-preprocess": "^4.10.6",
+    "tslib": "^2.3.1",
+    "typescript": "^4.7.4",
+    "vite": "^3.1.0",
+    "vitest": "^0.24.3"
+  },
+  "type": "module",
+  "engines": {
+    "node": "16"
+  }
+}

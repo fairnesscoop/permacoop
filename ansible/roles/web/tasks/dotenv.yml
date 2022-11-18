@@ -7,10 +7,10 @@
     mode: 0644
   become: true
 
-- name: Ensure client .env file is up to date
+- name: Ensure legacy client .env file is up to date
   template:
-    src: .env-client.j2
-    dest: "{{ workdir }}/client/.env"
+    src: .env-client-legacy.j2
+    dest: "{{ workdir }}/client/legacy/.env"
     owner: root
     group: root
     mode: 0644

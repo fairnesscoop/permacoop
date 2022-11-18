@@ -2,7 +2,15 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 compose = docker-compose -p permacoop
-client_port = 3001
+
+# See color codes here: http://jafrog.com/2013/11/23/colors-in-terminal.html
+run_api = ./tools/colorize_prefix.sh [api] 30 
+run_client_legacy = ./tools/colorize_prefix.sh [client:legacy] 31
+run_client_legacy_tailwind = ./tools/colorize_prefix.sh [client:legacy:tailwind] "38;5;52"
+run_client_kit = ./tools/colorize_prefix.sh [client:kit] "38;5;202"
+
+client_legacy_port = 3002
+client_kit_port = 3003
 
 install: ## Install API and client
 	make install-api
@@ -13,41 +21,78 @@ install-api: ## Install API
 	cp -n server/.env.dist server/.env
 	cd server && npm ci
 
-install-client: ## Install client
-	cp -n client/.env.dist client/.env
-	cd client && npm ci
+install-client: install-client-legacy install-client-kit ## Install client
 
-start: ## Serve API and client in parallel
+install-client-legacy: ## Install legacy client
+	cp -n client/legacy/.env.dist client/legacy/.env
+	cd client/legacy && npm ci
+
+install-client-kit: ## Install SvelteKit client
+	cd client/kit && npm ci
+
+install-client-e2e: ## Install E2E client dependencies
+	cd client/kit && npx playwright install firefox
+
+start: compose-up ## Start containers, API and client
 	make -j 2 start-api start-client
 
 start-api: ## Run API
-	./tools/colorize_prefix.sh [api] 30 "cd server && npm run start:dev"
+	${run_api} "cd server && npm run start:dev"
 
 start-client: ## Run client
-	make -j 2 start-client-dev start-client-tailwind
+	make -j 2 start-client-legacy start-client-kit
 
-start-client-dev:
-	PORT=${client_port} ./tools/colorize_prefix.sh [client] 31 "cd client && npm run dev"
+start-client-legacy: ## Run legacy client
+	make -j 2 start-client-legacy-dev start-client-legacy-tailwind
 
-start-client-tailwind:
-	./tools/colorize_prefix.sh [tailwind] 36 "cd client && npm run watch:tailwind"
+start-client-legacy-dev:
+	PORT=${client_legacy_port} ${run_client_legacy} "cd client/legacy && npm run dev"
+
+start-client-legacy-tailwind:
+	${run_client_legacy_tailwind} "cd client/legacy && npm run watch:tailwind"
+
+start-client-kit: ## Run SvelteKit client
+	PORT=${client_kit_port} ${run_client_kit} "cd client/kit && npm run dev"
+
+compose-up: ## Start containers
+	${compose} up -d
+
+compose-stop: ## Stop containers
+	${compose} stop
+
+compose-rm: stop-containers  ## Stop and remove containers
+	${compose} rm
+
+compose-ps: ## Show running containers
+	${compose} ps
 
 build: build-api build-client ## Build API and client
 
 build-api: ## Build API dist
 	cd server && npm run build
 
-build-client: ## Build client
-	cd client && npm run build
+build-client: build-client-legacy build-client-kit ## Build client
+
+build-client-legacy: ## Build legacy client
+	cd client/legacy && npm run build
+
+build-client-kit: ## Build SvelteKit client
+	cd client/kit && npm run build
 
 start-dist: ## Serve built API and client
 	make -j 2 start-dist-api start-dist-client
 
 start-dist-api: ## Serve built API
-	./tools/colorize_prefix.sh [api] 30 "cd server && npm run start:prod"
+	${run_api} "cd server && npm run start:prod"
 
 start-dist-client: ## Serve built client
-	PORT=${client_port} ./tools/colorize_prefix.sh [client] 31 "cd client && npm run start"
+	make -j 2 start-dist-client-legacy start-dist-client-kit
+
+start-dist-client-legacy: ## Serve built legacy client
+	PORT=${client_legacy_port} ${run_client_legacy} "cd client/legacy && npm run start"
+
+start-dist-client-kit: ## Serve built client
+	HOST=127.0.0.1 PORT=${client_kit_port} ${run_client_kit} "cd client/kit && npm run start"
 
 test: test-api test-client-unit ## Run test suite
 
@@ -60,27 +105,44 @@ test-api-watch: ## Run API tests in watch mode
 test-api-cov: ## Run API tests with coverage enabled
 	cd server && npm run test:cov
 
-test-client-unit: ## Run client unit tests
-	cd client && npm run test-unit
+test-client: test-client-legacy-unit test-client-kit-unit ## Run client tests
+
+test-client-legacy-unit: ## Run legacy client unit tests
+	cd client/legacy && npm run test-unit
+
+test-client-kit-unit: ## Run SvelteKit client unit tests
+	cd client/kit && npm run test:coverage
+
+test-client-e2e: ## Run client E2E tests (servers must be running)
+	cd client/kit && npm run test-e2e
+
+test-client-ci: test-client test-client-e2e-ci
+
+test-client-e2e-ci: ## Run client E2E tests
+	cd client/kit && npm run test-e2e:ci
 
 linter: linter-api linter-client ## Run linters
 
 linter-api: ## Run API linters
 	cd server && npm run lint
 
-linter-client: ## Run client linters
-	cd client && npm run lint
+linter-client: linter-client-legacy linter-client-kit ## Run client linters
 
-format: format-api ## Run code formatting
+linter-client-legacy: ## Run legacy client linters
+	cd client/legacy && npm run lint
+
+linter-client-kit: ## Run SvelteKit client linters
+	cd client/kit && npm run lint
+
+format: format-api format-client ## Run code formatting
 
 format-api: ## Run API code formatting
 	cd server && npm run format
 
-database-start: ## Start database container
-	./tools/colorize_prefix.sh [db] 34 "${compose} up -d -- database"
+format-client: format-client-kit ## Run client code formatting
 
-database-stop: ## Stop database container
-	./tools/colorize_prefix.sh [db] 34 "${compose} stop -- database"
+format-client-kit: ## Run SvelteKit client code formatting
+	cd client/kit && npm run format
 
 database-migrate: ## Database migrations
 	cd server && npm run migration:migrate
@@ -93,6 +155,9 @@ database-connect: ## Connect to the database container
 
 ci: ## Run CI checks
 	make install
+	make install-client-e2e
+	make database-migrate
 	make build
 	make test-api-cov
+	make test-client-ci
 	make linter

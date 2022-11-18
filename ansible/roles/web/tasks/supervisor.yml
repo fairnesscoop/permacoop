@@ -14,7 +14,18 @@
   become: true
   notify: reload nginx
 
-- name: Ensure client is running
-  supervisorctl: name=client state=present
+# Drop 'client' process from before client facade
+- name: Ensure client is stopped
+  supervisorctl: name=client state=absent
+  become: true
+  notify: reload nginx
+
+- name: Ensure client-legacy is running
+  supervisorctl: name=client-legacy state=present
+  become: true
+  notify: reload nginx
+
+- name: Ensure client-kit is running
+  supervisorctl: name=client-kit state=present
   become: true
   notify: reload nginx

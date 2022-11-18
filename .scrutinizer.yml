@@ -8,5 +8,6 @@ build:
           - js-scrutinizer-run
 filter:
   excluded_paths:
-    - 'client/static'
-    - 'client/src/store'
+    - 'client/legacy/static'
+    - 'client/legacy/src/store'
+    - 'client/kit/static'
