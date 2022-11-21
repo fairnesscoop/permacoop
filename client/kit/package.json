@@ -4,7 +4,7 @@
   "author": "Fairness",
   "private": true,
   "scripts": {
-    "dev": "vite dev",
+    "dev": "vite dev --clearScreen=false",
     "build": "vite build",
     "preview": "vite preview",
     "start": "node ./build",
