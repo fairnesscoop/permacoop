@@ -6,7 +6,7 @@ test("/ redirects to /kit/login", async ({ page }) => {
 });
 
 test("/login redirects to /kit/login", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/login");
   await page.waitForURL("/kit/login");
 });
 
