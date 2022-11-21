@@ -15,3 +15,12 @@
     group: root
     mode: 0644
   become: true
+
+- name: Ensure kit client .env.local file is up to date
+  template:
+    src: .env-client-kit.j2
+    dest: "{{ workdir }}/client/kit/.env.local"
+    owner: root
+    group: root
+    mode: 0644
+  become: true

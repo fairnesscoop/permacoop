@@ -6,4 +6,4 @@ db_name: permacoop
 
 file_encryption_key: secret
 
-git_version: master # Edit to deploy from a PR branch, e.g. feat/myfeature
+git_version: fm/kit-login # Edit to deploy from a PR branch, e.g. feat/myfeature

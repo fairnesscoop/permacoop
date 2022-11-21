@@ -9,8 +9,9 @@ const config: UserConfig = {
   plugins: [sveltekit()],
   server: {
     port: 3003,
+    base: "/kit",
     hmr: {
-      path: "/kit/",
+      path: "/kit",
     },
   },
   resolve: {
