@@ -413,7 +413,7 @@
   },
   "dashboard": {
     "title": "Tableau de bord",
-    "welcome": "Bonjour {firstName} {lastName} !"
+    "welcome": "Bonjour {{firstName}} {{lastName}} !"
   },
   "settings": {
     "errors": {

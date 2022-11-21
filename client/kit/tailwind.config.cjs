@@ -5,6 +5,7 @@ const Color = require("color");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{ts,html,svelte}"],
+  darkMode: "class",
   theme: {
     colors: {
       transparent: "transparent",

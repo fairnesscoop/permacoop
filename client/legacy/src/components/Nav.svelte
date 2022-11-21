@@ -45,14 +45,13 @@
     <div class="py-4 text-gray-500 dark:text-gray-400">
       <a
         class="inline-flex ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-        href="/">
+        href="/kit">
         <img src="images/logo.png" class="h-8" alt="Fairness" />
         <span class="ml-2">{$_('app')}</span>
       </a>
       <ul class="mt-6">
         <li class="relative px-6 py-3">
-          {#if !segment}<span class={activeClass} aria-hidden="true" />{/if}
-          <a class={!segment ? activeLinkClass : linkClass} href="/">
+          <a class={linkClass} href="/kit">
             <DashboardIcon className={'w-5 h-5'} />
             <span class="ml-4">{$_('dashboard.title')}</span>
           </a>

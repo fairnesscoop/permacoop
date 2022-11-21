@@ -1,7 +1,12 @@
 import i18n from "sveltekit-i18n";
 import type { Config } from "sveltekit-i18n";
 
-const config: Config = {
+type Payload = {
+  firstName: string;
+  lastName: string;
+};
+
+const config: Config<Payload> = {
   loaders: [
     {
       locale: "fr",

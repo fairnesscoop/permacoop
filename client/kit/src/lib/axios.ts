@@ -1,15 +1,15 @@
 import { browser } from "$app/environment";
 import axios from "axios";
-import Cookies from "js-cookie";
-import config from "src/config";
 export { AxiosError } from "axios";
+import config from "src/config";
+import { getTokenCookie } from "$lib/stores/auth";
 
 const client = axios.create({
   baseURL: browser ? config.API_URL : config.API_URL_SSR,
 });
 
 const authorizationBearerHeader = (token = "") => {
-  const bearer = token || Cookies.get("permacoop_token");
+  const bearer = token || getTokenCookie();
   const headers = bearer ? { Authorization: `Bearer ${bearer}` } : {};
   return {
     headers,

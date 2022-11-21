@@ -1,12 +1,13 @@
 <script lang="ts">
-  import Cookies from "js-cookie";
-  import { gotoSapper } from "$lib/navigation";
+  import { goto } from "$app/navigation";
   import { _ } from "$lib/i18n";
-  import { post, type AxiosError } from "$lib/axios";
+  import paths from "$lib/paths";
+  import type { AxiosError } from "$lib/axios";
   import { errorNormalizer } from "$lib/errors/normalizer";
   import ServerErrors from "src/components/ServerErrors.svelte";
   import Input from "src/components/inputs/Input.svelte";
   import Button from "src/components/inputs/Button.svelte";
+  import { login } from "$lib/stores/auth";
 
   let errors: string[] = [];
   let email = "";
@@ -16,17 +17,8 @@
   const handleSubmit = async () => {
     try {
       loading = true;
-
-      const {
-        data: { apiToken },
-      } = await post("login", { email, password });
-
-      Cookies.set("permacoop_token", apiToken, {
-        expires: 365,
-        secure: process.env.NODE_ENV === "production",
-      });
-
-      await gotoSapper("/");
+      await login(email, password);
+      await goto(paths.home);
     } catch (e) {
       errors = errorNormalizer(e as AxiosError);
     } finally {
