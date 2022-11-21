@@ -1,5 +1,6 @@
 <script lang="ts">
   import shortid from "$lib/shortid";
+  import RequiredMarker from "../RequiredMarker.svelte";
 
   export let type = "text";
   export let value: string;
@@ -15,7 +16,12 @@
 
 <div class={`block text-sm ${marginClass}`}>
   {#if label}
-    <label class="text-gray-700 dark:text-gray-400" for={id}>{label}</label>
+    <label class="text-gray-700 dark:text-gray-400" for={id}
+      >{label}
+      {#if required}
+        <RequiredMarker />
+      {/if}
+    </label>
   {/if}
   {#if type === "email"}
     <input type="email" {id} {required} {placeholder} class={className} bind:value />
