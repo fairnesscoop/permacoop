@@ -16,7 +16,6 @@ const config: UserConfig = {
   resolve: {
     alias: {
       src: path.resolve("./src"),
-      $lib: path.resolve("./src/lib"),
     },
   },
   css: {
