@@ -27,7 +27,7 @@ const config: UserConfig = {
           content: ["./src/app.html", "./src/**/*.svelte"],
           safelist: {
             standard: [/^(event-)\w*/],
-            deep: [/^(theme-dark)/],
+            deep: [/^(dark)/],
           },
           defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
         }),

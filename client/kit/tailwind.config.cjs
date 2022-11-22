@@ -1,10 +1,9 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-const plugin = require("tailwindcss/plugin");
-const Color = require("color");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{ts,html,svelte}"],
+  darkMode: "class",
   theme: {
     colors: {
       transparent: "transparent",
@@ -129,24 +128,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-    plugin(({ addUtilities, theme, variants }) => {
-      const newUtilities = {};
-
-      // Create .shadow-outline-* utility classes
-      Object.entries(theme("colors")).forEach(([name, value]) => {
-        if (name === "transparent" || name === "current") {
-          return;
-        }
-        const color = value[300] ? value[300] : value;
-        const hsla = Color(color).alpha(0.45).hsl().string();
-        newUtilities[`.shadow-outline-${name}`] = {
-          "box-shadow": `0 0 0 3px ${hsla}`,
-        };
-      });
-
-      addUtilities(newUtilities, variants("boxShadow"));
-    }),
-  ],
+  plugins: [require("@tailwindcss/forms")],
 };

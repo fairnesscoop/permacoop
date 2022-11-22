@@ -2,12 +2,12 @@ import { expect, test } from "@playwright/test";
 
 test("/ redirects to /kit/login", async ({ page }) => {
   await page.goto("/");
-  await page.waitForURL("/kit/login");
+  expect(page).toHaveURL("/kit/login");
 });
 
 test("/login redirects to /kit/login", async ({ page }) => {
   await page.goto("/login");
-  await page.waitForURL("/kit/login");
+  expect(page).toHaveURL("/kit/login");
 });
 
 test("Login page has expected h1", async ({ page }) => {

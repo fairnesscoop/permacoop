@@ -11,7 +11,7 @@
 
   const id = shortid.generate();
   const className =
-    "block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded";
+    "block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 dark:text-gray-300 form-input rounded";
 </script>
 
 <div class={`block text-sm ${marginClass}`}>
