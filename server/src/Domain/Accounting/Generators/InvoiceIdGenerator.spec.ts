@@ -16,8 +16,8 @@ describe('InvoiceIdGenerator', () => {
       instance(configService)
     );
 
-    when(configService.get('ACCOUNTING_INVOICE_PREFIX')).thenResolve('FS');
-    when(configService.get('ACCOUNTING_PAD')).thenResolve(4);
+    when(configService.get('ACCOUNTING_INVOICE_PREFIX')).thenReturn('FS');
+    when(configService.get('ACCOUNTING_PAD')).thenReturn(4);
     when(dateUtils.getCurrentDate()).thenReturn(new Date('2020-04-07'));
     when(invoiceRepository.countByYear(2020)).thenResolve(0);
     expect(await generator.generate()).toBe('FS-2020-0001');

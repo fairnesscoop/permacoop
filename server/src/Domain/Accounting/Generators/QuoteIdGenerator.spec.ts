@@ -16,8 +16,8 @@ describe('QuoteIdGenerator', () => {
       instance(configService)
     );
 
-    when(configService.get('ACCOUNTING_QUOTE_PREFIX')).thenResolve('FS-DEVIS');
-    when(configService.get('ACCOUNTING_PAD')).thenResolve(4);
+    when(configService.get('ACCOUNTING_QUOTE_PREFIX')).thenReturn('FS-DEVIS');
+    when(configService.get('ACCOUNTING_PAD')).thenReturn(4);
     when(dateUtils.getCurrentDate()).thenReturn(new Date('2020-04-07'));
     when(quoteRepository.countByYear(2020)).thenResolve(0);
     expect(await generator.generate()).toBe('FS-DEVIS-2020-0001');
