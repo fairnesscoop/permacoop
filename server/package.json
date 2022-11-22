@@ -16,9 +16,10 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:cov": "jest --coverage",
-    "migration:diff": "ts-node ./node_modules/.bin/typeorm migration:generate -d migrations -n",
-    "migration:migrate": "ts-node ./node_modules/.bin/typeorm migration:run",
-    "migration:drop": "ts-node ./node_modules/.bin/typeorm schema:drop"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:diff": "npm run typeorm -- migration:generate -d src/datasource.ts",
+    "migration:migrate": "npm run typeorm -- migration:run -d src/datasource.ts",
+    "migration:drop": "npm run typeorm -- schema:drop"
   },
   "dependencies": {
     "@nestjs/common": "^9.2.0",
@@ -68,7 +69,6 @@
     "ts-jest": "^29.0.3",
     "ts-loader": "^6.1.1",
     "ts-mockito": "^2.5.0",
-    "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.9.0"
   },
   "jest": {

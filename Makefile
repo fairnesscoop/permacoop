@@ -17,7 +17,6 @@ install: ## Install API and client
 	make install-client
 
 install-api: ## Install API
-	cp -n server/ormconfig.json.dist server/ormconfig.json
 	cp -n server/.env.dist server/.env
 	cd server && npm ci
 
@@ -151,7 +150,7 @@ database-migrate: ## Database migrations
 	cd server && npm run migration:migrate
 
 database-diff: ## Generate database diff
-	cd server && npm run migration:diff -n $(MIGRATION_NAME)
+	cd server && npm run migration:diff -- migrations/$(MIGRATION_NAME)
 
 database-connect: ## Connect to the database container
 	${compose} exec database psql -h database -d permacoop

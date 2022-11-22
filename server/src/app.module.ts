@@ -11,9 +11,11 @@ import { HumanResourceModule } from './Infrastructure/HumanResource/humanResourc
 import { SettingsModule } from './Infrastructure/Settings/settings.module';
 import { ContactModule } from './Infrastructure/Contact/contact.module';
 
+import { dataSourceOptions } from './datasource';
+
 @Module({
   imports: [
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot(dataSourceOptions),
     ConfigModule.forRoot(),
     AccountingModule,
     CustomerModule,

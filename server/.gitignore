@@ -2,7 +2,6 @@
 /dist
 /uploads
 /node_modules
-ormconfig.json
 .env
 # Logs
 logs
