@@ -1,8 +1,8 @@
 import { browser } from "$app/environment";
 import axios from "axios";
-export { AxiosError } from "axios";
-import config from "src/config";
 import { getTokenCookie } from "$lib/stores/auth";
+import config from "src/config";
+export { AxiosError } from "axios";
 
 const client = axios.create({
   baseURL: browser ? config.API_URL : config.API_URL_SSR,

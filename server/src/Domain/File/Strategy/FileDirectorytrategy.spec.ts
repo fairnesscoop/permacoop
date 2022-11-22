@@ -9,7 +9,7 @@ describe('FileDirectoryStrategy', () => {
       instance(configService)
     );
 
-    when(configService.get('UPLOAD_LOCATION')).thenResolve('uploads');
+    when(configService.get('UPLOAD_LOCATION')).thenReturn('uploads');
     expect(await strategy.location(new Date('2020-04-29'))).toBe(
       'uploads/2020/4'
     );

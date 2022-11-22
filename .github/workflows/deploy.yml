@@ -1,9 +1,6 @@
 name: Deployment
 
 on:
-  push:
-    branches:
-       - master
   workflow_run:
     workflows:
       - CI
