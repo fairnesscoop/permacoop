@@ -7,4 +7,4 @@ export const ROLES = {
 export enum Theme {
   LIGHT = "light",
   DARK = "dark",
-};
+}

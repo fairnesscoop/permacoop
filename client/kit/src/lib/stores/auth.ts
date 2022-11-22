@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import { post } from "$lib/axios";
 import { writable } from "svelte/store";
+import { invalidate } from "$app/navigation";
 
 export const user = writable<User | null>();
 
@@ -21,8 +22,12 @@ export const login = async (email: string, password: string) => {
     expires: 365,
     secure: process.env.NODE_ENV === "production",
   });
+
+  invalidate("auth:login");
 };
 
 export const logout = () => {
   Cookies.remove(TOKEN_COOKIE);
+
+  invalidate("auth:login");
 };

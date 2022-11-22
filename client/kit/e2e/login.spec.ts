@@ -16,7 +16,7 @@ test("Login page has expected h1", async ({ page }) => {
 });
 
 test("Logs in using form", async ({ page }) => {
-  await page.goto("/kit/login");
+  await page.goto("/");
 
   const emailField = page.getByLabel("Adresse email");
   expect(emailField).toHaveAttribute("required", "");
@@ -30,5 +30,4 @@ test("Logs in using form", async ({ page }) => {
   await loginButton.click();
 
   await page.getByText("Bonjour John Doe !").waitFor();
-  expect(page).toHaveURL("/");
 });

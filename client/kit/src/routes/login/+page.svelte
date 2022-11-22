@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import { _ } from "$lib/i18n";
   import paths from "$lib/paths";
   import type { AxiosError } from "$lib/axios";
-  import { gotoSapper } from "$lib/navigation";
   import { errorNormalizer } from "$lib/errors/normalizer";
   import ServerErrors from "src/components/ServerErrors.svelte";
   import Input from "src/components/inputs/Input.svelte";
@@ -18,7 +18,7 @@
     try {
       loading = true;
       await login(email, password);
-      await gotoSapper(paths.home);
+      await goto(paths.home);
     } catch (e) {
       errors = errorNormalizer(e as AxiosError);
     } finally {

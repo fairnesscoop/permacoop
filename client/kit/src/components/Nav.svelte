@@ -45,9 +45,7 @@
 
   type Section = SimpleSection | ListSection;
 
-  let sections: Section[];
-
-  $: sections = [
+  const sections: Section[] = [
     {
       type: "simple",
       label: $_("dashboard.title"),
