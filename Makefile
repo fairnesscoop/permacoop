@@ -157,10 +157,11 @@ database-connect: ## Connect to the database container
 	${compose} exec database psql -h database -d permacoop
 
 ci: ## Run CI checks
+	make compose-up
 	make install
 	make install-client-e2e
-	make database-migrate
 	make build
+	make database-migrate
 	make test-api-cov
 	make test-client-ci
 	make linter

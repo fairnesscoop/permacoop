@@ -3,8 +3,9 @@ node_modules
 /build
 /.svelte-kit
 /package
-.env
-.env.*
+.env.local
+.env.*.local
 !.env.example
 test-results
 coverage/
+static/css/index.css

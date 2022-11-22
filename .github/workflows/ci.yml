@@ -18,9 +18,6 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-node-${{ hashFiles('**/client/kit/package-lock.json') }}
 
-      - name: Start containers
-        run: make compose-up
-
       - name: Tests
         run: make ci
 

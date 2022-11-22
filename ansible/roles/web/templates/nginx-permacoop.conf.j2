@@ -2,11 +2,11 @@ add_header X-Frame-Options "DENY";
 add_header X-Content-Type-Options "nosniff";
 add_header X-XSS-Protection "1; mode=block";
 
-upstream client-legacy {
+upstream client_legacy {
     server 127.0.0.1:{{ client_legacy_port }};
 }
 
-upstream client-kit {
+upstream client_kit {
     server 127.0.0.1:{{ client_kit_port }};
 }
 
@@ -45,12 +45,12 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://client-legacy/;
+        proxy_pass http://client_legacy/;
     }
 
-    location /kit/ {
+    location /kit {
         include proxy_params;
-        proxy_pass http://client-kit$request_uri;
+        proxy_pass http://client_kit;
     }
 
     location /api/ {
