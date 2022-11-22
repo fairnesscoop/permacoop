@@ -36,7 +36,7 @@
     "date-fns": "^2.8.1",
     "helmet": "^3.22.0",
     "lodash": ">=4.17.19",
-    "passport": "^0.4.1",
+    "passport": "^0.6.0",
     "passport-http-bearer": "^1.0.1",
     "pg": "^8.2.1",
     "reflect-metadata": "^0.1.13",
