@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { browser } from "$app/environment";
   import { page } from "$app/stores";
   import paths from "$lib/paths";
-  import { theme, Theme } from "$lib/stores/theme";
+  import { Theme } from "src/constants";
+  import { theme } from "$lib/stores/theme";
   import { user } from "$lib/stores/auth";
   import Header from "src/components/Header/Header.svelte";
   import Nav from "src/components/Nav.svelte";

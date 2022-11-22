@@ -3,3 +3,8 @@ export const ROLES = {
   ACCOUNTANT: "accountant",
   EMPLOYEE: "employee",
 };
+
+export enum Theme {
+  LIGHT = "light",
+  DARK = "dark",
+};

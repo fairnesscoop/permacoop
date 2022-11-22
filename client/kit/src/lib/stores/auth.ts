@@ -24,5 +24,5 @@ export const login = async (email: string, password: string) => {
 };
 
 export const logout = () => {
-  Cookies.remove("permacoop_token");
+  Cookies.remove(TOKEN_COOKIE);
 };

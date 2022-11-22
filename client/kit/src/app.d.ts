@@ -4,7 +4,7 @@
 declare namespace App {
   interface Locals {
     user: User | null;
-    theme: import("$lib/stores/theme").Theme | null;
+    theme: import("src/constants").Theme | null;
   }
   // interface PageData {}
   // interface Error {}

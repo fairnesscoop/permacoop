@@ -1,10 +1,6 @@
 import Cookies from "js-cookie";
 import { get, writable } from "svelte/store";
-
-export enum Theme {
-  LIGHT = "light",
-  DARK = "dark",
-}
+import { Theme } from "src/constants";
 
 const THEME_COOKIE = "permacoop_theme";
 
