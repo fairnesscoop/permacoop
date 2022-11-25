@@ -10,6 +10,10 @@ export default defineConfig({
     alias: {
       ...config?.resolve?.alias,
       $lib: path.resolve("./src/lib"),
+      // Add any alias resolutions that should be mocked, because
+      // they are not available unless SvelteKit runs.
+      "$app/environment": path.resolve("./tests/app.environment.mock.ts"),
+      "$app/navigation": path.resolve("./tests/app.navigation.mock.ts"),
     },
   },
   plugins: [
@@ -26,5 +30,6 @@ export default defineConfig({
       "**/dist/**",
       "**/.{idea,git,cache,output,temp}/**",
     ],
+    setupFiles: [path.resolve("./tests/setup.ts")],
   },
 });

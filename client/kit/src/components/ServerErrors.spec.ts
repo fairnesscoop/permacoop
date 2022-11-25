@@ -3,7 +3,7 @@
  */
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/svelte";
-import { addTranslations, loadTranslations } from "src/lib/i18n";
+import { addTranslations } from "src/lib/i18n";
 import ServerErrors from "./ServerErrors.svelte";
 
 it("renders nothing with no error.", () => {
@@ -13,8 +13,6 @@ it("renders nothing with no error.", () => {
 });
 
 it("renders the given errors", async () => {
-  await loadTranslations("fr");
-
   addTranslations({
     fr: {
       "": {
