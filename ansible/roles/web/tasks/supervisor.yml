@@ -6,8 +6,6 @@
     group: root
     mode: 0644
   become: true
-  # Config or dependencies may have changed, so restart the server.
-  notify: reload supervisor
 
 - name: Ensure api is running
   supervisorctl: name=api state=present
@@ -23,3 +21,7 @@
   supervisorctl: name=client-kit state=present
   become: true
   notify: reload nginx
+
+- name: Ensure supervisor has reloaded
+  service: name=supervisor state=reloaded
+  become: true
