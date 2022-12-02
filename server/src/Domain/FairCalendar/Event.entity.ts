@@ -8,6 +8,7 @@ export enum EventType {
   SUPPORT = 'support',
   DOJO = 'dojo',
   FORMATION_CONFERENCE = 'formationConference',
+  ADMIN = 'admin',
   OTHER = 'other'
 }
 

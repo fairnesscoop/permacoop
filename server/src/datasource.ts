@@ -13,7 +13,7 @@ export const dataSourceOptions: DataSourceOptions = {
   synchronize: false,
   logging: ['error'],
   entities: ['dist/src/Domain/**/*.entity{.ts,.js}'],
-  migrations: ['dist/migrations/**/*{.ts,.js}'],
+  migrations: ['migrations/**/*{.ts,.js}'],
   migrationsTableName: 'migrations'
 };
 

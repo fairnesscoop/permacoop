@@ -8,11 +8,11 @@
 
 /* Fair Calendar custom CSS */
 
-.event-mission {
+.event-mission, .event-admin {
   @apply px-1 py-1 font-semibold border-green-100 text-green-700 bg-green-100 !important;
 }
 
-.event-mission--dark {
+.event-mission--dark, .event-admin--dark {
   @apply px-1 py-1 font-semibold border-green-700 bg-green-700 text-green-100 !important;
 }
 
