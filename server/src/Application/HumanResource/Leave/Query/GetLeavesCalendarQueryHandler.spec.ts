@@ -2,7 +2,7 @@ import { LeaveRequest } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRequestRepository';
-import { instance, mock, verify, when } from 'ts-mockito';
+import { instance, mock, verify, when, deepEqual } from 'ts-mockito';
 import { GetLeavesCalendarQuery } from './GetLeavesCalendarQuery';
 import { GetLeavesCalendarQueryHandler } from './GetLeavesCalendarQueryHandler';
 
@@ -25,13 +25,24 @@ describe('GetLeavesCalendarQueryHandler', () => {
     const user = mock(User);
     when(user.getFullName()).thenReturn('Jane Dean');
 
-    const leaveRequest = mock(LeaveRequest);
-    when(leaveRequest.getStartDate()).thenReturn(
+    const startDate = new Date(
       'Thu Nov 03 2022 12:00:00 GMT+0100 (Central European Standard Time)'
     );
-    when(leaveRequest.getEndDate()).thenReturn(
+    const endDate = new Date(
       'Sat Nov 05 2022 12:00:00 GMT+0100 (Central European Standard Time)'
     );
+
+    when(dateUtilsAdapter.format(deepEqual(startDate), 'yyyyMMdd')).thenReturn(
+      '20221103'
+    );
+
+    when(dateUtilsAdapter.format(deepEqual(endDate), 'yyyyMMdd')).thenReturn(
+      '20221105'
+    );
+
+    const leaveRequest = mock(LeaveRequest);
+    when(leaveRequest.getStartDate()).thenReturn(startDate.toISOString());
+    when(leaveRequest.getEndDate()).thenReturn(endDate.toISOString());
     when(leaveRequest.getUser()).thenReturn(instance(user));
 
     when(leaveRequestRepository.findAcceptedLeaveRequests()).thenResolve([
