@@ -28,14 +28,24 @@ export class GetLeavesCalendarQueryHandler {
     ];
 
     leaveRequests.forEach(leaveRequest => {
+      // See https://www.rfc-editor.org/rfc/rfc5545#section-3.6.1
+      // DTSTART is inclusive, and DTEND is non-inclusive.
+      // But we store leave request dates as inclusive on both ends.
+      const inclusiveStartDate = new Date(leaveRequest.getStartDate());
+      const inclusiveEndDate = new Date(leaveRequest.getEndDate());
+      const nonInclusiveEndDate = this.dateUtils.addDaysToDate(
+        inclusiveEndDate,
+        1
+      );
+
       lines.push(
         'BEGIN:VEVENT',
         `DTSTART;VALUE=DATE:${this.dateUtils.format(
-          new Date(leaveRequest.getStartDate()),
+          inclusiveStartDate,
           'yyyyMMdd'
         )}`,
         `DTEND;VALUE=DATE:${this.dateUtils.format(
-          new Date(leaveRequest.getEndDate()),
+          nonInclusiveEndDate,
           'yyyyMMdd'
         )}`,
         `SUMMARY:Congés ${leaveRequest.getUser().getFullName()}`,

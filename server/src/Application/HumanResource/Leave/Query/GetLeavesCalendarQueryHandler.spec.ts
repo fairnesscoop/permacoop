@@ -31,14 +31,19 @@ describe('GetLeavesCalendarQueryHandler', () => {
     const endDate = new Date(
       'Sat Nov 05 2022 12:00:00 GMT+0100 (Central European Standard Time)'
     );
+    const eventEndDate = new Date(
+      'Sat Nov 06 2022 12:00:00 GMT+0100 (Central European Standard Time)'
+    );
 
+    when(dateUtilsAdapter.addDaysToDate(deepEqual(endDate), 1)).thenReturn(
+      eventEndDate
+    );
     when(dateUtilsAdapter.format(deepEqual(startDate), 'yyyyMMdd')).thenReturn(
       '20221103'
     );
-
-    when(dateUtilsAdapter.format(deepEqual(endDate), 'yyyyMMdd')).thenReturn(
-      '20221105'
-    );
+    when(
+      dateUtilsAdapter.format(deepEqual(eventEndDate), 'yyyyMMdd')
+    ).thenReturn('20221106');
 
     const leaveRequest = mock(LeaveRequest);
     when(leaveRequest.getStartDate()).thenReturn(startDate.toISOString());
@@ -62,7 +67,7 @@ describe('GetLeavesCalendarQueryHandler', () => {
 
     expect(lines.shift()).toBe('BEGIN:VEVENT');
     expect(lines.shift()).toBe('DTSTART;VALUE=DATE:20221103');
-    expect(lines.shift()).toBe('DTEND;VALUE=DATE:20221105');
+    expect(lines.shift()).toBe('DTEND;VALUE=DATE:20221106');
     expect(lines.shift()).toBe('SUMMARY:Congés Jane Dean');
     expect(lines.shift()).toBe('END:VEVENT');
 
