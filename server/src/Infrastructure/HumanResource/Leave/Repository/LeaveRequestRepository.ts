@@ -114,6 +114,25 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
     return query.getManyAndCount();
   }
 
+  public findAcceptedLeaveRequests(): Promise<LeaveRequest[]> {
+    const query = this.repository
+      .createQueryBuilder('leaveRequest')
+      .select([
+        'leaveRequest.startDate',
+        'leaveRequest.endDate',
+        'user.firstName',
+        'user.lastName'
+      ])
+      .where('status = :status')
+      .setParameter('status', Status.ACCEPTED)
+      .innerJoin('leaveRequest.user', 'user')
+      .innerJoin('user.userAdministrative', 'userAdministrative')
+      .andWhere('userAdministrative.leavingDate IS NULL')
+      .addOrderBy('leaveRequest.startDate', 'ASC');
+
+    return query.getMany();
+  }
+
   public findAcceptedLeaveRequestsByMonth(date: Date): Promise<LeaveRequest[]> {
     const monthDate: MonthDate = this.dateUtils.getMonth(date);
 
