@@ -2,6 +2,7 @@ export default {
   // general
   home: "/kit",
   login: "/kit/login",
+  profile: "/profile",
 
   // faircalendar
   fairCalendar: "/faircalendar",

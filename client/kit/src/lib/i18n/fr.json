@@ -398,14 +398,21 @@
     }
   },
   "profile": {
-    "title": "Mon compte",
-    "logout": "Se déconnecter",
     "form": {
       "first_name": "Prénom",
       "last_name": "Nom",
       "email": "Adresse email",
       "password": "Mot de passe"
     }
+  },
+  "account_dropdown": {
+    "title": "Compte",
+    "profile": "Mon compte",
+    "logout": "Se déconnecter"
+  },
+  "theme": {
+    "switch_light": "Passer au thème clair",
+    "switch_dark": "Passer au thème sombre"
   },
   "search": {
     "title": "Rechercher",

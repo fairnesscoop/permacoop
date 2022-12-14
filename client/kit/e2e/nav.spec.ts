@@ -59,7 +59,7 @@ test.describe("Account settings", () => {
   test("Opens and closes the account settings menu", async ({ page }) => {
     await page.goto("/");
 
-    const button = page.getByRole("button", { name: "Paramètres" });
+    const button = page.getByRole("button", { name: "Compte" });
     await button.waitFor();
     expect(page.getByText("Mon compte")).not.toBeVisible();
 
@@ -73,7 +73,7 @@ test.describe("Account settings", () => {
 
   test("Visits profile page through header", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("button", { name: "Paramètres" }).click();
+    await page.getByRole("button", { name: "Compte" }).click();
     await page.getByText("Mon compte").click();
     await page.waitForURL("/profile");
   });
