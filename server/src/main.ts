@@ -18,6 +18,11 @@ async function bootstrap() {
     )
     .setVersion('1.0.0')
     .addBearerAuth()
+    .addSecurity('calendar_secret', {
+      type: 'apiKey',
+      name: 'calendar_secret',
+      in: 'query'
+    })
     .build();
 
   const document = SwaggerModule.createDocument(app, options);

@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { BusModule } from '../bus.module';
@@ -72,10 +73,13 @@ import { GetUsersElementsAction } from './Payslip/Action/GetUsersElementsAction'
 import { GetUsersElementsCsvAction } from './Payslip/Action/GetUsersElementsCsvAction';
 import { GetUsersElementsQueryHandler } from 'src/Application/HumanResource/Payslip/Query/GetUsersElementsQueryHandler';
 import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesByMonthQueryHandler';
+import { GetLeavesCalendarAction } from './Leave/Action/GetLeavesCalendarAction';
+import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesCalendarQueryHandler';
 
 @Module({
   imports: [
     BusModule,
+    ConfigModule,
     PassportModule,
     TypeOrmModule.forFeature([
       User,
@@ -94,6 +98,7 @@ import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leav
     LoginAction,
     CreateUserAction,
     GetLeavesAction,
+    GetLeavesCalendarAction,
     UpdateUserAction,
     GetMeAction,
     UpdateMeAction,
@@ -159,6 +164,7 @@ import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leav
     AcceptedLeaveRequestEventListener,
     LeaveRequestToLeavesConverter,
     GetLeaveRequestsQueryHandler,
+    GetLeavesCalendarQueryHandler,
     GetLeaveRequestByIdQueryHandler,
     DoesLeaveExistForPeriod,
     CanLeaveRequestBeRemoved,

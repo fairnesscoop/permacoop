@@ -153,6 +153,7 @@ cd ansible && make secrets env="<ENV>"
 The following secret values are **REQUIRED**:
 
 * `file_encryption_key` - (Deprecated, use any value)
+* `calendar_secret` - Calendar export secret token
 * `db_host` - Database server hostname
 * `db_port` - Database server port
 * `db_username` - Database server username

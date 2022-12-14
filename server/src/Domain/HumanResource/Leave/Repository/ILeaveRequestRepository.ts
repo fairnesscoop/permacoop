@@ -14,5 +14,6 @@ export interface ILeaveRequestRepository {
     startDate: string,
     endDate: string
   ): Promise<LeaveRequest | undefined>;
+  findAcceptedLeaveRequests(): Promise<LeaveRequest[]>;
   findAcceptedLeaveRequestsByMonth(date: Date): Promise<LeaveRequest[]>;
 }
