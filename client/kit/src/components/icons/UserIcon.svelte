@@ -1,10 +1,10 @@
 <script lang="ts">
-  export let className: tring;
+  export let className: string;
 </script>
 
 <svg
   class={className}
-  aria-hidden="true"
+  {...$$restProps}
   fill="none"
   stroke-linecap="round"
   stroke-linejoin="round"

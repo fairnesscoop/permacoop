@@ -2,12 +2,14 @@
   import { theme, toggleTheme } from "$lib/stores/theme";
   import DarkThemeIcon from "src/components/icons/DarkThemeIcon.svelte";
   import LightThemeIcon from "src/components/icons/LightThemeIcon.svelte";
+
+  $: title = $theme === "dark" ? "Passer au thème clair" : "Passer au thème sombre";
 </script>
 
-<button on:click={toggleTheme} class="rounded-md focus:outline-none focus:shadow-outline-purple">
+<button on:click={toggleTheme} class="rounded-md" {title}>
   {#if $theme === "dark"}
-    <LightThemeIcon className="w-5 h-5" />
+    <LightThemeIcon aria-hidden="true" className="w-5 h-5" />
   {:else}
-    <DarkThemeIcon className="w-5 h-5" />
+    <DarkThemeIcon aria-hidden="true" className="w-5 h-5" />
   {/if}
 </button>

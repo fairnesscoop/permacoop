@@ -4,7 +4,7 @@
 
 <svg
   class={className}
-  aria-hidden="true"
+  {...$$restProps}
   fill="none"
   stroke-linecap="round"
   stroke-linejoin="round"

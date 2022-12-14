@@ -50,7 +50,7 @@
               href={section.href}
               data-testid="nav-link"
             >
-              <svelte:component this={section.icon} className="w-5 h-5" />
+              <svelte:component this={section.icon} aria-hidden="true" className="w-5 h-5" />
               <span class="ml-4">{section.label}</span>
             </a>
           {/if}
@@ -62,7 +62,7 @@
               on:click={() => toggleSection(index)}
             >
               <span class="inline-flex items-center">
-                <svelte:component this={section.icon} className="w-5 h-5" />
+                <svelte:component this={section.icon} aria-hidden="true" className="w-5 h-5" />
 
                 <span class="ml-4">
                   {section.label}

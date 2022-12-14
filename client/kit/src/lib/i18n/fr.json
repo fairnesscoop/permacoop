@@ -408,8 +408,8 @@
     }
   },
   "search": {
-    "title": "Chercher un client, un projet ...",
-    "aria_label": "Rechercher"
+    "title": "Rechercher",
+    "placeholder": "Chercher un client, un projet ..."
   },
   "dashboard": {
     "title": "Tableau de bord",
