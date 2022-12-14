@@ -4,6 +4,7 @@
   import ChevronDownIcon from "./icons/ChevronDownIcon.svelte";
   import ChevronUpIcon from "./icons/ChevronUpIcon.svelte";
   import paths from "$lib/paths";
+  import { clickOutside } from "$lib/actions";
 
   export let sections: NavSection[];
 
@@ -14,7 +15,7 @@
 
   const toggleSection = (index: number) => {
     const section = sections[index];
-    if (section.type === "list") {
+    if (section.type === "group") {
       sections[index] = { ...section, isOpen: !section.isOpen };
     }
   };
@@ -22,10 +23,10 @@
 
 <aside
   role="navigation"
-  class="z-20 flex-shrink-0 hidden overflow-y-auto bg-white dark:bg-gray-800 md:block"
-  class:open={$isMobileMenuOpen}
+  class="z-20 flex-shrink-0 overflow-y-auto bg-white dark:bg-gray-800 md:block"
+  use:clickOutside={() => isMobileMenuOpen.set(false)}
 >
-  <div class="py-4 text-gray-500 dark:text-gray-400">
+  <div class="py-4 hidden md:block text-gray-500 dark:text-gray-400" class:open={$isMobileMenuOpen}>
     <a
       class="inline-flex ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
       href={paths.home}
@@ -34,31 +35,33 @@
       <span class="ml-2">{$_("app")}</span>
     </a>
 
-    <ul class="mt-6">
+    <ul id="nav-menu" class="mt-6">
       {#each sections as section, index}
         <li class="relative px-6 py-3">
-          {#if section.isActive}
+          {#if (section.type === "link" && section.isActive) || (section.type === "group" && section.links && section.links.some((link) => link.isActive))}
             <span
               class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
               aria-hidden="true"
             />
           {/if}
 
-          {#if section.type !== "list" && section.href}
+          {#if section.type === "link" && section.href}
             <a
               class={section.isActive ? activeLinkClass : linkClass}
               href={section.href}
               data-testid="nav-link"
+              aria-current={section.isActive ? "page" : undefined}
             >
               <svelte:component this={section.icon} aria-hidden="true" className="w-5 h-5" />
               <span class="ml-4">{section.label}</span>
             </a>
           {/if}
 
-          {#if section.type === "list" && section.subSections}
+          {#if section.type === "group" && section.links}
             <button
-              class={section.isActive ? activeLinkClass : linkClass}
-              aria-haspopup="true"
+              class={linkClass}
+              aria-expanded={section.isOpen}
+              aria-controls="submenu-{index}"
               on:click={() => toggleSection(index)}
             >
               <span class="inline-flex items-center">
@@ -76,19 +79,25 @@
               </span>
             </button>
 
-            <ul
-              class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
-              class:hidden={!section.isOpen}
-              aria-label="submenu"
-            >
-              {#each section.subSections || [] as item}
-                <li
-                  class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                >
-                  <a class="w-full" href={item.href} data-testid="nav-link">{item.label}</a>
-                </li>
-              {/each}
-            </ul>
+            {#if section.isOpen}
+              <ul
+                id="submenu-{index}"
+                class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+              >
+                {#each section.links || [] as link}
+                  <li
+                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  >
+                    <a
+                      class="w-full {link.isActive ? activeLinkClass : linkClass}"
+                      aria-current={link.isActive ? "page" : undefined}
+                      href={link.href}
+                      data-testid="nav-link">{link.label}</a
+                    >
+                  </li>
+                {/each}
+              </ul>
+            {/if}
           {/if}
         </li>
       {/each}

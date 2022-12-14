@@ -17,7 +17,7 @@
 </script>
 
 {#if $user}
-  <div use:clickOutside={{ callback: () => (open = false) }}>
+  <div use:clickOutside={() => (open = false)}>
     <button
       on:click={() => (open = !open)}
       type="button"

@@ -7,20 +7,19 @@ interface User {
 }
 
 interface LinkNavSection {
-  type?: "link";
+  type: "link";
   label: string;
   href: string;
   icon: typeof SvelteComponent;
   isActive: boolean;
 }
 
-interface LinkListNavSection {
-  type: "list";
+interface GroupNavSection {
+  type: "group";
   label: string;
   icon: typeof SvelteComponent;
-  isActive: boolean;
   isOpen: boolean;
-  subSections?: { label: string; href: string }[];
+  links?: { label: string; href: string; isActive: boolean }[];
 }
 
-type NavSection = LinkNavSection | LinkListNavSection;
+type NavSection = LinkNavSection | GroupNavSection;

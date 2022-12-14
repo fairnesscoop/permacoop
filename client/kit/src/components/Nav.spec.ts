@@ -21,38 +21,47 @@ it("renders a navbar with brand link and no sections", () => {
 it("renders the expected sections", () => {
   const sections: NavSection[] = [
     {
+      type: "link",
+      label: "Home",
+      href: "/",
+      icon: UsersIcon,
+      isActive: false,
+    },
+    {
+      type: "link",
       label: "Calendar",
       href: "/calendar",
       icon: UsersIcon,
       isActive: true,
     },
     {
-      type: "list",
+      type: "group",
       label: "CRM",
       icon: UsersIcon,
-      isActive: false,
       isOpen: true,
-      subSections: [
+      links: [
         {
           label: "Projects",
           href: "/crm/projects",
+          isActive: false,
         },
         {
           label: "Customers",
           href: "/crm/customers",
+          isActive: false,
         },
       ],
     },
     {
-      type: "list",
+      type: "group",
       label: "HR",
       icon: UsersIcon,
-      isActive: false,
       isOpen: false, // Not open
-      subSections: [
+      links: [
         {
           label: "Users",
           href: "/hr/users",
+          isActive: false,
         },
       ],
     },
@@ -64,10 +73,16 @@ it("renders the expected sections", () => {
 
   expect(queryAllByTestId(nav, "nav-link")).toHaveLength(4);
 
+  const homeLink = getByRole(nav, "link", { name: "Home" });
+  expect(homeLink).toBeInTheDocument();
+  expect(homeLink).toHaveAttribute("href", "/");
+
   const calendarLink = getByRole(nav, "link", { name: "Calendar" });
   expect(calendarLink).toBeInTheDocument();
   expect(calendarLink).toHaveAttribute("href", "/calendar");
+  expect(calendarLink).toHaveAttribute("aria-current", "page");
 
+  // Group titles are not links
   const crmLink = queryByRole(nav, "link", { name: "CRM" });
   expect(crmLink).not.toBeInTheDocument();
 
@@ -80,5 +95,5 @@ it("renders the expected sections", () => {
   expect(customersLink).toHaveAttribute("href", "/crm/customers");
 
   const usersLink = queryByRole(nav, "link", { name: "Users" });
-  expect(usersLink).not.toBeVisible(); // This fails?
+  expect(usersLink).not.toBeInTheDocument();
 });

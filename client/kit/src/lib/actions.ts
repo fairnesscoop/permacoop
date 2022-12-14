@@ -1,10 +1,6 @@
-type Options = {
-  callback: () => void;
-};
-
 export const clickOutside = (
   node: HTMLElement,
-  { callback }: Options
+  callback: () => void
 ): {
   destroy: () => void;
 } => {

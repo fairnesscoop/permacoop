@@ -10,7 +10,7 @@ it("renders an email input.", () => {
   const label = "my email input";
   const type = "email";
 
-  const { getByRole } = render(Input, { value, label, type });
+  const { getByRole } = render(Input, { value, label, type, required: true });
 
   expect(getByRole("textbox", { name: /my email input/i })).toBeInTheDocument();
 });

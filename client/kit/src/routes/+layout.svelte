@@ -22,53 +22,100 @@
 
   const sections: NavSection[] = [
     {
+      type: "link",
       label: $_("dashboard.title"),
       href: paths.home,
       isActive: $page.url.pathname === paths.home,
       icon: DashboardIcon,
     },
     {
+      type: "link",
       label: $_("faircalendar.breadcrumb"),
       href: paths.fairCalendar,
       isActive: $page.url.pathname.startsWith(paths.fairCalendar),
       icon: CalendarIcon,
     },
     {
-      type: "list",
+      type: "group",
       label: $_("crm.breadcrumb"),
-      subSections: [
-        { label: $_("crm.projects.title"), href: paths.projects },
-        { label: $_("crm.customers.title"), href: paths.customers },
-        { label: $_("crm.contacts.title"), href: paths.contacts },
+      links: [
+        {
+          label: $_("crm.projects.title"),
+          href: paths.projects,
+          isActive: $page.url.pathname === paths.projects,
+        },
+        {
+          label: $_("crm.customers.title"),
+          href: paths.customers,
+          isActive: $page.url.pathname === paths.customers,
+        },
+        {
+          label: $_("crm.contacts.title"),
+          href: paths.contacts,
+          isActive: $page.url.pathname === paths.contacts,
+        },
       ],
-      isActive: $page.url.pathname.startsWith(paths.crm),
       isOpen: true,
       icon: CrmIcon,
     },
     {
-      type: "list",
+      type: "group",
       label: $_("accounting.breadcrumb"),
-      subSections: [
-        { label: $_("accounting.invoices.title"), href: paths.invoices },
-        { label: $_("accounting.quotes.title"), href: paths.quotes },
-        { label: $_("accounting.tasks.title"), href: paths.tasks },
-        { label: $_("accounting.daily_rates.title"), href: paths.dailyRates },
+      links: [
+        {
+          label: $_("accounting.invoices.title"),
+          href: paths.invoices,
+          isActive: $page.url.pathname === paths.invoices,
+        },
+        {
+          label: $_("accounting.quotes.title"),
+          href: paths.quotes,
+          isActive: $page.url.pathname === paths.quotes,
+        },
+        {
+          label: $_("accounting.tasks.title"),
+          href: paths.tasks,
+          isActive: $page.url.pathname === paths.tasks,
+        },
+        {
+          label: $_("accounting.daily_rates.title"),
+          href: paths.dailyRates,
+          isActive: $page.url.pathname === paths.dailyRates,
+        },
       ],
-      isActive: $page.url.pathname.startsWith(paths.accounting),
       isOpen: true,
       icon: AccountingIcon,
     },
     {
-      type: "list",
+      type: "group",
       label: $_("human_resources.breadcrumb"),
-      subSections: [
-        { label: $_("human_resources.leaves.title"), href: paths.leaves },
-        { label: $_("human_resources.payslips.breadcrumb"), href: paths.payslips },
-        { label: $_("human_resources.meal_tickets.breadcrumb"), href: paths.mealTickets },
-        { label: $_("human_resources.savings_records.title"), href: paths.savingsRecords },
-        { label: $_("human_resources.users.title"), href: paths.users },
+      links: [
+        {
+          label: $_("human_resources.leaves.title"),
+          href: paths.leaves,
+          isActive: $page.url.pathname === paths.leaves,
+        },
+        {
+          label: $_("human_resources.payslips.breadcrumb"),
+          href: paths.payslips,
+          isActive: $page.url.pathname === paths.payslips,
+        },
+        {
+          label: $_("human_resources.meal_tickets.breadcrumb"),
+          href: paths.mealTickets,
+          isActive: $page.url.pathname === paths.mealTickets,
+        },
+        {
+          label: $_("human_resources.savings_records.title"),
+          href: paths.savingsRecords,
+          isActive: $page.url.pathname === paths.savingsRecords,
+        },
+        {
+          label: $_("human_resources.users.title"),
+          href: paths.users,
+          isActive: $page.url.pathname === paths.users,
+        },
       ],
-      isActive: $page.url.pathname.startsWith(paths.humanResources),
       isOpen: true,
       icon: UsersIcon,
     },
