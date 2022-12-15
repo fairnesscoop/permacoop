@@ -25,7 +25,7 @@ export class GetUsersElementsCsvAction {
 
     const month = date.toISOString().substring(0, 7);
 
-    res.attachment(`playslips-${month}.csv`);
+    res.attachment(`Fairness - Éléments de paie - ${month}.csv`);
 
     const payslips: UserElementsView[] = await this.queryBus.execute(
       new GetUsersElementsQuery(date)
