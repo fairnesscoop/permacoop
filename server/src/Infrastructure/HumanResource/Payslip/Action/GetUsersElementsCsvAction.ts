@@ -5,8 +5,8 @@ import { IQueryBus } from 'src/Application/IQueryBus';
 import { GetUsersElementsQuery } from 'src/Application/HumanResource/Payslip/Query/GetUsersElementsQuery';
 import { UserElementsView } from 'src/Application/HumanResource/Payslip/View/UserElementsView';
 import { Response } from 'express';
-import { UserLeavesView } from 'src/Application/HumanResource/Payslip/View/UserLeavesView';
 import { format } from 'date-fns';
+import { LeaveRequestSlotView } from 'src/Application/HumanResource/Leave/View/LeaveRequestSlotView';
 
 @Controller('payslips.csv')
 @ApiCookieAuth()
@@ -27,63 +27,72 @@ export class GetUsersElementsCsvAction {
 
     res.attachment(`playslips-${month}.csv`);
 
-    const payslips = await this.queryBus.execute(
+    const payslips: UserElementsView[] = await this.queryBus.execute(
       new GetUsersElementsQuery(date)
     );
 
-    const rows: string[] = payslips.map((payslip: UserElementsView) =>
-      [
+    const headers = [
+      'Prénom',
+      'Nom',
+      'Contrat',
+      "Date d'entrée",
+      'Salaire annuel brut',
+      'Salaire mensuel brut',
+      'Temps de travail',
+      'Frais de transport',
+      'Titres restaurant',
+      'Mutuelle',
+      'Congés payés',
+      'Congés sans solde',
+      'Congés maladie',
+      'Congés exceptionnels',
+      'Notes'
+    ];
+
+    const paidLeavesIndex = headers.findIndex(
+      value => value === 'Congés payés'
+    );
+
+    const rows: string[] = [];
+
+    for (const payslip of payslips) {
+      const row = [
         payslip.firstName,
         payslip.lastName,
         payslip.contract,
         payslip.joiningDate,
         payslip.annualEarnings,
         payslip.monthlyEarnings.toFixed(2),
-        payslip.workingTime,
+        payslip.workingTime === 'full_time' ? 'Temps plein' : 'Temps partiel',
         payslip.transportFee,
         payslip.mealTickets,
-        payslip.healthInsurance,
-        this.formatLeaves(payslip.paidLeaves),
+        payslip.healthInsurance === 'yes' ? 'Oui' : 'Non',
+        payslip.paidLeaves.totalDays,
         payslip.unpaidLeaves.totalDays,
         payslip.sickLeaves.totalDays,
-        payslip.exceptionalLeaves.totalDays
-      ].join(',')
-    );
+        payslip.exceptionalLeaves.totalDays,
+        ''
+      ];
 
-    const headers = [
-      'firstName',
-      'lastName',
-      'contract',
-      'joiningDate',
-      'annualEarnings',
-      'monthlyEarnings',
-      'workingTime',
-      'transportFee',
-      'mealTickets',
-      'healthInsurance',
-      'paidLeaves',
-      'unpaidLeaves',
-      'sickLeaves',
-      'exceptionalLeaves'
-    ];
+      rows.push(row.join(';'));
 
-    const csv: string = [headers.join(','), ...rows].join('\n');
+      for (const leave of payslip.paidLeaves.leaves) {
+        const leaveRow = row.map((_, index) =>
+          index === paidLeavesIndex ? this.formatLeaves(leave) : ''
+        );
+        rows.push(leaveRow.join(';'));
+      }
+    }
+
+    const csv: string = [headers.join(';'), ...rows].join('\n');
 
     return res.send(csv);
   }
 
-  private formatLeaves(leaves: UserLeavesView): string {
-    if (leaves.totalDays === 0) return '';
-
+  private formatLeaves(leave: LeaveRequestSlotView): string {
     const formatDate = (dateString: string): string =>
       format(new Date(dateString), 'dd/MM/yyyy');
 
-    const formattedSlots = leaves.leaves.map(
-      leave => formatDate(leave.startDate) + ' - ' + formatDate(leave.endDate)
-    );
-
-    const row = leaves.totalDays + '\n' + formattedSlots.join('\n');
-
-    return `"${row}"`;
+    return formatDate(leave.startDate) + ' - ' + formatDate(leave.endDate);
   }
 }
