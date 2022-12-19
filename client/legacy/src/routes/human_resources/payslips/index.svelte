@@ -30,29 +30,41 @@
   });
 
   const getCsvAsbase64 = async () => {
-    const csv = await get('payslips.csv');
-    const csvFile = new Blob([csv.data], { type: "text/csv" });
-
-    return window.URL.createObjectURL(csvFile);
-  }
+    try {
+      const csv = await get('payslips.csv');
+      const csvFile = new Blob([csv.data], { type: 'text/csv' });
+      return window.URL.createObjectURL(csvFile);
+    } catch (e) {
+      errors = errorNormalizer(e);
+      return "#";
+    }
+  };
 </script>
 
 <svelte:head>
   <title>{title} - {$_('app')}</title>
 </svelte:head>
 
-<Breadcrumb items={[{ title: $_('human_resources.breadcrumb') }, { title: $_('human_resources.payslips.breadcrumb') }]} />
+<Breadcrumb
+  items={[{ title: $_('human_resources.breadcrumb') }, { title: $_('human_resources.payslips.breadcrumb') }]} />
 <ServerErrors {errors} />
 <div class="inline-flex items-center">
   <H4Title {title} />
   {#await getCsvAsbase64() then csvObjectUrl}
     <a
       href={csvObjectUrl}
-      download={`payslips-${month.replace(' ', '-')}.csv`}
+      download={`Fairness - Éléments de paie - ${month.replace(' ', '-')}.csv`}
       class="px-2 py-1 mb-6 ml-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
       {$_('human_resources.payslips.download')}
     </a>
   {/await}
 
+  <a
+    href="https://gitlab.fairness.coop/fairness/documentation/-/wikis/Paiement-des-salaires"
+    class="px-2 py-1 mb-6 ml-2 text-sm font-medium leading-5 bg-purple-200 border rounded-lg"
+    rel="noreferrer"
+    target="_blank">
+    Voir le Wiki <span aria-hidden="true">↗</span>
+  </a>
 </div>
 <Table items={payslipElements} />
