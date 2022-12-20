@@ -2,7 +2,9 @@
 
 Permacoop is an open source and eco design ERP solution reserved for worker-owned business.
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/fairnesscoop/permacoop/CI)
+https://img.shields.io/github/actions/workflow/status/<user>/<repo>/test.yml?branch=main
+
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/fairness/permacoop/ci.yml?branch=master)
 [![codecov](https://codecov.io/gh/fairnesscoop/permacoop/branch/master/graph/badge.svg)](https://codecov.io/gh/fairnesscoop/permacoop)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fairnesscoop/permacoop/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fairnesscoop/permacoop/?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3bf4f001d4904cdb89e71f2793d1c6b7)](https://www.codacy.com/gh/fairnesscoop/permacoop?utm_source=github.com&utm_medium=referral&utm_content=fairnesscoop/permacoop&utm_campaign=Badge_Grade)
