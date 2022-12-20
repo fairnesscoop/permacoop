@@ -37,6 +37,7 @@ const aliases = [
 const environmentVariables = {
   'process.env.CLIENT_API_URL': JSON.stringify(process.env.CLIENT_API_URL),
   'process.env.CLIENT_API_URL_SSR': JSON.stringify(process.env.CLIENT_API_URL_SSR),
+  'process.env.CLIENT_CALENDAR_TOKEN': JSON.stringify(process.env.CLIENT_CALENDAR_TOKEN),
 };
 
 export default {

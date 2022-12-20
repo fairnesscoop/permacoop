@@ -9,13 +9,13 @@ import {
 import { Response } from 'express';
 import { ApiTags, ApiOperation, ApiSecurity } from '@nestjs/swagger';
 import { IQueryBus } from 'src/Application/IQueryBus';
-import { CalendarSecretGuard } from 'src/Infrastructure/HumanResource/User/Security/CalendarSecretGuard';
+import { CalendarTokenGuard } from 'src/Infrastructure/HumanResource/User/Security/CalendarTokenGuard';
 import { GetLeavesCalendarQuery } from 'src/Application/HumanResource/Leave/Query/GetLeavesCalendarQuery';
 
 @Controller('leaves')
 @ApiTags('Human Resource')
-@ApiSecurity('calendar_secret')
-@UseGuards(CalendarSecretGuard)
+@ApiSecurity('calendar_token')
+@UseGuards(CalendarTokenGuard)
 export class GetLeavesCalendarAction {
   constructor(
     @Inject('IQueryBus')
