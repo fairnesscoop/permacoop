@@ -9,4 +9,4 @@ api_url: http://localhost:3080/api
 calendar_token: abcd1234
 file_encryption_key: secret
 
-git_version: feat/leaves-calendar-button # Edit to deploy from a PR branch, e.g. feat/myfeature
+git_version: master # Edit to deploy from a PR branch, e.g. feat/myfeature
