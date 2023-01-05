@@ -1,1 +1,4 @@
 letsencrypt_enabled: true
+
+api_url_ssr: http://localhost:3000/api
+api_url: https://permacoop.fairness.coop/api

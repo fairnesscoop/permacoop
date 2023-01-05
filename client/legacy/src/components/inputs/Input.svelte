@@ -1,14 +1,16 @@
 <script>
   import shortid from '../../utils/shortid';
 
+  export let id = shortid.generate();
   export let type = 'text';
   export let value;
   export let label = '';
   export let placeholder = '';
   export let marginClass = 'mt-4';
   export let required = 'required';
+  export let readonly = false;
+  export let input;
 
-  const id = shortid.generate();
   const className =
     'block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input';
 </script>
@@ -22,16 +24,20 @@
       type="email"
       {id}
       {required}
+      {readonly}
       {placeholder}
       class={className}
+      bind:this={input}
       bind:value />
   {:else if type === 'password'}
     <input
       type="password"
       {id}
       {required}
+      {readonly}
       {placeholder}
       class={className}
+      bind:this={input}
       bind:value />
   {:else if type === 'money'}
     <input
@@ -41,23 +47,29 @@
       step="0.01"
       {id}
       {required}
+      {readonly}
       class={className}
+      bind:this={input}
       bind:value />
   {:else if type === 'date'}
     <input
       type="date"
       {id}
       {required}
+      {readonly}
       {placeholder}
       class={className}
+      bind:this={input}
       bind:value />
   {:else}
     <input
       type="text"
       {id}
       {required}
+      {readonly}
       {placeholder}
       class={className}
+      bind:this={input}
       bind:value />
   {/if}
 </div>

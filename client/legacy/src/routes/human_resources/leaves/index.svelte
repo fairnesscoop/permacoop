@@ -9,7 +9,6 @@
 <script>
   import { onMount } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import H4Title from 'components/H4Title.svelte';
   import Breadcrumb from 'components/Breadcrumb.svelte';
   import Link from 'components/links/Link.svelte';
   import Pagination from 'components/Pagination.svelte';
@@ -17,6 +16,7 @@
   import { historyPushState } from 'utils/url';
   import { errorNormalizer } from 'normalizer/errors';
   import Table from './_Table.svelte';
+  import CalendarLink from './_CalendarLink.svelte';
 
   export let page;
 
@@ -58,7 +58,6 @@
       errors = errorNormalizer(e);
     }
   };
-
 </script>
 
 <svelte:head>
@@ -66,12 +65,20 @@
 </svelte:head>
 
 <Breadcrumb items={[{ title: $_('human_resources.breadcrumb') }, { title }]} />
-<div class="inline-flex items-center">
-  <H4Title {title} />
-  <Link
-    href={'/human_resources/leaves/requests'}
-    value={$_('human_resources.leaves.requests.title')} />
+
+<div class="lg:flex justify-between items-center mb-6">
+  <div class="flex items-center">
+    <h4 class="text-lg font-semibold text-gray-600 dark:text-gray-300">
+      {title}
+    </h4>
+    
+    <Link href={'/human_resources/leaves/requests'} value={$_('human_resources.leaves.requests.title')} />
+  </div>
+  <div class="mt-4 lg:mt-0">
+    <CalendarLink />
+  </div>
 </div>
+
 <div class="w-full overflow-hidden rounded-lg shadow-xs">
   <div class="w-full overflow-x-auto">
     <Table items={response.items} on:delete={handleDelete} />

@@ -335,6 +335,10 @@
           "accept": "Accepter",
           "refuse": "Refuser"
         }
+      },
+      "calendar": {
+        "subscription_link": "Lien d'abonnement au calendrier",
+        "copy_subscription_link": "Copier l'URL dans le presse-papier"
       }
     },
     "users": {
