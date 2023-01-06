@@ -24,6 +24,7 @@ export class GetLeavesCalendarQueryHandler {
       'PRODID:-//Fairness//Permacoop//FR',
       'CALSCALE:GREGORIAN',
       'X-WR-CALNAME:Congés Fairness',
+      'NAME:Congés Fairness',
       'X-APPLE-CALENDAR-COLOR:#00CA9E'
     ];
 
@@ -40,6 +41,7 @@ export class GetLeavesCalendarQueryHandler {
 
       lines.push(
         'BEGIN:VEVENT',
+        `UID:${leaveRequest.getId()}`,
         `DTSTART;VALUE=DATE:${this.dateUtils.format(
           inclusiveStartDate,
           'yyyyMMdd'
