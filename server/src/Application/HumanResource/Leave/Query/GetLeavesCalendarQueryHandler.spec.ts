@@ -25,6 +25,7 @@ describe('GetLeavesCalendarQueryHandler', () => {
     const user = mock(User);
     when(user.getFullName()).thenReturn('Jane Dean');
 
+    const uuid = '3008a48d-99db-44c4-bf3a-75e95c47bd1a';
     const startDate = new Date(
       'Thu Nov 03 2022 12:00:00 GMT+0100 (Central European Standard Time)'
     );
@@ -46,6 +47,7 @@ describe('GetLeavesCalendarQueryHandler', () => {
     ).thenReturn('20221106');
 
     const leaveRequest = mock(LeaveRequest);
+    when(leaveRequest.getId()).thenReturn(uuid);
     when(leaveRequest.getStartDate()).thenReturn(startDate.toISOString());
     when(leaveRequest.getEndDate()).thenReturn(endDate.toISOString());
     when(leaveRequest.getUser()).thenReturn(instance(user));
@@ -63,9 +65,11 @@ describe('GetLeavesCalendarQueryHandler', () => {
     expect(lines.shift()).toBe('PRODID:-//Fairness//Permacoop//FR');
     expect(lines.shift()).toBe('CALSCALE:GREGORIAN');
     expect(lines.shift()).toBe('X-WR-CALNAME:Congés Fairness');
+    expect(lines.shift()).toBe('NAME:Congés Fairness');
     expect(lines.shift()).toBe('X-APPLE-CALENDAR-COLOR:#00CA9E');
 
     expect(lines.shift()).toBe('BEGIN:VEVENT');
+    expect(lines.shift()).toBe('UID:3008a48d-99db-44c4-bf3a-75e95c47bd1a');
     expect(lines.shift()).toBe('DTSTART;VALUE=DATE:20221103');
     expect(lines.shift()).toBe('DTEND;VALUE=DATE:20221106');
     expect(lines.shift()).toBe('SUMMARY:Congés Jane Dean');
