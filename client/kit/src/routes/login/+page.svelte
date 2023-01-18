@@ -26,7 +26,9 @@
         secure: process.env.NODE_ENV === "production",
       });
 
-      await gotoSapper("/");
+      // TEMP SOLUTION TO MAKE IT WORK LOCALLY
+      // DO NOT KEEP THIS IS BAD
+      await gotoSapper("http://localhost:3002");
     } catch (e) {
       errors = errorNormalizer(e as AxiosError);
     } finally {

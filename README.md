@@ -56,7 +56,7 @@ make start
 The server and client will be started:
 
 - API documentation available on <http://localhost:3000/api>
-- Client available on <http://localhost:3001/>
+- Client available on <http://localhost:3002/>
 
 To serve the built server and client locally, run:
 
