@@ -35,22 +35,16 @@ First, install dependencies:
 make install
 ```
 
-Then start the database and other services:
+Then start the servers, database and other services:
 
 ```
-make compose-up
+make start
 ```
 
-You can now run database migrations:
+In a separate terminal, run database migrations:
 
 ```
 make database-migrate
-```
-
-You can now start the application using:
-
-```bash
-make start
 ```
 
 The server and client will be started:

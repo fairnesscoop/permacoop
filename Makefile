@@ -32,7 +32,8 @@ install-client-kit: ## Install SvelteKit client
 install-client-e2e: ## Install E2E client dependencies
 	cd client/kit && npx playwright install firefox
 
-start: compose-up ## Start containers, API and client
+start: ## Start containers, API and client
+	make compose CMD="up -d"
 	make -j 2 start-api start-client
 
 start-api: ## Run API
@@ -56,16 +57,13 @@ start-client-kit: ## Run SvelteKit client
 compose: ## Run Docker compose command (args: CMD)
 	${compose} ${CMD}
 
-compose-up: ## Start containers
-	make compose CMD="up -d"
-
-compose-stop: ## Stop containers
+stop: ## Stop containers
 	make compose CMD=stop
 
-compose-rm: compose-stop  ## Stop and remove containers
+rm: stop  ## Stop and remove containers
 	make compose CMD=rm
 
-compose-ps: ## Show running containers
+ps: ## Show running containers
 	make compose CMD=ps
 
 build: build-api build-client ## Build API and client
@@ -156,7 +154,7 @@ database-connect: ## Connect to the database container
 	${compose} exec database psql -h database -d permacoop
 
 ci: ## Run CI checks
-	make compose-up
+	make compose CMD="up -d"
 	make install
 	make install-client-e2e
 	make build
