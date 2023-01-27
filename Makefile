@@ -15,6 +15,7 @@ client_kit_port = 3003
 install: ## Install API and client
 	make install-api
 	make install-client
+	make database-test-init
 
 install-api: ## Install API
 	cp -n server/.env.dist server/.env
@@ -147,6 +148,10 @@ format-client-kit: ## Run SvelteKit client code formatting
 database-migrate: ## Database migrations
 	cd server && npm run migration:migrate
 
+database-test-init: ## Initialize test database
+	make compose CMD="exec -T database createdb permacoop_test" || echo 'Does the test DB already exist? Ignoring...'
+	DATABASE_NAME=permacoop_test make database-migrate
+
 database-diff: ## Generate database diff
 	cd server && npm run migration:diff -- migrations/$(MIGRATION_NAME)
 
@@ -160,5 +165,6 @@ ci: ## Run CI checks
 	make build
 	make database-migrate
 	make test-api-cov
+	make database-test-init
 	make test-client-ci
 	make linter

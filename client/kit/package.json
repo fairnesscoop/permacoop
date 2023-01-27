@@ -13,7 +13,7 @@
     "test:watch": "vitest watch",
     "test-e2e": "playwright test",
     "test-e2e:ci": "start-server-and-test e2e-start '3000/api|3001/login' test-e2e",
-    "e2e-start": "cd ../../ && make start-dist",
+    "e2e-start": "DATABASE_NAME=permacoop_test cd ../../ && make start",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
