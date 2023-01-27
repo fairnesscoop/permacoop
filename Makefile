@@ -12,8 +12,6 @@ run_client_kit = ./tools/colorize_prefix.sh [client:kit] "38;5;202"
 client_legacy_port = 3002
 client_kit_port = 3003
 
-TEST_DATABASE_NAME=permacoop-test
-
 install: ## Install API and client
 	make install-api
 	make install-client
@@ -151,8 +149,8 @@ database-migrate: ## Database migrations
 	cd server && npm run migration:migrate
 
 database-test-init: ## Initialize test database
-	make compose CMD="exec -T database createdb ${TEST_DATABASE_NAME}" || echo 'Does the test DB already exist? Ignoring...'
-	DATABASE_NAME=${TEST_DATABASE_NAME} make database-migrate
+	make compose CMD="exec -T database createdb permacoop_test" || echo 'Does the test DB already exist? Ignoring...'
+	DATABASE_NAME=permacoop_test make database-migrate
 
 database-diff: ## Generate database diff
 	cd server && npm run migration:diff -- migrations/$(MIGRATION_NAME)
@@ -168,5 +166,5 @@ ci: ## Run CI checks
 	make database-migrate
 	make test-api-cov
 	make database-test-init
-	DATABASE_NAME=${TEST_DATABASE_NAME} make test-client-ci
+	make test-client-ci
 	make linter
