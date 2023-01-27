@@ -2,7 +2,7 @@
 
 Permacoop is an open source and eco design ERP solution reserved for worker-owned business.
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/fairnesscoop/permacoop/CI)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/fairnesscoop/permacoop/ci.yml?branch=master)
 [![codecov](https://codecov.io/gh/fairnesscoop/permacoop/branch/master/graph/badge.svg)](https://codecov.io/gh/fairnesscoop/permacoop)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fairnesscoop/permacoop/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fairnesscoop/permacoop/?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3bf4f001d4904cdb89e71f2793d1c6b7)](https://www.codacy.com/gh/fairnesscoop/permacoop?utm_source=github.com&utm_medium=referral&utm_content=fairnesscoop/permacoop&utm_campaign=Badge_Grade)
@@ -35,22 +35,16 @@ First, install dependencies:
 make install
 ```
 
-Then start the database and other services:
+Then start the servers, database and other services:
 
 ```
-make compose-up
+make start
 ```
 
-You can now run database migrations:
+In a separate terminal, run database migrations:
 
 ```
 make database-migrate
-```
-
-You can now start the application using:
-
-```bash
-make start
 ```
 
 The server and client will be started:

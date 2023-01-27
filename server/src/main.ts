@@ -18,9 +18,9 @@ async function bootstrap() {
     )
     .setVersion('1.0.0')
     .addBearerAuth()
-    .addSecurity('calendar_secret', {
+    .addSecurity('calendar_token', {
       type: 'apiKey',
-      name: 'calendar_secret',
+      name: 'token',
       in: 'query'
     })
     .build();

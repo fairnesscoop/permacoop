@@ -153,12 +153,14 @@ cd ansible && make secrets env="<ENV>"
 The following secret values are **REQUIRED**:
 
 * `file_encryption_key` - (Deprecated, use any value)
-* `calendar_secret` - Calendar export secret token
+* `calendar_token` - Calendar export secret token
 * `db_host` - Database server hostname
 * `db_port` - Database server port
 * `db_username` - Database server username
 * `db_password` - Database server password
 * `db_name` - Database name
+* `api_url_ssr` - URL used for API calls during client server-side rendering (SSR) (hint: use local URL to avoid traversing the network)
+* `api_url` - URL used by the browser for API calls
 
 ### Removing an environment
 

@@ -29,7 +29,7 @@ export class AcceptLeaveRequestAction {
   ) {}
 
   @Put(':id/accept')
-  @Roles(UserRole.COOPERATOR)
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({ summary: 'Accept leave request' })
   public async index(
     @Param() dto: IdDTO,

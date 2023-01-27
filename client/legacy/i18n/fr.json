@@ -267,7 +267,7 @@
       }
     },
     "payslips": {
-      "breadcrumb": "Fiches de paies",
+      "breadcrumb": "Éléments de paie",
       "title": "Éléments pour les fiches de paie",
       "user": "Salairé / stagiaire",
       "contract": "Type de contrat",
@@ -335,6 +335,10 @@
           "accept": "Accepter",
           "refuse": "Refuser"
         }
+      },
+      "calendar": {
+        "subscription_link": "Lien d'abonnement au calendrier",
+        "copy_subscription_link": "Copier l'URL dans le presse-papier"
       }
     },
     "users": {
