@@ -2,7 +2,6 @@
   import { isMobileMenuOpen } from "$lib/stores/layout";
   import BurgerIcon from "src/components/icons/BurgerIcon.svelte";
   import Profile from "./_Profile.svelte";
-  import Search from "./_Search.svelte";
   import ThemeToggler from "./_ThemeToggler.svelte";
 
   const toggleMobileMenu = () => {
@@ -12,7 +11,7 @@
 
 <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800" data-testid="outside">
   <div
-    class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300"
+    class="container flex items-center justify-between md:justify-end h-full px-6 mx-auto text-purple-600 dark:text-purple-300"
   >
     <button
       on:click={toggleMobileMenu}
@@ -23,10 +22,6 @@
     >
       <BurgerIcon aria-hidden="true" className={"w-6 h-6"} />
     </button>
-
-    <div class="flex justify-center flex-1 lg:mr-32">
-      <Search />
-    </div>
 
     <ul class="flex items-center flex-shrink-0 space-x-6">
       <li class="flex">

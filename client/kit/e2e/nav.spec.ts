@@ -4,7 +4,7 @@ import { STATE_AUTHENTICATED } from "./constants.js";
 test.use({ storageState: STATE_AUTHENTICATED });
 
 test("Visits pages listed in nav", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/kit");
 
   await page.getByRole("link", { name: "Tableau de bord" }).click();
   await page.waitForURL("/kit");
@@ -36,7 +36,7 @@ test("Visits pages listed in nav", async ({ page }) => {
   await page.getByRole("link", { name: "Congés" }).click();
   await page.waitForURL("/human_resources/leaves");
 
-  await page.getByRole("link", { name: "Fiches de paies" }).click();
+  await page.getByRole("link", { name: "Éléments de paie" }).click();
   await page.waitForURL("/human_resources/payslips");
 
   await page.getByRole("link", { name: "Tickets restaurant" }).click();
@@ -49,15 +49,9 @@ test("Visits pages listed in nav", async ({ page }) => {
   await page.waitForURL("/human_resources/users");
 });
 
-test("Fills the search bar", async ({ page }) => {
-  await page.goto("/");
-  await page.getByLabel("Rechercher").fill("Test");
-  expect(page.getByLabel("Rechercher")).toHaveValue("Test");
-});
-
 test.describe("Account settings", () => {
   test("Opens and closes the account settings menu", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/kit");
 
     const button = page.getByRole("button", { name: "Compte" });
     await button.waitFor();
@@ -72,7 +66,7 @@ test.describe("Account settings", () => {
   });
 
   test("Visits profile page through header", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/kit");
     await page.getByRole("button", { name: "Compte" }).click();
     await page.getByText("Mon compte").click();
     await page.waitForURL("/profile");

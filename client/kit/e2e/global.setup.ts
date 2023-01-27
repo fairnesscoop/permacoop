@@ -22,7 +22,7 @@ async function saveAuthenticatedState(
   const page = await browser.newPage({
     baseURL: config.projects[0].use.baseURL,
   });
-  await page.goto("/login");
+  await page.goto("/kit/login");
 
   await page.getByLabel("Adresse email").fill(email);
   await page.getByLabel("Mot de passe").fill(password);

@@ -31,7 +31,7 @@
       class="inline-flex ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
       href={paths.home}
     >
-      <img src="images/logo.png" class="h-8" alt="" />
+      <img src="/kit/images/logo.png" class="h-8" alt="" />
       <span class="ml-2">{$_("app")}</span>
     </a>
 
