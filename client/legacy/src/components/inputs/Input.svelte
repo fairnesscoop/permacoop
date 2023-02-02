@@ -70,6 +70,7 @@
       {placeholder}
       class={className}
       bind:this={input}
-      bind:value />
+      bind:value
+      {...$$restProps} />
   {/if}
 </div>
