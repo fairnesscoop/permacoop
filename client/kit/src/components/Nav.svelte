@@ -5,6 +5,7 @@
   import ChevronUpIcon from "./icons/ChevronUpIcon.svelte";
   import paths from "$lib/paths";
   import { clickOutside } from "$lib/actions";
+  import type { NavSection } from "$lib/navigation";
 
   export let sections: NavSection[];
 

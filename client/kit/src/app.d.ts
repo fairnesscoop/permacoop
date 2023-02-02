@@ -3,7 +3,7 @@
 // and what to do when importing types
 declare namespace App {
   interface Locals {
-    user: User | null;
+    user: import("src/lib/auth").User | null;
     theme: import("src/constants").Theme | null;
   }
   // interface PageData {}

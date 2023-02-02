@@ -13,6 +13,7 @@
   import UsersIcon from "src/components/icons/UsersIcon.svelte";
   import AccountingIcon from "src/components/icons/AccountingIcon.svelte";
   import type { LayoutData } from "./$types";
+  import type { NavSection } from "$lib/navigation";
 
   export let data: LayoutData;
 

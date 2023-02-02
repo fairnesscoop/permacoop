@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import { post } from "$lib/axios";
 import { writable } from "svelte/store";
 import { invalidate } from "$app/navigation";
+import type { User } from "$lib/auth";
 
 export const user = writable<User | null>();
 

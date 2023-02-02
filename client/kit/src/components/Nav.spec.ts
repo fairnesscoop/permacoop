@@ -3,6 +3,7 @@
  */
 import "@testing-library/jest-dom";
 import { render, getByRole, queryAllByTestId, queryByRole } from "@testing-library/svelte";
+import type { NavSection } from "$lib/navigation";
 import UsersIcon from "./icons/UsersIcon.svelte";
 import Nav from "./Nav.svelte";
 
