@@ -22,6 +22,11 @@
   become: true
   notify: reload nginx
 
+- name: Ensure client-proxy is running
+  supervisorctl: name=client-proxy state=present
+  become: true
+  notify: reload nginx
+
 - name: Ensure supervisor has reloaded
   service: name=supervisor state=reloaded
   become: true

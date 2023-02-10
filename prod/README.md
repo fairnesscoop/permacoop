@@ -185,19 +185,13 @@ permacoop $ cd ansible
 permacoop/ansible $ make vagrant CMD=up
 ```
 
-Enter the VM with SSH. The following command also creates an SSH tunnel between your host machine and the VM for PostgreSQL and Nginx. This allows you to access the deployed service at http://localhost:3080, while allowing the deployed service to access the database on your host ([credit](https://stackoverflow.com/a/28506841)).
-
-```console
-permacoop/ansible $ vagrant ssh -- -R 5432:localhost:5432 -L 3080:localhost:80
-```
-
 Check with a `ping`:
 
 ```console
 permacoop/ansible $ make ping env=vagrant
 ```
 
-In a separate terminal, open SSH tunnels (database, deployed nginx):
+In a separate terminal, open SSH tunnels between the host and the VM (allow the VM to access PostgreSQL on the host).
 
 ```console
 permacoop/ansible $ make vagrant-ssh
