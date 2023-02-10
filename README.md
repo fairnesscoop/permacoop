@@ -46,6 +46,21 @@ In a separate terminal, run database migrations:
 make database-migrate
 ```
 
+Then, you can seed the database with fake data
+
+```
+make seed-database
+```
+
+This command will create the default user "John Doe" :
+
+```json
+{
+  "email": "john@doe.com",
+  "password": "john"
+}
+```
+
 The server and client will be started:
 
 - API documentation available on <http://localhost:3000/api>
@@ -114,14 +129,6 @@ make database-migration NAME=add_some_column
 
 The client must send the user `apiToken` in the Authorization header when making requests to protected resources : `Authorization: Bearer <apiToken>`
 
-At the installation of the project a default user was created :
-
-```json
-{
-  "email": "john@doe.com",
-  "password": "john"
-}
-```
 
 To retrieve the `apiToken`, make a post request on `/login` with a user email and password.
 

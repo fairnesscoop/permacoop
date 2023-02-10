@@ -18,4 +18,4 @@ export const dataSourceOptions: DataSourceOptions = {
 };
 
 // For use by TypeORM CLI.
-export const dataSource = new DataSource(dataSourceOptions);
+export default new DataSource(dataSourceOptions);
