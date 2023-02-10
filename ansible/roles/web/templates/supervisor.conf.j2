@@ -16,6 +16,15 @@ autorestart=true
 stderr_logfile=/var/log/client-kit.err.log
 stdout_logfile=/var/log/client-kit.out.log
 
+[program:client-proxy]
+directory={{ workdir }}/client/proxy
+command=node index.cjs
+environment=HOST=127.0.0.1,NODE_ENV=production,LEGACY_PORT="{{ client_legacy_port }}",KIT_PORT="{{ client_kit_port }}",PORT="{{ client_proxy_port }}"
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/client-proxy.err.log
+stdout_logfile=/var/log/client-proxy.out.log
+
 [program:api]
 directory={{ workdir }}/server
 command=node ./dist/src/main.js

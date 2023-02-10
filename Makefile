@@ -8,20 +8,24 @@ run_api = ./tools/colorize_prefix.sh [api] 30
 run_client_legacy = ./tools/colorize_prefix.sh [client:legacy] 31
 run_client_legacy_tailwind = ./tools/colorize_prefix.sh [client:legacy:tailwind] "38;5;52"
 run_client_kit = ./tools/colorize_prefix.sh [client:kit] "38;5;202"
+run_client_proxy = ./tools/colorize_prefix.sh [client:proxy] 32
 
+client_proxy_port = 3001
 client_legacy_port = 3002
 client_kit_port = 3003
 
 install: ## Install API and client
 	make install-api
 	make install-client
-	make database-test-init
+ifneq ($(ANSIBLE),1)
+		make install-dev
+endif
 
 install-api: ## Install API
 	cp -n server/.env.dist server/.env
 	cd server && npm ci
 
-install-client: install-client-legacy install-client-kit ## Install client
+install-client: install-client-legacy install-client-kit install-client-proxy ## Install client
 
 install-client-legacy: ## Install legacy client
 	cp -n client/legacy/.env.dist client/legacy/.env
@@ -30,18 +34,25 @@ install-client-legacy: ## Install legacy client
 install-client-kit: ## Install SvelteKit client
 	cd client/kit && npm ci
 
+install-client-proxy: ## Install client proxy
+	cd client/proxy && npm ci
+
 install-client-e2e: ## Install E2E client dependencies
 	cd client/kit && npx playwright install firefox
 
+install-dev: ## Install local development dependencies and services
+	make up
+	make database-test-init
+
 start: ## Start containers, API and client
-	make compose CMD="up -d"
+	make up
 	make -j 2 start-api start-client
 
 start-api: ## Run API
 	${run_api} "cd server && npm run start:dev"
 
 start-client: ## Run client
-	make -j 2 start-client-legacy start-client-kit
+	make -j 3 start-client-legacy start-client-kit start-client-proxy
 
 start-client-legacy: ## Run legacy client
 	make -j 2 start-client-legacy-dev start-client-legacy-tailwind
@@ -55,11 +66,20 @@ start-client-legacy-tailwind:
 start-client-kit: ## Run SvelteKit client
 	PORT=${client_kit_port} ${run_client_kit} "cd client/kit && npm run dev"
 
+start-client-proxy: ## Start client proxy
+	LEGACY_PORT=${client_legacy_port} KIT_PORT=${client_kit_port} PORT=${client_proxy_port} ${run_client_proxy} "cd client/proxy && npm run dev"
+
 compose: ## Run Docker compose command (args: CMD)
 	${compose} ${CMD}
 
+up: ## Start containers
+	make compose CMD="up -d"
+
 stop: ## Stop containers
 	make compose CMD=stop
+
+restart: ## Restart containers
+	make compose CMD=restart
 
 rm: stop  ## Stop and remove containers
 	make compose CMD=rm
@@ -87,7 +107,7 @@ start-dist-api: ## Serve built API
 	${run_api} "cd server && npm run start:prod"
 
 start-dist-client: ## Serve built client
-	make -j 2 start-dist-client-legacy start-dist-client-kit
+	make -j 3 start-dist-client-legacy start-dist-client-kit start-client-proxy
 
 start-dist-client-legacy: ## Serve built legacy client
 	PORT=${client_legacy_port} ${run_client_legacy} "cd client/legacy && npm run start"

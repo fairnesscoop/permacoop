@@ -5,7 +5,8 @@ git_repo: "https://github.com/fairnesscoop/permacoop.git"
 letsencrypt_email: "equipe@fairness.coop"
 
 api_port: 3000
-client_legacy_port: 3001
-client_kit_port: 3002
+client_proxy_port: 3001
+client_legacy_port: 3002
+client_kit_port: 3003
 
 domain_name: "{{ inventory_hostname }}"
