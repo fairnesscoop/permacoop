@@ -1,12 +1,13 @@
 <script lang="ts">
   import Cookies from "js-cookie";
-  import { gotoSapper } from "$lib/navigation";
+  import { gotoSapper, ROUTES } from "$lib/navigation";
   import { _ } from "$lib/i18n";
   import { post, type AxiosError } from "$lib/axios";
   import { errorNormalizer } from "$lib/errors/normalizer";
-  import ServerErrors from "src/components/ServerErrors.svelte";
-  import Input from "src/components/inputs/Input.svelte";
-  import Button from "src/components/inputs/Button.svelte";
+  import ServerErrors from "src/components/Mollecules/ServerErrors/ServerErrors.svelte";
+  import Input from "src/components/Atoms/Input/Input.svelte";
+  import Button from "src/components/Atoms/Input/Button.svelte";
+  import { goto } from "$app/navigation";
 
   let errors: string[] = [];
   let email = "";
@@ -26,7 +27,7 @@
         secure: process.env.NODE_ENV === "production",
       });
 
-      await gotoSapper("/");
+      await goto(ROUTES.home);
     } catch (e) {
       errors = errorNormalizer(e as AxiosError);
     } finally {

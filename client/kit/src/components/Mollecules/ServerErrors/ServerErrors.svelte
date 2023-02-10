@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from "$lib/i18n";
-  import ErrorIcon from "./icons/ErrorIcon.svelte";
+  import ErrorIcon from "../../icons/ErrorIcon.svelte";
   export let errors: string[] = [];
 </script>
 

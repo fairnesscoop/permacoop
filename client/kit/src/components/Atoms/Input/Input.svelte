@@ -1,6 +1,6 @@
 <script lang="ts">
   import shortid from "$lib/shortid";
-  import RequiredMarker from "../RequiredMarker.svelte";
+  import RequiredMarker from "../RequiredMarker/RequiredMarker.svelte";
 
   export let type = "text";
   export let value: string;
