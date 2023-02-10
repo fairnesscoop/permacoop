@@ -118,6 +118,7 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
     const query = this.repository
       .createQueryBuilder('leaveRequest')
       .select([
+        'leaveRequest.id',
         'leaveRequest.startDate',
         'leaveRequest.endDate',
         'user.firstName',
