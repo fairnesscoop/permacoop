@@ -135,11 +135,13 @@ test-client-kit-unit: ## Run SvelteKit client unit tests
 	cd client/kit && npm run test:coverage
 
 test-client-e2e: ## Run client E2E tests (servers must be running)
+	make database-seed
 	cd client/kit && npm run test-e2e
 
 test-client-ci: test-client test-client-e2e-ci
 
 test-client-e2e-ci: ## Run client E2E tests
+	make database-seed
 	cd client/kit && npm run test-e2e:ci
 
 linter: linter-api linter-client ## Run linters
@@ -174,6 +176,8 @@ database-test-init: ## Initialize test database
 
 database-migration: ## Generate a database migration
 	cd server && npm run migration:generate -- migrations/$(NAME)
+database-seed: ## Seed database
+	cd server && npm run build && npm run seed:run
 
 database-connect: ## Connect to the database container
 	${compose} exec database psql -h database -d permacoop
