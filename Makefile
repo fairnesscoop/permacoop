@@ -15,7 +15,9 @@ client_kit_port = 3003
 install: ## Install API and client
 	make install-api
 	make install-client
-	make database-test-init
+ifneq ($(ANSIBLE),1)
+		make install-dev
+endif
 
 install-api: ## Install API
 	cp -n server/.env.dist server/.env
@@ -33,8 +35,12 @@ install-client-kit: ## Install SvelteKit client
 install-client-e2e: ## Install E2E client dependencies
 	cd client/kit && npx playwright install firefox
 
+install-dev: ## Install local development dependencies and services
+	make up
+	make database-test-init
+
 start: ## Start containers, API and client
-	make compose CMD="up -d"
+	make up
 	make -j 2 start-api start-client
 
 start-api: ## Run API
@@ -58,8 +64,14 @@ start-client-kit: ## Run SvelteKit client
 compose: ## Run Docker compose command (args: CMD)
 	${compose} ${CMD}
 
+up: ## Start containers
+	make compose CMD="up -d"
+
 stop: ## Stop containers
 	make compose CMD=stop
+
+restart: ## Restart containers
+	make compose CMD=restart
 
 rm: stop  ## Stop and remove containers
 	make compose CMD=rm
