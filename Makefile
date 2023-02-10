@@ -172,8 +172,8 @@ database-test-init: ## Initialize test database
 	make compose CMD="exec -T database createdb permacoop_test" || echo 'Does the test DB already exist? Ignoring...'
 	DATABASE_NAME=permacoop_test make database-migrate
 
-database-diff: ## Generate database diff
-	cd server && npm run migration:diff -- migrations/$(MIGRATION_NAME)
+database-migration: ## Generate a database migration
+	cd server && npm run migration:generate -- migrations/$(NAME)
 
 database-connect: ## Connect to the database container
 	${compose} exec database psql -h database -d permacoop
