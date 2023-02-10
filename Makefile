@@ -15,8 +15,9 @@ client_kit_port = 3003
 install: ## Install API and client
 	make install-api
 	make install-client
-	make up
-	make database-test-init
+ifneq ($(ANSIBLE),1)
+		make install-dev
+endif
 
 install-api: ## Install API
 	cp -n server/.env.dist server/.env
@@ -33,6 +34,10 @@ install-client-kit: ## Install SvelteKit client
 
 install-client-e2e: ## Install E2E client dependencies
 	cd client/kit && npx playwright install firefox
+
+install-dev: ## Install local development dependencies and services
+	make up
+	make database-test-init
 
 start: ## Start containers, API and client
 	make up
