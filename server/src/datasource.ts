@@ -12,10 +12,9 @@ export const dataSourceOptions: DataSourceOptions = {
   database: process.env.DATABASE_NAME,
   synchronize: false,
   logging: ['error'],
-  entities: ['dist/src/Domain/**/*.entity{.ts,.js}'],
-  migrations: ['dist/migrations/**/*{.ts,.js}'],
+  entities: ['src/Domain/**/*.entity{.ts,.js}'],
+  migrations: ['migrations/**/*{.ts,.js}'],
   migrationsTableName: 'migrations'
 };
 
-// For use by TypeORM CLI.
-export default new DataSource(dataSourceOptions);
+export const dataSource = new DataSource(dataSourceOptions);

@@ -135,13 +135,11 @@ test-client-kit-unit: ## Run SvelteKit client unit tests
 	cd client/kit && npm run test:coverage
 
 test-client-e2e: ## Run client E2E tests (servers must be running)
-	make database-seed
 	cd client/kit && npm run test-e2e
 
 test-client-ci: test-client test-client-e2e-ci
 
 test-client-e2e-ci: ## Run client E2E tests
-	make database-seed
 	cd client/kit && npm run test-e2e:ci
 
 linter: linter-api linter-client ## Run linters
@@ -172,12 +170,18 @@ database-migrate: ## Database migrations
 
 database-test-init: ## Initialize test database
 	make compose CMD="exec -T database createdb permacoop_test" || echo 'Does the test DB already exist? Ignoring...'
-	DATABASE_NAME=permacoop_test make database-migrate
+	DATABASE_NAME=permacoop_test make database-reset
+	DATABASE_NAME=permacoop_test make database-seed
 
 database-migration: ## Generate a database migration
 	cd server && npm run migration:generate -- migrations/$(NAME)
+
 database-seed: ## Seed database
-	cd server && npm run build && npm run seed:run
+	cd server && npm run seed:run
+
+database-reset: ## Reset database
+	cd server && npm run migration:drop
+	make database-migrate
 
 database-connect: ## Connect to the database container
 	${compose} exec database psql -h database -d permacoop

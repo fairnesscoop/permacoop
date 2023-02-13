@@ -19,13 +19,10 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "npm run typeorm -- migration:generate -d src/datasource.ts",
     "migration:migrate": "npm run typeorm -- migration:run -d src/datasource.ts",
-    "migration:drop": "npm run typeorm -- schema:drop",
-    "seed:config": "typeorm-seeding config -r ./dist -c seeding.js",
-    "seed:run": "typeorm-seeding seed -r ./dist -c seeding.js"
+    "migration:drop": "npm run typeorm -- schema:drop -d src/datasource.ts",
+    "seed:run": "ts-node ./node_modules/@jorgebodega/typeorm-seeding/dist/cli.js -d src/datasource.ts seed 'src/Infrastructure/Persistence/Seeders/*.ts'"
   },
   "dependencies": {
-    "@concepta/typeorm-seeding": "^4.0.0-beta.0",
-    "@faker-js/faker": "^7.6.0",
     "@nestjs/common": "^9.2.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.2.0",
@@ -51,6 +48,7 @@
     "typescript": "^4.9.3"
   },
   "devDependencies": {
+    "@jorgebodega/typeorm-seeding": "^6.0.1",
     "@nestjs/cli": "^9.1.5",
     "@nestjs/schematics": "^9.0.3",
     "@nestjs/testing": "^9.2.0",

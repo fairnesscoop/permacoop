@@ -46,13 +46,13 @@ In a separate terminal, run database migrations:
 make database-migrate
 ```
 
-Then, you can seed the database with fake data
+Then, add seed data to the database:
 
 ```
-make seed-database
+make database-seed
 ```
 
-This command will create the default user "John Doe" :
+This command will create the default user "John Doe":
 
 ```json
 {
@@ -117,12 +117,19 @@ To run linters and code checks, use:
 make linter
 ```
 
-### Database migrations
+### Database
 
 To generate a migration from the current state of the code, run:
 
 ```bash
 make database-migration NAME=add_some_column
+```
+
+To reset the database with seeded data, run:
+
+```bash
+make database-reset
+make database-seed
 ```
 
 ## Security
