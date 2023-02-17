@@ -1,10 +1,5 @@
 import { goto } from "$app/navigation";
 
-export const ROUTES = {
-  home: "/kit",
-  leaveRequest: "/kit/human_resources/leaves",
-};
-
 // This helper exists to mark places where we intend to redirect
 // to a page that we know is still managed by Sapper.
 // We will see a 404 error in the web console, because SvelteKit will try

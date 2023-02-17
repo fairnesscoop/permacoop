@@ -1,13 +1,12 @@
 <script lang="ts">
   import Cookies from "js-cookie";
-  import { gotoSapper, ROUTES } from "$lib/navigation";
+  import { gotoSapper } from "$lib/navigation";
   import { _ } from "$lib/i18n";
   import { post, type AxiosError } from "$lib/axios";
   import { errorNormalizer } from "$lib/errors/normalizer";
-  import ServerErrors from "src/components/Mollecules/ServerErrors/ServerErrors.svelte";
-  import Input from "src/components/Atoms/Input/Input.svelte";
-  import Button from "src/components/Atoms/Input/Button.svelte";
-  import { goto } from "$app/navigation";
+  import ServerErrors from "src/components/ServerErrors.svelte";
+  import Input from "src/components/inputs/Input.svelte";
+  import Button from "src/components/inputs/Button.svelte";
 
   let errors: string[] = [];
   let email = "";
@@ -27,7 +26,7 @@
         secure: process.env.NODE_ENV === "production",
       });
 
-      await goto(ROUTES.home);
+      await gotoSapper("/");
     } catch (e) {
       errors = errorNormalizer(e as AxiosError);
     } finally {
@@ -40,7 +39,7 @@
   <title>{$_("login.title")} - {$_("app")}</title>
 </svelte:head>
 
-<div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+<main class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
   <div
     class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800"
   >
@@ -70,4 +69,4 @@
       </form>
     </div>
   </div>
-</div>
+</main>

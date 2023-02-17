@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { LoginPage } from "./fixtures/LoginPage.js";
+import { LoginPage } from "./pages/loginPage.js";
 
 test("Login page has expected h1", async ({ page }) => {
   await page.goto("/kit/login");
