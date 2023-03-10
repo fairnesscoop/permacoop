@@ -6,5 +6,7 @@ export class removeInvoices1678458554609 implements MigrationInterface {
     await queryRunner.query(`DROP TABLE "invoice"`);
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {}
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    // noop.
+  }
 }
