@@ -27,7 +27,7 @@ export class DeleteLeaveRequestAction {
   ) {}
 
   @Delete(':id')
-  @Roles(UserRole.COOPERATOR)
+  @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({ summary: 'Delete leave request' })
   public async index(@Param() { id }: IdDTO, @LoggedUser() user: User) {
     try {
