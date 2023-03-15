@@ -81,7 +81,8 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
 
   public findLeaveRequests(
     page: number,
-    status?: Status
+    status?: Status,
+    limit?: number
   ): Promise<[LeaveRequest[], number]> {
     const query = this.repository
       .createQueryBuilder('leaveRequest')
@@ -99,9 +100,7 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
       ])
       .innerJoin('leaveRequest.user', 'user')
       .orderBy('leaveRequest.status', 'DESC')
-      .addOrderBy('leaveRequest.startDate', 'DESC')
-      .limit(MAX_ITEMS_PER_PAGE)
-      .offset((page - 1) * MAX_ITEMS_PER_PAGE);
+      .addOrderBy('leaveRequest.startDate', 'DESC');
 
     if (status) {
       query.where('leaveRequest.status = :status', { status });
@@ -109,6 +108,12 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
       query.where('leaveRequest.status != :status', {
         status: Status.ACCEPTED
       });
+    }
+
+    if (limit) {
+      query.limit(limit).offset((page - 1) * limit);
+    } else {
+      query.limit(MAX_ITEMS_PER_PAGE).offset((page - 1) * MAX_ITEMS_PER_PAGE);
     }
 
     return query.getManyAndCount();

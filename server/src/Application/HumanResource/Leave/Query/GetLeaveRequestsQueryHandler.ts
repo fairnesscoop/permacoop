@@ -25,13 +25,18 @@ export class GetLeaveRequestsQueryHandler {
   public async execute({
     currentUserId,
     page,
-    status
+    status,
+    limit
   }: GetLeaveRequestsQuery): Promise<Pagination<LeaveRequestView>> {
     const leaveRequestViews: LeaveRequestView[] = [];
     const [
       leaveRequests,
       total
-    ] = await this.leaveRequestRepository.findLeaveRequests(page, status);
+    ] = await this.leaveRequestRepository.findLeaveRequests(
+      page,
+      status,
+      limit
+    );
 
     const currentUser = await this.userRepository.findOneById(currentUserId);
     if (!currentUser) {

@@ -7,7 +7,8 @@ export interface ILeaveRequestRepository {
   findOneById(id: string): Promise<LeaveRequest | undefined>;
   findLeaveRequests(
     page: number,
-    status?: Status
+    status?: Status,
+    limit?: number
   ): Promise<[LeaveRequest[], number]>;
   findExistingLeaveRequestsByUserAndPeriod(
     user: User,
