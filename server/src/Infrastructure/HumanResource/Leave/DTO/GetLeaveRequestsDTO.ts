@@ -8,7 +8,6 @@ export class GetLeaveRequestsDTO extends PaginationDTO {
   @IsOptional()
   @ApiPropertyOptional()
   @IsPositive()
-  @Type(() => Number)
   public limit: number;
 
   @IsOptional()
