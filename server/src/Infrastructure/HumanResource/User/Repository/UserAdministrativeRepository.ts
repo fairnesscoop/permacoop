@@ -26,7 +26,8 @@ export class UserAdministrativeRepository
         'userAdministrative.healthInsurance',
         'userAdministrative.executivePosition',
         'userAdministrative.contract',
-        'userAdministrative.workingTime'
+        'userAdministrative.workingTime',
+        'userAdministrative.sustainableMobilityFee'
       ])
       .innerJoin('userAdministrative.user', 'user')
       .where('user.id = :userId', { userId })
