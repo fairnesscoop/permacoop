@@ -3,11 +3,12 @@
   import { createEventDispatcher } from 'svelte';
   import { range } from 'utils/array';
 
-  const itemsPerPage = 30;
-
+  export let limit;
   export let currentPage;
   export let pageCount;
   export let totalItems;
+
+  const itemsPerPage = limit || 30;
 
   $: start = (currentPage - 1) * itemsPerPage + 1;
   $: from = Math.min(totalItems, start + itemsPerPage - 1);
