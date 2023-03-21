@@ -118,7 +118,7 @@ start-dist-client-kit: ## Serve built client
 test: test-api test-client-unit ## Run test suite
 
 test-api: ## Run API tests
-	cd server && npm run test -- $(FILE)
+	cd server && npm run test
 
 test-api-watch: ## Run API tests in watch mode
 	cd server && npm run test:watch
