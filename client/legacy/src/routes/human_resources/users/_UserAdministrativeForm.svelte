@@ -57,18 +57,25 @@
   </div>
 </div>
 <div class="flex">
-  <div class="w-1/2 pr-2">
+  <div class="w-1/3 pr-2">
     <Input
       type={'money'}
       label={$_('human_resources.users.form.annual_earnings')}
       bind:value={userAdministrative.annualEarnings} />
   </div>
-  <div class="w-1/2 pl-2">
+  <div class="w-1/3 pr-2">
     <Input
       type={'money'}
       label={$_('human_resources.users.form.transport_fee')}
       required={false}
       bind:value={userAdministrative.transportFee} />
+  </div>
+  <div class="w-1/3">
+    <Input
+      type={'money'}
+      label={$_('human_resources.users.form.sustainable_mobility_fee')}
+      required={false}
+      bind:value={userAdministrative.sustainableMobilityFee} />
   </div>
 </div>
 <div class="flex">
