@@ -59,7 +59,7 @@ import { CooperativeRepository } from '../Settings/Repository/CooperativeReposit
     GetDailyRatesAction,
     GetDailyRateAction,
     UpdateDailyRateAction,
-    GetQuotesAction,
+    GetQuotesAction
   ],
   providers: [
     { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
@@ -80,7 +80,7 @@ import { CooperativeRepository } from '../Settings/Repository/CooperativeReposit
     GetDailyRatesQueryHandler,
     UpdateDailyRateCommandHandler,
     GetQuotesQueryHandler,
-    GetDailyRateByIdQueryHandler,
+    GetDailyRateByIdQueryHandler
   ]
 })
 export class AccountingModule {}
