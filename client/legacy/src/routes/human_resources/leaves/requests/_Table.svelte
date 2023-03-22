@@ -62,8 +62,8 @@
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
             <SeeLink href={`/human_resources/leaves/requests/${id}/view`} />
+            <EditLink href={`/human_resources/leaves/requests/${id}/edit`} />
             {#if $session.user && $session.user.id === user.id}
-              <EditLink href={`/human_resources/leaves/requests/${id}/edit`} />
               <DeleteLink
                 on:confirm={() => dispatch('delete', id)}
                 confirmMessage={$_('human_resources.leaves.requests.confirm')} />
