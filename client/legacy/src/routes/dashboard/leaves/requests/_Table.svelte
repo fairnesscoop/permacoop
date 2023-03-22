@@ -48,7 +48,7 @@
         </td>
         <td class="px-4 py-3">
           <div class="flex items-center space-x-4 text-sm">
-            {#if $session.user && $session.user.id === user.id}
+            {#if $session.user.id === user.id}
               <EditLink href={`/human_resources/leaves/requests/${id}/edit`} />
             {:else}
               <SeeLink href={`/human_resources/leaves/requests/${id}/view`} />
