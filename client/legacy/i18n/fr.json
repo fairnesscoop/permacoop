@@ -417,7 +417,14 @@
   },
   "dashboard": {
     "title": "Tableau de bord",
-    "welcome": "Bonjour {firstName} {lastName} !"
+    "welcome": "Bonjour {firstName} {lastName} !",
+    "leave_requests": {
+      "pending": {
+        "singular": "demande de congé est en attente de validation.",
+        "plural": "demandes de congé sont en attente de valitation."
+      },
+      "none": "Aucune demandes de congés en attente."
+    }
   },
   "settings": {
     "errors": {
