@@ -12,9 +12,10 @@ import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { ICommandBus } from 'src/Application/ICommandBus';
 import { LeaveRequestDTO } from '../DTO/LeaveRequestDTO';
 import { RolesGuard } from 'src/Infrastructure/HumanResource/User/Security/RolesGuard';
-import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
 import { Roles } from 'src/Infrastructure/HumanResource/User/Decorator/Roles';
 import { UpdateLeaveRequestCommand } from 'src/Application/HumanResource/Leave/Command/UpdateLeaveRequestCommand';
+import { LoggedUser } from '../../User/Decorator/LoggedUser';
 
 @Controller('leave-requests')
 @ApiTags('Human Resource')
@@ -29,7 +30,11 @@ export class UpdateLeaveRequestAction {
   @Put(':id')
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({ summary: 'Update existing leave request' })
-  public async index(@Param() { id }, @Body() dto: LeaveRequestDTO) {
+  public async index(
+    @Param() { id },
+    @Body() dto: LeaveRequestDTO,
+    @LoggedUser() user: User
+  ) {
     const { type, startDate, startsAllDay, endDate, endsAllDay, comment } = dto;
 
     try {
@@ -41,6 +46,7 @@ export class UpdateLeaveRequestAction {
           startsAllDay,
           endDate,
           endsAllDay,
+          user,
           comment
         )
       );

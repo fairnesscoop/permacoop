@@ -56,7 +56,7 @@ import { MealTicketRemovalRepository } from './MealTicket/Repository/MealTicketR
 import { IsMealTicketRemovalAlreadyExist } from 'src/Domain/HumanResource/MealTicket/Specification/IsMealTicketRemovalAlreadyExist';
 import { CreateMealTicketRemovalCommandHandler } from 'src/Application/HumanResource/MealTicket/Command/CreateMealTicketRemovalCommandHandler';
 import { CreateMealTicketRemovalAction } from './MealTicket/Action/CreateMealTicketRemovalAction';
-import { CanLeaveRequestBeRemoved } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeRemoved';
+import { DoesLeaveRequestBelongsToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongsToUser';
 import { DeleteLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/DeleteLeaveRequestCommandHandler';
 import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestAction';
 import { GetAvailableMealTicketsAction } from './MealTicket/Action/GetAvailableMealTicketsAction';
@@ -167,7 +167,7 @@ import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Lea
     GetLeavesCalendarQueryHandler,
     GetLeaveRequestByIdQueryHandler,
     DoesLeaveExistForPeriod,
-    CanLeaveRequestBeRemoved,
+    DoesLeaveRequestBelongsToUser,
     DeleteLeaveRequestCommandHandler,
     IsMealTicketRemovalAlreadyExist,
     CreateMealTicketRemovalCommandHandler,
