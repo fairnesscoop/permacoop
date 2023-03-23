@@ -1,6 +1,7 @@
 import { Factory } from '@concepta/typeorm-seeding';
 import { faker } from '@faker-js/faker';
 import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { UserAdministrativeFactory } from './UserAdministrativeFactory';
 
 export class UserFactory extends Factory<User> {
   protected async entity(): Promise<User> {
@@ -13,6 +14,12 @@ export class UserFactory extends Factory<User> {
       UserRole.COOPERATOR
     );
     return user;
+  }
+
+  protected async finalize(entity: User): Promise<void> {
+    entity.userAdministrative = await this.factory(
+      UserAdministrativeFactory
+    ).create();
   }
 }
 
@@ -27,5 +34,11 @@ export class JohnFactory extends Factory<User> {
       UserRole.COOPERATOR
     );
     return user;
+  }
+
+  protected async finalize(entity: User): Promise<void> {
+    entity.userAdministrative = await this.factory(
+      UserAdministrativeFactory
+    ).create();
   }
 }
