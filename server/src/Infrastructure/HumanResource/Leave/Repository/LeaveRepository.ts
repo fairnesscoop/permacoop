@@ -68,4 +68,22 @@ export class LeaveRepository implements ILeaveRepository {
 
     return Number(result.time) || 0;
   }
+
+  public async yearlyLeavesSummary(year: number): Promise<any> {
+    // need to type Promise return, don't really know how to do since it's custom
+    const result = await this.repository
+      .createQueryBuilder('leave')
+      .select([
+        'SUM(time) as total_time',
+        'user.firstName as first_name',
+        'user.lastName as last_name'
+      ])
+      .where('EXTRACT(YEAR FROM leave.date) = :year', { year })
+      .innerJoin('leave.leaveRequest', 'leaveRequest')
+      .innerJoin('leaveRequest.user', 'user')
+      .groupBy('user.id')
+      .getRawMany();
+
+    return result;
+  }
 }

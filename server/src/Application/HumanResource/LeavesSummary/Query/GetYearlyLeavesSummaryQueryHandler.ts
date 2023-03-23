@@ -14,7 +14,22 @@ export class GetYearlyLeavesSummaryQueryHandler {
   public async execute(
     query: GetYearlyLeavesSummaryQuery
   ): Promise<LeavesSummaryView[]> {
-    const leavesSummaries: LeavesSummaryView[] = [new LeavesSummaryView(420)];
-    return leavesSummaries;
+    const yearlyLeavesSummaries = await this.leaveRepository.yearlyLeavesSummary(
+      2023
+    );
+
+    const MAXIMUM_LEAVE_TIME_ALLOWED = 420 * 5 * 7;
+
+    const leavesSummaryViews = yearlyLeavesSummaries.map(
+      ({ total_time, first_name, last_name }) =>
+        new LeavesSummaryView(
+          total_time,
+          MAXIMUM_LEAVE_TIME_ALLOWED - total_time,
+          first_name,
+          last_name
+        )
+    );
+
+    return leavesSummaryViews;
   }
 }

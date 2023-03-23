@@ -10,4 +10,6 @@ export interface ILeaveRepository {
     endDate: string
   ): Promise<number>;
   sumOfDurationLeaveByUserAndDate(user: User, date: string): Promise<number>;
+  yearlyLeavesSummary(year: number): Promise<any[]>;
+  // need to type Promise return, don't really know how to do since it's custom
 }
