@@ -75,6 +75,8 @@ import { GetUsersElementsQueryHandler } from 'src/Application/HumanResource/Pays
 import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesByMonthQueryHandler';
 import { GetLeavesCalendarAction } from './Leave/Action/GetLeavesCalendarAction';
 import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesCalendarQueryHandler';
+import { GetYearlyLeavesSummaryAction } from './LeavesSummary/Action/GetYearlyLeavesSummaryAction';
+import { GetYearlyLeavesSummaryQueryHandler } from 'src/Application/HumanResource/LeavesSummary/Query/GetYearlyLeavesSummaryQueryHandler';
 
 @Module({
   imports: [
@@ -116,7 +118,8 @@ import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Lea
     DeleteLeaveRequestAction,
     CreateMealTicketRemovalAction,
     UpdateLeaveRequestAction,
-    IncreaseUserSavingsRecordAction
+    IncreaseUserSavingsRecordAction,
+    GetYearlyLeavesSummaryAction
   ],
   providers: [
     { provide: 'IUserRepository', useClass: UserRepository },
@@ -173,7 +176,8 @@ import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Lea
     CreateMealTicketRemovalCommandHandler,
     GetMealTicketsPerMonthQueryHandler,
     UpdateLeaveRequestCommandHandler,
-    IncreaseUserSavingsRecordCommandHandler
+    IncreaseUserSavingsRecordCommandHandler,
+    GetYearlyLeavesSummaryQueryHandler
   ]
 })
 export class HumanResourceModule {}
