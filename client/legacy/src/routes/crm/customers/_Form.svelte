@@ -11,7 +11,6 @@
 
   const address = customer.address;
   const dispatch = createEventDispatcher();
-  const zipCodePattern = /\d{5}/;
 
   const submit = () => {
     dispatch('save', customer);
@@ -25,7 +24,7 @@
   <Input label={$_('crm.customers.form.address')} bind:value={address.street} />
   <Input
     label={$_('crm.customers.form.zip_code')}
-    bind:value={address.zipCode} pattern={zipCodePattern} />
+    bind:value={address.zipCode} pattern={'\\d{5}'} />
   <Input label={$_('crm.customers.form.city')} bind:value={address.city} />
   <SelectInput
     label={$_('crm.customers.form.country')}
