@@ -6,7 +6,7 @@ import {
 import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRequestRepository';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRequestRepository';
-import { DoesLeaveRequestBelongsToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongsToUser';
+import { DoesLeaveRequestBelongToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongToUser';
 import { anything, deepEqual, instance, mock, verify, when } from 'ts-mockito';
 import { UpdateLeaveRequestCommand } from './UpdateLeaveRequestCommand';
 import { UpdateLeaveRequestCommandHandler } from './UpdateLeaveRequestCommandHandler';
@@ -14,7 +14,7 @@ import { LeaveRequestCantBeUpdatedException } from 'src/Domain/HumanResource/Lea
 
 describe('UpdateLeaveRequestCommandHandler', () => {
   let leaveRequestRepository: ILeaveRequestRepository;
-  let doesLeaveRequestBelongsToUser: DoesLeaveRequestBelongsToUser;
+  let doesLeaveRequestBelongToUser: DoesLeaveRequestBelongToUser;
   const user = mock(User);
   let commandHandler: UpdateLeaveRequestCommandHandler;
 
@@ -35,11 +35,11 @@ describe('UpdateLeaveRequestCommandHandler', () => {
 
   beforeEach(() => {
     leaveRequestRepository = mock(LeaveRequestRepository);
-    doesLeaveRequestBelongsToUser = mock(DoesLeaveRequestBelongsToUser);
+    doesLeaveRequestBelongToUser = mock(DoesLeaveRequestBelongToUser);
 
     commandHandler = new UpdateLeaveRequestCommandHandler(
       instance(leaveRequestRepository),
-      instance(doesLeaveRequestBelongsToUser)
+      instance(doesLeaveRequestBelongToUser)
     );
   });
 
@@ -68,7 +68,7 @@ describe('UpdateLeaveRequestCommandHandler', () => {
 
     when(leaveRequestRepository.findOneById(id)).thenResolve(leaveRequest);
     when(
-      doesLeaveRequestBelongsToUser.isSatisfiedBy(
+      doesLeaveRequestBelongToUser.isSatisfiedBy(
         instance(leaveRequest),
         instance(user)
       )
@@ -87,7 +87,7 @@ describe('UpdateLeaveRequestCommandHandler', () => {
         )
       ).once();
       verify(
-        doesLeaveRequestBelongsToUser.isSatisfiedBy(anything(), anything())
+        doesLeaveRequestBelongToUser.isSatisfiedBy(anything(), anything())
       ).never();
       verify(leaveRequestRepository.save(anything())).never();
     }

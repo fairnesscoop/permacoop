@@ -3,7 +3,7 @@ import { CommandHandler } from '@nestjs/cqrs';
 import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRequestRepository';
 import { UpdateLeaveRequestCommand } from './UpdateLeaveRequestCommand';
 import { LeaveRequestNotFoundException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestNotFoundException';
-import { DoesLeaveRequestBelongsToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongsToUser';
+import { DoesLeaveRequestBelongToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongToUser';
 import { LeaveRequestCantBeUpdatedException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestCantBeUpdatedException';
 
 @CommandHandler(UpdateLeaveRequestCommand)
@@ -11,7 +11,7 @@ export class UpdateLeaveRequestCommandHandler {
   constructor(
     @Inject('ILeaveRequestRepository')
     private readonly leaveRequestRepository: ILeaveRequestRepository,
-    private readonly doesLeaveRequestBelongsToUser: DoesLeaveRequestBelongsToUser
+    private readonly doesLeaveRequestBelongToUser: DoesLeaveRequestBelongToUser
   ) {}
 
   public async execute(command: UpdateLeaveRequestCommand): Promise<string> {
@@ -34,7 +34,7 @@ export class UpdateLeaveRequestCommandHandler {
 
     if (
       false ===
-      this.doesLeaveRequestBelongsToUser.isSatisfiedBy(leaveRequest, user)
+      this.doesLeaveRequestBelongToUser.isSatisfiedBy(leaveRequest, user)
     ) {
       throw new LeaveRequestCantBeUpdatedException();
     }

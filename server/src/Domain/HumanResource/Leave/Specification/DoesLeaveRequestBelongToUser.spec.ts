@@ -1,16 +1,16 @@
 import { mock, instance, when } from 'ts-mockito';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { LeaveRequest } from '../LeaveRequest.entity';
-import { DoesLeaveRequestBelongsToUser } from './DoesLeaveRequestBelongsToUser';
+import { DoesLeaveRequestBelongToUser } from './DoesLeaveRequestBelongToUser';
 
-describe('DoesLeaveRequestBelongsToUser', () => {
-  let doesLeaveRequestBelongsToUser: DoesLeaveRequestBelongsToUser;
+describe('DoesLeaveRequestBelongToUser', () => {
+  let doesLeaveRequestBelongToUser: DoesLeaveRequestBelongToUser;
   const user = mock(User);
   const leaveRequest = mock(LeaveRequest);
   const owner = mock(User);
 
   beforeEach(() => {
-    doesLeaveRequestBelongsToUser = new DoesLeaveRequestBelongsToUser();
+    doesLeaveRequestBelongToUser = new DoesLeaveRequestBelongToUser();
   });
 
   it('testLeaveRequestCantBeRemoved', async () => {
@@ -19,7 +19,7 @@ describe('DoesLeaveRequestBelongsToUser', () => {
     when(leaveRequest.getUser()).thenReturn(instance(user));
 
     expect(
-      await doesLeaveRequestBelongsToUser.isSatisfiedBy(
+      await doesLeaveRequestBelongToUser.isSatisfiedBy(
         instance(leaveRequest),
         instance(owner)
       )
@@ -32,7 +32,7 @@ describe('DoesLeaveRequestBelongsToUser', () => {
     when(leaveRequest.getUser()).thenReturn(instance(user));
 
     expect(
-      await doesLeaveRequestBelongsToUser.isSatisfiedBy(
+      await doesLeaveRequestBelongToUser.isSatisfiedBy(
         instance(leaveRequest),
         instance(owner)
       )

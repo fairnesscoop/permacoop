@@ -3,7 +3,7 @@ import { CommandHandler } from '@nestjs/cqrs';
 import { DeleteLeaveRequestCommand } from './DeleteLeaveRequestCommand';
 import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRequestRepository';
 import { LeaveRequestNotFoundException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestNotFoundException';
-import { DoesLeaveRequestBelongsToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongsToUser';
+import { DoesLeaveRequestBelongToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongToUser';
 import { LeaveRequestCantBeRemovedException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestCantBeRemovedException';
 
 @CommandHandler(DeleteLeaveRequestCommand)
@@ -11,7 +11,7 @@ export class DeleteLeaveRequestCommandHandler {
   constructor(
     @Inject('ILeaveRequestRepository')
     private readonly leaveRequestRepository: ILeaveRequestRepository,
-    private readonly doesLeaveRequestBelongsToUser: DoesLeaveRequestBelongsToUser
+    private readonly doesLeaveRequestBelongToUser: DoesLeaveRequestBelongToUser
   ) {}
 
   public async execute(command: DeleteLeaveRequestCommand): Promise<void> {
@@ -24,7 +24,7 @@ export class DeleteLeaveRequestCommandHandler {
 
     if (
       false ===
-      this.doesLeaveRequestBelongsToUser.isSatisfiedBy(leaveRequest, owner)
+      this.doesLeaveRequestBelongToUser.isSatisfiedBy(leaveRequest, owner)
     ) {
       throw new LeaveRequestCantBeRemovedException();
     }
