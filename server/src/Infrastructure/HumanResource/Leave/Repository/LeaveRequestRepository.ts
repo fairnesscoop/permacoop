@@ -161,4 +161,13 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
 
     return query.getMany();
   }
+
+  public getPendingCount(): Promise<number> {
+    const query = this.repository
+      .createQueryBuilder('leaveRequest')
+      .where('status = :status')
+      .setParameter('status', Status.PENDING);
+
+    return query.getCount();
+  }
 }

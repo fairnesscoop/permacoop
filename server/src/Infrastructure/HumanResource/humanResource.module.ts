@@ -75,6 +75,8 @@ import { GetUsersElementsQueryHandler } from 'src/Application/HumanResource/Pays
 import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesByMonthQueryHandler';
 import { GetLeavesCalendarAction } from './Leave/Action/GetLeavesCalendarAction';
 import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesCalendarQueryHandler';
+import { GetPendingLeaveRequestsCountAction } from './Leave/Action/GetPendingLeaveRequestsCountAction';
+import { GetPendingLeaveRequestsCountQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetPendingLeaveRequestsCountQueryHandler';
 
 @Module({
   imports: [
@@ -107,6 +109,7 @@ import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Lea
     GetUsersElementsAction,
     GetUsersElementsCsvAction,
     GetLeaveRequestsAction,
+    GetPendingLeaveRequestsCountAction,
     GetLeaveRequestAction,
     CreateLeaveRequestAction,
     RefuseLeaveRequestAction,
@@ -165,6 +168,7 @@ import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Lea
     LeaveRequestToLeavesConverter,
     GetLeaveRequestsQueryHandler,
     GetLeavesCalendarQueryHandler,
+    GetPendingLeaveRequestsCountQueryHandler,
     GetLeaveRequestByIdQueryHandler,
     DoesLeaveExistForPeriod,
     CanLeaveRequestBeRemoved,

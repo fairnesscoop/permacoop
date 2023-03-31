@@ -2,30 +2,20 @@
   import { _ } from 'svelte-i18n';
   import { stores } from '@sapper/app';
   import { get } from 'utils/axios';
-  import { onMount } from 'svelte';
   import { errorNormalizer } from 'normalizer/errors';
   import Link from 'components/links/Link.svelte';
 
   const { session } = stores();
 
-  let response = {
-    items: [],
-    totalItems: 0,
-    pageCount: 0,
-  };
+  let errors = null;
 
-  onMount(() => {
-    fetchLeaveRequests();
-  });
-
-  const fetchLeaveRequests = async () => {
+  const fetchPendingLeaveRequestsCount = async () => {
     try {
-      const { data } = await get('leave-requests', {
-        params: { page: 1, status: 'pending' },
-      });
-      response = data;
+      const response = await get('leave-requests/pending-count');
+      return response.data;
     } catch (e) {
       errors = errorNormalizer(e);
+      return 0;
     }
   };
 </script>
@@ -44,32 +34,22 @@
       },
     })}
   </h2>
+
   <h3
     class="my-3 inline-flex text-xl font-semibold text-gray-700 dark:text-gray-200">
     {$_('human_resources.leaves.requests.title')}
   </h3>
-  <div class="lg:flex items-center mb-6">
-    {#if response.totalItems > 1}
-      <p class="text-gray-700 dark:text-gray-300">
-        <strong>{response.totalItems}</strong>
-        {$_('dashboard.leave_requests.pending.plural')}
-      </p>
-      <Link
-        href={'/human_resources/leaves/requests'}
-        value={$_('human_resources.leaves.requests.title')} />
-    {:else if response.totalItems === 1}
-      <p class="text-gray-700 dark:text-gray-300">
-        <strong>{response.totalItems}</strong>
-        {$_('dashboard.leave_requests.pending.singular')}
-      </p>
 
+  {#await fetchPendingLeaveRequestsCount() then numPendingLeaveRequests}
+    <div class="lg:flex items-center mb-6">
+      <p class="text-gray-700 dark:text-gray-300">
+        {$_('dashboard.leave_requests.pending', { values: { count: numPendingLeaveRequests } })}
+      </p>
+      {#if numPendingLeaveRequests > 0}
       <Link
         href={'/human_resources/leaves/requests'}
-        value={$_('human_resources.leaves.requests.title')} />
-    {:else}
-      <p class="text-gray-700 dark:text-gray-300">
-        {$_('dashboard.leave_requests.none')}
-      </p>
-    {/if}
-  </div>
+        value={$_('human_resources.leaves.requests.see_all.title')} />
+      {/if}
+    </div>
+  {/await}
 {/if}

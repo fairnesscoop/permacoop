@@ -16,4 +16,5 @@ export interface ILeaveRequestRepository {
   ): Promise<LeaveRequest | undefined>;
   findAcceptedLeaveRequests(): Promise<LeaveRequest[]>;
   findAcceptedLeaveRequestsByMonth(date: Date): Promise<LeaveRequest[]>;
+  getPendingCount(): Promise<number>;
 }
