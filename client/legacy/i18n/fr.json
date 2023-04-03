@@ -325,7 +325,8 @@
           "already_exist_for_this_period": "Vous avez déjà une demande de congé sur cette période.",
           "cant_be_moderated": "Vous ne pouvez pas modérer cette demande de congé.",
           "cant_be_removed": "Vous ne pouvez pas supprimer cette demande de congé",
-          "not_found": "La demande de congé n'existe pas."
+          "not_found": "La demande de congé n'existe pas.",
+          "cant_be_updated": "Vous ne pouvez pas mettre à jour cette demande de congé."
         },
         "form": {
           "from_date": "Du",
