@@ -19,7 +19,8 @@ export class UserAdministrativeFactory extends Factory<UserAdministrative> {
       WorkingTimeType.FULL_TIME,
       dateUtils.format(faker.date.past(), 'y-MM-dd'),
       null,
-      60 * 100
+      700 * 100,
+      0
     );
 
     return userAdministrative;

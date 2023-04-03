@@ -96,7 +96,8 @@ export class UserRepository implements IUserRepository {
         'userAdministrative.healthInsurance',
         'userAdministrative.executivePosition',
         'userAdministrative.contract',
-        'userAdministrative.workingTime'
+        'userAdministrative.workingTime',
+        'userAdministrative.sustainableMobilityFee'
       ]);
     query.innerJoin('user.userAdministrative', 'userAdministrative');
     query.andWhere('user.role <> :role', { role: UserRole.ACCOUNTANT });

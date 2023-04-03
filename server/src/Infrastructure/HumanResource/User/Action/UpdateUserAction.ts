@@ -43,7 +43,8 @@ export class UpdateUserAction {
       healthInsurance,
       joiningDate,
       leavingDate,
-      transportFee
+      transportFee,
+      sustainableMobilityFee
     } = userAdministrativeDto;
 
     try {
@@ -58,7 +59,8 @@ export class UpdateUserAction {
           healthInsurance === 'true',
           joiningDate,
           leavingDate,
-          transportFee
+          transportFee,
+          sustainableMobilityFee
         )
       );
     } catch (e) {

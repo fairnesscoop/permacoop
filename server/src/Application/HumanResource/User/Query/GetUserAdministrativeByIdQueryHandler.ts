@@ -36,7 +36,8 @@ export class GetUserAdministrativeByIdQueryHandler {
         userAdministrative.haveHealthInsurance() ? 'true' : 'false',
         userAdministrative.getJoiningDate(),
         userAdministrative.getLeavingDate(),
-        userAdministrative.getTransportFee() * 0.01
+        userAdministrative.getTransportFee() * 0.01,
+        userAdministrative.getSustainableMobilityFee() * 0.01
       );
     }
 

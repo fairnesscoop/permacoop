@@ -26,7 +26,8 @@ export class UpdateUserCommandHandler {
       healthInsurance,
       joiningDate,
       leavingDate,
-      transportFee
+      transportFee,
+      sustainableMobilityFee
     } = command;
 
     const user = await this.userRepository.findOneById(id);
@@ -51,7 +52,8 @@ export class UpdateUserCommandHandler {
       healthInsurance,
       joiningDate,
       leavingDate,
-      transportFee ? Math.round(transportFee * 100) : 0
+      transportFee ? Math.round(transportFee * 100) : 0,
+      sustainableMobilityFee ? Math.round(sustainableMobilityFee * 100) : 0
     );
 
     await this.userRepository.save(user);

@@ -34,7 +34,8 @@ describe('CreatUserCommandHandler', () => {
     workingTime: WorkingTimeType.FULL_TIME,
     joiningDate: '2018-04-09',
     leavingDate: null,
-    transportFee: 75.2
+    transportFee: 75.2,
+    sustainableMobilityFee: 70
   };
   const userAdministrative = new UserAdministrative(
     5000000,
@@ -44,7 +45,8 @@ describe('CreatUserCommandHandler', () => {
     WorkingTimeType.FULL_TIME,
     '2018-04-09',
     null,
-    7520
+    7520,
+    7000
   );
 
   let userRepository: UserRepository;
