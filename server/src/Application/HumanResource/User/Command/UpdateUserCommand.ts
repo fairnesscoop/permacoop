@@ -16,6 +16,7 @@ export class UpdateUserCommand implements ICommand {
     public readonly healthInsurance: boolean,
     public readonly joiningDate: string,
     public readonly leavingDate: string,
-    public readonly transportFee: number
+    public readonly transportFee: number,
+    public readonly sustainableMobilityFee: number
   ) {}
 }

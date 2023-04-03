@@ -31,6 +31,9 @@ export class UserAdministrative {
   @Column({ type: 'integer', default: 0, nullable: true })
   private transportFee: number;
 
+  @Column({ type: 'integer', default: 0, nullable: true })
+  private sustainableMobilityFee: number;
+
   @Column({ type: 'boolean', nullable: false })
   private healthInsurance: boolean;
 
@@ -57,7 +60,8 @@ export class UserAdministrative {
     workingTime: WorkingTimeType,
     joiningDate: string,
     leavingDate?: string,
-    transportFee?: number
+    transportFee?: number,
+    sustainableMobilityFee?: number
   ) {
     this.annualEarnings = annualEarnings;
     this.healthInsurance = healthInsurance;
@@ -67,6 +71,7 @@ export class UserAdministrative {
     this.joiningDate = joiningDate;
     this.leavingDate = leavingDate;
     this.transportFee = transportFee;
+    this.sustainableMobilityFee = sustainableMobilityFee;
   }
 
   public getId(): string {
@@ -87,6 +92,10 @@ export class UserAdministrative {
 
   public getTransportFee(): number {
     return this.transportFee;
+  }
+
+  public getSustainableMobilityFee(): number {
+    return this.sustainableMobilityFee;
   }
 
   public haveHealthInsurance(): boolean {
@@ -113,7 +122,8 @@ export class UserAdministrative {
     healthInsurance: boolean,
     joiningDate: string,
     leavingDate: string,
-    transportFee: number
+    transportFee: number,
+    sustainableMobilityFee: number
   ): void {
     this.annualEarnings = annualEarnings;
     this.contract = contract;
@@ -123,5 +133,6 @@ export class UserAdministrative {
     this.joiningDate = joiningDate;
     this.leavingDate = leavingDate;
     this.transportFee = transportFee;
+    this.sustainableMobilityFee = sustainableMobilityFee;
   }
 }

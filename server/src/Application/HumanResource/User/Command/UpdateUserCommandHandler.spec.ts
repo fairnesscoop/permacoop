@@ -30,7 +30,8 @@ describe('UpdateProfileCommandHandler', () => {
     true,
     '2018-01-01',
     null,
-    75.2
+    75.2,
+    70
   );
 
   beforeEach(() => {
@@ -72,7 +73,8 @@ describe('UpdateProfileCommandHandler', () => {
       WorkingTimeType.PART_TIME,
       '2017-08-01',
       '2018-12-31',
-      null
+      null,
+      7000
     );
     const user = new User(
       'John',
@@ -102,7 +104,8 @@ describe('UpdateProfileCommandHandler', () => {
       WorkingTimeType.FULL_TIME,
       '2018-01-01',
       null,
-      7520
+      7520,
+      7000
     );
     verify(
       userRepository.save(
@@ -133,7 +136,8 @@ describe('UpdateProfileCommandHandler', () => {
       WorkingTimeType.PART_TIME,
       '2017-08-01',
       '2018-12-31',
-      null
+      null,
+      7000
     );
     const user = new User(
       'John',
