@@ -14,7 +14,8 @@ describe('UserAdministrative.entity', () => {
       WorkingTimeType.FULL_TIME,
       '2020-01-01',
       '2021-01-01',
-      7550
+      7550,
+      7000
     );
 
     expect(admin.getId()).toBe(undefined);
@@ -26,6 +27,7 @@ describe('UserAdministrative.entity', () => {
     expect(admin.getTransportFee()).toBe(7550);
     expect(admin.isExecutivePosition()).toBe(true);
     expect(admin.haveHealthInsurance()).toBe(true);
+    expect(admin.getSustainableMobilityFee()).toBe(7000);
   });
 
   it('testUpdate', () => {
@@ -37,7 +39,8 @@ describe('UserAdministrative.entity', () => {
       WorkingTimeType.FULL_TIME,
       '2020-01-01',
       null,
-      7550
+      7550,
+      7000
     );
 
     admin.update(
@@ -48,7 +51,8 @@ describe('UserAdministrative.entity', () => {
       false,
       '2020-01-02',
       '2021-01-02',
-      null
+      null,
+      3000
     );
     expect(admin.getAnnualEarnings()).toBe(3000000);
     expect(admin.getContract()).toBe(ContractType.APPRENTICESHIP);
@@ -58,5 +62,6 @@ describe('UserAdministrative.entity', () => {
     expect(admin.getJoiningDate()).toBe('2020-01-02');
     expect(admin.getLeavingDate()).toBe('2021-01-02');
     expect(admin.getTransportFee()).toBe(null);
+    expect(admin.getSustainableMobilityFee()).toBe(3000);
   });
 });

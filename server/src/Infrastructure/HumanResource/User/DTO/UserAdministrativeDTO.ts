@@ -32,6 +32,11 @@ export class UserAdministrativeDTO {
   @ApiPropertyOptional()
   public transportFee: number;
 
+  @IsOptional()
+  @IsNumber()
+  @ApiPropertyOptional()
+  public sustainableMobilityFee: number;
+
   @IsNotEmpty()
   @IsBooleanString()
   @ApiProperty()
