@@ -60,7 +60,7 @@
   {/await}
 
   <a
-    href="https://gitlab.fairness.coop/fairness/documentation/-/wikis/Paiement-des-salaires"
+    href="https://gitlab.fairness.coop/fairness/documentation/-/wikis/Salaires-et-fiches-de-paie"
     class="px-2 py-1 mb-6 ml-2 text-sm font-medium leading-5 bg-purple-200 border rounded-lg"
     rel="noreferrer"
     target="_blank">
