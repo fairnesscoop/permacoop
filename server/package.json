@@ -47,7 +47,7 @@
     "rimraf": "^3.0.2",
     "shortid": "^2.2.15",
     "swagger-ui-express": "^4.1.4",
-    "typeorm": "^0.3.10",
+    "typeorm": "^0.3.14",
     "typescript": "^4.9.3"
   },
   "devDependencies": {
