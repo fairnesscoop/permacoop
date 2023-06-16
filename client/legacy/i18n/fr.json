@@ -277,6 +277,7 @@
       "monthly_earnings": "Salaire brut mensuel",
       "working_time": "TC/TP",
       "transport_fee": "Transport",
+      "sustainable_mobility_fee": "Mobilité durable",
       "meal_tickets": "Tickets resto",
       "full_time": "Temps complet",
       "partial_time": "Temps partiel",
@@ -307,6 +308,9 @@
         "add": {
           "title": "Faire une demande de congé"
         },
+        "see_all": {
+          "title": "Voir les demandes de congés"
+        },
         "states": {
           "pending": "En attente",
           "accepted": "Acceptée",
@@ -323,7 +327,9 @@
         "errors": {
           "already_exist_for_this_period": "Vous avez déjà une demande de congé sur cette période.",
           "cant_be_moderated": "Vous ne pouvez pas modérer cette demande de congé.",
-          "not_found": "La demande de congé n'existe pas."
+          "cant_be_removed": "Vous ne pouvez pas supprimer cette demande de congé",
+          "not_found": "La demande de congé n'existe pas.",
+          "cant_be_updated": "Vous ne pouvez pas mettre à jour cette demande de congé."
         },
         "form": {
           "from_date": "Du",
@@ -373,6 +379,7 @@
         "health_insurance": "Mutuelle",
         "annual_earnings": "Salaire annuel brut",
         "transport_fee": "Frais de transport",
+        "sustainable_mobility_fee": "Forfait mobilité durable",
         "joining_date": "Date d'entrée",
         "leaving_date": "Date de sortie",
         "first_name": "Prénom",
@@ -417,7 +424,10 @@
   },
   "dashboard": {
     "title": "Tableau de bord",
-    "welcome": "Bonjour {firstName} {lastName} !"
+    "welcome": "Bonjour {firstName} {lastName} !",
+    "leave_requests": {
+      "pending": "{count, plural, =0 {Aucune demande de congés} one {1 demande de congés} other {{count} demandes de congés}} en attente de validation"
+    }
   },
   "settings": {
     "errors": {

@@ -50,7 +50,8 @@ export class CreateUserAction {
         healthInsurance,
         joiningDate,
         leavingDate,
-        transportFee
+        transportFee,
+        sustainableMobilityFee
       } = userDto.userAdministrative;
 
       if (role !== UserRole.ACCOUNTANT) {
@@ -62,7 +63,8 @@ export class CreateUserAction {
           healthInsurance: healthInsurance === 'true',
           joiningDate,
           leavingDate,
-          transportFee
+          transportFee,
+          sustainableMobilityFee
         };
       }
 

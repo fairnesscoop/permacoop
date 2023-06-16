@@ -14,11 +14,10 @@ Permacoop is an open source and eco design ERP solution reserved for worker-owne
 - [Node.js](https://nodejs.org) / [Nestjs](https://nestjs.com/)
 - [TypeORM](https://typeorm.io)
 - [Typescript](https://www.typescriptlang.org/)
-- [Jest](https://jestjs.io/) / [Ts-mockito](https://github.com/NagRock/ts-mockito)
-- [Svelte](https://svelte.dev/) / [Sapper](https://sapper.svelte.dev/)
+- [Jest](https://jestjs.io/) / [ts-mockito](https://github.com/NagRock/ts-mockito)
+- [Svelte](https://svelte.dev/) / [SvelteKit](https://kit.svelte.dev) / [Sapper](https://sapper.svelte.dev/) (legacy)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [PostgreSQL](https://www.postgresql.org/)
-- [Redis](https://redis.io/)
 - [Docker](https://www.docker.com/)
 
 ## Prerequisites
@@ -47,53 +46,13 @@ In a separate terminal, run database migrations:
 make database-migrate
 ```
 
-The server and client will be started:
-
-- API documentation available on <http://localhost:3000/api>
-- Client available on <http://localhost:3001/>
-
-To serve the built server and client locally, run:
+Then, you can seed the database with fake data
 
 ```
-make build
-make start-dist
+make database-seed
 ```
 
-To run tests, use:
-
-```
-make test
-```
-
-For E2E tests, you will need to install additional dependencies first:
-
-```
-make install-client-e2e
-```
-
-Run E2E tests using:
-
-```
-make test-client-e2e
-```
-
-To run automatic code formatting, run:
-
-```
-make format
-```
-
-To run linters and code checks, use:
-
-```
-make linter
-```
-
-## Security
-
-The client must send the user `apiToken` in the Authorization header when making requests to protected resources : `Authorization: Bearer <apiToken>`
-
-At the installation of the project a default user was created :
+This command will create the default user "John Doe" :
 
 ```json
 {
@@ -102,23 +61,75 @@ At the installation of the project a default user was created :
 }
 ```
 
-To retrieve the `apiToken`, make a post request on `/login` with a user email and password.
+The server and client will be started:
+
+- API documentation available on <http://localhost:3000/api>
+- Client available on <http://localhost:3001/>
 
 ## Helpers
 
-This following command will display all available helpers :
+To view all available commands, run:
 
 ```bash
 make help
 ```
 
-## Tests
+### Building and serving
 
-Run the unit test suite with this following command:
+To serve the built server and client locally, run:
+
+```bash
+make build
+make start-dist
+```
+
+### Tests
+
+To run tests, use:
 
 ```bash
 make test
 ```
+
+For E2E tests, you will need to install additional dependencies first:
+
+```bash
+make install-client-e2e
+```
+
+Run E2E tests using:
+
+```bash
+make test-client-e2e
+```
+
+### Code quality
+
+To run automatic code formatting, run:
+
+```bash
+make format
+```
+
+To run linters and code checks, use:
+
+```bash
+make linter
+```
+
+### Database migrations
+
+To generate a migration from the current state of the code, run:
+
+```bash
+make database-migration NAME=add_some_column
+```
+
+## Security
+
+The client must send the user `apiToken` in the Authorization header when making requests to protected resources : `Authorization: Bearer <apiToken>`
+
+To retrieve the `apiToken`, make a post request on `/login` with a user email and password.
 
 ## Features
 
@@ -140,3 +151,7 @@ make test
 ## Credits
 
 Created by [Fairness](https://fairness.coop)
+
+## License
+
+MIT

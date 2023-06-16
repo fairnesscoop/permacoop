@@ -118,7 +118,7 @@ start-dist-client-kit: ## Serve built client
 test: test-api test-client-unit ## Run test suite
 
 test-api: ## Run API tests
-	cd server && npm run test
+	cd server && npm run test -- $(FILE)
 
 test-api-watch: ## Run API tests in watch mode
 	cd server && npm run test:watch
@@ -135,11 +135,13 @@ test-client-kit-unit: ## Run SvelteKit client unit tests
 	cd client/kit && npm run test:coverage
 
 test-client-e2e: ## Run client E2E tests (servers must be running)
+	make database-seed
 	cd client/kit && npm run test-e2e
 
 test-client-ci: test-client test-client-e2e-ci
 
 test-client-e2e-ci: ## Run client E2E tests
+	make database-seed
 	cd client/kit && npm run test-e2e:ci
 
 linter: linter-api linter-client ## Run linters
@@ -172,8 +174,10 @@ database-test-init: ## Initialize test database
 	make compose CMD="exec -T database createdb permacoop_test" || echo 'Does the test DB already exist? Ignoring...'
 	DATABASE_NAME=permacoop_test make database-migrate
 
-database-diff: ## Generate database diff
-	cd server && npm run migration:diff -- migrations/$(MIGRATION_NAME)
+database-migration: ## Generate a database migration
+	cd server && npm run migration:generate -- migrations/$(NAME)
+database-seed: ## Seed database
+	cd server && npm run build && npm run seed:run
 
 database-connect: ## Connect to the database container
 	${compose} exec database psql -h database -d permacoop
