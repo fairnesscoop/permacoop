@@ -49,7 +49,7 @@ make database-migrate
 Then, you can seed the database with fake data
 
 ```
-make seed-database
+make database-seed
 ```
 
 This command will create the default user "John Doe" :
@@ -128,7 +128,6 @@ make database-migration NAME=add_some_column
 ## Security
 
 The client must send the user `apiToken` in the Authorization header when making requests to protected resources : `Authorization: Bearer <apiToken>`
-
 
 To retrieve the `apiToken`, make a post request on `/login` with a user email and password.
 

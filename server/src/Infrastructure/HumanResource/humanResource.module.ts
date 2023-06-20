@@ -56,7 +56,7 @@ import { MealTicketRemovalRepository } from './MealTicket/Repository/MealTicketR
 import { IsMealTicketRemovalAlreadyExist } from 'src/Domain/HumanResource/MealTicket/Specification/IsMealTicketRemovalAlreadyExist';
 import { CreateMealTicketRemovalCommandHandler } from 'src/Application/HumanResource/MealTicket/Command/CreateMealTicketRemovalCommandHandler';
 import { CreateMealTicketRemovalAction } from './MealTicket/Action/CreateMealTicketRemovalAction';
-import { CanLeaveRequestBeRemoved } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeRemoved';
+import { DoesLeaveRequestBelongToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongToUser';
 import { DeleteLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/DeleteLeaveRequestCommandHandler';
 import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestAction';
 import { GetAvailableMealTicketsAction } from './MealTicket/Action/GetAvailableMealTicketsAction';
@@ -75,6 +75,8 @@ import { GetUsersElementsQueryHandler } from 'src/Application/HumanResource/Pays
 import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesByMonthQueryHandler';
 import { GetLeavesCalendarAction } from './Leave/Action/GetLeavesCalendarAction';
 import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesCalendarQueryHandler';
+import { GetPendingLeaveRequestsCountAction } from './Leave/Action/GetPendingLeaveRequestsCountAction';
+import { GetPendingLeaveRequestsCountQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetPendingLeaveRequestsCountQueryHandler';
 
 @Module({
   imports: [
@@ -107,6 +109,7 @@ import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Lea
     GetUsersElementsAction,
     GetUsersElementsCsvAction,
     GetLeaveRequestsAction,
+    GetPendingLeaveRequestsCountAction,
     GetLeaveRequestAction,
     CreateLeaveRequestAction,
     RefuseLeaveRequestAction,
@@ -165,9 +168,10 @@ import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Lea
     LeaveRequestToLeavesConverter,
     GetLeaveRequestsQueryHandler,
     GetLeavesCalendarQueryHandler,
+    GetPendingLeaveRequestsCountQueryHandler,
     GetLeaveRequestByIdQueryHandler,
     DoesLeaveExistForPeriod,
-    CanLeaveRequestBeRemoved,
+    DoesLeaveRequestBelongToUser,
     DeleteLeaveRequestCommandHandler,
     IsMealTicketRemovalAlreadyExist,
     CreateMealTicketRemovalCommandHandler,

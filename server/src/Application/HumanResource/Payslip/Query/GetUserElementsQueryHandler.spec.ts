@@ -56,6 +56,7 @@ describe('GetUserElementsQueryHandler', () => {
     const user = mock(User);
     const earnings = 2000000;
     const rawTransportFee = 7500;
+    const rawSustainableMobilityFee = 7000;
     const userAdministrative = mock(UserAdministrative);
     when(userAdministrative.getContract()).thenReturn(ContractType.CDI);
     when(userAdministrative.isExecutivePosition()).thenReturn(true);
@@ -66,6 +67,9 @@ describe('GetUserElementsQueryHandler', () => {
       WorkingTimeType.FULL_TIME
     );
     when(userAdministrative.getTransportFee()).thenReturn(rawTransportFee);
+    when(userAdministrative.getSustainableMobilityFee()).thenReturn(
+      rawSustainableMobilityFee
+    );
     when(userAdministrative.haveHealthInsurance()).thenReturn(true);
 
     when(user.getId()).thenReturn('3b8a1954-2ade-44a2-a03c-338985c327ef');
@@ -141,6 +145,7 @@ describe('GetUserElementsQueryHandler', () => {
     const monthlyEarnings = earnings / 1200;
     const yearlyEarning = earnings * 0.01;
     const transportFee = rawTransportFee * 0.01;
+    const sustainableMobilityFee = rawSustainableMobilityFee * 0.01;
 
     expect(await queryHandler.execute(query)).toMatchObject([
       new UserElementsView(
@@ -153,6 +158,7 @@ describe('GetUserElementsQueryHandler', () => {
         monthlyEarnings,
         WorkingTimeType.FULL_TIME,
         transportFee,
+        sustainableMobilityFee,
         5,
         'yes',
         new UserLeavesView(0, [

@@ -3,14 +3,14 @@ import { DeleteLeaveRequestCommandHandler } from './DeleteLeaveRequestCommandHan
 import { DeleteLeaveRequestCommand } from './DeleteLeaveRequestCommand';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { LeaveRequestNotFoundException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestNotFoundException';
-import { CanLeaveRequestBeRemoved } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeRemoved';
+import { DoesLeaveRequestBelongToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongToUser';
 import { LeaveRequest } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRequestRepository';
 import { LeaveRequestCantBeRemovedException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestCantBeRemovedException';
 
 describe('DeleteLeaveRequestCommandHandler', () => {
   let leaveRequestRepository: LeaveRequestRepository;
-  let canLeaveRequestBeRemoved: CanLeaveRequestBeRemoved;
+  let doesLeaveRequestBelongToUser: DoesLeaveRequestBelongToUser;
   let handler: DeleteLeaveRequestCommandHandler;
 
   const user = mock(User);
@@ -22,11 +22,11 @@ describe('DeleteLeaveRequestCommandHandler', () => {
 
   beforeEach(() => {
     leaveRequestRepository = mock(LeaveRequestRepository);
-    canLeaveRequestBeRemoved = mock(CanLeaveRequestBeRemoved);
+    doesLeaveRequestBelongToUser = mock(DoesLeaveRequestBelongToUser);
 
     handler = new DeleteLeaveRequestCommandHandler(
       instance(leaveRequestRepository),
-      instance(canLeaveRequestBeRemoved)
+      instance(doesLeaveRequestBelongToUser)
     );
   });
 
@@ -48,7 +48,7 @@ describe('DeleteLeaveRequestCommandHandler', () => {
         )
       ).once();
       verify(
-        canLeaveRequestBeRemoved.isSatisfiedBy(anything(), anything())
+        doesLeaveRequestBelongToUser.isSatisfiedBy(anything(), anything())
       ).never();
       verify(leaveRequestRepository.remove(anything())).never();
     }
@@ -59,7 +59,7 @@ describe('DeleteLeaveRequestCommandHandler', () => {
       leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(instance(leaveRequest));
     when(
-      canLeaveRequestBeRemoved.isSatisfiedBy(
+      doesLeaveRequestBelongToUser.isSatisfiedBy(
         instance(leaveRequest),
         instance(user)
       )
@@ -73,7 +73,7 @@ describe('DeleteLeaveRequestCommandHandler', () => {
         'human_resources.leaves.requests.errors.cant_be_removed'
       );
       verify(
-        canLeaveRequestBeRemoved.isSatisfiedBy(
+        doesLeaveRequestBelongToUser.isSatisfiedBy(
           instance(leaveRequest),
           instance(user)
         )
@@ -92,7 +92,7 @@ describe('DeleteLeaveRequestCommandHandler', () => {
       leaveRequestRepository.findOneById('cfdd06eb-cd71-44b9-82c6-46110b30ce05')
     ).thenResolve(instance(leaveRequest));
     when(
-      canLeaveRequestBeRemoved.isSatisfiedBy(
+      doesLeaveRequestBelongToUser.isSatisfiedBy(
         instance(leaveRequest),
         instance(user)
       )
@@ -101,7 +101,7 @@ describe('DeleteLeaveRequestCommandHandler', () => {
     expect(await handler.execute(command)).toBeUndefined();
 
     verify(
-      canLeaveRequestBeRemoved.isSatisfiedBy(
+      doesLeaveRequestBelongToUser.isSatisfiedBy(
         instance(leaveRequest),
         instance(user)
       )
