@@ -9,7 +9,7 @@ import { format } from 'date-fns';
 import { LeaveRequestSlotView } from 'src/Application/HumanResource/Leave/View/LeaveRequestSlotView';
 
 const formatFrNumber = (n: number) =>
-  n.toLocaleString('fr-FR').replace(' ', '');
+  n.toLocaleString('fr-FR').replaceAll(' ', '');
 
 @Controller('payslips.csv')
 @ApiCookieAuth()
