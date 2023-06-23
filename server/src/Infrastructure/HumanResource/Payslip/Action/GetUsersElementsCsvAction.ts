@@ -8,9 +8,6 @@ import { Response } from 'express';
 import { format } from 'date-fns';
 import { LeaveRequestSlotView } from 'src/Application/HumanResource/Leave/View/LeaveRequestSlotView';
 
-const formatFrNumber = (n: number) =>
-  n.toLocaleString('fr-FR').replaceAll(' ', '');
-
 @Controller('payslips.csv')
 @ApiCookieAuth()
 @UseGuards(AuthGuard('bearer'))
@@ -19,6 +16,10 @@ export class GetUsersElementsCsvAction {
     @Inject('IQueryBus')
     private readonly queryBus: IQueryBus
   ) {}
+
+  private formatNumber(value: number): string {
+    return value.toLocaleString('fr-FR').replace(/\s/g, '');
+  }
 
   @Get()
   public async index(@Res() res: Response) {
@@ -65,17 +66,17 @@ export class GetUsersElementsCsvAction {
         payslip.firstName,
         payslip.contract,
         payslip.joiningDate,
-        formatFrNumber(payslip.annualEarnings),
-        formatFrNumber(Math.round(payslip.monthlyEarnings * 100) / 100),
+        this.formatNumber(payslip.annualEarnings),
+        this.formatNumber(Math.round(payslip.monthlyEarnings * 100) / 100),
         payslip.workingTime === 'full_time' ? 'Temps plein' : 'Temps partiel',
-        formatFrNumber(payslip.transportFee),
-        formatFrNumber(payslip.sustainableMobilityFee),
+        this.formatNumber(payslip.transportFee),
+        this.formatNumber(payslip.sustainableMobilityFee),
         payslip.mealTickets,
         payslip.healthInsurance === 'yes' ? 'Oui' : 'Non',
-        formatFrNumber(payslip.paidLeaves.totalDays),
-        formatFrNumber(payslip.unpaidLeaves.totalDays),
-        formatFrNumber(payslip.sickLeaves.totalDays),
-        formatFrNumber(payslip.exceptionalLeaves.totalDays),
+        this.formatNumber(payslip.paidLeaves.totalDays),
+        this.formatNumber(payslip.unpaidLeaves.totalDays),
+        this.formatNumber(payslip.sickLeaves.totalDays),
+        this.formatNumber(payslip.exceptionalLeaves.totalDays),
         ''
       ];
 
