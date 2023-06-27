@@ -172,6 +172,17 @@ If an environment is not used anymore, it should be decommissioned to remove unu
   * Drop the environment from the environment list in this file.
 * Drop the [computing resources](#computing-resources) allocated to the environment.
 
+## CI deployment
+
+The `master` branch is deployed using the GitHub Actions `deploy.yml` workflow.
+
+This requires configuring a deployment SSH key:
+
+* Connect to the production VM
+* Run `$ ssh-keygen -t ed25519 -C "equipe@fairness.coop" -f ~/.ssh/github_actions`
+* Store the output of `cat ~/.ssh/github_actions` as `SSH_PRIVATE_KEY` in the [GitHub Actions secrets](https://github.com/fairnesscoop/permacoop/settings/secrets/actions)
+* Run `$ ssh-keyscan -H -t ed25519 permacoop.fairness.coop`, then store this as `SSH_KNOWN_HOSTS` in the GitHub Actions secrets.
+
 ## Tools
 
 ### Testing on a Vagrant VM
