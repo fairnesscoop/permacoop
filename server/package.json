@@ -17,6 +17,7 @@
     "test:watch": "jest --watchAll",
     "test:cov": "jest --coverage",
     "typeorm": "typeorm-ts-node-commonjs",
+    "migration:create": "npm run typeorm -- migration:create",
     "migration:generate": "npm run typeorm -- migration:generate -d src/datasource.ts",
     "migration:migrate": "npm run typeorm -- migration:run -d src/datasource.ts",
     "migration:drop": "npm run typeorm -- schema:drop",
