@@ -33,7 +33,6 @@ export class AddEventsAction {
     try {
       const {
         type,
-        billable,
         startDate,
         endDate,
         projectId,
@@ -46,7 +45,6 @@ export class AddEventsAction {
           type,
           user,
           time,
-          billable === 'true',
           new Date(startDate),
           new Date(endDate),
           projectId,

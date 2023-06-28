@@ -37,7 +37,6 @@
     endDate,
     type: 'mission',
     time: null,
-    billable: 'true',
     summary: '',
     taskId: null,
     projectId: null,

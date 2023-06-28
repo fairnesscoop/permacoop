@@ -27,7 +27,6 @@ export class GetEventByIdQueryHandler {
       event.getId(),
       event.getType(),
       event.getTime(),
-      event.isBillable(),
       event.getDate(),
       event.getSummary(),
       project ? new ProjectView(project.getId(), project.getName()) : null,

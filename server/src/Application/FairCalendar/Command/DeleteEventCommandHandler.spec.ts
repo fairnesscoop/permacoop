@@ -23,7 +23,6 @@ describe('DeleteEventCommandHandler', () => {
     instance(user),
     420,
     '2020-05-15',
-    true,
     instance(project),
     instance(task),
     'summary'

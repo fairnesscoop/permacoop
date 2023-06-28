@@ -8,7 +8,6 @@ export class FairCalendarView {
     public readonly date: string,
     public readonly summary?: string,
     public readonly id?: string,
-    public readonly billable?: boolean,
     public readonly project?: ProjectView,
     public readonly task?: TaskView
   ) {}
