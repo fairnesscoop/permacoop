@@ -106,11 +106,6 @@
                   class="w-full"
                   href="/crm/customers">{$_('crm.customers.title')}</a>
               </li>
-              <li class={subLinkClass}>
-                <a
-                  class="w-full"
-                  href="/crm/contacts">{$_('crm.contacts.title')}</a>
-              </li>
             {/if}
           </ul>
         </li>
