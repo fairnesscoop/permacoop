@@ -36,31 +36,6 @@
   },
   "accounting": {
     "breadcrumb": "FairGestion",
-    "invoices": {
-      "title": "Factures",
-      "date": "Date",
-      "project": "Nom du projet",
-      "invoice_id": "Numéro de facture",
-      "expiry_date": "Date d'échéance",
-      "amount": "Montant TTC",
-      "status": {
-        "title": "Statut",
-        "payed": "Payé",
-        "sent": "Envoyé",
-        "draft": "Brouillon",
-        "canceled": "Annulé"
-      },
-      "add": {
-        "title": "Générer une facture"
-      },
-      "errors": {
-        "no_billable_events_found": "Il n'y a rien à facturer sur le projet pour la période sélectionnée."
-      },
-      "form": {
-        "submit": "Générer",
-        "expire_in_days": "Echéance (en jours)"
-      }
-    },
     "quotes": {
       "title": "Devis",
       "quote_id": "Numéro du devis",

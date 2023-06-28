@@ -32,17 +32,8 @@ import { UpdateDailyRateCommandHandler } from 'src/Application/Accounting/Comman
 import { GetQuotesAction } from './Action/Quote/GetQuotesAction';
 import { GetQuotesQueryHandler } from 'src/Application/Accounting/Query/Quote/GetQuotesQueryHandler';
 import { UserRepository } from '../HumanResource/User/Repository/UserRepository';
-import { Invoice } from 'src/Domain/Accounting/Invoice.entity';
-import { InvoiceItem } from 'src/Domain/Accounting/InvoiceItem.entity';
-import { GenerateInvoiceCommandHandler } from 'src/Application/Accounting/Command/Invoice/GenerateInvoiceCommandHandler';
 import { EventRepository } from '../FairCalendar/Repository/EventRepository';
 import { Event } from 'src/Domain/FairCalendar/Event.entity';
-import { InvoiceRepository } from './Repository/InvoiceRepository';
-import { InvoiceItemRepository } from './Repository/InvoiceItemRepository';
-import { InvoiceIdGenerator } from 'src/Domain/Accounting/Generators/InvoiceIdGenerator';
-import { GenerateInvoiceAction } from './Action/Invoice/GenerateInvoiceAction';
-import { GetInvoicesAction } from './Action/Invoice/GetInvoicesAction';
-import { GetInvoicesQueryHandler } from 'src/Application/Accounting/Query/Invoice/GetInvoicesQueryHandler';
 import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
 import { CooperativeRepository } from '../Settings/Repository/CooperativeRepository';
 
@@ -58,8 +49,6 @@ import { CooperativeRepository } from '../Settings/Repository/CooperativeReposit
       Task,
       DailyRate,
       User,
-      Invoice,
-      InvoiceItem,
       Event,
       Cooperative
     ])
@@ -70,9 +59,7 @@ import { CooperativeRepository } from '../Settings/Repository/CooperativeReposit
     GetDailyRatesAction,
     GetDailyRateAction,
     UpdateDailyRateAction,
-    GetQuotesAction,
-    GetInvoicesAction,
-    GenerateInvoiceAction
+    GetQuotesAction
   ],
   providers: [
     { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
@@ -85,8 +72,6 @@ import { CooperativeRepository } from '../Settings/Repository/CooperativeReposit
     { provide: 'ITaskRepository', useClass: TaskRepository },
     { provide: 'ICustomerRepository', useClass: CustomerRepository },
     { provide: 'IEventRepository', useClass: EventRepository },
-    { provide: 'IInvoiceRepository', useClass: InvoiceRepository },
-    { provide: 'IInvoiceItemRepository', useClass: InvoiceItemRepository },
     CreateQuoteCommandHandler,
     CreateQuoteItemsCommandHandler,
     CreateDailyRateCommandHandler,
@@ -95,10 +80,7 @@ import { CooperativeRepository } from '../Settings/Repository/CooperativeReposit
     GetDailyRatesQueryHandler,
     UpdateDailyRateCommandHandler,
     GetQuotesQueryHandler,
-    GetDailyRateByIdQueryHandler,
-    GenerateInvoiceCommandHandler,
-    InvoiceIdGenerator,
-    GetInvoicesQueryHandler
+    GetDailyRateByIdQueryHandler
   ]
 })
 export class AccountingModule {}

@@ -141,11 +141,6 @@
               <li class={subLinkClass}>
                 <a
                   class="w-full"
-                  href="accounting/invoices">{$_('accounting.invoices.title')}</a>
-              </li>
-              <li class={subLinkClass}>
-                <a
-                  class="w-full"
                   href="accounting/quotes">{$_('accounting.quotes.title')}</a>
               </li>
               <li class={subLinkClass}>
