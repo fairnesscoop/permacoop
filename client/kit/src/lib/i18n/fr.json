@@ -61,26 +61,6 @@
         "expire_in_days": "Echéance (en jours)"
       }
     },
-    "daily_rates": {
-      "title": "TJM",
-      "user": "Coopérateur - salarié",
-      "amount": "Montant HT",
-      "task": "Nom de la mission",
-      "customer": "Nom du client",
-      "errors": {
-        "already_exist": "Ce TJM a déjà été configuré.",
-        "not_found": "Le TJM n'existe pas."
-      },
-      "add": {
-        "title": "Ajouter un TJM"
-      },
-      "edit": {
-        "title": "Edition du TJM \"{name}\""
-      },
-      "form": {
-        "daily_rate": "Taux HT"
-      }
-    },
     "tasks": {
       "title": "Missions",
       "name": "Nom de la mission",
