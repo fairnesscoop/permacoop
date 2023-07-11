@@ -180,7 +180,7 @@ database-seed: ## Seed database
 	cd server && npm run build && npm run seed:run
 
 database-connect: ## Connect to the database container
-	${compose} exec database psql -h database -d permacoop_quotes
+	${compose} exec database psql -h database -d permacoop
 
 ci: ## Run CI checks
 	make compose CMD="up -d"
