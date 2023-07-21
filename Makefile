@@ -175,7 +175,7 @@ database-test-init: ## Initialize test database
 	DATABASE_NAME=permacoop_test make database-migrate
 
 database-migration: ## Generate a database migration
-	cd server && npm run migration:create -- migrations/$(NAME)
+	cd server && npm run migration:generate -- migrations/$(NAME)
 database-seed: ## Seed database
 	cd server && npm run build && npm run seed:run
 
