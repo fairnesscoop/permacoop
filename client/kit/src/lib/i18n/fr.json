@@ -61,39 +61,6 @@
         "expire_in_days": "Echéance (en jours)"
       }
     },
-    "quotes": {
-      "title": "Devis",
-      "quote_id": "Numéro du devis",
-      "date": "Date",
-      "customer": "Nom du client",
-      "amount": "Montant TTC",
-      "add": {
-        "title": "Créer un devis"
-      },
-      "form": {
-        "customer": "Nom du client",
-        "description": "Description",
-        "description_placeholder": "Description de la prestation",
-        "quantity": "Quantité",
-        "daily_rate": "Taux HT",
-        "add_new": "+ Ajouter une nouvelle ligne",
-        "sub_total": "Sous total : <b>{subTotal}</b>",
-        "vat": "TVA (20%) : <b>{vat}</b>",
-        "total": "Total TTC : <b>{total}</b>"
-      },
-      "status": {
-        "title": "Statut",
-        "draft": "Brouillon",
-        "sent": "Envoyé",
-        "refused": "Refusé",
-        "canceled": "Annulé",
-        "accepted": "Accepté"
-      },
-      "errors": {
-        "invalid_project": "Ce projet ne correspond pas au client selectionné.",
-        "not_found": "Le devis n'existe pas."
-      }
-    },
     "daily_rates": {
       "title": "TJM",
       "user": "Coopérateur - salarié",
