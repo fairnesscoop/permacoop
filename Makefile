@@ -175,12 +175,12 @@ database-test-init: ## Initialize test database
 	DATABASE_NAME=permacoop_test make database-migrate
 
 database-migration: ## Generate a database migration
-	cd server && npm run migration:create -- migrations/$(NAME)
+	cd server && npm run migration:generate -- migrations/$(NAME)
 database-seed: ## Seed database
 	cd server && npm run build && npm run seed:run
 
 database-connect: ## Connect to the database container
-	${compose} exec database psql -h database -d permacoop_quotes
+	${compose} exec database psql -h database -d permacoop
 
 ci: ## Run CI checks
 	make compose CMD="up -d"
