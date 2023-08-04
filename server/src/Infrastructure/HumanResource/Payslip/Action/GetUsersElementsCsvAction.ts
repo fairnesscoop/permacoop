@@ -17,6 +17,10 @@ export class GetUsersElementsCsvAction {
     private readonly queryBus: IQueryBus
   ) {}
 
+  private formatNumber(value: number): string {
+    return value.toLocaleString('fr-FR').replace(/\s/g, '');
+  }
+
   @Get()
   public async index(@Res() res: Response) {
     res.header('Content-Type', 'text/csv');
@@ -32,8 +36,8 @@ export class GetUsersElementsCsvAction {
     );
 
     const headers = [
+      'NOM',
       'Prénom',
-      'Nom',
       'Contrat',
       "Date d'entrée",
       'Salaire annuel brut',
@@ -58,21 +62,21 @@ export class GetUsersElementsCsvAction {
 
     for (const payslip of payslips) {
       const row = [
+        payslip.lastName.toUpperCase(),
         payslip.firstName,
-        payslip.lastName,
         payslip.contract,
         payslip.joiningDate,
-        payslip.annualEarnings,
-        payslip.monthlyEarnings.toFixed(2),
+        this.formatNumber(payslip.annualEarnings),
+        this.formatNumber(Math.round(payslip.monthlyEarnings * 100) / 100),
         payslip.workingTime === 'full_time' ? 'Temps plein' : 'Temps partiel',
-        payslip.transportFee,
-        payslip.sustainableMobilityFee,
+        this.formatNumber(payslip.transportFee),
+        this.formatNumber(payslip.sustainableMobilityFee),
         payslip.mealTickets,
         payslip.healthInsurance === 'yes' ? 'Oui' : 'Non',
-        payslip.paidLeaves.totalDays,
-        payslip.unpaidLeaves.totalDays,
-        payslip.sickLeaves.totalDays,
-        payslip.exceptionalLeaves.totalDays,
+        this.formatNumber(payslip.paidLeaves.totalDays),
+        this.formatNumber(payslip.unpaidLeaves.totalDays),
+        this.formatNumber(payslip.sickLeaves.totalDays),
+        this.formatNumber(payslip.exceptionalLeaves.totalDays),
         ''
       ];
 

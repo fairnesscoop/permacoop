@@ -105,11 +105,6 @@
                   class="w-full"
                   href="/crm/customers">{$_('crm.customers.title')}</a>
               </li>
-              <li class={subLinkClass}>
-                <a
-                  class="w-full"
-                  href="/crm/contacts">{$_('crm.contacts.title')}</a>
-              </li>
             {/if}
           </ul>
         </li>
@@ -140,22 +135,7 @@
               <li class={subLinkClass}>
                 <a
                   class="w-full"
-                  href="accounting/invoices">{$_('accounting.invoices.title')}</a>
-              </li>
-              <li class={subLinkClass}>
-                <a
-                  class="w-full"
-                  href="accounting/quotes">{$_('accounting.quotes.title')}</a>
-              </li>
-              <li class={subLinkClass}>
-                <a
-                  class="w-full"
                   href="accounting/tasks">{$_('accounting.tasks.title')}</a>
-              </li>
-              <li class={subLinkClass}>
-                <a
-                  class="w-full"
-                  href="accounting/daily_rates">{$_('accounting.daily_rates.title')}</a>
               </li>
             </ul>
           </li>

@@ -13,10 +13,6 @@ export interface IEventRepository {
   delete(event: Event): void;
   findOneById(id: string): Promise<Event | undefined>;
   findMonthlyEvents(date: string, userId: string): Promise<Event[]>;
-  findBillableEventsByMonthAndProject(
-    date: Date,
-    project: Project
-  ): Promise<any[]>;
   sumOfTimeSpentByUserAndDate(user: User, date: string): Promise<number>;
   countEventsByUserAndPeriod(
     user: User,

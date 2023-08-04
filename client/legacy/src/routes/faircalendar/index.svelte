@@ -73,10 +73,8 @@
         goto(`/faircalendar/${info.startStr}_${endDate}/add`);
       },
       eventDataTransform: (data) => {
-        const { id, date, time, summary, type, task, billable, project } = data;
-        let title = `${minutesToHours(time)}${
-          false === billable && type === 'mission' ? '*' : ''
-        } - `;
+        const { id, date, time, summary, type, task, project } = data;
+        let title = `${minutesToHours(time)} - `;
         let eventType = type.startsWith('leave_') ? 'leave' : type;
 
         if ('mission' === type && task && project) {
@@ -146,6 +144,4 @@
 
 <div class="px-3 mb-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
   <div id="calendar" />
-  <small
-    class="mt-2 mb-2 font-semibold dark:text-white">{$_('faircalendar.not_billable')}</small>
 </div>

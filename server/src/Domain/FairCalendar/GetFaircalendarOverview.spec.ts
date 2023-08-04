@@ -33,7 +33,6 @@ describe('GetFairCalendarOverview', () => {
       '2019-12-12',
       null,
       null,
-      true,
       project
     );
 
@@ -61,7 +60,6 @@ describe('GetFairCalendarOverview', () => {
       '2019-12-12',
       null,
       null,
-      true,
       project
     );
     const event2 = new FairCalendarView(EventType.DOJO, 120, '2019-12-12');
@@ -71,7 +69,6 @@ describe('GetFairCalendarOverview', () => {
       '2019-12-13',
       null,
       null,
-      true,
       project
     );
     const event5 = new FairCalendarView(
@@ -80,7 +77,6 @@ describe('GetFairCalendarOverview', () => {
       '2019-12-10',
       null,
       null,
-      true,
       project
     );
     const event6 = new FairCalendarView(EventType.SUPPORT, 240, '2019-12-10');

@@ -41,7 +41,6 @@
       ...event,
       startDate: new Date(event.startDate),
       endDate: new Date(event.endDate),
-      billable: String(event.billable),
     });
   };
 </script>
@@ -76,16 +75,6 @@
         {/each}
       </SelectInput>
     </div>
-    {#if event.type === 'mission'}
-      <div class="w-1/2 pl-2">
-        <SelectInput
-          label={$_('faircalendar.form.billable')}
-          bind:value={event.billable}>
-          <option value={true}>{$_('common.yes')}</option>
-          <option value={false}>{$_('common.no')}</option>
-        </SelectInput>
-      </div>
-    {/if}
   </div>
   <Input
     label={$_('faircalendar.form.summary')}
