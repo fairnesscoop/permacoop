@@ -179,9 +179,10 @@ The `master` branch is deployed using the GitHub Actions `deploy.yml` workflow.
 This requires configuring a deployment SSH key:
 
 * Connect to the production VM
-* Run `$ ssh-keygen -t ed25519 -C "equipe@fairness.coop" -f ~/.ssh/github_actions`
-* Store the output of `cat ~/.ssh/github_actions` as `SSH_PRIVATE_KEY` in the [GitHub Actions secrets](https://github.com/fairnesscoop/permacoop/settings/secrets/actions)
-* Run `$ ssh-keyscan -H -t ed25519 permacoop.fairness.coop`, then store this as `SSH_KNOWN_HOSTS` in the GitHub Actions secrets.
+* Run `$ ssh-keygen -t ed25519 -C "equipe@fairness.coop" -f ~/.ssh/github_actions` to generate SSH keys
+* Copy the contents of `~/.ssh/github_actions.pub` to `~/.authorized_keys`
+* Store the contents of `~/.ssh/github_actions` as `SSH_PRIVATE_KEY` in the [GitHub Actions secrets](https://github.com/fairnesscoop/permacoop/settings/secrets/actions)
+* Run `$ ssh-keyscan -t ed25519 permacoop.fairness.coop`, then store the resulting line as `SSH_KNOWN_HOSTS` in the GitHub Actions secrets.
 
 ## Tools
 
