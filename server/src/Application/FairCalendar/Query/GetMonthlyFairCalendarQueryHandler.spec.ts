@@ -28,7 +28,6 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
     const event1 = mock(Event);
     when(event1.getId()).thenReturn('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
     when(event1.getType()).thenReturn('mission');
-    when(event1.isBillable()).thenReturn(true);
     when(event1.getTime()).thenReturn(90);
     when(event1.getDate()).thenReturn('2019-12-12');
     when(event1.getSummary()).thenReturn('lorem ipsum');
@@ -39,7 +38,6 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
     when(event2.getId()).thenReturn('b9a9b094-5bb2-4d0b-b01e-231b6cb50039');
     when(event2.getType()).thenReturn('dojo');
     when(event2.getTime()).thenReturn(300);
-    when(event2.isBillable()).thenReturn(false);
     when(event2.getDate()).thenReturn('2019-12-12');
     when(event2.getSummary()).thenReturn('dolor sit amet');
     when(event2.getTask()).thenReturn(null);
@@ -106,7 +104,6 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
         '2019-12-12',
         'lorem ipsum',
         'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
-        true,
         new ProjectView('bf4a645c-9754-4943-baec-783361c6d814', 'RadioFrance'),
         new TaskView('7fb77f06-2d0b-4758-886a-42bba5445fcd', 'Development')
       ),
@@ -116,7 +113,6 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
         '2019-12-12',
         'dolor sit amet',
         'b9a9b094-5bb2-4d0b-b01e-231b6cb50039',
-        false,
         null,
         null
       ),

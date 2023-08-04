@@ -40,7 +40,6 @@ describe('AddEventCommandHandler', () => {
     EventType.MISSION,
     instance(user),
     420,
-    true,
     new Date('2020-10-19'),
     new Date('2020-10-20'),
     '50e624ef-3609-4053-a437-f74844a2d2de',
@@ -72,7 +71,6 @@ describe('AddEventCommandHandler', () => {
           EventType.MISSION,
           instance(user),
           420,
-          true,
           new Date('2020-10-19'),
           new Date('2020-10-20')
         )
@@ -96,7 +94,6 @@ describe('AddEventCommandHandler', () => {
       EventType.MISSION,
       instance(user),
       420,
-      true,
       new Date('2020-10-24'),
       new Date('2020-10-25'),
       '50e624ef-3609-4053-a437-f74844a2d2de',
@@ -206,7 +203,6 @@ describe('AddEventCommandHandler', () => {
       EventType.MISSION,
       instance(user),
       420,
-      true,
       new Date('2020-10-19'),
       new Date('2020-10-19'),
       '50e624ef-3609-4053-a437-f74844a2d2de',
@@ -219,7 +215,6 @@ describe('AddEventCommandHandler', () => {
       instance(user),
       420,
       '2020-10-19',
-      true,
       instance(project),
       instance(task),
       'RF development'
@@ -275,7 +270,6 @@ describe('AddEventCommandHandler', () => {
       instance(user),
       420,
       '2020-10-19',
-      true,
       instance(project),
       instance(task),
       'RF development'
@@ -285,7 +279,6 @@ describe('AddEventCommandHandler', () => {
       instance(user),
       420,
       '2020-10-20',
-      true,
       instance(project),
       instance(task),
       'RF development'
