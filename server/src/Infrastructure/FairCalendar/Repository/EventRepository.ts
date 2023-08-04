@@ -7,7 +7,6 @@ import {
 } from 'src/Domain/FairCalendar/Repository/IEventRepository';
 import { Event, EventType } from 'src/Domain/FairCalendar/Event.entity';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
-import { DailyRate } from 'src/Domain/Accounting/DailyRate.entity';
 import { Project } from 'src/Domain/Project/Project.entity';
 
 @Injectable()

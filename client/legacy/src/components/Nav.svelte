@@ -143,11 +143,6 @@
                   class="w-full"
                   href="accounting/tasks">{$_('accounting.tasks.title')}</a>
               </li>
-              <li class={subLinkClass}>
-                <a
-                  class="w-full"
-                  href="accounting/daily_rates">{$_('accounting.daily_rates.title')}</a>
-              </li>
             </ul>
           </li>
         {/if}
