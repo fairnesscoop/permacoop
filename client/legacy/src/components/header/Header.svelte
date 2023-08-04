@@ -34,7 +34,7 @@
 
 <svelte:window
   on:click={(e) => {
-    if (e.target.id !== 'burger' && e.target.parentElement.id !== 'burger') {
+    if (e.target.id !== 'burger' && e.target && e.target.parentElement.id !== 'burger') {
       $settings.openMobileMenu = false;
     }
   }} />
