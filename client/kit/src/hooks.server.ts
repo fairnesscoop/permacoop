@@ -14,10 +14,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   event.locals.theme = theme;
 
-  if (isNonProtected(event.url)) {
-    return resolve(event);
-  }
-
   const token = getTokenCookie(event.cookies);
 
   if (!token) {
@@ -36,7 +32,11 @@ export const handle: Handle = async ({ event, resolve }) => {
     };
 
     return resolve(event);
-  } catch {
-    return new Response(null, { status: 302, headers: { Location: "/kit/login" } });
+  } catch (e) {
+    if (isNonProtected(event.url)) {
+      return resolve(event);
+    } else {
+      return new Response(null, { status: 302, headers: { Location: "/kit/login" } });
+    }
   }
 };
