@@ -229,6 +229,9 @@
         "add": {
           "title": "Faire une demande de congé"
         },
+        "see_all": {
+          "title": "Voir les demandes de congés"
+        },
         "states": {
           "pending": "En attente",
           "accepted": "Acceptée",
@@ -342,7 +345,10 @@
   },
   "dashboard": {
     "title": "Tableau de bord",
-    "welcome": "Bonjour {{firstName}} {{lastName}} !"
+    "welcome": "Bonjour {firstName} {lastName} !",
+    "leave_requests": {
+      "pending": "{count, plural, =0 {Aucune demande de congés} =1 {1 demande de congés} other {{count} demandes de congés}} en attente de validation"
+    }
   },
   "settings": {
     "errors": {

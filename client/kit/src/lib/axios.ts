@@ -28,6 +28,6 @@ export const del = (url: string) => {
   return client.delete(url, authorizationBearerHeader());
 };
 
-export const get = (url: string, payload: any, token: string) => {
+export const get = (url: string, payload: any = {}, token = "") => {
   return client.get(url, { ...payload, ...authorizationBearerHeader(token) });
 };

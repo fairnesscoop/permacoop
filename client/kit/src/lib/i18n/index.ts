@@ -1,12 +1,16 @@
-import i18n from "sveltekit-i18n";
-import type { Config } from "sveltekit-i18n";
+import i18n from "@sveltekit-i18n/base";
+import parser from "@sveltekit-i18n/parser-icu";
+import type { Config } from "@sveltekit-i18n/parser-icu";
 
-type Payload = {
-  firstName: string;
-  lastName: string;
-};
+interface Payload {
+  firstName?: string;
+  lastName?: string;
+  count?: number;
+}
 
 const config: Config<Payload> = {
+  parser: parser(),
+
   loaders: [
     {
       locale: "fr",
