@@ -24,11 +24,11 @@ export const login = async (email: string, password: string) => {
     secure: process.env.NODE_ENV === "production",
   });
 
-  invalidate("auth:login");
+  invalidate("auth:changed");
 };
 
 export const logout = () => {
   Cookies.remove(TOKEN_COOKIE);
 
-  invalidate("auth:login");
+  invalidate("auth:changed");
 };
