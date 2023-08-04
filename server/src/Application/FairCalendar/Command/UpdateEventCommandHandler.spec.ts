@@ -35,7 +35,6 @@ describe('UpdateEventCommandHandler', () => {
     instance(user),
     EventType.MISSION,
     420,
-    true,
     '50e624ef-3609-4053-a437-f74844a2d2de',
     'e3fc9666-2932-4dc1-b2b9-d904388293fb',
     'Superkaiser development'
@@ -80,14 +79,7 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything()
-        )
+        event.update(anything(), anything(), anything(), anything(), anything())
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -118,14 +110,7 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything()
-        )
+        event.update(anything(), anything(), anything(), anything(), anything())
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -145,8 +130,7 @@ describe('UpdateEventCommandHandler', () => {
           '5a18fde0-07d9-4854-a6da-c3ad2de76bd7',
           instance(user),
           EventType.MISSION,
-          420,
-          true
+          420
         )
       );
     } catch (e) {
@@ -164,14 +148,7 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything()
-        )
+        event.update(anything(), anything(), anything(), anything(), anything())
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -212,14 +189,7 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything()
-        )
+        event.update(anything(), anything(), anything(), anything(), anything())
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -260,14 +230,7 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(anything(), anything())
       ).never();
       verify(
-        event.update(
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything()
-        )
+        event.update(anything(), anything(), anything(), anything(), anything())
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -311,14 +274,7 @@ describe('UpdateEventCommandHandler', () => {
         isMaximumTimeSpentReached.isSatisfiedBy(instance(event), 420)
       ).once();
       verify(
-        event.update(
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything(),
-          anything()
-        )
+        event.update(anything(), anything(), anything(), anything(), anything())
       ).never();
       verify(eventRepository.save(anything())).never();
     }
@@ -366,7 +322,6 @@ describe('UpdateEventCommandHandler', () => {
       event.update(
         EventType.MISSION,
         420,
-        true,
         instance(project),
         instance(task),
         'Superkaiser development'

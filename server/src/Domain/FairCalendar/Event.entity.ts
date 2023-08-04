@@ -27,9 +27,6 @@ export class Event {
   @Column({ type: 'date', nullable: false })
   private date: string;
 
-  @Column({ type: 'boolean', default: true })
-  private billable: boolean;
-
   @Column({ type: 'varchar', nullable: true })
   private summary: string;
 
@@ -47,7 +44,6 @@ export class Event {
     user: User,
     time: number,
     date: string,
-    billable: boolean,
     project?: Project,
     task?: Task,
     summary?: string
@@ -56,7 +52,6 @@ export class Event {
     this.user = user;
     this.time = time;
     this.date = date;
-    this.billable = billable;
     this.project = project;
     this.task = task;
     this.summary = summary;
@@ -78,10 +73,6 @@ export class Event {
     return this.date;
   }
 
-  public isBillable(): boolean {
-    return this.billable;
-  }
-
   public getSummary(): string | null {
     return this.summary;
   }
@@ -101,14 +92,12 @@ export class Event {
   public update(
     type: EventType,
     time: number,
-    billable: boolean,
     project?: Project,
     task?: Task,
     summary?: string
   ): void {
     this.type = type;
     this.time = time;
-    this.billable = billable;
     this.project = project;
     this.task = task;
     this.summary = summary;

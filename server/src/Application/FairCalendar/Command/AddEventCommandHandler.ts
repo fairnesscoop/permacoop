@@ -32,7 +32,6 @@ export class AddEventCommandHandler extends AbstractProjectAndTaskGetter {
       type,
       startDate,
       endDate,
-      billable,
       projectId,
       taskId,
       summary,
@@ -55,16 +54,7 @@ export class AddEventCommandHandler extends AbstractProjectAndTaskGetter {
 
     for (const day of days) {
       const date = this.dateUtils.format(day, 'y-MM-dd');
-      const event = new Event(
-        type,
-        user,
-        time,
-        date,
-        billable && type === EventType.MISSION,
-        project,
-        task,
-        summary
-      );
+      const event = new Event(type, user, time, date, project, task, summary);
 
       if (
         true === (await this.isMaximumTimeSpentReached.isSatisfiedBy(event))

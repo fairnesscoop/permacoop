@@ -53,9 +53,6 @@
       "add": {
         "title": "Générer une facture"
       },
-      "errors": {
-        "no_billable_events_found": "Il n'y a rien à facturer sur le projet pour la période sélectionnée."
-      },
       "form": {
         "submit": "Générer",
         "expire_in_days": "Echéance (en jours)"
@@ -156,7 +153,6 @@
     "breadcrumb": "FairCalendar",
     "title": "Faircalendar {month}",
     "summary": "Récapitulatif",
-    "not_billable": "* Non facturé",
     "no_meal_ticket_for_this_day": "Pas de ticket restaurant pour cette journée",
     "errors": {
       "event_doesnt_belong_to_user": "Cet évènement ne vous appartient pas, vous ne pouvez ni le modifier, ni le supprimer.",
@@ -190,7 +186,6 @@
     "form": {
       "type": "Type de CRA",
       "time": "Temps passé",
-      "billable": "Facturable",
       "summary": "Commentaire",
       "can_have_meal_ticket": "Je reçois un ticket restaurant pour cet évenement",
       "cant_have_meal_ticket_comment": "Pour quelle raison ne voulez-vous pas en reçevoir ?"

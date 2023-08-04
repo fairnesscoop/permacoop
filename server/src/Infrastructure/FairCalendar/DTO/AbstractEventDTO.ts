@@ -24,11 +24,6 @@ export abstract class AbstractEventDTO {
   @IsIn([...ArrayUtils.range(30, 480, 30)])
   public time: number;
 
-  @IsNotEmpty()
-  @IsBooleanString()
-  @ApiProperty()
-  public billable: string;
-
   @ApiPropertyOptional()
   @IsOptional()
   @IsUUID()
