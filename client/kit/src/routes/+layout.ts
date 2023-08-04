@@ -10,8 +10,5 @@ export const load: LayoutLoad = async ({ url, data }) => {
   const initLocale = locale.get() || defaultLocale;
   await loadTranslations(initLocale, pathname);
 
-  return {
-    user: data.user,
-    theme: data.theme,
-  };
+  return data;
 };

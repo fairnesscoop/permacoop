@@ -14,6 +14,7 @@ export default defineConfig({
       // they are not available unless SvelteKit runs.
       "$app/environment": path.resolve("./tests/app.environment.mock.ts"),
       "$app/navigation": path.resolve("./tests/app.navigation.mock.ts"),
+      "$app/stores": path.resolve("./tests/app.stores.mock.ts"),
     },
   },
   plugins: [
