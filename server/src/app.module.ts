@@ -8,7 +8,6 @@ import { FairCalendarModule } from './Infrastructure/FairCalendar/faircalendar.m
 import { FileModule } from './Infrastructure/File/file.module';
 import { HumanResourceModule } from './Infrastructure/HumanResource/humanResource.module';
 import { SettingsModule } from './Infrastructure/Settings/settings.module';
-import { ContactModule } from './Infrastructure/Contact/contact.module';
 
 import { dataSourceOptions } from './datasource';
 
@@ -22,8 +21,7 @@ import { dataSourceOptions } from './datasource';
     HumanResourceModule,
     ProjectModule,
     TaskModule,
-    SettingsModule,
-    ContactModule
+    SettingsModule
   ]
 })
 export class AppModule {}
