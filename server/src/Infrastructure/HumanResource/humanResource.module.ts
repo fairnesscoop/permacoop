@@ -21,6 +21,8 @@ import { GetUsersQueryHandler } from 'src/Application/HumanResource/User/Query/G
 import { IsEmailAlreadyExist } from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
 import { UpdateProfileCommandHandler } from 'src/Application/HumanResource/User/Command/UpdateProfileCommandHandler';
 import { BearerStrategy } from './User/Security/BearerStrategy';
+import { LocalStrategy } from './User/Security/LocalStrategy';
+import { UserSerializer } from './User/Security/UserSerializer';
 import { GetUserByIdQueryHandler } from 'src/Application/HumanResource/User/Query/GetUserByIdQueryHandler';
 import { UserAdministrative } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import { UserAdministrativeRepository } from './User/Repository/UserAdministrativeRepository';
@@ -78,12 +80,16 @@ import { GetLeavesCalendarAction } from './Leave/Action/GetLeavesCalendarAction'
 import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesCalendarQueryHandler';
 import { GetPendingLeaveRequestsCountAction } from './Leave/Action/GetPendingLeaveRequestsCountAction';
 import { GetPendingLeaveRequestsCountQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetPendingLeaveRequestsCountQueryHandler';
+import session = require('express-session');
+import { LogoutController } from './User/Controller/LogoutController';
 
 @Module({
   imports: [
     BusModule,
     ConfigModule,
-    PassportModule,
+    PassportModule.register({
+      session: true
+    }),
     TypeOrmModule.forFeature([
       User,
       UserAdministrative,
@@ -99,6 +105,7 @@ import { GetPendingLeaveRequestsCountQueryHandler } from 'src/Application/HumanR
   ],
   controllers: [
     LoginController,
+    LogoutController,
     LoginAction,
     CreateUserAction,
     GetLeavesAction,
@@ -158,6 +165,8 @@ import { GetPendingLeaveRequestsCountQueryHandler } from 'src/Application/HumanR
     UpdateProfileCommandHandler,
     UpdateUserCommandHandler,
     BearerStrategy,
+    LocalStrategy,
+    UserSerializer,
     GetUserByIdQueryHandler,
     GetUserAdministrativeByIdQueryHandler,
     GetUsersElementsQueryHandler,

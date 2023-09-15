@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Render, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, Get, Post, Render, Res, UseGuards } from '@nestjs/common';
+import { Response } from 'express';
+import { LocalAuthGuard } from '../Security/LocalAuthGuard';
 
-@Controller('')
+@Controller('login')
 export class LoginController {
   @Get()
   @Render('login')
@@ -10,8 +11,8 @@ export class LoginController {
   }
 
   @Post()
-  @Render('login')
-  public async post(@Req() req: Request) {
-    return {};
+  @UseGuards(LocalAuthGuard)
+  public async post(@Res() res: Response) {
+    res.redirect(303, '/');
   }
 }

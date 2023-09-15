@@ -7,10 +7,14 @@
     <div class="c-card u-mt" style="--mt: calc(8 * var(--w))">
         <div class="u-cols--even" style="--cols: 2">
             <img src="/public/images/login-office.jpeg" alt="" width="448px" height="411px">
-            <form method="POST" action="/" class="u-p" style="--p: calc(4 * var(--w))">
+            <form method="POST" action="/login" class="u-p" style="--p: calc(4 * var(--w))">
                 <h1 class="u-text--center">
                     Connexion
                 </h1>
+
+                {% if user %}
+                    <p>User: {{ user|dump }}</p>
+                {% endif %}
 
                 <div class="c-input-group">
                     <label for="email" class="required">Adresse email</label>
