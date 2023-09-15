@@ -3,9 +3,6 @@ help:
 
 compose = docker-compose -p permacoop
 
-# See color codes here: http://jafrog.com/2013/11/23/colors-in-terminal.html
-run = ./tools/colorize_prefix.sh [server] 30
-
 install: ## Install
 	cp -n server/.env.dist server/.env
 	make install-deps
@@ -20,7 +17,7 @@ install-dev: up ## Install local development dependencies and services
 	make database-test-init
 
 start: up ## Start
-	${run} "cd server && npm run start:dev"
+	cd server && npm run start:dev
 
 compose: ## Run Docker compose command (args: CMD)
 	${compose} ${CMD}
@@ -44,7 +41,7 @@ build: ## Build dist
 	cd server && npm run build
 
 start-dist: ## Serve built server
-	${run} "cd server && npm run start:prod"
+	cd server && npm run start:prod
 
 test: ## Run tests
 	cd server && npm run test -- $(FILE)

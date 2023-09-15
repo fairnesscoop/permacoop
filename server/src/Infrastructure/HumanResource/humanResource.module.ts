@@ -5,6 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 import { BusModule } from '../bus.module';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { File } from 'src/Domain/File/File.entity';
+import { LoginController } from './User/Controller/LoginController';
 import { LoginAction } from './User/Action/LoginAction';
 import { CreateUserAction } from './User/Action/CreateUserAction';
 import { GetMeAction } from './User/Action/GetMeAction';
@@ -97,6 +98,7 @@ import { GetPendingLeaveRequestsCountQueryHandler } from 'src/Application/HumanR
     ])
   ],
   controllers: [
+    LoginController,
     LoginAction,
     CreateUserAction,
     GetLeavesAction,

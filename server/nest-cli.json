@@ -2,9 +2,8 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "assets": [
-      {"include": "templates/*", "watchAssets": true},
-      {"include": "public/*", "watchAssets": true}
-    ]
+    "assets": ["templates/**/*", "public/**/*"],
+    "watchAssets": true,
+    "manualRestart": true
   }
 }

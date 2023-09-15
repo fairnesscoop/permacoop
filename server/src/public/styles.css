@@ -1,4 +1,177 @@
-p {
-    color: red;
+@layer reset, defaults, components, utilities;
+
+:root {
+  /* Spacing */
+  --v: 0.25rem;
+  --w: 0.5rem;
+  /* Fonts */
+  --font-default: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  /* Colors */
+  --background-default: #ffffff;
+  --background-alt-grey: #f9fafb;
+  --background-action-violet: #6c2bd9;
+  --background-action-violet-hover: #52289b;
+  --text-on-background-default: #282828;
+  --text-on-background-action-violet: #ffffff;
+  --text-danger: #ff0000;
+  /* Shadows */
+  --shadow-default: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.1) 0px 8px 10px -6px;
 }
 
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Colors */
+    --background-alt-grey: #121317;
+  }
+}
+
+@layer reset {
+  /* https://www.joshwcomeau.com/css/custom-css-reset/ */
+  /*
+    1. Use a more-intuitive box-sizing model.
+  */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  /*
+    2. Remove default margin
+  */
+  * {
+    margin: 0;
+  }
+  /*
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+  */
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  /*
+    5. Improve media defaults
+  */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+  /*
+    6. Remove built-in form typography styles
+  */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+  /*
+    7. Avoid text overflows
+  */
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+  /*
+    8. Create a root stacking context
+  */
+  #root,
+  #__next {
+    isolation: isolate;
+  }
+}
+
+@layer defaults {
+  body {
+    background-color: var(--background-default);
+    color: var(--text-on-background-default);
+    font-family: var(--font-default);
+  }
+
+  h1 {
+    margin-bottom: calc(3 * var(--w));
+  }
+
+  label.required::after {
+    content: ' *';
+    color: var(--text-danger);
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  button:not(:disabled):hover {
+    background-color: var(--hover-tint);
+  }
+}
+
+@layer components {
+  .c-card {
+    background-color: var(--background-default);
+    box-shadow: var(--shadow-default);
+  }
+
+  .c-input-group {
+    margin-bottom: calc(2 * var(--w));
+  }
+
+  .c-input-group > input {
+    display: block;
+    width: 100%;
+  }
+
+  .c-input-group > label {
+    margin-bottom: var(--v);
+  }
+
+  .c-btn {
+    --hover-tint: var(--background-action-violet-hover);
+    border: none;
+    padding: var(--w) calc(2 * var(--w));
+    background-color: var(--background-action-violet);
+    color: var(--text-on-background-action-violet);
+  }
+  .c-btn:hover {
+    background-color: var(--hover-tint);
+  }
+}
+
+@layer utilities {
+  .u-center {
+    display: grid;
+    place-items: center;
+  }
+
+  .u-background-alt-grey {
+    background-color: var(--background-alt-grey);
+  }
+
+  .u-cols--even {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+  }
+
+  .u-mt {
+    margin-top: var(--mt);
+  }
+
+  .u-p {
+    padding: var(--p);
+  }
+
+  .u-text--center {
+    text-align: center;
+  }
+}

@@ -15,7 +15,7 @@ async function bootstrap() {
 
   const assetsDir = path.join(__dirname, '..', 'public');
   app.useStaticAssets(assetsDir, { prefix: '/public' });
-  
+
   const viewsDir = path.join(__dirname, '..', 'templates');
   nunjucks.configure(viewsDir, { express });
   app.setBaseViewsDir(viewsDir);
