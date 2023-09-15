@@ -10,8 +10,12 @@ import { HumanResourceModule } from './Infrastructure/HumanResource/humanResourc
 import { SettingsModule } from './Infrastructure/Settings/settings.module';
 
 import { dataSourceOptions } from './datasource';
+import { HomeController } from './Infrastructure/Controller/HomeController';
 
 @Module({
+  controllers: [
+    HomeController,
+  ],
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
     ConfigModule.forRoot(),
