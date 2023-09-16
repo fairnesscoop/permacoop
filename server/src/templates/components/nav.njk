@@ -1,5 +1,3 @@
-{% set view_name = 'home' %}
-
 <nav class="pc-nav">
   <ul>
     <li>
@@ -9,7 +7,7 @@
       <a {% if view_name == 'home' %}aria-current="page"{% endif %} href="{{ path('home') }}">
         {% set class_name = 'pc-icon--sm' %}
         {% include 'icons/dashboard.njk' %}
-        {{ 'dashboard-title'|translate }}
+        {{ 'dashboard-title'|trans }}
       </a>
     </li>
 
@@ -17,15 +15,15 @@
       {% if view_name == 'faircalendar_index' %}
         <span class="pc-nav__decoration" aria-hidden="true"></span>
       {% endif %}
-      <a {% if view_name == 'faircalendar:index' %}aria-current="page"{% endif %} href="{{ path('faircalendar_index') }}">
+      <a {% if view_name == 'faircalendar_index' %}aria-current="page"{% endif %} href="{{ path('faircalendar_index') }}">
         {% set class_name = 'pc-icon--sm' %}
         {% include 'icons/calendar.njk' %}
-        {{ "faircalendar-title"|translate }}
+        {{ "faircalendar-title"|trans }}
       </a>
     </li>
 
     <li>
-      {% if app_name == 'crm' %}
+      {% if view_name|startswith('crm_') %}
         <span class="pc-nav__decoration" aria-hidden="true"></span>
       {% endif %}
 
@@ -33,18 +31,18 @@
           <summary>
             {% set class_name = 'pc-icon--sm' %}
             {% include 'icons/crm.njk' %}
-            {{ "crm-title"|translate }}
+            {{ "crm-title"|trans }}
           </summary>
 
           <ul>
             <li>
               <a href="{{ path('crm_customers_list') }}" {% if view_name == 'crm_customers_list' %}aria-current="page"{% endif %}>
-                {{ "crm-customers-title"|translate|capitalize }}
+                {{ "crm-customers-title"|trans|capitalize }}
               </a>
             </li>
             <li>
               <a href="{{ path('crm_projects_list') }}" {% if view_name == 'crm_projects_list' %}aria-current="page"{% endif %}>
-                {{ "crm-projects-title"|translate|capitalize }}
+                {{ "crm-projects-title"|trans|capitalize }}
               </a>
             </li>
           </ul>
@@ -52,7 +50,7 @@
     </li>
 
     <li>
-      {% if app_name == 'accounts' %}
+      {% if view_name|startswith('accounts_') %}
         <span class="pc-nav__decoration" aria-hidden="true"></span>
       {% endif %}
 
@@ -60,13 +58,13 @@
         <summary>
           {% set class_name = 'pc-icon--sm' %}
           {% include 'icons/group.njk'  %}
-          {{ 'accounts-title'|translate }}
+          {{ 'accounts-title'|trans }}
         </summary>
 
         <ul>
           <li>
             <a href="{{ path('accounts_workers_list') }}" {% if view_name == 'accounts_workers_list' %}aria-current="page"{% endif %}>
-              {{ 'accounts-workers-title'|translate }}
+              {{ 'accounts-workers-title'|trans }}
             </a>
           </li>
         </ul>

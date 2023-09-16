@@ -1,0 +1,11 @@
+{% extends 'layouts/app.njk' %}
+
+{% block main %}
+<h1>{{ 'faircalendar-title'|trans }}</h1>
+
+<div
+    data-controller="fullcalendar"
+    data-fullcalendar-events-json-value="{{ fullCalendarEvents|dump }}"
+    data-fullcalendar-add-url-template-value="{{ path('faircalendar_events_add', { date: '__date__' }) }}"
+></div>
+{% endblock main %}

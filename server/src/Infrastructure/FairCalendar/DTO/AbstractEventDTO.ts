@@ -6,8 +6,7 @@ import {
   IsIn,
   IsEnum,
   IsOptional,
-  IsNumber,
-  IsBooleanString
+  IsNumberString
 } from 'class-validator';
 import { EventType } from 'src/Domain/FairCalendar/Event.entity';
 import { ArrayUtils } from 'src/Infrastructure/Common/Utils/ArrayUtils';
@@ -20,8 +19,8 @@ export abstract class AbstractEventDTO {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
-  @IsIn([...ArrayUtils.range(30, 480, 30)])
+  @IsNumberString()
+  @IsIn([...ArrayUtils.range(30, 480, 30)].map(n => n.toString()))
   public time: number;
 
   @ApiPropertyOptional()

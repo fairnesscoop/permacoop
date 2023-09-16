@@ -8,5 +8,8 @@ export class UnexpectedErrorFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     response.render('errors/error', { error });
     response.statusCode = 500;
+    if (error['status'] === 400) {
+      console.error(error);
+    }
   }
 }

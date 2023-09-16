@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#343a40" />
     <link rel="stylesheet" href="/public/styles.css">
     <title>{% block title %}Permacoop{% endblock title %}</title>
+    <script src="{{ asset('client.js') }}" type="module" async defer></script>
   </head>
   {% block header %}{% endblock header %}
   <body class="{% block body_class %}{% endblock body_class %}">

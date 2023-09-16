@@ -8,7 +8,7 @@
                 <a href="/accounts/edit" class="pc-icon--left">
                     {% set class_name = "pc-icon pc-icon--sm" %}
                     {% include 'icons/user.njk' %}
-                    {{ 'header-account'|translate|capitalize }}
+                    {{ 'header-account'|trans|capitalize }}
                 </a>
             </li>
             <li>
@@ -16,7 +16,7 @@
                     <button type="submit" class="pc-link pc-icon--left">
                         {% set class_name = "pc-icon pc-icon--sm" %}
                         {% include 'icons/logout.njk' %}
-                        {{ 'header-logout'|translate|capitalize }}
+                        {{ 'header-logout'|trans|capitalize }}
                     </button>
                 </form>
             </li>

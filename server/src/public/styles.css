@@ -15,22 +15,49 @@
   /* Colors */
   --background-default: #ffffff;
   --background-alt-grey: #f9fafb;
+  --background-muted: #f0f0f0;
   --background-action-violet: #6c2bd9;
   --background-action-violet-hover: #52289b;
-  --text-on-background-default: #282828;
+  --background-danger: #f05252;
+  --text-default: #282828;
+  --text-muted: #555555;
   --text-on-background-action-violet: #ffffff;
   --text-danger: #ff0000;
+  --text-on-danger: #ffffff;
   /* Shadows */
   --shadow-default: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
     rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.1) 0px 8px 10px -6px;
+  --shadow-inner: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  /* FairCalendar */
+  --event-mission-background: rgb(222, 247, 236);
+  --event-mission-border: rgb(222, 247, 236);
+  --event-mission-text: rgb(4, 108, 78);
+  --event-dojo-background: rgb(225, 239, 254);
+  --event-dojo-border: rgb(225, 239, 254);
+  --event-dojo-text: rgb(26, 86, 219);
+  --event-support-background: rgb(229, 237, 255);
+  --event-support-border: rgb(229, 237, 255);
+  --event-support-text: rgb(81, 69, 205);
+  --event-formation_conference-background: rgb(254, 236, 220);
+  --event-formation_conference-border: rgb(254, 236, 220);
+  --event-formation_conference-text: rgb(180, 52, 3);
+  --event-other-background: rgb(244, 245, 247);
+  --event-other-border: rgb(244, 245, 247);
+  --event-other-text: rgb(36, 38, 45);
+  --event-holiday-background: rgb(237, 235, 254);
+  --event-holiday-border: rgb(237, 235, 254);
+  --event-holiday-text: rgb(108, 43, 217);
 }
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     /* Colors */
+    --background-default: #1a1b23;
     --background-alt-grey: #121317;
+    --text-default: #ffffff;
+    --text-muted: #bbbbbb;
   }
 }
 
@@ -103,7 +130,7 @@
 @layer defaults {
   body {
     background-color: var(--background-default);
-    color: var(--text-on-background-default);
+    color: var(--text-default);
     font-family: var(--font-default);
     font-size: var(--font-size-default);
   }
@@ -182,13 +209,19 @@
     background-color: var(--background-action-violet);
     color: var(--text-on-background-action-violet);
   }
+
   .pc-btn:hover {
     background-color: var(--hover-tint);
   }
 
+  .pc-btn--danger {
+    background-color: var(--background-danger);
+    color: var(--text-on-danger);
+  }
+
   .pc-nav {
     overflow-y: auto;
-    padding: calc(4 * var(--v)) 0;
+    padding: calc(2 * var(--w)) 0;
   }
 
   .pc-nav ul {
@@ -203,8 +236,8 @@
   }
 
   .pc-nav ul li ul {
-    padding: calc(2 * var(--v));
-    margin-top: calc(2 * var(--v));
+    padding: var(--w);
+    margin-top: var(--w);
     overflow: hidden;
     font-size: var(--font-size-sm);
     box-shadow: var(--shadow-inner);
@@ -212,7 +245,7 @@
   }
 
   .pc-nav ul li ul li {
-    padding: calc(2 * var(--v)) calc(1 * var(--v));
+    padding: var(--w) var(--v);
   }
 
   .pc-nav__decoration {
@@ -236,10 +269,14 @@
 
   .pc-nav details > summary {
     cursor: pointer;
+    color: var(--text-muted);
   }
 
   .pc-nav a[aria-current='page'] {
     font-weight: bold;
+  }
+  .pc-nav a:not([aria-current='page']) {
+    color: var(--text-muted);
   }
 
   .pc-nav details summary > svg,
@@ -351,4 +388,20 @@
   .pc-text--center {
     text-align: center;
   }
+}
+
+/* fullcalendar customizations */
+
+.fc-event {
+  padding: var(--v);
+  font-weight: bold;
+}
+
+.fc-view-harness {
+  background-color: var(--background-default);
+}
+
+.fc-day-other {
+  position: static !important;
+  background-color: var(--background-muted);
 }

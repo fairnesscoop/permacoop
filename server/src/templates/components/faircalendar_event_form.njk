@@ -1,0 +1,46 @@
+<form method="POST">
+    <div class="pc-input-group">
+        <label for="type">{{ 'faircalendar-type-title'|trans }}</label>
+        <select name="type" id="type">
+            {% for type in types %}
+                <option value="{{ type }}"{% if event and event.type == type %}selected{% endif %}>{{ 'faircalendar-type-option'|trans({ type: type }) }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="pc-input-group">
+        <label for="projectId">{{ 'faircalendar-projectId-title'|trans }}</label>
+        <select name="projectId" id="projectId">
+            {% for project in projects %}
+                <option value="{{ project.id }}" {% if event and event.project.id == project.id %}selected{% endif %}>{{ project.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="pc-input-group">
+        <label for="taskId">{{ 'faircalendar-taskId-title'|trans }}</label>
+        <select name="taskId" id="taskId">
+            {% for task in tasks %}
+                <option value="{{ task.id }}" {% if event and event.task.id == task.id %}selected{% endif %}>{{ task.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="pc-input-group">
+        <label for="time">{{ 'faircalendar-time-title'|trans }}</label>
+        <select name="time" id="time">
+            {% for time in times %}
+                <option value="{{ time }}" {% if event and event.time == time %}selected{% endif %}>{{ time|minutesToHours }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    {% if date %}
+        <input type="hidden" name="startDate" value="{{ date }}T00:00:00">
+        <input type="hidden" name="endDate" value="{{ date }}T23:59:59">
+    {% endif %}
+    
+    <button type="submit" class="pc-btn">
+        {{ "common-form-save"|trans|capitalize }}
+    </button>
+</form>

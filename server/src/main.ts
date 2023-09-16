@@ -8,7 +8,8 @@ import * as session from 'express-session';
 import * as connectPgSimple from 'connect-pg-simple';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
-import { nunjucks } from './Infrastructure/Nunjucks';
+import { nunjucks } from './Infrastructure/Common/Templating';
+import { registerFilters } from './Infrastructure/Common/Templating/filters';
 
 async function bootstrap() {
   const isProd = process.env.NODE_ENV === 'production';
@@ -45,8 +46,10 @@ async function bootstrap() {
   const viewsDir = path.join(__dirname, '..', 'templates');
   app.setBaseViewsDir(viewsDir);
 
-  const njk = nunjucks(app, { watch: !isProd });
-  njk.env.addFilter('translate', key => key);
+  const translator = app.get('ITranslator');
+
+  const njk = await nunjucks(app, { watch: !isProd });
+  registerFilters(njk.env, translator);
   njk.contextProcessor((ctx, _req, _res) => {
     ctx.asset = (path: string) => `/public/${path}`;
   });

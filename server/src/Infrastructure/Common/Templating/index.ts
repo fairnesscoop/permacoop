@@ -1,7 +1,7 @@
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { NextFunction, Request, Response } from 'express';
 import { FileSystemLoader, Environment, TemplateCallback } from 'nunjucks';
-import { getNamedRoutes } from '../NestJS/Routing/WithName';
+import { getNamedRoutes } from '../Routing/WithName';
 
 type ContextProcessorFn = (
   ctx: Record<string, any>,
@@ -9,7 +9,7 @@ type ContextProcessorFn = (
   res: Response
 ) => void;
 
-export const nunjucks = (
+export const nunjucks = async (
   app: NestExpressApplication,
   { watch } = { watch: false }
 ) => {
@@ -29,14 +29,26 @@ export const nunjucks = (
   const ctxProcessors: ContextProcessorFn[] = [
     (ctx, req, _res) => {
       ctx.req = req;
-      ctx.path = (name: string) => urls[name] ?? '#';
+      (ctx.path = (name: string, params: Record<string, any> = {}) => {
+        let path = nameToPath[name];
+        if (!path) {
+          return '#';
+        }
+        Object.entries(params).forEach(([name, value]) => {
+          path = path.replace(`:${name}`, value.toString());
+        });
+        return path;
+      }),
+        (ctx.view_name = pathToName[req.url] ?? null);
     }
   ];
 
-  const urls = {};
+  const nameToPath = {};
+  const pathToName = {};
 
   getNamedRoutes(app).forEach(({ name, path }) => {
-    urls[name] = path;
+    nameToPath[name] = path;
+    pathToName[path] = name;
   });
 
   app.use((req: Request, res: Response, next: NextFunction): void => {

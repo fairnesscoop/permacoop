@@ -10,8 +10,8 @@ import { FairCalendarModule } from './Infrastructure/FairCalendar/faircalendar.m
 import { FileModule } from './Infrastructure/File/file.module';
 import { HumanResourceModule } from './Infrastructure/HumanResource/humanResource.module';
 import { SettingsModule } from './Infrastructure/Settings/settings.module';
-import { UnexpectedErrorFilter } from './Infrastructure/NestJS/ExceptionFilter/UnexpectedErrorFilter';
-import { AuthRequiredFilter } from './Infrastructure/NestJS/ExceptionFilter/AuthRequiredFilter';
+import { UnexpectedErrorFilter } from './Infrastructure/Common/ExceptionFilter/UnexpectedErrorFilter';
+import { AuthRequiredFilter } from './Infrastructure/Common/ExceptionFilter/AuthRequiredFilter';
 import { dataSourceOptions } from './datasource';
 
 const providers = [];

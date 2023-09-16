@@ -1,6 +1,6 @@
 import { Controller, Get, Render, UseGuards } from '@nestjs/common';
+import { WithName } from 'src/Infrastructure/Common/Routing/WithName';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
-import { WithName } from 'src/Infrastructure/NestJS/Routing/WithName';
 
 @Controller('')
 @UseGuards(IsAuthenticatedGuard)
