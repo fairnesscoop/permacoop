@@ -12,18 +12,14 @@
                     Connexion
                 </h1>
 
-                {% if user %}
-                    <p>User: {{ user|dump }}</p>
-                {% endif %}
-
                 <div class="c-input-group">
                     <label for="email" class="required">Adresse email</label>
-                    <input name="email" type="email">
+                    <input id="email" name="email" type="email">
                 </div>
 
                 <div class="c-input-group">
                     <label for="password" class="required">Mot de passe</label>
-                    <input name="password" type="password">
+                    <input id="password" name="password" type="password">
                 </div>
 
                 <button class="c-btn" type="submit">Se connecter</button>

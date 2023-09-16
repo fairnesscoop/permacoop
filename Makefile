@@ -14,6 +14,7 @@ install-deps: ## Install dependencies
 	cd server && npm ci
 
 install-dev: up ## Install local development dependencies and services
+	cd server && npx playwright install firefox
 	make database-test-init
 
 start: up ## Start
@@ -49,6 +50,9 @@ test: ## Run tests
 test-watch: ## Run tests in watch mode
 	cd server && npm run test:watch
 
+test-e2e:
+	cd server && npx playwright test
+
 test-cov: ## Run tests with coverage enabled
 	cd server && npm run test:cov
 
@@ -79,6 +83,7 @@ ci: ## Run CI checks
 	make install
 	make build
 	make database-migrate
-	make test-api-cov
+	make test-cov
 	make database-test-init
+	make test-e2e
 	make linter
