@@ -1,0 +1,16 @@
+{% extends 'layouts/_base.njk' %}
+{% block body %}
+    <div class="pc-app">
+        <aside class="pc-app__sidebar">
+            <a class="pc-brand" href="{{ path('home') }}">
+                <img class="pc-brand__logo" src="{{ asset('images/logo.png') }}" alt="Fairness"/>
+                <span>{{ "site-title"|translate }}</span>
+            </a>
+            {% include "components/nav.njk" %}
+        </aside>
+        {% include "components/header.njk" %}
+        <main class="pc-app__content">
+            {% block main %}{% endblock main %}
+        </main>
+    </div>
+{% endblock body %}

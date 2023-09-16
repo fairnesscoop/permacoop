@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { APP_FILTER, DiscoveryModule } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { HomeModule } from './Infrastructure/Home/home.module';
@@ -9,11 +10,27 @@ import { FairCalendarModule } from './Infrastructure/FairCalendar/faircalendar.m
 import { FileModule } from './Infrastructure/File/file.module';
 import { HumanResourceModule } from './Infrastructure/HumanResource/humanResource.module';
 import { SettingsModule } from './Infrastructure/Settings/settings.module';
-
+import { UnexpectedErrorFilter } from './Infrastructure/NestJS/ExceptionFilter/UnexpectedErrorFilter';
+import { AuthRequiredFilter } from './Infrastructure/NestJS/ExceptionFilter/AuthRequiredFilter';
 import { dataSourceOptions } from './datasource';
+
+const providers = [];
+
+if (process.env.NODE_ENV !== 'production') {
+  providers.push({
+    provide: APP_FILTER,
+    useClass: UnexpectedErrorFilter
+  });
+}
+
+providers.push({
+  provide: APP_FILTER,
+  useClass: AuthRequiredFilter
+});
 
 @Module({
   imports: [
+    DiscoveryModule,
     TypeOrmModule.forRoot(dataSourceOptions),
     ConfigModule.forRoot(),
     HomeModule,
@@ -24,6 +41,7 @@ import { dataSourceOptions } from './datasource';
     ProjectModule,
     TaskModule,
     SettingsModule
-  ]
+  ],
+  providers
 })
 export class AppModule {}

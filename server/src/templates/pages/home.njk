@@ -1,0 +1,5 @@
+{% extends 'layouts/app.njk' %}
+
+{% block main %}
+    <h1>Bonjour, {{ req.user.firstName|capitalize }} {{ req.user.lastName|capitalize }} !</h1>
+{% endblock main %}

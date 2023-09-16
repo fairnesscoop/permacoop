@@ -5,7 +5,7 @@ import { LocalAuthGuard } from '../Security/LocalAuthGuard';
 @Controller('login')
 export class LoginController {
   @Get()
-  @Render('login')
+  @Render('pages/login')
   public get() {
     return {};
   }

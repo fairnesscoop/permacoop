@@ -4,17 +4,18 @@ import * as pg from 'pg';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import * as helmet from 'helmet';
-import * as nunjucks from 'nunjucks';
 import * as session from 'express-session';
 import * as connectPgSimple from 'connect-pg-simple';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
+import { nunjucks } from './Infrastructure/Nunjucks';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  const express = app.getHttpAdapter().getInstance();
+  const isProd = process.env.NODE_ENV === 'production';
 
-  const pgPool = new pg.Pool({
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  const sessionPgPool = new pg.Pool({
     host: process.env.DATABASE_HOST,
     port: +process.env.DATABASE_PORT,
     user: process.env.DATABASE_USERNAME,
@@ -31,7 +32,7 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: false,
       store: new (connectPgSimple(session))({
-        pool: pgPool,
+        pool: sessionPgPool,
         createTableIfMissing: true
       })
     }),
@@ -42,8 +43,14 @@ async function bootstrap() {
   app.useStaticAssets(assetsDir, { prefix: '/public' });
 
   const viewsDir = path.join(__dirname, '..', 'templates');
-  nunjucks.configure(viewsDir, { express });
   app.setBaseViewsDir(viewsDir);
+
+  const njk = nunjucks(app, { watch: !isProd });
+  njk.env.addFilter('translate', key => key);
+  njk.contextProcessor((ctx, _req, _res) => {
+    ctx.asset = (path: string) => `/public/${path}`;
+  });
+  app.engine('njk', njk.engine);
   app.setViewEngine('njk');
 
   await app.listen(3000, '0.0.0.0');

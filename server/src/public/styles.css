@@ -1,11 +1,17 @@
-@layer reset, defaults, components, utilities;
+@layer reset, defaults, layouts, components, utilities;
 
 :root {
   /* Spacing */
   --v: 0.25rem;
   --w: 0.5rem;
   /* Fonts */
-  --font-default: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-default: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-size-md: 1.1rem;
+  --font-size-sm: calc(0.8 * var(--font-size-md));
+  --font-size-lg: calc(1.2 * var(--font-size-md));
+  --font-size-default: var(--font-size-md);
   /* Colors */
   --background-default: #ffffff;
   --background-alt-grey: #f9fafb;
@@ -15,7 +21,9 @@
   --text-on-background-action-violet: #ffffff;
   --text-danger: #ff0000;
   /* Shadows */
-  --shadow-default: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.1) 0px 8px 10px -6px;
+  --shadow-default: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.1) 0px 8px 10px -6px;
 }
 
 /* Dark mode */
@@ -97,6 +105,7 @@
     background-color: var(--background-default);
     color: var(--text-on-background-default);
     font-family: var(--font-default);
+    font-size: var(--font-size-default);
   }
 
   h1 {
@@ -115,63 +124,231 @@
   button:not(:disabled):hover {
     background-color: var(--hover-tint);
   }
+
+  a {
+    color: inherit;
+  }
+
+  a:visited {
+    color: inherit;
+  }
+}
+
+@layer layouts {
+  .pc-app {
+    display: grid;
+    grid-template-areas:
+      'nav header'
+      'nav main';
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    background-color: var(--background-alt-grey);
+  }
+
+  .pc-app__sidebar {
+    grid-area: nav;
+    background-color: var(--background-default);
+  }
+
+  .pc-app__content {
+    padding: calc(3 * var(--w));
+  }
 }
 
 @layer components {
-  .c-card {
+  .pc-card {
     background-color: var(--background-default);
     box-shadow: var(--shadow-default);
   }
 
-  .c-input-group {
+  .pc-input-group {
     margin-bottom: calc(2 * var(--w));
   }
 
-  .c-input-group > input {
+  .pc-input-group > input {
     display: block;
     width: 100%;
   }
 
-  .c-input-group > label {
+  .pc-input-group > label {
     margin-bottom: var(--v);
   }
 
-  .c-btn {
+  .pc-btn {
     --hover-tint: var(--background-action-violet-hover);
     border: none;
     padding: var(--w) calc(2 * var(--w));
     background-color: var(--background-action-violet);
     color: var(--text-on-background-action-violet);
   }
-  .c-btn:hover {
+  .pc-btn:hover {
     background-color: var(--hover-tint);
+  }
+
+  .pc-nav {
+    overflow-y: auto;
+    padding: calc(4 * var(--v)) 0;
+  }
+
+  .pc-nav ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+  }
+
+  .pc-nav ul li {
+    position: relative;
+    padding: calc(3 * var(--v)) calc(3 * var(--v));
+  }
+
+  .pc-nav ul li ul {
+    padding: calc(2 * var(--v));
+    margin-top: calc(2 * var(--v));
+    overflow: hidden;
+    font-size: var(--font-size-sm);
+    box-shadow: var(--shadow-inner);
+    background-color: var(--background-alt-grey);
+  }
+
+  .pc-nav ul li ul li {
+    padding: calc(2 * var(--v)) calc(1 * var(--v));
+  }
+
+  .pc-nav__decoration {
+    position: absolute;
+    inset: 0;
+    left: 0;
+    width: var(--v);
+    background-color: var(--background-action-violet);
+    border-top-right-radius: var(--radius-lg);
+    border-bottom-right-radius: var(--radius-lg);
+  }
+
+  .pc-nav a,
+  .pc-nav details > summary {
+    display: inline-flex;
+    column-gap: calc(2 * var(--v));
+    align-items: center;
+    width: 100%;
+    font-size: var(--font-size-sm);
+  }
+
+  .pc-nav details > summary {
+    cursor: pointer;
+  }
+
+  .pc-nav a[aria-current='page'] {
+    font-weight: bold;
+  }
+
+  .pc-nav details summary > svg,
+  svg.pc-icon--sm {
+    display: inline;
+  }
+
+  .pc-brand {
+    display: inline-flex;
+    align-items: center;
+    column-gap: calc(3 * var(--v));
+    padding: calc(6 * var(--v));
+    font-size: var(--font-size-lg);
+    font-weight: bold;
+  }
+
+  .pc-brand__logo {
+    width: calc(8 * var(--v));
+    height: calc(8 * var(--v));
+  }
+
+  .pc-icon--danger {
+    color: var(--text-danger);
+  }
+
+  .pc-icon--sm {
+    width: calc(6 * var(--v));
+    height: calc(6 * var(--v));
+  }
+
+  .pc-icon--left {
+    display: flex;
+    align-items: center;
+  }
+
+  .pc-icon--left > .pc-icon {
+    margin-inline-end: calc(2 * var(--v));
+  }
+
+  .pc-header {
+    grid-area: header;
+    background-color: var(--background-default);
+    display: flex;
+    justify-content: end;
+    padding: calc(3 * var(--v));
+  }
+
+  details.pc-dropdown {
+    position: relative;
+  }
+
+  details.pc-dropdown > summary {
+    cursor: pointer;
+  }
+
+  details.pc-dropdown .pc-dropdown__content {
+    z-index: 1;
+    position: absolute;
+    background-color: var(--background-default);
+    box-shadow: var(--shadow-default);
+    right: 0;
+    width: max-content;
+    padding: calc(3 * var(--v));
+  }
+
+  ul.pc-dropdown__content > li {
+    padding-block: calc(2 * var(--v));
+  }
+
+  .pc-raw-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  button.pc-link {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text-link);
+    cursor: pointer;
+    text-decoration: underline;
   }
 }
 
 @layer utilities {
-  .u-center {
+  .pc-center {
     display: grid;
     place-items: center;
   }
 
-  .u-background-alt-grey {
+  .pc-background-alt-grey {
     background-color: var(--background-alt-grey);
   }
 
-  .u-cols--even {
+  .pc-cols--even {
     display: grid;
     grid-template-columns: repeat(var(--cols), 1fr);
   }
 
-  .u-mt {
+  .pc-mt {
     margin-top: var(--mt);
   }
 
-  .u-p {
+  .pc-p {
     padding: var(--p);
   }
 
-  .u-text--center {
+  .pc-text--center {
     text-align: center;
   }
 }

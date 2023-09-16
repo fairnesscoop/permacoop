@@ -1,0 +1,76 @@
+{% set view_name = 'home' %}
+
+<nav class="pc-nav">
+  <ul>
+    <li>
+      {% if view_name == 'home' %}
+        <span class="pc-nav__decoration" aria-hidden="true"></span>
+      {% endif %}
+      <a {% if view_name == 'home' %}aria-current="page"{% endif %} href="{{ path('home') }}">
+        {% set class_name = 'pc-icon--sm' %}
+        {% include 'icons/dashboard.njk' %}
+        {{ 'dashboard-title'|translate }}
+      </a>
+    </li>
+
+    <li>
+      {% if view_name == 'faircalendar_index' %}
+        <span class="pc-nav__decoration" aria-hidden="true"></span>
+      {% endif %}
+      <a {% if view_name == 'faircalendar:index' %}aria-current="page"{% endif %} href="{{ path('faircalendar_index') }}">
+        {% set class_name = 'pc-icon--sm' %}
+        {% include 'icons/calendar.njk' %}
+        {{ "faircalendar-title"|translate }}
+      </a>
+    </li>
+
+    <li>
+      {% if app_name == 'crm' %}
+        <span class="pc-nav__decoration" aria-hidden="true"></span>
+      {% endif %}
+
+      <details open>
+          <summary>
+            {% set class_name = 'pc-icon--sm' %}
+            {% include 'icons/crm.njk' %}
+            {{ "crm-title"|translate }}
+          </summary>
+
+          <ul>
+            <li>
+              <a href="{{ path('crm_customers_list') }}" {% if view_name == 'crm_customers_list' %}aria-current="page"{% endif %}>
+                {{ "crm-customers-title"|translate|capitalize }}
+              </a>
+            </li>
+            <li>
+              <a href="{{ path('crm_projects_list') }}" {% if view_name == 'crm_projects_list' %}aria-current="page"{% endif %}>
+                {{ "crm-projects-title"|translate|capitalize }}
+              </a>
+            </li>
+          </ul>
+      </details>
+    </li>
+
+    <li>
+      {% if app_name == 'accounts' %}
+        <span class="pc-nav__decoration" aria-hidden="true"></span>
+      {% endif %}
+
+      <details open>
+        <summary>
+          {% set class_name = 'pc-icon--sm' %}
+          {% include 'icons/group.njk'  %}
+          {{ 'accounts-title'|translate }}
+        </summary>
+
+        <ul>
+          <li>
+            <a href="{{ path('accounts_workers_list') }}" {% if view_name == 'accounts_workers_list' %}aria-current="page"{% endif %}>
+              {{ 'accounts-workers-title'|translate }}
+            </a>
+          </li>
+        </ul>
+      </details>
+    </li>
+  </ul>
+</nav>

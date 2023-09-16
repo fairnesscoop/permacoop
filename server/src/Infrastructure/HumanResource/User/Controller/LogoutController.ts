@@ -6,10 +6,12 @@ import {
   Res
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { WithName } from 'src/Infrastructure/NestJS/Routing/WithName';
 
 @Controller('logout')
 export class LogoutController {
   @Post()
+  @WithName('logout')
   public async post(@Req() req: Request, @Res() res: Response): Promise<void> {
     const err = await new Promise(resolve => {
       req.logout(err => resolve(err));

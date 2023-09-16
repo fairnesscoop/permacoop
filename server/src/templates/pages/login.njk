@@ -1,28 +1,28 @@
-{% extends '_base.njk' %}
+{% extends 'layouts/blank.njk' %}
 
 {% block title %}Se connecter - {{ super() }}{% endblock title %}
-{% block body_class %}u-center u-background-alt-grey{% endblock body_class %}
+{% block body_class %}pc-center pc-background-alt-grey{% endblock body_class %}
 
 {% block main %}
-    <div class="c-card u-mt" style="--mt: calc(8 * var(--w))">
-        <div class="u-cols--even" style="--cols: 2">
+    <div class="pc-card pc-mt" style="--mt: calc(8 * var(--w))">
+        <div class="pc-cols--even" style="--cols: 2">
             <img src="/public/images/login-office.jpeg" alt="" width="448px" height="411px">
-            <form method="POST" action="/login" class="u-p" style="--p: calc(4 * var(--w))">
-                <h1 class="u-text--center">
+            <form method="POST" action="/login" class="pc-p" style="--p: calc(4 * var(--w))">
+                <h1 class="pc-text--center">
                     Connexion
                 </h1>
 
-                <div class="c-input-group">
+                <div class="pc-input-group">
                     <label for="email" class="required">Adresse email</label>
                     <input id="email" name="email" type="email">
                 </div>
 
-                <div class="c-input-group">
+                <div class="pc-input-group">
                     <label for="password" class="required">Mot de passe</label>
                     <input id="password" name="password" type="password">
                 </div>
 
-                <button class="c-btn" type="submit">Se connecter</button>
+                <button class="pc-btn" type="submit">Se connecter</button>
             </form>
         </div>
     </div>
