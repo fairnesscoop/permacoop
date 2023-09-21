@@ -1,3 +1,13 @@
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Colors */
+    --background-default: #1a1b23;
+    --background-alt-grey: #121317;
+    --text-default: #ffffff;
+    --text-muted: #bbbbbb;
+  }
+}
+
 :root {
   /* Spacing */
   --v: 0.25rem;
@@ -24,9 +34,8 @@
   --text-error: #ff0000;
   --text-on-error: #ffffff;
   /* Shadows */
-  --shadow-default: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-    rgba(0, 0, 0, 0.1) 0px 8px 10px -6px;
+  --shadow-default: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-inner: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
   /* FairCalendar */
   --event-mission-background: rgb(222, 247, 236);
@@ -47,15 +56,4 @@
   --event-holiday-background: rgb(237, 235, 254);
   --event-holiday-border: rgb(237, 235, 254);
   --event-holiday-text: rgb(108, 43, 217);
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Colors */
-    --background-default: #1a1b23;
-    --background-alt-grey: #121317;
-    --text-default: #ffffff;
-    --text-muted: #bbbbbb;
-  }
 }

@@ -1,40 +1,19 @@
 .pc-nav {
-  overflow-y: auto;
   padding: calc(2 * var(--w)) 0;
 }
 
-.pc-nav ul {
+.pc-nav > ul {
   list-style-type: none;
   padding: 0;
-  width: 100%;
 }
 
-.pc-nav ul li {
-  position: relative;
-  padding: calc(3 * var(--v)) calc(3 * var(--v));
-}
-
-.pc-nav ul li ul {
-  padding: var(--w);
-  margin-top: var(--w);
-  overflow: hidden;
+.pc-nav > ul > li ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 calc(2 * var(--w));
   font-size: var(--font-size-sm);
   box-shadow: var(--shadow-inner);
   background-color: var(--background-alt-grey);
-}
-
-.pc-nav ul li ul li {
-  padding: var(--w) var(--v);
-}
-
-.pc-nav__decoration {
-  position: absolute;
-  inset: 0;
-  left: 0;
-  width: var(--v);
-  background-color: var(--background-action-violet);
-  border-top-right-radius: var(--radius-lg);
-  border-bottom-right-radius: var(--radius-lg);
 }
 
 .pc-nav a,
@@ -44,6 +23,7 @@
   align-items: center;
   width: 100%;
   font-size: var(--font-size-sm);
+  padding: calc(3 * var(--v)) calc(5 * var(--v));
 }
 
 .pc-nav details > summary {
@@ -54,8 +34,24 @@
 .pc-nav a[aria-current='page'] {
   font-weight: bold;
 }
+
 .pc-nav a:not([aria-current='page']) {
   color: var(--text-muted);
+}
+
+.pc-nav > ul > li > a[aria-current='page'] {
+  position: relative;
+}
+
+.pc-nav > ul > li > a[aria-current='page']::before {
+  position: absolute;
+  content: '';
+  inset: 0;
+  left: 0;
+  width: var(--v);
+  background-color: var(--background-action-violet);
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
 }
 
 .pc-nav details summary > svg,

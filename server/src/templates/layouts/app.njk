@@ -1,14 +1,112 @@
 {% extends 'layouts/_base.njk' %}
+{% import 'macros/icons.njk' as icons %}
+
 {% block body %}
     <div class="pc-app">
-        <aside class="pc-app__sidebar">
-            <a class="pc-brand" href="{{ path('home') }}">
-                <img class="pc-brand__logo" src="{{ asset('images/logo.png') }}" alt="Fairness"/>
-                <span>{{ "site-title"|trans }}</span>
+        <div class="pc-app__brand">
+            <a href="{{ path('home') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="Fairness"/>
+                {{ "site-title"|trans }}
             </a>
-            {% include "components/nav.njk" %}
-        </aside>
-        {% include "components/header.njk" %}
+        </div>
+
+        <header class="pc-app__header">
+            <details class="pc-dropdown">
+                <summary>
+                    {{ req.user.firstName|first|upper }}
+                </summary>
+                <ul class="pc-raw-list pc-dropdown__content">
+                    <li>
+                        <a href="/accounts/edit" class="pc-icon--left">
+                            {{ icons.user(class_name='pc-icon pc-icon--sm') }}
+                            {{ 'header-account'|trans|capitalize }}
+                        </a>
+                    </li>
+                    <li>
+                        <form method="POST" action="{{ path('logout') }}">
+                            <button type="submit" class="pc-link pc-icon--left">
+                                {{ icons.logout(class_name='pc-icon pc-icon--sm') }}
+                                {{ 'header-logout'|trans|capitalize }}
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </details>
+        </header>
+
+        <nav class="pc-app__sidebar pc-nav">
+            <ul>
+                <li>
+                {% if view_name == 'home' %}
+                    <span class="pc-nav__decoration" aria-hidden="true"></span>
+                {% endif %}
+                <a {% if view_name == 'home' %}aria-current="page"{% endif %} href="{{ path('home') }}">
+                    {{ icons.dashboard(class_name='pc-icon--sm') }}
+                    {{ 'dashboard-title'|trans }}
+                </a>
+                </li>
+
+                <li>
+                {% if view_name == 'faircalendar_index' %}
+                    <span class="pc-nav__decoration" aria-hidden="true"></span>
+                {% endif %}
+                <a {% if view_name == 'faircalendar_index' %}aria-current="page"{% endif %} href="{{ path('faircalendar_index') }}">
+                    {{ icons.calendar(class_name='pc-icon--sm') }}
+                    {{ "faircalendar-title"|trans }}
+                </a>
+                </li>
+
+                <li>
+                {% if view_name|startswith('crm_') %}
+                    <span class="pc-nav__decoration" aria-hidden="true"></span>
+                {% endif %}
+
+                <details open>
+                    <summary>
+                        {% set class_name = 'pc-icon--sm' %}
+                        {{ icons.crm(class_name='pc-icon--sm') }}
+                        {{ "crm-title"|trans }}
+                    </summary>
+
+                    <ul>
+                        <li>
+                        <a href="{{ path('crm_customers_list') }}" {% if view_name == 'crm_customers_list' %}aria-current="page"{% endif %}>
+                            {{ "crm-customers-title"|trans|capitalize }}
+                        </a>
+                        </li>
+                        <li>
+                        <a href="{{ path('crm_projects_list') }}" {% if view_name == 'crm_projects_list' %}aria-current="page"{% endif %}>
+                            {{ "crm-projects-title"|trans|capitalize }}
+                        </a>
+                        </li>
+                    </ul>
+                </details>
+                </li>
+
+                <li>
+                {% if view_name|startswith('accounts_') %}
+                    <span class="pc-nav__decoration" aria-hidden="true"></span>
+                {% endif %}
+
+                <details open>
+                    <summary>
+                    {% set class_name = 'pc-icon--sm' %}
+                    {{ icons.group(class_name='pc-icon--sm') }}
+                    {{ 'accounts-title'|trans }}
+                    </summary>
+
+                    <ul>
+                    <li>
+                        <a href="{{ path('accounts_workers_list') }}" {% if view_name == 'accounts_workers_list' %}aria-current="page"{% endif %}>
+                        {{ 'accounts-workers-title'|trans }}
+                        </a>
+                    </li>
+                    </ul>
+                </details>
+                </li>
+            </ul>
+        </nav>
+
         <main class="pc-app__content">
             {% block main %}{% endblock main %}
         </main>
