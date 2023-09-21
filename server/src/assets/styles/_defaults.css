@@ -29,3 +29,17 @@ a {
 a:visited {
   color: inherit;
 }
+
+select {
+  display: block;
+  appearance: none;
+  width: 100%;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0aec0'%3E%3Cpath d='M15.3 9.3a1 1 0 011.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 011.4-1.4l3.3 3.29 3.3-3.3z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-color: var(--background-default);
+  background-position: right var(--w) center;
+  background-size: calc(3 * var(--w)) calc(3 * var(--w));
+  border: 1px solid var(--border-default);
+  border-radius: var(--v);
+  padding: var(--w) calc(5 * var(--w)) var(--w) calc(3 * var(--v));
+}

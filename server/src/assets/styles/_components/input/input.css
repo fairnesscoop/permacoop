@@ -7,6 +7,16 @@
   width: 100%;
 }
 
-.pc-input-group > label {
-  margin-bottom: var(--v);
+.pc-select-group {
+  margin-bottom: calc(2 * var(--w));
+}
+
+.pc-input-group > select {
+  display: block;
+  width: 100%;
+}
+
+:where(.pc-input-group, .pc-select-group) > label {
+  display: block;
+  padding-bottom: var(--v);
 }

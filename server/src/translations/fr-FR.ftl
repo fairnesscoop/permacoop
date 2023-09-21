@@ -11,7 +11,7 @@ faircalendar-events-edit-title = CRA du {$date}
 faircalendar-type-title = Type de CRA
 faircalendar-type-option = {$type ->
     [mission] Mission
-    [dojo] Dojo
+    [dojo] Dojos
     [support] Supports
     [formationConference] Formations / Confs
     *[other] Autre

@@ -11,7 +11,7 @@
   {% block header %}{% endblock header %}
   <body class="{% block body_class %}{% endblock body_class %}">
     {% block body %}
-        <main>
+        <main class="{% block main_class %}{% endblock main_class %}"">
             {% block main %}{% endblock main %}
         </main>
     {% endblock body %}
