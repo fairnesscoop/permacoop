@@ -7,7 +7,7 @@ dashboard-title = Tableau de bord
 
 faircalendar-title = FairCalendar
 faircalendar-events-add-title = CRA du {$date}
-faircalendar-events-edit-title = Édition du CRA du {$date}
+faircalendar-events-edit-title = CRA du {$date}
 faircalendar-type-title = Type de CRA
 faircalendar-type-option = {$type ->
     [mission] Mission

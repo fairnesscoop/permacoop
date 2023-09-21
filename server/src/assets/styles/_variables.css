@@ -20,14 +20,15 @@
   --font-size-sm: calc(0.8 * var(--font-size-md));
   --font-size-lg: calc(1.2 * var(--font-size-md));
   --font-size-default: var(--font-size-md);
+  --font-weight-md: 500;
   /* Colors */
   --background-default: #ffffff;
   --background-alt-grey: #f9fafb;
   --background-muted: #f0f0f0;
   --background-action-violet: #6c2bd9;
   --background-action-violet-hover: #52289b;
-  --background-error: #f05252;
-  --background-error-hover: #c74444;
+  --background-error: #dd1d1d;
+  --background-error-hover: #b92020;
   --text-default: #282828;
   --text-muted: #555555;
   --text-on-background-action-violet: #ffffff;

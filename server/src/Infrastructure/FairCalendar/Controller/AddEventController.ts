@@ -25,7 +25,7 @@ import { GetProjectsQuery } from 'src/Application/Project/Query/GetProjectsQuery
 import { GetCooperativeQuery } from 'src/Application/Settings/Query/GetCooperativeQuery';
 import { ArrayUtils } from 'src/Infrastructure/Common/Utils/ArrayUtils';
 
-@Controller('app/faircalendar/events/add/:date')
+@Controller('app/faircalendar/events/add')
 @UseGuards(IsAuthenticatedGuard)
 export class AddEventController {
   constructor(
@@ -35,7 +35,7 @@ export class AddEventController {
     private readonly queryBus: IQueryBus
   ) {}
 
-  @Get()
+  @Get(':date')
   @WithName('faircalendar_events_add')
   @Render('pages/faircalendar_events_add')
   public async get(@Param() dto: AddEventControllerDTO) {
@@ -67,7 +67,7 @@ export class AddEventController {
     };
   }
 
-  @Post()
+  @Post(':date')
   public async post(
     @Body() dto: AddEventDTO,
     @LoggedUser() user: User,

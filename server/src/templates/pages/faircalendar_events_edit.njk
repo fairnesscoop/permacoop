@@ -1,13 +1,16 @@
 {% extends 'layouts/app.njk' %}
 {% block main %}
-    <h1>
-        {{ 'faircalendar-events-edit-title'|trans({ date: event.date }) }}
-    </h1>
-    <form method="POST" action="{{ path('faircalendar_event_delete', { id: event.id }) }}">
-        <button class="pc-btn pc-btn--error" type="submit">
-            {{ 'common-form-delete'|trans }}
-        </button>
-    </form>
+    <div class="pc-row pc-row--middle">
+        <h1 class="pc-m" style="--m: 0">
+            {{ 'faircalendar-events-edit-title'|trans({ date: event.date }) }}
+        </h1>
+        <form method="POST" action="{{ path('faircalendar_event_delete', { id: event.id }) }}" class="pc-ml" style="--ml: var(--w)">
+            <button class="pc-btn pc-btn--small pc-btn--error" type="submit">
+                {{ 'common-form-delete'|trans }}
+            </button>
+        </form>
+    </div>
+
     <div class="pc-card pc-p pc-mt" style="--p: calc(2 * var(--w)); --mt: calc(3 * var(--w))">
         {% include 'components/faircalendar_event_form.njk' %}
     </div>

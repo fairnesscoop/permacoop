@@ -4,6 +4,11 @@
   padding: var(--w) calc(2 * var(--w));
   background-color: var(--background-action-violet);
   color: var(--text-on-background-action-violet);
+  font-weight: var(--font-weight-md);
+}
+
+.pc-btn--small {
+  font-size: var(--font-size-sm);
 }
 
 .pc-btn:hover {
