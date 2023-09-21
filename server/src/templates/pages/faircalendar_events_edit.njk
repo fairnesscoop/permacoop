@@ -4,7 +4,7 @@
         {{ 'faircalendar-events-edit-title'|trans({ date: event.date }) }}
     </h1>
     <form method="POST" action="{{ path('faircalendar_event_delete', { id: event.id }) }}">
-        <button class="pc-btn pc-btn--danger" type="submit">
+        <button class="pc-btn pc-btn--error" type="submit">
             {{ 'common-form-delete'|trans }}
         </button>
     </form>

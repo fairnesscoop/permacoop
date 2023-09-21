@@ -1,0 +1,21 @@
+details.pc-dropdown {
+  position: relative;
+}
+
+details.pc-dropdown > summary {
+  cursor: pointer;
+}
+
+details.pc-dropdown .pc-dropdown__content {
+  z-index: 1;
+  position: absolute;
+  background-color: var(--background-default);
+  box-shadow: var(--shadow-default);
+  right: 0;
+  width: max-content;
+  padding: calc(3 * var(--v));
+}
+
+ul.pc-dropdown__content > li {
+  padding-block: calc(2 * var(--v));
+}

@@ -1,0 +1,12 @@
+.pc-input-group {
+  margin-bottom: calc(2 * var(--w));
+}
+
+.pc-input-group > input {
+  display: block;
+  width: 100%;
+}
+
+.pc-input-group > label {
+  margin-bottom: var(--v);
+}

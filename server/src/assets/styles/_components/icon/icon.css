@@ -1,0 +1,17 @@
+.pc-icon--error {
+  color: var(--text-error);
+}
+
+.pc-icon--sm {
+  width: calc(6 * var(--v));
+  height: calc(6 * var(--v));
+}
+
+.pc-icon--left {
+  display: flex;
+  align-items: center;
+}
+
+.pc-icon--left > .pc-icon {
+  margin-inline-end: calc(2 * var(--v));
+}

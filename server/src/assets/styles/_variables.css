@@ -1,0 +1,61 @@
+:root {
+  /* Spacing */
+  --v: 0.25rem;
+  --w: 0.5rem;
+  /* Fonts */
+  --font-default: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-size-md: 1.1rem;
+  --font-size-sm: calc(0.8 * var(--font-size-md));
+  --font-size-lg: calc(1.2 * var(--font-size-md));
+  --font-size-default: var(--font-size-md);
+  /* Colors */
+  --background-default: #ffffff;
+  --background-alt-grey: #f9fafb;
+  --background-muted: #f0f0f0;
+  --background-action-violet: #6c2bd9;
+  --background-action-violet-hover: #52289b;
+  --background-error: #f05252;
+  --background-error-hover: #c74444;
+  --text-default: #282828;
+  --text-muted: #555555;
+  --text-on-background-action-violet: #ffffff;
+  --text-error: #ff0000;
+  --text-on-error: #ffffff;
+  /* Shadows */
+  --shadow-default: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.1) 0px 8px 10px -6px;
+  --shadow-inner: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  /* FairCalendar */
+  --event-mission-background: rgb(222, 247, 236);
+  --event-mission-border: rgb(222, 247, 236);
+  --event-mission-text: rgb(4, 108, 78);
+  --event-dojo-background: rgb(225, 239, 254);
+  --event-dojo-border: rgb(225, 239, 254);
+  --event-dojo-text: rgb(26, 86, 219);
+  --event-support-background: rgb(229, 237, 255);
+  --event-support-border: rgb(229, 237, 255);
+  --event-support-text: rgb(81, 69, 205);
+  --event-formation_conference-background: rgb(254, 236, 220);
+  --event-formation_conference-border: rgb(254, 236, 220);
+  --event-formation_conference-text: rgb(180, 52, 3);
+  --event-other-background: rgb(244, 245, 247);
+  --event-other-border: rgb(244, 245, 247);
+  --event-other-text: rgb(36, 38, 45);
+  --event-holiday-background: rgb(237, 235, 254);
+  --event-holiday-border: rgb(237, 235, 254);
+  --event-holiday-text: rgb(108, 43, 217);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Colors */
+    --background-default: #1a1b23;
+    --background-alt-grey: #121317;
+    --text-default: #ffffff;
+    --text-muted: #bbbbbb;
+  }
+}

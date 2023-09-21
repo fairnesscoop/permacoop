@@ -1,6 +1,6 @@
 # compiled output
-/dist
-/uploads
+dist/
+uploads/
 /node_modules
 .env
 # Logs

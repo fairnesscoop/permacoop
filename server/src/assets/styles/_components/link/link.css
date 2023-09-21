@@ -1,0 +1,8 @@
+button.pc-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-link);
+  cursor: pointer;
+  text-decoration: underline;
+}

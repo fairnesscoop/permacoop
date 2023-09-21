@@ -1,0 +1,17 @@
+.pc-btn {
+  --hover-tint: var(--background-action-violet-hover);
+  border: none;
+  padding: var(--w) calc(2 * var(--w));
+  background-color: var(--background-action-violet);
+  color: var(--text-on-background-action-violet);
+}
+
+.pc-btn:hover {
+  background-color: var(--hover-tint);
+}
+
+.pc-btn--error {
+  --hover-tint: var(--background-error-hover);
+  background-color: var(--background-error);
+  color: var(--text-on-error);
+}

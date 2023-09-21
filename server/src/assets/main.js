@@ -1,3 +1,5 @@
+import './styles/main.css';
+
 import { Application } from '@hotwired/stimulus';
 
 import FullCalendarController from './controllers/fullcalendar_controller';

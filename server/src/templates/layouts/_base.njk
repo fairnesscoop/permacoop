@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="theme-color" content="#343a40" />
-    <link rel="stylesheet" href="/public/styles.css">
+    <link rel="stylesheet" href="{{ asset('app.css') }}">
     <title>{% block title %}Permacoop{% endblock title %}</title>
-    <script src="{{ asset('client.js') }}" type="module" async defer></script>
+    <script src="{{ asset('app.js') }}" type="module" async defer></script>
   </head>
   {% block header %}{% endblock header %}
   <body class="{% block body_class %}{% endblock body_class %}">

@@ -1,0 +1,28 @@
+.pc-app {
+  display: grid;
+  grid-template-areas:
+    'sidebar header'
+    'sidebar content';
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  background-color: var(--background-alt-grey);
+}
+
+.pc-app__sidebar {
+  grid-area: sidebar;
+  background-color: var(--background-default);
+}
+
+.pc-app__content {
+  grid-area: content;
+  padding: calc(3 * var(--w));
+}
+
+.pc-app__header {
+  grid-area: header;
+  background-color: var(--background-default);
+  display: flex;
+  justify-content: end;
+  padding: calc(3 * var(--v));
+}
