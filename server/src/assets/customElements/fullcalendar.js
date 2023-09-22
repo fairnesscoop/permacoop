@@ -16,9 +16,11 @@ export default class extends HTMLElement {
       initialView: 'dayGridMonth',
       locale: 'fr',
       nowIndicator: true,
+      showNonCurrentDates: false,
       selectable: true,
       weekends: false,
       height: 700,
+      headerToolbar: false,
       dayHeaderFormat: { weekday: 'long' },
       events,
       select: info => {

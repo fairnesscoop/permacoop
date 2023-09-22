@@ -1,7 +1,8 @@
 {% import 'macros/icons.njk' as icons %}
 
-{% macro render_table(table) %}
-<table class="app-table">
+{% macro render_table(table, attr={}) %}
+{% set attr = attr|merge({class: 'app-table ' + attr.class|default('')}) %}
+<table {% include 'components/attr.njk' %}>
   <thead>
     <tr class="dark:border-gray-70 dark:text-gray-400 dark:bg-gray-800">
       {% for column in table.columns %}

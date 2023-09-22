@@ -42,6 +42,7 @@ button,
 textarea,
 select {
   font: inherit;
+  color: currentColor;
 }
 /*
 7. Avoid text overflows

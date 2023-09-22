@@ -7,10 +7,10 @@
 {% block main %}
     {{ breadcrumb([{ title: 'crm-tasks-title'|trans }]) }}
 
-    <div class="pc-row pc-row--middle" style="--row-gap: calc(2 * var(--w))">
+    <div class="pc-row pc-row--middle pc-mb" style="--row-gap: calc(2 * var(--w)); --mb: calc(3 * var(--w))">
         <h1 class="pc-m" style="--m: 0">{{ 'crm-tasks-title'|trans }}</h1>
         <a href="{{ path('crm_tasks_add') }}" class="pc-btn">{{ 'common-add'|trans }}</a>
     </div>
 
-    {{ render_table(table) }}
+    {{ render_table(table, attr={class: 'pc-mt', style: '--mt: calc(4 * var(--w))'}) }}
 {% endblock main %}

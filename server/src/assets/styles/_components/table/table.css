@@ -13,6 +13,12 @@
   background-color: var(--background-alt-grey);
 }
 
+@media (prefers-color-scheme: dark) {
+  .app-table thead {
+    background-color: var(--background-default);
+  }
+}
+
 .app-table :where(th, td) {
   padding: calc(3 * var(--v)) calc(4 * var(--v));
 }

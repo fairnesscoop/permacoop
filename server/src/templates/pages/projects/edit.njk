@@ -9,11 +9,11 @@
 {% block main %}
     {{ breadcrumb([{ title: 'crm-projects-title'|trans, href: path('crm_projects_list') }, { title: title }]) }}
 
-    <h1 class="pc-m" style="--m: 0">
+    <h1>
         {{ title }}
     </h1>
 
-    <div class="pc-card pc-mt" style="--mt: calc(3 * var(--w))">
+    <div class="pc-card">
         {{ project_form(project, customers, class_name='pc-card__content') }}
     </div>
 {% endblock main %}

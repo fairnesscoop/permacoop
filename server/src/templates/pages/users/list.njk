@@ -16,5 +16,5 @@
         <a href="{{ path('people_users_add') }}" class="pc-btn">{{ 'common-add'|trans }}</a>
     </div>
 
-    {{ render_table(table) }}
+    {{ render_table(table, attr={class: 'pc-mt', style: '--mt: calc(4 * var(--w))'}) }}
 {% endblock main %}

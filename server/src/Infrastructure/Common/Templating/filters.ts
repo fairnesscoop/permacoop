@@ -17,4 +17,14 @@ export const registerFilters = (env: Environment, translator: ITranslator) => {
     'fullName',
     obj => `${capitalize(obj.firstName)} ${capitalize(obj.lastName)}`
   );
+  env.addFilter('merge', (left, right) => {
+    const result = {};
+    for (const key in left) {
+      result[key] = left[key];
+    }
+    for (const key in right) {
+      result[key] = right[key];
+    }
+    return result;
+  });
 };

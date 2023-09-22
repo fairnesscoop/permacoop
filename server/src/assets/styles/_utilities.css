@@ -38,6 +38,10 @@
   margin-top: var(--mt);
 }
 
+.pc-mb {
+  margin-bottom: var(--mb);
+}
+
 .pc-ml {
   margin-left: var(--ml);
 }
