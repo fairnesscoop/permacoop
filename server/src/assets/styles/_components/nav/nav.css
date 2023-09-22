@@ -7,13 +7,29 @@
   padding: 0;
 }
 
+.pc-nav li.active {
+  position: relative;
+}
+
+.pc-nav li.active > details > summary {
+  font-weight: bold;
+}
+
 .pc-nav > ul > li ul {
   list-style-type: none;
   padding: 0;
   margin: 0 calc(2 * var(--w));
-  font-size: var(--font-size-sm);
   box-shadow: var(--shadow-inner);
   background-color: var(--background-alt-grey);
+}
+
+.pc-nav details > summary {
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.pc-nav details > summary::after {
+  content: '⌄';
 }
 
 .pc-nav a,
@@ -22,13 +38,7 @@
   column-gap: calc(2 * var(--v));
   align-items: center;
   width: 100%;
-  font-size: var(--font-size-sm);
   padding: calc(3 * var(--v)) calc(5 * var(--v));
-}
-
-.pc-nav details > summary {
-  cursor: pointer;
-  color: var(--text-muted);
 }
 
 .pc-nav a[aria-current='page'] {
@@ -43,7 +53,7 @@
   position: relative;
 }
 
-.pc-nav a[aria-current='page']::before {
+.pc-nav :where(li.active, > ul > li > a[aria-current='page'])::before {
   position: absolute;
   content: '';
   inset: 0;

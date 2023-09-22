@@ -1,6 +1,7 @@
 common-form-save = Enregistrer
 common-form-delete = Supprimer
 common-add = Ajouter
+common-edit = Modifier
 common-actions = Actions
 
 site-title = Permacoop
@@ -28,6 +29,7 @@ crm-title = FairCRM
 
 crm-customers-title = Clients
 crm-customers-add-title = Ajouter un client
+crm-customers-edit-title = Édition du client "{$name}"
 crm-customers-name = Nom du client
 crm-customers-street = Adresse
 crm-customers-zipCode = Code postal

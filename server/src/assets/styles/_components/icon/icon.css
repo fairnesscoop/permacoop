@@ -2,6 +2,10 @@
   color: var(--text-error);
 }
 
+.pc-icon--action-violet {
+  color: var(--text-action-violet);
+}
+
 .pc-icon--sm {
   width: calc(6 * var(--v));
   height: calc(6 * var(--v));

@@ -16,7 +16,7 @@
   --font-default: Inter, system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-size-md: 1.1rem;
+  --font-size-md: 0.95rem;
   --font-size-sm: calc(0.8 * var(--font-size-md));
   --font-size-lg: calc(1.2 * var(--font-size-md));
   --font-size-default: var(--font-size-md);
@@ -29,12 +29,15 @@
   --background-action-violet-hover: #52289b;
   --background-error: #dd1d1d;
   --background-error-hover: #b92020;
-  --border-default: #e2e8f0;
   --text-default: #282828;
   --text-muted: #636363;
   --text-on-background-action-violet: #ffffff;
+  --text-action-violet: #6c2bd9;
   --text-error: #ff0000;
   --text-on-error: #ffffff;
+  /* Borders */
+  --border-default: #e2e8f0;
+  --radius-sm: var(--v);
   /* Shadows */
   --shadow-default: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);

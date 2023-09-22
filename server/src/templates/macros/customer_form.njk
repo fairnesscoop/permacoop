@@ -1,26 +1,26 @@
-{% macro customer_form(class_name='') %}
+{% macro customer_form(customer=null, class_name='') %}
 <form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
     <div class="pc-input-group">
         <label for="name" class="required">{{ 'crm-customers-name'|trans }}</label>
-        <input type="text" name="name" id="name" required>
+        <input type="text" name="name" id="name" required {% if customer %}value="{{ customer.name }}"{% endif %}>
     </div>
 
     <div class="pc-input-group">
         <label for="street" class="required">{{ 'crm-customers-street'|trans }}</label>
-        <input type="text" name="street" id="street" required>
+        <input type="text" name="street" id="street" required {% if customer %}value="{{ customer.address.street }}"{% endif %}>
     </div>
 
     <div class="pc-input-group">
         <label for="zipCode" class="required">{{ 'crm-customers-zipCode'|trans }}</label>
-        <input type="text" name="zipCode" id="zipCode" required pattern="\d{5}">
+        <input type="text" name="zipCode" id="zipCode" required pattern="\d{5}" {% if customer %}value="{{ customer.address.zipCode }}"{% endif %}>
     </div>
 
     <div class="pc-input-group">
         <label for="city" class="required">{{ 'crm-customers-city'|trans }}</label>
-        <input type="text" name="city" id="city" required>
+        <input type="text" name="city" id="city" required {% if customer %}value="{{ customer.address.city }}"{% endif %}>
     </div>
 
-    <input type="hidden" name="country" value="FR">
+    <input type="hidden" name="country" value="{% if customer %}{{ customer.address.country }}{% else %}FR{% endif %}">
 
     <button type="submit" class="pc-btn">
         {{ "common-form-save"|trans|capitalize }}

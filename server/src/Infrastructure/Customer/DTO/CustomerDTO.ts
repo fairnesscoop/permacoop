@@ -1,16 +1,20 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
-import { IsNotEmpty, ValidateNested } from 'class-validator';
-import { AddressDTO } from './AddressDTO';
+import { IsNotEmpty, MaxLength, IsISO31661Alpha2 } from 'class-validator';
 
 export class CustomerDTO {
-  @ApiProperty()
   @IsNotEmpty()
   public name: string;
 
-  @ApiProperty({ type: AddressDTO })
-  @ValidateNested()
   @IsNotEmpty()
-  @Type(() => AddressDTO)
-  public address: AddressDTO;
+  public street: string;
+
+  @IsNotEmpty()
+  public city: string;
+
+  @IsNotEmpty()
+  @MaxLength(6)
+  public zipCode: string;
+
+  @IsNotEmpty()
+  @IsISO31661Alpha2()
+  public country: string;
 }

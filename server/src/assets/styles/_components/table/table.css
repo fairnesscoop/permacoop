@@ -6,7 +6,6 @@
 }
 
 .app-table thead {
-  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-md);
   text-align: left;
   color: var(--text-muted);

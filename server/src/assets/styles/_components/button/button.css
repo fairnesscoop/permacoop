@@ -7,10 +7,6 @@
   font-weight: var(--font-weight-md);
 }
 
-.pc-btn--small {
-  font-size: var(--font-size-sm);
-}
-
 .pc-btn:hover {
   background-color: var(--hover-tint);
 }

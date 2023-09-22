@@ -1,3 +1,5 @@
+{% import 'macros/icons.njk' as icons %}
+
 {% macro table(items) %}
 <table class="app-table">
   <thead>
@@ -19,9 +21,9 @@
           {{ item.address.country }}
         </td>
         <td>
-          <div class="flex items-center space-x-4 text-sm">
-            {# <EditLink href={`/crm/customers/${id}/edit`} /> #}
-          </div>
+          <a href="{{ path('crm_customers_edit', { id: item.id }) }}" title="{{ 'common-edit'|trans }}">
+            {{ icons.pencil(class_name='pc-icon pc-icon--sm pc-icon--action-violet') }}
+          </a>
         </td>
       </tr>
       {% else %}

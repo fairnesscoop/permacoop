@@ -1,4 +1,5 @@
-<form method="POST">
+{% macro faircalendar_event_form(event, types, projects, tasks, times, date=null, class_name='') %}
+<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
     <div class="pc-select-group">
         <label for="type" class="required">{{ 'faircalendar-type-title'|trans }}</label>
         <select name="type" id="type" required>
@@ -48,3 +49,4 @@
         {{ "common-form-save"|trans|capitalize }}
     </button>
 </form>
+{% endmacro %}

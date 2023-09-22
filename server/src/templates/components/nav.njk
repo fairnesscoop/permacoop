@@ -24,12 +24,12 @@
 
                 <ul>
                     <li>
-                        <a href="{{ path('crm_customers_list') }}" {% if view_name == 'crm_customers_list' %}aria-current="page"{% endif %}>
+                        <a href="{{ path('crm_customers_list') }}" {% if view_name|startswith('crm_customers_') %}aria-current="page"{% endif %}>
                             {{ "crm-customers-title"|trans|capitalize }}
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('crm_projects_list') }}" {% if view_name == 'crm_projects_list' %}aria-current="page"{% endif %}>
+                        <a href="{{ path('crm_projects_list') }}" {% if view_name|startswith('crm_projects_') %}aria-current="page"{% endif %}>
                             {{ "crm-projects-title"|trans|capitalize }}
                         </a>
                     </li>

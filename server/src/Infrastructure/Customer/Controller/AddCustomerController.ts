@@ -14,7 +14,7 @@ import { ICommandBus } from 'src/Application/ICommandBus';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { CreateCustomerCommand } from 'src/Application/Customer/Command/CreateCustomerCommand';
-import { AddCustomerDTO } from '../DTO/AddCustomerDTO';
+import { CustomerDTO } from '../DTO/CustomerDTO';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 
 @Controller('app/faircalendar/events/add')
@@ -23,7 +23,7 @@ export class AddCustomerController {
   constructor(
     @Inject('ICommandBus')
     private readonly commandBus: ICommandBus,
-    private readonly routeNameResolver: RouteNameResolver
+    private readonly resolver: RouteNameResolver
   ) {}
 
   @Get()
@@ -34,10 +34,7 @@ export class AddCustomerController {
   }
 
   @Post()
-  public async index(
-    @Body() customerDto: AddCustomerDTO,
-    @Res() res: Response
-  ) {
+  public async index(@Body() customerDto: CustomerDTO, @Res() res: Response) {
     const { street, city, zipCode, country, name } = customerDto;
 
     try {
@@ -45,7 +42,7 @@ export class AddCustomerController {
         new CreateCustomerCommand(name, street, city, zipCode, country)
       );
 
-      res.redirect(303, this.routeNameResolver.resolve('crm_customers_list'));
+      res.redirect(303, this.resolver.resolve('crm_customers_list'));
     } catch (e) {
       throw new BadRequestException(e.message);
     }
