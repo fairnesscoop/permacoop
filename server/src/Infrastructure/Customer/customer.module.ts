@@ -14,14 +14,23 @@ import { UpdateCustomerAction } from './Action/UpdateCustomerAction';
 import { GetCustomerAction } from './Action/GetCustomerAction';
 import { AddressRepository } from './Repository/AddressRepository';
 import { Address } from 'src/Domain/Customer/Address.entity';
+import { ListCustomersController } from './Controller/ListCustomersController';
+import { AddCustomerController } from './Controller/AddCustomerController';
+import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
 
 @Module({
-  imports: [BusModule, TypeOrmModule.forFeature([Customer, Address])],
+  imports: [
+    BusModule,
+    TypeOrmModule.forFeature([Customer, Address]),
+    ExtendedRoutingModule
+  ],
   controllers: [
     CreateCustomerAction,
     UpdateCustomerAction,
     GetCustomerAction,
-    GetCustomersAction
+    GetCustomersAction,
+    ListCustomersController,
+    AddCustomerController
   ],
   providers: [
     { provide: 'ICustomerRepository', useClass: CustomerRepository },

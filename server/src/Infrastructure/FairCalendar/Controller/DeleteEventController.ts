@@ -13,7 +13,7 @@ import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Secu
 import { LoggedUser } from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
-import { WithName } from 'src/Infrastructure/Common/Routing/WithName';
+import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { DeleteEventCommand } from 'src/Application/FairCalendar/Command/DeleteEventCommand';
 
 @Controller('app/faircalendar/events/delete')

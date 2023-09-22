@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, Provider } from '@nestjs/common';
 import { APP_FILTER, DiscoveryModule } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
@@ -13,8 +13,9 @@ import { SettingsModule } from './Infrastructure/Settings/settings.module';
 import { UnexpectedErrorFilter } from './Infrastructure/Common/ExceptionFilter/UnexpectedErrorFilter';
 import { AuthRequiredFilter } from './Infrastructure/Common/ExceptionFilter/AuthRequiredFilter';
 import { dataSourceOptions } from './datasource';
+import { ExtendedRoutingModule } from './Infrastructure/Common/ExtendedRouting/extendedRouting.module';
 
-const providers = [];
+const providers: Provider[] = [];
 
 if (process.env.NODE_ENV !== 'production') {
   providers.push({
@@ -40,7 +41,8 @@ providers.push({
     HumanResourceModule,
     ProjectModule,
     TaskModule,
-    SettingsModule
+    SettingsModule,
+    ExtendedRoutingModule
   ],
   providers
 })

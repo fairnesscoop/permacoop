@@ -1,7 +1,7 @@
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { NextFunction, Request, Response } from 'express';
 import { FileSystemLoader, Environment, TemplateCallback } from 'nunjucks';
-import { RouteNameResolver } from '../Routing/RouteNameResolver';
+import { RouteNameResolver } from '../ExtendedRouting/RouteNameResolver';
 
 type ContextProcessorFn = (
   ctx: Record<string, any>,
@@ -26,9 +26,7 @@ export const nunjucks = async (
     env.render(name, { ...ctx, ...ctx._locals.njkCtx }, cb);
   };
 
-  const routeNameResolver = RouteNameResolver.fromApp(app);
-  const resolve = routeNameResolver.createResolveFn();
-  const getName = routeNameResolver.createGetNameFn();
+  const routeNameResolver = app.get(RouteNameResolver);
 
   const ctxProcessors: ContextProcessorFn[] = [
     (ctx, req, _res) => {
@@ -36,13 +34,13 @@ export const nunjucks = async (
 
       ctx.path = (name: string, params: object = {}) => {
         try {
-          return resolve(name, params);
+          return routeNameResolver.resolve(name, params);
         } catch {
           return '#';
         }
       };
 
-      ctx.view_name = getName(req.url);
+      ctx.view_name = routeNameResolver.getName(req.url);
     }
   ];
 

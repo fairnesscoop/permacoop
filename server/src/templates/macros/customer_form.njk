@@ -1,0 +1,29 @@
+{% macro customer_form(class_name='') %}
+<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
+    <div class="pc-input-group">
+        <label for="name" class="required">{{ 'crm-customers-name'|trans }}</label>
+        <input type="text" name="name" id="name" required>
+    </div>
+
+    <div class="pc-input-group">
+        <label for="street" class="required">{{ 'crm-customers-street'|trans }}</label>
+        <input type="text" name="street" id="street" required>
+    </div>
+
+    <div class="pc-input-group">
+        <label for="zipCode" class="required">{{ 'crm-customers-zipCode'|trans }}</label>
+        <input type="text" name="zipCode" id="zipCode" required pattern="\d{5}">
+    </div>
+
+    <div class="pc-input-group">
+        <label for="city" class="required">{{ 'crm-customers-city'|trans }}</label>
+        <input type="text" name="city" id="city" required>
+    </div>
+
+    <input type="hidden" name="country" value="FR">
+
+    <button type="submit" class="pc-btn">
+        {{ "common-form-save"|trans|capitalize }}
+    </button>
+</form>
+{% endmacro %}

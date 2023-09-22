@@ -22,12 +22,12 @@ button:not(:disabled):hover {
   background-color: var(--hover-tint);
 }
 
-a {
-  color: inherit;
+a:not(.pc-btn) {
+  color: currentColor;
 }
 
-a:visited {
-  color: inherit;
+a:not(.pc-btn):visited {
+  color: currentColor;
 }
 
 select {

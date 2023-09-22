@@ -1,0 +1,14 @@
+{% extends 'layouts/app.njk' %}
+{% from 'macros/customer_form.njk' import customer_form %}
+
+{% block main_class %}pc-container{% endblock %}
+
+{% block main %}
+    <h1>
+        {{ 'crm-customers-add-title'|trans }}
+    </h1>
+
+    <div class="pc-card">
+        {{ customer_form(class_name='pc-card__content') }}
+    </div>
+{% endblock main %}

@@ -10,7 +10,7 @@ import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { GetMonthlyFairCalendarQuery } from 'src/Application/FairCalendar/Query/GetMonthlyFairCalendarQuery';
 import { IQueryBus } from 'src/Application/IQueryBus';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
-import { WithName } from 'src/Infrastructure/Common/Routing/WithName';
+import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { FairCalendarControllerDTO } from '../DTO/FairCalendarControllerDTO';
 import { EventView } from 'src/Application/FairCalendar/View/EventView';
 import { ITranslator } from 'src/Application/ITranslations';

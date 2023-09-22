@@ -1,0 +1,34 @@
+{% macro table(items) %}
+<table class="app-table">
+  <thead>
+    <tr class="dark:border-gray-70 dark:text-gray-400 dark:bg-gray-800">
+      <th>{{ 'crm-customers-name'|trans }}</th>
+      <th>{{ 'crm-customers-street'|trans }}</th>
+      <th>{{ 'common-actions'|trans }}</th>
+    </tr>
+  </thead>
+  <tbody class="dark:divide-gray-700 dark:bg-gray-800">
+    {% for item in items %}
+      <tr class="text-gray-700 dark:text-gray-400">
+        <td>{{ item.name }}</td>
+        <td>
+          {{ item.address.street }}
+          <br />
+          {{ item.address.zipCode }} {{ item.address.city }}
+          <br />
+          {{ item.address.country }}
+        </td>
+        <td>
+          <div class="flex items-center space-x-4 text-sm">
+            {# <EditLink href={`/crm/customers/${id}/edit`} /> #}
+          </div>
+        </td>
+      </tr>
+      {% else %}
+        <tr>
+          <td colspan="3">Vide</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}

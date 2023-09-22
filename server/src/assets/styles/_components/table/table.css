@@ -1,0 +1,27 @@
+.app-table {
+  border-collapse: collapse;
+  width: 100%;
+  white-space: nowrap;
+  box-shadow: var(--shadow-default);
+}
+
+.app-table thead {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-md);
+  text-align: left;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  background-color: var(--background-alt-grey);
+}
+
+.app-table :where(th, td) {
+  padding: calc(3 * var(--v)) calc(4 * var(--v));
+}
+
+.app-table tbody {
+  background-color: var(--background-default);
+}
+
+.app-table tr {
+  border-bottom: 1px solid var(--border-default);
+}

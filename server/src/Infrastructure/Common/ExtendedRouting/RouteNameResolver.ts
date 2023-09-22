@@ -1,21 +1,21 @@
 // Inspired by: https://github.com/nestjs/nest/blob/cb2af8a3723272bcbacde44dcaadab66a7ec8b7c/packages/core/router/route-alias-resolver.ts
-import { INestApplication } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PATH_METADATA } from '@nestjs/common/constants';
 import { isObject } from '@nestjs/common/utils/shared.utils';
 import { DiscoveryService } from '@nestjs/core';
 import { ROUTE_NAME_METADATA } from './WithName';
 
+@Injectable()
 export class RouteNameResolver {
   private readonly nameMap: Map<string, string[]>;
 
-  constructor() {
+  constructor(discoveryService: DiscoveryService) {
     this.nameMap = new Map();
+    this.init(discoveryService);
   }
 
-  public static fromApp(app: INestApplication): RouteNameResolver {
-    const resolver = new RouteNameResolver();
-
-    const controllers = app.get(DiscoveryService).getControllers();
+  private init(discoveryService: DiscoveryService) {
+    const controllers = discoveryService.getControllers();
 
     controllers.forEach(controller => {
       const basePath: string = Reflect.getMetadata(
@@ -36,12 +36,10 @@ export class RouteNameResolver {
 
         if (name) {
           const path: string = Reflect.getMetadata(PATH_METADATA, method);
-          resolver.register(name, basePath, [path]);
+          this.register(name, basePath, [path]);
         }
       });
     });
-
-    return resolver;
   }
 
   public register(name: string, basePath: string, path: string[]) {
@@ -51,12 +49,7 @@ export class RouteNameResolver {
     this.nameMap.set(name, this.createPath(basePath, path));
   }
 
-  public createResolveFn(): (name: string, params?: object) => string {
-    const resolveFn = this.resolve.bind(this);
-    return (name: string, params?: object) => resolveFn(name, params);
-  }
-
-  private resolve(name: string, params?: object): string {
+  public resolve(name: string, params?: object): string {
     if (!this.nameMap.has(name)) {
       throw new Error(`Not Found: ${name} not registered`);
     }
@@ -72,12 +65,7 @@ export class RouteNameResolver {
     return path ? path : '/';
   }
 
-  public createGetNameFn(): (path: string) => string | null {
-    const getNameFn = this.getName.bind(this);
-    return (path: string) => getNameFn(path);
-  }
-
-  private getName(path: string): string | null {
+  public getName(path: string): string | null {
     const parts = this.splitPath([path]);
 
     const entries = Array.from(this.nameMap.entries());

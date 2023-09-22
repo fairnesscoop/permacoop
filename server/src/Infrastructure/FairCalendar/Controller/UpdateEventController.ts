@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { ICommandBus } from 'src/Application/ICommandBus';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
-import { WithName } from 'src/Infrastructure/Common/Routing/WithName';
+import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { AddEventControllerDTO } from '../DTO/AddEventControllerDTO';
 import { LoggedUser } from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
 import { User } from 'src/Domain/HumanResource/User/User.entity';

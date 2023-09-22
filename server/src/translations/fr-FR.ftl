@@ -1,5 +1,7 @@
 common-form-save = Enregistrer
 common-form-delete = Supprimer
+common-add = Ajouter
+common-actions = Actions
 
 site-title = Permacoop
 
@@ -23,7 +25,14 @@ faircalendar-filters-month-title = Filtrer par mois
 faircalendar-filters-userId-title = Filtrer par coopérateur-salarié
 
 crm-title = FairCRM
+
 crm-customers-title = Clients
+crm-customers-add-title = Ajouter un client
+crm-customers-name = Nom du client
+crm-customers-street = Adresse
+crm-customers-zipCode = Code postal
+crm-customers-city = Ville
+
 crm-projects-title = Projets
 
 accounts-title = FairRH

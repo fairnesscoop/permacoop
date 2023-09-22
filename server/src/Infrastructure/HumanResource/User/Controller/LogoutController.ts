@@ -6,7 +6,7 @@ import {
   Res
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { WithName } from 'src/Infrastructure/Common/Routing/WithName';
+import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 
 @Controller('logout')
 export class LogoutController {

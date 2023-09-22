@@ -3,8 +3,8 @@ help:
 
 compose = docker-compose -p permacoop
 
-run_server = ./tools/colorize_prefix.sh [server] 30 
-run_watch = ./tools/colorize_prefix.sh [watch] 32 
+run_server = ./tools/colorize_prefix.sh [server] 31
+run_watch = ./tools/colorize_prefix.sh [watch] 36
 
 install: ## Install
 	cp -n server/.env.dist server/.env

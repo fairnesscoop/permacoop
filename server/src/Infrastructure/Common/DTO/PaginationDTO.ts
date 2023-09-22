@@ -7,5 +7,5 @@ export class PaginationDTO {
   @Min(1)
   @Max(10000)
   @Type(() => Number)
-  public page: number = 1;
+  public page = 1;
 }
