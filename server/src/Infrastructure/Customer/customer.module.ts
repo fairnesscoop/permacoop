@@ -14,6 +14,7 @@ import { ListCustomersController } from './Controller/ListCustomersController';
 import { AddCustomerController } from './Controller/AddCustomerController';
 import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
 import { EditCustomerController } from './Controller/EditCustomerController';
+import { CustomerTableFactory } from './Table/CustomerTableFactory';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { EditCustomerController } from './Controller/EditCustomerController';
     UpdateCustomerCommandHandler,
     CreateCustomerCommandHandler,
     GetCustomerByIdQueryHandler,
-    GetCustomersQueryHandler
+    GetCustomersQueryHandler,
+    CustomerTableFactory
   ]
 })
 export class CustomerModule {}

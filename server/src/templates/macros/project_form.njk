@@ -1,0 +1,21 @@
+{% macro project_form(project, customers, class_name='') %}
+<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
+    <div class="pc-input-group">
+        <label for="name" class="required">{{ 'crm-projects-name-title'|trans }}</label>
+        <input type="text" name="name" id="name" required {% if project %}value="{{ project.name }}"{% endif %}>
+    </div>
+
+    <div class="pc-select-group">
+        <label for="customerId" class="required">{{ 'crm-projects-customer-title'|trans }}</label>
+        <select name="customerId" id="customerId" required>
+            {% for customer in customers %}
+                <option value="{{ customer.id }}" {% if project and project.customer.id == customer.id %}selected{% endif %}>{{ customer.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit" class="pc-btn">
+        {{ "common-form-save"|trans|capitalize }}
+    </button>
+</form>
+{% endmacro %}

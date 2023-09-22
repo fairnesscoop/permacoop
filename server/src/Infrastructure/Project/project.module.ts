@@ -3,25 +3,29 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BusModule } from '../bus.module';
 import { Project } from 'src/Domain/Project/Project.entity';
 import { Customer } from 'src/Domain/Customer/Customer.entity';
-import { CreateProjectAction } from './Action/CreateProjectAction';
 import { CreateProjectCommandHandler } from 'src/Application/Project/Command/CreateProjectCommandHandler';
 import { ProjectRepository } from './Repository/ProjectRepository';
 import { IsProjectAlreadyExist } from 'src/Domain/Project/Specification/IsProjectAlreadyExist';
 import { CustomerRepository } from '../Customer/Repository/CustomerRepository';
-import { GetProjectsAction } from './Action/GetProjectsAction';
 import { GetProjectsQueryHandler } from 'src/Application/Project/Query/GetProjectsQueryHandler';
-import { UpdateProjectAction } from './Action/UpdateProjectAction';
-import { GetProjectAction } from './Action/GetProjectAction';
 import { GetProjectByIdQueryHandler } from 'src/Application/Project/Query/GetProjectByIdQueryHandler';
 import { UpdateProjectCommandHandler } from 'src/Application/Project/Command/UpdateProjectCommandHandler';
+import { ListProjectsController } from './Controller/ListProjectsController';
+import { AddProjectController } from './Controller/AddProjectController';
+import { EditProjectController } from './Controller/EditProjectController';
+import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
+import { ProjectTableFactory } from './Table/ProjectTableFactory';
 
 @Module({
-  imports: [BusModule, TypeOrmModule.forFeature([Project, Customer])],
+  imports: [
+    BusModule,
+    TypeOrmModule.forFeature([Project, Customer]),
+    ExtendedRoutingModule
+  ],
   controllers: [
-    GetProjectsAction,
-    GetProjectAction,
-    CreateProjectAction,
-    UpdateProjectAction
+    ListProjectsController,
+    AddProjectController,
+    EditProjectController
   ],
   providers: [
     { provide: 'IProjectRepository', useClass: ProjectRepository },
@@ -30,7 +34,8 @@ import { UpdateProjectCommandHandler } from 'src/Application/Project/Command/Upd
     IsProjectAlreadyExist,
     GetProjectsQueryHandler,
     GetProjectByIdQueryHandler,
-    UpdateProjectCommandHandler
+    UpdateProjectCommandHandler,
+    ProjectTableFactory
   ]
 })
 export class ProjectModule {}

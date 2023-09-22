@@ -7,32 +7,32 @@ import {
   Render
 } from '@nestjs/common';
 import { IQueryBus } from 'src/Application/IQueryBus';
-import { GetCustomersQuery } from 'src/Application/Customer/Query/GetCustomersQuery';
 import { PaginationDTO } from 'src/Infrastructure/Common/DTO/PaginationDTO';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
+import { GetProjectsQuery } from 'src/Application/Project/Query/GetProjectsQuery';
+import { ProjectTableFactory } from '../Table/ProjectTableFactory';
 import { Pagination } from 'src/Application/Common/Pagination';
-import { CustomerView } from 'src/Application/Customer/View/CustomerView';
-import { CustomerTableFactory } from '../Table/CustomerTableFactory';
+import { ProjectView } from 'src/Application/Project/View/ProjectView';
 
-@Controller('app/customers')
+@Controller('app/projects')
 @UseGuards(IsAuthenticatedGuard)
-export class ListCustomersController {
+export class ListProjectsController {
   constructor(
     @Inject('IQueryBus')
     private readonly queryBus: IQueryBus,
-    private readonly tableFactory: CustomerTableFactory
+    private tableFactory: ProjectTableFactory
   ) {}
 
   @Get()
-  @WithName('crm_customers_list')
-  @Render('pages/customers_index.njk')
+  @WithName('crm_projects_list')
+  @Render('pages/projects_list.njk')
   public async index(@Query() pagination: PaginationDTO) {
-    const customers: Pagination<CustomerView> = await this.queryBus.execute(
-      new GetCustomersQuery(pagination.page)
+    const projects: Pagination<ProjectView> = await this.queryBus.execute(
+      new GetProjectsQuery(pagination.page)
     );
 
-    const table = this.tableFactory.create(customers.items);
+    const table = this.tableFactory.create(projects.items);
 
     return { table };
   }

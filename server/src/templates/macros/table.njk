@@ -1,34 +1,40 @@
 {% import 'macros/icons.njk' as icons %}
 
-{% macro table(items) %}
+{% macro render_table(table) %}
 <table class="app-table">
   <thead>
     <tr class="dark:border-gray-70 dark:text-gray-400 dark:bg-gray-800">
-      <th>{{ 'crm-customers-name'|trans }}</th>
-      <th>{{ 'crm-customers-street'|trans }}</th>
-      <th>{{ 'common-actions'|trans }}</th>
+      {% for column in table.columns %}
+        <th>{{ column|trans }}</th>
+      {% endfor %}
     </tr>
   </thead>
   <tbody class="dark:divide-gray-700 dark:bg-gray-800">
-    {% for item in items %}
+    {% for row in table.rows %}
       <tr class="text-gray-700 dark:text-gray-400">
-        <td>{{ item.name }}</td>
-        <td>
-          {{ item.address.street }}
-          <br />
-          {{ item.address.zipCode }} {{ item.address.city }}
-          <br />
-          {{ item.address.country }}
-        </td>
-        <td>
-          <a href="{{ path('crm_customers_edit', { id: item.id }) }}" title="{{ 'common-edit'|trans }}">
-            {{ icons.pencil(class_name='pc-icon pc-icon--sm pc-icon--action-violet') }}
-          </a>
-        </td>
+        {% for value in row %}
+          {% if value.actions %}
+            <td>
+              {% if value.actions.edit %}
+                <a href="{{ value.actions.edit.url }}" title="{{ 'common-edit'|trans }}">
+                  {{ icons.pencil(class_name='pc-icon pc-icon--sm pc-icon--action-violet') }}
+                </a>
+              {% endif %}
+            </td>
+          {% else %}
+            <td>
+              {% if value.safe %}
+                {{ value.safe|safe }}
+              {% else %}
+                {{ value }}
+              {% endif %}
+            </td>
+          {% endif %}
+        {% endfor %}
       </tr>
       {% else %}
         <tr>
-          <td colspan="3">Vide</td>
+          <td colspan="{{ table.columns|length }}">Vide</td>
         </tr>
     {% endfor %}
   </tbody>

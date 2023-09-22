@@ -17,7 +17,7 @@ import { CreateCustomerCommand } from 'src/Application/Customer/Command/CreateCu
 import { CustomerDTO } from '../DTO/CustomerDTO';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 
-@Controller('app/faircalendar/events/add')
+@Controller('app/customers/add')
 @UseGuards(IsAuthenticatedGuard)
 export class AddCustomerController {
   constructor(

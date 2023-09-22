@@ -30,9 +30,9 @@ export const nunjucks = async (
 
   const ctxProcessors: ContextProcessorFn[] = [
     (ctx, req, _res) => {
-      ctx.req = req;
+      ctx['req'] = req;
 
-      ctx.path = (name: string, params: object = {}) => {
+      ctx['path'] = (name: string, params: object = {}) => {
         try {
           return routeNameResolver.resolve(name, params);
         } catch {
@@ -40,7 +40,7 @@ export const nunjucks = async (
         }
       };
 
-      ctx.view_name = routeNameResolver.getName(req.url);
+      ctx['view_name'] = routeNameResolver.getName(req.url);
     }
   ];
 

@@ -16,7 +16,7 @@
   margin-bottom: calc(2 * var(--w));
 }
 
-.pc-input-group > select {
+.pc-select-group > select {
   display: block;
   appearance: none;
   width: 100%;

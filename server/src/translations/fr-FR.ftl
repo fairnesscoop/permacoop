@@ -36,6 +36,10 @@ crm-customers-zipCode = Code postal
 crm-customers-city = Ville
 
 crm-projects-title = Projets
+crm-projects-add-title = Ajouter un projet
+crm-projects-edit-title = Édition du projet "{$name}"
+crm-projects-name-title = Nom du projet
+crm-projects-customer-title = Client
 
 accounts-title = FairRH
 accounts-workers-title = Coopérateurs - salariés

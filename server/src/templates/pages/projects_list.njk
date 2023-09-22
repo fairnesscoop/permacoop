@@ -5,8 +5,8 @@
 
 {% block main %}
     <div class="pc-row pc-row--middle">
-        <h1 class="pc-m" style="--m: 0">{{ 'crm-customers-title'|trans }}</h1>
-        <a href="{{ path('crm_customers_add') }}" class="pc-btn pc-ml" style="--ml: calc(2 * var(--w))">{{ 'common-add'|trans }}</a>
+        <h1 class="pc-m" style="--m: 0">{{ 'crm-projects-title'|trans }}</h1>
+        <a href="{{ path('crm_projects_add') }}" class="pc-btn pc-ml" style="--ml: calc(2 * var(--w))">{{ 'common-add'|trans }}</a>
     </div>
 
     {{ render_table(table) }}
