@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { BusModule } from '../bus.module';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
-import { File } from 'src/Domain/File/File.entity';
 import { LoginController } from './User/Controller/LoginController';
 import { LoginAction } from './User/Action/LoginAction';
 import { CreateUserAction } from './User/Action/CreateUserAction';
@@ -14,7 +13,6 @@ import { GetUsersAction } from './User/Action/GetUsersAction';
 import { UserRepository } from './User/Repository/UserRepository';
 import { PasswordEncoderAdapter } from '../Adapter/PasswordEncoderAdapter';
 import { DateUtilsAdapter } from '../Adapter/DateUtilsAdapter';
-import { FileRepository } from '../File/Repository/FileRepository';
 import { LoginQueryHandler } from 'src/Application/HumanResource/User/Query/LoginQueryHandler';
 import { CreateUserCommandHandler } from 'src/Application/HumanResource/User/Command/CreateUserCommandHandler';
 import { GetUsersQueryHandler } from 'src/Application/HumanResource/User/Query/GetUsersQueryHandler';
@@ -80,7 +78,6 @@ import { GetLeavesCalendarAction } from './Leave/Action/GetLeavesCalendarAction'
 import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesCalendarQueryHandler';
 import { GetPendingLeaveRequestsCountAction } from './Leave/Action/GetPendingLeaveRequestsCountAction';
 import { GetPendingLeaveRequestsCountQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetPendingLeaveRequestsCountQueryHandler';
-import session = require('express-session');
 import { LogoutController } from './User/Controller/LogoutController';
 import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
 
@@ -94,7 +91,6 @@ import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting
     TypeOrmModule.forFeature([
       User,
       UserAdministrative,
-      File,
       LeaveRequest,
       Leave,
       Event,
@@ -138,7 +134,6 @@ import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting
     { provide: 'ILeaveRequestRepository', useClass: LeaveRequestRepository },
     { provide: 'IPasswordEncoder', useClass: PasswordEncoderAdapter },
     { provide: 'IDateUtils', useClass: DateUtilsAdapter },
-    { provide: 'IFileRepository', useClass: FileRepository },
     { provide: 'IEventRepository', useClass: EventRepository },
     { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
     {

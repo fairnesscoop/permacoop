@@ -7,7 +7,6 @@ import { ProjectModule } from './Infrastructure/Project/project.module';
 import { CustomerModule } from './Infrastructure/Customer/customer.module';
 import { TaskModule } from './Infrastructure/Task/task.module';
 import { FairCalendarModule } from './Infrastructure/FairCalendar/faircalendar.module';
-import { FileModule } from './Infrastructure/File/file.module';
 import { HumanResourceModule } from './Infrastructure/HumanResource/humanResource.module';
 import { SettingsModule } from './Infrastructure/Settings/settings.module';
 import { UnexpectedErrorFilter } from './Infrastructure/Common/ExceptionFilter/UnexpectedErrorFilter';
@@ -37,7 +36,6 @@ providers.push({
     HomeModule,
     CustomerModule,
     FairCalendarModule,
-    FileModule,
     HumanResourceModule,
     ProjectModule,
     TaskModule,
