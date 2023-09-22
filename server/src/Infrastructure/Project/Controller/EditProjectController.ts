@@ -38,7 +38,7 @@ export class EditProjectController {
 
   @Get(':id')
   @WithName('crm_projects_edit')
-  @Render('pages/projects_edit')
+  @Render('pages/projects/edit.njk')
   public async get(@Param() idDto: IdDTO) {
     const project = await this.queryBus.execute(
       new GetProjectByIdQuery(idDto.id)

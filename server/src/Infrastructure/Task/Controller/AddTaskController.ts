@@ -13,13 +13,13 @@ import { Response } from 'express';
 import { ICommandBus } from 'src/Application/ICommandBus';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
-import { CreateCustomerCommand } from 'src/Application/Customer/Command/CreateCustomerCommand';
-import { CustomerDTO } from '../DTO/CustomerDTO';
+import { CreateTaskCommand } from 'src/Application/Task/Command/CreateTaskCommand';
+import { TaskDTO } from '../DTO/TaskDTO';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 
-@Controller('app/customers/add')
+@Controller('app/tasks/add')
 @UseGuards(IsAuthenticatedGuard)
-export class AddCustomerController {
+export class AddTaskController {
   constructor(
     @Inject('ICommandBus')
     private readonly commandBus: ICommandBus,
@@ -27,22 +27,20 @@ export class AddCustomerController {
   ) {}
 
   @Get()
-  @WithName('crm_customers_add')
-  @Render('pages/customers/add.njk')
+  @WithName('crm_tasks_add')
+  @Render('pages/tasks/add.njk')
   public async get() {
     return {};
   }
 
   @Post()
-  public async post(@Body() customerDto: CustomerDTO, @Res() res: Response) {
-    const { street, city, zipCode, country, name } = customerDto;
+  public async post(@Body() taskDto: TaskDTO, @Res() res: Response) {
+    const { name } = taskDto;
 
     try {
-      await this.commandBus.execute(
-        new CreateCustomerCommand(name, street, city, zipCode, country)
-      );
+      await this.commandBus.execute(new CreateTaskCommand(name));
 
-      res.redirect(303, this.resolver.resolve('crm_customers_list'));
+      res.redirect(303, this.resolver.resolve('crm_tasks_list'));
     } catch (e) {
       throw new BadRequestException(e.message);
     }

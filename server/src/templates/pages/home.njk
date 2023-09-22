@@ -1,5 +1,9 @@
 {% extends 'layouts/app.njk' %}
 
+{% block main_class %}pc-container{% endblock %}
+
 {% block main %}
-    <h1>Bonjour, {{ req.user.firstName|capitalize }} {{ req.user.lastName|capitalize }} !</h1>
+<h1>
+    {{ 'home-title'|trans({ user: req.user.firstName|capitalize + ' ' + req.user.lastName|capitalize }) }}
+</h1>
 {% endblock main %}

@@ -6,6 +6,8 @@ common-actions = Actions
 
 site-title = Permacoop
 
+home-title = Bonjour, {$user} !
+
 dashboard-title = Tableau de bord
 
 faircalendar-title = FairCalendar
@@ -40,6 +42,10 @@ crm-projects-add-title = Ajouter un projet
 crm-projects-edit-title = Édition du projet "{$name}"
 crm-projects-name-title = Nom du projet
 crm-projects-customer-title = Client
+
+crm-tasks-title = Missions
+crm-tasks-name = Nom de la mission
+crm-tasks-edit-title = Édition de la mission "{$name}"
 
 accounts-title = FairRH
 accounts-workers-title = Coopérateurs - salariés

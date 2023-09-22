@@ -31,7 +31,7 @@ export class FairCalendarController {
 
   @Get()
   @WithName('faircalendar_index')
-  @Render('pages/faircalendar_index')
+  @Render('pages/faircalendar/index.njk')
   public async get(
     @Query() dto: FairCalendarControllerDTO,
     @LoggedUser() user: User

@@ -1,0 +1,12 @@
+{% macro task_form(task=null, class_name='') %}
+<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
+    <div class="pc-input-group">
+        <label for="name" class="required">{{ 'crm-tasks-name'|trans }}</label>
+        <input type="text" name="name" id="name" required {% if task %}value="{{ task.name }}"{% endif %}>
+    </div>
+
+    <button type="submit" class="pc-btn">
+        {{ "common-form-save"|trans|capitalize }}
+    </button>
+</form>
+{% endmacro %}

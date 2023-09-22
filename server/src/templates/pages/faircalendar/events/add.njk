@@ -1,5 +1,5 @@
 {% extends 'layouts/app.njk' %}
-{% from 'macros/faircalendar_event_form.njk' import faircalendar_event_form %}
+{% from './_form.njk' import event_form %}
 
 {% block main_class %}pc-container{% endblock %}
 
@@ -9,6 +9,6 @@
     </h1>
 
     <div class="pc-card">
-        {{ faircalendar_event_form(null, types, projects, tasks, times, date, class_name='pc-card__content') }}
+        {{ event_form(null, types, projects, tasks, times, date, class_name='pc-card__content') }}
     </div>
 {% endblock main %}

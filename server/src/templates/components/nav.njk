@@ -33,6 +33,11 @@
                             {{ "crm-projects-title"|trans|capitalize }}
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ path('crm_tasks_list') }}" {% if view_name|startswith('crm_tasks_') %}aria-current="page"{% endif %}>
+                            {{ "crm-tasks-title"|trans|capitalize }}
+                        </a>
+                    </li>
                 </ul>
             </details>
         </li>

@@ -1,0 +1,19 @@
+{% extends 'layouts/app.njk' %}
+{% from 'macros/breadcrumb.njk' import breadcrumb %}
+{% from './_form.njk' import task_form %}
+
+{% block main_class %}pc-container{% endblock %}
+
+{% set title = 'crm-tasks-edit-title'|trans({name: task.name }) %}
+
+{% block main %}
+    {{ breadcrumb([{ title: 'crm-tasks-title'|trans, href: path('crm_tasks_list') }, { title: title }]) }}
+
+    <h1 class="pc-m" style="--m: 0">
+        {{ title }}
+    </h1>
+
+    <div class="pc-card pc-mt" style="--mt: calc(3 * var(--w))">
+        {{ task_form(task, class_name='pc-card__content') }}
+    </div>
+{% endblock main %}

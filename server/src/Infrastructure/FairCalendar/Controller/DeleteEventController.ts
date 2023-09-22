@@ -26,7 +26,7 @@ export class DeleteEventController {
 
   @Post(':id')
   @WithName('faircalendar_event_delete')
-  public async index(
+  public async post(
     @Param() dto: IdDTO,
     @LoggedUser() user: User,
     @Res() res: Response

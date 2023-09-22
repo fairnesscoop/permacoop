@@ -16,14 +16,14 @@ import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { IQueryBus } from 'src/Application/IQueryBus';
 import { Response } from 'express';
 import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
-import { GetCustomerByIdQuery } from 'src/Application/Customer/Query/GetCustomerByIdQuery';
-import { CustomerDTO } from '../DTO/CustomerDTO';
-import { UpdateCustomerCommand } from 'src/Application/Customer/Command/UpdateCustomerCommand';
+import { TaskDTO } from '../DTO/TaskDTO';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
+import { GetTaskByIdQuery } from 'src/Application/Task/Query/GetTaskByIdQuery';
+import { UpdateTaskCommand } from 'src/Application/Task/Command/UpdateTaskCommand';
 
-@Controller('app/customers/edit')
+@Controller('app/tasks/edit')
 @UseGuards(IsAuthenticatedGuard)
-export class EditCustomerController {
+export class EditTaskController {
   constructor(
     @Inject('ICommandBus')
     private readonly commandBus: ICommandBus,
@@ -33,39 +33,28 @@ export class EditCustomerController {
   ) {}
 
   @Get(':id')
-  @WithName('crm_customers_edit')
-  @Render('pages/customers/edit.njk')
+  @WithName('crm_tasks_edit')
+  @Render('pages/tasks/edit.njk')
   public async get(@Param() idDto: IdDTO) {
-    const customer = await this.queryBus.execute(
-      new GetCustomerByIdQuery(idDto.id)
-    );
+    const task = await this.queryBus.execute(new GetTaskByIdQuery(idDto.id));
 
     return {
-      customer
+      task
     };
   }
 
   @Post(':id')
   public async post(
     @Param() idDto: IdDTO,
-    @Body() dto: CustomerDTO,
+    @Body() dto: TaskDTO,
     @Res() res: Response
   ) {
-    const { name, street, zipCode, city, country } = dto;
+    const { name } = dto;
 
     try {
-      await this.commandBus.execute(
-        new UpdateCustomerCommand(
-          idDto.id,
-          name,
-          street,
-          city,
-          zipCode,
-          country
-        )
-      );
+      await this.commandBus.execute(new UpdateTaskCommand(idDto.id, name));
 
-      res.redirect(303, this.resolver.resolve('crm_customers_list'));
+      res.redirect(303, this.resolver.resolve('crm_tasks_list'));
     } catch (e) {
       throw new BadRequestException(e.message);
     }

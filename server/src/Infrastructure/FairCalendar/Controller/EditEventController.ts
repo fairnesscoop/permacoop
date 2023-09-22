@@ -33,7 +33,7 @@ import { GetEventByIdQuery } from 'src/Application/FairCalendar/Query/GetEventBy
 
 @Controller('app/faircalendar/events/edit')
 @UseGuards(IsAuthenticatedGuard)
-export class UpdateEventController {
+export class EditEventController {
   constructor(
     @Inject('ICommandBus')
     private readonly commandBus: ICommandBus,
@@ -43,7 +43,7 @@ export class UpdateEventController {
 
   @Get(':id')
   @WithName('faircalendar_events_edit')
-  @Render('pages/faircalendar_events_edit')
+  @Render('pages/faircalendar/events/edit.njk')
   public async get(@Param() idDto: IdDTO) {
     const event = await this.queryBus.execute(new GetEventByIdQuery(idDto.id));
 

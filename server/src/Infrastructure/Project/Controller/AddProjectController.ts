@@ -35,7 +35,7 @@ export class AddProjectController {
 
   @Get()
   @WithName('crm_projects_add')
-  @Render('pages/projects_add')
+  @Render('pages/projects/add.njk')
   public async get() {
     const customers: Pagination<CustomerView> = await this.queryBus.execute(
       new GetCustomersQuery(1)
@@ -47,7 +47,7 @@ export class AddProjectController {
   }
 
   @Post()
-  public async index(@Body() projectDto: ProjectDTO, @Res() res: Response) {
+  public async poqr(@Body() projectDto: ProjectDTO, @Res() res: Response) {
     const { name, customerId } = projectDto;
 
     try {

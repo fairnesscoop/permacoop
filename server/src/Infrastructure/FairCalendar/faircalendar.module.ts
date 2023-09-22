@@ -24,7 +24,7 @@ import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
 import { FluentTranslatorAdapter } from '../Adapter/FluentTranslatorAdapter';
 import { FairCalendarController } from './Controller/FairCalendarController';
 import { AddEventController } from './Controller/AddEventController';
-import { UpdateEventController } from './Controller/UpdateEventController';
+import { EditEventController } from './Controller/EditEventController';
 import { DeleteEventController } from './Controller/DeleteEventController';
 
 @Module({
@@ -36,7 +36,7 @@ import { DeleteEventController } from './Controller/DeleteEventController';
   controllers: [
     FairCalendarController,
     AddEventController,
-    UpdateEventController,
+    EditEventController,
     DeleteEventController
   ],
   providers: [

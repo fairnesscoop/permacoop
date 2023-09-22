@@ -37,7 +37,7 @@ export class AddEventController {
 
   @Get(':date')
   @WithName('faircalendar_events_add')
-  @Render('pages/faircalendar_events_add')
+  @Render('pages/faircalendar/events/add.njk')
   public async get(@Param() dto: AddEventControllerDTO) {
     const types = [
       'mission',
