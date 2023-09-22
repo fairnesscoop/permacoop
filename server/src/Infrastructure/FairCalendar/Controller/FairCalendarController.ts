@@ -16,6 +16,8 @@ import { EventView } from 'src/Application/FairCalendar/View/EventView';
 import { ITranslator } from 'src/Application/ITranslations';
 import { minutesToHours } from 'src/Infrastructure/Common/Utils/dateUtils';
 import { LoggedUser } from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
+import { UserView } from 'src/Application/HumanResource/User/View/UserView';
+import { GetUsersQuery } from 'src/Application/HumanResource/User/Query/GetUsersQuery';
 
 @Controller('app/faircalendar')
 @UseGuards(IsAuthenticatedGuard)
@@ -36,6 +38,8 @@ export class FairCalendarController {
   ) {
     const date = dto.date ? new Date(dto.date) : new Date();
     const userId = dto.userId ? dto.userId : user['id'];
+
+    const users: UserView[] = await this.queryBus.execute(new GetUsersQuery());
 
     const events: EventView[] = await this.queryBus.execute(
       new GetMonthlyFairCalendarQuery(date, userId)
@@ -64,6 +68,7 @@ export class FairCalendarController {
     });
 
     return {
+      users,
       fullCalendarEvents,
       date
     };

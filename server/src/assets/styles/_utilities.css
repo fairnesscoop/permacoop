@@ -16,7 +16,7 @@
 }
 
 .pc-cols--even {
-  --cols: auto;
+  --cols: 1;
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
   gap: var(--gap, calc(2 * var(--w)));

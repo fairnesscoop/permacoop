@@ -3,6 +3,9 @@ help:
 
 compose = docker-compose -p permacoop
 
+run_server = ./tools/colorize_prefix.sh [server] 30 
+run_watch = ./tools/colorize_prefix.sh [watch] 32 
+
 install: ## Install
 	cp -n server/.env.dist server/.env
 	make install-deps
@@ -18,7 +21,13 @@ install-dev: up ## Install local development dependencies and services
 	make database-test-init
 
 start: up ## Start
-	cd server && npm run start:dev
+	make -j 2 start-server start-watch
+
+start-server:
+	${run_server} "cd server && npm run start:dev"
+
+start-watch:
+	${run_watch} "cd server && npm run assets:watch"
 
 compose: ## Run Docker compose command (args: CMD)
 	${compose} ${CMD}
@@ -44,7 +53,7 @@ build-app:
 	cd server && npm run build
 
 build-assets:
-	cd server && npm run build:assets
+	cd server && npm run assets:build
 
 start-dist: ## Serve built server
 	cd server && npm run start:prod

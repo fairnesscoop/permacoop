@@ -5,6 +5,23 @@
 {% block main %}
 <h1>{{ 'faircalendar-title'|trans }}</h1>
 
+<form action="">
+    <div class="pc-cols--even" style="--cols: 3">
+        <div class="select-group">
+            <label for="month">{{ 'faircalendar-filters-month-title'|trans }}</label>
+            <input type="month" name="month">
+        </div>
+        <div class="select-group">
+            <label for="userId">{{ 'faircalendar-filters-userId-title'|trans }}</label>
+            <select name="userId" id="userId">
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.fullName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</form>
+
 <div
     data-controller="fullcalendar"
     data-fullcalendar-events-json-value="{{ fullCalendarEvents|dump }}"

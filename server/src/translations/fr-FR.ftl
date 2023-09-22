@@ -19,6 +19,8 @@ faircalendar-type-option = {$type ->
 faircalendar-taskId-title = Mission
 faircalendar-projectId-title = Projet
 faircalendar-time-title = Temps passé
+faircalendar-filters-month-title = Filtrer par mois
+faircalendar-filters-userId-title = Filtrer par coopérateur-salarié
 
 crm-title = FairCRM
 crm-customers-title = Clients

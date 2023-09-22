@@ -39,11 +39,11 @@
   color: var(--text-muted);
 }
 
-.pc-nav > ul > li > a[aria-current='page'] {
+.pc-nav a[aria-current='page'] {
   position: relative;
 }
 
-.pc-nav > ul > li > a[aria-current='page']::before {
+.pc-nav a[aria-current='page']::before {
   position: absolute;
   content: '';
   inset: 0;
