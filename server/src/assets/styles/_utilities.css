@@ -5,6 +5,7 @@
 
 .pc-row {
   display: flex;
+  gap: var(--row-gap, 0);
 }
 
 .pc-row--middle {

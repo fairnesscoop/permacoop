@@ -1,9 +1,14 @@
 {% extends 'layouts/app.njk' %}
+{% from 'macros/breadcrumb.njk' import breadcrumb %}
 
 {% block main_class %}pc-container{% endblock %}
 
+{% set title = 'faircalendar-title'|trans %}
+
 {% block main %}
-<h1>{{ 'faircalendar-title'|trans }}</h1>
+{{ breadcrumb([{ title: title}]) }}
+
+<h1>{{ title }}</h1>
 
 <form action="">
     <div class="pc-cols--even" style="--cols: 3">
