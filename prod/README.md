@@ -17,6 +17,8 @@ _This document describes Fairness' production deployment of Permacoop. It is mea
 
 ## Architecture overview
 
+<!-- TODO -->
+
 The deployed service architecture is as follows:
 
 ```
