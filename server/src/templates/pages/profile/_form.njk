@@ -1,0 +1,27 @@
+{% macro profile_form(user, class_name='') %}
+<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
+    <div class="pc-input-group">
+        <label for="firstName" class="required">{{ 'profile-firstName'|trans }}</label>
+        <input type="text" name="firstName" id="firstName" required value="{{ user.firstName }}">
+    </div>
+
+    <div class="pc-input-group">
+        <label for="lastName" class="required">{{ 'profile-lastName'|trans }}</label>
+        <input type="text" name="lastName" id="lastName" required value="{{ user.lastName }}">
+    </div>
+
+    <div class="pc-input-group">
+        <label for="email" class="required">{{ 'profile-email'|trans }}</label>
+        <input type="email" name="email" id="email" required value="{{ user.email }}">
+    </div>
+
+    <div class="pc-input-group">
+        <label for="password">{{ 'profile-password'|trans }}</label>
+        <input type="password" name="password" id="password">
+    </div>
+
+    <button type="submit" class="pc-btn">
+        {{ "common-form-save"|trans|capitalize }}
+    </button>
+</form>
+{% endmacro %}

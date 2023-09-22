@@ -47,6 +47,12 @@ crm-tasks-title = Missions
 crm-tasks-name = Nom de la mission
 crm-tasks-edit-title = Édition de la mission "{$name}"
 
+profile-title = Mon compte
+profile-firstName = Nom
+profile-lastName = Prénom
+profile-email = Adresse e-mail
+profile-password = Mot de passe
+
 accounts-title = FairRH
 accounts-workers-title = Coopérateurs - salariés
 

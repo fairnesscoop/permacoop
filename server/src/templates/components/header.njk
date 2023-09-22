@@ -1,0 +1,25 @@
+{% import 'macros/icons.njk' as icons %}
+
+<header class="pc-app__header">
+    <details class="pc-dropdown">
+        <summary>
+            {{ req.user.firstName|first|upper }}
+        </summary>
+        <ul class="pc-raw-list pc-dropdown__content">
+            <li>
+                <a href="{{ path('profile_edit') }}" class="pc-icon--left">
+                    {{ icons.user(class_name='pc-icon pc-icon--sm') }}
+                    {{ 'header-account'|trans|capitalize }}
+                </a>
+            </li>
+            <li>
+                <form method="POST" action="{{ path('logout') }}">
+                    <button type="submit" class="pc-link pc-icon--left">
+                        {{ icons.logout(class_name='pc-icon pc-icon--sm') }}
+                        {{ 'header-logout'|trans|capitalize }}
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </details>
+</header>

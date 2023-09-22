@@ -80,6 +80,7 @@ import { GetPendingLeaveRequestsCountAction } from './Leave/Action/GetPendingLea
 import { GetPendingLeaveRequestsCountQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetPendingLeaveRequestsCountQueryHandler';
 import { LogoutController } from './User/Controller/LogoutController';
 import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
+import { EditProfileController } from './User/Controller/EditProfileController';
 
 @Module({
   imports: [
@@ -104,6 +105,7 @@ import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting
   controllers: [
     LoginController,
     LogoutController,
+    EditProfileController,
     LoginAction,
     CreateUserAction,
     GetLeavesAction,
