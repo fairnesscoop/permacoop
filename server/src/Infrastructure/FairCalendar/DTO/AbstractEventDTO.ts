@@ -17,7 +17,7 @@ export abstract class AbstractEventDTO {
 
   @IsNotEmpty()
   @IsInt()
-  @IsIn([...ArrayUtils.range(30, 480, 30)].map(n => n.toString()))
+  @IsIn([...ArrayUtils.range(30, 480, 30)])
   public time: number;
 
   @IsOptional()

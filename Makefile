@@ -16,14 +16,15 @@ endif
 install-deps: ## Install dependencies
 	cd server && npm ci
 
-install-dev: up ## Install local development dependencies and services
+install-dev: ## Install local development dependencies and services
 	cd server && npx playwright install firefox
+	make build
 	make database-test-init
 
-start: up ## Start
+start: ## Start
 	make -j 2 start-server start-watch
 
-start-server:
+start-server: up
 	${run_server} "cd server && npm run start:dev"
 
 start-watch:
@@ -47,15 +48,15 @@ rm: stop  ## Stop and remove containers
 ps: ## Show running containers
 	make compose CMD=ps
 
-build: build-app build-assets ## Build dist
+build: build-server build-assets ## Build dist
 
-build-app:
+build-server:
 	cd server && npm run build
 
 build-assets:
 	cd server && npm run assets:build
 
-start-dist: ## Serve built server
+start-dist: up ## Serve built server
 	cd server && npm run start:prod
 
 test: ## Run tests
@@ -79,25 +80,22 @@ format: ## Run code formatting
 database-migrate: ## Database migrations
 	cd server && npm run migration:migrate
 
-database-test-init: ## Initialize test database
+database-test-init: up ## Initialize test database
 	make compose CMD="exec -T database createdb permacoop_test" || echo 'Does the test DB already exist? Ignoring...'
-	DATABASE_NAME=permacoop_test make database-migrate
+	make database-migrate DATABASE_NAME=permacoop_test
+	make database-seed DATABASE_NAME=permacoop_test
 
 database-migration: ## Generate a database migration
 	cd server && npm run migration:create -- migrations/$(NAME)
 
 database-seed: ## Seed database
-	cd server && npm run build && npm run seed:run
+	cd server && npm run seed:run
 
 database-connect: ## Connect to the database container
 	${compose} exec database psql -h database -d permacoop
 
-ci: ## Run CI checks
-	make compose CMD="up -d"
+ci: up ## Run CI checks
 	make install
-	make build
-	make database-migrate
-	make test-cov
-	make database-test-init
-	make test-e2e
 	make linter
+	make test-cov
+	make test-e2e CI=1

@@ -4,14 +4,14 @@
     <ul>
         <li>
             <a {% if view_name == 'home' %}aria-current="page"{% endif %} href="{{ path('home') }}">
-                {{ icons.dashboard(class_name='pc-icon--sm') }}
+                {{ icons.dashboard(class_name='pc-icon pc-icon--sm') }}
                 {{ 'dashboard-title'|trans }}
             </a>
         </li>
 
         <li>
             <a {% if view_name|startswith('faircalendar_') %}aria-current="page"{% endif %} href="{{ path('faircalendar_index') }}">
-                {{ icons.calendar(class_name='pc-icon--sm') }}
+                {{ icons.calendar(class_name='pc-icon pc-icon--sm') }}
                 {{ "faircalendar-title"|trans }}
             </a>
         </li>
@@ -19,8 +19,7 @@
         <li {% if view_name|startswith('crm_') %}class="active"{% endif %}>
             <details open>
                 <summary>
-                    {% set class_name = 'pc-icon--sm' %}
-                    {{ icons.crm(class_name='pc-icon--sm') }}
+                    {{ icons.crm(class_name='pc-icon pc-icon--sm') }}
                     {{ "crm-title"|trans }}
                 </summary>
 
@@ -47,8 +46,7 @@
         <li {% if view_name|startswith('people_') %}class="active"{% endif %}>
             <details open>
                 <summary>
-                    {% set class_name = 'pc-icon--sm' %}
-                    {{ icons.group(class_name='pc-icon--sm') }}
+                    {{ icons.group(class_name='pc-icon pc-icon--sm') }}
                     {{ 'people-title'|trans }}
                 </summary>
 

@@ -7,7 +7,8 @@ import {
   IsNumber,
   IsBoolean,
   Min,
-  IsISO8601
+  IsISO8601,
+  ValidateIf
 } from 'class-validator';
 import {
   ContractType,
@@ -47,7 +48,8 @@ export class UserAdministrativeDTO {
   @IsISO8601()
   public joiningDate: string;
 
-  @IsOptional()
+  @IsISO8601()
+  @ValidateIf(v => v.leavingDate !== '')
   public leavingDate: string;
 
   @IsNotEmpty()

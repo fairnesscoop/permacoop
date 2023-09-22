@@ -1,3 +1,9 @@
+.pc-icon {
+  --size: 7;
+  width: calc(var(--size) * var(--v));
+  height: calc(var(--size) * var(--v));
+}
+
 .pc-icon--error {
   color: var(--text-error);
 }
@@ -13,8 +19,7 @@
 }
 
 .pc-icon--sm {
-  width: calc(6 * var(--v));
-  height: calc(6 * var(--v));
+  --size: 5;
 }
 
 .pc-icon--left {

@@ -30,7 +30,8 @@
   padding: var(--w) calc(5 * var(--w)) var(--w) calc(3 * var(--v));
 }
 
-:where(.pc-input-group, .pc-select-group) > label {
+.pc-input-group > label,
+.pc-select-group > label {
   display: block;
   padding-bottom: var(--v);
 }

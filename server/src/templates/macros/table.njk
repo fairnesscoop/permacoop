@@ -37,7 +37,7 @@
       </tr>
       {% else %}
         <tr>
-          <td colspan="{{ table.columns|length }}">Vide</td>
+          <td colspan="{{ table.columns|length }}">{{ 'common-table-empty'|trans }}</td>
         </tr>
     {% endfor %}
   </tbody>

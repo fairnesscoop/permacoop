@@ -5,10 +5,12 @@ common-edit = Modifier
 common-actions = Actions
 common-yes = Oui
 common-no = Non
+common-table-empty = Aucun élément
 
 site-title = Permacoop
 
 header-profile = Mon compte
+header-dropdown = Voir plus d'actions
 header-logout = Se déconnecter
 
 home-title = Bonjour, {$user} !

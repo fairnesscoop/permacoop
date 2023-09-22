@@ -31,7 +31,7 @@ const _readBundle = (path: string, locale: string) => {
 
   const resource = new fluent.FluentResource(content);
 
-  const bundle = new fluent.FluentBundle(locale);
+  const bundle = new fluent.FluentBundle(locale, { useIsolating: false });
   const errors = bundle.addResource(resource);
 
   if (errors.length > 0) {

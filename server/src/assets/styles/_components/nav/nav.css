@@ -53,7 +53,8 @@
   position: relative;
 }
 
-.pc-nav :where(li.active, > ul > li > a[aria-current='page'])::before {
+.pc-nav li.active::before,
+.pc-nav > ul > li > a[aria-current='page']::before {
   position: absolute;
   content: '';
   inset: 0;

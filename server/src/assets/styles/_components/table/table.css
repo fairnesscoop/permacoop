@@ -19,7 +19,8 @@
   }
 }
 
-.app-table :where(th, td) {
+.app-table th,
+.app-table td {
   padding: calc(3 * var(--v)) calc(4 * var(--v));
 }
 

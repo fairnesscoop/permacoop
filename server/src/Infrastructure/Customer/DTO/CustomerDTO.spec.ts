@@ -1,18 +1,14 @@
 import { CustomerDTO } from './CustomerDTO';
 import { validate } from 'class-validator';
-import { AddressDTO } from './AddressDTO';
 
 describe('CustomerDTO', () => {
   it('testValidDTO', async () => {
-    const addressDto = new AddressDTO();
-    addressDto.street = '2 rue Dieu';
-    addressDto.city = 'Paris';
-    addressDto.zipCode = '75010';
-    addressDto.country = 'FR';
-
     const dto = new CustomerDTO();
     dto.name = 'Customer';
-    dto.address = addressDto;
+    dto.street = '2 rue Dieu';
+    dto.city = 'Paris';
+    dto.zipCode = '75010';
+    dto.country = 'FR';
 
     const validation = await validate(dto);
     expect(validation).toHaveLength(0);
@@ -21,26 +17,27 @@ describe('CustomerDTO', () => {
   it('testInvalidDTO', async () => {
     const dto = new CustomerDTO();
     dto.name = '';
+    dto.street = '';
+    dto.city = '';
+    dto.zipCode = '';
+    dto.country = 'France';
 
     const validation = await validate(dto);
-    expect(validation).toHaveLength(2);
+    expect(validation).toHaveLength(5);
     expect(validation[0].constraints).toMatchObject({
       isNotEmpty: 'name should not be empty'
     });
     expect(validation[1].constraints).toMatchObject({
-      isNotEmpty: 'address should not be empty'
+      isNotEmpty: 'street should not be empty'
     });
-  });
-
-  it('testInvalidAddressDTO', async () => {
-    const badAddress = new AddressDTO();
-    badAddress.country = 'France';
-    const dto = new CustomerDTO();
-
-    dto.name = 'Customer';
-    dto.address = badAddress;
-
-    const validation = await validate(dto);
-    expect(validation).toHaveLength(1);
+    expect(validation[2].constraints).toMatchObject({
+      isNotEmpty: 'city should not be empty'
+    });
+    expect(validation[3].constraints).toMatchObject({
+      isNotEmpty: 'zipCode should not be empty'
+    });
+    expect(validation[4].constraints).toMatchObject({
+      isISO31661Alpha2: 'country must be a valid ISO31661 Alpha2 code'
+    });
   });
 });

@@ -27,7 +27,7 @@ describe('UserAdministrativeDTO', () => {
     const dto = new UserAdministrativeDTO();
     dto.role = UserRole.COOPERATOR;
     dto.joiningDate = '';
-    dto.leavingDate = '';
+    dto.leavingDate = 'invalid';
 
     const validation = await validate(dto);
 
@@ -38,19 +38,19 @@ describe('UserAdministrativeDTO', () => {
       isPositive: 'annualEarnings must be a positive number'
     });
     expect(validation[1].constraints).toMatchObject({
-      isBooleanString: 'healthInsurance must be a boolean string',
+      isBoolean: 'healthInsurance must be a boolean value',
       isNotEmpty: 'healthInsurance should not be empty'
     });
     expect(validation[2].constraints).toMatchObject({
-      isBooleanString: 'executivePosition must be a boolean string',
+      isBoolean: 'executivePosition must be a boolean value',
       isNotEmpty: 'executivePosition should not be empty'
     });
     expect(validation[3].constraints).toMatchObject({
-      isDateString: 'joiningDate must be a ISOString',
+      // isDateString: 'joiningDate must be a ISOString',
       isNotEmpty: 'joiningDate should not be empty'
     });
     expect(validation[4].constraints).toMatchObject({
-      isDateString: 'leavingDate must be a ISOString'
+      isIso8601: 'leavingDate must be a valid ISO 8601 date string'
     });
     expect(validation[5].constraints).toMatchObject({
       isEnum: 'contract must be a valid enum value',

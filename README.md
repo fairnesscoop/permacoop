@@ -61,10 +61,7 @@ This command will create the default user "John Doe" :
 }
 ```
 
-The server and client will be started:
-
-- API documentation available on <http://localhost:3000/api>
-- Client available on <http://localhost:3001/>
+The server will be available at <http://localhost:3000>.
 
 ## Helpers
 
@@ -91,16 +88,10 @@ To run tests, use:
 make test
 ```
 
-For E2E tests, you will need to install additional dependencies first:
-
-```bash
-make install-client-e2e
-```
-
 Run E2E tests using:
 
 ```bash
-make test-client-e2e
+make test-e2e
 ```
 
 ### Code quality
@@ -125,12 +116,6 @@ To generate a migration from the current state of the code, run:
 make database-migration NAME=add_some_column
 ```
 
-## Security
-
-The client must send the user `apiToken` in the Authorization header when making requests to protected resources : `Authorization: Bearer <apiToken>`
-
-To retrieve the `apiToken`, make a post request on `/login` with a user email and password.
-
 ## Features
 
 - Tasks management
@@ -142,11 +127,6 @@ To retrieve the `apiToken`, make a post request on `/login` with a user email an
   - Leaves
   - Cooperators / employee
   - Savings records
-- Accounting
-  - Quotations
-  - Daily rates
-  - Invoicing
-- Contacts managment
 
 ## Credits
 

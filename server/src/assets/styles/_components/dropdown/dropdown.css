@@ -3,6 +3,7 @@ details.pc-dropdown {
 }
 
 details.pc-dropdown > summary {
+  display: inline; /* Remove default 'v' */
   cursor: pointer;
 }
 
