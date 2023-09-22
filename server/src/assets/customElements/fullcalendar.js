@@ -1,16 +1,17 @@
-import { Controller } from '@hotwired/stimulus';
 import { Calendar } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-export default class extends Controller {
-  static values = {
-    eventsJson: String,
-    addUrlTemplate: String
-  };
+export default class extends HTMLElement {
+  constructor() {
+    super();
+  }
 
-  connect() {
-    const calendar = new Calendar(this.element, {
+  connectedCallback() {
+    const events = JSON.parse(this.dataset.eventsJson);
+    const addUrlTemplate = this.dataset.addUrlTemplate;
+
+    const calendar = new Calendar(this, {
       plugins: [interactionPlugin, dayGridPlugin],
       initialView: 'dayGridMonth',
       locale: 'fr',
@@ -19,7 +20,7 @@ export default class extends Controller {
       weekends: false,
       height: 700,
       dayHeaderFormat: { weekday: 'long' },
-      events: JSON.parse(this.eventsJsonValue),
+      events,
       select: info => {
         const year = info.start.getFullYear();
         const month = (info.start.getMonth() + 1).toString().padStart(2, '0');
@@ -27,7 +28,7 @@ export default class extends Controller {
           .getDate()
           .toString()
           .padStart(2, '0');
-        const url = this.addUrlTemplateValue.replace(
+        const url = addUrlTemplate.replace(
           '__date__',
           `${year}-${month}-${day}`
         );

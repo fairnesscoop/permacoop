@@ -22,9 +22,8 @@
     </div>
 </form>
 
-<div
-    data-controller="fullcalendar"
-    data-fullcalendar-events-json-value="{{ fullCalendarEvents|dump }}"
-    data-fullcalendar-add-url-template-value="{{ path('faircalendar_events_add', { date: '__date__' }) }}"
-></div>
+<pc-fullcalendar
+    data-events-json="{{ fullCalendarEvents|dump }}"
+    data-add-url-template="{{ path('faircalendar_events_add', { date: '__date__' }) }}"
+></pc-fullcalendar>
 {% endblock main %}
