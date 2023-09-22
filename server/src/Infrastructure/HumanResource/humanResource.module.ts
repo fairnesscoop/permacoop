@@ -82,6 +82,7 @@ import { GetPendingLeaveRequestsCountAction } from './Leave/Action/GetPendingLea
 import { GetPendingLeaveRequestsCountQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetPendingLeaveRequestsCountQueryHandler';
 import session = require('express-session');
 import { LogoutController } from './User/Controller/LogoutController';
+import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
 
 @Module({
   imports: [
@@ -101,7 +102,8 @@ import { LogoutController } from './User/Controller/LogoutController';
       MealTicketRemoval,
       UserSavingsRecord,
       InterestRate
-    ])
+    ]),
+    ExtendedRoutingModule
   ],
   controllers: [
     LoginController,
