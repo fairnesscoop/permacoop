@@ -121,7 +121,7 @@ export class UserAdministrative {
     executivePosition: boolean,
     healthInsurance: boolean,
     joiningDate: string,
-    leavingDate: string,
+    leavingDate: string | null,
     transportFee: number,
     sustainableMobilityFee: number
   ): void {

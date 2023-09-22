@@ -23,6 +23,13 @@
   gap: var(--gap, calc(2 * var(--w)));
 }
 
+.pc-grid {
+  display: grid;
+  grid-template-rows: repeat(var(--rows), 1fr);
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: var(--gap, calc(2 * var(--w)));
+}
+
 .pc-m {
   margin: var(--m);
 }

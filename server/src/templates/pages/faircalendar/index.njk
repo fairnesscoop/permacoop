@@ -20,7 +20,7 @@
             <label for="userId">{{ 'faircalendar-filters-userId-title'|trans }}</label>
             <select name="userId" id="userId">
                 {% for user in users %}
-                    <option value="{{ user.id }}">{{ user.fullName }}</option>
+                    <option value="{{ user.id }}">{{ user|fullName }}</option>
                 {% endfor %}
             </select>
         </div>

@@ -51,7 +51,7 @@ export class UpdateUserCommandHandler {
       executivePosition,
       healthInsurance,
       joiningDate,
-      leavingDate,
+      leavingDate ? leavingDate : null,
       transportFee ? Math.round(transportFee * 100) : 0,
       sustainableMobilityFee ? Math.round(sustainableMobilityFee * 100) : 0
     );

@@ -1,24 +1,28 @@
-{% macro profile_form(user, class_name='') %}
-<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
+{% macro profile_fields(user, require_password=false) %}
     <div class="pc-input-group">
         <label for="firstName" class="required">{{ 'profile-firstName'|trans }}</label>
-        <input type="text" name="firstName" id="firstName" required value="{{ user.firstName }}">
+        <input type="text" name="firstName" id="firstName" required {% if user %}value="{{ user.firstName }}"{% endif %}>
     </div>
 
     <div class="pc-input-group">
         <label for="lastName" class="required">{{ 'profile-lastName'|trans }}</label>
-        <input type="text" name="lastName" id="lastName" required value="{{ user.lastName }}">
+        <input type="text" name="lastName" id="lastName" required {% if user %}value="{{ user.lastName }}"{% endif %}>
     </div>
 
     <div class="pc-input-group">
         <label for="email" class="required">{{ 'profile-email'|trans }}</label>
-        <input type="email" name="email" id="email" required value="{{ user.email }}">
+        <input type="email" name="email" id="email" required {% if user %}value="{{ user.email }}"{% endif %}>
     </div>
 
     <div class="pc-input-group">
-        <label for="password">{{ 'profile-password'|trans }}</label>
-        <input type="password" name="password" id="password">
+        <label for="password" {% if require_password %}class="required"{% endif %}>{{ 'profile-password'|trans }}</label>
+        <input type="password" name="password" id="password" {% if require_password %}required{% endif %}>
     </div>
+{% endmacro %}
+
+{% macro profile_form(user, class_name='') %}
+<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
+    {{ profile_fields(user) }}
 
     <button type="submit" class="pc-btn">
         {{ "common-form-save"|trans|capitalize }}

@@ -3,8 +3,13 @@ common-form-delete = Supprimer
 common-add = Ajouter
 common-edit = Modifier
 common-actions = Actions
+common-yes = Oui
+common-no = Non
 
 site-title = Permacoop
+
+header-profile = Mon compte
+header-logout = Se déconnecter
 
 home-title = Bonjour, {$user} !
 
@@ -48,13 +53,45 @@ crm-tasks-name = Nom de la mission
 crm-tasks-edit-title = Édition de la mission "{$name}"
 
 profile-title = Mon compte
-profile-firstName = Nom
-profile-lastName = Prénom
+profile-firstName = Prénom
+profile-lastName = Nom
 profile-email = Adresse e-mail
 profile-password = Mot de passe
 
-accounts-title = FairRH
-accounts-workers-title = Coopérateurs - salariés
+people-title = FairRH
 
-header-account = Mon compte
-header-logout = Se déconnecter
+users-title = Coopérateur·ices et salarié·es
+users-add-title = Ajouter un·e coopérateur·ice-salarié·e
+users-edit-title = Mise à jour des informations administratives de {$user}
+users-firstName = Prénom
+users-lastName = Nom
+users-email = Adresse e-mail
+users-role = Rôle
+users-role-value = {$role ->
+    [cooperator] Coopérateur·ice
+    [employee] Salarié·e
+    [accountant] Comptable
+    *[other] Autre
+}
+users-contract = Contrat de travail
+users-contract-value = {$contract ->
+    [cdi] CDI
+    [cdd] CDD
+    [ctt] CTT
+    [apprenticeship] Apprentissage
+    [professionalization] Professionalisation
+    *[other] Autre
+}
+users-workingTime = Temps de travail
+users-workingTime-value = {$workingTime ->
+    [full_time] Temps plein
+    [part_time] Temps partiel
+    *[other] Autre
+}
+users-executivePosition = Statut cadre
+users-healthInsurance = Mutuelle
+users-annualEarnings = Salaire annuel brut
+users-transportFee = Frais de transport
+users-sustainableMobilityFee = Forfait mobilité durable
+users-joiningDate = Date d'entrée
+users-leavingDate = Date de sortie

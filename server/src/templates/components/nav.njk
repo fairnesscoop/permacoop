@@ -44,22 +44,18 @@
             </details>
         </li>
 
-        <li>
-            {% if view_name|startswith('accounts_') %}
-                <span class="pc-nav__decoration" aria-hidden="true"></span>
-            {% endif %}
-
+        <li {% if view_name|startswith('people_') %}class="active"{% endif %}>
             <details open>
                 <summary>
                     {% set class_name = 'pc-icon--sm' %}
                     {{ icons.group(class_name='pc-icon--sm') }}
-                    {{ 'accounts-title'|trans }}
+                    {{ 'people-title'|trans }}
                 </summary>
 
                 <ul>
                     <li>
-                        <a href="{{ path('accounts_workers_list') }}" {% if view_name == 'accounts_workers_list' %}aria-current="page"{% endif %}>
-                        {{ 'accounts-workers-title'|trans }}
+                        <a href="{{ path('people_users_list') }}" {% if view_name|startswith('people_users_') %}aria-current="page"{% endif %}>
+                            {{ 'users-title'|trans }}
                         </a>
                     </li>
                 </ul>

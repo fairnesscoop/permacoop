@@ -4,6 +4,6 @@
 
 {% block main %}
 <h1>
-    {{ 'home-title'|trans({ user: req.user.firstName|capitalize + ' ' + req.user.lastName|capitalize }) }}
+    {{ 'home-title'|trans({ user: req.user|fullName }) }}
 </h1>
 {% endblock main %}

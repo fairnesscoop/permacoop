@@ -1,7 +1,6 @@
 import { UserDTO } from './UserDTO';
 import { validate } from 'class-validator';
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
-import { UserAdministrativeDTO } from './UserAdministrativeDTO';
 import {
   ContractType,
   WorkingTimeType
@@ -20,40 +19,34 @@ describe('UserDTO', () => {
   });
 
   it('testValidWithAdministrativeDTO', async () => {
-    const adminDto = new UserAdministrativeDTO();
-    adminDto.role = UserRole.COOPERATOR;
-    adminDto.annualEarnings = 50000;
-    adminDto.contract = ContractType.CDI;
-    adminDto.workingTime = WorkingTimeType.FULL_TIME;
-    adminDto.executivePosition = 'true';
-    adminDto.healthInsurance = 'true';
-    adminDto.transportFee = 7500;
-    adminDto.joiningDate = '2020-12-17T03:24:00';
-    adminDto.leavingDate = '2021-12-17T03:24:00';
-
     const dto = new UserDTO();
     dto.email = 'mathieu@fairness.coop';
     dto.firstName = 'Mathieu';
     dto.lastName = 'MARCHOIS';
     dto.password = 'password';
-    dto.userAdministrative = adminDto;
+    dto.role = UserRole.COOPERATOR;
+    dto.annualEarnings = 50000;
+    dto.contract = ContractType.CDI;
+    dto.workingTime = WorkingTimeType.FULL_TIME;
+    dto.executivePosition = true;
+    dto.healthInsurance = true;
+    dto.transportFee = 7500;
+    dto.joiningDate = '2020-12-17T03:24:00';
+    dto.leavingDate = '2021-12-17T03:24:00';
 
     const validation = await validate(dto);
     expect(validation).toHaveLength(0);
   });
 
   it('testInvalidDTO', async () => {
-    const adminDto = new UserAdministrativeDTO();
-    adminDto.transportFee = 1.5;
-    adminDto.joiningDate = '';
-    adminDto.leavingDate = '';
-
     const dto = new UserDTO();
     dto.email = 'mathieufairness.coop';
     dto.firstName = '';
     dto.lastName = '';
     dto.password = '';
-    dto.userAdministrative = adminDto;
+    dto.transportFee = 1.5;
+    dto.joiningDate = '';
+    dto.leavingDate = '';
 
     const validation = await validate(dto);
     expect(validation).toHaveLength(5);

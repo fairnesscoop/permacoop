@@ -5,11 +5,6 @@ import { PassportModule } from '@nestjs/passport';
 import { BusModule } from '../bus.module';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { LoginController } from './User/Controller/LoginController';
-import { LoginAction } from './User/Action/LoginAction';
-import { CreateUserAction } from './User/Action/CreateUserAction';
-import { GetMeAction } from './User/Action/GetMeAction';
-import { UpdateMeAction } from './User/Action/UpdateMeAction';
-import { GetUsersAction } from './User/Action/GetUsersAction';
 import { UserRepository } from './User/Repository/UserRepository';
 import { PasswordEncoderAdapter } from '../Adapter/PasswordEncoderAdapter';
 import { DateUtilsAdapter } from '../Adapter/DateUtilsAdapter';
@@ -47,8 +42,6 @@ import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
 import { GetLeaveRequestByIdQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestByIdQueryHandler';
 import { CooperativeRepository } from '../Settings/Repository/CooperativeRepository';
 import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
-import { UpdateUserAction } from './User/Action/UpdateUserAction';
-import { GetUserAction } from './User/Action/GetUserAction';
 import { UpdateUserCommandHandler } from 'src/Application/HumanResource/User/Command/UpdateUserCommandHandler';
 import { GetUserAdministrativeByIdQueryHandler } from 'src/Application/HumanResource/User/Query/GetUserAdministrativeByIdQueryHandler';
 import { GetLeavesAction } from './Leave/Action/GetLeavesAction';
@@ -81,6 +74,10 @@ import { GetPendingLeaveRequestsCountQueryHandler } from 'src/Application/HumanR
 import { LogoutController } from './User/Controller/LogoutController';
 import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
 import { EditProfileController } from './User/Controller/EditProfileController';
+import { ListUsersController } from './User/Controller/ListUsersController';
+import { UserTableFactory } from './User/Table/UserTableFactory';
+import { AddUserController } from './User/Controller/AddUserController';
+import { EditUserController } from './User/Controller/EditUserController';
 
 @Module({
   imports: [
@@ -105,16 +102,12 @@ import { EditProfileController } from './User/Controller/EditProfileController';
   controllers: [
     LoginController,
     LogoutController,
+    ListUsersController,
+    AddUserController,
+    EditUserController,
     EditProfileController,
-    LoginAction,
-    CreateUserAction,
     GetLeavesAction,
     GetLeavesCalendarAction,
-    UpdateUserAction,
-    GetMeAction,
-    UpdateMeAction,
-    GetUserAction,
-    GetUsersAction,
     GetUsersElementsAction,
     GetUsersElementsCsvAction,
     GetLeaveRequestsAction,
@@ -187,7 +180,8 @@ import { EditProfileController } from './User/Controller/EditProfileController';
     CreateMealTicketRemovalCommandHandler,
     GetMealTicketsPerMonthQueryHandler,
     UpdateLeaveRequestCommandHandler,
-    IncreaseUserSavingsRecordCommandHandler
+    IncreaseUserSavingsRecordCommandHandler,
+    UserTableFactory
   ]
 })
 export class HumanResourceModule {}

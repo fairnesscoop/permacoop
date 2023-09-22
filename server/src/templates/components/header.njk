@@ -9,14 +9,14 @@
             <li>
                 <a href="{{ path('profile_edit') }}" class="pc-icon--left">
                     {{ icons.user(class_name='pc-icon pc-icon--sm') }}
-                    {{ 'header-account'|trans|capitalize }}
+                    {{ 'header-profile'|trans }}
                 </a>
             </li>
             <li>
                 <form method="POST" action="{{ path('logout') }}">
                     <button type="submit" class="pc-link pc-icon--left">
                         {{ icons.logout(class_name='pc-icon pc-icon--sm') }}
-                        {{ 'header-logout'|trans|capitalize }}
+                        {{ 'header-logout'|trans }}
                     </button>
                 </form>
             </li>

@@ -25,7 +25,12 @@ async function bootstrap() {
   });
 
   app.use(helmet());
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: { enableImplicitConversion: true }
+    })
+  );
 
   app.use(
     session({

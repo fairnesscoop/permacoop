@@ -25,6 +25,8 @@
             <td>
               {% if value.safe %}
                 {{ value.safe|safe }}
+              {% elseif value.trans %}
+                {{ value.trans.message|trans(value.trans.params) }}
               {% else %}
                 {{ value }}
               {% endif %}

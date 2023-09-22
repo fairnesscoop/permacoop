@@ -1,0 +1,104 @@
+{% from 'pages/profile/_form.njk' import profile_fields %}
+
+{% macro _user_administrative_fields(userAdministrative, contracts, workingTimes) %}
+    <div class="pc-cols--even" style="--cols: 4">
+        <div class="pc-select-group">
+            <label for="contract" class="required">{{ 'users-contract'|trans }}</label>
+            <select name="contract" id="contract" required>
+                {% for contract in contracts %}
+                    <option value="{{ contract }}" {% if user and userAdministrative.contract == contract %}selected{% endif %}>{{ 'users-contract-value'|trans({ contract: contract }) }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="pc-select-group">
+            <label for="workingTime" class="required">{{ 'users-workingTime'|trans }}</label>
+            <select name="workingTime" id="workingTime" required>
+                {% for workingTime in workingTimes %}
+                    <option value="{{ workingTime }}" {% if userAdministrative and userAdministrative.workingTime == workingTime %}selected{% endif %}>{{ 'users-workingTime-value'|trans({ workingTime: workingTime }) }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="pc-select-group">
+            <label for="executivePosition" class="required">{{ 'users-executivePosition'|trans }}</label>
+            <select name="executivePosition" id="executivePosition" required>
+                <option value="true" {% if userAdministrative and userAdministrative.executivePosition %}selected{% endif %}>{{ 'common-yes'|trans }}</option>
+                <option value="false" {% if userAdministrative and not userAdministrative.executivePosition %}selected{% endif %}>{{ 'common-no'|trans }}</option>
+            </select>
+        </div>
+
+        <div class="pc-select-group">
+            <label for="healthInsurance" class="required">{{ 'users-healthInsurance'|trans }}</label>
+            <select name="healthInsurance" id="healthInsurance" required>
+                <option value="true" {% if userAdministrative and userAdministrative.healthInsurance %}selected{% endif %}>{{ 'common-yes'|trans }}</option>
+                <option value="false" {% if userAdministrative and not userAdministrative.healthInsurance %}selected{% endif %}>{{ 'common-no'|trans }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="pc-cols--even" style="--cols: 3">
+        <div class="pc-input-group">
+            <label for="annualEarnings" class="required">{{ 'users-annualEarnings'|trans }}</label>
+            <input type="number" min="0" id="annualEarnings" name="annualEarnings" required value="{% if userAdministrative %}{{ userAdministrative.annualEarnings }}{% else %}0{% endif %}">
+        </div>
+    
+        <div class="pc-input-group">
+            <label for="transportFee" class="required">{{ 'users-transportFee'|trans }}</label>
+            <input type="number" min="0" step="any" id="transportFee" name="transportFee" required value="{% if userAdministrative %}{{ userAdministrative.transportFee }}{% else %}0{% endif %}">
+        </div>
+    
+        <div class="pc-input-group">
+            <label for="sustainableMobilityFee" class="required">{{ 'users-sustainableMobilityFee'|trans }}</label>
+            <input type="number" min="0" step="any" id="sustainableMobilityFee" name="sustainableMobilityFee" required value="{% if userAdministrative %}{{ userAdministrative.sustainableMobilityFee }}{% else %}0{% endif %}">
+        </div>
+    </div>
+
+    <div class="pc-cols--even" style="--cols: 2">
+        <div class="pc-input-group">
+            <label for="joiningDate" class="required">{{ 'users-joiningDate'|trans }}</label>
+            <input type="date" id="joiningDate" name="joiningDate" required {% if userAdministrative %}value="{{ userAdministrative.joiningDate }}"{% endif %}>
+        </div>
+    
+        <div class="pc-input-group">
+            <label for="leavingDate">{{ 'users-leavingDate'|trans }}</label>
+            <input type="date" id="leavingDate" name="leavingDate" {% if userAdministrative %}value="{{ userAdministrative.leavingDate }}"{% endif %}>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro _user_role_field(user, roles) %}
+    <div class="pc-select-group">
+        <label for="role" class="required">{{ 'users-role'|trans }}</label>
+        <select name="role" id="role" required>
+            {% for role in roles %}
+                <option value="{{ role }}" {% if user and user.role == role %}selected{% endif %}>{{ 'users-role-value'|trans({ role: role }) }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endmacro %}
+
+{% macro user_add_form(roles, contracts, workingTimes, class_name='') %}
+<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
+    {{ _user_role_field(null, roles) }}
+    <div class="pc-grid" style="--rows: 2; --cols: 2">
+        {{ profile_fields(null, require_password=true) }}
+    </div>
+    {{ _user_administrative_fields(null, contracts, workingTimes) }}
+
+    <button type="submit" class="pc-btn">
+        {{ "common-form-save"|trans|capitalize }}
+    </button>
+</form>
+{% endmacro %}
+
+{% macro user_edit_form(user, roles, contracts, workingTimes, class_name='') %}
+<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
+    {{ _user_role_field(user, roles) }}
+    {{ _user_administrative_fields(user.administrativeView, contracts, workingTimes) }}
+
+    <button type="submit" class="pc-btn">
+        {{ "common-form-save"|trans|capitalize }}
+    </button>
+</form>
+{% endmacro %}

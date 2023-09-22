@@ -11,8 +11,4 @@ export class UserView {
     public readonly isAdministrativeEditable: boolean,
     public readonly administrativeView: UserAdministrativeView = null
   ) {}
-
-  get fullName(): string {
-    return `${this.firstName} ${this.lastName}`;
-  }
 }
