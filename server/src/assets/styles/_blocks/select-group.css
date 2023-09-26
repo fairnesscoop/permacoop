@@ -1,17 +1,3 @@
-.pc-input-group {
-  margin-bottom: calc(2 * var(--w));
-}
-
-.pc-input-group > input {
-  appearance: none;
-  display: block;
-  width: 100%;
-  background-color: var(--background-default);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
-  padding: calc(2 * var(--v)) calc(3 * var(--v));
-}
-
 .pc-select-group {
   margin-bottom: calc(2 * var(--w));
 }
@@ -28,10 +14,4 @@
   border: 1px solid var(--border-default);
   border-radius: var(--radius-sm);
   padding: var(--w) calc(5 * var(--w)) var(--w) calc(3 * var(--v));
-}
-
-.pc-input-group > label,
-.pc-select-group > label {
-  display: block;
-  padding-bottom: var(--v);
 }

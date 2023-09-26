@@ -1,11 +1,11 @@
 {% import 'macros/icons.njk' as icons %}
 
 {% macro breadcrumb(items) %}
-    <nav class="pc-breadcrumb" role="navigation" aria-label="{{ 'breadcrumb-title'|trans }}">
+    <nav class="pc-breadcrumb pc-box" style="--box-padding: var(--w)" role="navigation" aria-label="{{ 'breadcrumb-title'|trans }}">
         <ol>
             <li>
                 <a href="/" class="font-semibold text-grey-dark pc-row pc-row--middle" style="--row-gap: var(--v)">
-                    {{ icons.dashboard(class_name='pc-icon pc-icon--sm') }}
+                    {{ icons.dashboard() }}
                     {{ 'site-title'|trans }}
                 </a>
             </li>

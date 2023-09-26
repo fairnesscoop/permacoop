@@ -2,18 +2,16 @@
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 {% from './_form.njk' import project_form %}
 
-{% block main_class %}pc-container{% endblock %}
-
 {% set title = 'crm-projects-add-title'|trans %}
 
 {% block main %}
+<div class="pc-container">
     {{ breadcrumb([{ title: 'crm-projects-title'|trans, href: path('crm_projects_list') }, { title: title }]) }}
 
     <h1>
         {{ title }}
     </h1>
 
-    <div class="pc-card">
-        {{ project_form(null, customers, class_name='pc-card__content') }}
-    </div>
+    {{ project_form(null, customers, attr={class: 'pc-box'}) }}
+</div>
 {% endblock main %}

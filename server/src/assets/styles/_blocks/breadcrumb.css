@@ -1,10 +1,6 @@
-nav[role='navigation'][aria-label].pc-breadcrumb {
+nav.pc-breadcrumb[role='navigation'][aria-label] {
   color: var(--text-muted);
-  background-color: var(--background-default);
-  box-shadow: var(--shadow-default);
-  padding: var(--w);
   margin-bottom: calc(4 * var(--v));
-  /* flex p-2 mt-6 mb-6 text-sm text-gray-500 bg-white rounded-lg shadow-md dark:bg-gray-800 */
 }
 
 .pc-breadcrumb > ol {
@@ -18,4 +14,8 @@ nav[role='navigation'][aria-label].pc-breadcrumb {
 .pc-breadcrumb li:not(:first-child)::before {
   content: '/';
   margin-inline: var(--w);
+}
+
+.pc-breadcrumb a {
+  font-weight: 500;
 }

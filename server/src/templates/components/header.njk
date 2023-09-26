@@ -1,21 +1,21 @@
 {% import 'macros/icons.njk' as icons %}
 
-<header class="pc-app__header">
+<header class="pc-grid-area pc-flex-end pc-z-index pc-shadow pc-p" style="--grid-area: header; --z: 1; --p: calc(3 * var(--v)) calc(6 * var(--v))">
     <ul class="pc-raw-list pc-row pc-row--middle" style="--row-gap: calc(3 * var(--w))">
         <li>
-            <a href="{{ path('profile_edit') }}" class="pc-icon--left">
-                {{ icons.user(class_name='pc-icon pc-icon--sm') }}
+            <a href="{{ path('profile_edit') }}" class="pc-link-btn pc-icon--left">
+                {{ icons.user() }}
                 {{ 'header-profile'|trans }}
             </a>
         </li>
         <li>
             <details class="pc-dropdown" title="{{ 'header-dropdown'|trans }}">
                 <summary class="pc-p" style="--p: var(--w) 0">
-                    {{ icons.more(class_name='pc-icon') }}
+                    {{ icons.more(attr={class: 'pc-icon'}) }}
                 </summary>
-                <form method="POST" action="{{ path('logout') }}" class="pc-dropdown__content">
-                    <button type="submit" class="pc-link pc-icon--left">
-                        {{ icons.logout(class_name='pc-icon pc-icon--sm') }}
+                <form method="POST" action="{{ path('logout') }}">
+                    <button type="submit" class="pc-link-btn pc-icon--left">
+                        {{ icons.logout() }}
                         {{ 'header-logout'|trans }}
                     </button>
                 </form>

@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="theme-color" content="#343a40" />
     <link rel="stylesheet" href="{{ asset('app.css') }}">
-    <title>{% block title %}Permacoop{% endblock title %}</title>
+    <title>{% block title %}Permacoop{% endblock %}</title>
     <script src="{{ asset('app.js') }}" type="module" async defer></script>
   </head>
-  {% block header %}{% endblock header %}
-  <body class="{% block body_class %}{% endblock body_class %}">
-    {% block body %}
-        <main class="{% block main_class %}{% endblock main_class %}"">
-            {% block main %}{% endblock main %}
-        </main>
-    {% endblock body %}
+  {% block header %}{% endblock %}
+  <body {% block body_attr %}{% endblock %}>
+    {% block body %}{% endblock %}
   </body>
 </html>

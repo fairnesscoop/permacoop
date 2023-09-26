@@ -5,9 +5,10 @@
   background-color: var(--background-action-violet);
   color: var(--text-on-background-action-violet);
   font-weight: var(--font-weight-md);
+  cursor: pointer;
 }
 
-.pc-btn:hover {
+.pc-btn:not(:disabled):hover {
   background-color: var(--hover-tint);
 }
 

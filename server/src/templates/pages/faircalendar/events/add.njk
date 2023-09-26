@@ -2,16 +2,14 @@
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 {% from './_form.njk' import event_form %}
 
-{% block main_class %}pc-container{% endblock %}
-
 {% set title = 'faircalendar-events-add-title'|trans({ date: date }) %}
 
 {% block main %}
+<div class="pc-container">
     {{ breadcrumb([{ title: 'faircalendar-title'|trans, href: path('faircalendar_index') }, { title: title }]) }}
 
     <h1>{{ title }}</h1>
 
-    <div class="pc-card">
-        {{ event_form(null, types, projects, tasks, times, date, class_name='pc-card__content') }}
-    </div>
+    {{ event_form(null, types, projects, tasks, times, date, attr=={class: 'pc-box'}) }}
+</div>
 {% endblock main %}

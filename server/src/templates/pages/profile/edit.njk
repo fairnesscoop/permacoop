@@ -2,18 +2,16 @@
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 {% from './_form.njk' import profile_form %}
 
-{% block main_class %}pc-container{% endblock %}
-
 {% set title = 'profile-title'|trans %}
 
 {% block main %}
+<div class="pc-container">
     {{ breadcrumb([{ title: title }]) }}
 
     <h1 class="pc-m" style="--m: 0">
         {{ title }}
     </h1>
 
-    <div class="pc-card pc-mt" style="--mt: calc(3 * var(--w))">
-        {{ profile_form(user, class_name='pc-card__content') }}
-    </div>
+    {{ profile_form(user, attr={class: 'pc-box pc-mt', style: '--mt: calc(3 * var(--w))'}) }}
+</div>
 {% endblock main %}

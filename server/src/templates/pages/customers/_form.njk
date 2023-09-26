@@ -1,29 +1,30 @@
-{% macro customer_form(customer=null, class_name='') %}
-<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
+{% import 'macros/buttons.njk' as buttons %}
+{% from 'macros/attr.njk' import render_attr %}
+
+{% macro customer_form(customer=null, attr=null) %}
+<form method="POST" {{ render_attr(attr) }}>
     <div class="pc-input-group">
-        <label for="name" class="required">{{ 'crm-customers-name'|trans }}</label>
+        <label class="pc-label required" for="name">{{ 'crm-customers-name'|trans }}</label>
         <input type="text" name="name" id="name" required {% if customer %}value="{{ customer.name }}"{% endif %}>
     </div>
 
     <div class="pc-input-group">
-        <label for="street" class="required">{{ 'crm-customers-street'|trans }}</label>
+        <label class="pc-label required" for="street">{{ 'crm-customers-street'|trans }}</label>
         <input type="text" name="street" id="street" required {% if customer %}value="{{ customer.address.street }}"{% endif %}>
     </div>
 
     <div class="pc-input-group">
-        <label for="zipCode" class="required">{{ 'crm-customers-zipCode'|trans }}</label>
+        <label class="pc-label required" for="zipCode">{{ 'crm-customers-zipCode'|trans }}</label>
         <input type="text" name="zipCode" id="zipCode" required pattern="\d{5}" {% if customer %}value="{{ customer.address.zipCode }}"{% endif %}>
     </div>
 
     <div class="pc-input-group">
-        <label for="city" class="required">{{ 'crm-customers-city'|trans }}</label>
+        <label class="pc-label required" for="city">{{ 'crm-customers-city'|trans }}</label>
         <input type="text" name="city" id="city" required {% if customer %}value="{{ customer.address.city }}"{% endif %}>
     </div>
 
     <input type="hidden" name="country" value="{% if customer %}{{ customer.address.country }}{% else %}FR{% endif %}">
 
-    <button type="submit" class="pc-btn">
-        {{ "common-form-save"|trans|capitalize }}
-    </button>
+    {{ buttons.save(attr={type: 'submit'}) }}
 </form>
 {% endmacro %}

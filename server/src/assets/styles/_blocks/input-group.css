@@ -1,0 +1,13 @@
+.pc-input-group {
+  margin-bottom: calc(2 * var(--w));
+}
+
+.pc-input-group > input {
+  appearance: none;
+  display: block;
+  width: 100%;
+  background-color: var(--background-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  padding: calc(2 * var(--v)) calc(3 * var(--v));
+}

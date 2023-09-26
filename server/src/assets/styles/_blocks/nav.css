@@ -1,0 +1,79 @@
+.pc-nav {
+  color: var(--text-muted);
+}
+
+.pc-nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin-block: 0;
+}
+
+/* Links get padding to facilitate clicking */
+
+/* First-level */
+.pc-nav .pc-nav-entry > a,
+.pc-nav .pc-nav-entry summary {
+  padding-block: calc(3 * var(--v));
+  padding-inline: calc(6 * var(--v));
+}
+/* Second-level */
+.pc-nav details a {
+  display: block;
+  padding-block: calc(2 * var(--v));
+  padding-inline: calc(4 * var(--v));
+}
+
+/* Active links get decorations */
+
+.pc-nav a[aria-current='page'] {
+  color: var(--text-default);
+  font-weight: bold;
+}
+
+.pc-nav a[aria-current='page'] {
+  position: relative;
+}
+
+.pc-nav a[aria-current='page']::before {
+  position: absolute;
+  content: '';
+  inset: 0;
+  width: var(--v);
+  border-top-right-radius: var(--v);
+  border-bottom-right-radius: var(--v);
+  background-color: var(--background-action-violet);
+}
+
+/* Active link groups get showcased less prominently */
+
+.pc-nav .pc-nav-entry.active summary {
+  color: var(--text-default);
+}
+
+/* First-level links get a hover effect */
+
+.pc-nav a:hover,
+.pc-nav .pc-nav-entry summary:hover {
+  color: var(--text-default);
+}
+
+/* Link group headers are shown as togglable */
+
+.pc-nav details > summary {
+  cursor: pointer;
+}
+
+.pc-nav details > summary::after {
+  content: '⌄';
+  font-size: var(--font-size-lg);
+  margin-left: auto;
+}
+
+/* Link groups are shown in a box */
+
+.pc-nav details ul {
+  margin-inline: calc(3 * var(--w));
+  box-shadow: var(--shadow-inner);
+  background-color: var(--background-alt-grey);
+  border-radius: var(--radius-sm);
+}

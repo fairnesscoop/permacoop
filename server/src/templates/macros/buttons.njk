@@ -1,0 +1,11 @@
+{% import 'macros/icons.njk' as icons %}
+{% from 'macros/attr.njk' import render_attr %}
+
+{% macro save(attr=null) %}
+    {% set attr = attr|default({}) %}
+    {% set attr = attr|merge({ class: 'pc-btn pc-icon--left ' + attr.class|default('') }) %}
+    <button {{ render_attr(attr) }}>
+        {{ icons.save() }}
+        {{ "common-form-save"|trans|capitalize }}
+    </button>
+{% endmacro %}

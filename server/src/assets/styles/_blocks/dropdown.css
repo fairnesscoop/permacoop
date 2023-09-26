@@ -3,20 +3,18 @@ details.pc-dropdown {
 }
 
 details.pc-dropdown > summary {
-  display: inline; /* Remove default 'v' */
+  display: inline; /* Remove built-in chevron */
   cursor: pointer;
 }
 
-details.pc-dropdown .pc-dropdown__content {
+details.pc-dropdown > *:not(summary) {
   z-index: 1;
   position: absolute;
   background-color: var(--background-default);
   box-shadow: var(--shadow-default);
+  border: 1px solid var(--border-default);
+  top: 100%;
   right: 0;
   width: max-content;
-  padding: calc(3 * var(--v));
-}
-
-ul.pc-dropdown__content > li {
-  padding-block: calc(2 * var(--v));
+  margin-top: calc(3 * var(--v));
 }

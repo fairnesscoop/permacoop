@@ -1,41 +1,41 @@
 {% import 'macros/icons.njk' as icons %}
 
-<nav class="pc-app__sidebar pc-nav">
+<nav class="pc-nav pc-grid-area pc-z-index" style="--grid-area: nav; --z: 2">
     <ul>
-        <li>
-            <a {% if view_name == 'home' %}aria-current="page"{% endif %} href="{{ path('home') }}">
-                {{ icons.dashboard(class_name='pc-icon pc-icon--sm') }}
+        <li class="pc-nav-entry">
+            <a href="{{ path('home') }}" class="pc-link-btn pc-icon--left" {% if view_name == 'home' %}aria-current="page"{% endif %}>
+                {{ icons.dashboard() }}
                 {{ 'dashboard-title'|trans }}
             </a>
         </li>
 
-        <li>
-            <a {% if view_name|startswith('faircalendar_') %}aria-current="page"{% endif %} href="{{ path('faircalendar_index') }}">
-                {{ icons.calendar(class_name='pc-icon pc-icon--sm') }}
+        <li class="pc-nav-entry">
+            <a href="{{ path('faircalendar_index') }}" class="pc-link-btn pc-icon--left" {% if view_name|startswith('faircalendar_') %}aria-current="page"{% endif %}">
+                {{ icons.calendar() }}
                 {{ "faircalendar-title"|trans }}
             </a>
         </li>
 
-        <li {% if view_name|startswith('crm_') %}class="active"{% endif %}>
+        <li class="pc-nav-entry {% if view_name|startswith('crm_') %}active{% endif %}" aria-labelledby="crm-summary">
             <details open>
-                <summary>
-                    {{ icons.crm(class_name='pc-icon pc-icon--sm') }}
+                <summary id="crm-summary" class="pc-icon--left">
+                    {{ icons.crm() }}
                     {{ "crm-title"|trans }}
                 </summary>
 
                 <ul>
                     <li>
-                        <a href="{{ path('crm_customers_list') }}" {% if view_name|startswith('crm_customers_') %}aria-current="page"{% endif %}>
+                        <a href="{{ path('crm_customers_list') }}" class="pc-link-btn" {% if view_name|startswith('crm_customers_') %}aria-current="page"{% endif %}>
                             {{ "crm-customers-title"|trans|capitalize }}
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('crm_projects_list') }}" {% if view_name|startswith('crm_projects_') %}aria-current="page"{% endif %}>
+                        <a href="{{ path('crm_projects_list') }}" class="pc-link-btn" {% if view_name|startswith('crm_projects_') %}aria-current="page"{% endif %}>
                             {{ "crm-projects-title"|trans|capitalize }}
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('crm_tasks_list') }}" {% if view_name|startswith('crm_tasks_') %}aria-current="page"{% endif %}>
+                        <a href="{{ path('crm_tasks_list') }}" class="pc-link-btn" {% if view_name|startswith('crm_tasks_') %}aria-current="page"{% endif %}>
                             {{ "crm-tasks-title"|trans|capitalize }}
                         </a>
                     </li>
@@ -43,16 +43,16 @@
             </details>
         </li>
 
-        <li {% if view_name|startswith('people_') %}class="active"{% endif %}>
+        <li class="pc-nav-entry {% if view_name|startswith('people_') %}active{% endif %}">
             <details open>
-                <summary>
-                    {{ icons.group(class_name='pc-icon pc-icon--sm') }}
+                <summary class="pc-icon--left">
+                    {{ icons.group() }}
                     {{ 'people-title'|trans }}
                 </summary>
 
                 <ul>
                     <li>
-                        <a href="{{ path('people_users_list') }}" {% if view_name|startswith('people_users_') %}aria-current="page"{% endif %}>
+                        <a href="{{ path('people_users_list') }}" class="pc-link-btn" {% if view_name|startswith('people_users_') %}aria-current="page"{% endif %}>
                             {{ 'users-title'|trans }}
                         </a>
                     </li>

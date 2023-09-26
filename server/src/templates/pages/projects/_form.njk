@@ -1,12 +1,15 @@
-{% macro project_form(project, customers, class_name='') %}
-<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
+{% import 'macros/buttons.njk' as buttons %}
+{% from 'macros/attr.njk' import render_attr %}
+
+{% macro project_form(project, customers, attr=null) %}
+<form method="POST" {{ render_attr(attr) }}>
     <div class="pc-input-group">
-        <label for="name" class="required">{{ 'crm-projects-name-title'|trans }}</label>
+        <label class="pc-label required" for="name">{{ 'crm-projects-name-title'|trans }}</label>
         <input type="text" name="name" id="name" required {% if project %}value="{{ project.name }}"{% endif %}>
     </div>
 
     <div class="pc-select-group">
-        <label for="customerId" class="required">{{ 'crm-projects-customer-title'|trans }}</label>
+        <label class="pc-label required" for="customerId">{{ 'crm-projects-customer-title'|trans }}</label>
         <select name="customerId" id="customerId" required>
             {% for customer in customers %}
                 <option value="{{ customer.id }}" {% if project and project.customer.id == customer.id %}selected{% endif %}>{{ customer.name }}</option>
@@ -14,8 +17,6 @@
         </select>
     </div>
 
-    <button type="submit" class="pc-btn">
-        {{ "common-form-save"|trans|capitalize }}
-    </button>
+    {{ buttons.save(attr={type: 'submit'}) }}
 </form>
 {% endmacro %}

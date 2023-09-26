@@ -1,0 +1,12 @@
+.pc-link-btn {
+  border: none;
+  padding: var(--w) calc(2 * var(--w));
+  font-weight: var(--font-weight-md);
+  cursor: pointer;
+  background-color: inherit;
+}
+
+.pc-link-btn:hover,
+.pc-link-btn[aria-current='page'] {
+  background-color: var(--background-default-hover);
+}

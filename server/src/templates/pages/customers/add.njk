@@ -1,14 +1,13 @@
 {% extends 'layouts/app.njk' %}
+{% from 'macros/breadcrumb.njk' import breadcrumb %}
 {% from './_form.njk' import customer_form %}
 
-{% block main_class %}pc-container{% endblock %}
+{% set title = 'crm-customers-add-title'|trans %}
 
 {% block main %}
-    <h1>
-        {{ 'crm-customers-add-title'|trans }}
-    </h1>
+<div class="pc-container">
+    <h1>{{ title }}</h1>
 
-    <div class="pc-card">
-        {{ customer_form(class_name='pc-card__content') }}
-    </div>
+    {{ customer_form(attr={class: 'pc-box'}) }}
+</div>
 {% endblock main %}

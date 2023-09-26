@@ -1,0 +1,16 @@
+.pc-grid {
+  display: grid;
+}
+
+.pc-grid:not(.pc-grid--templated) {
+  grid-template-rows: repeat(var(--rows, 1), 1fr);
+  grid-template-columns: repeat(var(--cols, 1), 1fr);
+}
+
+.pc-grid.pc-grid--templated {
+  grid-template: var(--grid-template);
+}
+
+.pc-grid-area {
+  grid-area: var(--grid-area);
+}

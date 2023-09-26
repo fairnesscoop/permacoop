@@ -8,28 +8,3 @@ body {
 h1 {
   margin-bottom: calc(3 * var(--w));
 }
-
-label.required::after {
-  content: ' *';
-  color: var(--text-error);
-}
-
-button {
-  cursor: pointer;
-}
-
-button:not(:disabled):hover {
-  background-color: var(--hover-tint);
-}
-
-a:not(.pc-btn) {
-  color: currentColor;
-}
-
-a:not(.pc-btn):visited {
-  color: currentColor;
-}
-
-select {
-  display: block;
-}

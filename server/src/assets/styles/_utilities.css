@@ -3,33 +3,6 @@
   place-items: center;
 }
 
-.pc-row {
-  display: flex;
-  gap: var(--row-gap, 0);
-}
-
-.pc-row--middle {
-  align-items: center;
-}
-
-.pc-background-alt-grey {
-  background-color: var(--background-alt-grey);
-}
-
-.pc-cols--even {
-  --cols: 1;
-  display: grid;
-  grid-template-columns: repeat(var(--cols), 1fr);
-  gap: var(--gap, calc(2 * var(--w)));
-}
-
-.pc-grid {
-  display: grid;
-  grid-template-rows: repeat(var(--rows), 1fr);
-  grid-template-columns: repeat(var(--cols), 1fr);
-  gap: var(--gap, calc(2 * var(--w)));
-}
-
 .pc-m {
   margin: var(--m);
 }

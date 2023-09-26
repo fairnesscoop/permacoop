@@ -1,7 +1,11 @@
-{% macro event_form(event, types, projects, tasks, times, date=null, class_name='') %}
-<form method="POST" {% if class_name %}class="{{ class_name }}"{% endif %}>
+{% import 'macros/buttons.njk' as buttons %}
+{% import 'macros/icons.njk' as icons %}
+{% from 'macros/attr.njk' import render_attr %}
+
+{% macro event_form(event, types, projects, tasks, times, date=null, attr=null) %}
+<form method="POST" {{ render_attr(attr) }}>
     <div class="pc-select-group">
-        <label for="type" class="required">{{ 'faircalendar-type-title'|trans }}</label>
+        <label class="pc-label required" for="type">{{ 'faircalendar-type-title'|trans }}</label>
         <select name="type" id="type" required>
             {% for type in types %}
                 <option value="{{ type }}"{% if event and event.type == type %}selected{% endif %}>{{ 'faircalendar-type-option'|trans({ type: type }) }}</option>
@@ -9,9 +13,9 @@
         </select>
     </div>
 
-    <div class="pc-cols--even" style="--cols: 2">
+    <div class="pc-grid pc-gap" style="--cols: 2">
         <div class="pc-select-group">
-            <label for="projectId" class="required">{{ 'faircalendar-projectId-title'|trans }}</label>
+            <label class="pc-label required" for="projectId">{{ 'faircalendar-projectId-title'|trans }}</label>
             <select name="projectId" id="projectId" required>
                 {% for project in projects %}
                     <option value="{{ project.id }}" {% if event and event.project.id == project.id %}selected{% endif %}>{{ project.name }}</option>
@@ -20,7 +24,7 @@
         </div>
 
         <div class="pc-select-group">
-            <label for="taskId" class="required">{{ 'faircalendar-taskId-title'|trans }}</label>
+            <label class="pc-label required" for="taskId">{{ 'faircalendar-taskId-title'|trans }}</label>
             <select name="taskId" id="taskId" required>
                 {% for task in tasks %}
                     <option value="{{ task.id }}" {% if event and event.task.id == task.id %}selected{% endif %}>{{ task.name }}</option>
@@ -29,9 +33,9 @@
         </div>
     </div>
 
-    <div class="pc-cols--even" style="--cols: 2">
+    <div class="pc-grid pc-gap" style="--cols: 2">
         <div class="pc-select-group">
-            <label for="time" class="required">{{ 'faircalendar-time-title'|trans }}</label>
+            <label class="pc-label required" for="time">{{ 'faircalendar-time-title'|trans }}</label>
             <select name="time" id="time" required>
                 {% for time in times %}
                     <option value="{{ time }}" {% if event and event.time == time %}selected{% endif %}>{{ time|minutesToHours }}</option>
@@ -44,9 +48,7 @@
         <input type="hidden" name="startDate" value="{{ date }}T00:00:00">
         <input type="hidden" name="endDate" value="{{ date }}T23:59:59">
     {% endif %}
-    
-    <button type="submit" class="pc-btn">
-        {{ "common-form-save"|trans|capitalize }}
-    </button>
+
+    {{ buttons.save(attr={type: 'submit'}) }}
 </form>
 {% endmacro %}

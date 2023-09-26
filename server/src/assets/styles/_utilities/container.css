@@ -1,0 +1,5 @@
+.pc-container {
+  max-width: min(80rem, 100%);
+  margin-inline: auto;
+  padding-inline: calc(3 * var(--w));
+}

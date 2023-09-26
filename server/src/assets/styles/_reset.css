@@ -63,3 +63,13 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+/* Our own reset */
+
+/*
+9. Remove default link styles
+*/
+a {
+  color: inherit;
+  text-decoration: none;
+}

@@ -1,9 +1,0 @@
-.pc-card {
-  background-color: var(--background-default);
-  box-shadow: var(--shadow-default);
-}
-
-.pc-card__content {
-  padding: calc(2 * var(--w));
-  padding-top: calc(3 * var(--w));
-}

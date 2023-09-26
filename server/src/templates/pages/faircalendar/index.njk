@@ -1,34 +1,34 @@
 {% extends 'layouts/app.njk' %}
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 
-{% block main_class %}pc-container{% endblock %}
-
 {% set title = 'faircalendar-title'|trans %}
 
 {% block main %}
-{{ breadcrumb([{ title: title}]) }}
+<div class="pc-container">
+    {{ breadcrumb([{ title: title}]) }}
 
-<h1>{{ title }}</h1>
+    <h1>{{ title }}</h1>
 
-<form action="">
-    <div class="pc-cols--even" style="--cols: 3">
-        <div class="select-group">
-            <label for="month">{{ 'faircalendar-filters-month-title'|trans }}</label>
-            <input type="month" name="month">
+    <form action="">
+        <div class="pc-grid pc-gap" style="--cols: 3">
+            <div class="select-group">
+                <label class="pc-label" for="month">{{ 'faircalendar-filters-month-title'|trans }}</label>
+                <input type="month" name="month">
+            </div>
+            <div class="select-group">
+                <label class="pc-label" for="userId">{{ 'faircalendar-filters-userId-title'|trans }}</label>
+                <select name="userId" id="userId">
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user|fullName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
-        <div class="select-group">
-            <label for="userId">{{ 'faircalendar-filters-userId-title'|trans }}</label>
-            <select name="userId" id="userId">
-                {% for user in users %}
-                    <option value="{{ user.id }}">{{ user|fullName }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </div>
-</form>
+    </form>
 
-<pc-fullcalendar
-    data-events-json="{{ fullCalendarEvents|dump }}"
-    data-add-url-template="{{ path('faircalendar_events_add', { date: '__date__' }) }}"
-></pc-fullcalendar>
+    <pc-fullcalendar
+        data-events-json="{{ fullCalendarEvents|dump }}"
+        data-add-url-template="{{ path('faircalendar_events_add', { date: '__date__' }) }}"
+    ></pc-fullcalendar>
+</div>
 {% endblock main %}

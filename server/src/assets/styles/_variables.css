@@ -13,6 +13,7 @@
   --font-weight-md: 500;
   /* Colors */
   --background-default: #ffffff;
+  --background-default-hover: #f1f2f3;
   --background-alt-grey: #f9fafb;
   --background-muted: #f0f0f0;
   --background-action-violet: #6c2bd9;
@@ -20,7 +21,7 @@
   --background-error: #dd1d1d;
   --background-error-hover: #b92020;
   --text-default: #282828;
-  --text-muted: #636363;
+  --text-muted: #6e6e6e;
   --text-on-background-action-violet: #ffffff;
   --text-action-violet: #6c2bd9;
   --text-error: #ff0000;

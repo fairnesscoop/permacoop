@@ -1,7 +1,7 @@
 .pc-icon {
-  --size: 7;
-  width: calc(var(--size) * var(--v));
-  height: calc(var(--size) * var(--v));
+  --icon-size: 7;
+  width: calc(var(--icon-size) * var(--v));
+  height: calc(var(--icon-size) * var(--v));
 }
 
 .pc-icon--error {
@@ -19,14 +19,19 @@
 }
 
 .pc-icon--sm {
-  --size: 5;
+  --icon-size: 5;
 }
 
-.pc-icon--left {
+.pc-icon--left,
+.pc-icon--right {
   display: flex;
   align-items: center;
 }
 
 .pc-icon--left > .pc-icon {
   margin-inline-end: calc(2 * var(--v));
+}
+
+.pc-icon--right > .pc-icon {
+  margin-inline-start: calc(2 * var(--v));
 }

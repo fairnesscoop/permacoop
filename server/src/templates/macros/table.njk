@@ -1,8 +1,9 @@
 {% import 'macros/icons.njk' as icons %}
+{% from 'macros/attr.njk' import render_attr %}
 
 {% macro render_table(table, attr={}) %}
 {% set attr = attr|merge({class: 'app-table ' + attr.class|default('')}) %}
-<table {% include 'components/attr.njk' %}>
+<table {{ render_attr(attr) }}>
   <thead>
     <tr class="dark:border-gray-70 dark:text-gray-400 dark:bg-gray-800">
       {% for column in table.columns %}
@@ -18,7 +19,7 @@
             <td>
               {% if value.actions.edit %}
                 <a href="{{ value.actions.edit.url }}" title="{{ 'common-edit'|trans }}">
-                  {{ icons.pencil(class_name='pc-icon pc-icon--sm pc-icon--action-violet') }}
+                  {{ icons.pencil(attr={class: 'pc-icon pc-icon--sm pc-icon--action-violet'}) }}
                 </a>
               {% endif %}
             </td>

@@ -1,0 +1,12 @@
+a.pc-brand {
+  display: inline-flex;
+  align-items: center;
+  column-gap: calc(2 * var(--v));
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+}
+
+a.pc-brand > img {
+  width: calc(8 * var(--v));
+  height: calc(8 * var(--v));
+}

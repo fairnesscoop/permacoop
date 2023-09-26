@@ -2,18 +2,14 @@
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 {% from './_form.njk' import customer_form %}
 
-{% block main_class %}pc-container{% endblock %}
-
 {% set title = 'crm-customers-edit-title'|trans({name: customer.name }) %}
 
 {% block main %}
+<div class="pc-container">
     {{ breadcrumb([{ title: 'crm-customers-title'|trans, href: path('crm_customers_list') }, { title: title }]) }}
 
-    <h1>
-        {{ title }}
-    </h1>
+    <h1>{{ title }}</h1>
 
-    <div class="pc-card">
-        {{ customer_form(customer, class_name='pc-card__content') }}
-    </div>
+    {{ customer_form(customer, attr={class: 'pc-box'}) }}
+</div>
 {% endblock main %}
