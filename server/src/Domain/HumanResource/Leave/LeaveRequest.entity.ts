@@ -15,8 +15,13 @@ export enum Type {
   ILLIMITED = 'illimited'
 }
 
+export interface ILeaveRequestModeration {
+  getStatus(): string;
+  getUserId(): string;
+}
+
 @Entity()
-export class LeaveRequest {
+export class LeaveRequest implements ILeaveRequestModeration {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
@@ -78,6 +83,10 @@ export class LeaveRequest {
 
   public getUser(): User {
     return this.user;
+  }
+
+  public getUserId(): string {
+    return this.user.getId();
   }
 
   public getStatus(): Status {

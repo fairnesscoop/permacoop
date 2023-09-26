@@ -56,6 +56,11 @@
                             {{ 'users-title'|trans }}
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ path('people_leaves_list') }}" class="pc-link-btn" {% if view_name|startswith('people_leaves_') %}aria-current="page"{% endif %}>
+                            {{ 'leaves-title'|trans }}
+                        </a>
+                    </li>
                 </ul>
             </details>
         </li>

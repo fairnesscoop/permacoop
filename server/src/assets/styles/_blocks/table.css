@@ -1,11 +1,16 @@
-.app-table {
-  border-collapse: collapse;
-  width: 100%;
-  white-space: nowrap;
+.pc-table-wrapper {
+  overflow-x: auto;
   box-shadow: var(--shadow-default);
 }
 
-.app-table thead {
+table.pc-table {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.pc-table thead {
   font-weight: var(--font-weight-md);
   text-align: left;
   color: var(--text-muted);
@@ -14,20 +19,20 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .app-table thead {
+  .pc-table thead {
     background-color: var(--background-default);
   }
 }
 
-.app-table th,
-.app-table td {
+.pc-table th,
+.pc-table td {
   padding: calc(3 * var(--v)) calc(4 * var(--v));
 }
 
-.app-table tbody {
+.pc-table tbody {
   background-color: var(--background-default);
 }
 
-.app-table tr {
+.pc-table tr {
   border-bottom: 1px solid var(--border-default);
 }

@@ -1,8 +1,8 @@
 {% import 'macros/icons.njk' as icons %}
 
-{% macro add(href) %}
+{% macro add(href, text='common-add'|trans) %}
     <a href="{{ href }}" class="pc-btn pc-icon--left">
         {{ icons.plus() }}
-        {{ 'common-add'|trans }}
+        {{ text }}
     </a>
 {% endmacro %}

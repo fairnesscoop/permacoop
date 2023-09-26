@@ -1,9 +1,8 @@
 import { Environment } from 'nunjucks';
 import { ITranslator } from 'src/Application/ITranslations';
-import { minutesToHours } from '../Utils/dateUtils';
-
-const capitalize = (v: string): string =>
-  v.charAt(0).toUpperCase() + v.slice(1);
+import { formatHtmlDate, minutesToHours } from '../Utils/dateUtils';
+import { formatFullName } from '../Utils/formatUtils';
+import { ArrayUtils } from '../Utils/ArrayUtils';
 
 export const registerFilters = (env: Environment, translator: ITranslator) => {
   env.addFilter('trans', (key, params = {}) =>
@@ -13,10 +12,9 @@ export const registerFilters = (env: Environment, translator: ITranslator) => {
     value ? value.startsWith(other) : false
   );
   env.addFilter('minutesToHours', minutes => minutesToHours(minutes));
-  env.addFilter(
-    'fullName',
-    obj => `${capitalize(obj.firstName)} ${capitalize(obj.lastName)}`
-  );
+  env.addFilter('fullName', obj => formatFullName(obj));
+  env.addFilter('htmlDate', value => formatHtmlDate(value));
+  env.addFilter('zip', (left, right) => ArrayUtils.zip(left, right));
   env.addFilter('merge', (left, right) => {
     const result = {};
     for (const key in left) {

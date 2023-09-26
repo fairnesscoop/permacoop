@@ -30,13 +30,17 @@ export default class extends HTMLElement {
           .getDate()
           .toString()
           .padStart(2, '0');
+
         const url = addUrlTemplate.replace(
           '__date__',
           `${year}-${month}-${day}`
         );
+
         window.location = url;
       }
     });
+
+    calendar.gotoDate(this.dataset.date);
 
     calendar.render();
   }

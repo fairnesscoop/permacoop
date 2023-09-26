@@ -5,3 +5,7 @@
 .pc-background-alt-grey {
   background-color: var(--background-alt-grey);
 }
+
+.pc-background-muted {
+  background-color: var(--background-muted);
+}

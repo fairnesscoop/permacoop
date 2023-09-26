@@ -1,8 +1,15 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional } from 'class-validator';
+
+export enum ModerationAction {
+  ACCEPT = 'accept',
+  DENY = 'deny'
+}
 
 export class ModerationDTO {
   @IsOptional()
-  @ApiPropertyOptional()
   public comment: string;
+
+  @IsNotEmpty()
+  @IsEnum(ModerationAction)
+  public action: ModerationAction;
 }

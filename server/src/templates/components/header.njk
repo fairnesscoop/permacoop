@@ -1,25 +1,27 @@
 {% import 'macros/icons.njk' as icons %}
 
 <header class="pc-grid-area pc-flex-end pc-z-index pc-shadow pc-p" style="--grid-area: header; --z: 1; --p: calc(3 * var(--v)) calc(6 * var(--v))">
-    <ul class="pc-raw-list pc-row pc-row--middle" style="--row-gap: calc(3 * var(--w))">
-        <li>
-            <a href="{{ path('profile_edit') }}" class="pc-link-btn pc-icon--left">
-                {{ icons.user() }}
-                {{ 'header-profile'|trans }}
-            </a>
-        </li>
-        <li>
-            <details class="pc-dropdown" title="{{ 'header-dropdown'|trans }}">
-                <summary class="pc-p" style="--p: var(--w) 0">
-                    {{ icons.more(attr={class: 'pc-icon'}) }}
-                </summary>
+    <details class="pc-dropdown" title="{{ 'header-dropdown'|trans }}">
+        <summary class="pc-center pc-circle pc-background-muted pc-w pc-h" style="--w: calc(8 * var(--v)); --h: calc(8 * var(--v))">
+            {{ req.user.firstName|first|capitalize }}
+        </summary>
+
+        <ul class="pc-raw-list">
+            <li>
+                <a href="{{ path('profile_edit') }}" class="pc-link-btn pc-icon--left">
+                    {{ icons.user() }}
+                    {{ 'header-profile'|trans }}
+                </a>
+            </li>
+            <li>
                 <form method="POST" action="{{ path('logout') }}">
                     <button type="submit" class="pc-link-btn pc-icon--left">
                         {{ icons.logout() }}
                         {{ 'header-logout'|trans }}
                     </button>
                 </form>
-            </details>
-        </li>
-    </ul>
+            </li>
+        </ul>
+
+    </details>
 </header>

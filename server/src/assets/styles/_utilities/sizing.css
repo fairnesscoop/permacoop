@@ -1,3 +1,7 @@
-.pc-h-fullscreen {
-  height: 100vh;
+.pc-w {
+  width: var(--w);
+}
+
+.pc-h {
+  height: var(--h);
 }

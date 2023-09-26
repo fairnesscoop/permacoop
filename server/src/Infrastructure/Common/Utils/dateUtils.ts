@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 export const minutesToHours = (value: number): string => {
   const hours = Math.floor(value / 60);
   const minutes = value % 60;
@@ -11,4 +13,12 @@ export const minutesToHours = (value: number): string => {
   }
 
   return `${hours}h${minutes}`;
+};
+
+export const formatDate = (value: Date): string => {
+  return format(value, 'dd/MM/yyyy');
+};
+
+export const formatHtmlDate = (value: Date): string => {
+  return format(value, 'yyyy-MM-dd');
 };

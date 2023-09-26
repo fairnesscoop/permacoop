@@ -78,6 +78,15 @@ import { ListUsersController } from './User/Controller/ListUsersController';
 import { UserTableFactory } from './User/Table/UserTableFactory';
 import { AddUserController } from './User/Controller/AddUserController';
 import { EditUserController } from './User/Controller/EditUserController';
+import { ListLeavesController } from './Leave/Controller/ListLeavesController';
+import { ListLeaveRequestsController } from './Leave/Controller/ListLeaveRequestsController';
+import { LeaveTableFactory } from './Leave/Table/LeaveTableFactory';
+import { AddLeaveRequestController } from './Leave/Controller/AddLeaveRequestController';
+import { EditLeaveRequestController } from './Leave/Controller/EditLeaveRequestController';
+import { LeaveRequestTableFactory } from './Leave/Table/LeaveRequestTableFactory';
+import { GetLeaveRequestController } from './Leave/Controller/GetLeaveRequestController';
+import { ModerateLeaveRequestController } from './Leave/Controller/ModerateLeaveRequestController';
+import { DeleteLeaveRequestController } from './Leave/Controller/DeleteLeaveRequestController';
 
 @Module({
   imports: [
@@ -106,6 +115,13 @@ import { EditUserController } from './User/Controller/EditUserController';
     AddUserController,
     EditUserController,
     EditProfileController,
+    ListLeavesController,
+    ListLeaveRequestsController,
+    AddLeaveRequestController,
+    EditLeaveRequestController,
+    GetLeaveRequestController,
+    ModerateLeaveRequestController,
+    DeleteLeaveRequestController,
     GetLeavesAction,
     GetLeavesCalendarAction,
     GetUsersElementsAction,
@@ -181,7 +197,9 @@ import { EditUserController } from './User/Controller/EditUserController';
     GetMealTicketsPerMonthQueryHandler,
     UpdateLeaveRequestCommandHandler,
     IncreaseUserSavingsRecordCommandHandler,
-    UserTableFactory
+    UserTableFactory,
+    LeaveTableFactory,
+    LeaveRequestTableFactory
   ]
 })
 export class HumanResourceModule {}

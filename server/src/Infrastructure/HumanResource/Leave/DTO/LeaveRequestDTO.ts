@@ -1,42 +1,38 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import {
   IsNotEmpty,
   IsEnum,
-  IsDateString,
   IsOptional,
-  IsBoolean
+  IsBoolean,
+  IsISO8601
 } from 'class-validator';
 import { Type } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { DateGreaterOrEqualThan } from 'src/Infrastructure/Common/Validator/DateGreaterOrEqualThan';
 
 export class LeaveRequestDTO {
-  @ApiProperty({ enum: Type })
   @IsNotEmpty()
   @IsEnum(Type)
   public type: Type;
 
   @IsNotEmpty()
-  @IsDateString()
-  @ApiProperty()
+  @IsISO8601()
   public startDate: string;
 
   @IsNotEmpty()
+  @Transform((_, { startsAllDay }) => startsAllDay === 'true')
   @IsBoolean()
-  @ApiProperty()
   public startsAllDay: boolean;
 
   @IsNotEmpty()
-  @IsDateString()
+  @IsISO8601()
   @DateGreaterOrEqualThan('startDate')
-  @ApiProperty()
   public endDate: string;
 
   @IsNotEmpty()
+  @Transform((_, { endsAllDay }) => endsAllDay === 'true')
   @IsBoolean()
-  @ApiProperty()
   public endsAllDay: boolean;
 
   @IsOptional()
-  @ApiPropertyOptional()
   public comment: string;
 }

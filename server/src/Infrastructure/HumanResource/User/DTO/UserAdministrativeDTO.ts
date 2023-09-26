@@ -15,6 +15,7 @@ import {
   WorkingTimeType
 } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
+import { Transform } from 'class-transformer';
 
 export class UserAdministrativeDTO {
   @IsNotEmpty()
@@ -37,10 +38,12 @@ export class UserAdministrativeDTO {
   public sustainableMobilityFee: number;
 
   @IsNotEmpty()
+  @Transform((_, { healthInsurance }) => healthInsurance === 'true')
   @IsBoolean()
   public healthInsurance: boolean;
 
   @IsNotEmpty()
+  @Transform((_, { executivePosition }) => executivePosition === 'true')
   @IsBoolean()
   public executivePosition: boolean;
 

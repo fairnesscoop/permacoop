@@ -1,10 +1,11 @@
 import { UserSummaryView } from '../../User/View/UserSummaryView';
 import {
   Type,
-  Status
+  Status,
+  ILeaveRequestModeration
 } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 
-export class LeaveRequestDetailView {
+export class LeaveRequestDetailView implements ILeaveRequestModeration {
   constructor(
     public readonly id: string,
     public readonly type: Type,
@@ -19,4 +20,12 @@ export class LeaveRequestDetailView {
     public readonly moderator: UserSummaryView = null,
     public readonly moderationComment: string = null
   ) {}
+
+  public getStatus(): string {
+    return this.status;
+  }
+
+  public getUserId(): string {
+    return this.user.id;
+  }
 }

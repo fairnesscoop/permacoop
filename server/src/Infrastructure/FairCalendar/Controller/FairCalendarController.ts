@@ -12,12 +12,12 @@ import { IQueryBus } from 'src/Application/IQueryBus';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { FairCalendarControllerDTO } from '../DTO/FairCalendarControllerDTO';
-import { EventView } from 'src/Application/FairCalendar/View/EventView';
 import { ITranslator } from 'src/Application/ITranslations';
 import { minutesToHours } from 'src/Infrastructure/Common/Utils/dateUtils';
 import { LoggedUser } from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
 import { UserView } from 'src/Application/HumanResource/User/View/UserView';
 import { GetUsersQuery } from 'src/Application/HumanResource/User/Query/GetUsersQuery';
+import { FairCalendarView } from 'src/Application/FairCalendar/View/FairCalendarView';
 
 @Controller('app/faircalendar')
 @UseGuards(IsAuthenticatedGuard)
@@ -41,29 +41,41 @@ export class FairCalendarController {
 
     const users: UserView[] = await this.queryBus.execute(new GetUsersQuery());
 
-    const events: EventView[] = await this.queryBus.execute(
+    const events: FairCalendarView[] = await this.queryBus.execute(
       new GetMonthlyFairCalendarQuery(date, userId)
     );
 
     const fullCalendarEvents = events.map(event => {
       let title = `${minutesToHours(event.time)} - `;
-      if (event.type === 'mission' && event.task && event.project) {
+
+      const fcEventType = event.type.startsWith('leave_')
+        ? 'leave'
+        : event.type;
+
+      if (fcEventType === 'mission' && event.task && event.project) {
         title += `${event.project.name} (${event.task.name})`;
+      } else if (fcEventType === 'leave') {
+        title += `${this.translator.translate('leaves-type-value', {
+          type: event.type.slice(6)
+        })}`;
       } else {
         title += `${this.translator.translate('faircalendar-type-option', {
           type: event.type
         })}`;
       }
+
       return {
         // See: https://fullcalendar.io/docs/event-object
-        type: event.type,
+        type: fcEventType,
         start: event.date,
         end: event.date,
         title,
-        url: `/app/faircalendar/events/edit/${event.id}`,
-        textColor: `var(--event-${event.type}-text)`,
-        backgroundColor: `var(--event-${event.type}-background)`,
-        borderColor: `var(--event-${event.type}-border)`
+        ...(event.id
+          ? { url: `/app/faircalendar/events/edit/${event.id}` }
+          : {}),
+        textColor: `var(--event-${fcEventType}-text)`,
+        backgroundColor: `var(--event-${fcEventType}-background)`,
+        borderColor: `var(--event-${fcEventType}-border)`
       };
     });
 

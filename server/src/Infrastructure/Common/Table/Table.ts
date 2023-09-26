@@ -9,16 +9,26 @@ type TransValue = {
   };
 };
 
-type ActionsValue = {
+export type ActionsValue = {
   actions: {
+    view?: {
+      url: string;
+    };
     edit?: {
+      url: string;
+    };
+    delete?: {
       url: string;
     };
   };
 };
 
-export type Row = (string | TransValue | SafeValue | ActionsValue)[];
+export type Row = (string | number | TransValue | SafeValue | ActionsValue)[];
 
 export class Table {
   constructor(public readonly columns: string[], public readonly rows: Row[]) {}
+}
+
+export class Inline {
+  constructor(public readonly columns: string[], public readonly row: Row) {}
 }

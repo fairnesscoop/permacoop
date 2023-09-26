@@ -1,7 +1,7 @@
 {% extends 'layouts/_base.njk' %}
 
 {% block body %}
-    <div class="pc-grid pc-grid--templated pc-h-fullscreen" style="--grid-template: 'brand header' auto 'nav content' 1fr / 18rem 1fr">
+    <div class="pc-grid pc-grid--templated pc-h" style="--grid-template: 'brand header' auto 'nav content' 1fr / 18rem 1fr; --h: 100vh">
         <div class="pc-grid-area pc-p pc-z-index pc-background-default" style="--grid-area: brand; --p: calc(3 * var(--v)) calc(6 * var(--v)); --z: 2">
             <a href="{{ path('home') }}" class="pc-brand">
                 <img src="{{ asset('images/logo.png') }}" alt="Fairness"/>
@@ -13,7 +13,7 @@
 
         {% include 'components/nav.njk' %}
 
-        <main class="pc-grid-area pc-p-block pc-background-alt-grey" style="--grid-area: content; --p-block: calc(3 * var(--w))">
+        <main class="pc-grid-area pc-p pc-background-alt-grey" style="--grid-area: content; --p: calc(3 * var(--w)) 0">
             {% block main %}{% endblock main %}
         </main>
     </div>

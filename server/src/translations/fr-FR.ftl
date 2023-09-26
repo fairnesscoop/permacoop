@@ -1,5 +1,6 @@
 common-form-save = Enregistrer
 common-form-delete = Supprimer
+common-view = Voir
 common-add = Ajouter
 common-edit = Modifier
 common-actions = Actions
@@ -26,6 +27,8 @@ faircalendar-type-option = {$type ->
     [dojo] Dojos
     [support] Supports
     [formationConference] Formations / Confs
+    [leave] Congés
+    [holiday] Jour férié
     *[other] Autre
 }
 faircalendar-taskId-title = Mission
@@ -98,3 +101,41 @@ users-transportFee = Frais de transport
 users-sustainableMobilityFee = Forfait mobilité durable
 users-joiningDate = Date d'entrée
 users-leavingDate = Date de sortie
+
+leaves-title = Congés
+leaves-user = Coopérateur·ice - salarié·e
+leaves-period = Période
+leaves-type = Type de congé
+leaves-type-value = {$type ->
+    [paid] Congé payé
+    [unpaid] Congé sans solde
+    [special] Congé exceptionnel
+    [medical] Congé maladie
+    [illimited] Congé illimité
+    *[other] Autre
+}
+leaves-startDate = Du
+leaves-endDate = Au
+leaves-period-value = Du {$startDate} au {$endDate}
+leaves-allDay = Toute la journée
+leaves-comment = Commentaire
+leaves-status = État
+leaves-status-value = {$status ->
+    [pending] En attente de validation
+    [accepted] Accepté
+    [refused] Refusé
+    *[other] Autre
+}
+leaves-duration = Durée
+leaves-duration-value = {$days ->
+    [one] 1 jour
+    *[other] {$days} jours
+}
+leaves-see-requests = Voir les demandes de congés
+leave-requests-title = Demandes de congés
+leave-requests-add-title = Faire une demande de congés
+leave-requests-edit-title = Demande de {$user}
+leave-requests-error-cannot-moderate = Vous ne pouvez pas modérer cette demande de congés.
+leave-requests-moderation = Modération
+leave-requests-moderation-accept = Accepter la demande de congés
+leave-requests-moderation-deny = Refuser la demande de congés

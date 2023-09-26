@@ -1,46 +1,84 @@
 {% import 'macros/icons.njk' as icons %}
 {% from 'macros/attr.njk' import render_attr %}
 
+{% macro _render_value(value) %}
+  {% if value.actions %}
+    <span class="pc-row pc-row--middle">
+      {% if value.actions.view %}
+        <a href="{{ value.actions.view.url }}" class="pc-link-btn" title="{{ 'common-view'|trans }}">
+          {{ icons.eye(attr={class: 'pc-icon--action-violet'}) }}
+        </a>
+      {% endif %}
+      {% if value.actions.edit %}
+        <a href="{{ value.actions.edit.url }}" class="pc-link-btn" title="{{ 'common-edit'|trans }}">
+          {{ icons.pencil(attr={class: 'pc-icon--action-violet'}) }}
+        </a>
+      {% endif %}
+      {% if value.actions.delete %}
+        <form method="POST" action="{{ value.actions.delete.url }}" title="{{ 'common-delete'|trans }}">
+          <button class="pc-link-btn">
+            {{ icons.trash({class: 'pc-icon--action-violet'}) }}
+          </button>
+        </form>
+      {% endif %}
+    </span>
+  {% elseif value.safe %}
+    {{ value.safe|safe }}
+  {% elseif value.trans %}
+    {{ value.trans.message|trans(value.trans.params) }}
+  {% else %}
+    {{ value }}
+  {% endif %}
+{% endmacro %}
+
 {% macro render_table(table, attr={}) %}
-{% set attr = attr|merge({class: 'app-table ' + attr.class|default('')}) %}
-<table {{ render_attr(attr) }}>
-  <thead>
-    <tr class="dark:border-gray-70 dark:text-gray-400 dark:bg-gray-800">
-      {% for column in table.columns %}
-        <th>{{ column|trans }}</th>
-      {% endfor %}
-    </tr>
-  </thead>
-  <tbody class="dark:divide-gray-700 dark:bg-gray-800">
-    {% for row in table.rows %}
-      <tr class="text-gray-700 dark:text-gray-400">
-        {% for value in row %}
-          {% if value.actions %}
-            <td>
-              {% if value.actions.edit %}
-                <a href="{{ value.actions.edit.url }}" title="{{ 'common-edit'|trans }}">
-                  {{ icons.pencil(attr={class: 'pc-icon pc-icon--sm pc-icon--action-violet'}) }}
-                </a>
-              {% endif %}
-            </td>
-          {% else %}
-            <td>
-              {% if value.safe %}
-                {{ value.safe|safe }}
-              {% elseif value.trans %}
-                {{ value.trans.message|trans(value.trans.params) }}
-              {% else %}
-                {{ value }}
-              {% endif %}
-            </td>
-          {% endif %}
+{% set attr = attr|merge({class: 'pc-table-wrapper ' + attr.class|default('')}) %}
+<div {{ render_attr(attr) }}>
+  <table class="pc-table">
+    <thead>
+      <tr>
+        {% for column in table.columns %}
+          <th>{{ column|trans }}</th>
         {% endfor %}
       </tr>
-      {% else %}
+    </thead>
+    <tbody>
+      {% for row in table.rows %}
         <tr>
-          <td colspan="{{ table.columns|length }}">{{ 'common-table-empty'|trans }}</td>
+          {% for value in row %}
+            <td>
+              {{ _render_value(value) }}
+            </td>
+          {% endfor %}
         </tr>
-    {% endfor %}
-  </tbody>
-</table>
+        {% else %}
+          <tr>
+            <td colspan="{{ table.columns|length }}">{{ 'common-table-empty'|trans }}</td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endmacro %}
+
+{% macro render_inline(inline) %}
+{% set attr = attr|merge({class: 'pc-table-wrapper ' + attr.class|default('')}) %}
+<div {{ render_attr(attr) }}>
+  <table class="pc-table">
+    <tbody>
+      {% for column, value in inline.columns|zip(inline.row) %}
+        <tr>
+          <td>{{ column|trans }}</td>
+          <td>
+            {{ _render_value(value) }}
+          </td>
+        </tr>
+        {% else %}
+          <tr>
+            <td colspan="2">{{ 'common-table-empty'|trans }}</td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endmacro %}

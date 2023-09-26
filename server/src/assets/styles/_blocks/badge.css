@@ -1,0 +1,6 @@
+.pc-badge {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--background-muted);
+}

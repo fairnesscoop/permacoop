@@ -73,3 +73,10 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/*
+10. Remove default marker on summaries
+*/
+summary {
+  display: block;
+}

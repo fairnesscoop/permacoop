@@ -46,12 +46,15 @@
   --event-formation_conference-background: rgb(254, 236, 220);
   --event-formation_conference-border: rgb(254, 236, 220);
   --event-formation_conference-text: rgb(180, 52, 3);
-  --event-other-background: rgb(244, 245, 247);
-  --event-other-border: rgb(244, 245, 247);
-  --event-other-text: rgb(36, 38, 45);
+  --event-leave-background: rgb(253, 246, 178);
+  --event-leave-border: rgb(253, 246, 178);
+  --event-leave-text: rgb(142, 75, 16);
   --event-holiday-background: rgb(237, 235, 254);
   --event-holiday-border: rgb(237, 235, 254);
   --event-holiday-text: rgb(108, 43, 217);
+  --event-other-background: rgb(244, 245, 247);
+  --event-other-border: rgb(244, 245, 247);
+  --event-other-text: rgb(36, 38, 45);
 }
 
 @media (prefers-color-scheme: dark) {

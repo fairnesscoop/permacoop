@@ -8,3 +8,7 @@ body {
 h1 {
   margin-bottom: calc(3 * var(--w));
 }
+
+main {
+  overflow-y: auto;
+}
