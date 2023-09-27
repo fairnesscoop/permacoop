@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { HomeController } from './Controller/HomeController';
+import { BusModule } from '../bus.module';
 import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
+import { HomeController } from './Controller/HomeController';
 
 @Module({
-  imports: [ExtendedRoutingModule],
+  imports: [BusModule, ExtendedRoutingModule],
   controllers: [HomeController]
 })
 export class HomeModule {}

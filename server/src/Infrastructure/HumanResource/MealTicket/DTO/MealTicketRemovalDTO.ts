@@ -1,12 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsDateString } from 'class-validator';
+import { IsNotEmpty, IsISO8601, IsOptional } from 'class-validator';
 
 export class MealTicketRemovalDTO {
-  @ApiProperty()
   @IsNotEmpty()
-  @IsDateString()
+  @IsISO8601()
   public date: string;
-
-  @ApiProperty()
-  public comment: string;
 }

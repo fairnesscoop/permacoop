@@ -3,5 +3,19 @@
 {% block main %}
 <div class="pc-container">
     <h1>{{ 'home-title'|trans({ user: req.user|fullName }) }}</h1>
+
+    <h2>
+        {{ 'home-pending-leaves-title'|trans }}
+    </h2>
+
+    <p>
+        {{ 'home-pending-leaves'|trans({ leaves: pendingLeaves }) }}
+    </p>
+
+    {% if pendingLeaves %}
+        <a href="{{ path('people_leave_requests_list') }}" class="pc-btn">
+            {{ 'home-pending-leaves-see-all'|trans }}
+        </a>
+    {% endif %}
 </div>
 {% endblock main %}

@@ -62,6 +62,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ path('people_meal_tickets_list') }}" class="pc-link-btn" {% if view_name|startswith('people_meal_tickets_') %}aria-current="page"{% endif %}>
+                            {{ 'meal-tickets-title'|trans }}
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ path('people_leaves_list') }}" class="pc-link-btn" {% if view_name|startswith('people_leaves_') %}aria-current="page"{% endif %}>
                             {{ 'leaves-title'|trans }}
                         </a>

@@ -2,6 +2,8 @@
   /* Spacing */
   --v: 0.25rem;
   --w: 0.5rem;
+  --text-spacing: 0 0 calc(3 * var(--w)) 0;
+  --title-spacing: 0 0 calc(3 * var(--w)) 0;
   /* Fonts */
   --font-default: Inter, system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,

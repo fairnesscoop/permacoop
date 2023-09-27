@@ -23,18 +23,13 @@ import { LeaveRequest } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity
 import { LeaveRequestRepository } from './Leave/Repository/LeaveRequestRepository';
 import { CreateLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/CreateLeaveRequestCommandHandler';
 import { DoesLeaveRequestExistForPeriod } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestExistForPeriod';
-import { CreateLeaveRequestAction } from './Leave/Action/CreateLeaveRequestAction';
 import { RefuseLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/RefuseLeaveRequestCommandHandler';
-import { RefuseLeaveRequestAction } from './Leave/Action/RefuseLeaveRequestAction';
 import { CanLeaveRequestBeModerated } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeModerated';
 import { AcceptedLeaveRequestEventListener } from 'src/Application/HumanResource/Leave/Event/AcceptedLeaveRequestEventListener';
 import { EventRepository } from '../FairCalendar/Repository/EventRepository';
 import { Event } from 'src/Domain/FairCalendar/Event.entity';
 import { AcceptLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/AcceptLeaveRequestCommandHandler';
-import { AcceptLeaveRequestAction } from './Leave/Action/AcceptLeaveRequestAction';
 import { GetLeaveRequestsQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestsQueryHandler';
-import { GetLeaveRequestsAction } from './Leave/Action/GetLeaveRequestsAction';
-import { GetLeaveRequestAction } from './Leave/Action/GetLeaveRequestAction';
 import { DoesLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesLeaveExistForPeriod';
 import { LeaveRequestToLeavesConverter } from 'src/Domain/HumanResource/Leave/Converter/LeaveRequestToLeavesConverter';
 import { LeaveRepository } from './Leave/Repository/LeaveRepository';
@@ -44,18 +39,13 @@ import { CooperativeRepository } from '../Settings/Repository/CooperativeReposit
 import { Cooperative } from 'src/Domain/Settings/Cooperative.entity';
 import { UpdateUserCommandHandler } from 'src/Application/HumanResource/User/Command/UpdateUserCommandHandler';
 import { GetUserAdministrativeByIdQueryHandler } from 'src/Application/HumanResource/User/Query/GetUserAdministrativeByIdQueryHandler';
-import { GetLeavesAction } from './Leave/Action/GetLeavesAction';
 import { MealTicketRemoval } from 'src/Domain/HumanResource/MealTicket/MealTicketRemoval.entity';
 import { MealTicketRemovalRepository } from './MealTicket/Repository/MealTicketRemovalRepository';
 import { IsMealTicketRemovalAlreadyExist } from 'src/Domain/HumanResource/MealTicket/Specification/IsMealTicketRemovalAlreadyExist';
 import { CreateMealTicketRemovalCommandHandler } from 'src/Application/HumanResource/MealTicket/Command/CreateMealTicketRemovalCommandHandler';
-import { CreateMealTicketRemovalAction } from './MealTicket/Action/CreateMealTicketRemovalAction';
 import { DoesLeaveRequestBelongToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongToUser';
 import { DeleteLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/DeleteLeaveRequestCommandHandler';
-import { DeleteLeaveRequestAction } from './Leave/Action/DeleteLeaveRequestAction';
-import { GetAvailableMealTicketsAction } from './MealTicket/Action/GetAvailableMealTicketsAction';
 import { GetMealTicketsPerMonthQueryHandler } from 'src/Application/HumanResource/MealTicket/Query/GetMealTicketsPerMonthQueryHandler';
-import { UpdateLeaveRequestAction } from './Leave/Action/UpdateLeaveRequestAction';
 import { UpdateLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/UpdateLeaveRequestCommandHandler';
 import { UserSavingsRecord } from 'src/Domain/HumanResource/Savings/UserSavingsRecord.entity';
 import { UserSavingsRecordRepository } from './Savings/Repository/UserSavingsRecordRepository';
@@ -63,13 +53,9 @@ import { IncreaseUserSavingsRecordCommandHandler } from 'src/Application/HumanRe
 import { IncreaseUserSavingsRecordAction } from './Savings/Action/IncreaseUserSavingsRecordAction';
 import { InterestRate } from 'src/Domain/HumanResource/Savings/InterestRate.entity';
 import { InterestRateRepository } from './Savings/Repository/InterestRateRepository';
-import { GetUsersElementsAction } from './Payslip/Action/GetUsersElementsAction';
-import { GetUsersElementsCsvAction } from './Payslip/Action/GetUsersElementsCsvAction';
 import { GetUsersElementsQueryHandler } from 'src/Application/HumanResource/Payslip/Query/GetUsersElementsQueryHandler';
 import { GetLeavesByMonthQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesByMonthQueryHandler';
-import { GetLeavesCalendarAction } from './Leave/Action/GetLeavesCalendarAction';
 import { GetLeavesCalendarQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeavesCalendarQueryHandler';
-import { GetPendingLeaveRequestsCountAction } from './Leave/Action/GetPendingLeaveRequestsCountAction';
 import { GetPendingLeaveRequestsCountQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetPendingLeaveRequestsCountQueryHandler';
 import { LogoutController } from './User/Controller/LogoutController';
 import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
@@ -91,6 +77,9 @@ import { GetPayrollElementsController } from './PayrollElements/Controller/GetPa
 import { PayrollElementsTableFactory } from './PayrollElements/Table/PayrollElementsTableFactory';
 import { FluentTranslatorAdapter } from '../Adapter/FluentTranslatorAdapter';
 import { TablesModule } from '../Tables/tables.module';
+import { ListMealTicketsController } from './MealTicket/Controller/ListMealTicketsController';
+import { MealTicketTableFactory } from './MealTicket/Table/MealTicketTableFactory';
+import { AddMealTicketRemovalController } from './MealTicket/Controller/AddMealTicketRemovalController';
 
 @Module({
   imports: [
@@ -128,21 +117,8 @@ import { TablesModule } from '../Tables/tables.module';
     ModerateLeaveRequestController,
     DeleteLeaveRequestController,
     GetPayrollElementsController,
-    GetLeavesAction,
-    GetLeavesCalendarAction,
-    GetUsersElementsAction,
-    GetUsersElementsCsvAction,
-    GetLeaveRequestsAction,
-    GetPendingLeaveRequestsCountAction,
-    GetLeaveRequestAction,
-    CreateLeaveRequestAction,
-    RefuseLeaveRequestAction,
-    AcceptLeaveRequestAction,
-    CreateMealTicketRemovalAction,
-    GetAvailableMealTicketsAction,
-    DeleteLeaveRequestAction,
-    CreateMealTicketRemovalAction,
-    UpdateLeaveRequestAction,
+    ListMealTicketsController,
+    AddMealTicketRemovalController,
     IncreaseUserSavingsRecordAction
   ],
   providers: [
@@ -207,7 +183,8 @@ import { TablesModule } from '../Tables/tables.module';
     UserTableFactory,
     LeaveTableFactory,
     LeaveRequestTableFactory,
-    PayrollElementsTableFactory
+    PayrollElementsTableFactory,
+    MealTicketTableFactory
   ]
 })
 export class HumanResourceModule {}

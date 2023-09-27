@@ -17,6 +17,13 @@ header-dropdown = Voir plus d'actions
 header-logout = Se déconnecter
 
 home-title = Bonjour, {$user} !
+home-pending-leaves-title = Demandes de congés
+home-pending-leaves = {$leaves ->
+    [0] Aucune demande de congés
+    [1] 1 demande de congés
+    *[other] {$leaves} demandes de congés
+} en attente de validation
+home-pending-leaves-see-all = Voir les demandes de congés
 
 dashboard-title = Tableau de bord
 
@@ -173,3 +180,10 @@ payroll-elements-specialLeaves = Congés exceptionnels
 payroll-elements-download = Télécharger
 payroll-elements-filename = Fairness - Éléments de paie - {$date}.csv
 payroll-elements-wiki = Voir le Wiki
+
+meal-tickets-title = Tickets resto
+meal-tickets-user = Coopérateur·ice - Salarié·e
+meal-tickets-num-tickets = Nb tickets restaurant
+meal-tickets-num-exceptions = Nb exceptions
+meal-tickets-add-removal-title = Ajouter une exception
+meal-tickets-removal-date = Je ne souhaite pas recevoir de ticket restaurant pour la date du :

@@ -5,10 +5,30 @@ body {
   font-size: var(--font-size-default);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: var(--title-spacing);
+}
+
 h1 {
-  margin-bottom: calc(3 * var(--w));
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  line-height: 2rem;
 }
 
 main {
   overflow-y: auto;
+}
+
+p {
+  font-size: 1rem;
+  margin: var(--text-spacing);
 }
