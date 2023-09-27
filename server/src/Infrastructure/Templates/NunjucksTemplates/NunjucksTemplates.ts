@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { NextFunction, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { Environment, FileSystemLoader, TemplateCallback } from 'nunjucks';
 import { runtime } from 'nunjucks';
@@ -72,6 +72,19 @@ export class NunjucksTemplates implements ITemplates {
       ctx['path'] = (name: string, params: object = {}) => {
         try {
           return this.resolver.resolve(name, params);
+        } catch {
+          return '#';
+        }
+      };
+
+      ctx['url'] = (name: string, params: object = {}) => {
+        try {
+          const path = this.resolver.resolve(name, params);
+          const proto = req.protocol;
+          const origin = req.get('Host');
+          const baseUrl = `${proto}://${origin}`;
+          const url = new URL(path, baseUrl);
+          return url.toString();
         } catch {
           return '#';
         }

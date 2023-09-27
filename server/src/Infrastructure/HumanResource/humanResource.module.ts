@@ -80,6 +80,7 @@ import { TablesModule } from '../Tables/tables.module';
 import { ListMealTicketsController } from './MealTicket/Controller/ListMealTicketsController';
 import { MealTicketTableFactory } from './MealTicket/Table/MealTicketTableFactory';
 import { AddMealTicketRemovalController } from './MealTicket/Controller/AddMealTicketRemovalController';
+import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesCalendarController';
 
 @Module({
   imports: [
@@ -116,6 +117,7 @@ import { AddMealTicketRemovalController } from './MealTicket/Controller/AddMealT
     GetLeaveRequestController,
     ModerateLeaveRequestController,
     DeleteLeaveRequestController,
+    ExportLeavesCalendarController,
     GetPayrollElementsController,
     ListMealTicketsController,
     AddMealTicketRemovalController,

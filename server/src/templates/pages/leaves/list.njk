@@ -19,6 +19,18 @@
         </a>
     </div>
 
+    <div class="pc-row pc-row--middle">
+        <label for="calendarUrl">{{ 'leaves-calendar-url-title'|trans }}</label>
+        <div>
+            <input id="calendarUrl" class="pc-input" type="text" readonly value="{{ url('people_leaves_calendar') }}?token={{ calendarToken }}">
+        </div>
+        <div>
+            <button is="pc-clipboard" class="pc-btn pc-btn--muted" data-clipboard-source="#calendarUrl" title="{{ 'clipboard-copy'|trans }}">
+                {{ icons.clipboard() }}
+            </button>
+        </div>
+    </div>
+
     {% table table, { attr: {class: 'pc-mt', style: '--mt: calc(4 * var(--w))'} } %}
 </div>
 {% endblock main %}

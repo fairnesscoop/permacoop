@@ -156,6 +156,7 @@ leave-requests-error-cannot-moderate = Vous ne pouvez pas modérer cette demande
 leave-requests-moderation = Modération
 leave-requests-moderation-accept = Accepter la demande de congés
 leave-requests-moderation-deny = Refuser la demande de congés
+leaves-calendar-url-title = Lien d'abonnement au calendrier
 
 payroll-elements-title = Éléments de paie
 payroll-elements-user = Salarié·e / stagiaire
@@ -187,3 +188,5 @@ meal-tickets-num-tickets = Nb tickets restaurant
 meal-tickets-num-exceptions = Nb exceptions
 meal-tickets-add-removal-title = Ajouter une exception
 meal-tickets-removal-date = Je ne souhaite pas recevoir de ticket restaurant pour la date du :
+
+clipboard-copy = Copier dans le presse papier

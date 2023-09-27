@@ -17,3 +17,9 @@
   background-color: var(--background-error);
   color: var(--text-on-error);
 }
+
+.pc-btn--muted {
+  --hover-tint: var(--background-muted-hover);
+  background-color: var(--background-muted);
+  color: var(--text-on-muted);
+}

@@ -40,6 +40,8 @@ export class ListLeavesController {
 
     const table = this.tableFactory.create(leaves.items);
 
-    return { table };
+    const calendarToken = process.env.CALENDAR_TOKEN;
+
+    return { table, calendarToken };
   }
 }

@@ -18,12 +18,14 @@
   --background-default-hover: #f1f2f3;
   --background-alt-grey: #f9fafb;
   --background-muted: #f0f0f0;
+  --background-muted-hover: #dadada;
   --background-action-violet: #6c2bd9;
   --background-action-violet-hover: #52289b;
   --background-error: #dd1d1d;
   --background-error-hover: #b92020;
   --text-default: #282828;
   --text-muted: #6e6e6e;
+  --text-on-muted: #282828;
   --text-on-background-action-violet: #ffffff;
   --text-action-violet: #6c2bd9;
   --text-error: #ff0000;
