@@ -13,7 +13,7 @@ export class UserElementsView {
     public readonly transportFee: number,
     public readonly sustainableMobilityFee: number,
     public readonly mealTickets: number,
-    public readonly healthInsurance: string,
+    public readonly healthInsurance: boolean,
     public readonly paidLeaves: UserLeavesView,
     public readonly unpaidLeaves: UserLeavesView,
     public readonly sickLeaves: UserLeavesView,

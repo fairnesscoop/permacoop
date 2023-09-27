@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as fluent from '@fluent/bundle';
-import { ITranslator } from 'src/Application/ITranslations';
+import { ITranslator } from 'src/Infrastructure/Translations/ITranslator';
 
 @Injectable()
 export class FluentTranslatorAdapter implements ITranslator {
@@ -48,9 +48,9 @@ const _translate = (
 ): string | null => {
   const message = bundle.getMessage(key);
 
-  if (message && message.value) {
-    return bundle.formatPattern(message.value, params);
-  } else {
+  if (!message || !message.value) {
     return key;
   }
+
+  return bundle.formatPattern(message.value, params);
 };

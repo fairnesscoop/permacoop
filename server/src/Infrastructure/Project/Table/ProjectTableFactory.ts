@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { ProjectView } from 'src/Application/Project/View/ProjectView';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
-import { Row, Table } from 'src/Infrastructure/Common/Table/Table';
+import { RowFactory } from 'src/Infrastructure/Tables/RowFactory';
+import { Table } from 'src/Infrastructure/Tables';
 
 @Injectable()
 export class ProjectTableFactory {
-  constructor(private readonly resolver: RouteNameResolver) {}
+  constructor(
+    private readonly resolver: RouteNameResolver,
+    private readonly rowFactory: RowFactory
+  ) {}
 
   public create(projects: ProjectView[]): Table {
     const columns = [
@@ -14,20 +18,19 @@ export class ProjectTableFactory {
       'common-actions'
     ];
 
-    const rows = projects.map(
-      (project): Row => [
-        project.name,
-        project.customer.name,
-        {
-          actions: {
-            edit: {
-              url: this.resolver.resolve('crm_projects_edit', {
-                id: project.id
-              })
-            }
+    const rows = projects.map(project =>
+      this.rowFactory
+        .createBuilder()
+        .value(project.name)
+        .value(project.customer.name)
+        .actions({
+          edit: {
+            url: this.resolver.resolve('crm_projects_edit', {
+              id: project.id
+            })
           }
-        }
-      ]
+        })
+        .build()
     );
 
     return new Table(columns, rows);

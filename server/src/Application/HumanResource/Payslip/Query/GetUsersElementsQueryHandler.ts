@@ -60,7 +60,7 @@ export class GetUsersElementsQueryHandler {
           user.getUserAdministrative().getTransportFee() * 0.01,
           user.getUserAdministrative().getSustainableMobilityFee() * 0.01,
           mealTicketsByUser[user.getId()],
-          user.getUserAdministrative().haveHealthInsurance() ? 'yes' : 'no',
+          user.getUserAdministrative().haveHealthInsurance(),
           this.createUserLeavesView(userLeaves.paid, date),
           this.createUserLeavesView(userLeaves.unpaid, date),
           this.createUserLeavesView(userLeaves.medical, date),

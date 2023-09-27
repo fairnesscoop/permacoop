@@ -10,3 +10,7 @@
 .pc-link-btn[aria-current='page'] {
   background-color: var(--background-default-hover);
 }
+
+a[target='_blank']::after {
+  content: '↗';
+}

@@ -15,12 +15,14 @@ import { AddProjectController } from './Controller/AddProjectController';
 import { EditProjectController } from './Controller/EditProjectController';
 import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
 import { ProjectTableFactory } from './Table/ProjectTableFactory';
+import { TablesModule } from '../Tables/tables.module';
 
 @Module({
   imports: [
     BusModule,
     TypeOrmModule.forFeature([Project, Customer]),
-    ExtendedRoutingModule
+    ExtendedRoutingModule,
+    TablesModule
   ],
   controllers: [
     ListProjectsController,

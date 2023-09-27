@@ -87,6 +87,10 @@ import { LeaveRequestTableFactory } from './Leave/Table/LeaveRequestTableFactory
 import { GetLeaveRequestController } from './Leave/Controller/GetLeaveRequestController';
 import { ModerateLeaveRequestController } from './Leave/Controller/ModerateLeaveRequestController';
 import { DeleteLeaveRequestController } from './Leave/Controller/DeleteLeaveRequestController';
+import { GetPayrollElementsController } from './PayrollElements/Controller/GetPayrollElementsController';
+import { PayrollElementsTableFactory } from './PayrollElements/Table/PayrollElementsTableFactory';
+import { FluentTranslatorAdapter } from '../Adapter/FluentTranslatorAdapter';
+import { TablesModule } from '../Tables/tables.module';
 
 @Module({
   imports: [
@@ -106,7 +110,8 @@ import { DeleteLeaveRequestController } from './Leave/Controller/DeleteLeaveRequ
       UserSavingsRecord,
       InterestRate
     ]),
-    ExtendedRoutingModule
+    ExtendedRoutingModule,
+    TablesModule
   ],
   controllers: [
     LoginController,
@@ -122,6 +127,7 @@ import { DeleteLeaveRequestController } from './Leave/Controller/DeleteLeaveRequ
     GetLeaveRequestController,
     ModerateLeaveRequestController,
     DeleteLeaveRequestController,
+    GetPayrollElementsController,
     GetLeavesAction,
     GetLeavesCalendarAction,
     GetUsersElementsAction,
@@ -164,6 +170,7 @@ import { DeleteLeaveRequestController } from './Leave/Controller/DeleteLeaveRequ
       provide: 'IMealTicketRemovalRepository',
       useClass: MealTicketRemovalRepository
     },
+    { provide: 'ITranslator', useClass: FluentTranslatorAdapter },
     Date,
     LoginQueryHandler,
     CreateUserCommandHandler,
@@ -199,7 +206,8 @@ import { DeleteLeaveRequestController } from './Leave/Controller/DeleteLeaveRequ
     IncreaseUserSavingsRecordCommandHandler,
     UserTableFactory,
     LeaveTableFactory,
-    LeaveRequestTableFactory
+    LeaveRequestTableFactory,
+    PayrollElementsTableFactory
   ]
 })
 export class HumanResourceModule {}

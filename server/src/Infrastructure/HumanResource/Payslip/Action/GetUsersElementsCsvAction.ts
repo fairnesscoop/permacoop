@@ -72,7 +72,7 @@ export class GetUsersElementsCsvAction {
         this.formatNumber(payslip.transportFee),
         this.formatNumber(payslip.sustainableMobilityFee),
         payslip.mealTickets,
-        payslip.healthInsurance === 'yes' ? 'Oui' : 'Non',
+        payslip.healthInsurance ? 'Oui' : 'Non',
         this.formatNumber(payslip.paidLeaves.totalDays),
         this.formatNumber(payslip.unpaidLeaves.totalDays),
         this.formatNumber(payslip.sickLeaves.totalDays),

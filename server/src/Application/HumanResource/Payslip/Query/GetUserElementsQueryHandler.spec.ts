@@ -160,7 +160,7 @@ describe('GetUserElementsQueryHandler', () => {
         transportFee,
         sustainableMobilityFee,
         5,
-        'yes',
+        true,
         new UserLeavesView(0, [
           leaveRequestSlot1,
           leaveRequestSlot2,

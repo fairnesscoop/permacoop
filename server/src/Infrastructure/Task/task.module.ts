@@ -13,9 +13,15 @@ import { ListTasksController } from './Controller/ListTasksController';
 import { AddTaskController } from './Controller/AddTaskController';
 import { EditTaskController } from './Controller/EditTaskController';
 import { TaskTableFactory } from './Table/TaskTableFactory';
+import { TablesModule } from '../Tables/tables.module';
 
 @Module({
-  imports: [BusModule, TypeOrmModule.forFeature([Task]), ExtendedRoutingModule],
+  imports: [
+    BusModule,
+    TypeOrmModule.forFeature([Task]),
+    ExtendedRoutingModule,
+    TablesModule
+  ],
   controllers: [ListTasksController, AddTaskController, EditTaskController],
   providers: [
     { provide: 'ITaskRepository', useClass: TaskRepository },

@@ -15,12 +15,14 @@ import { AddCustomerController } from './Controller/AddCustomerController';
 import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
 import { EditCustomerController } from './Controller/EditCustomerController';
 import { CustomerTableFactory } from './Table/CustomerTableFactory';
+import { TablesModule } from '../Tables/tables.module';
 
 @Module({
   imports: [
     BusModule,
     TypeOrmModule.forFeature([Customer, Address]),
-    ExtendedRoutingModule
+    ExtendedRoutingModule,
+    TablesModule
   ],
   controllers: [
     ListCustomersController,

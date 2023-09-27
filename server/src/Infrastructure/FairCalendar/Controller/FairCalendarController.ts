@@ -12,7 +12,7 @@ import { IQueryBus } from 'src/Application/IQueryBus';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { FairCalendarControllerDTO } from '../DTO/FairCalendarControllerDTO';
-import { ITranslator } from 'src/Application/ITranslations';
+import { ITranslator } from 'src/Infrastructure/Translations/ITranslator';
 import { minutesToHours } from 'src/Infrastructure/Common/Utils/dateUtils';
 import { LoggedUser } from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
 import { UserView } from 'src/Application/HumanResource/User/View/UserView';

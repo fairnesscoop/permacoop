@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { UserView } from 'src/Application/HumanResource/User/View/UserView';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
-import { Row, Table } from 'src/Infrastructure/Common/Table/Table';
+import { RowFactory } from 'src/Infrastructure/Tables/RowFactory';
+import { Table } from 'src/Infrastructure/Tables';
 
 @Injectable()
 export class UserTableFactory {
-  constructor(private readonly resolver: RouteNameResolver) {}
+  constructor(
+    private readonly resolver: RouteNameResolver,
+    private readonly rowFactory: RowFactory
+  ) {}
 
   public create(users: UserView[]): Table {
     const columns = [
@@ -16,22 +20,21 @@ export class UserTableFactory {
       'common-actions'
     ];
 
-    const rows = users.map(
-      (user): Row => [
-        user.firstName,
-        user.lastName,
-        user.email,
-        { trans: { message: 'users-role-value', params: { role: user.role } } },
-        {
-          actions: {
-            edit: {
-              url: this.resolver.resolve('people_users_edit', {
-                id: user.id
-              })
-            }
+    const rows = users.map(user =>
+      this.rowFactory
+        .createBuilder()
+        .value(user.firstName)
+        .value(user.lastName)
+        .value(user.email)
+        .trans('users-role-value', { role: user.role })
+        .actions({
+          edit: {
+            url: this.resolver.resolve('people_users_edit', {
+              id: user.id
+            })
           }
-        }
-      ]
+        })
+        .build()
     );
 
     return new Table(columns, rows);

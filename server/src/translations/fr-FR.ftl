@@ -7,6 +7,8 @@ common-actions = Actions
 common-yes = Oui
 common-no = Non
 common-table-empty = Aucun élément
+common-money = {NUMBER($value, style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2)} €
+common-date = {DATETIME($date, month: "numeric", year: "numeric", day: "numeric")}
 
 site-title = Permacoop
 
@@ -114,6 +116,14 @@ leaves-type-value = {$type ->
     [illimited] Congé illimité
     *[other] Autre
 }
+leaves-type-value-plural = {$type ->
+    [paid] Congés payés
+    [unpaid] Congés sans solde
+    [special] Congés exceptionnels
+    [medical] Congés maladie
+    [illimited] Congés illimités
+    *[other] Autre
+}
 leaves-startDate = Du
 leaves-endDate = Au
 leaves-period-value = Du {$startDate} au {$endDate}
@@ -139,3 +149,27 @@ leave-requests-error-cannot-moderate = Vous ne pouvez pas modérer cette demande
 leave-requests-moderation = Modération
 leave-requests-moderation-accept = Accepter la demande de congés
 leave-requests-moderation-deny = Refuser la demande de congés
+
+payroll-elements-title = Éléments de paie
+payroll-elements-user = Salarié·e / stagiaire
+payroll-elements-contract = Contrat
+payroll-elements-contract-value = { users-contract-value } {$executivePosition ->
+    [yes] Cadre
+    *[no] {""}
+}
+payroll-elements-joiningDate = Date d'entrée
+payroll-elements-annualEarnings = Salaire brut annuel
+payroll-elements-monthlyEarnings = Salaire brut mensuel
+payroll-elements-workingTime = TC / TP
+payroll-elements-executive = Cadre
+payroll-elements-transportFee = Transport
+payroll-elements-sustainableMobilityFee = Mobilité durable
+payroll-elements-mealTickets = Tickets resto
+payroll-elements-healthInsurance = Mutuelle
+payroll-elements-paidLeaves = Congés payés
+payroll-elements-unpaidLeaves = Congés sans solde
+payroll-elements-medicalLeaves = Congés maladie
+payroll-elements-specialLeaves = Congés exceptionnels
+payroll-elements-download = Télécharger
+payroll-elements-filename = Fairness - Éléments de paie - {$date}.csv
+payroll-elements-wiki = Voir le Wiki

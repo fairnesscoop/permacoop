@@ -8,12 +8,9 @@ import * as session from 'express-session';
 import * as connectPgSimple from 'connect-pg-simple';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
-import { nunjucks } from './Infrastructure/Common/Templating';
-import { registerFilters } from './Infrastructure/Common/Templating/filters';
+import { ITemplates } from './Infrastructure/Templates/ITemplates';
 
 async function bootstrap() {
-  const isProd = process.env.NODE_ENV === 'production';
-
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   const sessionPgPool = new pg.Pool({
@@ -51,15 +48,8 @@ async function bootstrap() {
   const viewsDir = path.join(__dirname, '..', 'templates');
   app.setBaseViewsDir(viewsDir);
 
-  const translator = app.get('ITranslator');
-
-  const njk = await nunjucks(app, { watch: !isProd });
-  registerFilters(njk.env, translator);
-  njk.contextProcessor((ctx, _req, _res) => {
-    ctx.asset = (path: string) => `/public/${path}`;
-  });
-  app.engine('njk', njk.engine);
-  app.setViewEngine('njk');
+  const templates: ITemplates = app.get('ITemplates');
+  templates.registerViewEngine(app, '/public');
 
   await app.listen(3000, '0.0.0.0');
 }

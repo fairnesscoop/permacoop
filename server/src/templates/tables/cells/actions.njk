@@ -1,0 +1,23 @@
+{% import 'macros/icons.njk' as icons %}
+
+<span class="pc-row pc-row--middle">
+  {% if actions.view %}
+    <a href="{{ actions.view.url }}" class="pc-link-btn" title="{{ 'common-view'|trans }}">
+      {{ icons.eye(attr={class: 'pc-icon--action-violet'}) }}
+    </a>
+  {% endif %}
+
+  {% if actions.edit %}
+    <a href="{{ actions.edit.url }}" class="pc-link-btn" title="{{ 'common-edit'|trans }}">
+      {{ icons.pencil(attr={class: 'pc-icon--action-violet'}) }}
+    </a>
+  {% endif %}
+
+  {% if actions.delete %}
+    <form method="POST" action="{{ actions.delete.url }}" title="{{ 'common-delete'|trans }}">
+      <button class="pc-link-btn">
+        {{ icons.trash({class: 'pc-icon--action-violet'}) }}
+      </button>
+    </form>
+  {% endif %}
+</span>

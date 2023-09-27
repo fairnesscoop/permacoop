@@ -1,6 +1,5 @@
 {% extends 'layouts/app.njk' %}
 {% import 'macros/links.njk' as links %}
-{% from 'macros/table.njk' import render_table with context %}
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 
 {% set title = 'crm-customers-title'|trans %}
@@ -16,6 +15,6 @@
         {{ links.add(path('crm_customers_add'))}}
     </div>
 
-    {{ render_table(table, attr={class: 'pc-mt', style: '--mt: calc(4 * var(--w))'}) }}
+    {% table table, { attr: {class: 'pc-mt', style: '--mt: calc(4 * var(--w))'} } %}
 </div>
 {% endblock main %}

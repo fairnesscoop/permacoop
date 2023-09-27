@@ -2,18 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { LeaveRequestDetailView } from 'src/Application/HumanResource/Leave/View/LeaveRequestDetailView';
 import { LeaveRequestView } from 'src/Application/HumanResource/Leave/View/LeaveRequestView';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
-import {
-  ActionsValue,
-  Inline,
-  Row,
-  Table
-} from 'src/Infrastructure/Common/Table/Table';
+import { Inline, Row, Table } from 'src/Infrastructure/Tables';
 import { formatDate } from 'src/Infrastructure/Common/Utils/dateUtils';
 import { formatFullName } from 'src/Infrastructure/Common/Utils/formatUtils';
+import {
+  ActionsOptions,
+  RowFactory
+} from 'src/Infrastructure/Tables/RowFactory';
 
 @Injectable()
 export class LeaveRequestTableFactory {
-  constructor(private readonly resolver: RouteNameResolver) {}
+  constructor(
+    private readonly resolver: RouteNameResolver,
+    private rowFactory: RowFactory
+  ) {}
 
   public create(leaveRequests: LeaveRequestView[], userId: string): Table {
     const columns = [
@@ -26,7 +28,7 @@ export class LeaveRequestTableFactory {
 
     const rows = leaveRequests.map(
       (leaveRequest): Row => {
-        const actions: ActionsValue['actions'] = {
+        const actions: ActionsOptions = {
           view: {
             url: this.resolver.resolve('people_leave_requests_detail', {
               id: leaveRequest.id
@@ -42,31 +44,17 @@ export class LeaveRequestTableFactory {
           };
         }
 
-        return [
-          formatFullName(leaveRequest.user),
-          {
-            trans: {
-              message: 'leaves-period-value',
-              params: {
-                startDate: leaveRequest.startDate,
-                endDate: leaveRequest.endDate
-              }
-            }
-          },
-          {
-            trans: {
-              message: 'leaves-type-value',
-              params: { type: leaveRequest.type }
-            }
-          },
-          {
-            trans: {
-              message: 'leaves-status-value',
-              params: { status: leaveRequest.status }
-            }
-          },
-          { actions }
-        ];
+        return this.rowFactory
+          .createBuilder()
+          .value(formatFullName(leaveRequest.user))
+          .trans('leaves-period-value', {
+            startDate: leaveRequest.startDate,
+            endDate: leaveRequest.endDate
+          })
+          .trans('leaves-type-value', { type: leaveRequest.type })
+          .trans('leaves-status-value', { status: leaveRequest.status })
+          .actions(actions)
+          .build();
       }
     );
 
@@ -83,29 +71,15 @@ export class LeaveRequestTableFactory {
       'leaves-comment'
     ];
 
-    const row: Row = [
-      {
-        trans: {
-          message: 'leaves-status-value',
-          params: { status: leaveRequest.status }
-        }
-      },
-      {
-        trans: {
-          message: 'leaves-type-value',
-          params: { type: leaveRequest.type }
-        }
-      },
-      formatDate(new Date(leaveRequest.startDate)),
-      formatDate(new Date(leaveRequest.endDate)),
-      {
-        trans: {
-          message: 'leaves-duration-value',
-          params: { days: leaveRequest.duration }
-        }
-      },
-      leaveRequest.comment
-    ];
+    const row = this.rowFactory
+      .createBuilder()
+      .trans('leaves-status-value', { status: leaveRequest.status })
+      .trans('leaves-type-value', { type: leaveRequest.type })
+      .value(formatDate(new Date(leaveRequest.startDate)))
+      .value(formatDate(new Date(leaveRequest.endDate)))
+      .trans('leaves-duration-value', { days: leaveRequest.duration })
+      .value(leaveRequest.comment)
+      .build();
 
     return new Inline(columns, row);
   }
