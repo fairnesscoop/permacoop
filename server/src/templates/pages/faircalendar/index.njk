@@ -1,37 +1,63 @@
 {% extends 'layouts/app.njk' %}
+{% import 'macros/icons.njk' as icons %}
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 
-{% set title = 'faircalendar-title'|trans %}
+{% set title = 'faircalendar-page-title'|trans({ date: date }) %}
 
 {% block main %}
 <div class="pc-container">
-    {{ breadcrumb([{ title: title}]) }}
+    {{ breadcrumb([{ title: title }]) }}
 
     <h1>{{ title }}</h1>
 
-    <form action="">
-        <div class="pc-grid pc-gap" style="--cols: 3">
-            <div class="select-group">
-                <label class="pc-label" for="month">{{ 'faircalendar-filters-month-title'|trans }}</label>
-                <input type="month" name="month">
+    <div class="pc-grid pc-grid--templated pc-gap" style="--grid-template: auto / auto 1fr">
+        <form is="pc-faircalendar-filters-form" data-title-target="h1" data-calendar-target="#faircalendar" class="pc-stack">
+            <input type="text" id="minYear" name="minYear" hidden value="{{ minYear }}">
+            <input type="text" id="maxYear" name="maxYear" hidden value="{{ maxYear }}">
+
+            <div class="pc-row" style="--row-gap: 0">
+                <button id="previousBtn" type="button" class="pc-btn pc-btn--muted" title="Mois précédent">{{ '<' }}</button>
+                <button id="todayBtn" type="button" class="pc-btn pc-btn--muted" title="Aujourd'hui">
+                    {{ icons.calendar() }}
+                </button>
+                <button id="nextBtn" type="button" class="pc-btn pc-btn--muted" title="Mois suivant">{{ '>' }}</button>
             </div>
-            <div class="select-group">
-                <label class="pc-label" for="userId">{{ 'faircalendar-filters-userId-title'|trans }}</label>
-                <select name="userId" id="userId">
-                    {% for user in users %}
-                        <option value="{{ user.id }}">{{ user|fullName }}</option>
+            <div class="pc-select-group">
+                <label class="pc-label" for="month">{{ 'faircalendar-filters-month-title'|trans }}</label>
+                <select name="month" id="month">
+                    {% for month in range(12) %}
+                        <option value="{{ month }}" {% if month == currentMonth %}selected{% endif %}>{{ month|longMonth|capitalize }}</option>
                     {% endfor %}
                 </select>
             </div>
+            <div class="pc-select-group">
+                <label class="pc-label" for="year">{{ 'faircalendar-filters-year-title'|trans }}</label>
+                <select name="year" id="year">
+                    {% for year in range(minYear, maxYear + 1) %}
+                        <option value="{{ year }}" {% if year == currentYear %}selected{% endif %}>{{ year }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="pc-select-group">
+                <label class="pc-label" for="userId">{{ 'faircalendar-filters-userId-title'|trans }}</label>
+                <select name="userId" id="userId">
+                    {% for user in users %}
+                        <option value="{{ user.id }}" {% if user.id == userId %}selected{% endif %}>{{ user|fullName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+
+        <div id="faircalendar" class="pc-stack">
+            {% table overviewTable, { attr: {class: 'pc-table--center pc-table--no-shadow'} } %}
+
+            <pc-fullcalendar
+                data-events-json="{{ fullCalendarEvents|dump }}"
+                data-add-url-template="{{ path('faircalendar_events_add', { date: '__date__' }) }}"
+                data-date="{{ date|htmlDate }}"
+                data-height="30rem"
+            ></pc-fullcalendar>
         </div>
-    </form>
-
-    {% table overviewTable, { attr: {class: 'pc-table--center pc-table--no-shadow pc-m', style: '--m: calc(2 * var(--w)) 0'} } %}
-
-    <pc-fullcalendar
-        data-events-json="{{ fullCalendarEvents|dump }}"
-        data-add-url-template="{{ path('faircalendar_events_add', { date: '__date__' }) }}"
-        data-date="{{ date|htmlDate }}"
-    ></pc-fullcalendar>
+    </div>
 </div>
 {% endblock main %}

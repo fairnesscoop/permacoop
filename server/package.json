@@ -7,8 +7,9 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "assets:build": "esbuild src/assets/main.js --bundle --minify --outfile=dist/public/app.js",
-    "assets:watch": "npm run assets:build -- --watch",
+    "_esbuild": "esbuild src/assets/main.js --bundle --outfile=dist/public/app.js",
+    "assets:build": "npm run _esbuild -- --minify",
+    "assets:watch": "npm run _esbuild -- --watch",
     "format": "prettier --write \"src/**/*.ts\" \"src/assets/**/*\" \"e2e/**/*.js\"",
     "start": "nest start",
     "start:dev": "nest start --preserveWatchOutput --watch --debug",

@@ -25,7 +25,7 @@
   --background-error-hover: #b92020;
   --text-default: #282828;
   --text-muted: #6e6e6e;
-  --text-on-muted: #282828;
+  --text-on-muted: var(--text-default);
   --text-on-background-action-violet: #ffffff;
   --text-action-violet: #6c2bd9;
   --text-error: #ff0000;
@@ -65,8 +65,10 @@
   :root {
     /* Colors */
     --background-default: #1a1b23;
+    --background-default-hover: #2a2b36;
     --background-alt-grey: #121317;
     --background-muted: #272930;
+    --background-muted-hover: #33353d;
     --text-default: #ffffff;
     --text-muted: #bbbbbb;
     --border-default: #636363;

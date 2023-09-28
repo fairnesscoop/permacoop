@@ -19,7 +19,7 @@ export default class extends HTMLElement {
       showNonCurrentDates: false,
       selectable: true,
       weekends: false,
-      height: 700,
+      height: this.dataset.height,
       headerToolbar: false,
       dayHeaderFormat: { weekday: 'long' },
       events,

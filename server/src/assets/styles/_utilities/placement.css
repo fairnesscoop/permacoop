@@ -1,0 +1,4 @@
+.pc-center {
+  display: grid;
+  place-items: center;
+}

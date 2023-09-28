@@ -1,3 +1,7 @@
+.pc-text--center {
+  text-align: center;
+}
+
 .pc-bold {
   font-weight: bold;
 }

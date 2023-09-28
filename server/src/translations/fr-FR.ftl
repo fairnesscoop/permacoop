@@ -9,6 +9,7 @@ common-no = Non
 common-table-empty = Aucun élément
 common-money = {NUMBER($value, style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2)} €
 common-date = {DATETIME($date, month: "numeric", year: "numeric", day: "numeric")}
+common-month-long = {DATETIME($date, month: "long")}
 
 site-title = Permacoop
 
@@ -28,6 +29,7 @@ home-pending-leaves-see-all = Voir les demandes de congés
 dashboard-title = Tableau de bord
 
 faircalendar-title = FairCalendar
+faircalendar-page-title = FairCalendar {DATETIME($date, month: "long", year: "numeric")}
 faircalendar-events-add-title = Ajout d'un CRA le {$date}
 faircalendar-events-edit-title = Édition du CRA du {$date}
 faircalendar-type-title = Type de CRA
@@ -43,8 +45,9 @@ faircalendar-type-option = {$type ->
 faircalendar-taskId-title = Mission
 faircalendar-projectId-title = Projet
 faircalendar-time-title = Temps passé
-faircalendar-filters-month-title = Filtrer par mois
-faircalendar-filters-userId-title = Filtrer par coopérateur-salarié
+faircalendar-filters-month-title = Mois
+faircalendar-filters-year-title = Année
+faircalendar-filters-userId-title = Coopérateur·ice - salarié·e
 faircalendar-overview-days = {$days ->
     [0] 0
     [1] 1 jour

@@ -1,4 +1,4 @@
-import { IsOptional, IsUUID, IsISO8601 } from 'class-validator';
+import { IsOptional, IsUUID, IsNumber } from 'class-validator';
 
 // TODO test
 export class FairCalendarControllerDTO {
@@ -6,7 +6,19 @@ export class FairCalendarControllerDTO {
   @IsOptional()
   public userId?: string;
 
-  @IsISO8601()
+  @IsNumber()
   @IsOptional()
-  public date?: string;
+  public month?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public year?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public minYear?: number;
+
+  @IsNumber()
+  @IsOptional()
+  public maxYear?: number;
 }

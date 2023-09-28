@@ -14,6 +14,7 @@ import {
 } from '../../Common/Utils/dateUtils';
 import { ArrayUtils } from '../../Common/Utils/ArrayUtils';
 import { TablesExtension } from './TablesExtension';
+import { getMonth, getYear } from 'date-fns';
 
 @Injectable()
 export class NunjucksTemplates implements ITemplates {
@@ -39,9 +40,17 @@ export class NunjucksTemplates implements ITemplates {
     );
     env.addFilter('minutesToHours', minutes => minutesToHours(minutes));
     env.addFilter('fullName', obj => formatFullName(obj));
-    env.addFilter('date', value => formatDate(value));
+    env.addFilter('date', value =>
+      value === 'now' ? new Date() : formatDate(value)
+    );
     env.addFilter('htmlDate', value => formatHtmlDate(value));
     env.addFilter('htmlYearMonth', value => formatHtmlDate(value).slice(0, 7));
+    env.addFilter('longMonth', (month: number) =>
+      this.translator.translate('common-month-long', {
+        date: new Date(2023, month, 15)
+      })
+    );
+    env.addFilter('year', (date: Date) => getYear(date));
     env.addFilter('zip', (left, right) => ArrayUtils.zip(left, right));
     env.addFilter('merge', (left, right) => {
       const result = {};
@@ -93,6 +102,8 @@ export class NunjucksTemplates implements ITemplates {
       ctx['view_name'] = this.resolver.getName(req.url);
 
       ctx['asset'] = (path: string) => `${assetsRoot}/${path}`;
+
+      ctx['now'] = new Date();
 
       next();
     });

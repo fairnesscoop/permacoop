@@ -1,8 +1,3 @@
-.pc-center {
-  display: grid;
-  place-items: center;
-}
-
 .pc-m {
   margin: var(--m);
 }
@@ -23,12 +18,10 @@
   padding: var(--p);
 }
 
-.pc-text--center {
-  text-align: center;
+.pc-p-block {
+  padding-block: var(--p-block);
 }
 
-.pc-raw-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.pc-stack > * + * {
+  margin-top: var(--stack-spacing, calc(2 * var(--w)));
 }

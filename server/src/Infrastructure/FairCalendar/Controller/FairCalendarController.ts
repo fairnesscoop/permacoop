@@ -40,7 +40,11 @@ export class FairCalendarController {
     @Query() dto: FairCalendarControllerDTO,
     @LoggedUser() user: User
   ) {
-    const date = dto.date ? new Date(dto.date) : new Date();
+    const date =
+      dto.month !== undefined && dto.year !== undefined
+        ? new Date(dto.year, dto.month, 15)
+        : new Date();
+
     const userId = dto.userId ? dto.userId : user['id'];
 
     const users: UserView[] = await this.queryBus.execute(new GetUsersQuery());
@@ -86,11 +90,20 @@ export class FairCalendarController {
       };
     });
 
+    const currentYear = date.getFullYear();
+    const minYear = dto.minYear ?? currentYear - 5;
+    const maxYear = dto.maxYear ?? currentYear;
+
     return {
       users,
+      overviewTable,
       fullCalendarEvents,
       date,
-      overviewTable
+      currentMonth: date.getMonth(),
+      currentYear: date.getFullYear(),
+      minYear,
+      maxYear,
+      userId
     };
   }
 }

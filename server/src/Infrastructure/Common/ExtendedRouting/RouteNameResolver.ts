@@ -66,7 +66,9 @@ export class RouteNameResolver {
   }
 
   public getName(path: string): string | null {
-    const parts = this.splitPath([path]);
+    const pathWithoutQueryString = path.split('?')[0];
+
+    const parts = this.splitPath([pathWithoutQueryString]);
 
     const entries = Array.from(this.nameMap.entries());
     entries.sort(

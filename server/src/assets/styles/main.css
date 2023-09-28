@@ -2,6 +2,5 @@
 @import './_reset.css';
 @import './_defaults.css';
 @import './_blocks/index.css';
-@import './_utilities.css';
 @import './_utilities/index.css';
 @import './_overrides.css';
