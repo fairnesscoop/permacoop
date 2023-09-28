@@ -12,7 +12,6 @@ import { Task } from 'src/Domain/Task/Task.entity';
 import { Project } from 'src/Domain/Project/Project.entity';
 import { ProjectRepository } from '../Project/Repository/ProjectRepository';
 import { DateUtilsAdapter } from '../Adapter/DateUtilsAdapter';
-import { GetFairCalendarOverview } from 'src/Domain/FairCalendar/GetFairCalendarOverview';
 import { GetMonthlyFairCalendarQueryHandler } from 'src/Application/FairCalendar/Query/GetMonthlyFairCalendarQueryHandler';
 import { GetEventByIdQueryHandler } from 'src/Application/FairCalendar/Query/GetEventByIdQueryHandler';
 import { DoesEventBelongToUser } from 'src/Domain/FairCalendar/Specification/DoesEventBelongToUser';
@@ -26,12 +25,18 @@ import { FairCalendarController } from './Controller/FairCalendarController';
 import { AddEventController } from './Controller/AddEventController';
 import { EditEventController } from './Controller/EditEventController';
 import { DeleteEventController } from './Controller/DeleteEventController';
+import { FairCalendarOverviewFactory } from 'src/Domain/FairCalendar/FairCalendarOverviewFactory';
+import { FairCalendarOverviewTableFactory } from './Table/FairCalendarOverviewTableFactory';
+import { TranslationsModule } from '../Translations/translations.module';
+import { TablesModule } from '../Tables/tables.module';
 
 @Module({
   imports: [
     BusModule,
     ConfigModule,
-    TypeOrmModule.forFeature([Project, Event, Task, Leave, Cooperative])
+    TypeOrmModule.forFeature([Project, Event, Task, Leave, Cooperative]),
+    TranslationsModule,
+    TablesModule
   ],
   controllers: [
     FairCalendarController,
@@ -55,7 +60,8 @@ import { DeleteEventController } from './Controller/DeleteEventController';
     UpdateEventCommandHandler,
     GetEventByIdQueryHandler,
     DoesEventBelongToUser,
-    GetFairCalendarOverview
+    FairCalendarOverviewFactory,
+    FairCalendarOverviewTableFactory
   ]
 })
 export class FairCalendarModule {}

@@ -18,6 +18,8 @@ import { LoggedUser } from 'src/Infrastructure/HumanResource/User/Decorator/Logg
 import { UserView } from 'src/Application/HumanResource/User/View/UserView';
 import { GetUsersQuery } from 'src/Application/HumanResource/User/Query/GetUsersQuery';
 import { FairCalendarView } from 'src/Application/FairCalendar/View/FairCalendarView';
+import { FairCalendarOverviewFactory } from 'src/Domain/FairCalendar/FairCalendarOverviewFactory';
+import { FairCalendarOverviewTableFactory } from '../Table/FairCalendarOverviewTableFactory';
 
 @Controller('app/faircalendar')
 @UseGuards(IsAuthenticatedGuard)
@@ -26,7 +28,9 @@ export class FairCalendarController {
     @Inject('IQueryBus')
     private readonly queryBus: IQueryBus,
     @Inject('ITranslator')
-    private readonly translator: ITranslator
+    private readonly translator: ITranslator,
+    private overviewFactory: FairCalendarOverviewFactory,
+    private overviewTableFactory: FairCalendarOverviewTableFactory
   ) {}
 
   @Get()
@@ -44,6 +48,9 @@ export class FairCalendarController {
     const events: FairCalendarView[] = await this.queryBus.execute(
       new GetMonthlyFairCalendarQuery(date, userId)
     );
+
+    const overview = await this.overviewFactory.create(events);
+    const overviewTable = this.overviewTableFactory.create(overview);
 
     const fullCalendarEvents = events.map(event => {
       let title = `${minutesToHours(event.time)} - `;
@@ -82,7 +89,8 @@ export class FairCalendarController {
     return {
       users,
       fullCalendarEvents,
-      date
+      date,
+      overviewTable
     };
   }
 }

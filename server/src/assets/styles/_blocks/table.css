@@ -1,5 +1,9 @@
 .pc-table-wrapper {
   overflow-x: auto;
+  border: 1px solid var(--border-default);
+}
+
+.pc-table-wrapper:not(.pc-table--no-shadow) {
   box-shadow: var(--shadow-default);
 }
 
@@ -12,10 +16,17 @@ table.pc-table {
 
 .pc-table thead {
   font-weight: var(--font-weight-md);
-  text-align: left;
   color: var(--text-muted);
   text-transform: uppercase;
   background-color: var(--background-alt-grey);
+}
+
+.pc-table-wrapper:not(.pc-table--center) thead {
+  text-align: left;
+}
+
+.pc-table--center {
+  text-align: center;
 }
 
 @media (prefers-color-scheme: dark) {

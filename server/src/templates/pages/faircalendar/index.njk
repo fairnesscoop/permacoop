@@ -26,6 +26,8 @@
         </div>
     </form>
 
+    {% table overviewTable, { attr: {class: 'pc-table--center pc-table--no-shadow pc-m', style: '--m: calc(2 * var(--w)) 0'} } %}
+
     <pc-fullcalendar
         data-events-json="{{ fullCalendarEvents|dump }}"
         data-add-url-template="{{ path('faircalendar_events_add', { date: '__date__' }) }}"

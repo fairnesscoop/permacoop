@@ -45,6 +45,11 @@ faircalendar-projectId-title = Projet
 faircalendar-time-title = Temps passé
 faircalendar-filters-month-title = Filtrer par mois
 faircalendar-filters-userId-title = Filtrer par coopérateur-salarié
+faircalendar-overview-days = {$days ->
+    [0] 0
+    [1] 1 jour
+    *[other] {$days} jours
+}
 
 crm-title = FairCRM
 

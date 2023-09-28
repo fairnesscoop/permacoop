@@ -4,13 +4,13 @@ import { CooperativeNotFoundException } from '../Settings/Repository/Cooperative
 import { ICooperativeRepository } from '../Settings/Repository/ICooperativeRepository';
 import { ICalendarOverview } from './ICalendarOverview';
 
-export class GetFairCalendarOverview {
+export class FairCalendarOverviewFactory {
   constructor(
     @Inject('ICooperativeRepository')
     private readonly cooperativeRepository: ICooperativeRepository
   ) {}
 
-  public async index(items: FairCalendarView[]): Promise<ICalendarOverview> {
+  public async create(items: FairCalendarView[]): Promise<ICalendarOverview> {
     const cooperative = await this.cooperativeRepository.find();
     if (!cooperative) {
       throw new CooperativeNotFoundException();

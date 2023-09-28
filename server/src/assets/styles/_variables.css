@@ -47,9 +47,9 @@
   --event-support-background: rgb(229, 237, 255);
   --event-support-border: rgb(229, 237, 255);
   --event-support-text: rgb(81, 69, 205);
-  --event-formation_conference-background: rgb(254, 236, 220);
-  --event-formation_conference-border: rgb(254, 236, 220);
-  --event-formation_conference-text: rgb(180, 52, 3);
+  --event-formationConference-background: rgb(254, 236, 220);
+  --event-formationConference-border: rgb(254, 236, 220);
+  --event-formationConference-text: rgb(180, 52, 3);
   --event-leave-background: rgb(253, 246, 178);
   --event-leave-border: rgb(253, 246, 178);
   --event-leave-text: rgb(142, 75, 16);
@@ -80,9 +80,9 @@
     --event-support-background: rgb(81, 69, 205);
     --event-support-border: rgb(81, 69, 205);
     --event-support-text: var(--text-default);
-    --event-formation_conference-background: rgb(180, 52, 3);
-    --event-formation_conference-border: rgb(180, 52, 3);
-    --event-formation_conference-text: var(--text-default);
+    --event-formationConference-background: rgb(180, 52, 3);
+    --event-formationConference-border: rgb(180, 52, 3);
+    --event-formationConference-text: var(--text-default);
     --event-other-background: rgb(36, 38, 45);
     --event-other-border: rgb(36, 38, 45);
     --event-other-text: var(--text-default);
