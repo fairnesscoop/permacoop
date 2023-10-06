@@ -1,19 +1,15 @@
 {% extends 'layouts/_base.njk' %}
+{% import 'macros/icons.njk' as icons %}
+
+{% block body_attr %}class="pc-relative"{% endblock %}
 
 {% block body %}
-    <div class="pc-grid pc-grid--templated pc-h" style="--grid-template: 'brand header' auto 'nav content' 1fr / 18rem 1fr; --h: 100vh">
-        <div class="pc-grid-area pc-p pc-z-index pc-background-default" style="--grid-area: brand; --p: calc(3 * var(--v)) calc(6 * var(--v)); --z: 2">
-            <a href="{{ path('home') }}" class="pc-brand">
-                <img src="{{ asset('images/logo.png') }}" alt="Fairness"/>
-                {{ "site-title"|trans }}
-            </a>
-        </div>
+    {% include 'components/header.njk' %}
 
-        {% include 'components/header.njk' %}
-
+    <div class="pc-with-sidebar" style="--sidebar-size: 40ch; --non-sidebar-min-size: 60%">
         {% include 'components/nav.njk' %}
 
-        <main class="pc-grid-area pc-p pc-background-alt-grey" style="--grid-area: content; --p: calc(3 * var(--w)) 0">
+        <main class="pc-background-alt-grey pc-p" style="--p: calc(3 * var(--w)) 0">
             {% block main %}{% endblock main %}
         </main>
     </div>

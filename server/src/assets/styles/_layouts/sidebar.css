@@ -1,0 +1,17 @@
+.pc-with-sidebar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.pc-with-sidebar > :first-child {
+  flex-basis: var(--sidebar-size, 20rem);
+  flex-grow: 1;
+}
+
+.pc-with-sidebar > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: var(--non-sidebar-min-size, 50%);
+}

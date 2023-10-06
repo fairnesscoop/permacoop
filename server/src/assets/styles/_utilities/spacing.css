@@ -21,7 +21,3 @@
 .pc-p-block {
   padding-block: var(--p-block);
 }
-
-.pc-stack > * + * {
-  margin-top: var(--stack-spacing, calc(2 * var(--w)));
-}

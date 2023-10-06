@@ -1,6 +1,7 @@
 @import './_variables.css';
 @import './_reset.css';
 @import './_defaults.css';
+@import './_layouts/index.css';
 @import './_blocks/index.css';
 @import './_utilities/index.css';
 @import './_overrides.css';

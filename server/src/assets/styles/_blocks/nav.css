@@ -1,5 +1,27 @@
 .pc-nav {
   color: var(--text-muted);
+  display: none;
+}
+
+#pc-nav-toggle {
+  background-color: transparent;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.pc-nav-open {
+  display: block;
+}
+
+@media screen and (min-width: 840px) {
+  #pc-nav-toggle {
+    display: none;
+  }
+  .pc-nav {
+    display: block;
+  }
 }
 
 .pc-nav ul {

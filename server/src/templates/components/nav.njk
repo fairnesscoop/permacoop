@@ -1,6 +1,6 @@
 {% import 'macros/icons.njk' as icons %}
 
-<nav class="pc-nav pc-grid-area pc-z-index" style="--grid-area: nav; --z: 2">
+<nav class="pc-nav pc-p" style="--p: calc(2 * var(--w)) 0" data-nav-toggle-target="nav">
     <ul>
         <li class="pc-nav-entry">
             <a href="{{ path('home') }}" class="pc-link-btn pc-icon--left" {% if view_name == 'home' %}aria-current="page"{% endif %}>

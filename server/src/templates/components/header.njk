@@ -1,6 +1,15 @@
 {% import 'macros/icons.njk' as icons %}
 
-<header class="pc-grid-area pc-flex-end pc-z-index pc-shadow pc-p" style="--grid-area: header; --z: 1; --p: calc(3 * var(--v)) calc(6 * var(--v))">
+<header class="pc-cluster pc-relative pc-z-index pc-shadow pc-p" style="--cluster-justify: space-between; --z: 1; --p: calc(3 * var(--v)) calc(6 * var(--v))">
+    <button id="pc-nav-toggle" is="pc-nav-toggle">
+        {{ icons.menu() }}
+    </button>
+
+    <a href="{{ path('home') }}" class="pc-brand">
+        <img src="{{ asset('images/logo.png') }}" alt="Fairness"/>
+        {{ "site-title"|trans }}
+    </a>
+
     <details class="pc-dropdown" title="{{ 'header-dropdown'|trans }}">
         <summary class="pc-center pc-circle pc-background-muted pc-w pc-h" style="--w: calc(8 * var(--v)); --h: calc(8 * var(--v))">
             {{ req.user.firstName|first|capitalize }}
