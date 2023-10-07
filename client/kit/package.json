@@ -43,7 +43,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "jsdom": "^20.0.1",
-    "postcss": "^8.4.19",
+    "postcss": "^8.4.31",
     "prettier": "^2.6.2",
     "prettier-plugin-svelte": "^2.7.0",
     "start-server-and-test": "^1.14.0",
