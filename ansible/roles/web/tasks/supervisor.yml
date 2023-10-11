@@ -7,23 +7,8 @@
     mode: 0644
   become: true
 
-- name: Ensure api is running
-  supervisorctl: name=api state=present
-  become: true
-  notify: reload nginx
-
-- name: Ensure client-legacy is running
-  supervisorctl: name=client-legacy state=present
-  become: true
-  notify: reload nginx
-
-- name: Ensure client-kit is running
-  supervisorctl: name=client-kit state=present
-  become: true
-  notify: reload nginx
-
-- name: Ensure client-proxy is running
-  supervisorctl: name=client-proxy state=present
+- name: Ensure server is running
+  supervisorctl: name=server state=present
   become: true
   notify: reload nginx
 

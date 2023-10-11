@@ -6,7 +6,3 @@ build:
       tests:
         override:
           - js-scrutinizer-run
-filter:
-  excluded_paths:
-    - 'client/legacy/static'
-    - 'client/legacy/src/store'

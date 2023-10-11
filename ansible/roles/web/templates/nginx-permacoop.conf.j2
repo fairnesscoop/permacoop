@@ -2,12 +2,8 @@ add_header X-Frame-Options "DENY";
 add_header X-Content-Type-Options "nosniff";
 add_header X-XSS-Protection "1; mode=block";
 
-upstream client_proxy {
-    server 127.0.0.1:{{ client_proxy_port }};
-}
-
-upstream api {
-    server 127.0.0.1:{{ api_port }};
+upstream server {
+    server 127.0.0.1:{{ server_port }};
 }
 
 server {
@@ -39,13 +35,8 @@ server {
         log_not_found off;
     }
 
-    location /api/ {
-        include proxy_params;
-        proxy_pass http://api$request_uri;
-    }
-
     location / {
         include proxy_params;
-        proxy_pass http://client_proxy/;
+        proxy_pass http://server$request_uri;
     }
 }

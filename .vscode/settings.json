@@ -8,14 +8,6 @@
 	"eslint.format.enable": true,
 	"eslint.lintTask.enable": true,
 	"eslint.workingDirectories": [
-        {
-            "directory": "./client/legacy",
-            "changeProcessCWD": true
-        },
-        {
-            "directory": "./client/kit",
-            "changeProcessCWD": true
-        },
 		{
             "directory": "./server",
             "changeProcessCWD": true
