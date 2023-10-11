@@ -10,8 +10,8 @@
 
     <h1>{{ title }}</h1>
 
-    <div class="pc-grid pc-grid--templated pc-gap" style="--grid-template: auto / auto 1fr">
-        {% include './_filters_form.njk' %}
+    <div class="pc-with-sidebar pc-gap" style="--sidebar-size: 18ch; --non-sidebar-min-size: 80%">
+        {% include './_filters.njk' %}
 
         <div id="faircalendar" class="pc-stack">
             {% table overviewTable, { attr: {class: 'pc-table--center pc-table--no-shadow'} } %}

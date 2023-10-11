@@ -1,4 +1,5 @@
 .pc-nav {
+  background-color: var(--background-default);
   color: var(--text-muted);
   display: none;
 }
@@ -11,8 +12,13 @@
   cursor: pointer;
 }
 
-.pc-nav-open {
+.pc-nav--open {
+  position: fixed;
+  min-width: 100vw;
+  min-height: 100vh;
+  z-index: 999;
   display: block;
+  box-shadow: var(--shadow-default);
 }
 
 @media screen and (min-width: 840px) {
@@ -21,6 +27,12 @@
   }
   .pc-nav {
     display: block;
+    /* Undo mobile open styles */
+    position: static;
+    min-width: unset;
+    min-height: unset;
+    z-index: unset;
+    box-shadow: none;
   }
 }
 
@@ -66,10 +78,19 @@
   background-color: var(--background-action-violet);
 }
 
-/* Active link groups get showcased less prominently */
+/* Active link groups get showcased, but less prominently */
 
 .pc-nav .pc-nav-entry.active summary {
   color: var(--text-default);
+}
+
+/* Link groups are shown in a box */
+
+.pc-nav details ul {
+  margin-inline: calc(3 * var(--w));
+  box-shadow: var(--shadow-inner);
+  background-color: var(--background-alt-grey);
+  border-radius: var(--radius-sm);
 }
 
 /* First-level links get a hover effect */
@@ -89,13 +110,4 @@
   content: '⌄';
   font-size: var(--font-size-lg);
   margin-left: auto;
-}
-
-/* Link groups are shown in a box */
-
-.pc-nav details ul {
-  margin-inline: calc(3 * var(--w));
-  box-shadow: var(--shadow-inner);
-  background-color: var(--background-alt-grey);
-  border-radius: var(--radius-sm);
 }

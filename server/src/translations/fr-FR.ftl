@@ -13,6 +13,9 @@ common-month-long = {DATETIME($date, month: "long")}
 
 site-title = Permacoop
 
+nav-open = Ouvrir la navigation principale
+nav-title = Navigation principale
+
 header-profile = Mon compte
 header-dropdown = Voir plus d'actions
 header-logout = Se déconnecter
