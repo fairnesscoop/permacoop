@@ -1,0 +1,6 @@
+{% import 'macros/icons.njk' as icons %}
+
+<button is="pc-theme-toggler" aria-hidden="true" class="pc-btn pc-btn--secondary pc-btn--circle pc-w pc-h" style="--wi: calc(4 * var(--w)); --h: calc(4 * var(--w))">
+    {{ icons.sun({id: 'theme-light'}) }}
+    {{ icons.moon({id: 'theme-dark'}) }}
+</button>

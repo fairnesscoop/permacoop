@@ -1,0 +1,7 @@
+[data-theme='dark'] #theme-dark {
+  display: none;
+}
+
+[data-theme='light'] #theme-light {
+  display: none;
+}

@@ -12,6 +12,12 @@
   background-color: var(--hover-tint);
 }
 
+.pc-btn--secondary {
+  --hover-tint: var(--background-muted-hover);
+  background-color: var(--background-default);
+  color: var(--text-action-violet-on-background-default);
+}
+
 .pc-btn--error {
   --hover-tint: var(--background-error-hover);
   background-color: var(--background-error);
@@ -22,4 +28,11 @@
   --hover-tint: var(--background-muted-hover);
   background-color: var(--background-muted);
   color: var(--text-on-muted);
+}
+
+.pc-btn--circle {
+  border-radius: 50%;
+  padding: 0;
+  display: grid;
+  place-items: center;
 }

@@ -105,6 +105,8 @@ export class NunjucksTemplates implements ITemplates {
 
       ctx['now'] = new Date();
 
+      ctx['theme'] = req.cookies.theme;
+
       next();
     });
 

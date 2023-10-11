@@ -1,11 +1,14 @@
 {% from 'macros/attr.njk' import render_attr %}
 
-{% macro _icon(attr=null, paths=[], mode='stroke') %}
-  {% set attr = attr|default({}) %}
+{% macro svg_attr(attr=null, mode='stroke') %}
   {% set attr = attr|merge({ class: 'pc-icon pc-icon--sm ' + attr.class|default('') }) %}
-  {% set attr = attr|merge({ 'aria-hidden': 'true', fill: 'none', viewBox: '0 0 24 24' }) %}
+  {% set attr = attr|merge({ 'aria-hidden': 'true', fill: 'none', viewBox: attr.viewBox|default('0 0 24 24') }) %}
   {% set attr = attr|merge({ stroke: 'currentColor' } if mode == 'stroke' else { fill: 'currentColor' }) %}
-  <svg {{ render_attr(attr) }}>
+  {{- render_attr(attr) -}}
+{% endmacro %}
+
+{% macro _icon(attr=null, paths=[], mode='stroke') %}
+  <svg {{ svg_attr(attr, mode=mode) }}>
     {% for d in paths %}
       <path d="{{ d }}" {% if mode == 'stroke' %}stroke-linecap="round" stroke-linejoin="round" stroke-width="2"{% endif %} />
     {% endfor %}
@@ -70,4 +73,18 @@
 
 {% macro menu(attr=null) %}
   {{ _icon(attr, mode='fill', paths=["M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"]) }}
+{% endmacro %}
+
+{% macro sun(attr=null) %}
+  {% set attr = attr|merge({viewBox: '0 0 20 20'}) %}
+  <svg {{ svg_attr(attr, mode='fill') }}>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>
+  </svg>
+{% endmacro %}
+
+{% macro moon(attr=null) %}
+  {% set attr = attr|merge({viewBox: '0 0 20 20'}) %}
+  <svg {{ svg_attr(attr, mode='fill') }}>
+    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+  </svg>
 {% endmacro %}

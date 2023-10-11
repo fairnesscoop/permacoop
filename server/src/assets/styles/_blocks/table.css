@@ -29,10 +29,8 @@ table.pc-table {
   text-align: center;
 }
 
-@media (prefers-color-scheme: dark) {
-  .pc-table thead {
-    background-color: var(--background-default);
-  }
+[data-theme='dark'] .pc-table thead {
+  background-color: var(--background-default);
 }
 
 .pc-table th,

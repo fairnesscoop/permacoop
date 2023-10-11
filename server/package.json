@@ -46,6 +46,7 @@
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "connect-pg-simple": "^9.0.0",
+    "cookie-parser": "^1.4.6",
     "crypto": "^1.0.1",
     "date-fns": "^2.8.1",
     "express-session": "^1.17.3",

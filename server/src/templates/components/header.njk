@@ -10,27 +10,32 @@
         {{ "site-title"|trans }}
     </a>
 
-    <details class="pc-dropdown" title="{{ 'header-dropdown'|trans }}">
-        <summary class="pc-center pc-circle pc-background-muted pc-w pc-h" style="--w: calc(8 * var(--v)); --h: calc(8 * var(--v))">
-            {{ req.user.firstName|first|capitalize }}
-        </summary>
+    <div class="pc-cluster pc-gap" style="--cluster-align: center">
+        {% include 'components/theme_toggler.njk' %}
 
-        <ul class="pc-raw-list">
-            <li>
-                <a href="{{ path('profile_edit') }}" class="pc-link-btn pc-icon--left">
-                    {{ icons.user() }}
-                    {{ 'header-profile'|trans }}
-                </a>
-            </li>
-            <li>
-                <form method="POST" action="{{ path('logout') }}">
-                    <button type="submit" class="pc-link-btn pc-icon--left">
-                        {{ icons.logout() }}
-                        {{ 'header-logout'|trans }}
-                    </button>
-                </form>
-            </li>
-        </ul>
+        <details class="pc-dropdown" title="{{ 'header-dropdown'|trans }}">
+            <summary class="pc-btn pc-btn--muted pc-btn--circle pc-w pc-h" style="--wi: calc(8 * var(--v)); --h: calc(8 * var(--v))">
+                {{ req.user.firstName|first|capitalize }}
+            </summary>
 
-    </details>
+            <ul class="pc-raw-list">
+                <li>
+                    <a href="{{ path('profile_edit') }}" class="pc-link-btn pc-icon--left">
+                        {{ icons.user() }}
+                        {{ 'header-profile'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <form method="POST" action="{{ path('logout') }}">
+                        <button type="submit" class="pc-link-btn pc-icon--left">
+                            {{ icons.logout() }}
+                            {{ 'header-logout'|trans }}
+                        </button>
+                    </form>
+                </li>
+            </ul>
+
+        </details>
+    </div>
+
 </header>

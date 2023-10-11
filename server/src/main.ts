@@ -5,6 +5,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import * as helmet from 'helmet';
 import * as session from 'express-session';
+import * as cookieParser from 'cookie-parser';
 import * as connectPgSimple from 'connect-pg-simple';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
@@ -22,6 +23,7 @@ async function bootstrap() {
   });
 
   app.use(helmet());
+  app.use(cookieParser());
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
