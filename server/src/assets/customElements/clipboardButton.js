@@ -1,7 +1,7 @@
 export default class extends HTMLButtonElement {
   connectedCallback() {
     /** @type {HTMLInputElement|null} */
-    const sourceEl = document.querySelector(this.dataset.clipboardSource);
+    const sourceEl = document.querySelector(this.dataset.clipboardButtonSource);
 
     if (!sourceEl) {
       throw new Error('Source element not found');

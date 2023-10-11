@@ -7,4 +7,5 @@
 
 .fc-view-harness {
   background-color: var(--background-default);
+  z-index: 0;
 }

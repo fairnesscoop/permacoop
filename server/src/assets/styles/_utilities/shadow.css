@@ -1,3 +1,7 @@
 .pc-shadow {
   box-shadow: var(--shadow-default);
 }
+
+.pc-shadow-inner {
+  box-shadow: var(--shadow-inner);
+}

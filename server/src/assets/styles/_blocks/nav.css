@@ -13,10 +13,11 @@
 }
 
 .pc-nav--open {
-  position: fixed;
+  position: absolute;
+  top: 0;
   min-width: 100vw;
   min-height: 100vh;
-  z-index: 999;
+  z-index: 1;
   display: block;
   box-shadow: var(--shadow-default);
 }

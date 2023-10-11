@@ -25,7 +25,7 @@
             <input id="calendarUrl" class="pc-input" type="text" readonly value="{{ url('people_leaves_calendar') }}?token={{ calendarToken }}">
         </div>
         <div>
-            <button is="pc-clipboard" class="pc-btn pc-btn--muted" data-clipboard-source="#calendarUrl" title="{{ 'clipboard-copy'|trans }}">
+            <button is="pc-clipboard-button" class="pc-btn pc-btn--muted" data-clipboard-button-source="#calendarUrl" title="{{ 'clipboard-copy'|trans }}">
                 {{ icons.clipboard() }}
             </button>
         </div>

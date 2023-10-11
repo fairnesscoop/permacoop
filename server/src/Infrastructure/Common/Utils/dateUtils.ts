@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 export const minutesToHours = (value: number): string => {
   const hours = Math.floor(value / 60);
@@ -15,7 +15,10 @@ export const minutesToHours = (value: number): string => {
   return `${hours}h${minutes}`;
 };
 
-export const formatDate = (value: Date): string => {
+export const formatDate = (value: Date | string): string => {
+  if (typeof value === 'string') {
+    value = parseISO(value);
+  }
   return format(value, 'dd/MM/yyyy');
 };
 

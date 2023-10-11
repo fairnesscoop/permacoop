@@ -86,41 +86,6 @@ profile-password = Mot de passe
 
 people-title = FairRH
 
-users-title = Coopérateur·ices et salarié·es
-users-add-title = Ajouter un·e coopérateur·ice-salarié·e
-users-edit-title = Mise à jour des informations administratives de {$user}
-users-firstName = Prénom
-users-lastName = Nom
-users-email = Adresse e-mail
-users-role = Rôle
-users-role-value = {$role ->
-    [cooperator] Coopérateur·ice
-    [employee] Salarié·e
-    [accountant] Comptable
-    *[other] Autre
-}
-users-contract = Contrat de travail
-users-contract-value = {$contract ->
-    [cdi] CDI
-    [cdd] CDD
-    [ctt] CTT
-    [apprenticeship] Apprentissage
-    [professionalization] Professionalisation
-    *[other] Autre
-}
-users-workingTime = Temps de travail
-users-workingTime-value = {$workingTime ->
-    [full_time] Temps plein
-    [part_time] Temps partiel
-    *[other] Autre
-}
-users-executivePosition = Statut cadre
-users-healthInsurance = Mutuelle
-users-annualEarnings = Salaire annuel brut
-users-transportFee = Frais de transport
-users-sustainableMobilityFee = Forfait mobilité durable
-users-joiningDate = Date d'entrée
-users-leavingDate = Date de sortie
 
 leaves-title = Congés
 leaves-user = Coopérateur·ice - salarié·e
@@ -199,5 +164,42 @@ meal-tickets-num-tickets = Nb tickets restaurant
 meal-tickets-num-exceptions = Nb exceptions
 meal-tickets-add-removal-title = Ajouter une exception
 meal-tickets-removal-date = Je ne souhaite pas recevoir de ticket restaurant pour la date du :
+
+
+users-title = Coopérateur·ices et salarié·es
+users-add-title = Ajouter un·e coopérateur·ice-salarié·e
+users-edit-title = Mise à jour des informations administratives de {$user}
+users-firstName = Prénom
+users-lastName = Nom
+users-email = Adresse e-mail
+users-role = Rôle
+users-role-value = {$role ->
+    [cooperator] Coopérateur·ice
+    [employee] Salarié·e
+    [accountant] Comptable
+    *[other] Autre
+}
+users-contract = Contrat de travail
+users-contract-value = {$contract ->
+    [cdi] CDI
+    [cdd] CDD
+    [ctt] CTT
+    [apprenticeship] Apprentissage
+    [professionalization] Professionalisation
+    *[other] Autre
+}
+users-workingTime = Temps de travail
+users-workingTime-value = {$workingTime ->
+    [full_time] Temps plein
+    [part_time] Temps partiel
+    *[other] Autre
+}
+users-executivePosition = Statut cadre
+users-healthInsurance = Mutuelle
+users-annualEarnings = Salaire annuel brut
+users-transportFee = Frais de transport
+users-sustainableMobilityFee = Forfait mobilité durable
+users-joiningDate = Date d'entrée
+users-leavingDate = Date de sortie
 
 clipboard-copy = Copier dans le presse papier
