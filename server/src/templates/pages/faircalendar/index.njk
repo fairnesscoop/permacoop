@@ -4,6 +4,10 @@
 
 {% set title = 'faircalendar-page-title'|trans({ date: date }) %}
 
+{% block scripts %}
+    <script src="{{ asset('faircalendar.js') }}" type="module" async defer></script>
+{% endblock %}
+
 {% block main %}
 <div class="pc-container">
     {{ breadcrumb([{ title: title }]) }}

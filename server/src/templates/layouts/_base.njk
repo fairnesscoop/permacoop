@@ -4,12 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="theme-color" content="#343a40" />
-    <link rel="stylesheet" href="{{ asset('app.css') }}">
+    <link rel="stylesheet" href="{{ asset('main.css') }}">
     <title>{% block title %}Permacoop{% endblock %}</title>
-    <script src="{{ asset('app.js') }}" type="module" async defer></script>
+    <script src="{{ asset('main.js') }}" type="module" async defer></script>
   </head>
   {% block header %}{% endblock %}
   <body {% block body_attr %}{% endblock %}>
     {% block body %}{% endblock %}
+    {% block scripts %}{% endblock %}
   </body>
 </html>

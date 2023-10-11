@@ -48,12 +48,12 @@ rm: stop  ## Stop and remove containers
 ps: ## Show running containers
 	make compose CMD=ps
 
-build: build-server build-assets ## Build dist
+build: dist assets ## Build dist and assets
 
-build-server:
+dist:
 	cd server && npm run build
 
-build-assets:
+assets:
 	cd server && npm run assets:build
 
 start-dist: up ## Serve built server
