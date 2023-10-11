@@ -1,7 +1,10 @@
 {% extends 'layouts/app.njk' %}
+{% from 'macros/breadcrumb.njk' import breadcrumb %}
 
 {% block main %}
 <div class="pc-container">
+    {{ breadcrumb([]) }}
+
     <h1>{{ 'home-title'|trans({ user: req.user|fullName }) }}</h1>
 
     <h2>

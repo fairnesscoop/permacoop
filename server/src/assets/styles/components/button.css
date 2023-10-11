@@ -13,7 +13,7 @@
 }
 
 .pc-btn--secondary {
-  --hover-tint: var(--background-muted-hover);
+  --hover-tint: var(--background-muted);
   background-color: var(--background-default);
   color: var(--text-action-violet-on-background-default);
 }
@@ -33,6 +33,8 @@
 .pc-btn--circle {
   border-radius: 50%;
   padding: 0;
+  width: var(--button-size, calc(4 * var(--w)));
+  height: var(--button-size, calc(4 * var(--w)));
   display: grid;
   place-items: center;
 }

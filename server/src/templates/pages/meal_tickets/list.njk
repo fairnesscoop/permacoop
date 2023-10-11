@@ -5,10 +5,10 @@
 {% set title = 'meal-tickets-title'|trans %}
 
 {% block main %}
-<div class="pc-container">
+<div class="pc-container pc-stack">
     {{ breadcrumb([{ title: 'people-title'|trans }, { title: title }]) }}
 
-    <div class="pc-row pc-row--middle pc-row--between">
+    <div class="pc-cluster pc-gap" style="--cluster-justify: space-between; --cluster-align: center">
         <h1 class="pc-m" style="--m: 0">
             {{ title }}
         </h1>
@@ -18,6 +18,6 @@
         </a>
     </div>
 
-    {% table table, { attr: {class: 'pc-mt', style: '--mt: calc(4 * var(--w))'} } %}
+    {% table table %}
 </div>
 {% endblock main %}

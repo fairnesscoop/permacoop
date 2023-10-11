@@ -1,15 +1,15 @@
-<form is="pc-faircalendar-filters-form" data-title-target="h1" data-calendar-target="#faircalendar" class="pc-stack">
+<form is="pc-faircalendar-filters-form" data-title-target="h1" data-calendar-target="#faircalendar" class="pc-cluster pc-gap" style="--cluster-align: flex-end">
     <input type="text" id="minYear" name="minYear" hidden value="{{ minYear }}">
     <input type="text" id="maxYear" name="maxYear" hidden value="{{ maxYear }}">
 
-    <div class="pc-row" style="--row-gap: 0">
+    <div class="pc-cluster" style="--cluster-align: stretch">
         <button id="previousBtn" type="button" class="pc-btn pc-btn--muted" title="Mois précédent">{{ '<' }}</button>
         <button id="todayBtn" type="button" class="pc-btn pc-btn--muted" title="Aujourd'hui">
             {{ icons.calendar() }}
         </button>
         <button id="nextBtn" type="button" class="pc-btn pc-btn--muted" title="Mois suivant">{{ '>' }}</button>
     </div>
-    <div class="pc-select-group">
+    <div class="pc-select-group pc-m" style="--m: 0">
         <label class="pc-label" for="month">{{ 'faircalendar-filters-month-title'|trans }}</label>
         <select name="month" id="month">
             {% for month in range(12) %}
@@ -17,7 +17,7 @@
             {% endfor %}
         </select>
     </div>
-    <div class="pc-select-group">
+    <div class="pc-select-group pc-m" style="--m: 0">
         <label class="pc-label" for="year">{{ 'faircalendar-filters-year-title'|trans }}</label>
         <select name="year" id="year">
             {% for year in range(minYear, maxYear + 1) %}
@@ -25,7 +25,7 @@
             {% endfor %}
         </select>
     </div>
-    <div class="pc-select-group">
+    <div class="pc-select-group pc-m" style="--m: 0">
         <label class="pc-label" for="userId">{{ 'faircalendar-filters-userId-title'|trans }}</label>
         <select name="userId" id="userId">
             {% for user in users %}

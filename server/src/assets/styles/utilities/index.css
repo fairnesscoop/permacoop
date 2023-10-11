@@ -1,14 +1,7 @@
 @import './background.css';
-@import './border.css';
-@import './container.css';
-@import './flex.css';
 @import './gap.css';
-@import './grid.css';
 @import './list.css';
 @import './placement.css';
-@import './row.css';
 @import './shadow.css';
-@import './sizing.css';
 @import './spacing.css';
 @import './text.css';
-@import './z-index.css';

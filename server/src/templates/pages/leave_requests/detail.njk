@@ -5,19 +5,19 @@
 {% set title = 'leave-requests-edit-title'|trans({ user: leaveRequest.user|fullName }) %}
 
 {% block main %}
-<div class="pc-container">
+<div class="pc-container pc-stack">
     {{ breadcrumb([{ title: 'people-title'|trans }, { title: 'leaves-title'|trans, href: path('people_leaves_list') }, { title: 'leave-requests-title'|trans, href: path('people_leave_requests_list') }, { title: title }]) }}
 
     <h1>{{ title }}</h1>
 
-    {% inlinetable inline, { attr: { class: 'pc-box' } } %}
+    {% inlinetable inline, { attr: { class: 'pc-card' } } %}
 
-    <div class="pc-box pc-mt" style="--mt: calc(2 * var(--w))">
+    <div class="pc-card pc-box">
         {% if canModerate %}
             <h2>{{ 'leave-requests-moderation'|trans }}</h2>
             {{ leave_request_moderation_form(leaveRequest) }}
         {% else %}
-            <p class="pc-center">{{ 'leave-requests-error-cannot-moderate'|trans }}</p>
+            <p class="pc-text--center">{{ 'leave-requests-error-cannot-moderate'|trans }}</p>
         {% endif %}
     </div>
 </div>

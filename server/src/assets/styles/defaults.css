@@ -24,10 +24,6 @@ h2 {
   line-height: 2rem;
 }
 
-main {
-  overflow-y: auto;
-}
-
 p {
   font-size: 1rem;
   margin: var(--text-spacing);

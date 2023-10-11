@@ -1,0 +1,7 @@
+.pc-m {
+  margin: var(--m);
+}
+
+.pc-p {
+  padding: var(--p);
+}

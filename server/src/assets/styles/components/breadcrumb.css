@@ -1,0 +1,13 @@
+nav.pc-breadcrumb {
+  color: var(--text-muted);
+  margin-bottom: calc(4 * var(--w));
+}
+
+.pc-breadcrumb li:not(:first-child)::before {
+  content: '/';
+  margin-inline: var(--w);
+}
+
+.pc-breadcrumb a {
+  font-weight: var(--font-weight-md);
+}

@@ -1,9 +1,0 @@
-.pc-flex-between {
-  display: flex;
-  justify-content: space-between;
-}
-
-.pc-flex-end {
-  display: flex;
-  justify-content: flex-end;
-}

@@ -5,15 +5,15 @@
 {% set title = 'payroll-elements-title'|trans %}
 
 {% block main %}
-<div class="pc-container">
+<div class="pc-container pc-stack">
     {{ breadcrumb([{ title: 'people-title'|trans }, { title: title }]) }}
 
-    <div class="pc-row pc-row--middle pc-row--between">
+    <div class="pc-cluster pc-gap" style="--cluster-justify: space-between; --cluster-align: center">
         <h1 class="pc-m" style="--m: 0">
             {{ title }}
         </h1>
 
-        <div class="pc-row pc-row--middle" style="--row-gap: calc(2 * var(--w))">
+        <div class="pc-cluster pc-gap" style="--cluster-align: center">
             <a is="pc-blob-link" data-blob-content="{{ csv }}" data-blob-mime-type="application/csv" download="{{ 'payroll-elements-filename'|trans({ date: date|htmlYearMonth }) }}" class="pc-btn">
                 {{ 'payroll-elements-download'|trans }}
             </a>
@@ -24,6 +24,6 @@
         </div>
     </div>
 
-    {% table table, { attr: { class: 'pc-mt', style: '--mt: calc(4 * var(--w))' } } %}
+    {% table table %}
 </div>
 {% endblock main %}

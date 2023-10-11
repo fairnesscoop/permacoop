@@ -1,5 +1,4 @@
-.pc-box {
+.pc-card {
   background-color: var(--background-default);
   box-shadow: var(--shadow-default);
-  padding: var(--box-padding, calc(3 * var(--w)));
 }

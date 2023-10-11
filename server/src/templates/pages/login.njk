@@ -2,11 +2,11 @@
 {% import 'macros/icons.njk' as icons %}
 {% from 'macros/attr.njk' import render_attr %}
 
-{% block body_attr %}{{ render_attr({ class: 'pc-center pc-background-alt-grey' }) }}{% endblock body_attr %}
+{% block body_attr %}{{ render_attr({ class: 'pc-h-full pc-center pc-background-alt-grey' }) }}{% endblock body_attr %}
 {% block title %}Se connecter - {{ super() }}{% endblock %}
 
 {% block main %}
-    <div class="pc-box pc-mt" style="--box-padding: 0; --mt: calc(8 * var(--w))">
+    <div class="pc-card">
         <div class="pc-grid pc-gap" style="--cols: 2">
             <img src="/public/images/login-office.jpeg" alt="" width="448px" height="411px">
             <form method="POST" action="/login" class="pc-p" style="--p: calc(4 * var(--w)) calc(6 * var(--w))">

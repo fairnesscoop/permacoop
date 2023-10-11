@@ -1,15 +1,19 @@
 body.pc-app {
   position: relative;
+  /* Ensure content fills entire screen height */
   display: flex;
   flex-direction: column;
-  /* Make it fill entire screen height */
   min-height: 100vh;
 }
 
 /* Stretch main div and its children to fill entire screen height too */
-body.pc-app > :last-child {
+.pc-app > :last-child {
   flex-grow: 1;
 }
-body.pc-app > :last-child > * {
+.pc-app > :last-child > * {
   align-self: stretch;
+}
+
+.pc-app main {
+  overflow-y: auto;
 }

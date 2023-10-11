@@ -18,7 +18,7 @@
     </div>
 
     <div class="pc-input-group">
-        <label class="pc-label" for="password" {% if require_password %}class="required"{% endif %}>{{ 'profile-password'|trans }}</label>
+        <label class="pc-label {% if require_password %}required{% endif %}" for="password">{{ 'profile-password'|trans }}</label>
         <input type="password" name="password" id="password" {% if require_password %}required{% endif %}>
     </div>
 {% endmacro %}
