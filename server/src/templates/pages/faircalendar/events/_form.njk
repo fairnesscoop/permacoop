@@ -2,7 +2,7 @@
 {% import 'macros/icons.njk' as icons %}
 {% from 'macros/attr.njk' import render_attr %}
 
-{% macro event_form(event, types, projects, tasks, times, date=null, attr=null) %}
+{% macro event_form(event, types, projects, tasks, times, startDate, endDate, attr=null) %}
 <form method="POST" {{ render_attr(attr) }}>
     <div class="pc-select-group">
         <label class="pc-label required" for="type">{{ 'faircalendar-type-title'|trans }}</label>
@@ -44,10 +44,8 @@
         </div>
     </div>
 
-    {% if date %}
-        <input type="hidden" name="startDate" value="{{ date }}T00:00:00">
-        <input type="hidden" name="endDate" value="{{ date }}T23:59:59">
-    {% endif %}
+    <input type="hidden" name="startDate" value="{{ startDate }}T00:00:00">
+    <input type="hidden" name="endDate" value="{{ endDate }}T00:00:00">
 
     {{ buttons.save(attr={type: 'submit'}) }}
 </form>

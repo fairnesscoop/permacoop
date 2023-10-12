@@ -33,7 +33,8 @@ dashboard-title = Tableau de bord
 
 faircalendar-title = FairCalendar
 faircalendar-page-title = FairCalendar {DATETIME($date, month: "long", year: "numeric")}
-faircalendar-events-add-title = Ajout d'un CRA le {$date}
+faircalendar-events-add-title = Ajout d'un CRA le {$startDate}
+faircalendar-events-add-span-title = Ajout d'un CRA du {$startDate} au {$endDate}
 faircalendar-events-edit-title = Édition du CRA du {$date}
 faircalendar-type-title = Type de CRA
 faircalendar-type-option = {$type ->

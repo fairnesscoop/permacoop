@@ -49,17 +49,39 @@ export class RouteNameResolver {
     this.nameMap.set(name, this.createPath(basePath, path));
   }
 
+  private resolveParamsInPart(part: string, params?: object): string {
+    if (!isObject(params)) {
+      return part;
+    }
+
+    // [':startDate', ':endDate']
+    const paramNames = part.match(/:([a-zA-Z\d]+)/g);
+
+    if (!paramNames) {
+      return part;
+    }
+
+    let thePart = part;
+
+    for (const paramName of paramNames) {
+      const value = params[paramName.replace(':', '')];
+
+      if (value) {
+        thePart = thePart.replace(paramName, value);
+      }
+    }
+
+    return thePart;
+  }
+
   public resolve(name: string, params?: object): string {
     if (!this.nameMap.has(name)) {
       throw new Error(`Not Found: ${name} not registered`);
     }
 
     const path = this.nameMap.get(name).reduce((path, part) => {
-      if (part.startsWith(':') && isObject(params)) {
-        const paramValue = params[part.replace(':', '')];
-        return path + '/' + (paramValue !== undefined ? paramValue : part);
-      }
-      return part ? path + '/' + part : path;
+      const thePart = this.resolveParamsInPart(part, params);
+      return thePart ? path + '/' + thePart : path;
     }, '');
 
     return path ? path : '/';

@@ -35,7 +35,7 @@ export class AddEventController {
     private readonly queryBus: IQueryBus
   ) {}
 
-  @Get(':date')
+  @Get(':startDate--:endDate')
   @WithName('faircalendar_events_add')
   @Render('pages/faircalendar/events/add.njk')
   public async get(@Param() dto: AddEventControllerDTO) {
@@ -59,7 +59,8 @@ export class AddEventController {
     const times = [...ArrayUtils.range(30, dayDuration, 30)].reverse();
 
     return {
-      date: dto.date,
+      startDate: dto.startDate,
+      endDate: dto.endDate,
       types,
       tasks: tasksPagination.items,
       projects: projectsPagination.items,

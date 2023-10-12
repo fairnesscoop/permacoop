@@ -2,7 +2,7 @@
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 {% from './_form.njk' import event_form %}
 
-{% set title = 'faircalendar-events-add-title'|trans({ date: date }) %}
+{% set title = 'faircalendar-events-add-span-title'|trans({ startDate: startDate, endDate: endDate }) if startDate != endDate else 'faircalendar-events-add-title'|trans({ startDate: startDate }) %}
 
 {% block main %}
 <div class="pc-container">
@@ -10,6 +10,6 @@
 
     <h1>{{ title }}</h1>
 
-    {{ event_form(null, types, projects, tasks, times, date, attr=={class: 'pc-card pc-box'}) }}
+    {{ event_form(null, types, projects, tasks, times, startDate, endDate, attr={class: 'pc-card pc-box'}) }}
 </div>
 {% endblock main %}

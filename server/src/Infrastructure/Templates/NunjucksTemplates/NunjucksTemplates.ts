@@ -81,7 +81,12 @@ export class NunjucksTemplates implements ITemplates {
       ctx['path'] = (name: string, params: object = {}) => {
         try {
           return this.resolver.resolve(name, params);
-        } catch {
+        } catch (err) {
+          console.error(
+            `Failed to resolve path ${name} with params ${JSON.stringify(
+              params
+            )}: ${err}`
+          );
           return '#';
         }
       };

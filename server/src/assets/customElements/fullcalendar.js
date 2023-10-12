@@ -1,6 +1,7 @@
 import { Calendar } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { format, subDays } from 'date-fns';
 
 export default class extends HTMLElement {
   constructor() {
@@ -10,8 +11,6 @@ export default class extends HTMLElement {
   connectedCallback() {
     const events = JSON.parse(this.dataset.eventsJson);
     const addUrlTemplate = this.dataset.addUrlTemplate;
-
-    // TODO: drag and drop select multiple days
 
     const calendar = new Calendar(this, {
       plugins: [interactionPlugin, dayGridPlugin],
@@ -26,17 +25,12 @@ export default class extends HTMLElement {
       dayHeaderFormat: { weekday: 'long' },
       events,
       select: info => {
-        const year = info.start.getFullYear();
-        const month = (info.start.getMonth() + 1).toString().padStart(2, '0');
-        const day = info.start
-          .getDate()
-          .toString()
-          .padStart(2, '0');
+        const startDate = format(info.start, 'yyyy-MM-dd');
+        const endDate = format(subDays(info.end, 1), 'yyyy-MM-dd');
 
-        const url = addUrlTemplate.replace(
-          '__date__',
-          `${year}-${month}-${day}`
-        );
+        const url = addUrlTemplate
+          .replace(':startDate', startDate)
+          .replace(':endDate', endDate);
 
         window.location = url;
       }

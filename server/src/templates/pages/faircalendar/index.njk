@@ -22,7 +22,7 @@
 
             <pc-fullcalendar
                 data-events-json="{{ fullCalendarEvents|dump }}"
-                data-add-url-template="{{ path('faircalendar_events_add', { date: '__date__' }) }}"
+                data-add-url-template="{{ path('faircalendar_events_add', { startDate: ':startDate', endDate: ':endDate' }) }}"
                 data-date="{{ date|htmlDate }}"
                 data-height="30rem"
             ></pc-fullcalendar>
