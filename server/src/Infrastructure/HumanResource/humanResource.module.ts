@@ -13,7 +13,6 @@ import { CreateUserCommandHandler } from 'src/Application/HumanResource/User/Com
 import { GetUsersQueryHandler } from 'src/Application/HumanResource/User/Query/GetUsersQueryHandler';
 import { IsEmailAlreadyExist } from 'src/Domain/HumanResource/User/Specification/IsEmailAlreadyExist';
 import { UpdateProfileCommandHandler } from 'src/Application/HumanResource/User/Command/UpdateProfileCommandHandler';
-import { BearerStrategy } from './User/Security/BearerStrategy';
 import { LocalStrategy } from './User/Security/LocalStrategy';
 import { UserSerializer } from './User/Security/UserSerializer';
 import { GetUserByIdQueryHandler } from 'src/Application/HumanResource/User/Query/GetUserByIdQueryHandler';
@@ -157,7 +156,6 @@ import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesC
     GetLeavesByMonthQueryHandler,
     UpdateProfileCommandHandler,
     UpdateUserCommandHandler,
-    BearerStrategy,
     LocalStrategy,
     UserSerializer,
     GetUserByIdQueryHandler,

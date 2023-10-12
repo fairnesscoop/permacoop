@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { IUserSavingsRecordRepository } from 'src/Domain/HumanResource/Savings/Repository/IUserSavingsRecordRepository';
 import { UserSavingsRecord } from 'src/Domain/HumanResource/Savings/UserSavingsRecord.entity';
 
+// TODO: remove this directory (frontend was not re-implemented)
 export class UserSavingsRecordRepository
   implements IUserSavingsRecordRepository {
   constructor(

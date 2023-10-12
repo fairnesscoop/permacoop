@@ -9,6 +9,7 @@ export class LocalAuthGuard extends AuthGuard('local') {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    // Perform log in using LocalStrategy
     await super.canActivate(context);
     const request = context.switchToHttp().getRequest() as Request;
     await super.logIn(request);

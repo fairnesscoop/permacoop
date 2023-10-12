@@ -1,5 +1,5 @@
 import { instance, mock, when } from 'ts-mockito';
-import { GetFairCalendarOverview } from './GetFairCalendarOverview';
+import { FairCalendarOverviewFactory } from './FairCalendarOverviewFactory';
 import { EventType } from './Event.entity';
 import { ICalendarOverview } from './ICalendarOverview';
 import { CooperativeRepository } from 'src/Infrastructure/Settings/Repository/CooperativeRepository';
@@ -9,13 +9,13 @@ import { ProjectView } from 'src/Application/Project/View/ProjectView';
 import { Type } from '../HumanResource/Leave/LeaveRequest.entity';
 import { CooperativeNotFoundException } from '../Settings/Repository/CooperativeNotFoundException';
 
-describe('GetFairCalendarOverview', () => {
-  let getFairCalendarOverview: GetFairCalendarOverview;
+describe('FairCalendarOverviewFactory', () => {
+  let fairCalendarOverviewFactory: FairCalendarOverviewFactory;
   let cooperativeRepository: CooperativeRepository;
 
   beforeEach(() => {
     cooperativeRepository = mock(CooperativeRepository);
-    getFairCalendarOverview = new GetFairCalendarOverview(
+    fairCalendarOverviewFactory = new FairCalendarOverviewFactory(
       instance(cooperativeRepository)
     );
   });
@@ -37,7 +37,7 @@ describe('GetFairCalendarOverview', () => {
     );
 
     try {
-      await getFairCalendarOverview.index([event1]);
+      await fairCalendarOverviewFactory.create([event1]);
     } catch (e) {
       expect(e).toBeInstanceOf(CooperativeNotFoundException);
       expect(e.message).toBe('settings.errors.cooperative_not_found');
@@ -107,7 +107,7 @@ describe('GetFairCalendarOverview', () => {
     };
 
     expect(
-      await getFairCalendarOverview.index([
+      await fairCalendarOverviewFactory.create([
         event1,
         event2,
         event3,

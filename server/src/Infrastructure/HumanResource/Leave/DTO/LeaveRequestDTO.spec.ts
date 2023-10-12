@@ -43,7 +43,7 @@ describe('LeaveRequestDTO', () => {
       isNotEmpty: 'type should not be empty'
     });
     expect(validation[1].constraints).toMatchObject({
-      isDateString: 'startDate must be a ISOString',
+      isIso8601: 'startDate must be a valid ISO 8601 date string',
       isNotEmpty: 'startDate should not be empty'
     });
     expect(validation[2].constraints).toMatchObject({
@@ -51,7 +51,7 @@ describe('LeaveRequestDTO', () => {
       isNotEmpty: 'startsAllDay should not be empty'
     });
     expect(validation[3].constraints).toMatchObject({
-      isDateString: 'endDate must be a ISOString',
+      isIso8601: 'endDate must be a valid ISO 8601 date string',
       isNotEmpty: 'endDate should not be empty'
     });
     expect(validation[4].constraints).toMatchObject({
