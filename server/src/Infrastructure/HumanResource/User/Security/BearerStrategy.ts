@@ -4,6 +4,7 @@ import { Injectable, UnauthorizedException, Inject } from '@nestjs/common';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
 
+// TODO remove
 @Injectable()
 export class BearerStrategy extends PassportStrategy(Strategy, 'bearer') {
   constructor(

@@ -1,7 +1,7 @@
 {% import 'macros/icons.njk' as icons %}
 
-<header class="pc-cluster pc-relative pc-shadow pc-p" style="--cluster-justify: space-between; z-index: 2; --p: calc(3 * var(--v)) calc(6 * var(--v))">
-    <button id="pc-nav-toggle" is="pc-nav-toggle" aria-haspopup="menu" aria-controls="pc-nav-toggle-menu" aria-label="{{ 'nav-open'|trans}}">
+<header class="pc-cluster pc-relative pc-shadow pc-p" style="--cluster-justify: space-between; z-index: 2; --p: calc(3 * var(--v)) calc(6 * var(--v))">    
+    <button is="pc-nav-menu-button" aria-haspopup="true" aria-expanded="false" aria-controls="pc-nav-menu" aria-label="{{ 'nav-open'|trans }}">
         {{ icons.menu() }}
     </button>
 
@@ -34,8 +34,6 @@
                     </form>
                 </li>
             </ul>
-
         </details>
     </div>
-
 </header>

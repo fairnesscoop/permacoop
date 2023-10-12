@@ -12,7 +12,7 @@ common-date = {DATETIME($date, month: "numeric", year: "numeric", day: "numeric"
 common-month-long = {DATETIME($date, month: "long")}
 
 site-title = Permacoop
-
+breadcrumb-title = Fil d'Ariane
 nav-open = Ouvrir la navigation principale
 nav-title = Navigation principale
 

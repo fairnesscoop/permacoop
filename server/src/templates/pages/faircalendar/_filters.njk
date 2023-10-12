@@ -1,4 +1,4 @@
-<form is="pc-faircalendar-filters-form" data-title-target="h1" data-calendar-target="#faircalendar" class="pc-cluster pc-gap" style="--cluster-align: flex-end">
+<form method="GET" action="{{ path('faircalendar_index') }}" is="pc-faircalendar-filters-form" data-title-target="h1" data-calendar-target="#faircalendar" class="pc-cluster pc-gap" style="--cluster-align: flex-end">
     <input type="text" id="minYear" name="minYear" hidden value="{{ minYear }}">
     <input type="text" id="maxYear" name="maxYear" hidden value="{{ maxYear }}">
 

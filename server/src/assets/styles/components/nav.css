@@ -1,10 +1,9 @@
 .pc-nav {
   background-color: var(--background-default);
   color: var(--text-muted);
-  display: none;
 }
 
-#pc-nav-toggle {
+[is='pc-nav-menu-button'] {
   background-color: transparent;
   border: none;
   width: 2rem;
@@ -12,35 +11,19 @@
   cursor: pointer;
 }
 
-.pc-nav--open {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  display: block;
-  box-shadow: var(--shadow-default);
-}
-
-@media screen and (min-width: 840px) {
-  #pc-nav-toggle {
-    display: none;
-  }
-  .pc-nav {
-    display: block;
-    /* Undo mobile open styles */
-    position: static;
-    min-width: unset;
-    min-height: unset;
-    z-index: unset;
-    box-shadow: none;
-  }
-}
-
 .pc-nav ul {
   list-style-type: none;
   padding: 0;
   margin-block: 0;
+}
+
+@media screen and (min-width: 840px) {
+  [is='pc-nav-menu-button'] {
+    display: none;
+  }
+  .pc-nav > ul {
+    display: block;
+  }
 }
 
 /* Links get padding to facilitate clicking */
@@ -107,7 +90,7 @@
   cursor: pointer;
 }
 
-.pc-nav details > summary::after {
+.pc-nav-dropdown::before {
   content: '⌄';
   font-size: var(--font-size-lg);
   margin-left: auto;

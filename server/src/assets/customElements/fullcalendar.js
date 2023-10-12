@@ -11,6 +11,8 @@ export default class extends HTMLElement {
     const events = JSON.parse(this.dataset.eventsJson);
     const addUrlTemplate = this.dataset.addUrlTemplate;
 
+    // TODO: drag and drop select multiple days
+
     const calendar = new Calendar(this, {
       plugins: [interactionPlugin, dayGridPlugin],
       initialView: 'dayGridMonth',
