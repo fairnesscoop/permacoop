@@ -23,12 +23,21 @@ export default class extends HTMLElement {
           events,
           locale: 'fr',
           hiddenDays: [
-            0, // Sunday
-            6 // Saturday
+            6, // Saturday
+            0 // Sunday
           ],
           date: this.dataset.date,
           headerToolbar: { start: '', center: '', end: '' },
           dayMaxEvents: true,
+          eventStartEditable: false,
+          eventDurationEditable: false,
+          eventContent: ({ event }) => {
+            const url = event.extendedProps.url;
+            if (url) {
+              return { html: `<a href="${url}">${event.title}</a>` };
+            }
+            return event.title;
+          },
           selectable: true,
           selectBackgroundColor: 'var(--background-action-violet)',
           select: info => {

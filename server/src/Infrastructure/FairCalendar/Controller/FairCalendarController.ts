@@ -82,7 +82,11 @@ export class FairCalendarController {
         end: event.date,
         title,
         ...(event.id
-          ? { url: `/app/faircalendar/events/edit/${event.id}` }
+          ? {
+              extendedProps: {
+                url: `/app/faircalendar/events/edit/${event.id}`
+              }
+            }
           : {}),
         textColor: `var(--event-${fcEventType}-text)`,
         backgroundColor: `var(--event-${fcEventType}-background)`,
