@@ -1,3 +1,5 @@
-import fullcalendar from './customElements/fullcalendar';
+import './styles/faircalendar.css';
 
-customElements.define('pc-fullcalendar', fullcalendar);
+import eventCalendar from './customElements/eventCalendar';
+
+customElements.define('pc-eventcalendar', eventCalendar);

@@ -60,6 +60,7 @@
   --event-other-background: rgb(244, 245, 247);
   --event-other-border: rgb(244, 245, 247);
   --event-other-text: rgb(36, 38, 45);
+  --event-today: #fcf8e3;
 }
 
 [data-theme='dark'] {
@@ -92,4 +93,5 @@
   --event-holiday-background: rgb(159, 88, 10);
   --event-holiday-border: rgb(159, 88, 10);
   --event-holiday-text: var(--text-default);
+  --event-today: #645f44;
 }

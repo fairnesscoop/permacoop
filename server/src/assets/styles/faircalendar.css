@@ -1,0 +1,16 @@
+@import '@event-calendar/core/index.css';
+
+/* EventCalendar customizations */
+
+.ec-event {
+  font-weight: bold;
+}
+
+.ec-day.ec-today {
+  background-color: var(--event-today);
+}
+
+.pc-eventcalendar .ec-day-grid .ec-uniform .ec-day {
+  /* Fix: by default EventCalendar sets the min-height of day boxes to 0 when dayMaxEvents is true. */
+  min-height: 5rem;
+}

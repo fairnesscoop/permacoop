@@ -9,11 +9,11 @@
  * New <head> is NOT processed.
  *
  * @param {string} url
- * @param {{ targets: string[] } options}
+ * @param {{ init: RequestInit|undefined, targets: string[] } options}
  * @returns {Promise<void>}
  */
 export async function visit(url, options = { targets: ['body'] }) {
-  const response = await fetch(url);
+  const response = await fetch(url, { headers: { 'X-Turbolite': 'true' } });
 
   // Inspiration: https://stackoverflow.com/a/10585079
   const tmpDoc = document.createElement('html');
