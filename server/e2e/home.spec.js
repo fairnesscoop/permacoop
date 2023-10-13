@@ -47,6 +47,9 @@ test('nav links', async ({ page }) => {
     ['Clients', '/app/customers'],
     ['Projets', '/app/projects'],
     ['Missions', '/app/tasks'],
+    ['Congés', '/app/people/leaves'],
+    ['Éléments de paie', '/app/people/payroll_elements'],
+    ['Tickets resto', '/app/people/meal_tickets'],
     ['Coopérateur·ices et salarié·es', '/app/people/users']
   ]);
 });
@@ -54,11 +57,15 @@ test('nav links', async ({ page }) => {
 test('header actions', async ({ page }) => {
   await page.goto('/app');
 
-  await page.getByRole('link', { name: 'Mon compte' }).click();
-  await page.getByRole('heading', { level: 1, name: 'Mon compte' }).waitFor();
-
+  const accountLink = page.getByRole('link', { name: 'Mon compte' });
+  await expect(accountLink).not.toBeVisible();
   const logoutButton = page.getByRole('button', { name: 'Se déconnecter' });
   await expect(logoutButton).not.toBeVisible();
+
+  await page.getByRole('group', { name: "Voir plus d'actions" }).click();
+  await accountLink.click();
+  await page.getByRole('heading', { level: 1, name: 'Mon compte' }).waitFor();
+
   await page.getByRole('group', { name: "Voir plus d'actions" }).click();
   await logoutButton.click();
   await page.waitForURL('/login');
