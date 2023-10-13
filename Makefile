@@ -65,11 +65,11 @@ test: ## Run tests
 test-watch: ## Run tests in watch mode
 	cd server && npm run test:watch
 
-test-e2e:
-	cd server && npx playwright test
-
 test-cov: ## Run tests with coverage enabled
 	cd server && npm run test:cov
+
+test-e2e:
+	cd server && npx playwright test
 
 linter: ## Run linters
 	cd server && npm run lint

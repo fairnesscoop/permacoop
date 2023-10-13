@@ -3,7 +3,10 @@
 {% from 'macros/attr.njk' import render_attr %}
 
 {% macro event_form(event, types, projects, tasks, times, startDate, endDate, attr=null) %}
-<form method="POST" {{ render_attr(attr) }}>
+
+{% set isNotMission = event and event.type != 'mission' %}
+
+<form method="POST" {{ render_attr(attr) }} is="pc-event-form">
     <div class="pc-select-group">
         <label class="pc-label required" for="type">{{ 'faircalendar-type-title'|trans }}</label>
         <select name="type" id="type" required>
@@ -13,10 +16,10 @@
         </select>
     </div>
 
-    <div class="pc-grid pc-gap" style="--cols: 2">
+    <div id="mission-fields" class="pc-grid pc-gap" style="--cols: 2" {% if isNotMission %}hidden{% endif %}>
         <div class="pc-select-group">
             <label class="pc-label required" for="projectId">{{ 'faircalendar-projectId-title'|trans }}</label>
-            <select name="projectId" id="projectId" required>
+            <select name="projectId" id="projectId" required {% if isNotMission %}disabled{% endif %}>
                 {% for project in projects %}
                     <option value="{{ project.id }}" {% if event and event.project.id == project.id %}selected{% endif %}>{{ project.name }}</option>
                 {% endfor %}
@@ -25,7 +28,7 @@
 
         <div class="pc-select-group">
             <label class="pc-label required" for="taskId">{{ 'faircalendar-taskId-title'|trans }}</label>
-            <select name="taskId" id="taskId" required>
+            <select name="taskId" id="taskId" required {% if isNotMission %}disabled{% endif %}>
                 {% for task in tasks %}
                     <option value="{{ task.id }}" {% if event and event.task.id == task.id %}selected{% endif %}>{{ task.name }}</option>
                 {% endfor %}

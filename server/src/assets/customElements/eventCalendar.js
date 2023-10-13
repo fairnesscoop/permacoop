@@ -14,6 +14,14 @@ export default class extends HTMLElement {
 
     this.classList.add('pc-eventcalendar');
 
+    const goToEventCreate = (startDate, endDate) => {
+      const url = addUrlTemplate
+        .replace(':startDate', format(startDate, 'yyyy-MM-dd'))
+        .replace(':endDate', format(endDate, 'yyyy-MM-dd'));
+
+      window.location = url;
+    };
+
     let ec = new Calendar({
       target: this,
       props: {
@@ -38,21 +46,15 @@ export default class extends HTMLElement {
             }
             return event.title;
           },
+          dateClick: info => goToEventCreate(info.date, info.date),
           selectable: true,
           selectBackgroundColor: 'var(--background-action-violet)',
           select: info => {
-            const startDate = format(info.start, 'yyyy-MM-dd');
-            const endDate = format(subDays(info.end, 1), 'yyyy-MM-dd');
-
-            const url = addUrlTemplate
-              .replace(':startDate', startDate)
-              .replace(':endDate', endDate);
-
             // By default, range will stay selected if navigating using the
             // back button.
             ec.unselect();
 
-            window.location = url;
+            goToEventCreate(info.start, subDays(info.end, 1));
           }
         }
       }
