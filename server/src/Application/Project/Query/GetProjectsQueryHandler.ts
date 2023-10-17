@@ -19,6 +19,7 @@ export class GetProjectsQueryHandler {
     const { customerId, page } = query;
 
     const projectViews: ProjectView[] = [];
+
     const [projects, total] = await this.projectRepository.findProjects(
       page,
       customerId

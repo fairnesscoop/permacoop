@@ -4,5 +4,8 @@ export interface IProjectRepository {
   save(project: Project): Promise<Project>;
   findOneByName(name: string): Promise<Project | undefined>;
   findOneById(id: string): Promise<Project | undefined>;
-  findProjects(page: number, customerId?: string): Promise<[Project[], number]>;
+  findProjects(
+    page: number | null,
+    customerId?: string
+  ): Promise<[Project[], number]>;
 }

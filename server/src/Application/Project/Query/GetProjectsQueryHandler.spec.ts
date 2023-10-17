@@ -82,4 +82,62 @@ describe('GetProjectsQueryHandler', () => {
     );
     verify(projectRepository.findProjects(1, undefined)).once();
   });
+
+  it('testGetAllProjects', async () => {
+    const projectRepository = mock(ProjectRepository);
+
+    const customer1 = mock(Customer);
+    when(customer1.getId()).thenReturn('58958f69-d104-471b-b780-bbb0ec6c52da');
+    when(customer1.getName()).thenReturn('Radio France');
+
+    const project1 = mock(Project);
+    when(project1.getId()).thenReturn('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
+    when(project1.getName()).thenReturn('z51');
+    when(project1.getInvoiceUnit()).thenReturn(InvoiceUnits.DAY);
+    when(project1.getCustomer()).thenReturn(instance(customer1));
+
+    const project2 = mock(Project);
+    when(project2.getId()).thenReturn('d54f15d6-1a1d-47e8-8672-9f46018f9960');
+    when(project2.getName()).thenReturn('BO cruiser');
+    when(project2.getInvoiceUnit()).thenReturn(InvoiceUnits.HOUR);
+    when(project2.getCustomer()).thenReturn(instance(customer1));
+
+    when(projectRepository.findProjects(null, undefined)).thenResolve([
+      [instance(project2), instance(project1)],
+      2
+    ]);
+
+    const queryHandler = new GetProjectsQueryHandler(
+      instance(projectRepository)
+    );
+
+    const expectedResult = new Pagination<ProjectView>(
+      [
+        new ProjectView(
+          'd54f15d6-1a1d-47e8-8672-9f46018f9960',
+          'BO cruiser',
+          InvoiceUnits.HOUR,
+          new CustomerView(
+            '58958f69-d104-471b-b780-bbb0ec6c52da',
+            'Radio France'
+          )
+        ),
+        new ProjectView(
+          'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
+          'z51',
+          InvoiceUnits.DAY,
+          new CustomerView(
+            '58958f69-d104-471b-b780-bbb0ec6c52da',
+            'Radio France'
+          )
+        )
+      ],
+      2
+    );
+
+    expect(
+      await queryHandler.execute(new GetProjectsQuery(null))
+    ).toMatchObject(expectedResult);
+    verify(projectRepository.findProjects(null, undefined)).once();
+  });
 });

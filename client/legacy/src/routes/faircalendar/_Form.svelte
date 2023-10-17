@@ -22,7 +22,7 @@
   onMount(async () => {
     let [tasksReponse, projectsReponse, settingsResponse] = await Promise.all([
       get('tasks', { params: { page: 1 } }),
-      get('projects', { params: { page: 1 } }),
+      get('projects'),
       get('settings/cooperative'),
     ]);
 
