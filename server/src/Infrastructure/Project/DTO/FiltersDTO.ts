@@ -8,7 +8,7 @@ export class FiltersDTO {
   @Min(1)
   @Max(10000)
   @Type(() => Number)
-  public page?: number = 1;
+  public page?: number = null;
 
   @ApiPropertyOptional()
   @IsOptional()
