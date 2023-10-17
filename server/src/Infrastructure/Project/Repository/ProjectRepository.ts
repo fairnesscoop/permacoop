@@ -39,10 +39,10 @@ export class ProjectRepository implements IProjectRepository {
   }
 
   public findProjects(
-    page: number = 1,
+    page: number | null = 1,
     customerId?: string
   ): Promise<[Project[], number]> {
-    const query = this.repository
+    let query = this.repository
       .createQueryBuilder('project')
       .select([
         'project.id',
@@ -53,9 +53,13 @@ export class ProjectRepository implements IProjectRepository {
       ])
       .innerJoin('project.customer', 'customer')
       .orderBy('customer.name', 'ASC')
-      .addOrderBy('project.name', 'ASC')
-      .limit(MAX_ITEMS_PER_PAGE)
-      .offset((page - 1) * MAX_ITEMS_PER_PAGE);
+      .addOrderBy('project.name', 'ASC');
+
+    if (typeof page === 'number') {
+      query = query
+        .limit(MAX_ITEMS_PER_PAGE)
+        .offset((page - 1) * MAX_ITEMS_PER_PAGE);
+    }
 
     if (customerId) {
       query.andWhere('customer.id = :customerId', { customerId });

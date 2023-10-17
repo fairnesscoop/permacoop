@@ -27,7 +27,10 @@ export class GetProjectsAction {
     @Query() filters: FiltersDTO
   ): Promise<Pagination<ProjectView>> {
     return await this.queryBus.execute(
-      new GetProjectsQuery(Number(filters.page), filters.customerId)
+      new GetProjectsQuery(
+        filters.page ? Number(filters.page) : null,
+        filters.customerId
+      )
     );
   }
 }
