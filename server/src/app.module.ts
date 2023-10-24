@@ -32,7 +32,9 @@ providers.push({
   imports: [
     DiscoveryModule,
     TypeOrmModule.forRoot(dataSourceOptions),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: ['.env.local', '.env']
+    }),
     HomeModule,
     CustomerModule,
     FairCalendarModule,

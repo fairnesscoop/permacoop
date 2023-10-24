@@ -7,11 +7,8 @@ run_server = ./tools/colorize_prefix.sh [server] 31
 run_watch = ./tools/colorize_prefix.sh [watch] 36
 
 install: ## Install
-	cp -n server/.env.dist server/.env
 	make install-deps
-ifneq ($(ANSIBLE),1)
-		make install-dev
-endif
+	make install-dev
 
 install-deps: ## Install dependencies
 	cd server && npm ci
