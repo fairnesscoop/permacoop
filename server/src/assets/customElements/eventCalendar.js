@@ -4,15 +4,11 @@ import Interaction from '@event-calendar/interaction';
 import { format, subDays } from 'date-fns';
 
 export default class extends HTMLElement {
-  constructor() {
-    super();
-  }
-
   connectedCallback() {
+    this.classList.add('pc-eventcalendar');
+
     const events = JSON.parse(this.dataset.eventsJson);
     const addUrlTemplate = this.dataset.addUrlTemplate;
-
-    this.classList.add('pc-eventcalendar');
 
     const goToEventCreate = (startDate, endDate) => {
       const url = addUrlTemplate
@@ -22,7 +18,7 @@ export default class extends HTMLElement {
       window.location = url;
     };
 
-    let ec = new Calendar({
+    const ec = new Calendar({
       target: this,
       props: {
         plugins: [DayGrid, Interaction],

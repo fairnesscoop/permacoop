@@ -6,9 +6,7 @@ export default class extends HTMLFormElement {
     onParsed(() => {
       const doSubmit = async () => {
         const url = buildFormFetchUrl(this);
-        await visit(url, {
-          targets: [this.dataset.titleTarget, this.dataset.calendarTarget]
-        });
+        await visit(url, { select: this.dataset.select });
       };
 
       this.previousBtn.addEventListener('click', () => {

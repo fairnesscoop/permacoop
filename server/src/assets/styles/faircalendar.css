@@ -2,6 +2,10 @@
 
 /* EventCalendar customizations */
 
+.pc-eventcalendar {
+  display: block;
+}
+
 .ec-event {
   font-weight: bold;
 }

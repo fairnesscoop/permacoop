@@ -5,22 +5,28 @@
  */
 
 /**
- * Fetch a web page, then swap targets with theirs.
+ * Fetch a web page, then swap selected elements with theirs.
  * New <head> is NOT processed.
  *
  * @param {string} url
- * @param {{ init: RequestInit|undefined, targets: string[] } options}
+ * @param {{ init: RequestInit|undefined, select: string|string[] } options}
  * @returns {Promise<void>}
  */
-export async function visit(url, options = { targets: ['body'] }) {
+export async function visit(url, options = { select: ['body'] }) {
+  if (typeof options.select === 'string') {
+    options.select = JSON.parse(options.select);
+  }
+
   const response = await fetch(url, { headers: { 'X-Turbolite': 'true' } });
 
   // Inspiration: https://stackoverflow.com/a/10585079
   const tmpDoc = document.createElement('html');
   tmpDoc.innerHTML = await response.text();
 
-  options.targets.forEach(target => {
-    document.querySelector(target).replaceWith(tmpDoc.querySelector(target));
+  options.select.forEach(selector => {
+    document
+      .querySelector(selector)
+      .replaceWith(tmpDoc.querySelector(selector));
   });
 
   window.history.pushState({}, '', response.url);

@@ -1,6 +1,7 @@
 {% extends 'layouts/app.njk' %}
 {% import 'macros/icons.njk' as icons %}
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
+{% from './_filters_form.njk' import filters_form with context %}
 
 {% set title = 'faircalendar-page-title'|trans({ date: date }) %}
 
@@ -21,7 +22,7 @@
     <h1>{{ title }}</h1>
 
     <div class="pc-with-sidebar pc-gap" style="--sidebar-size: 22ch; --non-sidebar-min-size: 80%">
-        {% include './_filters.njk' %}
+        {{ filters_form(select=['h1', '#faircalendar']) }}
 
         <div id="faircalendar" class="pc-stack">
             {% table overviewTable, { attr: {class: 'pc-table--center pc-table--no-shadow'} } %}
