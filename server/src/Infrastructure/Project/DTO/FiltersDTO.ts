@@ -1,8 +1,15 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsUUID, IsOptional } from 'class-validator';
-import { PaginationDTO } from 'src/Infrastructure/Common/DTO/PaginationDTO';
+import { Type } from 'class-transformer';
+import { IsUUID, IsOptional, Min, Max } from 'class-validator';
 
-export class FiltersDTO extends PaginationDTO {
+export class FiltersDTO {
+  @ApiPropertyOptional()
+  @IsOptional()
+  @Min(1)
+  @Max(10000)
+  @Type(() => Number)
+  public page?: number = 1;
+
   @ApiPropertyOptional()
   @IsOptional()
   @IsUUID()
