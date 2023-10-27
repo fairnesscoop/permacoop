@@ -11,13 +11,12 @@ Permacoop is an open source and eco design ERP solution reserved for worker-owne
 
 ## Technical stack
 
-- [Node.js](https://nodejs.org) / [Nestjs](https://nestjs.com/)
+- [Node.js](https://nodejs.org) / [Nestjs](https://nestjs.com/) / [Nunjucks](https://mozilla.github.io/nunjucks/templating.html)
+- HTML, CSS, [WebComponents](https://developer.mozilla.org/en-US/docs/Web/API/Web_Components)
 - [TypeORM](https://typeorm.io)
+- [PostgreSQL](https://www.postgresql.org/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Jest](https://jestjs.io/) / [ts-mockito](https://github.com/NagRock/ts-mockito)
-- [Svelte](https://svelte.dev/) / [SvelteKit](https://kit.svelte.dev) / [Sapper](https://sapper.svelte.dev/) (legacy)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [PostgreSQL](https://www.postgresql.org/)
 - [Docker](https://www.docker.com/)
 
 ## Prerequisites
@@ -126,7 +125,6 @@ make database-migration NAME=add_some_column
   - Meal tickets
   - Leaves
   - Cooperators / employee
-  - Savings records
 
 ## Credits
 

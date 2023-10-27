@@ -1,4 +1,0 @@
-- name: Ensure build is up to date
-  shell:
-    cmd: make build
-    chdir: "{{ workdir }}"

@@ -1,3 +1,5 @@
+.PHONY: dist
+
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
@@ -11,10 +13,10 @@ install: ## Install
 	make install-dev
 
 install-deps: ## Install dependencies
-	cd server && npm ci
+	npm ci
 
 install-dev: ## Install local development dependencies and services
-	cd server && npx playwright install firefox
+	npx playwright install firefox
 	make build
 	make database-test-init
 
@@ -22,10 +24,10 @@ start: ## Start
 	make -j 2 start-server start-watch
 
 start-server: up
-	${run_server} "cd server && npm run start:dev"
+	${run_server} "npm run start:dev"
 
 start-watch:
-	${run_watch} "cd server && npm run assets:watch"
+	${run_watch} "npm run assets:watch"
 
 compose: ## Run Docker compose command (args: CMD)
 	${compose} ${CMD}
@@ -48,34 +50,34 @@ ps: ## Show running containers
 build: dist assets ## Build dist and assets
 
 dist:
-	cd server && npm run build
+	npm run build
 
 assets:
-	cd server && npm run assets:build
+	npm run assets:build
 
-start-dist: up ## Serve built server
-	cd server && npm run start:prod
+start-dist: ## Serve built server
+	npm run start
 
 test: ## Run tests
-	cd server && npm run test -- $(FILE)
+	npm run test -- $(FILE)
 
 test-watch: ## Run tests in watch mode
-	cd server && npm run test:watch
+	npm run test:watch
 
 test-cov: ## Run tests with coverage enabled
-	cd server && npm run test:cov
+	npm run test:cov
 
 test-e2e:
-	cd server && npx playwright test
+	npx playwright test
 
 linter: ## Run linters
-	cd server && npm run lint
+	npm run lint
 
 format: ## Run code formatting
-	cd server && npm run format
+	npm run format
 
 database-migrate: ## Database migrations
-	cd server && npm run migration:migrate
+	npm run migration:migrate
 
 database-test-init: up ## Initialize test database
 	make compose CMD="exec -T database createdb permacoop_test" || echo 'Does the test DB already exist? Ignoring...'
@@ -83,10 +85,10 @@ database-test-init: up ## Initialize test database
 	make database-seed DATABASE_NAME=permacoop_test
 
 database-migration: ## Generate a database migration
-	cd server && npm run migration:create -- migrations/$(NAME)
+	npm run migration:create -- migrations/$(NAME)
 
 database-seed: ## Seed database
-	cd server && npm run seed:run
+	npm run seed:run
 
 database-connect: ## Connect to the database container
 	${compose} exec database psql -h database -d permacoop

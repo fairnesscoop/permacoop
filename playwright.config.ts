@@ -20,7 +20,7 @@ const config: PlaywrightTestConfig = {
     },
   ],
   webServer: {
-    command: 'cd .. && make start-dist',
+    command: 'make start-dist',
     reuseExistingServer: !process.env.CI,
     url: 'http://localhost:3000',
     env: {

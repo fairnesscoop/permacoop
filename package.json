@@ -11,9 +11,8 @@
     "assets:build": "npm run _esbuild -- --minify",
     "assets:watch": "npm run _esbuild -- --watch",
     "format": "prettier --write \"src/**/*.ts\" \"src/assets/**/*\" \"e2e/**/*.js\"",
-    "start": "nest start",
+    "start": "node dist/src/main",
     "start:dev": "nest start --preserveWatchOutput --watch --debug",
-    "start:prod": "node dist/src/main",
     "lint": "prettier --check \"src/**/*.ts\" \"src/assets/**/*\" \"e2e/**/*.js\" && eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "test": "jest",
@@ -24,8 +23,9 @@
     "migration:generate": "npm run typeorm -- migration:generate -d src/datasource.ts",
     "migration:migrate": "npm run typeorm -- migration:run -d src/datasource.ts",
     "migration:drop": "npm run typeorm -- schema:drop",
-    "seed:config": "typeorm-seeding config -r ./dist -c seeding.js",
-    "seed:run": "typeorm-seeding seed -r ./dist -c seeding.js"
+    "seed:config": "typeorm-seeding config -r ./dist -c src/seeding.js",
+    "seed:run": "typeorm-seeding seed -r ./dist -c src/seeding.js",
+    "scalingo-postbuild": "make build"
   },
   "dependencies": {
     "@concepta/typeorm-seeding": "^4.0.0-beta.0",
@@ -100,15 +100,15 @@
       "js",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "modulePaths": [
-      "<rootDir>/../"
+      "<rootDir>/"
     ],
     "testRegex": ".spec.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "coverageDirectory": "../coverage",
+    "coverageDirectory": "./coverage",
     "testEnvironment": "node"
   },
   "engines": {

@@ -1,8 +1,0 @@
-[program:server]
-directory={{ workdir }}/server
-command=node ./dist/src/main.js
-environment=HOST=127.0.0.1,NODE_ENV=production,PORT="{{ server_port }}"
-autostart=true
-autorestart=true
-stderr_logfile=/var/log/server.err.log
-stdout_logfile=/var/log/server.out.log
