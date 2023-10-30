@@ -27,9 +27,9 @@ export class ListProjectsController {
   @Get()
   @WithName('crm_projects_list')
   @Render('pages/projects/list.njk')
-  public async gzt(@Query() pagination: PaginationDTO) {
+  public async get(@Query() pagination: PaginationDTO) {
     const projects: Pagination<ProjectView> = await this.queryBus.execute(
-      new GetProjectsQuery(pagination.page ? Number(pagination.page) : null)
+      new GetProjectsQuery(pagination.page)
     );
 
     const table = this.tableFactory.create(projects.items);

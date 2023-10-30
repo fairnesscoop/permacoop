@@ -5,5 +5,5 @@ export class PaginationDTO {
   @Min(1)
   @Max(10000)
   @IsNumber()
-  public page?: number = null;
+  public page = 1;
 }

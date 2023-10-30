@@ -94,7 +94,7 @@ database-connect: ## Connect to the database container
 	${compose} exec database psql -h database -d permacoop
 
 prod-container:
-	cd prod && docker build -t fmfairness/permacoop:latest .
+	cd prod && docker build --no-cache -t fmfairness/permacoop:latest .
 
 prod-container-push:
 	docker push fmfairness/permacoop:latest

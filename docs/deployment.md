@@ -27,23 +27,34 @@ WWW ------- nginx (:443)                 |
 
 ## How to deploy
 
-TODO
+Build and push a new version of the Docker image:
+
+```
+make prod-container
+make prod-container-push
+```
+
+Go to Jelastic, open the topology settings, click the image version button, then select "Redeploy".
+
+This will make the site unavailable (502 Bad Gateway) for about 1 minute.
 
 ## Environnements
 
 Environments are copies of the Permacoop infrastructure. Currently the deployed environments are:
 
-| Name    | Description               | URL                             | Deploy branch |
-|---------|---------------------------|---------------------------------|---------------|
-| prod    | Production environment    | https://permacoop.fairness.coop | `feat/hotwire |
+| Name    | Description                 | URL                             | Deploy branch |
+|---------|-----------------------------|---------------------------------|---------------|
+| prod    | Production environment      | https://permacoop.fairness.coop | main |
+| rewrite | Rewrite preview environment | https://permacoop.jcloud-ver-jpe.ik-server.com | feat/hotwire |
 
 Each environment makes use of several computing resources, listed below:
 
-| Ressource           | Environment | Location |
-|---------------------|-------------|----------|
-| Cloud instance (VM) | All         | Jelastic |
-| PostgreSQL instance | All         | Jelastic |
-| DNS records         | All         | Gandi    |
+| Ressource           | Environment | Location   |
+|---------------------|-------------|------------|
+| Nginx               | All         | Jelastic   |
+| App container       | All         | Jelastic   |
+| PostgreSQL instance | All         | Scaleway   |
+| DNS records         | All         | Infomaniak |
 
 ## Configuration
 

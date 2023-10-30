@@ -60,7 +60,7 @@ export class EditEventController {
     );
 
     const projectsPagination: Pagination<ProjectView> = await this.queryBus.execute(
-      new GetProjectsQuery(1)
+      new GetProjectsQuery(null)
     );
 
     const { dayDuration }: CooperativeView = await this.queryBus.execute(

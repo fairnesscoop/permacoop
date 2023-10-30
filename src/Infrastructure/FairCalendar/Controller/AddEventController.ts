@@ -50,7 +50,7 @@ export class AddEventController {
     const tasksPagination = await this.queryBus.execute(new GetTasksQuery(1));
 
     const projectsPagination = await this.queryBus.execute(
-      new GetProjectsQuery(1)
+      new GetProjectsQuery(null)
     );
 
     const { dayDuration } = await this.queryBus.execute(
