@@ -18,10 +18,9 @@ describe('ProfileDTO', () => {
     dto.email = 'mathieufairness.coop';
     dto.firstName = '';
     dto.lastName = '';
-    dto.password = '';
 
     const validation = await validate(dto);
-    expect(validation).toHaveLength(4);
+    expect(validation).toHaveLength(3);
     expect(validation[0].constraints).toMatchObject({
       isNotEmpty: 'firstName should not be empty'
     });
@@ -30,9 +29,6 @@ describe('ProfileDTO', () => {
     });
     expect(validation[2].constraints).toMatchObject({
       isEmail: 'email must be an email'
-    });
-    expect(validation[3].constraints).toMatchObject({
-      isNotEmpty: 'password should not be empty'
     });
   });
 });

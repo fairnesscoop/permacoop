@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class ProfileDTO {
   @IsNotEmpty()
@@ -11,6 +11,6 @@ export class ProfileDTO {
   @IsEmail()
   public email: string;
 
-  @IsNotEmpty()
-  public password: string;
+  @IsOptional()
+  public password: string | null;
 }
