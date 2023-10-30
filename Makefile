@@ -93,6 +93,12 @@ database-seed: ## Seed database
 database-connect: ## Connect to the database container
 	${compose} exec database psql -h database -d permacoop
 
+prod-container:
+	cd prod && docker build -t fmfairness/permacoop:latest .
+
+prod-container-push:
+	docker push fmfairness/permacoop:latest
+
 ci: up ## Run CI checks
 	make install
 	make linter
