@@ -63,3 +63,13 @@ If an environment is not used anymore, it should be decommissioned to remove unu
 * Open, review and merge a PR with the following changes:
   * Drop the environment from the environment list in this file.
 * Drop the [computing resources](#computing-resources) allocated to the environment.
+
+## Migration Scaleway
+
+Voir https://doc.scalingo.com/databases/postgresql/dump-restore#restore
+
+Déployer une copie de la DB Scaleway :
+
+* Dans la Console Scaleway, récupérer un export de la DB (fichier `.custom`, par exemple `export.custom`)
+* Récupérer la `DATABASE_URL` sur Scalingo
+* Lancer `$ pg_restore --clean --if-exists --no-owner --no-privileges --no-comments --dbname $DATABASE_URL -v -Fc export.custom`
