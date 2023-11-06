@@ -4,6 +4,8 @@
 
 {% set title = 'users-title'|trans %}
 
+{% block title %}{{ title }} - {{ super() }}{% endblock %}
+
 {% block main %}
 <div class="pc-container pc-stack">
     {{ breadcrumb([{ title: 'people-title'|trans }, { title: title }]) }}

@@ -2,12 +2,14 @@
 {% import 'macros/links.njk' as links %}
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 
+{% set title = 'crm-projects-title'|trans %}
+
 {% block main %}
 <div class="pc-container pc-stack">
-    {{ breadcrumb([{ title: 'crm-projects-title'|trans }]) }}
+    {{ breadcrumb([{ title: title }]) }}
 
     <div class="pc-cluster pc-gap" style="--cluster-justify: space-between; --cluster-align: center">
-        <h1 class="pc-m" style="--m: 0">{{ 'crm-projects-title'|trans }}</h1>
+        <h1 class="pc-m" style="--m: 0">{{ title }}</h1>
         {{ links.add(path('crm_projects_add'))}}
     </div>
 

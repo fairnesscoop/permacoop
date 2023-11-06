@@ -1,6 +1,8 @@
 {% extends 'layouts/app.njk' %}
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 
+{% block title %}Accueil - {{ super() }}{% endblock %}
+
 {% block main %}
 <div class="pc-container">
     {{ breadcrumb([]) }}

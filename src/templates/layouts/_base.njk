@@ -6,7 +6,14 @@
     <meta name="theme-color" content="#343a40" />
     <link rel="stylesheet" href="{{ asset('main.css') }}">
     {% block styles %}{% endblock %}
-    <title>{% block title %}Permacoop{% endblock %}</title>
+    <title>
+      {% block title %}
+        {% if title is defined %}
+          {{ title }} -
+        {% endif %}
+        Permacoop
+      {% endblock %}
+    </title>
     <script src="{{ asset('main.js') }}" type="module" async defer></script>
     {% block scripts %}{% endblock %}
   </head>
