@@ -29,15 +29,10 @@ export class CreateCustomerAction {
   @Roles(UserRole.COOPERATOR, UserRole.EMPLOYEE)
   @ApiOperation({ summary: 'Create new customer' })
   public async index(@Body() customerDto: CustomerDTO) {
-    const {
-      address: { street, city, zipCode, country },
-      name
-    } = customerDto;
+    const { name } = customerDto;
 
     try {
-      const id = await this.commandBus.execute(
-        new CreateCustomerCommand(name, street, city, zipCode, country)
-      );
+      const id = await this.commandBus.execute(new CreateCustomerCommand(name));
 
       return { id };
     } catch (e) {

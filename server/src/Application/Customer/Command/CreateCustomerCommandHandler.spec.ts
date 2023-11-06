@@ -5,35 +5,22 @@ import { Customer } from 'src/Domain/Customer/Customer.entity';
 import { CreateCustomerCommandHandler } from 'src/Application/Customer/Command/CreateCustomerCommandHandler';
 import { CreateCustomerCommand } from 'src/Application/Customer/Command/CreateCustomerCommand';
 import { CustomerAlreadyExistException } from 'src/Domain/Customer/Exception/CustomerAlreadyExistException';
-import { AddressRepository } from 'src/Infrastructure/Customer/Repository/AddressRepository';
-import { Address } from 'src/Domain/Customer/Address.entity';
 
 describe('CreateCustomerCommandHandler', () => {
   let customerRepository: CustomerRepository;
-  let addressRepository: AddressRepository;
   let isCustomerAlreadyExist: IsCustomerAlreadyExist;
   let createdCustomer: Customer;
-  let createdAddress: Address;
   let handler: CreateCustomerCommandHandler;
 
-  const command = new CreateCustomerCommand(
-    'Customer',
-    '2 rue Dieu',
-    'Paris',
-    '75010',
-    'FR'
-  );
+  const command = new CreateCustomerCommand('Customer');
 
   beforeEach(() => {
     customerRepository = mock(CustomerRepository);
-    addressRepository = mock(AddressRepository);
     isCustomerAlreadyExist = mock(IsCustomerAlreadyExist);
     createdCustomer = mock(Customer);
-    createdAddress = mock(Address);
 
     handler = new CreateCustomerCommandHandler(
       instance(customerRepository),
-      instance(addressRepository),
       instance(isCustomerAlreadyExist)
     );
   });
@@ -45,14 +32,7 @@ describe('CreateCustomerCommandHandler', () => {
     );
     when(createdCustomer.getName()).thenReturn('Customer');
     when(
-      addressRepository.save(
-        deepEqual(new Address('2 rue Dieu', 'Paris', '75010', 'FR'))
-      )
-    ).thenResolve(instance(createdAddress));
-    when(
-      customerRepository.save(
-        deepEqual(new Customer('Customer', instance(createdAddress)))
-      )
+      customerRepository.save(deepEqual(new Customer('Customer')))
     ).thenResolve(instance(createdCustomer));
 
     expect(await handler.execute(command)).toBe(
@@ -60,11 +40,7 @@ describe('CreateCustomerCommandHandler', () => {
     );
 
     verify(isCustomerAlreadyExist.isSatisfiedBy('Customer')).once();
-    verify(
-      customerRepository.save(
-        deepEqual(new Customer('Customer', instance(createdAddress)))
-      )
-    ).once();
+    verify(customerRepository.save(deepEqual(new Customer('Customer')))).once();
     verify(createdCustomer.getId()).once();
   });
 
