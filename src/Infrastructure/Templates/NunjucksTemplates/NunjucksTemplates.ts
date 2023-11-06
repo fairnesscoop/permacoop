@@ -106,7 +106,9 @@ export class NunjucksTemplates implements ITemplates {
 
       ctx['view_name'] = this.resolver.getName(req.url);
 
-      ctx['asset'] = (path: string) => `${assetsRoot}/${path}`;
+      ctx['asset'] = (path: string) => {
+        return `${assetsRoot === '/' ? '' : assetsRoot}/${path}`;
+      };
 
       ctx['now'] = new Date();
 

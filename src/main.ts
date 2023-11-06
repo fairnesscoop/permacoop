@@ -45,13 +45,13 @@ async function bootstrap() {
   );
 
   const assetsDir = path.join(__dirname, '..', 'public');
-  app.useStaticAssets(assetsDir, { prefix: '/public' });
+  app.useStaticAssets(assetsDir);
 
   const viewsDir = path.join(__dirname, '..', 'templates');
   app.setBaseViewsDir(viewsDir);
 
   const templates: ITemplates = app.get('ITemplates');
-  templates.registerViewEngine(app, '/public');
+  templates.registerViewEngine(app, '');
 
   await app.listen(+(process.env.PORT || 3000), '0.0.0.0');
 }
