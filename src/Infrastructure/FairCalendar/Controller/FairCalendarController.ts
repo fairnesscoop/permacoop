@@ -47,7 +47,9 @@ export class FairCalendarController {
 
     const userId = dto.userId ? dto.userId : user['id'];
 
-    const users: UserView[] = await this.queryBus.execute(new GetUsersQuery(false, true));
+    const users: UserView[] = await this.queryBus.execute(
+      new GetUsersQuery(false, true)
+    );
 
     const events: FairCalendarView[] = await this.queryBus.execute(
       new GetMonthlyFairCalendarQuery(date, userId)
