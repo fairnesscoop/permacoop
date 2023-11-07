@@ -34,6 +34,9 @@
   padding-block: calc(3 * var(--v));
   padding-inline: calc(6 * var(--v));
 }
+.pc-nav-entry:last-child details ul {
+  margin-block-end: calc(3 * var(--v));
+}
 /* Second-level */
 .pc-nav details a {
   display: block;
@@ -90,8 +93,23 @@
   cursor: pointer;
 }
 
-.pc-nav-dropdown::before {
-  content: '⌄';
-  font-size: var(--font-size-lg);
+.pc-nav-dropdown {
+  position: relative;
   margin-left: auto;
+}
+
+.pc-nav-dropdown::after {
+  content: '⌄';
+  position: absolute;
+  transform: rotateZ(
+    90deg
+  ); /* There is no "left arrowhead" so we rotate "down arrowhead" instead */
+  top: -1rem;
+  left: -1.5ch;
+  font-size: var(--font-size-lg);
+}
+
+.pc-nav-entry details[open] .pc-nav-dropdown::after {
+  transform: none;
+  left: -2ch;
 }
