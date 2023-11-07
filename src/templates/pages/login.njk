@@ -8,7 +8,7 @@
 {% block main %}
     <div class="pc-card">
         <div class="pc-grid pc-gap" style="--cols: 2">
-            <img src="/public/images/login-office.jpeg" alt="" width="448px" height="411px">
+            <img src="{{ asset('images/login-office.jpeg') }}" alt="" width="448px" height="411px">
             <form method="POST" action="/login" class="pc-p" style="--p: calc(4 * var(--w)) calc(6 * var(--w))">
                 <h1 class="pc-text--center">
                     Connexion
