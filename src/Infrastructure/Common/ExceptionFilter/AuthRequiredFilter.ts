@@ -10,10 +10,11 @@ import { Response } from 'express';
 
 @Catch(UnauthorizedException, ForbiddenException)
 export class AuthRequiredFilter implements ExceptionFilter {
-  catch(exception: HttpException, host: ArgumentsHost): void {
+  catch(error: HttpException, host: ArgumentsHost): void {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    response.locals.flash('error', 'login-error-failed');
-    response.status(exception.getStatus()).redirect(303, '/login');
+    response.locals.flash('error', error.message);
+    response.status(error.getStatus());
+    response.render('pages/login.njk');
   }
 }

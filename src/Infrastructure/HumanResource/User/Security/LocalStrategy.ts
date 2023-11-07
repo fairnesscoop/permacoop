@@ -22,8 +22,8 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
   ): Promise<AuthenticatedView> {
     try {
       return await this.queryBus.execute(new LoginQuery(email, password));
-    } catch (exc) {
-      throw new UnauthorizedException();
+    } catch (err) {
+      throw new UnauthorizedException('login-error-failed');
     }
   }
 }

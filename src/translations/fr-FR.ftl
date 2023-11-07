@@ -17,6 +17,7 @@ breadcrumb-title = Fil d'Ariane
 nav-open = Ouvrir la navigation principale
 nav-title = Navigation principale
 
+http-error = Erreur {$statusCode} : {$errorName}
 form-errors-title = Erreur
 
 header-profile = Mon compte

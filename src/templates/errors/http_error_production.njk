@@ -1,0 +1,9 @@
+{% extends 'layouts/blank.njk' %}
+
+{% block main %}
+    <h1>
+        {{ 'http-error'|trans({statusCode: statusCode, errorName: errorName}) }}
+    </h1>
+
+    <p>{{ message }}</p>
+{% endblock main %}
