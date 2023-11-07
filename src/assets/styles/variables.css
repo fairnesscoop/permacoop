@@ -2,7 +2,7 @@
   /* Spacing */
   --v: 0.25rem;
   --w: 0.5rem;
-  --text-spacing: 0 0 calc(3 * var(--w)) 0;
+  --paragraph-spacing: 0 0 calc(3 * var(--w)) 0;
   --title-spacing: 0 0 calc(3 * var(--w)) 0;
   /* Fonts */
   --font-default: Inter, system-ui, -apple-system, BlinkMacSystemFont,
@@ -16,6 +16,7 @@
   /* Colors */
   --background-default: #ffffff;
   --background-default-hover: #f1f2f3;
+  --background-alt-error: #ffecec;
   --background-alt-grey: #f9fafb;
   --background-muted: #f0f0f0;
   --background-muted-hover: #dadada;
@@ -29,8 +30,9 @@
   --text-on-background-action-violet: #ffffff;
   --text-action-violet: #6c2bd9;
   --text-action-violet-on-background-default: #6c2bd9;
-  --text-error: #ff0000;
+  --text-error: #c52424;
   --text-on-error: #ffffff;
+  --text-on-alt-error: var(--text-error);
   /* Borders */
   --border-default: #e2e8f0;
   --radius-sm: var(--v);

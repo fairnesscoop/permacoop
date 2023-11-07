@@ -12,7 +12,7 @@
         </select>
     </div>
 
-    <div class="pc-grid pc-gap" style="--cols: 2">
+    <div class="pc-grid pc-gap" style="--grid-cols: 2">
         <div class="pc-input-group">
             <label for="startDate" class="pc-label required">{{ 'leaves-startDate'|trans }}</label>
             <input name="startDate" id="startDate" type="date" required {% if leaveRequest %}value="{{ leaveRequest.startDate|htmlDate }}"{% endif %}>
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="pc-grid pc-gap" style="--cols: 2">
+    <div class="pc-grid pc-gap" style="--grid-cols: 2">
         <div class="pc-input-group">
             <label for="endDate" class="pc-label required">{{ 'leaves-endDate'|trans }}</label>
             <input name="endDate" id="endDate" type="date" required {% if leaveRequest %}value="{{ leaveRequest.endDate|htmlDate }}"{% endif %}>
@@ -58,7 +58,7 @@
             <input id="comment" name="comment" type="text">
         </div>
 
-        <div class="pc-grid pc-gap" style="--cols: 2">
+        <div class="pc-grid pc-gap" style="--grid-cols: 2">
             <button type="submit" name="action" value="accept" class="pc-btn">
                 {{ 'leave-requests-moderation-accept'|trans }}
             </button>

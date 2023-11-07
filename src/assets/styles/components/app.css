@@ -1,0 +1,29 @@
+body.pc-app {
+  position: relative;
+  /* Fill entire height */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pc-app__content {
+  /* Fill entire height */
+  flex-grow: 1;
+}
+
+/* On bigger screens, the sidebar layout takes over */
+@media screen and (max-width: 840px) {
+  .pc-app__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pc-app__content > :last-child {
+    /* Fill entire height */
+    flex-grow: 1;
+  }
+}
+
+.pc-app main {
+  overflow-y: auto;
+}

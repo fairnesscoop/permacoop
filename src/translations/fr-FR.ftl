@@ -11,10 +11,13 @@ common-money = {NUMBER($value, style: "currency", currency: "EUR", minimumFracti
 common-date = {DATETIME($date, month: "numeric", year: "numeric", day: "numeric")}
 common-month-long = {DATETIME($date, month: "long")}
 
+coop-name = Fairness
 site-title = Permacoop
 breadcrumb-title = Fil d'Ariane
 nav-open = Ouvrir la navigation principale
 nav-title = Navigation principale
+
+form-errors-title = Erreur
 
 header-profile = Mon compte
 header-dropdown = Voir plus d'actions
@@ -24,6 +27,7 @@ login-title = Connexion
 login-email = Adresse email
 login-password = Mot de passe
 login-submit = Se connecter
+login-error-failed = L'adresse email ou le mot de passe est incorrect. Veuillez réessayer.
 
 home-title = Bonjour, {$user} !
 home-pending-leaves-title = Demandes de congés

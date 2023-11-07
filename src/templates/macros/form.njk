@@ -1,0 +1,20 @@
+{% macro render_form_errors() %}
+    {% set form_errors = get_flash_messages('error') %}
+
+    {% if form_errors|length > 0 %}
+        <div class="pc-form-errors" style="--paragraph-spacing: var(--v)">
+            <p class="pc-bold">
+                {{ 'form-errors-title'|trans }}
+            </p>
+            <ul class="pc-raw-list">
+                {% for error in form_errors %}
+                    <li>
+                        <p>
+                            {{ error|trans }}
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endmacro %}

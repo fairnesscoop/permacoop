@@ -16,7 +16,7 @@
         </select>
     </div>
 
-    <div id="mission-fields" class="pc-grid pc-gap" style="--cols: 2" {% if isNotMission %}hidden{% endif %}>
+    <div id="mission-fields" class="pc-grid pc-gap" style="--grid-cols: 2" {% if isNotMission %}hidden{% endif %}>
         <div class="pc-select-group">
             <label class="pc-label required" for="projectId">{{ 'faircalendar-projectId-title'|trans }}</label>
             <select name="projectId" id="projectId" required {% if isNotMission %}disabled{% endif %}>
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="pc-grid pc-gap" style="--cols: 2">
+    <div class="pc-grid pc-gap" style="--grid-cols: 2">
         <div class="pc-select-group">
             <label class="pc-label required" for="time">{{ 'faircalendar-time-title'|trans }}</label>
             <select name="time" id="time" required>

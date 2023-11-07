@@ -26,5 +26,5 @@ h2 {
 
 p {
   font-size: 1rem;
-  margin: var(--text-spacing);
+  margin: var(--paragraph-spacing);
 }

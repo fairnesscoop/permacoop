@@ -13,6 +13,7 @@ export class AuthRequiredFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost): void {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
+    response.locals.flash('error', 'login-error-failed');
     response.status(exception.getStatus()).redirect(303, '/login');
   }
 }

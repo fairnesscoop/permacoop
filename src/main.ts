@@ -10,6 +10,7 @@ import * as connectPgSimple from 'connect-pg-simple';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { ITemplates } from './Infrastructure/Templates/ITemplates';
+import { flashMessages } from './Infrastructure/Templates/FlashMessages';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -52,6 +53,8 @@ async function bootstrap() {
 
   const templates: ITemplates = app.get('ITemplates');
   templates.registerViewEngine(app, '');
+
+  app.use(flashMessages());
 
   await app.listen(+(process.env.PORT || 3000), '0.0.0.0');
 }

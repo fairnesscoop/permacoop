@@ -3,7 +3,7 @@
 {% from 'pages/profile/_form.njk' import profile_fields %}
 
 {% macro _user_administrative_fields(userAdministrative, contracts, workingTimes) %}
-    <div class="pc-grid pc-gap" style="--cols: 4">
+    <div class="pc-grid pc-gap" style="--grid-cols: 4">
         <div class="pc-select-group">
             <label class="pc-label required" for="contract">{{ 'users-contract'|trans }}</label>
             <select name="contract" id="contract" required>
@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div class="pc-grid pc-gap" style="--cols: 3">
+    <div class="pc-grid pc-gap" style="--grid-cols: 3">
         <div class="pc-input-group">
             <label class="pc-label required" for="annualEarnings">{{ 'users-annualEarnings'|trans }}</label>
             <input type="number" min="0" id="annualEarnings" name="annualEarnings" required value="{% if userAdministrative %}{{ userAdministrative.annualEarnings }}{% else %}0{% endif %}">
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div class="pc-grid pc-gap" style="--cols: 2">
+    <div class="pc-grid pc-gap" style="--grid-cols: 2">
         <div class="pc-input-group">
             <label class="pc-label required" for="joiningDate">{{ 'users-joiningDate'|trans }}</label>
             <input type="date" id="joiningDate" name="joiningDate" required {% if userAdministrative %}value="{{ userAdministrative.joiningDate }}"{% endif %}>
@@ -83,7 +83,7 @@
 {% macro user_add_form(roles, contracts, workingTimes, attr=null) %}
 <form method="POST" {{ render_attr(attr) }}>
     {{ _user_role_field(null, roles) }}
-    <div class="pc-grid pc-gap" style="--rows: 2; --cols: 2">
+    <div class="pc-grid pc-gap" style="--grid-rows: 2; --grid-cols: 2">
         {{ profile_fields(null, require_password=true) }}
     </div>
     {{ _user_administrative_fields(null, contracts, workingTimes) }}
