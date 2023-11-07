@@ -3,29 +3,29 @@
 {% from 'macros/attr.njk' import render_attr %}
 
 {% block body_attr %}{{ render_attr({ class: 'pc-h-full pc-center pc-background-alt-grey' }) }}{% endblock body_attr %}
-{% block title %}Se connecter - {{ super() }}{% endblock %}
+{% block title %}{{ 'login-title'|trans }} - {{ super() }}{% endblock %}
 
 {% block main %}
     <div class="pc-card">
         <div class="pc-grid pc-gap" style="--cols: 2">
             <img src="{{ asset('images/login-office.jpeg') }}" alt="" width="448px" height="411px">
-            <form method="POST" action="/login" class="pc-p" style="--p: calc(4 * var(--w)) calc(6 * var(--w))">
+            <form method="POST" action="{{ path('login') }}" class="pc-p" style="--p: calc(4 * var(--w)) calc(6 * var(--w))">
                 <h1 class="pc-text--center">
-                    Connexion
+                    {{ 'login-title'|trans }}
                 </h1>
 
                 <div class="pc-input-group">
-                    <label class="pc-label required" for="email">Adresse email</label>
+                    <label class="pc-label required" for="email">{{ 'login-email'|trans }}</label>
                     <input id="email" name="email" type="email">
                 </div>
 
                 <div class="pc-input-group">
-                    <label class="pc-label required" for="password">Mot de passe</label>
+                    <label class="pc-label required" for="password">{{ 'login-password'|trans }}</label>
                     <input id="password" name="password" type="password">
                 </div>
 
                 <button class="pc-btn pc-icon--right" type="submit">
-                    Se connecter
+                    {{ 'login-submit'|trans }}
                     {{ icons.arrow_right() }}
                 </button>
             </form>

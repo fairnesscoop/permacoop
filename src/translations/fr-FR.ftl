@@ -20,6 +20,11 @@ header-profile = Mon compte
 header-dropdown = Voir plus d'actions
 header-logout = Se déconnecter
 
+login-title = Connexion
+login-email = Adresse email
+login-password = Mot de passe
+login-submit = Se connecter
+
 home-title = Bonjour, {$user} !
 home-pending-leaves-title = Demandes de congés
 home-pending-leaves = {$leaves ->
