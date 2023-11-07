@@ -1,5 +1,6 @@
 .pc-with-sidebar {
   display: flex;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
@@ -14,4 +15,27 @@
   flex-basis: 0;
   flex-grow: 999;
   min-inline-size: var(--non-sidebar-min-size, 50%);
+  align-self: stretch;
+}
+
+@media screen and (min-width: 840px) {
+  .pc-with-sidebar-desktop {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .pc-with-sidebar-desktop > :first-child {
+    flex-basis: var(--sidebar-size, 20rem);
+    flex-grow: 1;
+  }
+
+  .pc-with-sidebar-desktop > :last-child {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: var(--non-sidebar-min-size, 50%);
+    align-self: stretch;
+  }
 }

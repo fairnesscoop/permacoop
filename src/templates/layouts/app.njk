@@ -6,14 +6,14 @@
 {% block body %}
     {% include 'components/header.njk' %}
 
-    <div class="pc-with-sidebar" style="--sidebar-desktop-size: 35ch; --non-sidebar-min-size: 60%">
+    <div class="pc-app__content pc-with-sidebar-desktop" style="--sidebar-size: 35ch">
         <nav class="pc-nav">
             <ul id="pc-nav-menu" hidden>
                 {% include 'components/nav_links.njk' %}
             </ul>
         </nav>
 
-        <main class="pc-background-alt-grey pc-p" style="--p: calc(3 * var(--w)) 0; align-content: stretch">
+        <main class="pc-background-alt-grey pc-p" style="--p: calc(3 * var(--w)) 0">
             {% block main %}{% endblock main %}
         </main>
     </div>
