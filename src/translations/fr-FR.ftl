@@ -29,6 +29,7 @@ login-email = Adresse email
 login-password = Mot de passe
 login-submit = Se connecter
 login-error-failed = L'adresse email ou le mot de passe est incorrect. Veuillez réessayer.
+login-error-auth-required = Veuillez vous connecter pour accéder à cette page.
 
 home-title = Bonjour, {$user} !
 home-pending-leaves-title = Demandes de congés

@@ -7,7 +7,7 @@
 {% block title %}{{ 'login-title'|trans }} - {{ super() }}{% endblock %}
 
 {% block main %}
-    <form method="POST" action="{{ path('login') }}" class="pc-container pc-card pc-box pc-stack" style="--container-size: 600px; --container-padding: calc(6 * var(--w)); --box-padding: calc(6 * var(--w))">
+    <form method="POST" action="{{ path('login') }}{% if next %}?next={{ next }}{% endif %}" class="pc-container pc-card pc-box pc-stack" style="--container-size: 600px; --container-padding: calc(6 * var(--w)); --box-padding: calc(6 * var(--w))">
         <div class="pc-cluster" style="--cluster-align: center; --cluster-justify: center; --cluster-gap: calc(2 * var(--w))">
             <img src="{{ asset('images/logo.png') }}" alt="{{ 'coop-name'|trans }}">
             <h1 class="pc-m" style="--m: 0">{{ 'site-title'|trans }}</h1>

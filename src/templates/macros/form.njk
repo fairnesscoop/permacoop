@@ -2,7 +2,7 @@
     {% set form_errors = get_flash_messages('error') %}
 
     {% if form_errors|length > 0 %}
-        <div class="pc-form-errors" style="--paragraph-spacing: var(--v)">
+        <div class="pc-form-errors" style="--paragraph-spacing: var(--v)" data-testid="form-errors">
             <p class="pc-bold">
                 {{ 'form-errors-title'|trans }}
             </p>

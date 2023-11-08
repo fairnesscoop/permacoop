@@ -34,6 +34,7 @@ export class HomeController {
   }
 
   @Get()
+  @WithName('index')
   public index(@Res() res: Response) {
     res.redirect(303, this.resolver.resolve('home'));
   }
