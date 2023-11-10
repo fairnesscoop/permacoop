@@ -46,3 +46,20 @@ export const buildFormFetchUrl = form => {
 
   return url;
 };
+
+/**
+ * Make all links navigate to a web page without a full-page reload.
+ * @param {Element} elt
+ */
+export function boostLinks(elt) {
+  if (!elt.id) {
+    throw new Error('element must have an id to enable link boosting');
+  }
+
+  elt.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', event => {
+      event.preventDefault();
+      visit(a.getAttribute('href'), { select: [`#${elt.id}`] });
+    });
+  });
+}
