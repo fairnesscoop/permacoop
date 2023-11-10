@@ -1,20 +1,20 @@
 {% extends 'layouts/_base.njk' %}
 {% import 'macros/icons.njk' as icons %}
 
-{% block body_attr %}class="pc-app"{% endblock %}
-
 {% block body %}
-    {% include 'components/header.njk' %}
+    <div class="pc-app">
+        {% include 'components/header.njk' %}
 
-    <div class="pc-app__content pc-with-sidebar-desktop" style="--sidebar-size: 35ch">
-        <nav class="pc-nav">
-            <ul id="pc-nav-menu" hidden>
-                {% include 'components/nav_links.njk' %}
-            </ul>
-        </nav>
+        <div class="pc-app__content pc-with-sidebar-desktop" style="--sidebar-size: 35ch">
+            <nav class="pc-nav">
+                <ul id="pc-nav-menu" hidden>
+                    {% include 'components/nav_links.njk' %}
+                </ul>
+            </nav>
 
-        <main class="pc-background-alt-grey pc-p" style="--p: calc(3 * var(--w)) 0">
-            {% block main %}{% endblock main %}
-        </main>
+            <main class="pc-background-alt-grey pc-p" style="--p: calc(3 * var(--w)) 0">
+                {% block main %}{% endblock main %}
+            </main>
+        </div>
     </div>
 {% endblock body %}

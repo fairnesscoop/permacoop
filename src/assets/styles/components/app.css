@@ -1,4 +1,4 @@
-body.pc-app {
+.pc-app {
   position: relative;
   /* Fill entire height */
   display: flex;

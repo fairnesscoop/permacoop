@@ -5,6 +5,48 @@
  */
 
 /**
+ * @param {Response} response
+ * @returns {Promise<string>}
+ */
+async function receiveResponseTrackingProgress(response) {
+  // Credit: https://javascript.info/fetch-progress
+  const reader = response.body.getReader();
+
+  const contentLength = response.headers.get('Content-Length');
+  let receivedLength = 0;
+
+  const chunks = [];
+
+  while (true) {
+    const { done, value } = await reader.read();
+
+    if (done) {
+      break;
+    }
+
+    chunks.push(value);
+    receivedLength += value.length;
+
+    document.dispatchEvent(
+      new CustomEvent('pc:fetchProgress', {
+        detail: { value: receivedLength / contentLength }
+      })
+    );
+  }
+
+  const chunksArr = new Uint8Array(receivedLength);
+
+  let position = 0;
+
+  for (const chunk of chunks) {
+    chunksArr.set(chunk, position);
+    position++;
+  }
+
+  return new TextDecoder('utf-8').decode(chunksArr);
+}
+
+/**
  * Fetch a web page, then swap selected elements with theirs.
  * New <head> is NOT processed.
  *
@@ -17,11 +59,14 @@ export async function visit(url, options = { select: ['body'] }) {
     options.select = JSON.parse(options.select);
   }
 
+  document.dispatchEvent(new CustomEvent('pc:fetchStart'));
   const response = await fetch(url, { headers: { 'X-Turbolite': 'true' } });
+  const html = await receiveResponseTrackingProgress(response);
+  document.dispatchEvent(new CustomEvent('pc:fetchEnd'));
 
   // Inspiration: https://stackoverflow.com/a/10585079
   const tmpDoc = document.createElement('html');
-  tmpDoc.innerHTML = await response.text();
+  tmpDoc.innerHTML = html;
 
   options.select.forEach(selector => {
     document

@@ -20,7 +20,10 @@
     {% block scripts %}{% endblock %}
   </head>
   {% block header %}{% endblock %}
-  <body id="pc-body" is="pc-boosted-links" {% block body_attr %}{% endblock %}>
-    {% block body %}{% endblock %}
+  <body>
+    <pc-navigation-progress></pc-navigation-progress>
+    <pc-boosted-links id="pc-boosted-links">
+      {% block body %}{% endblock %}
+    </pc-boosted-links>
   </body>
 </html>

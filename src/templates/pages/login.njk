@@ -3,35 +3,36 @@
 {% from 'macros/attr.njk' import render_attr %}
 {% from 'macros/form.njk' import render_form_errors with context %}
 
-{% block body_attr %}{{ render_attr({ class: 'pc-login pc-background-alt-grey' }) }}{% endblock body_attr %}
 {% block title %}{{ 'login-title'|trans }} - {{ super() }}{% endblock %}
 
-{% block main %}
-    <form method="POST" action="{{ path('login') }}{% if next %}?next={{ next }}{% endif %}" class="pc-container pc-card pc-box pc-stack" style="--container-size: 600px; --container-padding: calc(6 * var(--w)); --box-padding: calc(6 * var(--w))">
-        <div class="pc-cluster" style="--cluster-align: center; --cluster-justify: center; --cluster-gap: calc(2 * var(--w))">
-            <img src="{{ asset('images/logo.png') }}" alt="{{ 'coop-name'|trans }}">
-            <h1 class="pc-m" style="--m: 0">{{ 'site-title'|trans }}</h1>
-        </div>
+{% block body %}
+    <main class="pc-box pc-background-alt-grey" style="--box-padding: calc(8 * var(--w)) 0 0 0">
+        <form method="POST" action="{{ path('login') }}{% if next %}?next={{ next }}{% endif %}" class="pc-container pc-card pc-box pc-stack" style="--container-size: 600px; --container-padding: calc(6 * var(--w)); --box-padding: calc(6 * var(--w))">
+            <div class="pc-cluster" style="--cluster-align: center; --cluster-justify: center; --cluster-gap: calc(2 * var(--w))">
+                <img src="{{ asset('images/logo.png') }}" alt="{{ 'coop-name'|trans }}">
+                <h1 class="pc-m" style="--m: 0">{{ 'site-title'|trans }}</h1>
+            </div>
 
-        <h2 class="pc-text--center">
-            {{ 'login-title'|trans }}
-        </h2>
+            <h2 class="pc-text--center">
+                {{ 'login-title'|trans }}
+            </h2>
 
-        {{ render_form_errors() }}
+            {{ render_form_errors() }}
 
-        <div class="pc-input-group">
-            <label class="pc-label required" for="email">{{ 'login-email'|trans }}</label>
-            <input id="email" name="email" type="email">
-        </div>
+            <div class="pc-input-group">
+                <label class="pc-label required" for="email">{{ 'login-email'|trans }}</label>
+                <input id="email" name="email" type="email">
+            </div>
 
-        <div class="pc-input-group">
-            <label class="pc-label required" for="password">{{ 'login-password'|trans }}</label>
-            <input id="password" name="password" type="password">
-        </div>
+            <div class="pc-input-group">
+                <label class="pc-label required" for="password">{{ 'login-password'|trans }}</label>
+                <input id="password" name="password" type="password">
+            </div>
 
-        <button class="pc-btn pc-icon--right" type="submit">
-            {{ 'login-submit'|trans }}
-            {{ icons.arrow_right() }}
-        </button>
-    </form>
-{% endblock main %}
+            <button class="pc-btn pc-icon--right" type="submit">
+                {{ 'login-submit'|trans }}
+                {{ icons.arrow_right() }}
+            </button>
+        </form>
+    </main>
+{% endblock body %}
