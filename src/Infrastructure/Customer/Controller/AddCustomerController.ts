@@ -14,7 +14,7 @@ import { ICommandBus } from 'src/Application/ICommandBus';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { CreateCustomerCommand } from 'src/Application/Customer/Command/CreateCustomerCommand';
-import { CustomerDTO } from '../DTO/CustomerDTO';
+import { CustomerDTO } from 'server/src/Infrastructure/Customer/DTO/CustomerDTO';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 
 @Controller('app/customers/add')
@@ -35,12 +35,10 @@ export class AddCustomerController {
 
   @Post()
   public async post(@Body() customerDto: CustomerDTO, @Res() res: Response) {
-    const { street, city, zipCode, country, name } = customerDto;
+    const { name } = customerDto;
 
     try {
-      await this.commandBus.execute(
-        new CreateCustomerCommand(name, street, city, zipCode, country)
-      );
+      await this.commandBus.execute(new CreateCustomerCommand(name));
 
       res.redirect(303, this.resolver.resolve('crm_customers_list'));
     } catch (e) {

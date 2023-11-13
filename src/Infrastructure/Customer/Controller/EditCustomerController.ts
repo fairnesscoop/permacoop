@@ -17,7 +17,7 @@ import { IQueryBus } from 'src/Application/IQueryBus';
 import { Response } from 'express';
 import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
 import { GetCustomerByIdQuery } from 'src/Application/Customer/Query/GetCustomerByIdQuery';
-import { CustomerDTO } from '../DTO/CustomerDTO';
+import { CustomerDTO } from 'server/src/Infrastructure/Customer/DTO/CustomerDTO';
 import { UpdateCustomerCommand } from 'src/Application/Customer/Command/UpdateCustomerCommand';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 
@@ -51,19 +51,10 @@ export class EditCustomerController {
     @Body() dto: CustomerDTO,
     @Res() res: Response
   ) {
-    const { name, street, zipCode, city, country } = dto;
+    const { name } = dto;
 
     try {
-      await this.commandBus.execute(
-        new UpdateCustomerCommand(
-          idDto.id,
-          name,
-          street,
-          city,
-          zipCode,
-          country
-        )
-      );
+      await this.commandBus.execute(new UpdateCustomerCommand(idDto.id, name));
 
       res.redirect(303, this.resolver.resolve('crm_customers_list'));
     } catch (e) {

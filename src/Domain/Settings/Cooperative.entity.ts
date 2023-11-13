@@ -1,5 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Address } from '../Customer/Address.entity';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Cooperative {
@@ -17,13 +16,9 @@ export class Cooperative {
   })
   private dayDuration: number;
 
-  @ManyToOne(type => Address, { nullable: false })
-  private address: Address;
-
-  constructor(name: string, dayDuration: number, address: Address) {
+  constructor(name: string, dayDuration: number) {
     this.name = name;
     this.dayDuration = dayDuration;
-    this.address = address;
   }
 
   public getId(): string {
@@ -36,9 +31,5 @@ export class Cooperative {
 
   public getDayDuration(): number {
     return this.dayDuration;
-  }
-
-  public getAddress(): Address {
-    return this.address;
   }
 }

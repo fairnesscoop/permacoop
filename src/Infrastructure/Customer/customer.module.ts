@@ -8,8 +8,6 @@ import { CreateCustomerCommandHandler } from 'src/Application/Customer/Command/C
 import { GetCustomerByIdQueryHandler } from 'src/Application/Customer/Query/GetCustomerByIdQueryHandler';
 import { GetCustomersQueryHandler } from 'src/Application/Customer/Query/GetCustomersQueryHandler';
 import { UpdateCustomerCommandHandler } from 'src/Application/Customer/Command/UpdateCustomerCommandHandler';
-import { AddressRepository } from './Repository/AddressRepository';
-import { Address } from 'src/Domain/Customer/Address.entity';
 import { ListCustomersController } from './Controller/ListCustomersController';
 import { AddCustomerController } from './Controller/AddCustomerController';
 import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
@@ -20,7 +18,7 @@ import { TablesModule } from '../Tables/tables.module';
 @Module({
   imports: [
     BusModule,
-    TypeOrmModule.forFeature([Customer, Address]),
+    TypeOrmModule.forFeature([Customer]),
     ExtendedRoutingModule,
     TablesModule
   ],
@@ -31,7 +29,6 @@ import { TablesModule } from '../Tables/tables.module';
   ],
   providers: [
     { provide: 'ICustomerRepository', useClass: CustomerRepository },
-    { provide: 'IAddressRepository', useClass: AddressRepository },
     IsCustomerAlreadyExist,
     UpdateCustomerCommandHandler,
     CreateCustomerCommandHandler,
