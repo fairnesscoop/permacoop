@@ -3,13 +3,19 @@
  * [0]: https://turbo.hotwired.dev/
  * [1]: https://htmx.org/
  */
+import { activateScripts } from './html';
 
 /**
- * @param {Response} response
+ * @param {string} url
  * @returns {Promise<string>}
  */
-async function receiveResponseTrackingProgress(response) {
+async function fetchHtmlTrackingProgress(url) {
+  document.dispatchEvent(new CustomEvent('pc:fetchStart'));
+
+  const response = await fetch(url, { headers: { 'X-Turbolite': 'true' } });
+
   // Credit: https://javascript.info/fetch-progress
+
   const reader = response.body.getReader();
 
   const contentLength = response.headers.get('Content-Length');
@@ -43,12 +49,15 @@ async function receiveResponseTrackingProgress(response) {
     position++;
   }
 
-  return new TextDecoder('utf-8').decode(chunksArr);
+  const html = new TextDecoder('utf-8').decode(chunksArr);
+
+  document.dispatchEvent(new CustomEvent('pc:fetchEnd'));
+
+  return html;
 }
 
 /**
- * Fetch a web page, then swap selected elements with theirs.
- * New <head> is NOT processed.
+ * Fetch a web page, then swap selected elements and <head> with theirs.
  *
  * @param {string} url
  * @param {{ init: RequestInit|undefined, select: string|string[] } options}
@@ -59,10 +68,7 @@ export async function visit(url, options = { select: ['body'] }) {
     options.select = JSON.parse(options.select);
   }
 
-  document.dispatchEvent(new CustomEvent('pc:fetchStart'));
-  const response = await fetch(url, { headers: { 'X-Turbolite': 'true' } });
-  const html = await receiveResponseTrackingProgress(response);
-  document.dispatchEvent(new CustomEvent('pc:fetchEnd'));
+  const html = await fetchHtmlTrackingProgress(url);
 
   // Inspiration: https://stackoverflow.com/a/10585079
   const tmpDoc = document.createElement('html');
@@ -74,7 +80,14 @@ export async function visit(url, options = { select: ['body'] }) {
       .replaceWith(tmpDoc.querySelector(selector));
   });
 
-  window.history.pushState({}, '', response.url);
+  const headHTML = tmpDoc.querySelector('head').innerHTML;
+
+  if (headHTML) {
+    document.querySelector('head').innerHTML = headHTML;
+    activateScripts(document.querySelector('head'));
+  }
+
+  window.history.pushState({}, '', url);
 }
 
 /**
