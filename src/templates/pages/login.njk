@@ -5,8 +5,8 @@
 
 {% block title %}{{ 'login-title'|trans }} - {{ super() }}{% endblock %}
 
-{% block body %}
-    <main class="pc-box pc-background-alt-grey" style="--box-padding: calc(8 * var(--w)) 0 0 0">
+{% block main %}
+    <div class="pc-box" style="--box-padding: calc(8 * var(--w)) calc(3 * var(--w))">
         <form method="POST" action="{{ path('login') }}{% if next %}?next={{ next }}{% endif %}" class="pc-container pc-card pc-box pc-stack" style="--container-size: 600px; --container-padding: calc(6 * var(--w)); --box-padding: calc(6 * var(--w))">
             <div class="pc-cluster" style="--cluster-align: center; --cluster-justify: center; --cluster-gap: calc(2 * var(--w))">
                 <img src="{{ asset('images/logo.png') }}" alt="{{ 'coop-name'|trans }}">
@@ -34,5 +34,5 @@
                 {{ icons.arrow_right() }}
             </button>
         </form>
-    </main>
-{% endblock body %}
+    </div>
+{% endblock main %}

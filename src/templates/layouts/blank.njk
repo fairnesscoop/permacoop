@@ -1,7 +1,9 @@
 {% extends 'layouts/_base.njk' %}
  
 {% block body %}
-    <main>
-        {% block main %}{% endblock main %}
+    <div class="pc-shell">
+        <main class="{% block main_class %}pc-shell__content{% endblock %}">
+            {% block main %}{% endblock main %}
+        </main>
     </main>
 {% endblock body %}

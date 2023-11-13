@@ -1,4 +1,3 @@
-@import './app.css';
 @import './badge.css';
 @import './brand.css';
 @import './breadcrumb.css';
@@ -12,5 +11,6 @@
 @import './link.css';
 @import './nav.css';
 @import './select-group.css';
+@import './shell.css';
 @import './table.css';
 @import './theme.css';

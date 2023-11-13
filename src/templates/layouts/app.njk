@@ -2,17 +2,17 @@
 {% import 'macros/icons.njk' as icons %}
 
 {% block body %}
-    <div class="pc-app">
+    <div class="pc-shell">
         {% include 'components/header.njk' %}
 
-        <div class="pc-app__content pc-with-sidebar-desktop" style="--sidebar-size: 35ch">
+        <div class="pc-shell__content pc-shell-mobile pc-with-sidebar-desktop" style="--sidebar-size: 35ch; --shell-min-size: 100%">
             <nav class="pc-nav">
                 <ul id="pc-nav-menu" hidden>
                     {% include 'components/nav_links.njk' %}
                 </ul>
             </nav>
 
-            <main class="pc-background-alt-grey pc-p" style="--p: calc(3 * var(--w)) 0">
+            <main class="pc-shell__content pc-p" style="--p: calc(3 * var(--w)) 0">
                 {% block main %}{% endblock main %}
             </main>
         </div>

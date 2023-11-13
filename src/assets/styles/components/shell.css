@@ -1,0 +1,35 @@
+.pc-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: var(--shell-min-size, 100vh);
+}
+
+/* Main shell content grows */
+.pc-shell > .pc-shell__content {
+  flex-grow: 1;
+}
+
+.pc-shell__content {
+  background-color: var(--background-alt-grey);
+}
+
+/* Ensure all other shell elements match the main content's size */
+:where(.pc-shell, .pc-shell-mobile) > * {
+  align-self: stretch;
+}
+
+@media screen and (max-width: 840px) {
+  .pc-shell-mobile {
+    display: flex;
+    flex-direction: column;
+    min-height: var(--shell-min-size, 100vh);
+  }
+
+  .pc-shell-mobile > .pc-shell__content {
+    flex-grow: 1;
+  }
+
+  .pc-shell-mobile > * {
+    align-self: stretch;
+  }
+}
