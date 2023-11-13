@@ -1,0 +1,23 @@
+{% macro filters_form() %}
+    <form
+        is="pc-auto-form"
+        method="GET"
+        action="{{ path('people_payroll_elements') }}"
+        class="pc-cluster pc-gap"
+        style="--cluster-align: flex-end"
+    >
+        <div class="pc-select-group pc-m" style="--m: 0">
+            <label class="pc-label" for="month">{{ 'payroll-elements-filters-month-title'|trans }}</label>
+            <select name="month" id="month">
+                {% for monthValue in range(12) %}
+                    <option value="{{ monthValue }}" {% if monthValue == month %}selected{% endif %}>{{ monthValue|longMonth|capitalize }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="pc-input-group pc-m" style="--m: 0">
+            <label class="pc-label" for="year">{{ 'payroll-elements-filters-year-title'|trans }}</label>
+            <input type="number" id="year" name="year" pattern="\d+" value="{{ year }}" style="--input-width: 12ch">
+        </div>
+    </form>
+{% endmacro %}

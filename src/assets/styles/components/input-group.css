@@ -6,7 +6,7 @@
 .pc-input-group > input {
   appearance: none;
   display: block;
-  width: 100%;
+  width: var(--input-width, 100%);
   background-color: var(--background-default);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-sm);

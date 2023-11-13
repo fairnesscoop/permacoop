@@ -1,6 +1,7 @@
 {% extends 'layouts/app.njk' %}
 {% import 'macros/links.njk' as links %}
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
+{% from './_filters_form.njk' import filters_form with context %}
 
 {% set title = 'payroll-elements-title'|trans %}
 
@@ -13,15 +14,17 @@
             {{ title }}
         </h1>
 
-        <div class="pc-cluster pc-gap" style="--cluster-align: center">
-            <a is="pc-blob-link" data-blob-content="{{ csv }}" data-blob-mime-type="application/csv" download="{{ 'payroll-elements-filename'|trans({ date: date|htmlYearMonth }) }}" class="pc-btn">
-                {{ 'payroll-elements-download'|trans }}
-            </a>
+        <a href="https://wiki.fairness.coop/fr/guides/gestion/Salaires-et-fiches-de-paie" class="pc-link-btn" rel="noreferrer" target="_blank">
+            {{ 'payroll-elements-wiki'|trans }}
+        </a>
+    </div>
 
-            <a href="https://wiki.fairness.coop/fr/guides/gestion/Salaires-et-fiches-de-paie" class="pc-link-btn" rel="noreferrer" target="_blank">
-                {{ 'payroll-elements-wiki'|trans }}
-            </a>
-        </div>
+    <div class="pc-cluster pc-gap" style="--cluster-justify: space-between; --cluster-align: center">
+        {{ filters_form() }}
+
+        <a is="pc-blob-link" data-blob-content="{{ csv }}" data-blob-mime-type="application/csv" download="{{ 'payroll-elements-filename'|trans({ date: date|htmlYearMonth }) }}" class="pc-btn">
+            {{ 'payroll-elements-download'|trans }}
+        </a>
     </div>
 
     {% table table %}

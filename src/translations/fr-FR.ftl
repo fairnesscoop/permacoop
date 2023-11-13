@@ -169,6 +169,8 @@ payroll-elements-specialLeaves = Congés exceptionnels
 payroll-elements-download = Télécharger
 payroll-elements-filename = Fairness - Éléments de paie - {$date}.csv
 payroll-elements-wiki = Voir le Wiki
+payroll-elements-filters-month-title = Mois
+payroll-elements-filters-year-title = Année
 
 meal-tickets-title = Tickets resto
 meal-tickets-user = Coopérateur·ice - Salarié·e
