@@ -1,41 +1,35 @@
 import { onParsed } from '../lib/customElements';
-import { buildFormFetchUrl, visit } from '../lib/turbolite';
 
 export default class extends HTMLFormElement {
   connectedCallback() {
     onParsed(() => {
-      const doSubmit = async () => {
-        const url = buildFormFetchUrl(this);
-        await visit(url, { select: this.dataset.select });
-      };
-
       this.previousBtn.addEventListener('click', () => {
         this.month.value = this._clipMonth(+this.month.value - 1);
-        doSubmit();
+        this.requestSubmit();
       });
 
       this.todayBtn.addEventListener('click', () => {
         const today = new Date();
         this.month.value = today.getMonth();
         this.year.value = today.getFullYear();
-        doSubmit();
+        this.requestSubmit();
       });
 
       this.nextBtn.addEventListener('click', () => {
         this.month.value = this._clipMonth(+this.month.value + 1);
-        doSubmit();
+        this.requestSubmit();
       });
 
       this.month.addEventListener('change', () => {
-        doSubmit();
+        this.requestSubmit();
       });
 
       this.year.addEventListener('change', () => {
-        doSubmit();
+        this.requestSubmit();
       });
 
       this.userId.addEventListener('change', () => {
-        doSubmit();
+        this.requestSubmit();
       });
     });
   }

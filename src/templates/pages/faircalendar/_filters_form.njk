@@ -1,9 +1,8 @@
-{% macro filters_form(select) %}
+{% macro filters_form() %}
     <form
         is="pc-faircalendar-filters-form"
         method="GET"
         action="{{ path('faircalendar_index') }}"
-        data-select="{{ select|dump }}"
         class="pc-cluster pc-gap"
         style="--cluster-align: flex-end"
     >

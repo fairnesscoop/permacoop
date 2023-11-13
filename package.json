@@ -64,6 +64,7 @@
     "@event-calendar/core": "^2.3.3",
     "@event-calendar/day-grid": "^2.3.3",
     "@event-calendar/interaction": "^2.3.3",
+    "@hotwired/turbo": "^7.3.0",
     "@nestjs/cli": "^9.3.0",
     "@nestjs/schematics": "^9.0.3",
     "@nestjs/testing": "^9.2.0",

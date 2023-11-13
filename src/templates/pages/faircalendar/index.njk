@@ -17,22 +17,24 @@
 
 {% block main %}
 <div class="pc-container">
-    {{ breadcrumb([{ title: title }]) }}
+    <turbo-frame id="faircalendar">
+        {{ breadcrumb([{ title: title }]) }}
 
-    <h1>{{ title }}</h1>
+        <h1>{{ title }}</h1>
 
-    <div class="pc-with-sidebar pc-with-sidebar-start pc-gap" style="--sidebar-size: 22ch; --non-sidebar-min-size: 80%">
-        {{ filters_form(select=['h1', '#faircalendar']) }}
+        <div class="pc-with-sidebar pc-with-sidebar-start pc-gap" style="--sidebar-size: 22ch; --non-sidebar-min-size: 80%">
+            {{ filters_form() }}
 
-        <div id="faircalendar" class="pc-stack">
-            {% table overviewTable, { attr: {class: 'pc-table--center pc-table--no-shadow'} } %}
+            <div id="faircalendar" class="pc-stack">
+                {% table overviewTable, { attr: {class: 'pc-table--center pc-table--no-shadow'} } %}
 
-            <pc-eventcalendar
-                data-events-json="{{ fullCalendarEvents|dump }}"
-                data-add-url-template="{{ path('faircalendar_events_add', { startDate: ':startDate', endDate: ':endDate' }) }}"
-                data-date="{{ date|htmlDate }}"
-            ></pc-eventcalendar>
+                <pc-eventcalendar
+                    data-events-json="{{ fullCalendarEvents|dump }}"
+                    data-add-url-template="{{ path('faircalendar_events_add', { startDate: ':startDate', endDate: ':endDate' }) }}"
+                    data-date="{{ date|htmlDate }}"
+                ></pc-eventcalendar>
+            </div>
         </div>
-    </div>
+    </turbo-frame>
 </div>
 {% endblock main %}
