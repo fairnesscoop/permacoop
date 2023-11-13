@@ -32,15 +32,10 @@ export class UpdateCustomerAction {
   @ApiOperation({ summary: 'Update customer' })
   public async index(@Param() dto: IdDTO, @Body() customerDto: CustomerDTO) {
     try {
-      const {
-        address: { street, city, zipCode, country },
-        name
-      } = customerDto;
+      const { name } = customerDto;
       const { id } = dto;
 
-      await this.commandBus.execute(
-        new UpdateCustomerCommand(id, name, street, city, zipCode, country)
-      );
+      await this.commandBus.execute(new UpdateCustomerCommand(id, name));
 
       return { id };
     } catch (e) {
