@@ -80,9 +80,10 @@ database-migrate: ## Database migrations
 	npm run migration:migrate
 
 database-test-init: up ## Initialize test database
-	make compose CMD="exec -T database createdb permacoop_test" || echo 'Does the test DB already exist? Ignoring...'
-	make database-migrate DATABASE_NAME=permacoop_test
-	make database-seed DATABASE_NAME=permacoop_test
+	make compose CMD="exec -T database dropdb permacoop_hotwire_test"
+	make compose CMD="exec -T database createdb permacoop_hotwire_test"
+	make database-migrate DATABASE_NAME=permacoop_hotwire_test
+	make database-seed DATABASE_NAME=permacoop_hotwire_test
 
 database-migration: ## Generate a database migration
 	npm run migration:create -- migrations/$(NAME)

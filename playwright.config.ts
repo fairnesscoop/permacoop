@@ -1,11 +1,18 @@
+import * as path from 'path';
+import { config } from 'dotenv';
 import { type PlaywrightTestConfig, devices } from "@playwright/test";
 
-const config: PlaywrightTestConfig = {
+config({ path: path.resolve(process.cwd(), '.env.local') });
+config({ path: path.resolve(process.cwd(), '.env') });
+
+const port = 3038;
+
+const pwConfig: PlaywrightTestConfig = {
   testDir: "./e2e",
   retries: 0,
   timeout: 10 * 1000,
   use: {
-    baseURL: "http://localhost:3000",
+    baseURL: `http://localhost:${port}`,
     browserName: "firefox",
     headless: true,
     screenshot: "only-on-failure",
@@ -20,13 +27,14 @@ const config: PlaywrightTestConfig = {
     },
   ],
   webServer: {
-    command: 'make start-dist',
+    command: `make start-dist`,
     reuseExistingServer: !process.env.CI,
-    url: 'http://localhost:3000',
+    url: `http://localhost:${port}`,
     env: {
-      DATABASE_NAME: 'permacoop_test',
+      PORT: port.toString(),
+      DATABASE_NAME: process.env.DATABASE_NAME + '_test',
     }
   },
 };
 
-export default config;
+export default pwConfig;

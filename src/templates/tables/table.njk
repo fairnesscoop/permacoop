@@ -3,7 +3,7 @@
 {% set attr = attr|default({})|merge({class: 'pc-table-wrapper ' + attr.class|default('')}) %}
 
 <div {{ render_attr(attr) }}>
-  <table class="pc-table">
+  <table class="pc-table" {% if caption %}aria-label="{{ caption }}"{% endif %}>
     <thead>
       <tr>
         {% for column in table.columns %}

@@ -72,6 +72,7 @@ faircalendar-overview-days = {$days ->
 crm-title = FairCRM
 
 crm-customers-title = Clients
+crm-customers-table-caption = Liste des clients
 crm-customers-add-title = Ajouter un client
 crm-customers-edit-title = Édition du client "{$name}"
 crm-customers-name = Nom du client

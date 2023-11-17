@@ -3,6 +3,8 @@ import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { UserFactory } from '../Factories/UserFactory';
 
 import { UserSeeder } from './UserSeeder';
+import { CustomerSeeder } from './CustomerSeeder';
+import { CustomerFactory } from '../Factories/CustomerFactory';
 
 export class AppSeeder extends Seeder {
   async run() {
@@ -13,6 +15,11 @@ export class AppSeeder extends Seeder {
         })
       ]
     });
-    await this.call([userSeeder]);
+
+    const customerSeeder = new CustomerSeeder({
+      factories: [new CustomerFactory()]
+    });
+
+    await this.call([userSeeder, customerSeeder]);
   }
 }

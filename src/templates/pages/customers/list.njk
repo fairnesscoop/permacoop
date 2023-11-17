@@ -15,6 +15,6 @@
         {{ links.add(path('crm_customers_add'))}}
     </div>
 
-    {% table table %}
+    {% table table, {caption: 'crm-customers-table-caption'|trans} %}
 </div>
 {% endblock main %}
