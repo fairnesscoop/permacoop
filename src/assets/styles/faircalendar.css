@@ -2,7 +2,7 @@
 
 /* EventCalendar customizations */
 
-.pc-eventcalendar {
+pc-eventcalendar {
   display: block;
 }
 
@@ -14,7 +14,7 @@
   background-color: var(--event-today);
 }
 
-.pc-eventcalendar .ec-day-grid .ec-uniform .ec-day {
+pc-eventcalendar .ec-day-grid .ec-uniform .ec-day {
   /* Fix: by default EventCalendar sets the min-height of day boxes to 0 when dayMaxEvents is true. */
   min-height: 5rem;
 }
