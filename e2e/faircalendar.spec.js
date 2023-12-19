@@ -10,7 +10,7 @@ test.describe('authenticated', () => {
   test.use({ storageState: 'playwright/.auth/johnDoe.json' });
 
   test('basic content', async ({ page }) => {
-    await page.goto('/app/faircalendar?year=2023&month=10'); // month=0..11
+    await page.goto('/app/faircalendar?year=2023&month=11'); // month=1..12
     await expect(page).toHaveTitle('FairCalendar novembre 2023 - Permacoop');
 
     const calendar = page.getByTestId('pc-event-calendar');
@@ -21,7 +21,7 @@ test.describe('authenticated', () => {
   });
 
   test('go to add event', async ({ page }) => {
-    await page.goto('/app/faircalendar?year=2023&month=10');
+    await page.goto('/app/faircalendar?year=2023&month=11');
 
     const calendar = page.getByTestId('pc-event-calendar');
 
@@ -36,7 +36,7 @@ test.describe('authenticated', () => {
   });
 
   test('back button behavior', async ({ page }) => {
-    await page.goto('/app/faircalendar?year=2023&month=10');
+    await page.goto('/app/faircalendar?year=2023&month=11');
 
     const calendar = page.getByTestId('pc-event-calendar');
 

@@ -40,10 +40,11 @@ export class FairCalendarController {
     @Query() dto: FairCalendarControllerDTO,
     @LoggedUser() user: User
   ) {
-    const date =
-      dto.month !== undefined && dto.year !== undefined
-        ? new Date(dto.year, dto.month, 15)
-        : new Date();
+    let date = new Date();
+
+    if (dto.year !== undefined && dto.month !== undefined) {
+      date = new Date(dto.year, dto.month - 1, 15);
+    }
 
     const userId = dto.userId ? dto.userId : user['id'];
 
@@ -101,7 +102,7 @@ export class FairCalendarController {
       overviewTable,
       fullCalendarEvents,
       date,
-      currentMonth: date.getMonth(),
+      currentMonth: date.getMonth() + 1,
       currentYear: date.getFullYear(),
       userId
     };

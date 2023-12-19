@@ -149,6 +149,7 @@ leave-requests-moderation-deny = Refuser la demande de congés
 leaves-calendar-url-title = Lien d'abonnement au calendrier
 
 payroll-elements-title = Éléments de paie
+payroll-elements-page-title = Éléments de paie {DATETIME($date, month: "long", year: "numeric")}
 payroll-elements-user = Salarié·e / stagiaire
 payroll-elements-contract = Contrat
 payroll-elements-contract-value = { users-contract-value } {$executivePosition ->

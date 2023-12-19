@@ -7,3 +7,39 @@
 export function onParsed(cb) {
   requestAnimationFrame(cb);
 }
+
+/**
+ * Wait until an element appears in the DOM.
+ * Credit: https://stackoverflow.com/a/61511955
+ * @param {string} selector
+ * @param {Element} root
+ * @param {{timeout?: number}} options
+ * @returns {Promise<Element>}
+ */
+export function waitForElement(selector, root, { timeout } = {}) {
+  return new Promise(resolve => {
+    let timeoutHandle;
+
+    if (timeout) {
+      timeoutHandle = setTimeout(
+        () => reject(`failed to find ${selector} after ${timeout} ms`),
+        timeout
+      );
+    }
+
+    if (document.querySelector(selector)) {
+      clearTimeout(timeoutHandle);
+      return resolve(document.querySelector(selector));
+    }
+
+    const observer = new MutationObserver(_mutations => {
+      if (document.querySelector(selector)) {
+        observer.disconnect();
+        clearTimeout(timeoutHandle);
+        resolve(document.querySelector(selector));
+      }
+    });
+
+    observer.observe(root, { childList: true, subtree: true });
+  });
+}

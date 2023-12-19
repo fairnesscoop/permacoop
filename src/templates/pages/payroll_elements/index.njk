@@ -3,7 +3,7 @@
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 {% from './_filters_form.njk' import filters_form with context %}
 
-{% set title = 'payroll-elements-title'|trans %}
+{% set title = 'payroll-elements-page-title'|trans({ date: date }) %}
 
 {% block main %}
 <div class="pc-container pc-stack">
