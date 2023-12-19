@@ -63,6 +63,7 @@ faircalendar-time-title = Temps passé
 faircalendar-filters-month-title = Mois
 faircalendar-filters-year-title = Année
 faircalendar-filters-userId-title = Coopérateur·ice - salarié·e
+faircalendar-filters-submit = Mettre à jour
 faircalendar-overview-days = {$days ->
     [0] 0
     [1] 1 jour

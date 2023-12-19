@@ -1,55 +1,73 @@
 // @ts-check
 import { onParsed } from '../lib/customElements';
 
-export default class extends HTMLFormElement {
+export default class extends HTMLElement {
+  /** @type {HTMLFormElement} */
+  #form;
+
   connectedCallback() {
     onParsed(() => {
-      this.previousBtn.addEventListener('click', () => {
-        this.month.value = this._clipMonth(+this.month.value - 1);
+      const form = /** @type {HTMLFormElement} */ (this.querySelector('form'));
+
+      // Progressive enhancement:
+      // If this custom element activates, then we enable auto-submission and remove the manual submit button.
+      const submitBtn = /** @type {HTMLButtonElement} */ (this.querySelector('button[type="submit"]'));
+      const navigationTemplate = /** @type {HTMLTemplateElement} */ (this.querySelector('#faircalendar-filters-form-navigation'));
+      const navigation = document.importNode(navigationTemplate.content, true);
+      navigationTemplate.after(navigation);
+      submitBtn.remove();
+
+      this.#form = form;
+
+      form.previousBtn.addEventListener('click', () => {
+        this._updateMonth(+form.month.value - 1);
         this._submit();
       });
 
-      this.todayBtn.addEventListener('click', () => {
+      form.todayBtn.addEventListener('click', () => {
         const today = new Date();
-        this.month.value = today.getMonth();
-        this.year.value = today.getFullYear();
+        form.month.value = today.getMonth();
+        form.year.value = today.getFullYear();
         this._submit();
       });
 
-      this.nextBtn.addEventListener('click', () => {
-        this.month.value = this._clipMonth(+this.month.value + 1);
+      form.nextBtn.addEventListener('click', () => {
+        this._updateMonth(+form.month.value + 1);
         this._submit();
       });
 
-      this.month.addEventListener('change', () => {
+      form.month.addEventListener('change', () => {
         this._submit();
       });
 
-      this.year.addEventListener('change', () => {
+      form.year.addEventListener('change', () => {
         this._submit();
       });
 
-      this.userId.addEventListener('change', () => {
+      form.userId.addEventListener('change', () => {
         this._submit();
       });
     });
   }
 
   _submit() {
-    this.requestSubmit();
+    this.#form.requestSubmit();
   }
 
-  _clipMonth(month) {
+  /**
+   * @param {number} month
+   */
+  _updateMonth(month) {
     if (month < 0) {
       month += 12;
-      this.year.value = +this.year.value - 1;
+      this.#form.year.value = +this.#form.year.value - 1;
     }
 
     if (month > 11) {
       month -= 12;
-      this.year.value = +this.year.value + 1;
+      this.#form.year.value = +this.#form.year.value + 1;
     }
 
-    return month;
+    this.#form.month.value = month;
   }
 }

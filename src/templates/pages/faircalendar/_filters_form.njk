@@ -1,37 +1,44 @@
 {% macro filters_form() %}
-    <form
-        is="pc-faircalendar-filters-form"
-        method="GET"
-        action="{{ path('faircalendar_index') }}"
-        class="pc-cluster pc-gap"
-        style="--cluster-align: flex-end"
-    >
-        <div class="pc-cluster" style="--cluster-align: stretch">
-            <button id="previousBtn" type="button" class="pc-btn pc-btn--muted" title="Mois précédent">{{ '<' }}</button>
-            <button id="todayBtn" type="button" class="pc-btn pc-btn--muted" title="Aujourd'hui">
-                {{ icons.calendar() }}
+    <pc-faircalendar-filters-form>
+        <form
+            method="GET"
+            action="{{ path('faircalendar_index') }}"
+            class="pc-cluster pc-gap"
+            style="--cluster-align: flex-end"
+        >
+            <template id="faircalendar-filters-form-navigation">
+                <div class="pc-cluster" style="--cluster-align: stretch">
+                    <button id="previousBtn" type="button" class="pc-btn pc-btn--muted" title="Mois précédent">{{ '<' }}</button>
+                    <button id="todayBtn" type="button" class="pc-btn pc-btn--muted" title="Aujourd'hui">
+                        {{ icons.calendar() }}
+                    </button>
+                    <button id="nextBtn" type="button" class="pc-btn pc-btn--muted" title="Mois suivant">{{ '>' }}</button>
+                </div>
+            </template>
+
+            <div class="pc-select-group pc-m" style="--m: 0">
+                <label class="pc-label" for="month">{{ 'faircalendar-filters-month-title'|trans }}</label>
+                <select name="month" id="month">
+                    {% for month in range(12) %}
+                        <option value="{{ month }}" {% if month == currentMonth %}selected{% endif %}>{{ month|longMonth|capitalize }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="pc-input-group pc-m" style="--m: 0">
+                <label class="pc-label" for="year">{{ 'faircalendar-filters-year-title'|trans }}</label>
+                <input name="year" id="year" type="number" value="{{ currentYear }}">
+            </div>
+            <div class="pc-select-group pc-m" style="--m: 0">
+                <label class="pc-label" for="userId">{{ 'faircalendar-filters-userId-title'|trans }}</label>
+                <select name="userId" id="userId">
+                    {% for user in users %}
+                        <option value="{{ user.id }}" {% if user.id == userId %}selected{% endif %}>{{ user|fullName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="pc-btn pc-btn--secondary">
+                {{ 'faircalendar-filters-submit'|trans }}
             </button>
-            <button id="nextBtn" type="button" class="pc-btn pc-btn--muted" title="Mois suivant">{{ '>' }}</button>
-        </div>
-        <div class="pc-select-group pc-m" style="--m: 0">
-            <label class="pc-label" for="month">{{ 'faircalendar-filters-month-title'|trans }}</label>
-            <select name="month" id="month">
-                {% for month in range(12) %}
-                    <option value="{{ month }}" {% if month == currentMonth %}selected{% endif %}>{{ month|longMonth|capitalize }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="pc-input-group pc-m" style="--m: 0">
-            <label class="pc-label" for="year">{{ 'faircalendar-filters-year-title'|trans }}</label>
-            <input name="year" id="year" type="number" value="{{ currentYear }}">
-        </div>
-        <div class="pc-select-group pc-m" style="--m: 0">
-            <label class="pc-label" for="userId">{{ 'faircalendar-filters-userId-title'|trans }}</label>
-            <select name="userId" id="userId">
-                {% for user in users %}
-                    <option value="{{ user.id }}" {% if user.id == userId %}selected{% endif %}>{{ user|fullName }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </form>
+        </form>
+    </pc-faircalendar-filters-form>
 {% endmacro %}
