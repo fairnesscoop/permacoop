@@ -27,13 +27,9 @@ const pwConfig: PlaywrightTestConfig = {
     },
   ],
   webServer: {
-    command: `make start-dist`,
+    command: `make start-dist DATABASE_NAME=${process.env.DATABASE_NAME + '_test'} PORT=${port}`,
     reuseExistingServer: !process.env.CI,
     url: `http://localhost:${port}`,
-    env: {
-      PORT: port.toString(),
-      DATABASE_NAME: process.env.DATABASE_NAME + '_test',
-    }
   },
 };
 

@@ -80,7 +80,7 @@ database-migrate: ## Database migrations
 	npm run migration:migrate
 
 database-test-init: up ## Initialize test database
-	make compose CMD="exec -T database dropdb permacoop_hotwire_test"
+	make compose CMD="exec -T database dropdb --if-exists permacoop_hotwire_test"
 	make compose CMD="exec -T database createdb permacoop_hotwire_test"
 	make database-migrate DATABASE_NAME=permacoop_hotwire_test
 	make database-seed DATABASE_NAME=permacoop_hotwire_test
@@ -98,4 +98,4 @@ ci: up ## Run CI checks
 	make install
 	make linter
 	make test-cov
-	make test-e2e CI=1
+	make test-e2e CI=1 DATABASE_NAME=permacoop_hotwire
