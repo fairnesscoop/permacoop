@@ -13,12 +13,4 @@ export class FairCalendarControllerDTO {
   @IsNumber()
   @IsOptional()
   public year?: number;
-
-  @IsNumber()
-  @IsOptional()
-  public minYear?: number;
-
-  @IsNumber()
-  @IsOptional()
-  public maxYear?: number;
 }

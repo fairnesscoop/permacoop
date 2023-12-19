@@ -31,7 +31,7 @@ test.describe('authenticated', () => {
   test('navigate to add customer', async ({ page }) => {
     await page.goto('/app/customers');
 
-    await page.getByRole('button', { name: 'Ajouter' }).click();
+    await page.getByRole('link', { name: 'Ajouter' }).click();
     await page.waitForURL('/app/customers/add');
   });
 });

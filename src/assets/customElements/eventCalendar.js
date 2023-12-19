@@ -1,15 +1,11 @@
 // @ts-check
-import * as Turbo from '@hotwired/turbo';
 import Calendar from '@event-calendar/core';
 import DayGrid from '@event-calendar/day-grid';
 import Interaction from '@event-calendar/interaction';
 import { format, subDays } from 'date-fns';
 
 export default class extends HTMLElement {
-  /** @type {Calendar} */
-  #ec;
-
-  /** @type{string} */
+  /** @type {string} */
   #addUrlTemplate;
 
   connectedCallback() {
@@ -24,9 +20,7 @@ export default class extends HTMLElement {
     }
 
     this.#addUrlTemplate = addUrlTemplate;
-    this.#ec = this.#createCalendar(date, events);
-
-    document.addEventListener('turbo:before-cache', this.#onTurboBeforeCache);
+    this.#createCalendar(date, events);
   }
 
   /**
@@ -38,16 +32,15 @@ export default class extends HTMLElement {
       .replace(':startDate', format(startDate, 'yyyy-MM-dd'))
       .replace(':endDate', format(endDate, 'yyyy-MM-dd'));
 
-    Turbo.visit(url);
+    window.location.href = url;
   };
 
   /**
    * @param {string} date
    * @param {any[]} events
-   * @returns {Calendar}
    */
   #createCalendar = (date, events) => {
-    return new Calendar({
+    const ec = new Calendar({
       target: this,
       props: {
         plugins: [DayGrid, Interaction],
@@ -69,7 +62,7 @@ export default class extends HTMLElement {
             const url = event.extendedProps.url;
             if (url) {
               return {
-                html: `<a href="${url}" data-turbo-frame="_top">${event.title}</a>`
+                html: `<a href="${url}">${event.title}</a>`
               };
             }
             return event.title;
@@ -80,21 +73,13 @@ export default class extends HTMLElement {
           selectable: true,
           selectBackgroundColor: 'var(--background-action-violet)',
           select: ({ start, end }) => {
+            // By default, range will stay selected if navigating using the back button.
+            ec.unselect();
+
             this.#goToEventCreate(start, subDays(end, 1));
           }
         }
       }
     });
   };
-
-  #onTurboBeforeCache = () => {
-    this.#ec.destroy();
-  };
-
-  disconnectedCallback() {
-    document.removeEventListener(
-      'turbo:before-cache',
-      this.#onTurboBeforeCache
-    );
-  }
 }

@@ -23,9 +23,13 @@ test.describe('authenticated', () => {
     );
   });
 
-  test('navigate to leave requests', async ({ page }) => {
+  test.skip('navigate to leave requests -- requires leaveRequest seeder', async ({
+    page
+  }) => {
+    await page.goto('/app');
+
     await page
-      .getByRole('button', { name: 'Voir les demandes de congés' })
+      .getByRole('link', { name: 'Voir les demandes de congés' })
       .click();
     await page.waitForURL('/app/people/leave_requests');
   });

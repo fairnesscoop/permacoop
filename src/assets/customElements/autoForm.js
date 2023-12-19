@@ -1,3 +1,4 @@
+// @ts-check
 import { onParsed } from '../lib/customElements';
 
 export default class extends HTMLFormElement {

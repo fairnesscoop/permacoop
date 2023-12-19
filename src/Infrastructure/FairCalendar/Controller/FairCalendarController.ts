@@ -96,10 +96,6 @@ export class FairCalendarController {
       };
     });
 
-    const currentYear = date.getFullYear();
-    const minYear = dto.minYear ?? currentYear - 5;
-    const maxYear = dto.maxYear ?? currentYear;
-
     return {
       users,
       overviewTable,
@@ -107,8 +103,6 @@ export class FairCalendarController {
       date,
       currentMonth: date.getMonth(),
       currentYear: date.getFullYear(),
-      minYear,
-      maxYear,
       userId
     };
   }

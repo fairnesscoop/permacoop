@@ -6,9 +6,6 @@
         class="pc-cluster pc-gap"
         style="--cluster-align: flex-end"
     >
-        <input type="text" id="minYear" name="minYear" hidden value="{{ minYear }}">
-        <input type="text" id="maxYear" name="maxYear" hidden value="{{ maxYear }}">
-
         <div class="pc-cluster" style="--cluster-align: stretch">
             <button id="previousBtn" type="button" class="pc-btn pc-btn--muted" title="Mois précédent">{{ '<' }}</button>
             <button id="todayBtn" type="button" class="pc-btn pc-btn--muted" title="Aujourd'hui">
@@ -24,13 +21,9 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="pc-select-group pc-m" style="--m: 0">
+        <div class="pc-input-group pc-m" style="--m: 0">
             <label class="pc-label" for="year">{{ 'faircalendar-filters-year-title'|trans }}</label>
-            <select name="year" id="year">
-                {% for year in range(minYear, maxYear + 1) %}
-                    <option value="{{ year }}" {% if year == currentYear %}selected{% endif %}>{{ year }}</option>
-                {% endfor %}
-            </select>
+            <input name="year" id="year" type="number" value="{{ currentYear }}">
         </div>
         <div class="pc-select-group pc-m" style="--m: 0">
             <label class="pc-label" for="userId">{{ 'faircalendar-filters-userId-title'|trans }}</label>

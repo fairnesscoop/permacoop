@@ -1,3 +1,4 @@
+// @ts-check
 import { createCookie } from '../lib/cookie';
 
 export default class extends HTMLButtonElement {
@@ -5,19 +6,22 @@ export default class extends HTMLButtonElement {
     let theme = document.documentElement.dataset.theme;
 
     if (!theme) {
-      theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
-      this._setTheme(theme);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches;
+      theme = prefersDark ? 'dark' : 'light';
+      this._storeTheme(theme);
     }
 
     this.addEventListener('click', () => {
       theme = theme === 'dark' ? 'light' : 'dark';
-      this._setTheme(theme);
+      this._storeTheme(theme);
     });
   }
 
-  _setTheme(theme) {
+  /**
+   * @param {string} theme
+   */
+  _storeTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     // Store in a cookie so the server sets <html data-theme> next time.
     // This will avoid FLOUC (Flashlight of unstyled content) when dark mode is used.

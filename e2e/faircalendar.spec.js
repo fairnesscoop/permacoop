@@ -46,7 +46,7 @@ test.describe('authenticated', () => {
     await page.goto('/app');
     await page.goBack();
 
-    // Regression test: ensure calendar is rendered without duplication duplicated, and is interactive
+    // Regression test: ensure calendar is rendered without duplication and that it is interactive
     expect(await calendar.locator('.ec').count()).toBe(1);
     await calendar
       .locator('.ec-body .ec-day')
