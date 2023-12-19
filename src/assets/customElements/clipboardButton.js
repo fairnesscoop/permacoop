@@ -1,35 +1,31 @@
 // @ts-check
 
-export default class extends HTMLButtonElement {
-  /** @type {HTMLInputElement} */
-  #sourceEl;
-
+export default class extends HTMLElement {
   connectedCallback() {
-    const sourceSelector = this.dataset.clipboardButtonSource;
+    const selector = this.dataset.source;
 
-    if (!sourceSelector) {
-      throw new Error('data-clipboard-button-source is missing');
+    if (!selector) {
+      return;
     }
 
-    const sourceEl = /** @type {HTMLInputElement|null} */ (document.querySelector(
-      sourceSelector
+    const input = /** @type {HTMLInputElement|null} */ (document.querySelector(
+      selector
     ));
 
-    if (!sourceEl) {
-      throw new Error(`element '${sourceSelector}' was not found`);
+    if (!input) {
+      throw new Error(`input at '${selector}' was not found`);
     }
 
-    this.#sourceEl = sourceEl;
+    const template = /** @type {HTMLTemplateElement} */ (this.querySelector(
+      'template'
+    ));
+    this.appendChild(document.importNode(template.content, true));
 
-    this.addEventListener('click', this.#handleClick);
-  }
+    const btn = /** @type {HTMLButtonElement} */ (this.querySelector('button'));
 
-  #handleClick = () => {
-    this.#sourceEl.select(); // Visual feedback
-    navigator.clipboard.writeText(this.#sourceEl.value);
-  };
-
-  disconnectedCallback() {
-    this.removeEventListener('click', this.#handleClick);
+    btn.addEventListener('click', () => {
+      input.select(); // Visual feedback
+      navigator.clipboard.writeText(input.value);
+    });
   }
 }
