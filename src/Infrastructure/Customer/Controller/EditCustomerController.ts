@@ -17,7 +17,7 @@ import { IQueryBus } from 'src/Application/IQueryBus';
 import { Response } from 'express';
 import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
 import { GetCustomerByIdQuery } from 'src/Application/Customer/Query/GetCustomerByIdQuery';
-import { CustomerDTO } from 'server/src/Infrastructure/Customer/DTO/CustomerDTO';
+import { CustomerDTO } from 'src/Infrastructure/Customer/DTO/CustomerDTO';
 import { UpdateCustomerCommand } from 'src/Application/Customer/Command/UpdateCustomerCommand';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 

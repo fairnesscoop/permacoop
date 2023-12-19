@@ -14,7 +14,7 @@ import { ICommandBus } from 'src/Application/ICommandBus';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { CreateCustomerCommand } from 'src/Application/Customer/Command/CreateCustomerCommand';
-import { CustomerDTO } from 'server/src/Infrastructure/Customer/DTO/CustomerDTO';
+import { CustomerDTO } from 'src/Infrastructure/Customer/DTO/CustomerDTO';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 
 @Controller('app/customers/add')
