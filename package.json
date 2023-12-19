@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "ERP building for cooperatives",
-  "author": "Mathieu MARCHOIS",
+  "author": "Fairness",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",

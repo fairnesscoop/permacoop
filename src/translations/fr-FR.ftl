@@ -1,4 +1,5 @@
 common-form-save = Enregistrer
+common-form-update = Mettre à jour
 common-form-delete = Supprimer
 common-view = Voir
 common-add = Ajouter
@@ -63,7 +64,6 @@ faircalendar-time-title = Temps passé
 faircalendar-filters-month-title = Mois
 faircalendar-filters-year-title = Année
 faircalendar-filters-userId-title = Coopérateur·ice - salarié·e
-faircalendar-filters-submit = Mettre à jour
 faircalendar-overview-days = {$days ->
     [0] 0
     [1] 1 jour

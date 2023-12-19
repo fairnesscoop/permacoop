@@ -3,9 +3,9 @@ import { IsNumber, IsOptional } from 'class-validator';
 export class GetPayrollElementsControllerDTO {
   @IsNumber()
   @IsOptional()
-  public month: number;
+  public year: number;
 
   @IsNumber()
   @IsOptional()
-  public year: number;
+  public month: number;
 }

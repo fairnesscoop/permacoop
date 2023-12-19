@@ -10,6 +10,7 @@ import { formatFullName } from '../../Common/Utils/formatUtils';
 import {
   formatDate,
   formatHtmlDate,
+  formatHtmlYearMonth,
   minutesToHours
 } from '../../Common/Utils/dateUtils';
 import { ArrayUtils } from '../../Common/Utils/ArrayUtils';
@@ -44,7 +45,7 @@ export class NunjucksTemplates implements ITemplates {
       value === 'now' ? new Date() : formatDate(value)
     );
     env.addFilter('htmlDate', value => formatHtmlDate(value));
-    env.addFilter('htmlYearMonth', value => formatHtmlDate(value).slice(0, 7));
+    env.addFilter('htmlYearMonth', value => formatHtmlYearMonth(value));
     env.addFilter('longMonth', (month: number) =>
       this.translator.translate('common-month-long', {
         date: new Date(2023, month, 15)

@@ -25,3 +25,7 @@ export const formatDate = (value: Date | string): string => {
 export const formatHtmlDate = (value: Date): string => {
   return format(value, 'yyyy-MM-dd');
 };
+
+export const formatHtmlYearMonth = (value: Date): string => {
+  return format(value, 'yyyy-MM');
+};

@@ -10,9 +10,13 @@ export default class extends HTMLElement {
       const form = /** @type {HTMLFormElement} */ (this.querySelector('form'));
 
       // Progressive enhancement:
-      // If this custom element activates, then we enable auto-submission and remove the manual submit button.
-      const submitBtn = /** @type {HTMLButtonElement} */ (this.querySelector('button[type="submit"]'));
-      const navigationTemplate = /** @type {HTMLTemplateElement} */ (this.querySelector('#faircalendar-filters-form-navigation'));
+      // If this custom element activates, enable auto-submission and remove the manual submit button.
+      const submitBtn = /** @type {HTMLButtonElement} */ (this.querySelector(
+        'button[type="submit"]'
+      ));
+      const navigationTemplate = /** @type {HTMLTemplateElement} */ (this.querySelector(
+        '#faircalendar-filters-form-navigation'
+      ));
       const navigation = document.importNode(navigationTemplate.content, true);
       navigationTemplate.after(navigation);
       submitBtn.remove();
