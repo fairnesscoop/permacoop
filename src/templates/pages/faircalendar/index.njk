@@ -5,6 +5,11 @@
 
 {% set title = 'faircalendar-page-title'|trans({ date: date }) %}
 
+{% block preload %}
+    {{ super() }}
+    <link rel="preload" as="style" href="{{ asset('faircalendar.css') }}">
+{% endblock %}
+
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="{{ asset('faircalendar.css') }}">

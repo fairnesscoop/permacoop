@@ -42,7 +42,7 @@ export default class extends HTMLElement {
   _storeTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     // Store in a cookie so the server sets <html data-theme> next time.
-    // This will avoid FLOUC (Flashlight of unstyled content) when dark mode is used.
+    // This will avoid FOUC (flash of unstyled content) when dark mode is used.
     createCookie('theme', theme);
   }
 

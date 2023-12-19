@@ -5,3 +5,7 @@
 @import './components/index.css';
 @import './utilities/index.css';
 @import './overrides.css';
+
+.pc-reveal-on-css-load {
+  display: block;
+}

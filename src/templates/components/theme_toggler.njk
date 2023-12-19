@@ -2,7 +2,7 @@
 
 <pc-theme-toggler data-theme="{{ theme }}">
     <template>
-        <button aria-hidden="true" class="pc-btn pc-btn--secondary pc-btn--circle">
+        <button  class="pc-btn pc-btn--secondary pc-btn--circle" aria-label="{{ 'theme-toggle'|trans }}">
             {{ icons.sun({id: 'theme-light'}) }}
             {{ icons.moon({id: 'theme-dark'}) }}
         </button>

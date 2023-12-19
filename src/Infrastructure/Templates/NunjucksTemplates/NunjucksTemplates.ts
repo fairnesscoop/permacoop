@@ -15,7 +15,7 @@ import {
 } from '../../Common/Utils/dateUtils';
 import { ArrayUtils } from '../../Common/Utils/ArrayUtils';
 import { TablesExtension } from './TablesExtension';
-import { getMonth, getYear } from 'date-fns';
+import { getYear } from 'date-fns';
 
 @Injectable()
 export class NunjucksTemplates implements ITemplates {

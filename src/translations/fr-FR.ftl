@@ -220,3 +220,5 @@ users-joiningDate = Date d'entrée
 users-leavingDate = Date de sortie
 
 clipboard-copy = Copier dans le presse papier
+
+theme-toggle = Alterner le thème

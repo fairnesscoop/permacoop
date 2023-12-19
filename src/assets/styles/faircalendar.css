@@ -6,12 +6,21 @@ pc-eventcalendar {
   display: block;
 }
 
+.ec {
+  background-color: var(--background-default);
+}
+
 .ec-event {
   font-weight: bold;
 }
 
 .ec-day.ec-today {
   background-color: var(--event-today);
+}
+
+.ec-toolbar {
+  /* Fix: We don't set a toolbar but it leaves an empty div, remove it.  */
+  display: none;
 }
 
 pc-eventcalendar .ec-day-grid .ec-uniform .ec-day {
