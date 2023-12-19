@@ -3,7 +3,19 @@
   color: var(--text-muted);
 }
 
-[is='pc-nav-menu-button'] {
+.pc-nav.pc-mobile-only {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  box-shadow: var(--shadow-default);
+}
+
+.pc-nav.pc-desktop-only {
+  display: none;
+}
+
+pc-nav-menu-button > button {
   background-color: transparent;
   border: none;
   width: 2rem;
@@ -11,17 +23,14 @@
   cursor: pointer;
 }
 
-.pc-nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin-block: 0;
-}
-
 @media screen and (min-width: 840px) {
-  [is='pc-nav-menu-button'] {
+  pc-nav-menu-button {
     display: none;
   }
-  .pc-nav > ul {
+  .pc-nav.pc-mobile-only {
+    display: none;
+  }
+  .pc-nav.pc-desktop-only {
     display: block;
   }
 }

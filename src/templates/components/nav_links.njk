@@ -22,7 +22,7 @@
             <span class="pc-nav-dropdown" aria-hidden="true"></span>
         </summary>
 
-        <ul>
+        <ul class="pc-raw-list" role="list">
             <li>
                 <a href="{{ path('crm_customers_list') }}" class="pc-link-btn" {% if view_name|startswith('crm_customers_') %}aria-current="page"{% endif %}>
                     {{ "crm-customers-title"|trans|capitalize }}
@@ -50,7 +50,7 @@
             <span class="pc-nav-dropdown" aria-hidden="true"></span>
         </summary>
 
-        <ul>
+        <ul class="pc-raw-list" role="list">
             <li>
                 <a href="{{ path('people_leaves_list') }}" class="pc-link-btn" {% if view_name|startswith('people_leaves_') %}aria-current="page"{% endif %}>
                     {{ 'leaves-title'|trans }}

@@ -1,8 +1,10 @@
 // @ts-check
 
-export default class extends HTMLButtonElement {
+export default class extends HTMLElement {
   connectedCallback() {
-    const ariaControls = this.getAttribute('aria-controls');
+    const btn = /** @type {HTMLButtonElement} */ (this.querySelector('button'));
+
+    const ariaControls = btn.getAttribute('aria-controls');
 
     if (!ariaControls) {
       throw new Error('aria-controls is missing');
@@ -12,11 +14,11 @@ export default class extends HTMLButtonElement {
       ariaControls
     ));
 
-    let open = this.getAttribute('aria-expanded') === 'true' || false;
+    let open = btn.getAttribute('aria-expanded') === 'true' || false;
 
-    this.addEventListener('click', () => {
+    btn.addEventListener('click', () => {
       open = !open;
-      this.setAttribute('aria-expanded', open.toString());
+      btn.setAttribute('aria-expanded', open.toString());
       linksList.hidden = !open;
     });
   }
