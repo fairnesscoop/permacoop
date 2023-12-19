@@ -1,7 +1,7 @@
 // @ts-check
 import { onParsed } from '../lib/customElements';
 
-export default class extends HTMLFormElement {
+export default class extends HTMLElement {
   connectedCallback() {
     onParsed(() => {
       const missionFields = document.getElementById('mission-fields');
@@ -10,7 +10,8 @@ export default class extends HTMLFormElement {
         throw new Error('#mission-fields is missing');
       }
 
-      const type = /** @type {HTMLSelectElement} */ (this.type);
+      const form = /** @type {HTMLFormElement} */ (this.querySelector('form'));
+      const type = /** @type {HTMLSelectElement} */ (form.type);
 
       type.addEventListener('change', event => {
         if (!event.target) {
@@ -18,8 +19,8 @@ export default class extends HTMLFormElement {
         }
         const isMission = event.target['value'] === 'mission';
         missionFields.hidden = !isMission;
-        this.projectId.disabled = !isMission;
-        this.taskId.disabled = !isMission;
+        form.projectId.disabled = !isMission;
+        form.taskId.disabled = !isMission;
       });
     });
   }

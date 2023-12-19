@@ -12,7 +12,13 @@
   color: var(--text-action-violet);
 }
 
-[data-theme='dark'] .pc-icon--action-violet {
+@media (prefers-color-scheme: dark) {
+  .pc-icon--action-violet {
+    color: var(--text-default);
+  }
+}
+
+html[data-theme='dark'] .pc-icon--action-violet {
   color: var(--text-default);
 }
 

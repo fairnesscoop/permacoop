@@ -1,6 +1,10 @@
 {% import 'macros/icons.njk' as icons %}
 
-<button is="pc-theme-toggler" aria-hidden="true" class="pc-btn pc-btn--secondary pc-btn--circle">
-    {{ icons.sun({id: 'theme-light'}) }}
-    {{ icons.moon({id: 'theme-dark'}) }}
-</button>
+<pc-theme-toggler data-theme="{{ theme }}">
+    <template>
+        <button aria-hidden="true" class="pc-btn pc-btn--secondary pc-btn--circle">
+            {{ icons.sun({id: 'theme-light'}) }}
+            {{ icons.moon({id: 'theme-dark'}) }}
+        </button>
+    </template>
+</pc-theme-toggler>
