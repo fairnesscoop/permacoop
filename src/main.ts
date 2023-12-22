@@ -15,15 +15,6 @@ import { flashMessages } from './Infrastructure/Templates/FlashMessages';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  const sessionPgPool = new pg.Pool({
-    host: process.env.DATABASE_HOST,
-    port: +process.env.DATABASE_PORT,
-    user: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
-    max: 5
-  });
-
   app.use(helmet());
   app.use(cookieParser());
   app.useGlobalPipes(
@@ -33,18 +24,36 @@ async function bootstrap() {
     })
   );
 
+  const pgSession = connectPgSimple(session);
+
   app.use(
     session({
-      secret: 'my-secret',
+      store: new pgSession({
+        pool: new pg.Pool({
+          host: process.env.DATABASE_HOST,
+          port: +process.env.DATABASE_PORT,
+          user: process.env.DATABASE_USERNAME,
+          password: process.env.DATABASE_PASSWORD,
+          database: process.env.DATABASE_NAME
+        }),
+        createTableIfMissing: true
+      }),
+      secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
-      store: new (connectPgSimple(session))({
-        pool: sessionPgPool,
-        createTableIfMissing: true
-      })
-    }),
-    passport.session()
+      cookie: {
+        maxAge: 1000 * 604800, // 1 week
+        sameSite: true,
+        // enable only on https
+        secure: ['1', 'true'].includes(process.env.SESSION_COOKIE_SECURE || '')
+      }
+    })
   );
+
+  app.use(passport.session());
+
+  // Scalingo runs apps behind a reverse proxy
+  app.set('trust proxy', 1);
 
   const assetsDir = path.join(__dirname, '..', 'public');
   app.useStaticAssets(assetsDir);
