@@ -86,7 +86,7 @@ database-test-init: up ## Initialize test database
 	make database-seed DATABASE_NAME=permacoop_hotwire_test
 
 database-migration: ## Generate a database migration
-	npm run migration:create -- migrations/$(NAME)
+	npm run migration:generate -- migrations/$(NAME)
 
 database-seed: ## Seed database
 	npm run seed:run
@@ -99,3 +99,7 @@ ci: up ## Run CI checks
 	make linter
 	make test-cov
 	make test-e2e CI=1 DATABASE_NAME=permacoop_hotwire
+
+scalingo-postbuild:
+	make build
+	make database-migrate

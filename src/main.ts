@@ -1,16 +1,14 @@
 import * as path from 'path';
-import * as passport from 'passport';
-import * as pg from 'pg';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import * as helmet from 'helmet';
-import * as session from 'express-session';
 import * as cookieParser from 'cookie-parser';
-import * as connectPgSimple from 'connect-pg-simple';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
+import dataSource from './datasource';
 import { ITemplates } from './Infrastructure/Templates/ITemplates';
 import { flashMessages } from './Infrastructure/Templates/FlashMessages';
+import { useSession } from './Infrastructure/Security/ExpressSession';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -24,33 +22,7 @@ async function bootstrap() {
     })
   );
 
-  const pgSession = connectPgSimple(session);
-
-  app.use(
-    session({
-      store: new pgSession({
-        pool: new pg.Pool({
-          host: process.env.DATABASE_HOST,
-          port: +process.env.DATABASE_PORT,
-          user: process.env.DATABASE_USERNAME,
-          password: process.env.DATABASE_PASSWORD,
-          database: process.env.DATABASE_NAME
-        }),
-        createTableIfMissing: true
-      }),
-      secret: process.env.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        maxAge: 1000 * 604800, // 1 week
-        sameSite: true,
-        // enable only on https
-        secure: ['1', 'true'].includes(process.env.SESSION_COOKIE_SECURE || '')
-      }
-    })
-  );
-
-  app.use(passport.session());
+  await useSession(app, dataSource);
 
   // Scalingo runs apps behind a reverse proxy
   app.set('trust proxy', 1);
