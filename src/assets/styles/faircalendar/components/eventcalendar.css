@@ -1,24 +1,22 @@
 @import '@event-calendar/core/index.css';
 
-/* EventCalendar customizations */
-
 pc-eventcalendar {
   display: block;
 }
 
-.ec {
+pc-eventcalendar .ec {
   background-color: var(--background-default);
 }
 
-.ec-event {
+pc-eventcalendar .ec-event {
   font-weight: bold;
 }
 
-.ec-day.ec-today {
+pc-eventcalendar .ec-day.ec-today {
   background-color: var(--event-today);
 }
 
-.ec-toolbar {
+pc-eventcalendar .ec-toolbar {
   /* Fix: We don't set a toolbar but it leaves an empty div, remove it.  */
   display: none;
 }
@@ -28,7 +26,7 @@ pc-eventcalendar .ec-day-grid .ec-uniform .ec-day {
   min-height: 5rem;
 }
 
-.ec-event-body > a {
+pc-eventcalendar .ec-event-body > a {
   display: block;
   width: 100%;
 }

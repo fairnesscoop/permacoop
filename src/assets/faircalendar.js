@@ -1,4 +1,4 @@
-import './styles/faircalendar.css';
+import './styles/faircalendar/index.css';
 
 import eventCalendar from './customElements/eventCalendar';
 
