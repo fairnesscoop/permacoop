@@ -13,7 +13,6 @@ import {
 import { ICommandBus } from 'src/Application/ICommandBus';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
-import { AddEventControllerDTO } from '../DTO/AddEventControllerDTO';
 import { LoggedUser } from 'src/Infrastructure/HumanResource/User/Decorator/LoggedUser';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { IQueryBus } from 'src/Application/IQueryBus';
@@ -30,6 +29,7 @@ import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
 import { EditEventDTO } from '../DTO/EditEventDTO';
 import { UpdateEventCommand } from 'src/Application/FairCalendar/Command/UpdateEventCommand';
 import { GetEventByIdQuery } from 'src/Application/FairCalendar/Query/GetEventByIdQuery';
+import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 
 @Controller('app/faircalendar/events/edit')
 @UseGuards(IsAuthenticatedGuard)
@@ -38,7 +38,8 @@ export class EditEventController {
     @Inject('ICommandBus')
     private readonly commandBus: ICommandBus,
     @Inject('IQueryBus')
-    private readonly queryBus: IQueryBus
+    private readonly queryBus: IQueryBus,
+    private readonly resolver: RouteNameResolver
   ) {}
 
   @Get(':id')
@@ -99,7 +100,7 @@ export class EditEventController {
         )
       );
 
-      res.redirect(303, '/app/faircalendar');
+      res.redirect(303, this.resolver.resolve('faircalendar_index'));
     } catch (e) {
       throw new BadRequestException(e.message);
     }

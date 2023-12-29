@@ -3,20 +3,12 @@ import { createCookie, removeCookie } from '../lib/cookie';
 
 export default class extends HTMLElement {
   connectedCallback() {
-    // Progressive enhancement: show toggle button only if this JavaScript loads.
-    const template = /** @type {HTMLTemplateElement} */ (this.querySelector(
-      'template'
-    ));
-    this.appendChild(document.importNode(template.content, true));
-
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-    let theme = this.dataset.theme; // Comes from the cookie
+    let theme = document.documentElement.dataset.theme || null; // Comes from the cookie
 
     // Theme coming from the cookie has priority, use system default as a fallback.
-    if (theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-    } else {
+    if (!theme) {
       theme = prefersDark.matches ? 'dark' : 'light';
     }
 
@@ -40,14 +32,14 @@ export default class extends HTMLElement {
    * @param {string} theme
    */
   _storeTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.dataset.theme = theme;
     // Store in a cookie so the server sets <html data-theme> next time.
     // This will avoid FOUC (flash of unstyled content) when dark mode is used.
     createCookie('theme', theme);
   }
 
   _clearStoredTheme() {
-    document.documentElement.removeAttribute('data-theme');
+    delete document.documentElement.dataset.theme;
     removeCookie('theme');
   }
 }

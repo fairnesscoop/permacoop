@@ -9,10 +9,12 @@ pc-eventcalendar .ec {
 }
 
 pc-eventcalendar .ec-event {
+  padding: 4px;
   font-weight: bold;
 }
 
-pc-eventcalendar .ec-day.ec-today {
+/* note: duplicate class name to increase specificity */
+pc-eventcalendar .ec-today.ec-today {
   background-color: var(--event-today);
 }
 
@@ -23,7 +25,7 @@ pc-eventcalendar .ec-toolbar {
 
 pc-eventcalendar .ec-day-grid .ec-uniform .ec-day {
   /* Fix: by default EventCalendar sets the min-height of day boxes to 0 when dayMaxEvents is true. */
-  min-height: 5rem;
+  min-height: 7rem;
 }
 
 pc-eventcalendar .ec-event-body > a {

@@ -1,16 +1,12 @@
 // @ts-check
-import Calendar from '@event-calendar/core';
-import DayGrid from '@event-calendar/day-grid';
-import Interaction from '@event-calendar/interaction';
-import { format, subDays } from 'date-fns';
+import { format } from 'date-fns';
+import { createCookie } from '../lib/cookie';
 
 export default class extends HTMLElement {
   /** @type {string} */
   #addUrlTemplate;
 
   connectedCallback() {
-    this.dataset.testid = 'pc-event-calendar';
-
     const events = JSON.parse(this.dataset.eventsJson || '{}');
     const addUrlTemplate = this.dataset.addUrlTemplate;
     const date = this.dataset.date || new Date('now').toISOString();
@@ -20,7 +16,58 @@ export default class extends HTMLElement {
     }
 
     this.#addUrlTemplate = addUrlTemplate;
-    this.#createCalendar(date, events);
+
+    const viewToggleFieldset = /** @type {HTMLFieldSetElement} */ (this.querySelector(
+      '#view-toggle'
+    ));
+    viewToggleFieldset.hidden = false;
+
+    const listView = /** @type {HTMLElement} */ (this.querySelector(
+      '#list-view'
+    ));
+    listView.hidden = true;
+    const listViewRadio = /** @type {HTMLInputElement} */ (this.querySelector(
+      '#view-radio-list'
+    ));
+
+    const calendarView = /** @type {HTMLElement} */ (this.querySelector(
+      '#calendar-view'
+    ));
+    const calendarViewRadio = /** @type {HTMLInputElement} */ (this.querySelector(
+      '#view-radio-calendar'
+    ));
+
+    const initialView =
+      this.getAttribute('data-view') || calendarViewRadio.value;
+
+    const ensureCalendarCreated = async () => {
+      if (!calendarView.hasAttribute('data-created')) {
+        const { createCalendar } = await import('../lib/lazy/eventCalendar');
+        createCalendar(calendarView, date, events, this.#goToEventCreate);
+        calendarView.setAttribute('data-created', 'true');
+      }
+    };
+
+    if (initialView === calendarViewRadio.value) {
+      ensureCalendarCreated();
+    }
+
+    calendarView.hidden = initialView === listViewRadio.value;
+    listView.hidden = initialView === calendarViewRadio.value;
+
+    listViewRadio.addEventListener('change', () => {
+      calendarView.hidden = true;
+      listView.hidden = false;
+      this._storePreferredView(listViewRadio.value);
+    });
+
+    calendarViewRadio.addEventListener('change', () => {
+      listView.hidden = true;
+      ensureCalendarCreated().then(() => {
+        calendarView.hidden = false;
+        this._storePreferredView(calendarViewRadio.value);
+      });
+    });
   }
 
   /**
@@ -36,50 +83,9 @@ export default class extends HTMLElement {
   };
 
   /**
-   * @param {string} date
-   * @param {any[]} events
+   * @param {string} viewName
    */
-  #createCalendar = (date, events) => {
-    const ec = new Calendar({
-      target: this,
-      props: {
-        plugins: [DayGrid, Interaction],
-        options: {
-          view: 'dayGridMonth',
-          events,
-          locale: 'fr',
-          hiddenDays: [
-            6, // Saturday
-            0 // Sunday
-          ],
-          date,
-          headerToolbar: { start: '', center: '', end: '' },
-          dayMaxEvents: true,
-          eventStartEditable: false,
-          eventDurationEditable: false,
-          // TODO: add testid on days
-          eventContent: ({ event }) => {
-            const url = event.extendedProps.url;
-            if (url) {
-              return {
-                html: `<a href="${url}">${event.title}</a>`
-              };
-            }
-            return event.title;
-          },
-          dateClick: ({ event, date }) => {
-            this.#goToEventCreate(date, date);
-          },
-          selectable: true,
-          selectBackgroundColor: 'var(--background-action-violet)',
-          select: ({ start, end }) => {
-            // By default, range will stay selected if navigating using the back button.
-            ec.unselect();
-
-            this.#goToEventCreate(start, subDays(end, 1));
-          }
-        }
-      }
-    });
-  };
+  _storePreferredView(viewName) {
+    createCookie('faircalendar_view', viewName);
+  }
 }

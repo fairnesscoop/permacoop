@@ -4,8 +4,10 @@ import {
   Inject,
   Query,
   Render,
+  Req,
   UseGuards
 } from '@nestjs/common';
+import { Request } from 'express';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { GetMonthlyFairCalendarQuery } from 'src/Application/FairCalendar/Query/GetMonthlyFairCalendarQuery';
 import { IQueryBus } from 'src/Application/IQueryBus';
@@ -20,6 +22,9 @@ import { GetUsersQuery } from 'src/Application/HumanResource/User/Query/GetUsers
 import { FairCalendarView } from 'src/Application/FairCalendar/View/FairCalendarView';
 import { FairCalendarOverviewFactory } from 'src/Domain/FairCalendar/FairCalendarOverviewFactory';
 import { FairCalendarOverviewTableFactory } from '../Table/FairCalendarOverviewTableFactory';
+import { IDateUtils } from 'src/Application/IDateUtils';
+import { ArrayUtils } from 'src/Infrastructure/Common/Utils/ArrayUtils';
+import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 
 @Controller('app/faircalendar')
 @UseGuards(IsAuthenticatedGuard)
@@ -29,8 +34,11 @@ export class FairCalendarController {
     private readonly queryBus: IQueryBus,
     @Inject('ITranslator')
     private readonly translator: ITranslator,
+    @Inject('IDateUtils')
+    private readonly dateUtils: IDateUtils,
     private overviewFactory: FairCalendarOverviewFactory,
-    private overviewTableFactory: FairCalendarOverviewTableFactory
+    private overviewTableFactory: FairCalendarOverviewTableFactory,
+    private readonly resolver: RouteNameResolver
   ) {}
 
   @Get()
@@ -38,7 +46,8 @@ export class FairCalendarController {
   @Render('pages/faircalendar/index.njk')
   public async get(
     @Query() dto: FairCalendarControllerDTO,
-    @LoggedUser() user: User
+    @LoggedUser() user: User,
+    @Req() req: Request
   ) {
     let date = new Date();
 
@@ -87,7 +96,9 @@ export class FairCalendarController {
         ...(event.id
           ? {
               extendedProps: {
-                url: `/app/faircalendar/events/edit/${event.id}`
+                url: this.resolver.resolve('faircalendar_events_edit', {
+                  id: event.id
+                })
               }
             }
           : {}),
@@ -97,6 +108,18 @@ export class FairCalendarController {
       };
     });
 
+    const eventsByStartDate = ArrayUtils.groupBy(
+      fullCalendarEvents,
+      event => event.start
+    );
+
+    const listViewDays = this.dateUtils.getWeekDaysOfMonth(date).map(day => {
+      return [
+        day,
+        eventsByStartDate[this.dateUtils.format(day, 'yyyy-MM-dd')] || []
+      ];
+    });
+
     return {
       users,
       overviewTable,
@@ -104,7 +127,9 @@ export class FairCalendarController {
       date,
       currentMonth: date.getMonth() + 1,
       currentYear: date.getFullYear(),
-      userId
+      userId,
+      viewName: req.cookies.faircalendar_view,
+      listViewDays
     };
   }
 }

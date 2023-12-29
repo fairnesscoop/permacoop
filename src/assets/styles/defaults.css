@@ -28,3 +28,7 @@ p {
   font-size: 1rem;
   margin: var(--paragraph-spacing);
 }
+
+fieldset {
+  border: none;
+}

@@ -13,7 +13,7 @@ test.describe('authenticated', () => {
     await page.goto('/app/faircalendar?year=2023&month=11'); // month=1..12
     await expect(page).toHaveTitle('FairCalendar novembre 2023 - Permacoop');
 
-    const calendar = page.getByTestId('pc-event-calendar');
+    const calendar = page.getByTestId('pc-faircalendar-view-calendar');
     await expect(calendar).toBeVisible();
 
     const toussaint = calendar.getByText('7h - Jour férié');
@@ -23,7 +23,7 @@ test.describe('authenticated', () => {
   test('go to add event', async ({ page }) => {
     await page.goto('/app/faircalendar?year=2023&month=11');
 
-    const calendar = page.getByTestId('pc-event-calendar');
+    const calendar = page.getByTestId('pc-faircalendar-view-calendar');
 
     await calendar
       .locator('.ec-body .ec-day')
@@ -38,7 +38,7 @@ test.describe('authenticated', () => {
   test('back button behavior', async ({ page }) => {
     await page.goto('/app/faircalendar?year=2023&month=11');
 
-    const calendar = page.getByTestId('pc-event-calendar');
+    const calendar = page.getByTestId('pc-faircalendar-view-calendar');
 
     // Ensure rendered calendar is present
     expect(await calendar.locator('.ec').count()).toBe(1);

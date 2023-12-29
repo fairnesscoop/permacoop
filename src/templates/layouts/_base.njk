@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" {% if theme %}data-theme="{{ theme }}"{% endif %}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -26,6 +26,14 @@
         Permacoop
       {% endblock %}
     </title>
+
+    <noscript>
+      <style>
+        .pc-js-only {
+          display: none;
+        }
+      </style>
+    </noscript>
   </head>
 
   <body>

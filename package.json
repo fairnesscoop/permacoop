@@ -7,7 +7,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "_esbuild": "esbuild src/assets/main.js src/assets/faircalendar.js --bundle --splitting --outdir=dist/public --format=esm",
+    "_esbuild": "esbuild src/assets/main.js --bundle --splitting --outdir=dist/public --format=esm",
     "assets:build": "npm run _esbuild -- --minify",
     "assets:watch": "npm run _esbuild -- --watch",
     "format": "prettier --write \"src/**/*.ts\" \"src/assets/**/*\" \"e2e/**/*.js\"",

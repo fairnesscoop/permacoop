@@ -4,7 +4,8 @@ import {
   isWeekend as fnsIsWeekend,
   getDaysInMonth as fnsGetDaysInMonth,
   eachDayOfInterval,
-  addDays
+  addDays,
+  isWeekend
 } from 'date-fns';
 import { MonthDate } from 'src/Application/Common/MonthDate';
 import { IDateUtils } from 'src/Application/IDateUtils';
@@ -53,6 +54,17 @@ export class DateUtilsAdapter implements IDateUtils {
 
   public getDaysInMonth(date: Date): number {
     return fnsGetDaysInMonth(date);
+  }
+
+  public getWeekDaysOfMonth(date: Date): Date[] {
+    return eachDayOfInterval({
+      start: new Date(date.getFullYear(), date.getUTCMonth(), 1),
+      end: new Date(
+        date.getFullYear(),
+        date.getUTCMonth(),
+        this.getDaysInMonth(date)
+      )
+    }).filter(day => !isWeekend(day));
   }
 
   public isWeekend(date: Date): boolean {

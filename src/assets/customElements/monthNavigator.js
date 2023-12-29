@@ -28,12 +28,6 @@ export default class extends HTMLElement {
         this.#month = month;
         this.#year = year;
 
-        const template = /** @type {HTMLTemplateElement} */ (this.querySelector(
-          'template'
-        ));
-
-        this.appendChild(document.importNode(template.content, true));
-
         const previousBtn = /** @type {HTMLButtonElement} */ (this.querySelector(
           'button[data-previous]'
         ));

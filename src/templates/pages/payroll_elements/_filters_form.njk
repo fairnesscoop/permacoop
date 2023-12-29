@@ -25,9 +25,11 @@
                     <input type="number" id="year" name="year" pattern="\d+" value="{{ year }}" style="--input-width: 12ch">
                 </div>
 
-                <button type="submit" class="pc-btn pc-btn--secondary">
-                    {{ 'common-form-update'|trans }}
-                </button>
+                <noscript>
+                    <button type="submit" class="pc-btn pc-btn--secondary">
+                        {{ 'common-form-update'|trans }}
+                    </button>
+                </noscript>
             </form>
         </pc-auto-form>
     </div>

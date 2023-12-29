@@ -29,6 +29,7 @@ import { FairCalendarOverviewFactory } from 'src/Domain/FairCalendar/FairCalenda
 import { FairCalendarOverviewTableFactory } from './Table/FairCalendarOverviewTableFactory';
 import { TranslationsModule } from '../Translations/translations.module';
 import { TablesModule } from '../Tables/tables.module';
+import { ExtendedRoutingModule } from '../Common/ExtendedRouting/extendedRouting.module';
 
 @Module({
   imports: [
@@ -36,7 +37,8 @@ import { TablesModule } from '../Tables/tables.module';
     ConfigModule,
     TypeOrmModule.forFeature([Project, Event, Task, Leave, Cooperative]),
     TranslationsModule,
-    TablesModule
+    TablesModule,
+    ExtendedRoutingModule
   ],
   controllers: [
     FairCalendarController,

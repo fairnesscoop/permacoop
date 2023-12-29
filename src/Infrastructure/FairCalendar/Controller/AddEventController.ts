@@ -24,6 +24,7 @@ import { GetTasksQuery } from 'src/Application/Task/Query/GetTasksQuery';
 import { GetProjectsQuery } from 'src/Application/Project/Query/GetProjectsQuery';
 import { GetCooperativeQuery } from 'src/Application/Settings/Query/GetCooperativeQuery';
 import { ArrayUtils } from 'src/Infrastructure/Common/Utils/ArrayUtils';
+import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 
 @Controller('app/faircalendar/events/add')
 @UseGuards(IsAuthenticatedGuard)
@@ -32,7 +33,8 @@ export class AddEventController {
     @Inject('ICommandBus')
     private readonly commandBus: ICommandBus,
     @Inject('IQueryBus')
-    private readonly queryBus: IQueryBus
+    private readonly queryBus: IQueryBus,
+    private readonly resolver: RouteNameResolver
   ) {}
 
   @Get(':startDate--:endDate')
@@ -97,7 +99,7 @@ export class AddEventController {
         )
       );
 
-      res.redirect(303, '/app/faircalendar');
+      res.redirect(303, this.resolver.resolve('faircalendar_index'));
     } catch (e) {
       throw new BadRequestException(e.message);
     }

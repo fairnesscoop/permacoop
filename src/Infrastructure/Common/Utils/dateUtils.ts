@@ -1,4 +1,5 @@
 import { format, parseISO } from 'date-fns';
+import { fr } from 'date-fns/locale';
 
 export const minutesToHours = (value: number): string => {
   const hours = Math.floor(value / 60);
@@ -28,4 +29,11 @@ export const formatHtmlDate = (value: Date): string => {
 
 export const formatHtmlYearMonth = (value: Date): string => {
   return format(value, 'yyyy-MM');
+};
+
+export const formatEventDate = (value: Date | string): string => {
+  if (typeof value === 'string') {
+    value = parseISO(value);
+  }
+  return format(value, 'eee dd', { locale: fr });
 };

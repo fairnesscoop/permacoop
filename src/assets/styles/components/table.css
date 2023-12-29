@@ -35,7 +35,15 @@ table.pc-table {
 
 .pc-table th,
 .pc-table td {
-  padding: calc(3 * var(--v)) calc(4 * var(--v));
+  --default-table-padding: calc(3 * var(--v)) calc(4 * var(--v));
+  padding: var(--table-padding, var(--default-table-padding));
+}
+
+@media screen and (min-width: 840px) {
+  .pc-table th,
+  .pc-table td {
+    padding: var(--table-desktop-padding, var(--default-table-padding));
+  }
 }
 
 .pc-table tbody {

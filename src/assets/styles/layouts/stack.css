@@ -3,5 +3,5 @@
 }
 
 .pc-stack > * + * {
-  margin-top: var(--stack-spacing, calc(2 * var(--w)));
+  margin-top: var(--stack-gap, calc(2 * var(--w)));
 }

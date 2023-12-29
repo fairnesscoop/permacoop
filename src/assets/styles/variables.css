@@ -101,8 +101,8 @@
 }
 
 :root[data-theme='dark'] {
+  /* DO NOT MODIFY! COPY-PASTE THE ABOVE */
   /* Colors */
-  /* COPY-PASTE OF THE ABOVE */
   --background-default: #1a1b23;
   --background-default-hover: #2a2b36;
   --background-alt-grey: #121317;

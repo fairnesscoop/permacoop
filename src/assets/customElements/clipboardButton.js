@@ -16,11 +16,6 @@ export default class extends HTMLElement {
       throw new Error(`input at '${selector}' was not found`);
     }
 
-    const template = /** @type {HTMLTemplateElement} */ (this.querySelector(
-      'template'
-    ));
-    this.appendChild(document.importNode(template.content, true));
-
     const btn = /** @type {HTMLButtonElement} */ (this.querySelector('button'));
 
     btn.addEventListener('click', () => {

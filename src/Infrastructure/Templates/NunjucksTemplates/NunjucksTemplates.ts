@@ -9,6 +9,7 @@ import { ITranslator } from 'src/Infrastructure/Translations/ITranslator';
 import { formatFullName } from '../../Common/Utils/formatUtils';
 import {
   formatDate,
+  formatEventDate,
   formatHtmlDate,
   formatHtmlYearMonth,
   minutesToHours
@@ -44,6 +45,7 @@ export class NunjucksTemplates implements ITemplates {
     env.addFilter('date', value =>
       value === 'now' ? new Date() : formatDate(value)
     );
+    env.addFilter('eventDate', value => formatEventDate(value));
     env.addFilter('htmlDate', value => formatHtmlDate(value));
     env.addFilter('htmlYearMonth', value => formatHtmlYearMonth(value));
     env.addFilter('longMonth', (month: number) =>

@@ -1,20 +1,17 @@
 {% import 'macros/icons.njk' as icons %}
 
 {% macro month_navigator(monthTarget, yearTarget) %}
-    <pc-month-navigator data-month-target="{{ monthTarget }}" data-year-target="{{ yearTarget }}">
-        <template>
-            <div class="pc-cluster" style="--cluster-align: stretch">
-                {# TODO: translations #}
-                <button type="button" data-previous class="pc-btn pc-btn--muted" title="Mois précédent">
-                    {{ '<' }}
-                </button>
-                <button type="button" data-today class="pc-btn pc-btn--muted" title="Aujourd'hui">
-                    {{ icons.calendar() }}
-                </button>
-                <button type="button" data-next class="pc-btn pc-btn--muted" title="Mois suivant">
-                    {{ '>' }}
-                </button>
-            </div>
-        </template>
+    <pc-month-navigator class="pc-js-only" data-month-target="{{ monthTarget }}" data-year-target="{{ yearTarget }}">
+        <div class="pc-cluster" style="--cluster-align: stretch">
+            <button type="button" data-previous class="pc-btn pc-btn--muted" title="{{ 'common-month-previous'|trans }}">
+                {{ '<' }}
+            </button>
+            <button type="button" data-today class="pc-btn pc-btn--muted" title="{{ 'common-month-today'|trans }}">
+                {{ icons.calendar() }}
+            </button>
+            <button type="button" data-next class="pc-btn pc-btn--muted" title="{{ 'common-month-next'|trans }}">
+                {{ '>' }}
+            </button>
+        </div>
     </pc-month-navigator>
 {% endmacro %}

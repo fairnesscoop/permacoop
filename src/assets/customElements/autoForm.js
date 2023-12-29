@@ -6,17 +6,12 @@ export default class extends HTMLElement {
     onParsed(() => {
       // Progressive enhancement:
       // If this custom element activates, submit the form whenever
-      // a form control changes value, and remove any manual submit button.
+      // a form control changes value.
 
       const form = /** @type {HTMLFormElement} */ (this.querySelector('form'));
-      const submitBtn = this.querySelector('button[type="submit"]');
 
       for (const formControl of form.elements) {
         formControl.addEventListener('change', () => form.requestSubmit());
-      }
-
-      if (submitBtn) {
-        submitBtn.remove();
       }
     });
   }

@@ -1,24 +1,10 @@
 {% extends 'layouts/app.njk' %}
 {% import 'macros/icons.njk' as icons %}
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
+{% from './_event_list.njk' import event_list with context %}
 {% from './_filters_form.njk' import filters_form with context %}
 
 {% set title = 'faircalendar-page-title'|trans({ date: date }) %}
-
-{% block preload %}
-    {{ super() }}
-    <link rel="preload" as="style" href="{{ asset('faircalendar.css') }}">
-{% endblock %}
-
-{% block styles %}
-    {{ super() }}
-    <link rel="stylesheet" href="{{ asset('faircalendar.css') }}">
-{% endblock %}
-
-{% block scripts %}
-    {{ super() }}
-    <script src="{{ asset('faircalendar.js') }}" type="module" async defer></script>
-{% endblock %}
 
 {% block main %}
 <div class="pc-container">
@@ -33,11 +19,7 @@
             <div id="faircalendar" class="pc-stack">
                 {% table overviewTable, { attr: {class: 'pc-table--center pc-table--no-shadow'} } %}
 
-                <pc-eventcalendar
-                    data-events-json="{{ fullCalendarEvents|dump }}"
-                    data-add-url-template="{{ path('faircalendar_events_add', { startDate: ':startDate', endDate: ':endDate' }) }}"
-                    data-date="{{ date|htmlDate }}"
-                ></pc-eventcalendar>
+                {{ event_list() }}
             </div>
         </div>
     </pc-frame>

@@ -11,6 +11,9 @@ common-table-empty = Aucun élément
 common-money = {NUMBER($value, style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2)} €
 common-date = {DATETIME($date, month: "numeric", year: "numeric", day: "numeric")}
 common-month-long = {DATETIME($date, month: "long")}
+common-month-previous = Mois précédent
+common-month-today = Aujourd'hui
+common-month-next = Mois suivant
 
 coop-name = Fairness
 site-title = Permacoop
@@ -69,6 +72,10 @@ faircalendar-overview-days = {$days ->
     [1] 1 jour
     *[other] {$days} jours
 }
+faircalendar-view-toggle = Vue
+faircalendar-view-list = Vue liste
+faircalendar-view-list-add-event = Ajouter un CRA
+faircalendar-view-calendar = Vue calendrier
 
 crm-title = FairCRM
 
