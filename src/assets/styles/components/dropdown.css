@@ -1,0 +1,19 @@
+details.pc-dropdown {
+  position: relative;
+}
+
+details.pc-dropdown > summary {
+  cursor: pointer;
+}
+
+details.pc-dropdown > *:not(summary) {
+  z-index: 4;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: max-content;
+  margin-top: calc(1 * var(--v));
+  background-color: var(--background-default);
+  border: 1px solid var(--border-default);
+  box-shadow: var(--shadow-default);
+}

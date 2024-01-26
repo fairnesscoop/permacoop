@@ -1,0 +1,26 @@
+{% extends 'layouts/app.njk' %}
+{% from 'macros/breadcrumb.njk' import breadcrumb %}
+{% import 'macros/icons.njk' as icons %}
+{% from './_form.njk' import event_form %}
+
+{% set title = 'faircalendar-events-edit-title'|trans({ date: event.date }) %}
+
+{% block main %}
+<div class="pc-container pc-stack">
+    {{ breadcrumb([{ title: 'faircalendar-title'|trans, href: path('faircalendar_index') }, { title: title }]) }}
+
+    <div class="pc-cluster pc-gap" style="--cluster-justify: space-between; --cluster-align: center">
+        <h1 class="pc-m" style="--m: 0">
+            {{ title }}
+        </h1>
+        <form method="POST" action="{{ path('faircalendar_event_delete', { id: event.id }) }}">
+            <button class="pc-btn pc-btn--error pc-icon--left" type="submit">
+                {{ icons.trash() }}
+                {{ 'common-form-delete'|trans }}
+            </button>
+        </form>
+    </div>
+
+    {{ event_form(event, types, projects, tasks, times, attr={class: 'pc-card pc-box'}) }}
+</div>
+{% endblock main %}

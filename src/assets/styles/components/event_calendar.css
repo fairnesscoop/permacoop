@@ -1,0 +1,34 @@
+@import '@event-calendar/core/index.css';
+
+pc-eventcalendar {
+  display: block;
+}
+
+pc-eventcalendar .ec {
+  background-color: var(--background-default);
+}
+
+pc-eventcalendar .ec-event {
+  padding: 4px;
+  font-weight: bold;
+}
+
+/* note: duplicate class name to increase specificity */
+pc-eventcalendar .ec-today.ec-today {
+  background-color: var(--event-today);
+}
+
+pc-eventcalendar .ec-toolbar {
+  /* Fix: We don't set a toolbar but it leaves an empty div, remove it.  */
+  display: none;
+}
+
+pc-eventcalendar .ec-day-grid .ec-uniform .ec-day {
+  /* Fix: by default EventCalendar sets the min-height of day boxes to 0 when dayMaxEvents is true. */
+  min-height: 7rem;
+}
+
+pc-eventcalendar .ec-event-body > a {
+  display: block;
+  width: 100%;
+}

@@ -1,0 +1,12 @@
+.pc-badge {
+  --badge-color: inherit;
+  --badge-background: var(--background-muted);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 calc(2 * var(--v));
+  color: var(--badge-color, inherit);
+  background-color: var(--badge-background);
+  border: 1px solid var(--badge-background);
+  border-radius: var(--badge-radius, calc(1 * var(--w)));
+}

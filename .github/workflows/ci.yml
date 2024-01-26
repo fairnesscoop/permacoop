@@ -11,12 +11,12 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-          cache-dependency-path: client/kit/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - uses: actions/cache@v2
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-node-${{ hashFiles('**/client/kit/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: Tests
         run: make ci

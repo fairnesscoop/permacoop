@@ -1,0 +1,12 @@
+{% macro render_attr(attr=null) %}
+    {%- for name, value in attr|default({}) -%}
+        {%- if value != null -%}
+            {%- if value == true -%}
+                {{ name }}
+            {%- else -%}
+                {{ name }}="{{ value }}"
+            {%- endif -%}
+            {%- if not loop.last %} {% endif -%}
+        {%- endif -%}
+    {%- endfor -%}
+{% endmacro %}

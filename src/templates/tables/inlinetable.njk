@@ -1,0 +1,22 @@
+{% from 'macros/attr.njk' import render_attr %}
+
+{% set attr = attr|default({})|merge({class: 'pc-table-wrapper ' + attr.class|default('')}) %}
+
+<div {{ render_attr(attr) }}>
+  <table class="pc-table">
+    <tbody>
+      {% for column, cell in inline.columns|zip(inline.row) %}
+        <tr>
+          <td>{{ column|trans }}</td>
+          <td>
+            {{ cell.renderHtml()|safe }}
+          </td>
+        </tr>
+        {% else %}
+          <tr>
+            <td colspan="2">{{ 'common-table-empty'|trans }}</td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

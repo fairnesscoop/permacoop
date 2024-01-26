@@ -1,0 +1,32 @@
+{% import 'macros/buttons.njk' as buttons %}
+{% from 'macros/attr.njk' import render_attr %}
+
+{% macro profile_fields(user, require_password=false) %}
+    <div class="pc-input-group">
+        <label class="pc-label required" for="firstName">{{ 'profile-firstName'|trans }}</label>
+        <input type="text" name="firstName" id="firstName" required {% if user %}value="{{ user.firstName }}"{% endif %}>
+    </div>
+
+    <div class="pc-input-group">
+        <label class="pc-label required" for="lastName">{{ 'profile-lastName'|trans }}</label>
+        <input type="text" name="lastName" id="lastName" required {% if user %}value="{{ user.lastName }}"{% endif %}>
+    </div>
+
+    <div class="pc-input-group">
+        <label class="pc-label required" for="email">{{ 'profile-email'|trans }}</label>
+        <input type="email" name="email" id="email" required {% if user %}value="{{ user.email }}"{% endif %}>
+    </div>
+
+    <div class="pc-input-group">
+        <label class="pc-label {% if require_password %}required{% endif %}" for="password">{{ 'profile-password'|trans }}</label>
+        <input type="password" name="password" id="password" {% if require_password %}required{% endif %}>
+    </div>
+{% endmacro %}
+
+{% macro profile_form(user, attr=null) %}
+<form method="POST" {{ render_attr(attr) }}>
+    {{ profile_fields(user) }}
+
+    {{ buttons.save(attr={ type: 'submit' }) }}
+</form>
+{% endmacro %}

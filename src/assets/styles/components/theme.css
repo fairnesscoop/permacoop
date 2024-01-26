@@ -1,0 +1,19 @@
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) #theme-dark {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme]) #theme-light {
+    display: none;
+  }
+}
+
+html[data-theme='dark'] #theme-dark {
+  display: none;
+}
+
+html[data-theme='light'] #theme-light {
+  display: none;
+}

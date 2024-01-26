@@ -1,0 +1,15 @@
+{% extends 'layouts/app.njk' %}
+{% from 'macros/breadcrumb.njk' import breadcrumb %}
+{% from './_form.njk' import user_add_form %}
+
+{% set title = 'users-add-title'|trans %}
+
+{% block main %}
+<div class="pc-container">
+    {{ breadcrumb([{ title: 'people-title'|trans }, { title: 'users-title'|trans, href: path('people_users_list') }, { title: title }]) }}
+
+    <h1>{{ title }}</h1>
+
+    {{ user_add_form(roles, contracts, workingTimes, attr={ class: 'pc-card pc-box' }) }}
+</div>
+{% endblock main %}

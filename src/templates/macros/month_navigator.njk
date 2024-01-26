@@ -1,0 +1,17 @@
+{% import 'macros/icons.njk' as icons %}
+
+{% macro month_navigator(monthTarget, yearTarget) %}
+    <pc-month-navigator class="pc-js-only" data-month-target="{{ monthTarget }}" data-year-target="{{ yearTarget }}">
+        <div class="pc-cluster" style="--cluster-align: stretch">
+            <button type="button" data-previous class="pc-btn pc-btn--muted" title="{{ 'common-month-previous'|trans }}">
+                {{ '<' }}
+            </button>
+            <button type="button" data-today class="pc-btn pc-btn--muted" title="{{ 'common-month-today'|trans }}">
+                {{ icons.calendar() }}
+            </button>
+            <button type="button" data-next class="pc-btn pc-btn--muted" title="{{ 'common-month-next'|trans }}">
+                {{ '>' }}
+            </button>
+        </div>
+    </pc-month-navigator>
+{% endmacro %}

@@ -1,0 +1,7 @@
+.pc-stack > * {
+  margin-bottom: 0;
+}
+
+.pc-stack > * + * {
+  margin-top: var(--stack-gap, calc(2 * var(--w)));
+}

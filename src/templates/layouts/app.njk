@@ -1,0 +1,20 @@
+{% extends 'layouts/_base.njk' %}
+{% import 'macros/icons.njk' as icons %}
+
+{% block body %}
+    <div class="pc-shell">
+        {% include 'components/header.njk' %}
+
+        <div class="pc-shell__content pc-with-sidebar-desktop" style="--sidebar-size: 35ch; --shell-min-size: 100%">
+            <nav class="pc-shell__element pc-nav pc-desktop-only">
+                <ul class="pc-raw-list" role="list">
+                    {% include 'components/nav_links.njk' %}
+                </ul>
+            </nav>
+
+            <main class="pc-shell__element pc-p" style="--p: calc(3 * var(--w)) 0">
+                {% block main %}{% endblock main %}
+            </main>
+        </div>
+    </div>
+{% endblock body %}

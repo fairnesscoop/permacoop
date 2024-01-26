@@ -1,0 +1,6 @@
+.pc-container {
+  /* Define a padded container with fixed maximum width */
+  max-inline-size: var(--container-size, 80rem);
+  margin-inline: auto;
+  padding-inline: var(--container-padding, calc(2 * var(--w)));
+}

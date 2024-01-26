@@ -1,0 +1,36 @@
+{% from 'macros/month_navigator.njk' import month_navigator %}
+
+{% macro filters_form() %}
+    <div class="pc-cluster pc-gap" style="--cluster-align: flex-end">
+        {{ month_navigator(monthTarget='#month', yearTarget='#year') }}
+
+        <pc-auto-form>
+            <form
+                method="GET"
+                action="{{ path('people_payroll_elements') }}"
+                class="pc-cluster pc-gap"
+                style="--cluster-align: flex-end"
+            >
+                <div class="pc-select-group pc-m" style="--m: 0">
+                    <label class="pc-label" for="month">{{ 'payroll-elements-filters-month-title'|trans }}</label>
+                    <select name="month" id="month">
+                        {% for monthValue in range(1, 13) %}
+                            <option value="{{ monthValue }}" {% if monthValue == month %}selected{% endif %}>{{ (monthValue - 1)|longMonth|capitalize }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="pc-input-group pc-m" style="--m: 0">
+                    <label class="pc-label" for="year">{{ 'payroll-elements-filters-year-title'|trans }}</label>
+                    <input type="number" id="year" name="year" pattern="\d+" value="{{ year }}" style="--input-width: 12ch">
+                </div>
+
+                <noscript>
+                    <button type="submit" class="pc-btn pc-btn--secondary">
+                        {{ 'common-form-update'|trans }}
+                    </button>
+                </noscript>
+            </form>
+        </pc-auto-form>
+    </div>
+{% endmacro %}

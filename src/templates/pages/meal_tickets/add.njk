@@ -1,0 +1,22 @@
+{% extends 'layouts/app.njk' %}
+{% import 'macros/buttons.njk' as buttons %}
+{% from 'macros/breadcrumb.njk' import breadcrumb %}
+
+{% set title = 'meal-tickets-add-removal-title'|trans %}
+
+{% block main %}
+<div class="pc-container">
+    {{ breadcrumb([{ title: 'people-title'|trans }, { title: 'meal-tickets-title', href: path('people_meal_tickets_list') }, { title: title }]) }}
+
+    <h1>{{ title }}</h1>
+
+    <form method="POST" class="pc-card pc-box">
+        <div class="pc-input-group">
+            <label for="date" class="pc-label required">{{ 'meal-tickets-removal-date'|trans }}</label>
+            <input id="date" name="date" type="date" required>
+        </div>
+
+        {{ buttons.save() }}
+    </form>
+</div>
+{% endblock main %}

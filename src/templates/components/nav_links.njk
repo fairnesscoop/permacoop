@@ -1,0 +1,76 @@
+{% import 'macros/icons.njk' as icons %}
+
+<li class="pc-nav-entry">
+    <a href="{{ path('home') }}" class="pc-link-btn pc-icon--left" {% if view_name == 'home' %}aria-current="page"{% endif %}>
+        {{ icons.dashboard() }}
+        {{ 'dashboard-title'|trans }}
+    </a>
+</li>
+
+<li class="pc-nav-entry">
+    <a href="{{ path('faircalendar_index') }}" class="pc-link-btn pc-icon--left" {% if view_name|startswith('faircalendar_') %}aria-current="page"{% endif %}">
+        {{ icons.calendar() }}
+        {{ "faircalendar-title"|trans }}
+    </a>
+</li>
+
+<li class="pc-nav-entry {% if view_name|startswith('crm_') %}active{% endif %}" aria-labelledby="crm-summary">
+    <details open>
+        <summary id="crm-summary" class="pc-icon--left">
+            {{ icons.crm() }}
+            {{ "crm-title"|trans }}
+            <span class="pc-nav-dropdown" aria-hidden="true"></span>
+        </summary>
+
+        <ul class="pc-raw-list" role="list">
+            <li>
+                <a href="{{ path('crm_customers_list') }}" class="pc-link-btn" {% if view_name|startswith('crm_customers_') %}aria-current="page"{% endif %}>
+                    {{ "crm-customers-title"|trans|capitalize }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('crm_projects_list') }}" class="pc-link-btn" {% if view_name|startswith('crm_projects_') %}aria-current="page"{% endif %}>
+                    {{ "crm-projects-title"|trans|capitalize }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('crm_tasks_list') }}" class="pc-link-btn" {% if view_name|startswith('crm_tasks_') %}aria-current="page"{% endif %}>
+                    {{ "crm-tasks-title"|trans|capitalize }}
+                </a>
+            </li>
+        </ul>
+    </details>
+</li>
+
+<li class="pc-nav-entry {% if view_name|startswith('people_') %}active{% endif %}" aria-labelledby="people-summary">
+    <details open>
+        <summary id="people-summary" class="pc-icon--left">
+            {{ icons.group() }}
+            {{ 'people-title'|trans }}
+            <span class="pc-nav-dropdown" aria-hidden="true"></span>
+        </summary>
+
+        <ul class="pc-raw-list" role="list">
+            <li>
+                <a href="{{ path('people_leaves_list') }}" class="pc-link-btn" {% if view_name|startswith('people_leaves_') %}aria-current="page"{% endif %}>
+                    {{ 'leaves-title'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('people_payroll_elements') }}" class="pc-link-btn" {% if view_name == 'people_payroll_elements' %}aria-current="page"{% endif %}>
+                    {{ 'payroll-elements-title'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('people_meal_tickets_list') }}" class="pc-link-btn" {% if view_name|startswith('people_meal_tickets_') %}aria-current="page"{% endif %}>
+                    {{ 'meal-tickets-title'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('people_users_list') }}" class="pc-link-btn" {% if view_name|startswith('people_users_') %}aria-current="page"{% endif %}>
+                    {{ 'users-title'|trans }}
+                </a>
+            </li>
+        </ul>
+    </details>
+</li>

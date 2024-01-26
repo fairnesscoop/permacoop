@@ -1,0 +1,3 @@
+.pc-box {
+  padding: var(--box-padding, calc(3 * var(--w)));
+}

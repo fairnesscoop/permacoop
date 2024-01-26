@@ -1,0 +1,33 @@
+{% import 'macros/icons.njk' as icons %}
+
+{% macro breadcrumb(items) %}
+    <nav class="pc-breadcrumb pc-card pc-box" style="--box-padding: var(--w)" role="navigation" aria-label="{{ 'breadcrumb-title'|trans }}">
+        <ol class="pc-raw-list pc-cluster" style="--cluster-align: center">
+            {% if items|length > 0 %}
+                <li>
+                    <a href="/" class="font-semibold text-grey-dark pc-cluster pc-gap" style="--gap: var(--v)">
+                        {{ icons.dashboard() }}
+                        {{ 'site-title'|trans }}
+                    </a>
+                </li>
+            {% else %}
+                <li class="pc-cluster pc-gap" style="--gap: var(--v)">
+                    {{ icons.dashboard() }}
+                    {{ 'site-title'|trans }}
+                </li>
+            {% endif %}
+
+            {% for item in items %}
+                {% if item.href %}
+                    <li>
+                        <a href="{{ item.href }}">
+                            {{ item.title }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li>{{ item.title }}</li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </nav>
+{% endmacro %}

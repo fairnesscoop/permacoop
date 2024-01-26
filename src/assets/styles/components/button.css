@@ -1,0 +1,40 @@
+.pc-btn {
+  --hover-tint: var(--background-action-violet-hover);
+  border: none;
+  padding: var(--w) calc(2 * var(--w));
+  background-color: var(--background-action-violet);
+  color: var(--text-on-background-action-violet);
+  font-weight: var(--font-weight-md);
+  cursor: pointer;
+}
+
+.pc-btn:not(:disabled):hover {
+  background-color: var(--hover-tint);
+}
+
+.pc-btn--secondary {
+  --hover-tint: var(--background-muted);
+  background-color: var(--background-default);
+  color: var(--text-action-violet-on-background-default);
+}
+
+.pc-btn--error {
+  --hover-tint: var(--background-error-hover);
+  background-color: var(--background-error);
+  color: var(--text-on-error);
+}
+
+.pc-btn--muted {
+  --hover-tint: var(--background-muted-hover);
+  background-color: var(--background-muted);
+  color: var(--text-on-muted);
+}
+
+.pc-btn--circle {
+  border-radius: 50%;
+  padding: 0;
+  width: var(--button-size, calc(4 * var(--w)));
+  height: var(--button-size, calc(4 * var(--w)));
+  display: grid;
+  place-items: center;
+}

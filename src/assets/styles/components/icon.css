@@ -1,0 +1,41 @@
+.pc-icon {
+  --icon-size: 7;
+  width: calc(var(--icon-size) * var(--v));
+  height: calc(var(--icon-size) * var(--v));
+}
+
+.pc-icon--error {
+  color: var(--text-error);
+}
+
+.pc-icon--action-violet {
+  color: var(--text-action-violet);
+}
+
+@media (prefers-color-scheme: dark) {
+  .pc-icon--action-violet {
+    color: var(--text-default);
+  }
+}
+
+html[data-theme='dark'] .pc-icon--action-violet {
+  color: var(--text-default);
+}
+
+.pc-icon--sm {
+  --icon-size: 5;
+}
+
+.pc-icon--left,
+.pc-icon--right {
+  display: flex;
+  align-items: center;
+}
+
+.pc-icon--left > .pc-icon {
+  margin-inline-end: calc(2 * var(--v));
+}
+
+.pc-icon--right > .pc-icon {
+  margin-inline-start: calc(2 * var(--v));
+}

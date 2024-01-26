@@ -1,0 +1,4 @@
+.pc-card {
+  background-color: var(--background-default);
+  box-shadow: var(--shadow-default);
+}

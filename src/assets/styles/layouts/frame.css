@@ -1,0 +1,15 @@
+.pc-frame {
+  /* Define a frame with a fixed aspect ratio */
+  aspect-ratio: var(--frame-ratio, 3 / 2);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pc-frame > img {
+  /* Cover entire frame, image will be scaled if necessary */
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}

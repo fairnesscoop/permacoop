@@ -1,0 +1,22 @@
+{% extends 'layouts/app.njk' %}
+{% import 'macros/links.njk' as links %}
+{% from 'macros/breadcrumb.njk' import breadcrumb %}
+
+{% set title = 'users-title'|trans %}
+
+{% block title %}{{ title }} - {{ super() }}{% endblock %}
+
+{% block main %}
+<div class="pc-container pc-stack">
+    {{ breadcrumb([{ title: 'people-title'|trans }, { title: title }]) }}
+
+    <div class="pc-cluster pc-gap" style="--cluster-justify: space-between; --cluster-align: center">
+        <h1 class="pc-m" style="--m: 0">
+            {{ title }}
+        </h1>
+        {{ links.add(path('people_users_add'))}}
+    </div>
+
+    {% table table %}
+</div>
+{% endblock main %}

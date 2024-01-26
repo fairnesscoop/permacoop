@@ -1,0 +1,30 @@
+{% from 'macros/attr.njk' import render_attr %}
+
+{% set attr = attr|default({})|merge({class: 'pc-table-wrapper ' + attr.class|default('')}) %}
+
+<div {{ render_attr(attr) }}>
+  <table class="pc-table" {% if caption %}aria-label="{{ caption }}"{% endif %}>
+    <thead>
+      <tr>
+        {% for column in table.columns %}
+          <th>{{ column|trans }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in table.rows %}
+        <tr>
+          {% for cell in row %}
+            <td>
+                {{ cell.renderHtml()|safe }}
+            </td>
+          {% endfor %}
+        </tr>
+        {% else %}
+          <tr>
+            <td colspan="{{ table.columns|length }}">{{ 'common-table-empty'|trans }}</td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

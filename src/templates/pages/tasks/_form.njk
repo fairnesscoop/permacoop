@@ -1,0 +1,13 @@
+{% import 'macros/buttons.njk' as buttons %}
+{% from 'macros/attr.njk' import render_attr %}
+
+{% macro task_form(task=null, attr=null) %}
+<form method="POST" {{ render_attr(attr) }}>
+    <div class="pc-input-group">
+        <label class="pc-label required" for="name">{{ 'crm-tasks-name'|trans }}</label>
+        <input type="text" name="name" id="name" required {% if task %}value="{{ task.name }}"{% endif %}>
+    </div>
+
+    {{ buttons.save(attr={type: 'submit'}) }}
+</form>
+{% endmacro %}

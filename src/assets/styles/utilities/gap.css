@@ -1,0 +1,3 @@
+.pc-gap {
+  gap: var(--gap, calc(2 * var(--w)));
+}

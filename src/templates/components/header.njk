@@ -1,0 +1,48 @@
+{% import 'macros/icons.njk' as icons %}
+
+<header class="pc-header pc-cluster pc-shadow pc-p" style="--cluster-justify: space-between; z-index: 2; --p: calc(3 * var(--v)) calc(6 * var(--v))">    
+    <pc-nav-menu-button>
+        <button aria-haspopup="true" aria-expanded="false" aria-controls="pc-nav-mobile-menu" aria-label="{{ 'nav-open'|trans }}">
+            {{ icons.menu() }}
+        </button>
+    </pc-nav-menu-button>
+
+    <a href="{{ path('home') }}" class="pc-brand">
+        <img src="{{ asset('images/logo.png') }}" alt="{{ 'coop-name'|trans }}"/>
+        {{ "site-title"|trans }}
+    </a>
+
+    <div class="pc-cluster pc-gap" style="--cluster-align: center">
+        {% include 'components/theme_toggler.njk' %}
+
+        <details class="pc-dropdown" title="{{ 'header-dropdown'|trans }}">
+            <summary class="pc-btn pc-btn--muted pc-btn--circle">
+                {{ req.user.firstName|first|capitalize }}
+            </summary>
+
+            <ul class="pc-raw-list">
+                <li>
+                    <a href="{{ path('profile_edit') }}" class="pc-link-btn pc-icon--left">
+                        {{ icons.user() }}
+                        {{ 'header-profile'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <form method="POST" action="{{ path('logout') }}">
+                        <button type="submit" class="pc-link-btn pc-icon--left">
+                            {{ icons.logout() }}
+                            {{ 'header-logout'|trans }}
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <nav class="pc-nav pc-mobile-only">
+        {# 'hidden' so that it is closed by default #}
+        <ul id="pc-nav-mobile-menu" class="pc-raw-list" role="list" hidden>
+            {% include 'components/nav_links.njk' %}
+        </ul>
+    </nav>
+</header>

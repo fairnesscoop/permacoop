@@ -1,0 +1,69 @@
+{% macro event_list() %}
+    <pc-eventcalendar
+        data-events-json="{{ fullCalendarEvents|dump }}"
+        data-add-url-template="{{ path('faircalendar_events_add', { startDate: ':startDate', endDate: ':endDate' }) }}"
+        data-date="{{ date|htmlDate }}"
+        {% if viewName %}data-view="{{ viewName }}"{% endif %}
+    >
+        <fieldset id="view-toggle" aria-labelledby="view-toggle-legend" class="pc-js-only pc-cluster" style="--cluster-gap: calc(2 * var(--w)); --cluster-align: center; --cluster-justify: end">
+            <legend id="view-toggle-legend" class="pc-visually-hidden">
+                {{ 'faircalendar-view-toggle'|trans }}
+            </legend>
+            <div class="pc-cluster" style="--cluster-gap: var(--v); --cluster-justify: start">
+                <input name="view" id="view-radio-calendar" type="radio" value="calendar" {% if viewName == 'calendar' or not viewName %}checked{% endif %}>
+                <label for="view-radio-calendar">
+                    {{ 'faircalendar-view-calendar'|trans }}
+                </label>
+            </div>
+            <div class="pc-cluster" style="--cluster-gap: var(--v); --cluster-justify: start">
+                <input name="view" id="view-radio-list" type="radio" value="list" {% if viewName == 'list' %}checked{% endif %}>
+                <label for="view-radio-list">
+                    {{ 'faircalendar-view-list'|trans }}
+                </label>
+            </div>
+        </fieldset>
+
+        <div id="list-view" class="pc-table-wrapper" {% if viewName != 'list' %}hidden{% endif %}>
+            <table class="pc-table" style="--table-padding: var(--v); --table-desktop-padding: var(--v) var(--w)">
+                <colgroup>
+                    <col>
+                    <col style="width: 100%">
+                    <col>
+                </colgroup>
+                <tbody>
+                    {% for startDate, dayEvents in listViewDays %}
+                        <tr>
+                            <td>{{ startDate|eventDate }}</td>
+                            <td>
+                                <ul class="pc-raw-list pc-cluster" role="list" style="--cluster-gap: var(--w)">
+                                    {% for event in dayEvents %}
+                                        <li class="ec-event" style="background-color: {{ event.backgroundColor }}; color: {{ event.textColor }}; border: 1px solid {{ event.borderColor }};">
+                                            {% if event.extendedProps.url %}
+                                                <a href="{{ event.extendedProps.url }}">
+                                                    {{ event.title }}
+                                                </a>
+                                            {% else %}
+                                                {{ event.title }}
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>
+                                <a
+                                    href="{{ path('faircalendar_events_add', { startDate: startDate|htmlDate, endDate: startDate|htmlDate }) }}"
+                                    class="pc-btn pc-btn--secondary pc-btn--circle"
+                                    title="{{ 'faircalendar-view-list-add-event'|trans }}"
+                                >
+                                    {{ icons.plus() }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="calendar-view" class="pc-js-only" data-testid="pc-faircalendar-view-calendar"></div>
+    </pc-eventcalendar>
+{% endmacro %}

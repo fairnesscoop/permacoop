@@ -1,4 +1,0 @@
-- name: Ensure installation is up to date
-  shell:
-    cmd: ANSIBLE=1 make install
-    chdir: "{{ workdir }}"

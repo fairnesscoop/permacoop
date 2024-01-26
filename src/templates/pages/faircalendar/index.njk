@@ -1,0 +1,27 @@
+{% extends 'layouts/app.njk' %}
+{% import 'macros/icons.njk' as icons %}
+{% from 'macros/breadcrumb.njk' import breadcrumb %}
+{% from './_event_list.njk' import event_list with context %}
+{% from './_filters_form.njk' import filters_form with context %}
+
+{% set title = 'faircalendar-page-title'|trans({ date: date }) %}
+
+{% block main %}
+<div class="pc-container">
+    <pc-frame id="faircalendar">
+        {{ breadcrumb([{ title: title }]) }}
+
+        <h1>{{ title }}</h1>
+
+        <div class="pc-with-sidebar pc-with-sidebar-start pc-gap" style="--sidebar-size: 22ch; --non-sidebar-min-size: 80%">
+            {{ filters_form() }}
+
+            <div id="faircalendar" class="pc-stack">
+                {% table overviewTable, { attr: {class: 'pc-table--center pc-table--no-shadow'} } %}
+
+                {{ event_list() }}
+            </div>
+        </div>
+    </pc-frame>
+</div>
+{% endblock main %}

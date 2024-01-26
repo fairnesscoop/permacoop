@@ -1,0 +1,26 @@
+{% extends 'layouts/app.njk' %}
+{% from 'macros/breadcrumb.njk' import breadcrumb %}
+
+{% set title = 'home-title'|trans({user: req.user|fullName}) %}
+
+{% block main %}
+<div class="pc-container">
+    {{ breadcrumb([]) }}
+
+    <h1>{{ title }}</h1>
+
+    <h2>
+        {{ 'home-pending-leaves-title'|trans }}
+    </h2>
+
+    <p>
+        {{ 'home-pending-leaves'|trans({ leaves: pendingLeaves }) }}
+    </p>
+
+    {% if pendingLeaves %}
+        <a href="{{ path('people_leave_requests_list') }}" class="pc-btn">
+            {{ 'home-pending-leaves-see-all'|trans }}
+        </a>
+    {% endif %}
+</div>
+{% endblock main %}

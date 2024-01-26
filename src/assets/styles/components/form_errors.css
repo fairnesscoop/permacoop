@@ -1,0 +1,6 @@
+.pc-form-errors {
+  padding: var(--w);
+  background-color: var(--background-alt-error);
+  color: var(--text-on-alt-error);
+  margin-block-end: var(--w);
+}

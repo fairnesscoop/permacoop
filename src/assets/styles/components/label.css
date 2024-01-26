@@ -1,0 +1,9 @@
+.pc-label {
+  display: block;
+  padding-bottom: var(--v);
+}
+
+.pc-label.required::after {
+  content: ' *';
+  color: var(--text-error);
+}

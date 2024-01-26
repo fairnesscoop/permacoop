@@ -1,0 +1,17 @@
+.pc-shell {
+  /* Ensure page takes at least full height */
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-height: var(--shell-min-size, 100vh);
+}
+
+.pc-shell__content {
+  flex-grow: 1;
+  background-color: var(--background-alt-grey);
+}
+
+.pc-shell__element {
+  /* Grow to match the content's size */
+  align-self: stretch;
+}

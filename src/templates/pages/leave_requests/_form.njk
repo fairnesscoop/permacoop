@@ -1,0 +1,70 @@
+{% import 'macros/buttons.njk' as buttons %}
+{% from 'macros/attr.njk' import render_attr %}
+
+{% macro leave_request_form(leaveRequest, types, attr=null) %}
+<form method="POST" {{ render_attr(attr) }}>
+    <div class="pc-select-group">
+        <label for="type" class="pc-label required">{{ 'leaves-type'|trans }}</label>
+        <select name="type" id="type" required>
+            {% for type in types %}
+                <option value="{{ type }}" {% if leaveRequest and leaveRequest.type == type %}selected{% endif %}>{{ 'leaves-type-value'|trans({ type: type }) }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="pc-grid pc-gap" style="--grid-cols: 2">
+        <div class="pc-input-group">
+            <label for="startDate" class="pc-label required">{{ 'leaves-startDate'|trans }}</label>
+            <input name="startDate" id="startDate" type="date" required {% if leaveRequest %}value="{{ leaveRequest.startDate|htmlDate }}"{% endif %}>
+        </div>
+
+        <div class="pc-select-group">
+            <label for="startsAllDay" class="pc-label required">{{ 'leaves-allDay'|trans }}</label>
+            <select name="startsAllDay" id="startsAllDay">
+                <option value="true" {% if leaveRequest and leaveRequest.startsAllDay %}selected{% endif %}>{{ 'common-yes'|trans }}</option>
+                <option value="false" {% if leaveRequest and not leaveRequest.startsAllDay %}selected{% endif %}>{{ 'common-no'|trans }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="pc-grid pc-gap" style="--grid-cols: 2">
+        <div class="pc-input-group">
+            <label for="endDate" class="pc-label required">{{ 'leaves-endDate'|trans }}</label>
+            <input name="endDate" id="endDate" type="date" required {% if leaveRequest %}value="{{ leaveRequest.endDate|htmlDate }}"{% endif %}>
+        </div>
+    
+        <div class="pc-select-group">
+            <label for="endsAllDay" class="pc-label required">{{ 'leaves-allDay'|trans }}</label>
+            <select name="endsAllDay" id="endsAllDay">
+                <option value="true" {% if leaveRequest and leaveRequest.endsAllDay %}selected{% endif %}>{{ 'common-yes'|trans }}</option>
+                <option value="false" {% if leaveRequest and not leaveRequest.endsAllDay %}selected{% endif %}>{{ 'common-no'|trans }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="pc-input-group">
+        <label for="comment" class="pc-label">{{ 'leaves-comment'|trans }}</label>
+        <input name="comment" id="comment" type="text" {% if leaveRequest %}value="{{ leaveRequest.comment }}"{% endif %}>
+    </div>
+
+    {{ buttons.save(attr={type: 'submit'}) }}
+</form>
+{% endmacro %}
+
+{% macro leave_request_moderation_form(leaveRequest) %}
+    <form method="POST" action="{{ path('people_leave_requests_moderation', { id: leaveRequest.id }) }}">
+        <div class="pc-input-group">
+            <label for="comment" class="pc-label">{{ 'leaves-comment'|trans }}</label>
+            <input id="comment" name="comment" type="text">
+        </div>
+
+        <div class="pc-grid pc-gap" style="--grid-cols: 2">
+            <button type="submit" name="action" value="accept" class="pc-btn">
+                {{ 'leave-requests-moderation-accept'|trans }}
+            </button>
+            <button type="submit" name="action" value="deny" class="pc-btn pc-btn--error">
+                {{ 'leave-requests-moderation-deny'|trans }}
+            </button>
+        </div>
+    </form>
+{% endmacro %}
