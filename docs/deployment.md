@@ -23,7 +23,7 @@ WWW ------- app (:$PORT)  |
 
 ## How to deploy
 
-Push to the branch `feat-hotwire`.
+Push to the branch `master`.
 
 ## Environnements
 
@@ -31,18 +31,15 @@ Environments are copies of the Permacoop infrastructure. Currently the deployed 
 
 | Name | Description | URL | Deploy branch |
 |------|-------------|-----|---------------|
-| prod-scaleway | Legacy production environment | https://permacoop.fairness.coop | main |
-| prod-scalingo | Rewrite production environment | https://permacoop.osc-fr1.scalingo.io/ | feat-hotwire |
+| prod-scalingo | Production environment | https://permacoop.fairness.coop (CNAME to https://permacoop.osc-fr1.scalingo.io) | master |
 
 Each environment makes use of several computing resources, listed below:
 
 | Ressource           | Environment | Location   |
 |---------------------|-------------|------------|
-| VM                  | prod-scaleway | Scaleway   |
-| PostgreSQL instance | prod-scaleway | Scaleway   |
-| App                 | prod-scalingo | Scalingo   |
-| PostgreSQL instance | prod-scalingo | Scaleway   |
-| DNS records         | *         | Infomaniak |
+| App                 | prod-scalingo | Scalingo |
+| PostgreSQL instance | prod-scalingo | Scalingo |
+| DNS records         | *         | Gandi |
 
 ## Configuration
 
@@ -63,13 +60,3 @@ If an environment is not used anymore, it should be decommissioned to remove unu
 * Open, review and merge a PR with the following changes:
   * Drop the environment from the environment list in this file.
 * Drop the [computing resources](#computing-resources) allocated to the environment.
-
-## Migration Scaleway
-
-Voir https://doc.scalingo.com/databases/postgresql/dump-restore#restore
-
-Déployer une copie de la DB Scaleway :
-
-* Dans la Console Scaleway, récupérer un export de la DB (fichier `.custom`, par exemple `export.custom`)
-* Récupérer la `DATABASE_URL` sur Scalingo
-* Lancer `$ pg_restore --clean --if-exists --no-owner --no-privileges --no-comments --dbname $DATABASE_URL -v -Fc export.custom`
