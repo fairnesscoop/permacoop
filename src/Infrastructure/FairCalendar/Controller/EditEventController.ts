@@ -30,6 +30,8 @@ import { EditEventDTO } from '../DTO/EditEventDTO';
 import { UpdateEventCommand } from 'src/Application/FairCalendar/Command/UpdateEventCommand';
 import { GetEventByIdQuery } from 'src/Application/FairCalendar/Query/GetEventByIdQuery';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
+import { makeMonthUrl } from '../Routing/urls';
+import { EventView } from 'src/Application/FairCalendar/View/EventView';
 
 @Controller('app/faircalendar/events/edit')
 @UseGuards(IsAuthenticatedGuard)
@@ -100,7 +102,11 @@ export class EditEventController {
         )
       );
 
-      res.redirect(303, this.resolver.resolve('faircalendar_index'));
+      const event: EventView = await this.queryBus.execute(
+        new GetEventByIdQuery(idDto.id)
+      );
+
+      res.redirect(303, makeMonthUrl(this.resolver, new Date(event.date)));
     } catch (e) {
       throw new BadRequestException(e.message);
     }

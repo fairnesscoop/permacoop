@@ -25,6 +25,7 @@ import { GetProjectsQuery } from 'src/Application/Project/Query/GetProjectsQuery
 import { GetCooperativeQuery } from 'src/Application/Settings/Query/GetCooperativeQuery';
 import { ArrayUtils } from 'src/Infrastructure/Common/Utils/ArrayUtils';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
+import { makeMonthUrl } from '../Routing/urls';
 
 @Controller('app/faircalendar/events/add')
 @UseGuards(IsAuthenticatedGuard)
@@ -99,7 +100,7 @@ export class AddEventController {
         )
       );
 
-      res.redirect(303, this.resolver.resolve('faircalendar_index'));
+      res.redirect(303, makeMonthUrl(this.resolver, new Date(startDate)));
     } catch (e) {
       throw new BadRequestException(e.message);
     }
