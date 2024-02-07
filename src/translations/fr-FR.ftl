@@ -142,7 +142,7 @@ leaves-status-value = {$status ->
 }
 leaves-duration = Durée
 leaves-duration-value = {$days ->
-    [one] 1 jour
+    [1] 1 jour
     *[other] {$days} jours
 }
 leaves-see-requests = Voir les demandes de congés

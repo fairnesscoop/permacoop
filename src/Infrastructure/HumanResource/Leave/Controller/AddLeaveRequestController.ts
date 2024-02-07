@@ -49,7 +49,7 @@ export class AddLeaveRequestController {
     const { type, startDate, startsAllDay, endDate, endsAllDay, comment } = dto;
 
     try {
-      const id = await this.commandBus.execute(
+      await this.commandBus.execute(
         new CreateLeaveRequestCommand(
           user,
           type,

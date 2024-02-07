@@ -4,7 +4,6 @@ import {
   UseGuards,
   Get,
   Render,
-  Query,
   Param
 } from '@nestjs/common';
 import { IQueryBus } from 'src/Application/IQueryBus';
@@ -16,7 +15,6 @@ import { LeaveRequestTableFactory } from '../Table/LeaveRequestTableFactory';
 import { GetLeaveRequestByIdQuery } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestByIdQuery';
 import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
 import { CanLeaveRequestBeModerated } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeModerated';
-import { LeaveRequestView } from 'src/Application/HumanResource/Leave/View/LeaveRequestView';
 import { LeaveRequestDetailView } from 'src/Application/HumanResource/Leave/View/LeaveRequestDetailView';
 
 @Controller('app/people/leaves')
