@@ -29,12 +29,22 @@ export function createCalendar(target, date, events, goToEventCreate) {
         eventDurationEditable: false,
         // TODO: add testid on days
         eventContent: ({ event }) => {
-          const url = event.extendedProps.url;
+          const { url, summary } = event.extendedProps;
+
           if (url) {
             return {
-              html: `<a href="${url}">${event.title}</a>`
+              html: `<a href="${url}" ${
+                summary ? 'title="' + summary + '"' : ''
+              }>${event.title}</a>`
             };
           }
+
+          if (summary) {
+            return {
+              html: `<span title="${summary}">${event.title}</span>`
+            };
+          }
+
           return event.title;
         },
         dateClick: ({ event, date }) => {

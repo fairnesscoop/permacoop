@@ -64,6 +64,7 @@ faircalendar-type-option = {$type ->
 faircalendar-taskId-title = Mission
 faircalendar-projectId-title = Projet
 faircalendar-time-title = Temps passé
+faircalendar-summary-title = Commentaire
 faircalendar-filters-month-title = Mois
 faircalendar-filters-year-title = Année
 faircalendar-filters-userId-title = Coopérateur·ice - salarié·e
@@ -106,7 +107,6 @@ profile-email = Adresse e-mail
 profile-password = Mot de passe
 
 people-title = FairRH
-
 
 leaves-title = Congés
 leaves-user = Coopérateur·ice - salarié·e

@@ -39,9 +39,11 @@
                                     {% for event in dayEvents %}
                                         <li class="ec-event" style="background-color: {{ event.backgroundColor }}; color: {{ event.textColor }}; border: 1px solid {{ event.borderColor }};">
                                             {% if event.extendedProps.url %}
-                                                <a href="{{ event.extendedProps.url }}">
+                                                <a href="{{ event.extendedProps.url }}" {% if event.extendedProps.summary %}title="{{ event.extendedProps.summary }}"{% endif %}>
                                                     {{ event.title }}
                                                 </a>
+                                            {% elseif event.extendedProps.summary %}
+                                                <span title="{{ event.extendedProps.summary }}">{{ event.title }}</span>
                                             {% else %}
                                                 {{ event.title }}
                                             {% endif %}
