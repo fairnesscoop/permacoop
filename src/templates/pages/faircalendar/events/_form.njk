@@ -2,7 +2,7 @@
 {% import 'macros/icons.njk' as icons %}
 {% from 'macros/attr.njk' import render_attr %}
 
-{% macro event_form(event, types, projects, tasks, times, startDate, endDate, attr=null) %}
+{% macro event_form(event, types, projects, tasks, times, startDate=null, endDate=null, attr=null) %}
 
 {% set isNotMission = event and event.type != 'mission' %}
 
@@ -48,8 +48,13 @@
             </div>
         </div>
 
-        <input type="hidden" name="startDate" value="{{ startDate }}T00:00:00">
-        <input type="hidden" name="endDate" value="{{ endDate }}T00:00:00">
+        <div class="pc-input-group">
+            <label for="summary" class="pc-label">{{ 'faircalendar-summary-title'|trans }}</label>
+            <input name="summary" id="summary" {% if event %}value="{{ event.summary }}"{% endif %}>
+        </div>
+
+        {% if startDate %}<input type="hidden" name="startDate" value="{{ startDate }}T00:00:00">{% endif %}
+        {% if endDate %}<input type="hidden" name="endDate" value="{{ endDate }}T00:00:00">{% endif %}
 
         {{ buttons.save(attr={type: 'submit'}) }}
     </form>

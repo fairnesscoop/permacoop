@@ -87,21 +87,23 @@ export class FairCalendarController {
         })}`;
       }
 
+      const extendedProps: Record<string, any> = {
+        summary: event.summary
+      };
+
+      if (event.id) {
+        extendedProps.url = this.resolver.resolve('faircalendar_events_edit', {
+          id: event.id
+        });
+      }
+
       return {
         // See: https://fullcalendar.io/docs/event-object
         type: fcEventType,
         start: event.date,
         end: event.date,
         title,
-        ...(event.id
-          ? {
-              extendedProps: {
-                url: this.resolver.resolve('faircalendar_events_edit', {
-                  id: event.id
-                })
-              }
-            }
-          : {}),
+        extendedProps,
         textColor: `var(--event-${fcEventType}-text)`,
         backgroundColor: `var(--event-${fcEventType}-background)`,
         borderColor: `var(--event-${fcEventType}-border)`
