@@ -29,23 +29,9 @@ export function createCalendar(target, date, events, goToEventCreate) {
         eventDurationEditable: false,
         // TODO: add testid on days
         eventContent: ({ event }) => {
-          const { url, summary } = event.extendedProps;
+          const element = document.getElementById(`event-${event.id}`);
 
-          if (url) {
-            return {
-              html: `<a href="${url}" ${
-                summary ? 'title="' + summary + '"' : ''
-              }>${event.title}</a>`
-            };
-          }
-
-          if (summary) {
-            return {
-              html: `<span title="${summary}">${event.title}</span>`
-            };
-          }
-
-          return event.title;
+          return element ? { html: element.innerHTML } : event.title;
         },
         dateClick: ({ event, date }) => {
           goToEventCreate(date, date);

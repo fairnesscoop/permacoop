@@ -75,6 +75,10 @@ export default class extends HTMLElement {
    * @param {Date} endDate
    */
   #goToEventCreate = (startDate, endDate) => {
+    if (this.dataset.isCalendarOfLoggedUser !== 'true') {
+      return;
+    }
+
     const url = this.#addUrlTemplate
       .replace(':startDate', format(startDate, 'yyyy-MM-dd'))
       .replace(':endDate', format(endDate, 'yyyy-MM-dd'));
