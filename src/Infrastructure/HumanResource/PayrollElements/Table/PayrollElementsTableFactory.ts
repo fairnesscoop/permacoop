@@ -18,6 +18,7 @@ export class PayrollElementsTableFactory {
       'payroll-elements-workingTime',
       'payroll-elements-transportFee',
       'payroll-elements-sustainableMobilityFee',
+      'payroll-elements-sportsPassFee',
       'payroll-elements-mealTickets',
       'payroll-elements-healthInsurance',
       'payroll-elements-paidLeaves',
@@ -45,6 +46,9 @@ export class PayrollElementsTableFactory {
         .trans('common-money', { value: item.transportFee })
         .trans('common-money', {
           value: item.sustainableMobilityFee
+        })
+        .trans('common-money', {
+          value: item.sportsPassFee
         })
         .value(item.mealTickets)
         .trans(item.healthInsurance ? 'common-yes' : 'common-no')

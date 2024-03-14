@@ -170,6 +170,7 @@ payroll-elements-workingTime = TC / TP
 payroll-elements-executive = Cadre
 payroll-elements-transportFee = Transport
 payroll-elements-sustainableMobilityFee = Mobilité durable
+payroll-elements-sportsPassFee = Abonnement sportif
 payroll-elements-mealTickets = Tickets resto
 payroll-elements-healthInsurance = Mutuelle
 payroll-elements-paidLeaves = Congés payés
@@ -223,6 +224,7 @@ users-healthInsurance = Mutuelle
 users-annualEarnings = Salaire annuel brut
 users-transportFee = Frais de transport
 users-sustainableMobilityFee = Forfait mobilité durable
+users-sportsPassFee = Abonnement sportif
 users-joiningDate = Date d'entrée
 users-leavingDate = Date de sortie
 
