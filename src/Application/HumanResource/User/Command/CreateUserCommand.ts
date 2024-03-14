@@ -15,6 +15,7 @@ export interface IUserAdministrativeCommand {
   leavingDate: string;
   transportFee: number;
   sustainableMobilityFee: number;
+  sportsPassFee: number;
 }
 
 export class CreateUserCommand implements ICommand {

@@ -16,6 +16,7 @@ describe('UserAdministrativeDTO', () => {
     dto.executivePosition = true;
     dto.healthInsurance = true;
     dto.transportFee = 75.2;
+    dto.sportsPassFee = 30;
     dto.joiningDate = '2020-12-17T03:24:00';
     dto.leavingDate = '2021-12-17T03:24:00';
 

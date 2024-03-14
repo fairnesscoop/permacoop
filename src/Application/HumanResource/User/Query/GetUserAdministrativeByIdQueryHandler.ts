@@ -37,7 +37,8 @@ export class GetUserAdministrativeByIdQueryHandler {
         userAdministrative.getJoiningDate(),
         userAdministrative.getLeavingDate(),
         userAdministrative.getTransportFee() * 0.01,
-        userAdministrative.getSustainableMobilityFee() * 0.01
+        userAdministrative.getSustainableMobilityFee() * 0.01,
+        userAdministrative.getSportsPassFee() * 0.01
       );
     }
 
