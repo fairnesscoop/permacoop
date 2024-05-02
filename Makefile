@@ -103,3 +103,22 @@ ci: up ## Run CI checks
 scalingo-postbuild:
 	make build
 	make database-migrate
+
+devcontainer-install: ## Dev-container: Install
+	npm ci
+	npx playwright install firefox
+	npm run build
+	npm run assets:build
+
+devcontainer-start: ## Dev-container: Start all
+	make -j 2 devcontainer-start-server devcontainer-start-watch
+
+devcontainer-start-server: ## Dev-container: Start server
+	${run_server} "npm run start:dev"
+
+devcontainer-start-watch: ## Dev-container: Start watch assets
+	${run_watch} "npm run assets:watch"
+
+devcontainer-database-init: ## Dev-container: Init database
+	npm run migration:migrate
+	npm run seed:run

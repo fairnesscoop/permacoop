@@ -1,0 +1,32 @@
+volumes:
+  database:
+  node-modules:
+services:
+  database:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: permacoop
+      PGUSER: docker
+      PGPASSWORD: docker
+    volumes:
+      - database:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_HOST: database
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: docker
+      DATABASE_PASSWORD: docker
+      DATABASE_NAME: permacoop
+    volumes:
+      - ../:/workspace/:cached
+      - node-modules:/workspace/node_modules/
+    command: sleep infinity
+    depends_on:
+      - database

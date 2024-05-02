@@ -1,0 +1,8 @@
+// https://aka.ms/devcontainer.json
+// https://containers.dev/guide/dockerfile
+{
+    "name": "${localWorkspaceFolderBasename}",
+    "dockerComposeFile": "docker-compose.yaml",
+    "service": "devcontainer",
+    "workspaceFolder": "/workspace/"
+}

@@ -27,6 +27,8 @@ Ensure you have [Node.js](https://nodejs.org) **16.x** and `node-gyp` installed 
 
 ## Quickstart
 
+### First method
+
 First, install dependencies:
 
 ```bash
@@ -35,23 +37,49 @@ make install
 
 Then start the servers, database and other services:
 
-```
+```bash
 make start
 ```
 
 In a separate terminal, run database migrations:
 
-```
+```bash
 make database-migrate
 ```
 
-Then, you can seed the database with fake data
+Then, you can seed the database with fake data:
 
-```
+```bash
 make database-seed
 ```
 
-This command will create the default user "John Doe" :
+### Second method
+
+Open the project in a dev-container.
+
+Install dependencies:
+
+```bash
+make devcontainer-install
+```
+
+Init the database:
+
+```bash
+make devcontainer-database-init
+```
+
+Then start the servers:
+
+```bash
+make devcontainer-start
+```
+
+### Visit website
+
+The server will be available at <http://localhost:3000>.
+
+The default user is "John Doe":
 
 ```json
 {
@@ -59,8 +87,6 @@ This command will create the default user "John Doe" :
   "password": "john"
 }
 ```
-
-The server will be available at <http://localhost:3000>.
 
 ## Helpers
 
