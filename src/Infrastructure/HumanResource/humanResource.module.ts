@@ -80,6 +80,7 @@ import { ListMealTicketsController } from './MealTicket/Controller/ListMealTicke
 import { MealTicketTableFactory } from './MealTicket/Table/MealTicketTableFactory';
 import { AddMealTicketRemovalController } from './MealTicket/Controller/AddMealTicketRemovalController';
 import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesCalendarController';
+import { DoesLeaveRequestLackPostponedWorkedFreeDays } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestLackPostponedWorkedFreeDays';
 
 @Module({
   imports: [
@@ -163,6 +164,7 @@ import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesC
     GetUsersElementsQueryHandler,
     CreateLeaveRequestCommandHandler,
     DoesLeaveRequestExistForPeriod,
+    DoesLeaveRequestLackPostponedWorkedFreeDays,
     RefuseLeaveRequestCommandHandler,
     CanLeaveRequestBeModerated,
     AcceptLeaveRequestCommandHandler,

@@ -2,15 +2,19 @@ import { MonthDate } from 'src/Application/Common/MonthDate';
 import { DateUtilsAdapter } from './DateUtilsAdapter';
 
 describe('DateUtilsAdapter', () => {
+  let dateUtils: DateUtilsAdapter;
+
+  beforeEach(() => {
+    dateUtils = new DateUtilsAdapter();
+  });
+
   it('testFormat', () => {
-    const dateUtils = new DateUtilsAdapter();
     expect(
       dateUtils.format(new Date('2019-12-23T11:49:58.706Z'), 'y-MM-dd')
     ).toBe('2019-12-23');
   });
 
   it('testGetDaysInMonth', () => {
-    const dateUtils = new DateUtilsAdapter();
     expect(dateUtils.getDaysInMonth(new Date('2019-12-23T11:49:58.706Z'))).toBe(
       31
     );
@@ -20,7 +24,6 @@ describe('DateUtilsAdapter', () => {
   });
 
   it('testIsWeekend', () => {
-    const dateUtils = new DateUtilsAdapter();
     expect(dateUtils.isWeekend(new Date('2019-12-21T11:49:58.706Z'))).toBe(
       true
     );
@@ -30,7 +33,6 @@ describe('DateUtilsAdapter', () => {
   });
 
   it('testIsAWorkingDay', () => {
-    const dateUtils = new DateUtilsAdapter();
     expect(dateUtils.isAWorkingDay(new Date('2020-05-01T11:49:58.706Z'))).toBe(
       false
     );
@@ -43,15 +45,12 @@ describe('DateUtilsAdapter', () => {
   });
 
   it('testAddDaysToDate', () => {
-    const dateUtils = new DateUtilsAdapter();
     expect(
       dateUtils.addDaysToDate(new Date('2019-12-21T11:49:58.706Z'), 5)
     ).toMatchObject(new Date('2019-12-26T11:49:58.706Z'));
   });
 
   it('testGetCurrentDate', () => {
-    const dateUtils = new DateUtilsAdapter();
-
     expect(dateUtils.getCurrentDate()).toBeInstanceOf(Date);
     expect(dateUtils.getCurrentDateToISOString()).toBeDefined();
   });
@@ -59,7 +58,6 @@ describe('DateUtilsAdapter', () => {
   it('testGetWorkedDaysDuringAPeriod', () => {
     const startDate = new Date('2020-12-24');
     const endDate = new Date('2021-01-04');
-    const dateUtils = new DateUtilsAdapter();
 
     expect(
       dateUtils.getWorkedDaysDuringAPeriod(startDate, endDate)
@@ -74,8 +72,6 @@ describe('DateUtilsAdapter', () => {
   });
 
   it('testGetWorkedFreeDays', () => {
-    const dateUtils = new DateUtilsAdapter();
-
     expect(dateUtils.getWorkedFreeDays(2020)).toMatchObject([
       new Date(`2020-01-01T00:00:00.000Z`),
       new Date(`2020-05-01T00:00:00.000Z`),
@@ -104,8 +100,6 @@ describe('DateUtilsAdapter', () => {
   });
 
   it('testGetEasterDate', () => {
-    const dateUtils = new DateUtilsAdapter();
-
     expect(dateUtils.getEasterDate(2020)).toMatchObject(
       new Date(`2020-04-12T00:00:00.000Z`)
     );
@@ -121,16 +115,12 @@ describe('DateUtilsAdapter', () => {
   });
 
   it('testGetLeaveDuration', () => {
-    const dateUtils = new DateUtilsAdapter();
-
     expect(
       dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', false)
     ).toBe(7);
   });
 
   it('testGetMinimumLeaveDuration', () => {
-    const dateUtils = new DateUtilsAdapter();
-
     expect(
       dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-05', false)
     ).toBe(0.5);
@@ -141,19 +131,16 @@ describe('DateUtilsAdapter', () => {
     [new Date('2020-01-01T00:00:01.000Z'), 2020],
     [new Date('2020-12-31T23:59:59.000Z'), 2020]
   ])('testGetYear when date = %s', (date, expectedYear) => {
-    const dateUtils = new DateUtilsAdapter();
     expect(dateUtils.getYear(date)).toBe(expectedYear);
   });
 
   it('testGetLastDayOfYear', () => {
-    const dateUtils = new DateUtilsAdapter();
     const now = new Date('2021-12-12');
     const result = dateUtils.getLastDayOfYear(now);
     expect(result).toStrictEqual(new Date('2021-12-31'));
   });
 
   it('getFirstDayOfYear', () => {
-    const dateUtils = new DateUtilsAdapter();
     const now = new Date('2021-12-12');
     const result = dateUtils.getFirstDayOfYear(now);
     expect(result).toStrictEqual(new Date('2021-01-01'));
@@ -164,8 +151,54 @@ describe('DateUtilsAdapter', () => {
     [new Date('2021-12-31T23:59:59.000Z'), new MonthDate(2021, 12)],
     [new Date('2022-01-01T00:00:01.000Z'), new MonthDate(2022, 1)]
   ])('getMonth when date = %s', (date, expectedResult) => {
-    const dateUtils = new DateUtilsAdapter();
     const result = dateUtils.getMonth(date);
     expect(result).toStrictEqual(expectedResult);
+  });
+
+  it('testGetWorkedFreeDaysDuringAPeriod', () => {
+    expect(
+      dateUtils.getWorkedFreeDaysDuringAPeriod(
+        new Date('2024-07-01'),
+        new Date('2024-07-31')
+      )
+    ).toMatchObject([new Date('2024-07-14')]);
+
+    expect(
+      dateUtils.getWorkedFreeDaysDuringAPeriod(
+        new Date('2024-07-01'),
+        new Date('2024-09-31')
+      )
+    ).toMatchObject([new Date('2024-07-14'), new Date('2024-08-15')]);
+
+    expect(
+      dateUtils.getWorkedFreeDaysDuringAPeriod(
+        new Date('2024-07-01'),
+        new Date('2024-12-31')
+      )
+    ).toMatchObject([
+      new Date('2024-07-14'),
+      new Date('2024-08-15'),
+      new Date('2024-11-01'),
+      new Date('2024-11-11'),
+      new Date('2024-12-25')
+    ]);
+
+    expect(
+      dateUtils.getWorkedFreeDaysDuringAPeriod(
+        new Date('2024-07-01'),
+        new Date('2025-05-31')
+      )
+    ).toMatchObject([
+      new Date('2024-07-14'),
+      new Date('2024-08-15'),
+      new Date('2024-11-01'),
+      new Date('2024-11-11'),
+      new Date('2024-12-25'),
+      new Date('2025-01-01'),
+      new Date('2025-05-01'),
+      new Date('2025-05-08'),
+      new Date('2025-04-21'),
+      new Date('2025-05-29')
+    ]);
   });
 });

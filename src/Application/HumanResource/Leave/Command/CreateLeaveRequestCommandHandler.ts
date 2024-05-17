@@ -7,6 +7,7 @@ import { DoesLeaveRequestExistForPeriod } from 'src/Domain/HumanResource/Leave/S
 import { LeaveRequestAlreadyExistForThisPeriodException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestAlreadyExistForThisPeriodException';
 import { DoesLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesLeaveExistForPeriod';
 import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
+import { DoesLeaveRequestLackPostponedWorkedFreeDays } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestLackPostponedWorkedFreeDays';
 
 @CommandHandler(CreateLeaveRequestCommand)
 export class CreateLeaveRequestCommandHandler {
@@ -14,7 +15,8 @@ export class CreateLeaveRequestCommandHandler {
     @Inject('ILeaveRequestRepository')
     private readonly leaveRequestRepository: ILeaveRequestRepository,
     private readonly doesLeaveRequestExistForPeriod: DoesLeaveRequestExistForPeriod,
-    private readonly doesLeaveExistForPeriod: DoesLeaveExistForPeriod
+    private readonly doesLeaveExistForPeriod: DoesLeaveExistForPeriod,
+    private readonly DoesLeaveRequestLackPostponedWorkedFreeDays: DoesLeaveRequestLackPostponedWorkedFreeDays
   ) {}
 
   public async execute(command: CreateLeaveRequestCommand): Promise<string> {
@@ -24,9 +26,10 @@ export class CreateLeaveRequestCommandHandler {
       endsAllDay,
       type,
       startDate,
-      startsAllDay,
-      comment
+      startsAllDay
     } = command;
+
+    let { comment } = command;
 
     if (
       true ===
@@ -48,6 +51,16 @@ export class CreateLeaveRequestCommandHandler {
       ))
     ) {
       throw new EventsOrLeavesAlreadyExistForThisPeriodException();
+    }
+
+    if (
+      true ===
+      this.DoesLeaveRequestLackPostponedWorkedFreeDays.isSatisfiedBy(
+        startDate,
+        endDate
+      )
+    ) {
+      comment += ` ⚠️ Cette demande de congé contient un ou plusieurs jour(s) férié(s) glissant non pris en compte.`;
     }
 
     const leaveRequest = await this.leaveRequestRepository.save(

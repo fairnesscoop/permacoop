@@ -186,6 +186,20 @@ export class DateUtilsAdapter implements IDateUtils {
     return this.makeDate(year, n, p);
   }
 
+  public getWorkedFreeDaysDuringAPeriod(start: Date, end: Date): Date[] {
+    const workedFreeDays: Date[] = [];
+
+    for (let year = this.getYear(start); year <= this.getYear(end); year++) {
+      workedFreeDays.push(...this.getWorkedFreeDays(year));
+    }
+
+    return workedFreeDays.filter(
+      workedFreeDay =>
+        start.toISOString() < workedFreeDay.toISOString() &&
+        workedFreeDay.toISOString() < end.toISOString()
+    );
+  }
+
   public getLeaveDuration(
     startDate: string,
     isStartsAllDay: boolean,
