@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ProjectView } from 'src/Application/Project/View/ProjectView';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { RowFactory } from 'src/Infrastructure/Tables/RowFactory';
@@ -13,6 +13,7 @@ export class ProjectTableFactory {
 
   public create(projects: ProjectView[]): Table {
     const columns = [
+      'crm-projects-active',
       'crm-projects-name-title',
       'crm-projects-customer-title',
       'common-actions'
@@ -21,6 +22,10 @@ export class ProjectTableFactory {
     const rows = projects.map(project =>
       this.rowFactory
         .createBuilder()
+        .picto(
+          project.active ? 'active' : 'disabled',
+          project.active ? 'common-yes' : 'common-no'
+        )
         .value(project.name)
         .value(project.customer.name)
         .actions({

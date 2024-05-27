@@ -22,6 +22,7 @@ describe('UpdateProjectCommandHandler', () => {
     'afda00b1-bf49-4102-9bc2-bce17f3acd48',
     'Project',
     InvoiceUnits.HOUR,
+    true,
     'd4aa560e-d2f7-422e-ae8d-6af5d0455eeb'
   );
 
@@ -64,10 +65,20 @@ describe('UpdateProjectCommandHandler', () => {
     ).once();
     verify(projectRepository.save(instance(updatedProject))).once();
     verify(
-      updatedProject.update(instance(customer), InvoiceUnits.HOUR, 'Project')
+      updatedProject.update(
+        instance(customer),
+        InvoiceUnits.HOUR,
+        'Project',
+        true
+      )
     ).once();
     verify(
-      updatedProject.update(instance(customer), InvoiceUnits.HOUR, 'Project')
+      updatedProject.update(
+        instance(customer),
+        InvoiceUnits.HOUR,
+        'Project',
+        true
+      )
     ).calledBefore(projectRepository.save(instance(updatedProject)));
     verify(updatedProject.getName()).once();
   });
@@ -88,7 +99,9 @@ describe('UpdateProjectCommandHandler', () => {
         projectRepository.findOneById('afda00b1-bf49-4102-9bc2-bce17f3acd48')
       ).once();
       verify(projectRepository.save(anything())).never();
-      verify(updatedProject.update(anything(), anything(), anything())).never();
+      verify(
+        updatedProject.update(anything(), anything(), anything(), anything())
+      ).never();
       verify(updatedProject.getName()).never();
     }
   });
@@ -114,7 +127,9 @@ describe('UpdateProjectCommandHandler', () => {
         customerRepository.findOneById('d4aa560e-d2f7-422e-ae8d-6af5d0455eeb')
       ).once();
       verify(projectRepository.save(anything())).never();
-      verify(updatedProject.update(anything(), anything(), anything())).never();
+      verify(
+        updatedProject.update(anything(), anything(), anything(), anything())
+      ).never();
       verify(updatedProject.getName()).never();
     }
   });
@@ -141,7 +156,9 @@ describe('UpdateProjectCommandHandler', () => {
         customerRepository.findOneById('d4aa560e-d2f7-422e-ae8d-6af5d0455eeb')
       ).once();
       verify(projectRepository.save(anything())).never();
-      verify(updatedProject.update(anything(), anything(), anything())).never();
+      verify(
+        updatedProject.update(anything(), anything(), anything(), anything())
+      ).never();
       verify(updatedProject.getName()).once();
     }
   });

@@ -124,6 +124,17 @@ class RowBuilder {
     return this;
   }
 
+  public picto(picto: string, message: string): RowBuilder {
+    this.cells.push(
+      new TemplateCell(
+        'tables/cells/picto.njk',
+        { message, picto },
+        this.templates
+      )
+    );
+    return this;
+  }
+
   public actions(options: ActionsOptions): RowBuilder {
     this.cells.push(new ActionsCell(options, this.templates));
     return this;

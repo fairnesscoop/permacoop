@@ -6,6 +6,7 @@ export interface IProjectRepository {
   findOneById(id: string): Promise<Project | undefined>;
   findProjects(
     page: number | null,
+    activeOnly: boolean,
     customerId?: string
   ): Promise<[Project[], number]>;
 }
