@@ -10,6 +10,7 @@ describe('Project.entity', () => {
     const project = new Project(
       'Project name',
       InvoiceUnits.DAY,
+      true,
       instance(customer)
     );
 
@@ -17,6 +18,7 @@ describe('Project.entity', () => {
     expect(project.getFullName()).toBe('[Radio France] Project name');
     expect(project.getName()).toBe('Project name');
     expect(project.getInvoiceUnit()).toBe(InvoiceUnits.DAY);
+    expect(project.isActive()).toBe(true);
     expect(project.getCustomer()).toBe(instance(customer));
   });
 
@@ -29,13 +31,15 @@ describe('Project.entity', () => {
     const project = new Project(
       'Project name',
       InvoiceUnits.DAY,
+      false,
       instance(customer)
     );
-    project.update(instance(customer2), InvoiceUnits.HOUR, 'project');
+    project.update(instance(customer2), InvoiceUnits.HOUR, 'project', true);
 
     expect(project.getId()).toBe(undefined);
     expect(project.getFullName()).toBe('[RF] project');
     expect(project.getName()).toBe('project');
+    expect(project.isActive()).toBe(true);
     expect(project.getInvoiceUnit()).toBe(InvoiceUnits.HOUR);
     expect(project.getCustomer()).toBe(instance(customer2));
   });

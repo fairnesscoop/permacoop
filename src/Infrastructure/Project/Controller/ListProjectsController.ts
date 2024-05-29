@@ -29,7 +29,7 @@ export class ListProjectsController {
   @Render('pages/projects/list.njk')
   public async get(@Query() pagination: PaginationDTO) {
     const projects: Pagination<ProjectView> = await this.queryBus.execute(
-      new GetProjectsQuery(pagination.page)
+      new GetProjectsQuery(pagination.page, false)
     );
 
     const table = this.tableFactory.create(projects.items);

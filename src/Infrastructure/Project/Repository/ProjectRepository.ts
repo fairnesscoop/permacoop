@@ -30,6 +30,7 @@ export class ProjectRepository implements IProjectRepository {
         'project.id',
         'project.name',
         'project.invoiceUnit',
+        'project.active',
         'customer.id',
         'customer.name'
       ])
@@ -40,6 +41,7 @@ export class ProjectRepository implements IProjectRepository {
 
   public findProjects(
     page: number | null = 1,
+    activeOnly: boolean,
     customerId?: string
   ): Promise<[Project[], number]> {
     let query = this.repository
@@ -47,6 +49,7 @@ export class ProjectRepository implements IProjectRepository {
       .select([
         'project.id',
         'project.name',
+        'project.active',
         'project.invoiceUnit',
         'customer.id',
         'customer.name'
@@ -54,6 +57,10 @@ export class ProjectRepository implements IProjectRepository {
       .innerJoin('project.customer', 'customer')
       .orderBy('customer.name', 'ASC')
       .addOrderBy('project.name', 'ASC');
+
+    if (activeOnly === true) {
+      query = query.andWhere('project.active = true');
+    }
 
     if (typeof page === 'number') {
       query = query

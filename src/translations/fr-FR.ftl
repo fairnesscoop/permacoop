@@ -94,6 +94,7 @@ crm-projects-add-title = Ajouter un projet
 crm-projects-edit-title = Édition du projet "{$name}"
 crm-projects-name-title = Nom du projet
 crm-projects-customer-title = Client
+crm-projects-active = Actif
 
 crm-tasks-title = Missions
 crm-tasks-name = Nom de la mission

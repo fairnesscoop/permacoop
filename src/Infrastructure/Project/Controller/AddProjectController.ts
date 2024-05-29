@@ -42,17 +42,18 @@ export class AddProjectController {
     );
 
     return {
+      active: true,
       customers: customers.items
     };
   }
 
   @Post()
   public async poqr(@Body() projectDto: ProjectDTO, @Res() res: Response) {
-    const { name, customerId } = projectDto;
+    const { name, customerId, active } = projectDto;
 
     try {
       await this.commandBus.execute(
-        new CreateProjectCommand(name, InvoiceUnits.DAY, customerId)
+        new CreateProjectCommand(name, InvoiceUnits.DAY, active, customerId)
       );
 
       res.redirect(303, this.resolver.resolve('crm_projects_list'));

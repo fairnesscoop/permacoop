@@ -17,6 +17,14 @@
         </select>
     </div>
 
+    <div class="pc-input-group">
+        <label for="active" class="pc-label">
+            <input type="checkbox" name="active" id="active" value="true" {% if project == null or project.active %}checked{% endif %}>
+            {{ 'crm-projects-active'|trans }}
+        </label>
+    </div>
+
+
     {{ buttons.save(attr={type: 'submit'}) }}
 </form>
 {% endmacro %}

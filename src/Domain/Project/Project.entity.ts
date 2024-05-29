@@ -20,13 +20,22 @@ export class Project {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   private createdAt: Date;
 
+  @Column({ type: 'boolean', nullable: false, default: true })
+  private active: boolean;
+
   @ManyToOne(type => Customer, { nullable: false, onDelete: 'CASCADE' })
   private customer: Customer;
 
-  constructor(name: string, invoiceUnit: InvoiceUnits, customer: Customer) {
+  constructor(
+    name: string,
+    invoiceUnit: InvoiceUnits,
+    active: boolean,
+    customer: Customer
+  ) {
     this.name = name;
     this.invoiceUnit = invoiceUnit;
     this.customer = customer;
+    this.active = active;
   }
 
   public getId(): string {
@@ -53,13 +62,19 @@ export class Project {
     return `[${this.customer.getName()}] ${this.getName()}`;
   }
 
+  public isActive(): boolean {
+    return this.active;
+  }
+
   public update(
     customer: Customer,
     invoiceUnit: InvoiceUnits,
-    name: string
+    name: string,
+    active: boolean
   ): void {
     this.customer = customer;
     this.invoiceUnit = invoiceUnit;
     this.name = name;
+    this.active = active;
   }
 }

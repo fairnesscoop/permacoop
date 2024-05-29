@@ -39,3 +39,14 @@ html[data-theme='dark'] .pc-icon--action-violet {
 .pc-icon--right > .pc-icon {
   margin-inline-start: calc(2 * var(--v));
 }
+
+.pc-picto::before {
+  margin-inline-end: var(--v);
+}
+
+.pc-picto--active::before {
+  content: '✅';
+}
+.pc-picto--disabled::before {
+  content: '🚫';
+}

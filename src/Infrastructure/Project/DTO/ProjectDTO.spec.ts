@@ -5,6 +5,7 @@ describe('ProjectDTO', () => {
   it('testValidDTO', async () => {
     const dto = new ProjectDTO();
     dto.name = 'Project';
+    dto.active = false;
     dto.customerId = '2218609f-293b-4438-b3a0-cce8961e8acc';
 
     const validation = await validate(dto);
@@ -14,6 +15,7 @@ describe('ProjectDTO', () => {
   it('testInvalidDTO', async () => {
     const dto = new ProjectDTO();
     dto.name = '';
+    dto.active = false;
     dto.customerId = '12';
 
     const validation = await validate(dto);

@@ -16,12 +16,13 @@ export class GetProjectsQueryHandler {
   public async execute(
     query: GetProjectsQuery
   ): Promise<Pagination<ProjectView>> {
-    const { customerId, page } = query;
+    const { customerId, activeOnly, page } = query;
 
     const projectViews: ProjectView[] = [];
 
     const [projects, total] = await this.projectRepository.findProjects(
       page,
+      activeOnly,
       customerId
     );
 
@@ -32,6 +33,7 @@ export class GetProjectsQueryHandler {
         new ProjectView(
           project.getId(),
           project.getName(),
+          project.isActive(),
           project.getInvoiceUnit(),
           new CustomerView(customer.getId(), customer.getName())
         )
