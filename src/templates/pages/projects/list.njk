@@ -14,5 +14,8 @@
     </div>
 
     {% table table %}
+
+    {% set paginationUrl = path('crm_projects_list') %}
+    {% include 'includes/pagination.njk' %}
 </div>
 {% endblock main %}

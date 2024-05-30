@@ -30,15 +30,15 @@ export class ListLeaveRequestsController {
   @WithName('people_leave_requests_list')
   @Render('pages/leave_requests/list.njk')
   public async get(
-    @Query() pagination: PaginationDTO,
+    @Query() paginationDto: PaginationDTO,
     @LoggedUser() user: User
   ) {
-    const leaves: Pagination<LeaveRequestView> = await this.queryBus.execute(
-      new GetLeaveRequestsQuery(user.getId(), pagination.page)
+    const pagination: Pagination<LeaveRequestView> = await this.queryBus.execute(
+      new GetLeaveRequestsQuery(user.getId(), paginationDto.page)
     );
 
-    const table = this.tableFactory.create(leaves.items, user.getId());
+    const table = this.tableFactory.create(pagination.items, user.getId());
 
-    return { table };
+    return { table, pagination, currentPage: paginationDto.page };
   }
 }
