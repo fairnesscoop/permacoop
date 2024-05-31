@@ -173,7 +173,7 @@ leave-requests-delete = Annuler ce congé
 leave-requests-delete-title = Annuler ce congé ?
 leave-requests-delete-yes = Oui, annuler
 leave-requests-delete-no = Non, ne pas annuler
-
+leave-requests-create-notification-message = Salut 👋, {$userFirstName} a fait une demande de congé. Vous pouvez la visualiser ici: {$link}
 leaves-calendar-url-title = Lien d'abonnement au calendrier
 
 payroll-elements-title = Éléments de paie

@@ -11,6 +11,8 @@ import { IMattermostNotifier } from 'src/Application/IMattermostNotifier';
 import { ICommandBus } from 'src/Application/ICommandBus';
 import { CreateNotificationCommand } from 'src/Application/Notification/Command/CreateNotificationCommand';
 import { NotificationType } from 'src/Domain/Notification/Notification.entity';
+import { ITranslator } from 'src/Infrastructure/Translations/ITranslator';
+import { ConfigService } from '@nestjs/config';
 
 @CommandHandler(CreateLeaveRequestCommand)
 export class CreateLeaveRequestCommandHandler {
@@ -21,6 +23,9 @@ export class CreateLeaveRequestCommandHandler {
     private readonly commandBus: ICommandBus,
     private readonly doesLeaveRequestExistForPeriod: DoesLeaveRequestExistForPeriod,
     private readonly doesLeaveExistForPeriod: DoesLeaveExistForPeriod,
+    @Inject('ITranslator')
+    private readonly translator: ITranslator,
+    private readonly configService: ConfigService
   ) {}
 
   public async execute(command: CreateLeaveRequestCommand): Promise<string> {
@@ -71,7 +76,15 @@ export class CreateLeaveRequestCommandHandler {
     this.commandBus.execute(
       new CreateNotificationCommand(
         NotificationType.POST,
-        'Demande de congés',
+        this.translator.translate(
+          'leave-requests-create-notification-message',
+          {
+            userFirstName: leaveRequest.getUser().getFirstName(),
+            link: `${this.configService.get<string>(
+              'PERMACOOP_BASE_URL'
+            )}/app/people/leaves/${leaveRequest.getId()}`
+          }
+        ),
         leaveRequest
       )
     );
