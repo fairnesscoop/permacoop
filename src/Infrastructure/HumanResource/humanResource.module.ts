@@ -79,11 +79,14 @@ import { ListMealTicketsController } from './MealTicket/Controller/ListMealTicke
 import { MealTicketTableFactory } from './MealTicket/Table/MealTicketTableFactory';
 import { AddMealTicketRemovalController } from './MealTicket/Controller/AddMealTicketRemovalController';
 import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesCalendarController';
+import { HttpModule } from '@nestjs/axios';
+import { MattermostNotifier } from '../Adapter/MattermostNotifier';
 
 @Module({
   imports: [
     BusModule,
     ConfigModule,
+    HttpModule,
     PassportModule.register({
       session: true
     }),
@@ -126,6 +129,7 @@ import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesC
     { provide: 'ILeaveRequestRepository', useClass: LeaveRequestRepository },
     { provide: 'IPasswordEncoder', useClass: PasswordEncoderAdapter },
     { provide: 'IDateUtils', useClass: DateUtilsAdapter },
+    { provide: 'IMattermostNotifier', useClass: MattermostNotifier },
     { provide: 'IEventRepository', useClass: EventRepository },
     { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
     {

@@ -16,6 +16,10 @@ import { ExtendedRoutingModule } from './Infrastructure/Common/ExtendedRouting/e
 
 const providers: Provider[] = [];
 
+console.log(process.env.MATTERMOST_API_URL);
+console.log(process.env.MATTERMOST_ALFRED_EMAIL);
+console.log(process.env.MATTERMOST_ALFRED_PASSWORD);
+
 if (process.env.NODE_ENV !== 'production') {
   providers.push({
     provide: APP_FILTER,

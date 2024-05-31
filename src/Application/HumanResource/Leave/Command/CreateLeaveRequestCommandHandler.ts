@@ -7,6 +7,7 @@ import { DoesLeaveRequestExistForPeriod } from 'src/Domain/HumanResource/Leave/S
 import { LeaveRequestAlreadyExistForThisPeriodException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestAlreadyExistForThisPeriodException';
 import { DoesLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesLeaveExistForPeriod';
 import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
+import { IMattermostNotifier } from 'src/Application/IMattermostNotifier';
 
 @CommandHandler(CreateLeaveRequestCommand)
 export class CreateLeaveRequestCommandHandler {
@@ -14,7 +15,9 @@ export class CreateLeaveRequestCommandHandler {
     @Inject('ILeaveRequestRepository')
     private readonly leaveRequestRepository: ILeaveRequestRepository,
     private readonly doesLeaveRequestExistForPeriod: DoesLeaveRequestExistForPeriod,
-    private readonly doesLeaveExistForPeriod: DoesLeaveExistForPeriod
+    private readonly doesLeaveExistForPeriod: DoesLeaveExistForPeriod,
+    @Inject('IMattermostNotifier')
+    private readonly mattermostNotifier: IMattermostNotifier
   ) {}
 
   public async execute(command: CreateLeaveRequestCommand): Promise<string> {
@@ -60,6 +63,11 @@ export class CreateLeaveRequestCommandHandler {
         endsAllDay,
         comment
       )
+    );
+
+    this.mattermostNotifier.createPost(
+      process.env.MATTERMOST_CHANNEL_LEAVES_ID,
+      'HELLO FROM PERMACOOOOOOOOP'
     );
 
     return leaveRequest.getId();
