@@ -12,6 +12,7 @@ import { CreateNotificationCommand } from 'src/Application/Notification/Command/
 import { NotificationType } from 'src/Domain/Notification/Notification.entity';
 import { ITranslator } from 'src/Infrastructure/Translations/ITranslator';
 import { ConfigService } from '@nestjs/config';
+import { IDateUtils } from 'src/Application/IDateUtils';
 
 @CommandHandler(CreateLeaveRequestCommand)
 export class CreateLeaveRequestCommandHandler {
@@ -24,7 +25,9 @@ export class CreateLeaveRequestCommandHandler {
     private readonly doesLeaveExistForPeriod: DoesLeaveExistForPeriod,
     @Inject('ITranslator')
     private readonly translator: ITranslator,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
+    @Inject('IDateUtils')
+    private readonly dateUtils: IDateUtils
   ) {}
 
   public async execute(command: CreateLeaveRequestCommand): Promise<string> {
@@ -79,6 +82,14 @@ export class CreateLeaveRequestCommandHandler {
           'leave-requests-create-notification-message',
           {
             userFirstName: leaveRequest.getUser().getFirstName(),
+            startDate: leaveRequest.getStartDate(),
+            endDate: leaveRequest.getEndDate(),
+            duration: this.dateUtils.getLeaveDuration(
+              leaveRequest.getStartDate(),
+              leaveRequest.isStartsAllDay(),
+              leaveRequest.getEndDate(),
+              leaveRequest.isEndsAllDay()
+            ),
             link: `${this.configService.get<string>(
               'PERMACOOP_BASE_URL'
             )}/app/people/leaves/${leaveRequest.getId()}`

@@ -37,33 +37,36 @@ export class CreateNotificationCommandHandler {
     }
 
     if (type === NotificationType.REACTION) {
-      const post = await this.notificationRepository.findByLeaveRequestIdAndType(
-        leaveReaquest.getId(),
-        NotificationType.POST
+      const rootNotification = await this.getRootNotification(
+        leaveReaquest.getId()
       );
 
-      const { id } = await this.mattermostNotifier.createReaction(
-        post.getResourceId(),
+      await this.mattermostNotifier.createReaction(
+        rootNotification.getResourceId(),
         message
       );
 
       const notification = await this.notificationRepository.save(
-        new Notification(type, message, post.getResourceId(), leaveReaquest)
+        new Notification(
+          type,
+          message,
+          rootNotification.getResourceId(),
+          leaveReaquest
+        )
       );
 
       return notification.getId();
     }
 
     if (type === NotificationType.COMMENT) {
-      const post = await this.notificationRepository.findByLeaveRequestIdAndType(
-        leaveReaquest.getId(),
-        NotificationType.POST
+      const rootNotification = await this.getRootNotification(
+        leaveReaquest.getId()
       );
 
       const { id } = await this.mattermostNotifier.createComment(
         this.configService.get<string>('MATTERMOST_CHANNEL_LEAVES_ID'),
         message,
-        post.getResourceId()
+        rootNotification.getResourceId()
       );
 
       const notification = await this.notificationRepository.save(
@@ -74,5 +77,12 @@ export class CreateNotificationCommandHandler {
     }
 
     throw new Error('Type not managed');
+  }
+
+  private async getRootNotification(leaveReaquestId: string) {
+    return await this.notificationRepository.findByLeaveRequestIdAndType(
+      leaveReaquestId,
+      NotificationType.POST
+    );
   }
 }
