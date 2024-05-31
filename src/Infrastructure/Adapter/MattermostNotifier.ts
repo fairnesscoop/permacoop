@@ -45,25 +45,26 @@ export class MattermostNotifier implements IMattermostNotifier {
     postId: string,
     emojiName: string
   ): Promise<object> {
-  //   try {
-  //     const response = await this.httpService.axiosRef.post(
-  //       `${this.configService.get<string>('MATTERMOST_API_URL')}/reactions`,
-  //       {
-  //         channel_id: channelId,
-  //         message
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${this.configService.get<string>(
-  //             'MATTERMOST_ALFRED_TOKEN'
-  //           )}`
-  //         }
-  //       }
-  //     );
+    return {};
+    //   try {
+    //     const response = await this.httpService.axiosRef.post(
+    //       `${this.configService.get<string>('MATTERMOST_API_URL')}/reactions`,
+    //       {
+    //         channel_id: channelId,
+    //         message
+    //       },
+    //       {
+    //         headers: {
+    //           Authorization: `Bearer ${this.configService.get<string>(
+    //             'MATTERMOST_ALFRED_TOKEN'
+    //           )}`
+    //         }
+    //       }
+    //     );
 
-  //     return response.data;
-  //   } catch (e) {
-  //     console.log('ERROR: ', e);
-  //   }
-  // }
+    //     return response.data;
+    //   } catch (e) {
+    //     console.log('ERROR: ', e);
+    //   }
+  }
 }
