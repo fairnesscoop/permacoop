@@ -38,14 +38,36 @@ export class MattermostNotifier implements IMattermostNotifier {
     message: string,
     rootId: string
   ): Promise<object> {
-    return {};
+    try {
+      const response = await this.httpService.axiosRef.post(
+        `${this.configService.get<string>('MATTERMOST_API_URL')}/posts`,
+        {
+          channel_id: channelId,
+          message,
+          root_id: rootId
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.configService.get<string>(
+              'MATTERMOST_ALFRED_TOKEN'
+            )}`
+          }
+        }
+      );
+
+      console.log(response.data);
+
+      return response.data;
+    } catch (e) {
+      console.log('--error: ', e);
+      throw BadGatewayException;
+    }
   }
 
   public async createReaction(
     postId: string,
     emojiName: string
   ): Promise<object> {
-    // ded6nfbsejdp7cj4mkwyeknuna
     try {
       const response = await this.httpService.axiosRef.post(
         `${this.configService.get<string>('MATTERMOST_API_URL')}/reactions`,

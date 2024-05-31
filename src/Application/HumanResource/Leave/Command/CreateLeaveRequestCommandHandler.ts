@@ -7,7 +7,6 @@ import { DoesLeaveRequestExistForPeriod } from 'src/Domain/HumanResource/Leave/S
 import { LeaveRequestAlreadyExistForThisPeriodException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestAlreadyExistForThisPeriodException';
 import { DoesLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesLeaveExistForPeriod';
 import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
-import { IMattermostNotifier } from 'src/Application/IMattermostNotifier';
 import { ICommandBus } from 'src/Application/ICommandBus';
 import { CreateNotificationCommand } from 'src/Application/Notification/Command/CreateNotificationCommand';
 import { NotificationType } from 'src/Domain/Notification/Notification.entity';

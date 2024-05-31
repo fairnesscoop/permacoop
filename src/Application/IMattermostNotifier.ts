@@ -4,6 +4,6 @@ export interface IMattermostNotifier {
     channelId: string,
     message: string,
     rootId: string
-  ): Promise<object>;
-  createReaction(postId: string, emojiName: string): Promise<object>;
+  ): Promise<any>;
+  createReaction(postId: string, emojiName: string): Promise<any>;
 }
