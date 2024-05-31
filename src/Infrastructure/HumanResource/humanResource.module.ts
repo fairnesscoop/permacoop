@@ -24,6 +24,7 @@ import { CreateLeaveRequestCommandHandler } from 'src/Application/HumanResource/
 import { DoesLeaveRequestExistForPeriod } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestExistForPeriod';
 import { RefuseLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/RefuseLeaveRequestCommandHandler';
 import { CanLeaveRequestBeModerated } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeModerated';
+import { CanLeaveRequestBeCancelled } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeCancelled';
 import { AcceptedLeaveRequestEventListener } from 'src/Application/HumanResource/Leave/Event/AcceptedLeaveRequestEventListener';
 import { EventRepository } from '../FairCalendar/Repository/EventRepository';
 import { Event } from 'src/Domain/FairCalendar/Event.entity';
@@ -63,9 +64,7 @@ import { ListUsersController } from './User/Controller/ListUsersController';
 import { UserTableFactory } from './User/Table/UserTableFactory';
 import { AddUserController } from './User/Controller/AddUserController';
 import { EditUserController } from './User/Controller/EditUserController';
-import { ListLeavesController } from './Leave/Controller/ListLeavesController';
 import { ListLeaveRequestsController } from './Leave/Controller/ListLeaveRequestsController';
-import { LeaveTableFactory } from './Leave/Table/LeaveTableFactory';
 import { AddLeaveRequestController } from './Leave/Controller/AddLeaveRequestController';
 import { EditLeaveRequestController } from './Leave/Controller/EditLeaveRequestController';
 import { LeaveRequestTableFactory } from './Leave/Table/LeaveRequestTableFactory';
@@ -109,7 +108,6 @@ import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesC
     AddUserController,
     EditUserController,
     EditProfileController,
-    ListLeavesController,
     ListLeaveRequestsController,
     AddLeaveRequestController,
     EditLeaveRequestController,
@@ -165,6 +163,7 @@ import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesC
     DoesLeaveRequestExistForPeriod,
     RefuseLeaveRequestCommandHandler,
     CanLeaveRequestBeModerated,
+    CanLeaveRequestBeCancelled,
     AcceptLeaveRequestCommandHandler,
     AcceptedLeaveRequestEventListener,
     LeaveRequestToLeavesConverter,
@@ -181,7 +180,6 @@ import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesC
     UpdateLeaveRequestCommandHandler,
     IncreaseUserSavingsRecordCommandHandler,
     UserTableFactory,
-    LeaveTableFactory,
     LeaveRequestTableFactory,
     PayrollElementsTableFactory,
     MealTicketTableFactory

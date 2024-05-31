@@ -1,0 +1,19 @@
+.pc-picto::before {
+  margin-inline-end: var(--v);
+}
+
+.pc-picto--hourglass::before {
+  content: '⌛';
+}
+
+.pc-picto--active::before {
+  content: '✅';
+}
+
+.pc-picto--disabled::before {
+  content: '🚫';
+}
+
+.pc-picto--close::before {
+  content: '❌';
+}

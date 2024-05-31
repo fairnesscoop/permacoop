@@ -1,1 +1,5 @@
-<span class="pc-picto pc-picto--{{ picto }}">{{ message|trans }}</span>
+{% from 'macros/attr.njk' import render_attr %}
+
+{% set attr = attr|merge({class: attr.class|default('') ~ (' pc-picto pc-picto--' ~ picto) }) %}
+
+<span {{ render_attr(attr) }}>{{ message|trans }}</span>

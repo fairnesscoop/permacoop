@@ -2,10 +2,12 @@ import { UserSummaryView } from '../../User/View/UserSummaryView';
 import {
   Type,
   Status,
-  ILeaveRequestModeration
+  ILeaveRequestModeration,
+  ILeaveRequestOwnership
 } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 
-export class LeaveRequestDetailView implements ILeaveRequestModeration {
+export class LeaveRequestDetailView
+  implements ILeaveRequestModeration, ILeaveRequestOwnership {
   constructor(
     public readonly id: string,
     public readonly type: Type,
@@ -15,9 +17,11 @@ export class LeaveRequestDetailView implements ILeaveRequestModeration {
     public readonly endDate: string,
     public readonly endsAllDay: boolean,
     public readonly duration: number,
+    public readonly canCancel: boolean = false,
     public readonly comment: string,
     public readonly user: UserSummaryView,
     public readonly moderator: UserSummaryView = null,
+    public readonly moderateAt: string = null,
     public readonly moderationComment: string = null
   ) {}
 

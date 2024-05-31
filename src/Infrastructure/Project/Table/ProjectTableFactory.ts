@@ -3,6 +3,7 @@ import { ProjectView } from 'src/Application/Project/View/ProjectView';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { RowFactory } from 'src/Infrastructure/Tables/RowFactory';
 import { Table } from 'src/Infrastructure/Tables';
+import { Picto } from 'src/Infrastructure/Ui/Picto';
 
 @Injectable()
 export class ProjectTableFactory {
@@ -23,7 +24,7 @@ export class ProjectTableFactory {
       this.rowFactory
         .createBuilder()
         .picto(
-          project.active ? 'active' : 'disabled',
+          project.active ? Picto.ACTIVE : Picto.DISABLED,
           project.active ? 'common-yes' : 'common-no'
         )
         .value(project.name)

@@ -1,14 +1,26 @@
 {% extends 'layouts/app.njk' %}
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
-{% from './_form.njk' import leave_request_moderation_form with context %}
+{% from './_form.njk' import leave_request_moderation_form, leave_request_delete_form with context %}
 
-{% set title = 'leave-requests-edit-title'|trans({ user: leaveRequest.user|fullName }) %}
+{% set title = 'leave-requests-detail-title'|trans({ user: leaveRequest.user|fullName }) %}
 
 {% block main %}
 <div class="pc-container pc-stack">
-    {{ breadcrumb([{ title: 'people-title'|trans }, { title: 'leaves-title'|trans, href: path('people_leaves_list') }, { title: 'leave-requests-title'|trans, href: path('people_leave_requests_list') }, { title: title }]) }}
+    {{ breadcrumb([{ title: 'people-title'|trans }, { title: 'leaves-title'|trans, href: path('people_leave_requests_list') }, { title: title }]) }}
 
-    <h1>{{ title }}</h1>
+    <div class="pc-cluster pc-gap" style="--cluster-justify: space-between; --cluster-align: center">
+        <h1 class="pc-m" style="--m: 0">{{ title }}</h1>
+    
+        {% if canEdit %}
+            <a href="{{ path('people_leave_requests_edit', {id: leaveRequest.id}) }}" class="pc-btn">
+                {{ 'common-edit'|trans }}
+            </a>
+        {% endif %}
+
+        {% if leaveRequest.canCancel %}
+            {{ leave_request_delete_form(leaveRequest) }}
+        {% endif %}
+    </div>
 
     {% inlinetable inline, { attr: { class: 'pc-card' } } %}
 

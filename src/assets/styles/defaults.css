@@ -32,3 +32,7 @@ p {
 fieldset {
   border: none;
 }
+
+dialog {
+  margin: auto;
+}

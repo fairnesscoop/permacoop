@@ -36,7 +36,7 @@ export class DeleteLeaveRequestController {
     try {
       await this.commandBus.execute(new DeleteLeaveRequestCommand(id, user));
 
-      res.redirect(303, this.resolver.resolve('people_leaves_list'));
+      res.redirect(303, this.resolver.resolve('people_leave_requests_list'));
     } catch (e) {
       throw new BadRequestException(e.message);
     }

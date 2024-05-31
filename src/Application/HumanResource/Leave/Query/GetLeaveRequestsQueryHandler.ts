@@ -8,8 +8,7 @@ import { Pagination } from 'src/Application/Common/Pagination';
 import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRequestRepository';
 import { IUserRepository } from 'src/Domain/HumanResource/User/Repository/IUserRepository';
 import { UserNotFoundException } from 'src/Domain/HumanResource/User/Exception/UserNotFoundException';
-import { User } from 'src/Domain/HumanResource/User/User.entity';
-import { LeaveRequest } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
+import { CanLeaveRequestBeCancelled } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeCancelled';
 
 @QueryHandler(GetLeaveRequestsQuery)
 export class GetLeaveRequestsQueryHandler {
@@ -19,7 +18,8 @@ export class GetLeaveRequestsQueryHandler {
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
     @Inject('IDateUtils')
-    private readonly dateUtils: IDateUtils
+    private readonly dateUtils: IDateUtils,
+    private readonly canLeaveRequestBeCancelled: CanLeaveRequestBeCancelled
   ) {}
 
   public async execute({
@@ -54,7 +54,10 @@ export class GetLeaveRequestsQueryHandler {
             leaveRequest.getEndDate(),
             leaveRequest.isEndsAllDay()
           ),
-          this.canCancelLeave(currentUser, leaveRequest),
+          this.canLeaveRequestBeCancelled.isSatisfiedBy(
+            currentUser,
+            leaveRequest
+          ),
           null,
           new UserSummaryView(
             leaveUser.getId(),
@@ -66,19 +69,5 @@ export class GetLeaveRequestsQueryHandler {
     }
 
     return new Pagination<LeaveRequestView>(leaveRequestViews, total);
-  }
-
-  private canCancelLeave(byUser: User, leaveRequest: LeaveRequest): boolean {
-    if (byUser.getId() !== leaveRequest.getUser().getId()) {
-      return false;
-    }
-
-    if (
-      new Date(leaveRequest.getStartDate()) < this.dateUtils.getCurrentDate()
-    ) {
-      return false;
-    }
-
-    return true;
   }
 }

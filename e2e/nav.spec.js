@@ -19,7 +19,7 @@ test('nav links', async ({ page }) => {
     ['Clients', '/app/customers'],
     ['Projets', '/app/projects'],
     ['Missions', '/app/tasks'],
-    ['Congés', '/app/people/leaves'],
+    ['Congés', '/app/people/leave_requests'],
     ['Éléments de paie', '/app/people/payroll_elements'],
     ['Tickets resto', '/app/people/meal_tickets'],
     ['Coopérateur·ices et salarié·es', '/app/people/users']
