@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { LeaveRequest } from '../HumanResource/Leave/LeaveRequest.entity';
 
-export enum Type {
+export enum NotificationType {
   POST = 'post',
   COMMENT = 'comment',
   REACTION = 'reaction'
@@ -12,8 +12,8 @@ export class Notification {
   @PrimaryGeneratedColumn('uuid')
   private id: string;
 
-  @Column('enum', { enum: Type, nullable: false })
-  private type: Type;
+  @Column('enum', { enum: NotificationType, nullable: false })
+  private type: NotificationType;
 
   @Column({ type: 'varchar', nullable: false })
   private resourceId: string;
@@ -28,7 +28,7 @@ export class Notification {
   private leaveRequest: LeaveRequest;
 
   constructor(
-    type: Type,
+    type: NotificationType,
     message: string,
     resourceId: string,
     leaveRequest: LeaveRequest

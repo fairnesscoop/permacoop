@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { HttpModule } from '@nestjs/axios';
 import { PassportModule } from '@nestjs/passport';
 import { BusModule } from '../bus.module';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
@@ -79,8 +80,6 @@ import { ListMealTicketsController } from './MealTicket/Controller/ListMealTicke
 import { MealTicketTableFactory } from './MealTicket/Table/MealTicketTableFactory';
 import { AddMealTicketRemovalController } from './MealTicket/Controller/AddMealTicketRemovalController';
 import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesCalendarController';
-import { HttpModule } from '@nestjs/axios';
-import { MattermostNotifier } from '../Adapter/MattermostNotifier';
 
 @Module({
   imports: [
@@ -129,7 +128,6 @@ import { MattermostNotifier } from '../Adapter/MattermostNotifier';
     { provide: 'ILeaveRequestRepository', useClass: LeaveRequestRepository },
     { provide: 'IPasswordEncoder', useClass: PasswordEncoderAdapter },
     { provide: 'IDateUtils', useClass: DateUtilsAdapter },
-    { provide: 'IMattermostNotifier', useClass: MattermostNotifier },
     { provide: 'IEventRepository', useClass: EventRepository },
     { provide: 'ICooperativeRepository', useClass: CooperativeRepository },
     {

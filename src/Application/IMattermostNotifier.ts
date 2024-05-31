@@ -1,5 +1,5 @@
 export interface IMattermostNotifier {
-  createPost(channelId: string, message: string): Promise<object>;
+  createPost(channelId: string, message: string): Promise<any>;
   createComment(
     channelId: string,
     message: string,

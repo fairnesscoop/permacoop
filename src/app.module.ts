@@ -13,12 +13,9 @@ import { UnexpectedErrorFilter } from './Infrastructure/Common/ExceptionFilter/U
 import { AuthRequiredFilter } from './Infrastructure/Common/ExceptionFilter/AuthRequiredFilter';
 import { dataSourceOptions } from './datasource';
 import { ExtendedRoutingModule } from './Infrastructure/Common/ExtendedRouting/extendedRouting.module';
+import { NotificationModule } from './Infrastructure/Notification/notification.module';
 
 const providers: Provider[] = [];
-
-console.log(process.env.MATTERMOST_API_URL);
-console.log(process.env.MATTERMOST_ALFRED_EMAIL);
-console.log(process.env.MATTERMOST_ALFRED_PASSWORD);
 
 if (process.env.NODE_ENV !== 'production') {
   providers.push({
@@ -39,6 +36,7 @@ providers.push({
     ConfigModule.forRoot({
       envFilePath: ['.env.local', '.env']
     }),
+    NotificationModule,
     HomeModule,
     CustomerModule,
     FairCalendarModule,
@@ -46,7 +44,7 @@ providers.push({
     ProjectModule,
     TaskModule,
     SettingsModule,
-    ExtendedRoutingModule
+    ExtendedRoutingModule,
   ],
   providers
 })

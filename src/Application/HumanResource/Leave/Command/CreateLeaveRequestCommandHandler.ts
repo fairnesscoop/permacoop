@@ -8,16 +8,19 @@ import { LeaveRequestAlreadyExistForThisPeriodException } from 'src/Domain/Human
 import { DoesLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesLeaveExistForPeriod';
 import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
 import { IMattermostNotifier } from 'src/Application/IMattermostNotifier';
+import { ICommandBus } from 'src/Application/ICommandBus';
+import { CreateNotificationCommand } from 'src/Application/Notification/Command/CreateNotificationCommand';
+import { NotificationType } from 'src/Domain/Notification/Notification.entity';
 
 @CommandHandler(CreateLeaveRequestCommand)
 export class CreateLeaveRequestCommandHandler {
   constructor(
     @Inject('ILeaveRequestRepository')
     private readonly leaveRequestRepository: ILeaveRequestRepository,
+    @Inject('ICommandBus')
+    private readonly commandBus: ICommandBus,
     private readonly doesLeaveRequestExistForPeriod: DoesLeaveRequestExistForPeriod,
     private readonly doesLeaveExistForPeriod: DoesLeaveExistForPeriod,
-    @Inject('IMattermostNotifier')
-    private readonly mattermostNotifier: IMattermostNotifier
   ) {}
 
   public async execute(command: CreateLeaveRequestCommand): Promise<string> {
@@ -65,9 +68,12 @@ export class CreateLeaveRequestCommandHandler {
       )
     );
 
-    this.mattermostNotifier.createPost(
-      process.env.MATTERMOST_CHANNEL_LEAVES_ID,
-      'HELLO FROM PERMACOOOOOOOOP'
+    this.commandBus.execute(
+      new CreateNotificationCommand(
+        NotificationType.POST,
+        'Demande de congés',
+        leaveRequest
+      )
     );
 
     return leaveRequest.getId();
