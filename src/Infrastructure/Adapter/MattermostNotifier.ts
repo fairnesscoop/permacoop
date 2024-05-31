@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
+import { BadGatewayException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { IMattermostNotifier } from 'src/Application/IMattermostNotifier';
 
@@ -29,7 +29,7 @@ export class MattermostNotifier implements IMattermostNotifier {
 
       return response.data;
     } catch (e) {
-      console.log('ERROR: ', e);
+      throw BadGatewayException;
     }
   }
 
@@ -45,26 +45,27 @@ export class MattermostNotifier implements IMattermostNotifier {
     postId: string,
     emojiName: string
   ): Promise<object> {
-    return {};
-    //   try {
-    //     const response = await this.httpService.axiosRef.post(
-    //       `${this.configService.get<string>('MATTERMOST_API_URL')}/reactions`,
-    //       {
-    //         channel_id: channelId,
-    //         message
-    //       },
-    //       {
-    //         headers: {
-    //           Authorization: `Bearer ${this.configService.get<string>(
-    //             'MATTERMOST_ALFRED_TOKEN'
-    //           )}`
-    //         }
-    //       }
-    //     );
+    // ded6nfbsejdp7cj4mkwyeknuna
+    try {
+      const response = await this.httpService.axiosRef.post(
+        `${this.configService.get<string>('MATTERMOST_API_URL')}/reactions`,
+        {
+          post_id: postId,
+          emoji_name: emojiName,
+          user_id: this.configService.get<string>('MATTERMOST_ALFRED_USER_ID')
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.configService.get<string>(
+              'MATTERMOST_ALFRED_TOKEN'
+            )}`
+          }
+        }
+      );
 
-    //     return response.data;
-    //   } catch (e) {
-    //     console.log('ERROR: ', e);
-    //   }
+      return response.data;
+    } catch (e) {
+      throw BadGatewayException;
+    }
   }
 }
