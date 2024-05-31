@@ -38,3 +38,11 @@
   display: grid;
   place-items: center;
 }
+
+button.pc-btn:disabled {
+  cursor: default;
+}
+
+a.pc-btn[aria-current='page'] {
+  background-color: var(--hover-tint);
+}

@@ -16,5 +16,8 @@
     </div>
 
     {% table table %}
+
+    {% set paginationUrl = path('people_leave_requests_list') %}
+    {% include 'includes/pagination.njk' %}
 </div>
 {% endblock main %}

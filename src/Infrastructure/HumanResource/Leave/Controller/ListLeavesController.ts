@@ -31,17 +31,26 @@ export class ListLeavesController {
   @WithName('people_leaves_list')
   @Render('pages/leaves/list.njk')
   public async get(
-    @Query() pagination: PaginationDTO,
+    @Query() paginationDto: PaginationDTO,
     @LoggedUser() user: User
   ) {
-    const leaves: Pagination<LeaveRequestView> = await this.queryBus.execute(
-      new GetLeaveRequestsQuery(user.getId(), pagination.page, Status.ACCEPTED)
+    const pagination: Pagination<LeaveRequestView> = await this.queryBus.execute(
+      new GetLeaveRequestsQuery(
+        user.getId(),
+        paginationDto.page,
+        Status.ACCEPTED
+      )
     );
 
-    const table = this.tableFactory.create(leaves.items);
+    const table = this.tableFactory.create(pagination.items);
 
     const calendarToken = process.env.CALENDAR_TOKEN;
 
-    return { table, calendarToken };
+    return {
+      table,
+      calendarToken,
+      pagination,
+      currentPage: paginationDto.page
+    };
   }
 }

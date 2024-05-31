@@ -28,6 +28,11 @@ header-profile = Mon compte
 header-dropdown = Voir plus d'actions
 header-logout = Se déconnecter
 
+pagination = Pagination
+pagination-previous = Page précédente
+pagination-page = Page {$page}
+pagination-next = Page suivante
+
 login-title = Connexion
 login-email = Adresse email
 login-password = Mot de passe
