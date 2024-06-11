@@ -12,7 +12,8 @@ export enum Type {
   UNPAID = 'unpaid',
   SPECIAL = 'special',
   MEDICAL = 'medical',
-  ILLIMITED = 'illimited'
+  ILLIMITED = 'illimited',
+  POSTPONED_WORKED_FREE_DAY = 'postponedWorkedFreeDay'
 }
 
 export interface ILeaveRequestModeration {
