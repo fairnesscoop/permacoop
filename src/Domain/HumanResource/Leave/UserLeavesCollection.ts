@@ -25,8 +25,10 @@ export class UserLeavesCollection {
           break;
         case Type.MEDICAL:
           this.medical.push(leave);
+          break;
         case Type.POSTPONED_WORKED_FREE_DAY:
           this.postponedWorkedFreeDay.push(leave);
+          break;
       }
     }
   }
