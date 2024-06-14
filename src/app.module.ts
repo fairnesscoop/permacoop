@@ -44,7 +44,7 @@ providers.push({
     ProjectModule,
     TaskModule,
     SettingsModule,
-    ExtendedRoutingModule,
+    ExtendedRoutingModule
   ],
   providers
 })
