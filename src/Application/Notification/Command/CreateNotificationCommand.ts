@@ -6,6 +6,6 @@ export class CreateNotificationCommand implements ICommand {
   constructor(
     public readonly type: NotificationType,
     public readonly message: string,
-    public readonly leaveReaquest?: LeaveRequest,
+    public readonly leaveReaquest?: LeaveRequest
   ) {}
 }
