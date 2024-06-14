@@ -1,9 +1,7 @@
 {% from 'macros/month_navigator.njk' import month_navigator %}
-{% import 'macros/links.njk' as links %}
 
 {% macro filters_form() %}
     <pc-frame-form class="pc-cluster pc-gap" style="--cluster-align: flex-end">
-        {{ links.add(path('people_leave_requests_add'), text='leave-requests-add-title'|trans) }}
         {{ month_navigator(monthTarget='#month', yearTarget='#year') }}
 
         <pc-auto-form>

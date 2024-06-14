@@ -1,5 +1,6 @@
 {% extends 'layouts/app.njk' %}
 {% import 'macros/icons.njk' as icons %}
+{% import 'macros/links.njk' as links %}
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
 {% from './_event_list.njk' import event_list with context %}
 {% from './_filters_form.njk' import filters_form with context %}
@@ -8,10 +9,16 @@
 
 {% block main %}
 <div class="pc-container">
-    <pc-frame id="faircalendar">
+    <pc-frame class="pc-stack" id="faircalendar">
         {{ breadcrumb([{ title: title }]) }}
 
-        <h1>{{ title }}</h1>
+        <div class="pc-cluster pc-gap" style="--cluster-justify: space-between; --cluster-align: center">
+            <h1 class="pc-m" style="--m: 0">
+                {{ title }}
+            </h1>
+
+            {{ links.add(path('people_leave_requests_add'), text='leave-requests-add-title'|trans) }}
+        </div>
 
         <div class="pc-with-sidebar pc-with-sidebar-start pc-gap" style="--sidebar-size: 22ch; --non-sidebar-min-size: 80%">
             {{ filters_form() }}
