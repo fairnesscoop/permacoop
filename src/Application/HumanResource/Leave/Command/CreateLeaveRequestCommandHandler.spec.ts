@@ -11,11 +11,19 @@ import { LeaveRequestAlreadyExistForThisPeriodException } from 'src/Domain/Human
 import { DoesLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/DoesLeaveExistForPeriod';
 import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
 import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRequestRepository';
+import { CommandBusAdapter } from 'src/Infrastructure/Adapter/CommandBusAdapter';
+import { FluentTranslatorAdapter } from 'src/Infrastructure/Adapter/FluentTranslatorAdapter';
+import { ConfigService } from '@nestjs/config';
+import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
 
 describe('CreateLeaveRequestCommandHandler', () => {
   let leaveRequestRepository: LeaveRequestRepository;
   let doesLeaveRequestExistForPeriod: DoesLeaveRequestExistForPeriod;
   let doesLeaveExistForPeriod: DoesLeaveExistForPeriod;
+  let commandBusAdapter: CommandBusAdapter;
+  let fluentTranslatorAdapter: FluentTranslatorAdapter;
+  let configService: ConfigService;
+  let dateUtilsAdapter: DateUtilsAdapter;
   let handler: CreateLeaveRequestCommandHandler;
 
   const user = mock(User);
@@ -33,11 +41,19 @@ describe('CreateLeaveRequestCommandHandler', () => {
     leaveRequestRepository = mock(LeaveRequestRepository);
     doesLeaveRequestExistForPeriod = mock(DoesLeaveRequestExistForPeriod);
     doesLeaveExistForPeriod = mock(DoesLeaveExistForPeriod);
+    commandBusAdapter = mock(CommandBusAdapter);
+    fluentTranslatorAdapter = mock(FluentTranslatorAdapter);
+    configService = mock(ConfigService);
+    dateUtilsAdapter = mock(DateUtilsAdapter);
 
     handler = new CreateLeaveRequestCommandHandler(
       instance(leaveRequestRepository),
+      instance(commandBusAdapter),
       instance(doesLeaveRequestExistForPeriod),
-      instance(doesLeaveExistForPeriod)
+      instance(doesLeaveExistForPeriod),
+      instance(fluentTranslatorAdapter),
+      instance(configService),
+      instance(dateUtilsAdapter)
     );
   });
 
@@ -123,6 +139,7 @@ describe('CreateLeaveRequestCommandHandler', () => {
     when(leaveRequest.getId()).thenReturn(
       'cfdd06eb-cd71-44b9-82c6-46110b30ce05'
     );
+    when(leaveRequest.getUser()).thenReturn(instance(user));
 
     when(
       doesLeaveRequestExistForPeriod.isSatisfiedBy(
