@@ -21,6 +21,15 @@ export interface ILeaveRequestModeration {
   getUserId(): string;
 }
 
+export interface ILeaveRequestOwnership {
+  getUserId(): string;
+}
+
+export interface ILeaveRequestCancellation {
+  getUserId(): string;
+  getStartDate(): string;
+}
+
 @Entity()
 export class LeaveRequest implements ILeaveRequestModeration {
   @PrimaryGeneratedColumn('uuid')

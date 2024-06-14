@@ -1,3 +1,4 @@
+import * as crypto from 'crypto';
 import { Inject, Injectable } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
 import { NestExpressApplication } from '@nestjs/platform-express';
@@ -64,6 +65,9 @@ export class NunjucksTemplates implements ITemplates {
         result[key] = right[key];
       }
       return result;
+    });
+    env.addGlobal('randomHex', (size: number) => {
+      return crypto.randomBytes(size).toString('hex');
     });
 
     env.addExtension('tables', new TablesExtension(this));

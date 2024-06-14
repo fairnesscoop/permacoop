@@ -1,10 +1,12 @@
 common-form-save = Enregistrer
 common-form-update = Mettre à jour
 common-form-delete = Supprimer
+common-form-cancel = Annuler
 common-view = Voir
 common-add = Ajouter
 common-edit = Modifier
 common-actions = Actions
+common-close = Fermer
 common-yes = Oui
 common-no = Non
 common-table-empty = Aucun élément
@@ -14,6 +16,10 @@ common-month-long = {DATETIME($date, month: "long")}
 common-month-previous = Mois précédent
 common-month-today = Aujourd'hui
 common-month-next = Mois suivant
+
+dialog-delete-title = Supprimer cet élément ?
+dialog-delete-yes = Oui, supprimer
+dialog-delete-no = Non, ne pas supprimer
 
 coop-name = Fairness
 site-title = Permacoop
@@ -153,14 +159,21 @@ leaves-duration-value = {$days ->
     [1] 1 jour
     *[other] {$days} jours
 }
+leaves-moderator = Modérateur⋅ice
+leaves-moderateAt = Modéré le
 leaves-see-requests = Voir les demandes de congés
-leave-requests-title = Demandes de congés
 leave-requests-add-title = Faire une demande de congés
-leave-requests-edit-title = Demande de {$user}
+leave-requests-detail-title = Demande de {$user}
+leave-requests-edit-title = Édition de la demande de {$user}
 leave-requests-error-cannot-moderate = Vous ne pouvez pas modérer cette demande de congés.
 leave-requests-moderation = Modération
 leave-requests-moderation-accept = Accepter la demande de congés
 leave-requests-moderation-deny = Refuser la demande de congés
+leave-requests-delete = Annuler ce congé
+leave-requests-delete-title = Annuler ce congé ?
+leave-requests-delete-yes = Oui, annuler
+leave-requests-delete-no = Non, ne pas annuler
+
 leaves-calendar-url-title = Lien d'abonnement au calendrier
 
 payroll-elements-title = Éléments de paie

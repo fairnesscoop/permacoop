@@ -99,7 +99,7 @@ export class RowFactory {
   }
 }
 
-class RowBuilder {
+export class RowBuilder {
   private cells: ICell[];
 
   constructor(
@@ -107,6 +107,11 @@ class RowBuilder {
     private readonly templates: ITemplates
   ) {
     this.cells = [];
+  }
+
+  public apply(cb: (b: RowBuilder) => void): RowBuilder {
+    cb(this);
+    return this;
   }
 
   public value(value: string | number): RowBuilder {
@@ -124,11 +129,11 @@ class RowBuilder {
     return this;
   }
 
-  public picto(picto: string, message: string): RowBuilder {
+  public picto(picto: string, message: string, attr: any = {}): RowBuilder {
     this.cells.push(
       new TemplateCell(
         'tables/cells/picto.njk',
-        { message, picto },
+        { message, picto, attr },
         this.templates
       )
     );

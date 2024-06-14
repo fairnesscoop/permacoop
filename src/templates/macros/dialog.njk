@@ -1,0 +1,28 @@
+{% from 'macros/attr.njk' import render_attr %}
+
+{% macro confirm_dialog_form(title, actions) %}
+    <form method="dialog" class="pc-stack" style="--stack-gap: calc(3 * var(--w))">
+        <div class="pc-cluster" style="--cluster-justify: space-between; --cluster-gap: calc(3 * var(--w))">
+            <h1 class="pc-m" style="--m: 0">
+                {{ title }}
+            </h1>
+
+            <button
+                value="close"
+                class="pc-btn pc-btn--circle pc-btn--secondary"
+                title="{{ 'common-close'|trans }}"
+                aria-label="{{ 'common-close' }}"
+            >
+                <span class="pc-picto pc-picto--close"></span>
+            </button>
+        </div>
+
+        <div class="pc-cluster" style="--cluster-justify: flex-end; --cluster-gap: calc(2 * var(--w))">
+            {% for action in actions %}
+                <button value="{{ action.value }}" {{ render_attr(action.attr) }}>
+                    {{ action.label }}
+                </button>
+            {% endfor %}
+        </div>
+    </form>
+{% endmacro %}
