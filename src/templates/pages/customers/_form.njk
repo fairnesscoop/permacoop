@@ -8,23 +8,6 @@
         <input type="text" name="name" id="name" required {% if customer %}value="{{ customer.name }}"{% endif %}>
     </div>
 
-    <div class="pc-input-group">
-        <label class="pc-label required" for="street">{{ 'crm-customers-street'|trans }}</label>
-        <input type="text" name="street" id="street" required {% if customer %}value="{{ customer.address.street }}"{% endif %}>
-    </div>
-
-    <div class="pc-input-group">
-        <label class="pc-label required" for="zipCode">{{ 'crm-customers-zipCode'|trans }}</label>
-        <input type="text" name="zipCode" id="zipCode" required pattern="\d{5}" {% if customer %}value="{{ customer.address.zipCode }}"{% endif %}>
-    </div>
-
-    <div class="pc-input-group">
-        <label class="pc-label required" for="city">{{ 'crm-customers-city'|trans }}</label>
-        <input type="text" name="city" id="city" required {% if customer %}value="{{ customer.address.city }}"{% endif %}>
-    </div>
-
-    <input type="hidden" name="country" value="{% if customer %}{{ customer.address.country }}{% else %}FR{% endif %}">
-
     {{ buttons.save(attr={type: 'submit'}) }}
 </form>
 {% endmacro %}

@@ -1,14 +1,20 @@
 {% extends 'layouts/app.njk' %}
 {% from 'macros/breadcrumb.njk' import breadcrumb %}
-{% from './_form.njk' import leave_request_form %}
+{% from './_form.njk' import leave_request_form, leave_request_delete_form with context %}
 
 {% set title = 'leave-requests-edit-title'|trans({ user: leaveRequest.user|fullName }) %}
 
 {% block main %}
 <div class="pc-container">
-    {{ breadcrumb([{ title: 'people-title'|trans }, { title: 'leaves-title'|trans, href: path('people_leaves_list') }, { title: 'leave-requests-title'|trans, href: path('people_leave_requests_list') }, { title: title }]) }}
+    {{ breadcrumb([{ title: 'people-title'|trans }, { title: 'leaves-title'|trans, href: path('people_leave_requests_list') }, { title: 'leave-requests-detail-title'|trans({ user: leaveRequest.user|fullName }), href: path('people_leave_requests_detail', {id: leaveRequest.id}) }, { title: title }]) }}
 
-    <h1>{{ title }}</h1>
+    <div class="pc-cluster pc-m" style="--cluster-justify: space-between; --cluster-gap: calc(2 * var(--w)); --m: 0 0 calc(2 * var(--w)) 0">
+        <h1 class="pc-m" style="--m: 0">{{ title }}</h1>
+
+        {% if canDelete %}
+            {{ leave_request_delete_form(leaveRequest) }}
+        {% endif %}
+    </div>
 
     {{ leave_request_form(leaveRequest, types, attr={class: 'pc-card pc-box'}) }}
 </div>

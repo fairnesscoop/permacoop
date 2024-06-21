@@ -6,6 +6,7 @@ import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/R
 import { UserSummaryView } from '../../User/View/UserSummaryView';
 import { LeaveRequestDetailView } from '../View/LeaveRequestDetailView';
 import { GetLeaveRequestByIdQuery } from './GetLeaveRequestByIdQuery';
+import { CanLeaveRequestBeCancelled } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeCancelled';
 
 @QueryHandler(GetLeaveRequestByIdQuery)
 export class GetLeaveRequestByIdQueryHandler {
@@ -13,7 +14,8 @@ export class GetLeaveRequestByIdQueryHandler {
     @Inject('ILeaveRequestRepository')
     private readonly leaveRequestRepository: LeaveRequestRepository,
     @Inject('IDateUtils')
-    private readonly dateUtils: IDateUtils
+    private readonly dateUtils: IDateUtils,
+    private readonly canLeaveRequestBeCancelled: CanLeaveRequestBeCancelled
   ) {}
 
   public async execute(
@@ -53,6 +55,10 @@ export class GetLeaveRequestByIdQueryHandler {
         leaveRequest.getEndDate(),
         leaveRequest.isEndsAllDay()
       ),
+      this.canLeaveRequestBeCancelled.isSatisfiedBy(
+        query.currentUser,
+        leaveRequest
+      ),
       leaveRequest.getComment(),
       new UserSummaryView(
         user.getId(),
@@ -60,6 +66,7 @@ export class GetLeaveRequestByIdQueryHandler {
         user.getLastName()
       ),
       moderatorView,
+      leaveRequest.getModerateAt(),
       leaveRequest.getModerationComment()
     );
   }

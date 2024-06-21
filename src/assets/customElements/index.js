@@ -8,6 +8,8 @@ import frameForm from './frameForm';
 import monthNavigator from './monthNavigator';
 import navMenuButton from './navMenuButton';
 import themeToggler from './themeToggler';
+import './dialogTrigger';
+import './formSubmit';
 
 customElements.define('pc-auto-form', autoForm);
 customElements.define('pc-clipboard-button', clipboardButton);

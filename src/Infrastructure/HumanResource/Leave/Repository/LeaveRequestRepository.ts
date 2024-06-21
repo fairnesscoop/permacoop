@@ -39,6 +39,7 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
         'leaveRequest.endDate',
         'leaveRequest.endsAllDay',
         'leaveRequest.comment',
+        'leaveRequest.moderateAt',
         'leaveRequest.moderationComment',
         'user.id',
         'user.firstName',
@@ -105,10 +106,6 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
 
     if (status) {
       query.where('leaveRequest.status = :status', { status });
-    } else {
-      query.where('leaveRequest.status != :status', {
-        status: Status.ACCEPTED
-      });
     }
 
     return query.getManyAndCount();

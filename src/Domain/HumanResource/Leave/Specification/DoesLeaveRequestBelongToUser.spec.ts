@@ -5,7 +5,6 @@ import { DoesLeaveRequestBelongToUser } from './DoesLeaveRequestBelongToUser';
 
 describe('DoesLeaveRequestBelongToUser', () => {
   let doesLeaveRequestBelongToUser: DoesLeaveRequestBelongToUser;
-  const user = mock(User);
   const leaveRequest = mock(LeaveRequest);
   const owner = mock(User);
 
@@ -14,9 +13,10 @@ describe('DoesLeaveRequestBelongToUser', () => {
   });
 
   it('testLeaveRequestCantBeRemoved', async () => {
-    when(user.getId()).thenReturn('cfdd06eb-cd71-44b9-82c6-46110b30ce05');
     when(owner.getId()).thenReturn('50e624ef-3609-4053-a437-f74844a2d2de');
-    when(leaveRequest.getUser()).thenReturn(instance(user));
+    when(leaveRequest.getUserId()).thenReturn(
+      'cfdd06eb-cd71-44b9-82c6-46110b30ce05'
+    );
 
     expect(
       await doesLeaveRequestBelongToUser.isSatisfiedBy(
@@ -27,9 +27,10 @@ describe('DoesLeaveRequestBelongToUser', () => {
   });
 
   it('testLeaveRequestCanBeRemoved', async () => {
-    when(user.getId()).thenReturn('cfdd06eb-cd71-44b9-82c6-46110b30ce05');
     when(owner.getId()).thenReturn('cfdd06eb-cd71-44b9-82c6-46110b30ce05');
-    when(leaveRequest.getUser()).thenReturn(instance(user));
+    when(leaveRequest.getUserId()).thenReturn(
+      'cfdd06eb-cd71-44b9-82c6-46110b30ce05'
+    );
 
     expect(
       await doesLeaveRequestBelongToUser.isSatisfiedBy(

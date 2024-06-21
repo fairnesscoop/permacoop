@@ -16,6 +16,8 @@ import { GetLeaveRequestByIdQuery } from 'src/Application/HumanResource/Leave/Qu
 import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
 import { CanLeaveRequestBeModerated } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeModerated';
 import { LeaveRequestDetailView } from 'src/Application/HumanResource/Leave/View/LeaveRequestDetailView';
+import { DoesLeaveRequestBelongToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongToUser';
+import { Status } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 
 @Controller('app/people/leaves')
 @UseGuards(IsAuthenticatedGuard)
@@ -24,7 +26,8 @@ export class GetLeaveRequestController {
     @Inject('IQueryBus')
     private readonly queryBus: IQueryBus,
     private readonly tableFactory: LeaveRequestTableFactory,
-    private readonly canLeaveRequestBeModerated: CanLeaveRequestBeModerated
+    private readonly canLeaveRequestBeModerated: CanLeaveRequestBeModerated,
+    private readonly doesLeaveRequestBelongToUser: DoesLeaveRequestBelongToUser
   ) {}
 
   @Get(':id')
@@ -32,7 +35,7 @@ export class GetLeaveRequestController {
   @Render('pages/leave_requests/detail.njk')
   public async get(@Param() { id }: IdDTO, @LoggedUser() user: User) {
     const leaveRequest: LeaveRequestDetailView = await this.queryBus.execute(
-      new GetLeaveRequestByIdQuery(id)
+      new GetLeaveRequestByIdQuery(id, user)
     );
 
     const inline = this.tableFactory.createInline(leaveRequest);
@@ -40,6 +43,9 @@ export class GetLeaveRequestController {
     return {
       leaveRequest,
       inline,
+      canEdit:
+        leaveRequest.status === Status.PENDING &&
+        this.doesLeaveRequestBelongToUser.isSatisfiedBy(leaveRequest, user),
       canModerate: this.canLeaveRequestBeModerated.isSatisfiedBy(
         leaveRequest,
         user

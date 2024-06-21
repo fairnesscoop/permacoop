@@ -1,5 +1,6 @@
 {% import 'macros/buttons.njk' as buttons %}
 {% from 'macros/attr.njk' import render_attr %}
+{% from 'macros/dialog.njk' import confirm_dialog_form %}
 
 {% macro leave_request_form(leaveRequest, types, attr=null) %}
 <form method="POST" {{ render_attr(attr) }}>
@@ -67,4 +68,23 @@
             </button>
         </div>
     </form>
+{% endmacro %}
+
+{% macro leave_request_delete_form(leaveRequest) %}
+    {% set action = 'common-form-cancel'|trans %}
+    <pc-form-submit on="dialog-trigger:submit">
+        <form method="POST" action="{{ path('people_leave_requests_delete', { id: leaveRequest.id }) }}">
+            <pc-dialog-trigger dialog="leave_request_delete_confirm" submitValue="confirm">
+                <button type="submit" class="pc-btn pc-btn--error">
+                    {{ 'leave-requests-delete'|trans }}
+                </button>
+            </pc-dialog-trigger>
+        </form>
+    </pc-form-submit>
+
+    <dialog id="leave_request_delete_confirm">
+        {% set yesAction = { label: "leave-requests-delete-yes"|trans, value: "confirm", attr: {class: "pc-btn", type: 'submit'} } %}
+        {% set noAction = { label: "leave-requests-delete-no"|trans, value: "close", attr: {class: "pc-btn pc-btn--secondary"} }%}
+        {{ confirm_dialog_form(title="leave-requests-delete-title"|trans, actions=[yesAction, noAction]) }}
+    </dialog>
 {% endmacro %}
