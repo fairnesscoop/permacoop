@@ -10,6 +10,8 @@ export interface IDateUtils {
   getWorkedDaysDuringAPeriod(start: Date, end: Date): Date[];
   isAWorkingDay(date: Date): boolean;
   getWorkedFreeDays(year: number): Date[];
+  getWorkedDaysPerWeek(): number;
+  getNumberOfPaidLeaveWeeks(): number;
   getEasterDate(year: number): Date;
   getLeaveDuration(
     startDate: string,
@@ -17,6 +19,8 @@ export interface IDateUtils {
     endDate: string,
     isEndsAllDay: boolean
   ): number;
+  getLeaveDurationAsDays(duration: number);
+  getLeaveReferencePeriodDays(date: Date): [Date, Date];
   addDaysToDate(date: Date, days: number): Date;
   getYear(date: Date): number;
   getMonth(date: Date): MonthDate;

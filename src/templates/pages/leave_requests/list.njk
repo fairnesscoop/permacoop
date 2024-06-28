@@ -15,7 +15,10 @@
         {{ links.add(path('people_leave_requests_add'), text='leave-requests-add-title'|trans) }}
     </div>
 
-    {% table table %}
+    <div class="pc-stack">
+        {% table overviewTable, { attr: {class: 'pc-table--center pc-table--no-shadow'} } %}
+        {% table table %}
+    </div>
 
     {% set paginationUrl = path('people_leave_requests_list') %}
     {% include 'includes/pagination.njk' %}
