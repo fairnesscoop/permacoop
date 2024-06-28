@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { HttpModule } from '@nestjs/axios';
 import { PassportModule } from '@nestjs/passport';
 import { BusModule } from '../bus.module';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
@@ -84,6 +85,7 @@ import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesC
   imports: [
     BusModule,
     ConfigModule,
+    HttpModule,
     PassportModule.register({
       session: true
     }),
