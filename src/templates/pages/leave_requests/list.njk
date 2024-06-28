@@ -15,9 +15,21 @@
         {{ links.add(path('people_leave_requests_add'), text='leave-requests-add-title'|trans) }}
     </div>
 
-    {% table table %}
+    <div class="pc-cluster" style="--cluster-gap: calc(3 * var(--w))">
+        <div class="pc-stack">
+            <h2>{{ 'leaves-summary-title'|trans }}</h2>
 
-    {% set paginationUrl = path('people_leave_requests_list') %}
-    {% include 'includes/pagination.njk' %}
+            {% table overviewTable, { attr: {class: 'pc-table--center pc-table--no-shadow'} } %}
+        </div>
+
+        <div class="pc-stack">
+            <h2>{{ 'leaves-list-title'|trans }}</h2>
+
+            {% table table %}
+
+            {% set paginationUrl = path('people_leave_requests_list') %}
+            {% include 'includes/pagination.njk' %}
+        </div>
+    </div>
 </div>
 {% endblock main %}

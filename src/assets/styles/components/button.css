@@ -35,7 +35,7 @@
   padding: 0;
   width: var(--button-size, calc(4 * var(--w)));
   height: var(--button-size, calc(4 * var(--w)));
-  display: grid;
+  display: inline-grid;
   place-items: center;
 }
 

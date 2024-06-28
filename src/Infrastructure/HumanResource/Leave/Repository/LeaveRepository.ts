@@ -5,6 +5,7 @@ import { ILeaveRepository } from 'src/Domain/HumanResource/Leave/Repository/ILea
 import { Leave } from 'src/Domain/HumanResource/Leave/Leave.entity';
 import { User, UserRole } from 'src/Domain/HumanResource/User/User.entity';
 import { IDateUtils } from 'src/Application/IDateUtils';
+import { Type } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 
 export class LeaveRepository implements ILeaveRepository {
   constructor(
@@ -64,6 +65,25 @@ export class LeaveRepository implements ILeaveRepository {
       .andWhere('user.id = :user', { user: user.getId() })
       .innerJoin('leave.leaveRequest', 'leaveRequest')
       .innerJoin('leaveRequest.user', 'user')
+      .getRawOne();
+
+    return Number(result.time) || 0;
+  }
+
+  public async getSumOfPaidLeaveDurationsBetween(
+    startDate: Date,
+    endDate: Date,
+    userId: string
+  ): Promise<number> {
+    const result = await this.repository
+      .createQueryBuilder('leave')
+      .select('SUM(leave.time) as time')
+      .innerJoin('leave.leaveRequest', 'leaveRequest')
+      .innerJoin('leaveRequest.user', 'user')
+      .where('leave.date >= :startDate', { startDate })
+      .andWhere('leave.date < :endDate', { endDate })
+      .andWhere('leaveRequest.type = :type', { type: Type.PAID })
+      .andWhere('user.id = :userId', { userId: userId })
       .getRawOne();
 
     return Number(result.time) || 0;

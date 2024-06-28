@@ -63,6 +63,9 @@
   --event-other-border: rgb(244, 245, 247);
   --event-other-text: rgb(36, 38, 45);
   --event-today: #fcf8e3;
+  --leave-daysRemaining-background: rgb(222, 247, 236);
+  --leave-daysRemaining-border: rgb(222, 247, 236);
+  --leave-daysRemaining-text: rgb(4, 108, 78);
   --header-height-desktop: 56px;
 }
 

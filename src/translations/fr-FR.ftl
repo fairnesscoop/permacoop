@@ -121,6 +121,8 @@ profile-password = Mot de passe
 people-title = FairRH
 
 leaves-title = Congés
+leaves-summary-title = Synthèse
+leaves-list-title = Liste des congés
 leaves-user = Coopérateur·ice - salarié·e
 leaves-period = Période
 leaves-type = Type de congé
@@ -179,6 +181,23 @@ leave-requests-create-notification-message = Salut 👋, {$userFirstName} a fait
 leave-requests-approve-notification-emoji-name = white_check_mark
 leave-requests-approve-notification-message = Demande de congé approuvée par {$moderatorFirstName}
 leaves-calendar-url-title = Lien d'abonnement au calendrier
+-leaves-overview-days-value = {$days ->
+    [0] 0
+    [1] 1 jour
+    *[other] {$days} jours
+}
+leaves-overview-daysRemaining = Congés payés restants
+leaves-overview-daysRemaining-showExplanation = Voir l'explication
+leaves-overview-daysRemaining-value = {$daysRemaining ->
+    [0] 0
+    [1] 1 jour
+    *[other] {$daysRemaining} jours
+}
+leaves-overview-daysRemaining-explanation = Estimation sur une base de {$daysPerYear ->
+    [0] 0
+    [1] 1 jour
+    *[other] {$daysPerYear} jours
+} par an, hors congés exceptionnels
 
 payroll-elements-title = Éléments de paie
 payroll-elements-page-title = Éléments de paie {DATETIME($date, month: "long", year: "numeric")}

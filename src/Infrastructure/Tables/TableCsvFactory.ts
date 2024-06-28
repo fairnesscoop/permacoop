@@ -10,7 +10,9 @@ export class TableCsvFactory {
   ) {}
 
   public toCsv(table: Table): string {
-    const header = table.columns.map(name => this.translator.translate(name));
+    const header = table.columns.map(column =>
+      this.translator.translate(column.toString())
+    );
     const rows = table.rows.map(row =>
       row
         .map(cell => {

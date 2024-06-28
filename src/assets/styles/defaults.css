@@ -36,3 +36,20 @@ fieldset {
 dialog {
   margin: auto;
 }
+
+:popover-open {
+  position: absolute;
+  inset: unset;
+  margin: var(--w);
+  white-space: wrap;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-default);
+  padding: var(--w);
+  font-weight: normal;
+  text-transform: none;
+}
+
+[popovertarget]:focus {
+  outline: solid 2px;
+}
