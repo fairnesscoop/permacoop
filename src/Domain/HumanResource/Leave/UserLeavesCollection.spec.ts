@@ -16,13 +16,16 @@ describe('UserLeavesCollection', () => {
     when(postponedWorkedFreeDayLeave.getType()).thenReturn(
       Type.POSTPONED_WORKED_FREE_DAY
     );
+    const relocationLeave = mock(LeaveRequest);
+    when(relocationLeave.getType()).thenReturn(Type.RELOCATION);
 
     const userLeaves = new UserLeavesCollection([
       instance(paidLeave),
       instance(unpaidLeave),
       instance(specialLeave),
       instance(medicalLeave),
-      instance(postponedWorkedFreeDayLeave)
+      instance(postponedWorkedFreeDayLeave),
+      instance(relocationLeave)
     ]);
     expect(userLeaves.paid[0].getType()).toBe(Type.PAID);
     expect(userLeaves.unpaid[0].getType()).toBe(Type.UNPAID);
@@ -31,5 +34,6 @@ describe('UserLeavesCollection', () => {
     expect(userLeaves.postponedWorkedFreeDay[0].getType()).toBe(
       Type.POSTPONED_WORKED_FREE_DAY
     );
+    expect(userLeaves.relocation[0].getType()).toBe(Type.RELOCATION);
   });
 });

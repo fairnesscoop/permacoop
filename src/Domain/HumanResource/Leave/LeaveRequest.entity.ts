@@ -13,7 +13,8 @@ export enum Type {
   SPECIAL = 'special',
   MEDICAL = 'medical',
   ILLIMITED = 'illimited',
-  POSTPONED_WORKED_FREE_DAY = 'postponedWorkedFreeDay'
+  POSTPONED_WORKED_FREE_DAY = 'postponedWorkedFreeDay',
+  RELOCATION = 'relocation'
 }
 
 export interface ILeaveRequestModeration {

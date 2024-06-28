@@ -169,6 +169,7 @@ describe('GetUserElementsQueryHandler', () => {
         new UserLeavesView(0, []),
         new UserLeavesView(0, []),
         new UserLeavesView(0, []),
+        new UserLeavesView(0, []),
         new UserLeavesView(0, [])
       )
     ]);

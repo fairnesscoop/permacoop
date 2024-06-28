@@ -6,6 +6,7 @@ export class UserLeavesCollection {
   public special: LeaveRequest[] = [];
   public medical: LeaveRequest[] = [];
   public postponedWorkedFreeDay: LeaveRequest[] = [];
+  public relocation: LeaveRequest[] = [];
 
   constructor(leaves: LeaveRequest[]) {
     this.distributeLeavesByType(leaves);
@@ -28,6 +29,9 @@ export class UserLeavesCollection {
           break;
         case Type.POSTPONED_WORKED_FREE_DAY:
           this.postponedWorkedFreeDay.push(leave);
+          break;
+        case Type.RELOCATION:
+          this.relocation.push(leave);
           break;
       }
     }

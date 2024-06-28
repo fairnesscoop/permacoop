@@ -65,7 +65,8 @@ export class GetUsersElementsQueryHandler {
           this.createUserLeavesView(userLeaves.unpaid, date),
           this.createUserLeavesView(userLeaves.medical, date),
           this.createUserLeavesView(userLeaves.special, date),
-          this.createUserLeavesView(userLeaves.postponedWorkedFreeDay, date)
+          this.createUserLeavesView(userLeaves.postponedWorkedFreeDay, date),
+          this.createUserLeavesView(userLeaves.relocation, date)
         )
       );
     }
