@@ -99,8 +99,7 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
         'user.lastName'
       ])
       .innerJoin('leaveRequest.user', 'user')
-      .orderBy('leaveRequest.status', 'DESC')
-      .addOrderBy('leaveRequest.startDate', 'DESC')
+      .orderBy('leaveRequest.startDate', 'DESC')
       .limit(MAX_ITEMS_PER_PAGE)
       .offset((page - 1) * MAX_ITEMS_PER_PAGE);
 
