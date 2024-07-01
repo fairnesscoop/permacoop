@@ -16,6 +16,8 @@ import { Pagination } from 'src/Application/Common/Pagination';
 import { LeaveRequestView } from 'src/Application/HumanResource/Leave/View/LeaveRequestView';
 import { LoggedUser } from '../../User/Decorator/LoggedUser';
 import { LeaveRequestTableFactory } from '../Table/LeaveRequestTableFactory';
+import { LeaveRequestsOverviewTableFactory } from '../Table/LeaveRequestOverviewTableFactory';
+import { GetLeaveRequestsOverviewQuery } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestsOverviewQuery';
 
 @Controller('app/people/leave_requests')
 @UseGuards(IsAuthenticatedGuard)
@@ -23,7 +25,8 @@ export class ListLeaveRequestsController {
   constructor(
     @Inject('IQueryBus')
     private readonly queryBus: IQueryBus,
-    private readonly tableFactory: LeaveRequestTableFactory
+    private readonly tableFactory: LeaveRequestTableFactory,
+    private readonly overviewTableFactory: LeaveRequestsOverviewTableFactory
   ) {}
 
   @Get()
@@ -39,6 +42,16 @@ export class ListLeaveRequestsController {
 
     const table = this.tableFactory.create(pagination.items, user.getId());
 
-    return { table, pagination, currentPage: paginationDto.page };
+    const overview = await this.queryBus.execute(
+      new GetLeaveRequestsOverviewQuery(new Date(), user)
+    );
+    const overviewTable = this.overviewTableFactory.create(overview);
+
+    return {
+      table,
+      overviewTable,
+      pagination,
+      currentPage: paginationDto.page
+    };
   }
 }

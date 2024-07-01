@@ -80,6 +80,8 @@ import { ListMealTicketsController } from './MealTicket/Controller/ListMealTicke
 import { MealTicketTableFactory } from './MealTicket/Table/MealTicketTableFactory';
 import { AddMealTicketRemovalController } from './MealTicket/Controller/AddMealTicketRemovalController';
 import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesCalendarController';
+import { LeaveRequestsOverviewTableFactory } from './Leave/Table/LeaveRequestOverviewTableFactory';
+import { GetLeaveRequestsOverviewQueryHandler } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestsOverviewQueryHandler';
 
 @Module({
   imports: [
@@ -183,6 +185,8 @@ import { ExportLeavesCalendarController } from './Leave/Controller/ExportLeavesC
     IncreaseUserSavingsRecordCommandHandler,
     UserTableFactory,
     LeaveRequestTableFactory,
+    GetLeaveRequestsOverviewQueryHandler,
+    LeaveRequestsOverviewTableFactory,
     PayrollElementsTableFactory,
     MealTicketTableFactory
   ]

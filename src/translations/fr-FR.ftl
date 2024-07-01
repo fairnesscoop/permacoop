@@ -179,6 +179,14 @@ leave-requests-create-notification-message = Salut 👋, {$userFirstName} a fait
 leave-requests-approve-notification-emoji-name = white_check_mark
 leave-requests-approve-notification-message = Demande de congé approuvée par {$moderatorFirstName}
 leaves-calendar-url-title = Lien d'abonnement au calendrier
+leaves-overview-daysPerYear = Congés payés par an
+leaves-overview-daysTaken = Congés payés pris
+leaves-overview-daysRemaining = Congés payés restants (estimation)
+leaves-overview-days = {$days ->
+    [0] 0
+    [1] 1 jour
+    *[other] {$days} jours
+}
 
 payroll-elements-title = Éléments de paie
 payroll-elements-page-title = Éléments de paie {DATETIME($date, month: "long", year: "numeric")}

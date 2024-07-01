@@ -10,4 +10,9 @@ export interface ILeaveRepository {
     endDate: string
   ): Promise<number>;
   sumOfDurationLeaveByUserAndDate(user: User, date: string): Promise<number>;
+  getSumOfDurationsBetween(
+    startDate: Date,
+    endDate: Date,
+    user: User
+  ): Promise<number>;
 }
