@@ -24,6 +24,7 @@ describe('GetProjectByIdQueryHandler', () => {
 
     when(project.getId()).thenReturn('eb9e1d9b-dce2-48a9-b64f-f0872f3157d2');
     when(project.getName()).thenReturn('Project');
+    when(project.isActive()).thenReturn(true);
     when(project.getInvoiceUnit()).thenReturn(InvoiceUnits.DAY);
     when(project.getCustomer()).thenReturn(instance(customer));
     when(
@@ -34,6 +35,7 @@ describe('GetProjectByIdQueryHandler', () => {
       new ProjectView(
         'eb9e1d9b-dce2-48a9-b64f-f0872f3157d2',
         'Project',
+        true,
         InvoiceUnits.DAY,
         new CustomerView('aeb50974-0dcd-4ef4-af43-d656250e43bc', 'Customer')
       )
@@ -44,6 +46,7 @@ describe('GetProjectByIdQueryHandler', () => {
     ).once();
     verify(project.getId()).once();
     verify(project.getName()).once();
+    verify(project.isActive()).once();
     verify(project.getInvoiceUnit()).once();
     verify(project.getCustomer()).once();
     verify(customer.getId()).once();

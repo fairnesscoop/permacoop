@@ -13,6 +13,7 @@ import { UnexpectedErrorFilter } from './Infrastructure/Common/ExceptionFilter/U
 import { AuthRequiredFilter } from './Infrastructure/Common/ExceptionFilter/AuthRequiredFilter';
 import { dataSourceOptions } from './datasource';
 import { ExtendedRoutingModule } from './Infrastructure/Common/ExtendedRouting/extendedRouting.module';
+import { NotificationModule } from './Infrastructure/Notification/notification.module';
 
 const providers: Provider[] = [];
 
@@ -35,6 +36,7 @@ providers.push({
     ConfigModule.forRoot({
       envFilePath: ['.env.local', '.env']
     }),
+    NotificationModule,
     HomeModule,
     CustomerModule,
     FairCalendarModule,

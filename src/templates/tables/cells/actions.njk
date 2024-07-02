@@ -1,4 +1,5 @@
 {% import 'macros/icons.njk' as icons %}
+{% from 'macros/dialog.njk' import confirm_dialog_form %}
 
 <span class="pc-cluster pc-gap" style="--cluster-align: center">
   {% if actions.view %}
@@ -14,10 +15,21 @@
   {% endif %}
 
   {% if actions.delete %}
-    <form method="POST" action="{{ actions.delete.url }}" title="{{ 'common-delete'|trans }}">
-      <button class="pc-btn pc-btn--secondary">
-        {{ icons.trash({class: 'pc-icon--action-violet'}) }}
-      </button>
-    </form>
+    {% set id = randomHex(4) %}
+
+    <pc-form-submit on="dialog-trigger:submit">
+      <form method="POST" action="{{ actions.delete.url }}">
+        <pc-dialog-trigger dialog="dialog-delete-{{ id }}" submitValue="confirm">
+          <button class="pc-btn pc-btn--secondary" title="{{ 'common-form-delete'|trans }}" aria-label="{{ 'common-form-delete'|trans }}">
+            {{ icons.trash({class: 'pc-icon--action-violet'}) }}
+          </button>
+        </pc-dialog-trigger>
+      </form>
+    </pc-form-submit>
+
+    <dialog id="dialog-delete-{{ id }}">
+      {% set actions = [{ label: "dialog-delete-yes"|trans, value: "confirm", attr: {class: "pc-btn", type: 'submit'} }, { label: "dialog-delete-no"|trans, value: "close", attr: {class: "pc-btn pc-btn--secondary"} }] %}
+      {{ confirm_dialog_form(title="dialog-delete-title"|trans, actions=actions) }}
+    </dialog>
   {% endif %}
 </span>

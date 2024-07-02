@@ -6,6 +6,7 @@ export class UpdateProjectCommand implements ICommand {
     public readonly id: string,
     public readonly name: string,
     public readonly invoiceUnit: InvoiceUnits,
+    public readonly active: boolean,
     public readonly customerId: string
   ) {}
 }

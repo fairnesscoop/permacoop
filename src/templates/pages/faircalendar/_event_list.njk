@@ -2,6 +2,7 @@
     <pc-eventcalendar
         data-events-json="{{ fullCalendarEvents|dump }}"
         data-add-url-template="{{ path('faircalendar_events_add', { startDate: ':startDate', endDate: ':endDate' }) }}"
+        data-is-calendar-of-logged-user="{{ isCalendarOfLoggedUser|dump }}"
         data-date="{{ date|htmlDate }}"
         {% if viewName %}data-view="{{ viewName }}"{% endif %}
     >
@@ -23,7 +24,7 @@
             </div>
         </fieldset>
 
-        <div id="list-view" class="pc-table-wrapper" {% if viewName != 'list' %}hidden{% endif %}>
+        <div id="list-view" class="pc-table-wrapper">
             <table class="pc-table" style="--table-padding: var(--v); --table-desktop-padding: var(--v) var(--w)">
                 <colgroup>
                     <col>
@@ -37,8 +38,8 @@
                             <td>
                                 <ul class="pc-raw-list pc-cluster" role="list" style="--cluster-gap: var(--w)">
                                     {% for event in dayEvents %}
-                                        <li class="ec-event" style="background-color: {{ event.backgroundColor }}; color: {{ event.textColor }}; border: 1px solid {{ event.borderColor }};">
-                                            {% if event.extendedProps.url %}
+                                        <li {% if event.id %}id="event-{{ event.id }}"{% endif %} class="ec-event" style="background-color: {{ event.backgroundColor }}; color: {{ event.textColor }}; border: 1px solid {{ event.borderColor }};">
+                                            {% if event.extendedProps.url and isCalendarOfLoggedUser %}
                                                 <a href="{{ event.extendedProps.url }}" {% if event.extendedProps.summary %}title="{{ event.extendedProps.summary }}"{% endif %}>
                                                     {{ event.title }}
                                                 </a>
@@ -52,13 +53,15 @@
                                 </ul>
                             </td>
                             <td>
-                                <a
-                                    href="{{ path('faircalendar_events_add', { startDate: startDate|htmlDate, endDate: startDate|htmlDate }) }}"
-                                    class="pc-btn pc-btn--secondary pc-btn--circle"
-                                    title="{{ 'faircalendar-view-list-add-event'|trans }}"
-                                >
-                                    {{ icons.plus() }}
-                                </a>
+                                {% if isCalendarOfLoggedUser %}
+                                    <a
+                                        href="{{ path('faircalendar_events_add', { startDate: startDate|htmlDate, endDate: startDate|htmlDate }) }}"
+                                        class="pc-btn pc-btn--secondary pc-btn--circle"
+                                        title="{{ 'faircalendar-view-list-add-event'|trans }}"
+                                    >
+                                        {{ icons.plus() }}
+                                    </a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}

@@ -1,0 +1,69 @@
+{% import 'macros/icons.njk' as icons %}
+
+{% set start = (currentPage - 1) * pagination.itemsPerPage + 1 %}
+{% set previousPage = start + pagination.itemsPerPage - 1 %}
+{% if previousPage > pagination.totalItems %}
+    {% set previousPage = pagination.totalItems %}
+{% endif %}
+
+<nav aria-label="{{ 'pagination'|trans }}">
+    <ul class="pc-cluster pc-raw-list" style="--cluster-align: stretch">
+        <li class="pc-cluster pc-m" style="--m: 0 var(--w) 0 0">
+            {% if currentPage > 1 %}
+                <a
+                    href="{{ paginationUrl }}?page={{ currentPage - 1 }}"
+                    class="pc-btn pc-btn--secondary"
+                    title="{{ 'pagination-previous'|trans }}"
+                    aria-label="{{ 'pagination-previous'|trans }}"
+                >
+                    {{ icons.previous() }}
+                </a>
+            {% else %}
+                <button
+                    class="pc-btn pc-btn--muted"
+                    title="{{ 'pagination-previous'|trans }}"
+                    aria-label="{{ 'pagination-previous'|trans }}"
+                    disabled
+                >
+                    {{ icons.previous() }}
+                </button>
+            {% endif %}
+        </li>
+
+        {% for page in range(1, pagination.pageCount + 1) %}
+            <li class="pc-cluster">
+                <a
+                    href="{{ pagination_url }}?page={{ page }}"
+                    class="pc-btn pc-btn--secondary"
+                    title="{{ 'pagination-page'|trans({ page: page }) }}"
+                    aria-label="{{ 'pagination-page'|trans({ page: page }) }}"
+                    {% if page == currentPage %}aria-current="page"{% endif %}
+                >
+                    {{ page }}
+                </a>
+            </li>
+        {% endfor %}
+
+        <li class="pc-cluster pc-m" style="--m: 0 0 0 var(--w)">
+            {% if currentPage < pagination.pageCount %}
+                <a
+                    href="{{ paginationUrl }}?page={{ currentPage + 1 }}"
+                    class="pc-btn pc-btn--secondary"
+                    title="{{ 'pagination-next'|trans }}"
+                    aria-label="{{ 'pagination-next'|trans }}"
+                >
+                    {{ icons.next() }}
+                </a>
+            {% else %}
+                <button
+                    class="pc-btn pc-btn--muted"
+                    title="{{ 'pagination-next'|trans }}"
+                    aria-label="{{ 'pagination-next'|trans }}"
+                    disabled
+                >
+                    {{ icons.next() }}
+                </button>
+            {% endif %}
+        </li>
+    </ul>
+</nav>

@@ -24,6 +24,7 @@ export class GetProjectByIdQueryHandler {
     return new ProjectView(
       project.getId(),
       project.getName(),
+      project.isActive(),
       project.getInvoiceUnit(),
       new CustomerView(customer.getId(), customer.getName())
     );

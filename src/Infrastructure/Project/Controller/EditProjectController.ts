@@ -60,11 +60,17 @@ export class EditProjectController {
     @Body() dto: ProjectDTO,
     @Res() res: Response
   ) {
-    const { name, customerId } = dto;
+    const { name, customerId, active } = dto;
 
     try {
       await this.commandBus.execute(
-        new UpdateProjectCommand(idDto.id, name, InvoiceUnits.DAY, customerId)
+        new UpdateProjectCommand(
+          idDto.id,
+          name,
+          InvoiceUnits.DAY,
+          active,
+          customerId
+        )
       );
 
       res.redirect(303, this.resolver.resolve('crm_projects_list'));

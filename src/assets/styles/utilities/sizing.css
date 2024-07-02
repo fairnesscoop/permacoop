@@ -1,3 +1,7 @@
 .pc-max-w {
   max-width: var(--max-w);
 }
+
+.pc-h-full {
+  height: 100%;
+}

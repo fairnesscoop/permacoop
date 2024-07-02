@@ -12,18 +12,22 @@ import { UserSummaryView } from '../../User/View/UserSummaryView';
 import { LeaveRequestDetailView } from '../View/LeaveRequestDetailView';
 import { GetLeaveRequestByIdQuery } from './GetLeaveRequestByIdQuery';
 import { GetLeaveRequestByIdQueryHandler } from './GetLeaveRequestByIdQueryHandler';
+import { CanLeaveRequestBeCancelled } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeCancelled';
 
 describe('GetLeaveRequestByIdQueryHandler', () => {
   let leaveRequestRepository: LeaveRequestRepository;
   let dateUtils: DateUtilsAdapter;
+  let canLeaveRequestBeCancelled: CanLeaveRequestBeCancelled;
   let queryHandler: GetLeaveRequestByIdQueryHandler;
 
   beforeEach(() => {
     leaveRequestRepository = mock(LeaveRequestRepository);
     dateUtils = mock(DateUtilsAdapter);
+    canLeaveRequestBeCancelled = mock(CanLeaveRequestBeCancelled);
     queryHandler = new GetLeaveRequestByIdQueryHandler(
       instance(leaveRequestRepository),
-      instance(dateUtils)
+      instance(dateUtils),
+      instance(canLeaveRequestBeCancelled)
     );
   });
 
@@ -37,6 +41,7 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
       '2020-05-15',
       true,
       7.5,
+      false,
       'Country vacation',
       new UserSummaryView(
         '54bb15ad-56da-45f8-b594-3ca43f13d4c0',
@@ -48,6 +53,7 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
         'Ada',
         'LOVELACE'
       ),
+      '2020-05-01',
       'Go go go'
     );
 
@@ -72,7 +78,12 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
     when(leave.getComment()).thenReturn('Country vacation');
     when(leave.getUser()).thenReturn(instance(user));
     when(leave.getModerator()).thenReturn(instance(moderator));
+    when(leave.getModerateAt()).thenReturn('2020-05-01');
     when(leave.getModerationComment()).thenReturn('Go go go');
+
+    when(
+      canLeaveRequestBeCancelled.isSatisfiedBy(instance(user), instance(leave))
+    ).thenReturn(false);
 
     when(
       leaveRequestRepository.findOneById('204522d3-f077-4d21-b3ee-6e0d742fca44')
@@ -84,7 +95,10 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
 
     expect(
       await queryHandler.execute(
-        new GetLeaveRequestByIdQuery('204522d3-f077-4d21-b3ee-6e0d742fca44')
+        new GetLeaveRequestByIdQuery(
+          '204522d3-f077-4d21-b3ee-6e0d742fca44',
+          instance(user)
+        )
       )
     ).toMatchObject(expectedResult);
 
@@ -101,9 +115,14 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
       leaveRequestRepository.findOneById('204522d3-f077-4d21-b3ee-6e0d742fca44')
     ).thenResolve(null);
 
+    const user = mock(User);
+
     try {
       await queryHandler.execute(
-        new GetLeaveRequestByIdQuery('204522d3-f077-4d21-b3ee-6e0d742fca44')
+        new GetLeaveRequestByIdQuery(
+          '204522d3-f077-4d21-b3ee-6e0d742fca44',
+          user
+        )
       );
     } catch (e) {
       expect(e).toBeInstanceOf(LeaveRequestNotFoundException);
@@ -126,12 +145,14 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
       '2020-05-15',
       true,
       7.5,
+      false,
       'Country vacation',
       new UserSummaryView(
         '2402455a-4dc1-47c9-89a4-f9b859f02f5c',
         'John',
         'DOE'
       ),
+      null,
       null,
       null
     );
@@ -155,6 +176,10 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
     when(leave.getModerationComment()).thenReturn(null);
 
     when(
+      canLeaveRequestBeCancelled.isSatisfiedBy(instance(user), instance(leave))
+    ).thenReturn(false);
+
+    when(
       leaveRequestRepository.findOneById('a3753b9c-b711-4e0e-a535-e473161bd612')
     ).thenResolve(instance(leave));
 
@@ -164,7 +189,10 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
 
     expect(
       await queryHandler.execute(
-        new GetLeaveRequestByIdQuery('a3753b9c-b711-4e0e-a535-e473161bd612')
+        new GetLeaveRequestByIdQuery(
+          'a3753b9c-b711-4e0e-a535-e473161bd612',
+          instance(user)
+        )
       )
     ).toMatchObject(expectedResult);
 

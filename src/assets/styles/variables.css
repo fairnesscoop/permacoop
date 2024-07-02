@@ -63,6 +63,7 @@
   --event-other-border: rgb(244, 245, 247);
   --event-other-text: rgb(36, 38, 45);
   --event-today: #fcf8e3;
+  --header-height-desktop: 56px;
 }
 
 @media (prefers-color-scheme: dark) {

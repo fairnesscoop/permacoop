@@ -16,5 +16,8 @@
     </div>
 
     {% table table, {caption: 'crm-customers-table-caption'|trans} %}
+
+    {% set paginationUrl = path('crm_customers_list') %}
+    {% include 'includes/pagination.njk' %}
 </div>
 {% endblock main %}

@@ -12,12 +12,23 @@ export enum Type {
   UNPAID = 'unpaid',
   SPECIAL = 'special',
   MEDICAL = 'medical',
-  ILLIMITED = 'illimited'
+  ILLIMITED = 'illimited',
+  POSTPONED_WORKED_FREE_DAY = 'postponedWorkedFreeDay',
+  RELOCATION = 'relocation'
 }
 
 export interface ILeaveRequestModeration {
   getStatus(): string;
   getUserId(): string;
+}
+
+export interface ILeaveRequestOwnership {
+  getUserId(): string;
+}
+
+export interface ILeaveRequestCancellation {
+  getUserId(): string;
+  getStartDate(): string;
 }
 
 @Entity()

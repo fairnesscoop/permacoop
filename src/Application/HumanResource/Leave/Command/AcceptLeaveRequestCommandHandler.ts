@@ -10,6 +10,10 @@ import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/Fai
 import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Repository/ILeaveRequestRepository';
 import { LeaveRequestNotFoundException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestNotFoundException';
 import { LeaveRequestCantBeModeratedException } from 'src/Domain/HumanResource/Leave/Exception/LeaveRequestCantBeModeratedException';
+import { CreateNotificationCommand } from 'src/Application/Notification/Command/CreateNotificationCommand';
+import { NotificationType } from 'src/Domain/Notification/Notification.entity';
+import { ICommandBus } from 'src/Application/ICommandBus';
+import { ITranslator } from 'src/Infrastructure/Translations/ITranslator';
 
 @CommandHandler(AcceptLeaveRequestCommand)
 export class AcceptLeaveRequestCommandHandler {
@@ -21,7 +25,11 @@ export class AcceptLeaveRequestCommandHandler {
     @Inject('IDateUtils')
     private readonly dateUtils: IDateUtils,
     private readonly canLeaveRequestBeModerated: CanLeaveRequestBeModerated,
-    private readonly doesLeaveExistForPeriod: DoesLeaveExistForPeriod
+    private readonly doesLeaveExistForPeriod: DoesLeaveExistForPeriod,
+    @Inject('ICommandBus')
+    private readonly commandBus: ICommandBus,
+    @Inject('ITranslator')
+    private readonly translator: ITranslator
   ) {}
 
   public async execute(command: AcceptLeaveRequestCommand): Promise<string> {
@@ -58,6 +66,29 @@ export class AcceptLeaveRequestCommandHandler {
 
     await this.leaveRequestRepository.save(leaveRequest);
     this.eventBus.publish(new AcceptedLeaveRequestEvent(leaveRequest));
+
+    this.commandBus.execute(
+      new CreateNotificationCommand(
+        NotificationType.REACTION,
+        this.translator.translate(
+          'leave-requests-approve-notification-emoji-name'
+        ),
+        leaveRequest
+      )
+    );
+
+    this.commandBus.execute(
+      new CreateNotificationCommand(
+        NotificationType.COMMENT,
+        this.translator.translate(
+          'leave-requests-approve-notification-message',
+          {
+            moderatorFirstName: moderator.getFirstName()
+          }
+        ),
+        leaveRequest
+      )
+    );
 
     return leaveRequest.getId();
   }

@@ -45,7 +45,7 @@ export class ModerateLeaveRequestController {
     try {
       await this.commandBus.execute(command);
 
-      res.redirect(303, this.resolver.resolve('people_leaves_list'));
+      res.redirect(303, this.resolver.resolve('people_leave_requests_list'));
     } catch (e) {
       throw new BadRequestException(e.message);
     }

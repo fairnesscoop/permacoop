@@ -27,13 +27,13 @@ export class ListProjectsController {
   @Get()
   @WithName('crm_projects_list')
   @Render('pages/projects/list.njk')
-  public async get(@Query() pagination: PaginationDTO) {
-    const projects: Pagination<ProjectView> = await this.queryBus.execute(
-      new GetProjectsQuery(pagination.page)
+  public async get(@Query() paginationDto: PaginationDTO) {
+    const pagination: Pagination<ProjectView> = await this.queryBus.execute(
+      new GetProjectsQuery(paginationDto.page, false)
     );
 
-    const table = this.tableFactory.create(projects.items);
+    const table = this.tableFactory.create(pagination.items);
 
-    return { table };
+    return { table, pagination, currentPage: paginationDto.page };
   }
 }

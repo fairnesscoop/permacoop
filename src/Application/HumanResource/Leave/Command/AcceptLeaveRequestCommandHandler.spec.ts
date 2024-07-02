@@ -12,6 +12,8 @@ import { DoesLeaveExistForPeriod } from 'src/Domain/FairCalendar/Specification/D
 import { EventsOrLeavesAlreadyExistForThisPeriodException } from 'src/Domain/FairCalendar/Exception/EventsOrLeavesAlreadyExistForThisPeriodException';
 import { LeaveRequest } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { LeaveRequestRepository } from 'src/Infrastructure/HumanResource/Leave/Repository/LeaveRequestRepository';
+import { CommandBusAdapter } from 'src/Infrastructure/Adapter/CommandBusAdapter';
+import { FluentTranslatorAdapter } from 'src/Infrastructure/Adapter/FluentTranslatorAdapter';
 
 describe('AcceptLeaveRequestCommandHandler', () => {
   let leaveRequestRepository: LeaveRequestRepository;
@@ -19,6 +21,8 @@ describe('AcceptLeaveRequestCommandHandler', () => {
   let dateUtilsAdapter: DateUtilsAdapter;
   let canLeaveRequestBeModerated: CanLeaveRequestBeModerated;
   let doesLeaveExistForPeriod: DoesLeaveExistForPeriod;
+  let commandBusAdapter: CommandBusAdapter;
+  let fluentTranslatorAdapter: FluentTranslatorAdapter;
   let handler: AcceptLeaveRequestCommandHandler;
 
   const user = mock(User);
@@ -35,13 +39,17 @@ describe('AcceptLeaveRequestCommandHandler', () => {
     dateUtilsAdapter = mock(DateUtilsAdapter);
     canLeaveRequestBeModerated = mock(CanLeaveRequestBeModerated);
     doesLeaveExistForPeriod = mock(DoesLeaveExistForPeriod);
+    commandBusAdapter = mock(CommandBusAdapter);
+    fluentTranslatorAdapter = mock(FluentTranslatorAdapter);
 
     handler = new AcceptLeaveRequestCommandHandler(
       instance(leaveRequestRepository),
       instance(eventBusAdapter),
       instance(dateUtilsAdapter),
       instance(canLeaveRequestBeModerated),
-      instance(doesLeaveExistForPeriod)
+      instance(doesLeaveExistForPeriod),
+      instance(commandBusAdapter),
+      instance(fluentTranslatorAdapter)
     );
   });
 

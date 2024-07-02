@@ -17,7 +17,7 @@ describe('IsProjectAlreadyExist', () => {
 
   it('testProjectAlreadyExist', async () => {
     when(projectRepository.findOneByName('Encom')).thenResolve(
-      new Project('Encom', InvoiceUnits.DAY, new Customer('Radio France'))
+      new Project('Encom', InvoiceUnits.DAY, true, new Customer('Radio France'))
     );
     expect(await isProjectAlreadyExist.isSatisfiedBy('Encom')).toBe(true);
     verify(projectRepository.findOneByName('Encom')).once();

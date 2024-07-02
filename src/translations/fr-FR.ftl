@@ -1,10 +1,12 @@
 common-form-save = Enregistrer
 common-form-update = Mettre à jour
 common-form-delete = Supprimer
+common-form-cancel = Annuler
 common-view = Voir
 common-add = Ajouter
 common-edit = Modifier
 common-actions = Actions
+common-close = Fermer
 common-yes = Oui
 common-no = Non
 common-table-empty = Aucun élément
@@ -14,6 +16,10 @@ common-month-long = {DATETIME($date, month: "long")}
 common-month-previous = Mois précédent
 common-month-today = Aujourd'hui
 common-month-next = Mois suivant
+
+dialog-delete-title = Supprimer cet élément ?
+dialog-delete-yes = Oui, supprimer
+dialog-delete-no = Non, ne pas supprimer
 
 coop-name = Fairness
 site-title = Permacoop
@@ -27,6 +33,11 @@ form-errors-title = Erreur
 header-profile = Mon compte
 header-dropdown = Voir plus d'actions
 header-logout = Se déconnecter
+
+pagination = Pagination
+pagination-previous = Page précédente
+pagination-page = Page {$page}
+pagination-next = Page suivante
 
 login-title = Connexion
 login-email = Adresse email
@@ -94,6 +105,7 @@ crm-projects-add-title = Ajouter un projet
 crm-projects-edit-title = Édition du projet "{$name}"
 crm-projects-name-title = Nom du projet
 crm-projects-customer-title = Client
+crm-projects-active = Actif
 
 crm-tasks-title = Missions
 crm-tasks-name = Nom de la mission
@@ -118,6 +130,8 @@ leaves-type-value = {$type ->
     [special] Congé exceptionnel
     [medical] Congé maladie
     [illimited] Congé illimité
+    [postponedWorkedFreeDay] Congé jour férié glissant
+    [relocation] Congé déménagement
     *[other] Autre
 }
 leaves-type-value-plural = {$type ->
@@ -126,6 +140,8 @@ leaves-type-value-plural = {$type ->
     [special] Congés exceptionnels
     [medical] Congés maladie
     [illimited] Congés illimités
+    [postponedWorkedFreeDay] Congés jours fériés glissants
+    [relocation] Congés déménagement
     *[other] Autre
 }
 leaves-startDate = Du
@@ -145,14 +161,23 @@ leaves-duration-value = {$days ->
     [1] 1 jour
     *[other] {$days} jours
 }
+leaves-moderator = Modérateur⋅ice
+leaves-moderateAt = Modéré le
 leaves-see-requests = Voir les demandes de congés
-leave-requests-title = Demandes de congés
 leave-requests-add-title = Faire une demande de congés
-leave-requests-edit-title = Demande de {$user}
+leave-requests-detail-title = Demande de {$user}
+leave-requests-edit-title = Édition de la demande de {$user}
 leave-requests-error-cannot-moderate = Vous ne pouvez pas modérer cette demande de congés.
 leave-requests-moderation = Modération
 leave-requests-moderation-accept = Accepter la demande de congés
 leave-requests-moderation-deny = Refuser la demande de congés
+leave-requests-delete = Annuler ce congé
+leave-requests-delete-title = Annuler ce congé ?
+leave-requests-delete-yes = Oui, annuler
+leave-requests-delete-no = Non, ne pas annuler
+leave-requests-create-notification-message = Salut 👋, {$userFirstName} a fait une demande de congé du {$startDate} au {$endDate} ({$duration} jour(s)). Vous pouvez la visualiser ici: {$link}
+leave-requests-approve-notification-emoji-name = white_check_mark
+leave-requests-approve-notification-message = Demande de congé approuvée par {$moderatorFirstName}
 leaves-calendar-url-title = Lien d'abonnement au calendrier
 
 payroll-elements-title = Éléments de paie
@@ -177,6 +202,8 @@ payroll-elements-paidLeaves = Congés payés
 payroll-elements-unpaidLeaves = Congés sans solde
 payroll-elements-medicalLeaves = Congés maladie
 payroll-elements-specialLeaves = Congés exceptionnels
+payroll-elements-postponedWorkedFreeDayLeaves = Congés jours fériés glissants
+payroll-elements-relocationLeaves = Congés déménagement
 payroll-elements-download = Télécharger
 payroll-elements-filename = Fairness - Éléments de paie - {$date}.csv
 payroll-elements-wiki = Voir le Wiki

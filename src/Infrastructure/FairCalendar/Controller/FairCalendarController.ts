@@ -99,6 +99,7 @@ export class FairCalendarController {
 
       return {
         // See: https://fullcalendar.io/docs/event-object
+        id: event.id,
         type: fcEventType,
         start: event.date,
         end: event.date,
@@ -131,7 +132,8 @@ export class FairCalendarController {
       currentYear: date.getFullYear(),
       userId,
       viewName: req.cookies.faircalendar_view,
-      listViewDays
+      listViewDays,
+      isCalendarOfLoggedUser: userId === user.getId()
     };
   }
 }

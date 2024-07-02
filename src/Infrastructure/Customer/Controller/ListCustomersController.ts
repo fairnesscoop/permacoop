@@ -27,13 +27,13 @@ export class ListCustomersController {
   @Get()
   @WithName('crm_customers_list')
   @Render('pages/customers/list.njk')
-  public async get(@Query() pagination: PaginationDTO) {
-    const customers: Pagination<CustomerView> = await this.queryBus.execute(
-      new GetCustomersQuery(pagination.page)
+  public async get(@Query() paginationDto: PaginationDTO) {
+    const pagination: Pagination<CustomerView> = await this.queryBus.execute(
+      new GetCustomersQuery(paginationDto.page)
     );
 
-    const table = this.tableFactory.create(customers.items);
+    const table = this.tableFactory.create(pagination.items);
 
-    return { table };
+    return { table, pagination, currentPage: paginationDto.page };
   }
 }

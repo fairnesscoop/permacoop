@@ -27,13 +27,13 @@ export class ListTasksController {
   @Get()
   @WithName('crm_tasks_list')
   @Render('pages/tasks/list.njk')
-  public async get(@Query() pagination: PaginationDTO) {
-    const tasks: Pagination<TaskView> = await this.queryBus.execute(
-      new GetTasksQuery(pagination.page)
+  public async get(@Query() paginationDto: PaginationDTO) {
+    const pagination: Pagination<TaskView> = await this.queryBus.execute(
+      new GetTasksQuery(paginationDto.page)
     );
 
-    const table = this.tableFactory.create(tasks.items);
+    const table = this.tableFactory.create(pagination.items);
 
-    return { table };
+    return { table, pagination, currentPage: paginationDto.page };
   }
 }
