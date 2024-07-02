@@ -31,7 +31,8 @@ describe('UpdateProfileCommandHandler', () => {
     '2018-01-01',
     null,
     75.2,
-    70
+    70,
+    30
   );
 
   beforeEach(() => {
@@ -74,7 +75,8 @@ describe('UpdateProfileCommandHandler', () => {
       '2017-08-01',
       '2018-12-31',
       null,
-      7000
+      7000,
+      3000
     );
     const user = new User(
       'John',
@@ -105,7 +107,8 @@ describe('UpdateProfileCommandHandler', () => {
       '2018-01-01',
       null,
       7520,
-      7000
+      7000,
+      3000
     );
     verify(
       userRepository.save(
@@ -137,7 +140,8 @@ describe('UpdateProfileCommandHandler', () => {
       '2017-08-01',
       '2018-12-31',
       null,
-      7000
+      7000,
+      3000
     );
     const user = new User(
       'John',
