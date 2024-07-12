@@ -207,4 +207,38 @@ export class DateUtilsAdapter implements IDateUtils {
 
     return duration;
   }
+
+  /**
+   * @param duration Duration in minutes
+   * @returns Duration in days
+   */
+  public getLeaveDurationAsDays(duration: number) {
+    return duration / 420;
+  }
+
+  getLeaveReferencePeriodDays(date: Date): [Date, Date] {
+    // Reference period is between June 1st and May 31st.
+
+    let startDate = this.makeDate(this.getYear(date), 6, 1);
+
+    if (startDate > date) {
+      startDate = this.makeDate(this.getYear(date) - 1, 6, 1);
+    }
+
+    let endDate = this.makeDate(this.getYear(date), 5, 31);
+
+    if (endDate < date) {
+      endDate = this.makeDate(this.getYear(date) + 1, 5, 31);
+    }
+
+    return [startDate, endDate];
+  }
+
+  getWorkedDaysPerWeek(): number {
+    return 5;
+  }
+
+  getNumberOfPaidLeaveWeeks(): number {
+    return 7;
+  }
 }

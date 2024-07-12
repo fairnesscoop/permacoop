@@ -2,3 +2,7 @@
   display: grid;
   place-items: center;
 }
+
+.pc-relative {
+  position: relative;
+}

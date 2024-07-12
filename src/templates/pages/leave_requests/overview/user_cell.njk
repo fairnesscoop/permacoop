@@ -1,0 +1,22 @@
+<pc-auto-form>
+    <form
+        method="GET"
+        action=""
+        class="pc-cluster pc-gap"
+        style="--cluster-align: flex-end"
+    >
+        <div class="pc-select-group pc-m" style="--m: 0">
+            <label class="pc-label pc-visually-hidden" for="userId">{{ 'leaves-user'|trans }}</label>
+            <select name="userId" id="userId">
+                {% for user in users %}
+                    <option value="{{ user.id }}" {% if user.id == userId %}selected{% endif %}>{{ user|fullName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <noscript>
+            <button type="submit" class="pc-btn pc-btn--secondary">
+                {{ 'common-form-update'|trans }}
+            </button>
+        </noscript>
+    </form>
+</pc-auto-form>

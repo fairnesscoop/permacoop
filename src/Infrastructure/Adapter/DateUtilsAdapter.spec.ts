@@ -168,4 +168,34 @@ describe('DateUtilsAdapter', () => {
     const result = dateUtils.getMonth(date);
     expect(result).toStrictEqual(expectedResult);
   });
+
+  it('getLeaveDurationsAsDays', () => {
+    const dateUtils = new DateUtilsAdapter();
+    expect(dateUtils.getLeaveDurationAsDays(0)).toBe(0);
+    expect(dateUtils.getLeaveDurationAsDays(420)).toBe(1);
+    expect(dateUtils.getLeaveDurationAsDays(420 / 2)).toBe(0.5);
+  });
+
+  it('getLeaveReferencePeriodDays', () => {
+    const dateUtils = new DateUtilsAdapter();
+    expect(
+      dateUtils.getLeaveReferencePeriodDays(new Date('2024-01-01'))
+    ).toEqual([new Date('2023-06-01'), new Date('2024-05-31')]);
+    expect(
+      dateUtils.getLeaveReferencePeriodDays(new Date('2024-05-31'))
+    ).toEqual([new Date('2023-06-01'), new Date('2024-05-31')]);
+    expect(
+      dateUtils.getLeaveReferencePeriodDays(new Date('2024-06-01'))
+    ).toEqual([new Date('2024-06-01'), new Date('2025-05-31')]);
+  });
+
+  it('getWorkedDaysPerWeek', () => {
+    const dateUtils = new DateUtilsAdapter();
+    expect(dateUtils.getWorkedDaysPerWeek()).toBe(5);
+  });
+
+  it('getNumberOfPaidLeaveWeeks', () => {
+    const dateUtils = new DateUtilsAdapter();
+    expect(dateUtils.getNumberOfPaidLeaveWeeks()).toBe(7);
+  });
 });

@@ -7,7 +7,13 @@
     <thead>
       <tr>
         {% for column in table.columns %}
-          <th>{{ column|trans }}</th>
+          <th>
+            {% if column.isRaw %}
+              {{ column.getRaw()|safe }}
+            {% else %}
+              {{ column|trans }}
+            {% endif %}
+          </th>
         {% endfor %}
       </tr>
     </thead>
