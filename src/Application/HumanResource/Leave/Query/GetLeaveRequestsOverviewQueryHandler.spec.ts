@@ -43,7 +43,7 @@ describe('GetLeaveRequestsOverviewQueryHandler', () => {
         endDate,
         userId
       )
-    ).thenReturn(new Promise(resolve => resolve(6 * 420)));
+    ).thenResolve(6 * 420);
 
     when(dateUtils.getLeaveDurationAsDays(6 * 420)).thenReturn(6);
 
