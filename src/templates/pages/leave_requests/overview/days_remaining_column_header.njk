@@ -1,16 +1,5 @@
-<span>
-    {{ 'leaves-overview-daysRemaining'|trans }}
-</span>
-
-<span class="pc-relative">
-    <button
-        popovertarget="leaves-explanation"
-        class="pc-btn pc-btn--secondary pc-btn--circle"
-        title="{{ 'leaves-overview-daysRemaining-showExplanation'|trans }}"
-        aria-label="{{ 'leaves-overview-daysRemaining-showExplanation'|trans }}"
-    >i</button>
-
-    <div id="leaves-explanation" popover>
-        {{ 'leaves-overview-daysRemaining-explanation'|trans({ daysPerYear: daysPerYear }) }}
-    </div>
+{{ 'leaves-overview-daysRemaining'|trans }}
+<br>
+<span class="pc-text--default pc-text--small">
+    ({{ 'leaves-overview-daysRemaining-explanation'|trans({ daysPerYear: daysPerYear }) }})
 </span>

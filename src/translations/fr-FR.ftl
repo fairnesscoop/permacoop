@@ -193,11 +193,11 @@ leaves-overview-daysRemaining-value = {$daysRemaining ->
     [1] 1 jour
     *[other] {$daysRemaining} jours
 }
-leaves-overview-daysRemaining-explanation = Estimation sur une base de {$daysPerYear ->
+leaves-overview-daysRemaining-explanation = {$daysPerYear ->
     [0] 0
     [1] 1 jour
     *[other] {$daysPerYear} jours
-} par an, hors congés exceptionnels
+} par an, réinitialisé le 01/06, hors congés exceptionnels
 
 payroll-elements-title = Éléments de paie
 payroll-elements-page-title = Éléments de paie {DATETIME($date, month: "long", year: "numeric")}

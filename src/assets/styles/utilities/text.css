@@ -5,3 +5,13 @@
 .pc-bold {
   font-weight: bold;
 }
+
+.pc-text--default {
+  font-size: var(--font-size-default);
+  font-weight: normal;
+  text-transform: none;
+}
+
+.pc-text--small {
+  font-size: var(--font-size-sm);
+}
