@@ -18,7 +18,6 @@ import { IdDTO } from 'src/Infrastructure/Common/DTO/IdDTO';
 import { UserAdministrativeDTO } from '../DTO/UserAdministrativeDTO';
 import { IsAuthenticatedGuard } from '../Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
-import { GetUserByIdQuery } from 'src/Application/HumanResource/User/Query/GetUserByIdQuery';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 import {
@@ -68,7 +67,8 @@ export class EditUserController {
       joiningDate,
       leavingDate,
       transportFee,
-      sustainableMobilityFee
+      sustainableMobilityFee,
+      sportsPassFee
     } = userAdministrativeDto;
 
     try {
@@ -84,7 +84,8 @@ export class EditUserController {
           joiningDate,
           leavingDate ? leavingDate : null,
           transportFee,
-          sustainableMobilityFee
+          sustainableMobilityFee,
+          sportsPassFee
         )
       );
 

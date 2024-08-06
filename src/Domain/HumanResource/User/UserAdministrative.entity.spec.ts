@@ -15,7 +15,8 @@ describe('UserAdministrative.entity', () => {
       '2020-01-01',
       '2021-01-01',
       7550,
-      7000
+      7000,
+      3000
     );
 
     expect(admin.getId()).toBe(undefined);
@@ -28,6 +29,7 @@ describe('UserAdministrative.entity', () => {
     expect(admin.isExecutivePosition()).toBe(true);
     expect(admin.haveHealthInsurance()).toBe(true);
     expect(admin.getSustainableMobilityFee()).toBe(7000);
+    expect(admin.getSportsPassFee()).toBe(3000);
   });
 
   it('testUpdate', () => {
@@ -40,7 +42,8 @@ describe('UserAdministrative.entity', () => {
       '2020-01-01',
       null,
       7550,
-      7000
+      7000,
+      3000
     );
 
     admin.update(
@@ -52,7 +55,8 @@ describe('UserAdministrative.entity', () => {
       '2020-01-02',
       '2021-01-02',
       null,
-      3000
+      3000,
+      2000
     );
     expect(admin.getAnnualEarnings()).toBe(3000000);
     expect(admin.getContract()).toBe(ContractType.APPRENTICESHIP);
@@ -63,5 +67,6 @@ describe('UserAdministrative.entity', () => {
     expect(admin.getLeavingDate()).toBe('2021-01-02');
     expect(admin.getTransportFee()).toBe(null);
     expect(admin.getSustainableMobilityFee()).toBe(3000);
+    expect(admin.getSportsPassFee()).toBe(2000);
   });
 });

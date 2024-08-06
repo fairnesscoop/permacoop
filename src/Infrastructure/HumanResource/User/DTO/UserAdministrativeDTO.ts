@@ -37,6 +37,11 @@ export class UserAdministrativeDTO {
   @Min(0)
   public sustainableMobilityFee: number;
 
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  public sportsPassFee: number;
+
   @IsNotEmpty()
   @Transform((_, { healthInsurance }) => healthInsurance === 'true')
   @IsBoolean()

@@ -39,20 +39,25 @@
         </div>
     </div>
 
-    <div class="pc-grid pc-gap" style="--grid-cols: 3">
+    <div class="pc-grid pc-gap" style="--grid-cols: 4">
         <div class="pc-input-group">
             <label class="pc-label required" for="annualEarnings">{{ 'users-annualEarnings'|trans }}</label>
             <input type="number" min="0" id="annualEarnings" name="annualEarnings" required value="{% if userAdministrative %}{{ userAdministrative.annualEarnings }}{% else %}0{% endif %}">
         </div>
-    
+
         <div class="pc-input-group">
             <label class="pc-label required" for="transportFee">{{ 'users-transportFee'|trans }}</label>
             <input type="number" min="0" step="any" id="transportFee" name="transportFee" required value="{% if userAdministrative %}{{ userAdministrative.transportFee }}{% else %}0{% endif %}">
         </div>
-    
+
         <div class="pc-input-group">
             <label class="pc-label required" for="sustainableMobilityFee">{{ 'users-sustainableMobilityFee'|trans }}</label>
             <input type="number" min="0" step="any" id="sustainableMobilityFee" name="sustainableMobilityFee" required value="{% if userAdministrative %}{{ userAdministrative.sustainableMobilityFee }}{% else %}0{% endif %}">
+        </div>
+
+        <div class="pc-input-group">
+            <label class="pc-label required" for="sportsPassFee">{{ 'users-sportsPassFee'|trans }}</label>
+            <input type="number" min="0" step="any" id="sportsPassFee" name="sportsPassFee" required value="{% if userAdministrative %}{{ userAdministrative.sportsPassFee }}{% else %}0{% endif %}">
         </div>
     </div>
 
@@ -61,7 +66,7 @@
             <label class="pc-label required" for="joiningDate">{{ 'users-joiningDate'|trans }}</label>
             <input type="date" id="joiningDate" name="joiningDate" required {% if userAdministrative %}value="{{ userAdministrative.joiningDate }}"{% endif %}>
         </div>
-    
+
         <div class="pc-input-group">
             <label class="pc-label" for="leavingDate">{{ 'users-leavingDate'|trans }}</label>
             <input type="date" id="leavingDate" name="leavingDate" {% if userAdministrative %}value="{{ userAdministrative.leavingDate }}"{% endif %}>
