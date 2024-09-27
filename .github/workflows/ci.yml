@@ -19,7 +19,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: Tests
-        run: make ci
+        run: make ci BIN_DOCKER_COMPOSE="docker compose"
 
       - uses: codecov/codecov-action@v1
         with:

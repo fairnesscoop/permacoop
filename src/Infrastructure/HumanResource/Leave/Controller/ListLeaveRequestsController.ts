@@ -61,7 +61,7 @@ export class ListLeaveRequestsController {
       overviewTable,
       pagination,
       currentPage: dto.page,
-      calendarToken,
+      calendarToken
     };
   }
 }
