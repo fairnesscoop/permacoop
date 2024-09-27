@@ -54,11 +54,14 @@ export class ListLeaveRequestsController {
       userId
     );
 
+    const calendarToken = process.env.CALENDAR_TOKEN;
+
     return {
       table,
       overviewTable,
       pagination,
-      currentPage: dto.page
+      currentPage: dto.page,
+      calendarToken
     };
   }
 }

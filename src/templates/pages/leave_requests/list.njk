@@ -15,6 +15,16 @@
         {{ links.add(path('people_leave_requests_add'), text='leave-requests-add-title'|trans) }}
     </div>
 
+    <div class="pc-cluster pc-gap" style="--cluster-align: center">
+        <label for="calendarUrl">{{ 'leaves-calendar-url-title'|trans }}</label>
+        <input id="calendarUrl" class="pc-input" style="--input-width: fit-content" type="text" readonly value="{{ url('people_leaves_calendar') }}?token={{ calendarToken }}">
+        <pc-clipboard-button class="pc-js-only" data-source="#calendarUrl">
+            <button class="pc-btn pc-btn--muted" title="{{ 'clipboard-copy'|trans }}">
+                {{ icons.clipboard() }}
+            </button>
+        </pc-clipboard-button>
+    </div>
+
     <div class="pc-cluster" style="--cluster-gap: calc(3 * var(--w))">
         <div class="pc-stack">
             <h2>{{ 'leaves-summary-title'|trans }}</h2>
