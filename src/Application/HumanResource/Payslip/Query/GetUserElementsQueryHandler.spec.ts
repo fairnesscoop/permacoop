@@ -101,20 +101,29 @@ describe('GetUserElementsQueryHandler', () => {
     const startDate1 = '2022-05-09';
     const endDate1 = '2022-05-11';
     const leaveRequest1 = createLeaveRequestMock(startDate1, endDate1);
-    const leaveRequestSlot1 = new LeaveRequestSlotView(startDate1, endDate1);
+    const leaveRequestSlot1 = new LeaveRequestSlotView(
+      startDate1,
+      false,
+      endDate1,
+      false
+    );
     const startDate2 = '2022-04-25';
     const endDate2 = '2022-05-02';
     const leaveRequest2 = createLeaveRequestMock(startDate2, endDate2);
     const leaveRequestSlot2 = new LeaveRequestSlotView(
       '2022-05-01T00:00:00.000Z',
-      endDate2
+      true,
+      endDate2,
+      false
     );
     const startDate3 = '2022-05-29';
     const endDate3 = '2022-06-05';
     const leaveRequest3 = createLeaveRequestMock(startDate3, endDate3);
     const leaveRequestSlot3 = new LeaveRequestSlotView(
       startDate3,
-      '2022-05-31T00:00:00.000Z'
+      false,
+      '2022-05-31T00:00:00.000Z',
+      true
     );
 
     when(
