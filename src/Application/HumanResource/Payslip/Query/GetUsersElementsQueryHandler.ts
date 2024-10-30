@@ -95,7 +95,9 @@ export class GetUsersElementsQueryHandler {
       leavesSlotViews.push(
         new LeaveRequestSlotView(
           monthScopedLeave.startDate,
-          monthScopedLeave.endDate
+          monthScopedLeave.startsAllDay,
+          monthScopedLeave.endDate,
+          monthScopedLeave.endsAllDay
         )
       );
     }

@@ -1,7 +1,7 @@
 {%- if leaves.totalDays > 0 -%}
     <strong>{{ leaves.totalDays }}</strong> <br>
     {%- for leave in leaves.leaves -%}
-        {{ leave.startDate|date }} -> {{ leave.endDate|date }}
+        {{ leave.startDate|date }} {% if not leave.startsAllDay %}(0.5){% endif %} -> {{ leave.endDate|date }} {% if not leave.endsAllDay %}(0.5){% endif %}
         {%- if not loop.last %}<br>{% endif -%}
     {%- endfor -%}
 {%- endif -%}
