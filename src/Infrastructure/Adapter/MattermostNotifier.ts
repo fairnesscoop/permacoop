@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { BadGatewayException, Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { IMattermostNotifier } from 'src/Application/IMattermostNotifier';
 
@@ -29,7 +29,7 @@ export class MattermostNotifier implements IMattermostNotifier {
 
       return response.data;
     } catch (e) {
-      throw BadGatewayException;
+      throw new InternalServerErrorException(e);
     }
   }
 
@@ -55,12 +55,10 @@ export class MattermostNotifier implements IMattermostNotifier {
         }
       );
 
-      console.log(response.data);
-
       return response.data;
     } catch (e) {
-      console.log('--error: ', e);
-      throw BadGatewayException;
+      console.error('--error: ', e);
+      throw new InternalServerErrorException(e);
     }
   }
 
@@ -87,7 +85,7 @@ export class MattermostNotifier implements IMattermostNotifier {
 
       return response.data;
     } catch (e) {
-      throw BadGatewayException;
+      throw new InternalServerErrorException(e);
     }
   }
 }
