@@ -22,6 +22,17 @@ export class CreateNotificationCommandHandler {
   ) {}
 
   public async execute(command: CreateNotificationCommand): Promise<string> {
+    try {
+      return await this.createNotification(command);
+    } catch (e) {
+      // On avale l'exception pour éviter d'interrompre les autres traitements.
+      // Tant pis si la notification ne part pas, on finira bien par s'en rendre compte.
+      console.error('Failed to create notification:', e);
+    }
+  }
+  private async createNotification(
+    command: CreateNotificationCommand
+  ): Promise<string> {
     const { message, type, leaveReaquest } = command;
 
     if (type === NotificationType.POST) {
