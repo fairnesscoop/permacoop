@@ -1,7 +1,8 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { IMattermostNotifier } from 'src/Application/IMattermostNotifier';
+import { NotificationFailureException } from 'src/Domain/Notification/Exception/NotificationFailureException';
 
 @Injectable()
 export class MattermostNotifier implements IMattermostNotifier {
@@ -29,7 +30,7 @@ export class MattermostNotifier implements IMattermostNotifier {
 
       return response.data;
     } catch (e) {
-      throw new InternalServerErrorException(e);
+      throw new NotificationFailureException(e);
     }
   }
 
@@ -57,8 +58,7 @@ export class MattermostNotifier implements IMattermostNotifier {
 
       return response.data;
     } catch (e) {
-      console.error('--error: ', e);
-      throw new InternalServerErrorException(e);
+      throw new NotificationFailureException(e);
     }
   }
 
@@ -85,7 +85,7 @@ export class MattermostNotifier implements IMattermostNotifier {
 
       return response.data;
     } catch (e) {
-      throw new InternalServerErrorException(e);
+      throw new NotificationFailureException(e);
     }
   }
 }
