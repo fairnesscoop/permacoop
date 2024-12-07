@@ -13,7 +13,7 @@ export class IsMaximumTimeSpentReached {
 
   public async isSatisfiedBy(
     event: Event,
-    newTime: number = 0
+    newTime = 0
   ): Promise<boolean> {
     const user = event.getUser();
     const date = event.getDate();
