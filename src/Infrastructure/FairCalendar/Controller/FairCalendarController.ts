@@ -25,7 +25,9 @@ import { FairCalendarOverviewTableFactory } from '../Table/FairCalendarOverviewT
 import { IDateUtils } from 'src/Application/IDateUtils';
 import { ArrayUtils } from 'src/Infrastructure/Common/Utils/ArrayUtils';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Calendar')
 @Controller('app/faircalendar')
 @UseGuards(IsAuthenticatedGuard)
 export class FairCalendarController {

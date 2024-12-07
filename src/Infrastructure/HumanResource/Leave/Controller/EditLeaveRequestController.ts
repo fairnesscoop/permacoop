@@ -27,7 +27,9 @@ import { GetLeaveRequestByIdQuery } from 'src/Application/HumanResource/Leave/Qu
 import { IQueryBus } from 'src/Application/IQueryBus';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { DoesLeaveRequestBelongToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongToUser';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: Leave')
 @Controller('app/people/leave-requests/edit')
 @UseGuards(IsAuthenticatedGuard)
 export class EditLeaveRequestController {

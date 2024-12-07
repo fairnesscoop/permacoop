@@ -18,7 +18,9 @@ import { CanLeaveRequestBeModerated } from 'src/Domain/HumanResource/Leave/Speci
 import { LeaveRequestDetailView } from 'src/Application/HumanResource/Leave/View/LeaveRequestDetailView';
 import { DoesLeaveRequestBelongToUser } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestBelongToUser';
 import { Status } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: Leave')
 @Controller('app/people/leaves')
 @UseGuards(IsAuthenticatedGuard)
 export class GetLeaveRequestController {

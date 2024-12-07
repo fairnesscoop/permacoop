@@ -5,9 +5,11 @@ import {
   Req,
   Res
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 
+@ApiTags('HR :: Authentication')
 @Controller('logout')
 export class LogoutController {
   @Post()

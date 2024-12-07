@@ -9,6 +9,7 @@ import dataSource from './datasource';
 import { ITemplates } from './Infrastructure/Templates/ITemplates';
 import { flashMessages } from './Infrastructure/Templates/FlashMessages';
 import { useSession } from './Infrastructure/Security/ExpressSession';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -37,6 +38,22 @@ async function bootstrap() {
   templates.registerViewEngine(app, '');
 
   app.use(flashMessages());
+
+  const swaggerCustomOptions = {
+    explorer: false,
+    customCss: '.swagger-ui .topbar { background-color: black; } .swagger-ui img { display: none; }',
+    customSiteTitle: 'Permacoop API',
+    customfavIcon: ""
+  }
+
+  const swaggerOptions = new DocumentBuilder()
+    .setTitle('Permacoop API')
+    .setDescription('Permacoop is an open source and eco design ERP solution reserved for worker-owned business.')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, swaggerOptions);
+  SwaggerModule.setup('docs', app, document, swaggerCustomOptions);
 
   await app.listen(+(process.env.PORT || 3000), '0.0.0.0');
 }

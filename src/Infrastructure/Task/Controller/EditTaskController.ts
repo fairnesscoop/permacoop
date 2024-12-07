@@ -20,7 +20,9 @@ import { TaskDTO } from '../DTO/TaskDTO';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { GetTaskByIdQuery } from 'src/Application/Task/Query/GetTaskByIdQuery';
 import { UpdateTaskCommand } from 'src/Application/Task/Command/UpdateTaskCommand';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Task')
 @Controller('app/tasks/edit')
 @UseGuards(IsAuthenticatedGuard)
 export class EditTaskController {

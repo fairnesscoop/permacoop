@@ -16,7 +16,9 @@ import { DeleteLeaveRequestCommand } from 'src/Application/HumanResource/Leave/C
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { IsAuthenticatedGuard } from '../../User/Security/IsAuthenticatedGuard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: Leave')
 @Controller('app/people/leave-requests/delete')
 @UseGuards(IsAuthenticatedGuard)
 export class DeleteLeaveRequestController {
