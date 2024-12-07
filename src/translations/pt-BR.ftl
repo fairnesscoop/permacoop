@@ -1,4 +1,4 @@
-common-form-save = Registar
+common-form-save = Registrar
 common-form-update = Gravar
 common-form-delete = Excluir
 common-form-cancel = Cancelar
@@ -31,7 +31,7 @@ http-error = Erro {$statusCode} : {$errorName}
 form-errors-title = Erro
 
 header-profile = A minha conta
-header-dropdown = Ver mais acções
+header-dropdown = Ver mais ações
 header-logout = Desconectar
 
 pagination = Paginação
@@ -41,10 +41,10 @@ pagination-next = Página seguinte
 
 login-title = Conexão
 login-email = E-mail
-login-password = Palavra passe
+login-password = Senha
 login-submit = Conectar
-login-error-failed = O endereço de e-mail ou a palavra-passe estão incorretos. Por favor, tente novamente.
-login-error-auth-required = Por favor inicie sessão para aceder a esta página.
+login-error-failed = O endereço de e-mail ou a senha estão incorretos. Por favor, tente novamente.
+login-error-auth-required = Por favor inicie sessão para logar a esta página.
 
 home-title = Bom dia, {$user} !
 home-pending-leaves-title = Solicitações pendentes
@@ -105,7 +105,7 @@ crm-projects-add-title = Adicionar um projeto
 crm-projects-edit-title = Edtar o projeto "{$name}"
 crm-projects-name-title = Nome do projeto
 crm-projects-customer-title = Cliente
-crm-projects-active = Activo
+crm-projects-active = Ativo
 
 crm-tasks-title = Tarefas
 crm-tasks-name = Nome da Tarefa
@@ -114,9 +114,9 @@ crm-tasks-edit-title = Editar a tarefa "{$name}"
 
 profile-title = A minha conta
 profile-firstName = Nome
-profile-lastName = Apelido
+profile-lastName = Sobrenome
 profile-email = E-mail
-profile-password = Palavra passe
+profile-password = Senha
 
 people-title = FairRH
 
@@ -240,7 +240,7 @@ users-title = Colaboradores e funcionários
 users-add-title = Adicionar umAjouter um colaborador/funcionário
 users-edit-title = Atualizar informações administrativas de {$user}
 users-firstName = Nome
-users-lastName = Apelido
+users-lastName = Sobrenome
 users-email = E-mail
 users-role = Função
 users-role-value = {$role ->

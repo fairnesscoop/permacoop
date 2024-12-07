@@ -16,7 +16,7 @@ import {
 } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import { UserRole } from 'src/Domain/HumanResource/User/User.entity';
 import { Transform } from 'class-transformer';
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UserAdministrativeDTO {
   @ApiProperty()

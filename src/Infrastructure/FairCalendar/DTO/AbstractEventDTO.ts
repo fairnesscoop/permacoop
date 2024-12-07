@@ -9,7 +9,7 @@ import {
 } from 'class-validator';
 import { EventType } from 'src/Domain/FairCalendar/Event.entity';
 import { ArrayUtils } from 'src/Infrastructure/Common/Utils/ArrayUtils';
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export abstract class AbstractEventDTO {
   @ApiProperty()

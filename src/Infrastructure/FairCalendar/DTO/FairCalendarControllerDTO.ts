@@ -1,5 +1,5 @@
 import { IsOptional, IsUUID, IsNumber } from 'class-validator';
-import { ApiPropertyOptional } from "@nestjs/swagger";
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 // TODO test
 export class FairCalendarControllerDTO {

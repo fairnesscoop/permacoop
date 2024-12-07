@@ -30,7 +30,7 @@ export class TaskRepository implements ITaskRepository {
       .getOne();
   }
 
-  public findTasks(page: number = 1): Promise<[Task[], number]> {
+  public findTasks(page = 1): Promise<[Task[], number]> {
     return this.repository
       .createQueryBuilder('task')
       .select(['task.id', 'task.name'])

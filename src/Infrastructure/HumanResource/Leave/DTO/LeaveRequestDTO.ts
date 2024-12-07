@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 import { Type } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { DateGreaterOrEqualThan } from 'src/Infrastructure/Common/Validator/DateGreaterOrEqualThan';
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class LeaveRequestDTO {
   @ApiProperty()
