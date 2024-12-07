@@ -237,7 +237,7 @@ meal-tickets-removal-date = Não desejo receber voucher de restaurante para a da
 
 
 users-title = Colaboradores e funcionários
-users-add-title = Adicionar umAjouter um colaborador/funcionário
+users-add-title = Adicionar um colaborador/funcionário
 users-edit-title = Atualizar informações administrativas de {$user}
 users-firstName = Nome
 users-lastName = Sobrenome
