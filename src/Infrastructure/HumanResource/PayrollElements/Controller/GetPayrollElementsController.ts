@@ -19,7 +19,9 @@ import { GetPayrollElementsControllerDTO } from '../DTO/GetPayrollElementsContro
 import { Response } from 'express';
 import { ITranslator } from 'src/Infrastructure/Translations/ITranslator';
 import { formatHtmlYearMonth } from 'src/Infrastructure/Common/Utils/dateUtils';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: Payroll')
 @Controller('app/people/payroll_elements')
 @UseGuards(IsAuthenticatedGuard)
 export class GetPayrollElementsController {

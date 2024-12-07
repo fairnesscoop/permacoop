@@ -14,7 +14,9 @@ import { GetProjectsQuery } from 'src/Application/Project/Query/GetProjectsQuery
 import { ProjectTableFactory } from '../Table/ProjectTableFactory';
 import { Pagination } from 'src/Application/Common/Pagination';
 import { ProjectView } from 'src/Application/Project/View/ProjectView';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Project')
 @Controller('app/projects')
 @UseGuards(IsAuthenticatedGuard)
 export class ListProjectsController {

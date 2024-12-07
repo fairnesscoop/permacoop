@@ -29,7 +29,9 @@ import {
   IUserAdministrativeCommand
 } from 'src/Application/HumanResource/User/Command/CreateUserCommand';
 import { UserDTO } from '../DTO/UserDTO';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: User')
 @Controller('app/people/users/add')
 @UseGuards(IsAuthenticatedGuard)
 export class AddUserController {

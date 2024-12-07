@@ -11,7 +11,9 @@ import { Response } from 'express';
 import { LocalAuthGuard } from '../Security/LocalAuthGuard';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: Authentication')
 @Controller('login')
 export class LoginController {
   constructor(private readonly resolver: RouteNameResolver) {}
