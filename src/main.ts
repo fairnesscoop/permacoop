@@ -41,14 +41,17 @@ async function bootstrap() {
 
   const swaggerCustomOptions = {
     explorer: false,
-    customCss: '.swagger-ui .topbar { background-color: black; } .swagger-ui img { display: none; }',
+    customCss:
+      '.swagger-ui .topbar { background-color: black; } .swagger-ui img { display: none; }',
     customSiteTitle: 'Permacoop API',
-    customfavIcon: ""
-  }
+    customfavIcon: ''
+  };
 
   const swaggerOptions = new DocumentBuilder()
     .setTitle('Permacoop API')
-    .setDescription('Permacoop is an open source and eco design ERP solution reserved for worker-owned business.')
+    .setDescription(
+      'Permacoop is an open source and eco design ERP solution reserved for worker-owned business.'
+    )
     .setVersion('1.0')
     .addBearerAuth()
     .build();

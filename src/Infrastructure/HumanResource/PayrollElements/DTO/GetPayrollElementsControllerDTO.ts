@@ -1,5 +1,5 @@
 import { IsNumber, IsOptional } from 'class-validator';
-import { ApiPropertyOptional } from "@nestjs/swagger";
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class GetPayrollElementsControllerDTO {
   @ApiPropertyOptional()
