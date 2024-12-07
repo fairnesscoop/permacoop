@@ -18,7 +18,9 @@ import { CreateMealTicketRemovalCommand } from 'src/Application/HumanResource/Me
 import { IsAuthenticatedGuard } from '../../User/Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: Meal Ticket')
 @Controller('app/people/meal-tickets/removal/add')
 @UseGuards(IsAuthenticatedGuard)
 export class AddMealTicketRemovalController {

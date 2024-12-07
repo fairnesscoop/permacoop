@@ -32,7 +32,9 @@ import { GetEventByIdQuery } from 'src/Application/FairCalendar/Query/GetEventBy
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { makeMonthUrl } from '../Routing/urls';
 import { EventView } from 'src/Application/FairCalendar/View/EventView';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Calendar')
 @Controller('app/faircalendar/events/edit')
 @UseGuards(IsAuthenticatedGuard)
 export class EditEventController {

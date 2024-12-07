@@ -14,7 +14,9 @@ import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { Pagination } from 'src/Application/Common/Pagination';
 import { TaskView } from 'src/Application/Task/View/TaskView';
 import { TaskTableFactory } from '../Table/TaskTableFactory';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Task')
 @Controller('app/tasks')
 @UseGuards(IsAuthenticatedGuard)
 export class ListTasksController {

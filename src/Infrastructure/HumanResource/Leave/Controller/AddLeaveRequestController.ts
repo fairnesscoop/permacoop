@@ -19,7 +19,9 @@ import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { Type } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: Leave')
 @Controller('app/people/leave-requests/add')
 @UseGuards(IsAuthenticatedGuard)
 export class AddLeaveRequestController {

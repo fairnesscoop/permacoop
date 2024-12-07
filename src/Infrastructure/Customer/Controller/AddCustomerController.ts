@@ -16,7 +16,9 @@ import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { CreateCustomerCommand } from 'src/Application/Customer/Command/CreateCustomerCommand';
 import { CustomerDTO } from 'src/Infrastructure/Customer/DTO/CustomerDTO';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Customer')
 @Controller('app/customers/add')
 @UseGuards(IsAuthenticatedGuard)
 export class AddCustomerController {

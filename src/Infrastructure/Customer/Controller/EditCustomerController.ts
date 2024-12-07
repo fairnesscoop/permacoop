@@ -20,7 +20,9 @@ import { GetCustomerByIdQuery } from 'src/Application/Customer/Query/GetCustomer
 import { CustomerDTO } from 'src/Infrastructure/Customer/DTO/CustomerDTO';
 import { UpdateCustomerCommand } from 'src/Application/Customer/Command/UpdateCustomerCommand';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Customer')
 @Controller('app/customers/edit')
 @UseGuards(IsAuthenticatedGuard)
 export class EditCustomerController {

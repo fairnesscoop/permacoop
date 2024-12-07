@@ -12,7 +12,9 @@ import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { GetMealTicketsPerMonthQuery } from 'src/Application/HumanResource/MealTicket/Query/GetMealTicketsPerMonthQuery';
 import { MealTicketsPerMonthView } from 'src/Application/HumanResource/MealTicket/Views/MealTicketsPerMonthView';
 import { MealTicketTableFactory } from '../Table/MealTicketTableFactory';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: Meal Ticket')
 @Controller('app/people/meal_tickets')
 @UseGuards(IsAuthenticatedGuard)
 export class ListMealTicketsController {
