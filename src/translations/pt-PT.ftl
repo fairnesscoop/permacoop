@@ -17,60 +17,60 @@ common-month-previous = Mês Anterior
 common-month-today = Hoje
 common-month-next = Próximo Mês
 
-dialog-delete-title = Excluir ?
+dialog-delete-title = Excluir?
 dialog-delete-yes = Sim
 dialog-delete-no = Não
 
-coop-name = Fairness
+coop-name = Justiça
 site-title = Permacoop
-breadcrumb-title = Fil d'Ariane
+breadcrumb-title = Breadcrumb
 nav-open = Abrir navegação principal
 nav-title = Navegação Principal
 
 http-error = Erro {$statusCode} : {$errorName}
 form-errors-title = Erro
 
-header-profile = Mon compte
-header-dropdown = Voir plus d'actions
-header-logout = Se déconnecter
+header-profile = A minha conta
+header-dropdown = Ver mais ações
+header-logout = Desconectar
 
-pagination = Pagination
-pagination-previous = Page précédente
-pagination-page = Page {$page}
-pagination-next = Page suivante
+pagination = Paginação
+pagination-previous = Página anterior
+pagination-page = Página {$page}
+pagination-next = Página seguinte
 
-login-title = Connexion
-login-email = Adresse email
-login-password = Mot de passe
-login-submit = Se connecter
-login-error-failed = L'adresse email ou le mot de passe est incorrect. Veuillez réessayer.
-login-error-auth-required = Veuillez vous connecter pour accéder à cette page.
+login-title = Conexão
+login-email = Email
+login-password = Palavra passe
+login-submit = Conectar
+login-error-failed = O endereço de e-mail ou a palavra-passe estão incorretos. Por favor, tente novamente.
+login-error-auth-required = Por favor inicie sessão para aceder a esta página.
 
-home-title = Bonjour, {$user} !
-home-pending-leaves-title = Demandes de congés
+home-title = Bom dia, {$user} !
+home-pending-leaves-title = Deixe solicitações
 home-pending-leaves = {$leaves ->
-    [0] Aucune demande de congés
-    [1] 1 demande de congés
-    *[other] {$leaves} demandes de congés
-} en attente de validation
-home-pending-leaves-see-all = Voir les demandes de congés
+    [0] Sem pedidos de licença
+    [1] 1 pedido de licença
+    *[other] {$leaves} pedidos de licença
+} a aguardar validação
+home-pending-leaves-see-all = Ver pedidos de licença
 
-dashboard-title = Tableau de bord
+dashboard-title = Painel
 
 faircalendar-title = FairCalendar
 faircalendar-page-title = FairCalendar {DATETIME($date, month: "long", year: "numeric")}
-faircalendar-events-add-title = Ajout d'un CRA le {$startDate}
-faircalendar-events-add-span-title = Ajout d'un CRA du {$startDate} au {$endDate}
-faircalendar-events-edit-title = Édition du CRA du {$date}
-faircalendar-type-title = Type de CRA
+faircalendar-events-add-title = Adicionar CRA em {$startDate}
+faircalendar-events-add-span-title = Adição de CRA de {$startDate} a {$endDate}
+faircalendar-events-edit-title = Edição do CRA de {$date}
+faircalendar-type-title = Tipo de CRA
 faircalendar-type-option = {$type ->
     [mission] Mission
     [dojo] Dojos
     [support] Supports
     [formationConference] Formations / Confs
-    [leave] Congés
-    [holiday] Jour férié
-    *[other] Autre
+    [leave] Deixar
+    [holiday] Feriado
+    *[other] Outro
 }
 faircalendar-taskId-title = Mission
 faircalendar-projectId-title = Projet
