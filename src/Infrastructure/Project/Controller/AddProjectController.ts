@@ -38,7 +38,7 @@ export class AddProjectController {
   @Render('pages/projects/add.njk')
   public async get() {
     const customers: Pagination<CustomerView> = await this.queryBus.execute(
-      new GetCustomersQuery(1)
+      new GetCustomersQuery(null)
     );
 
     return {
@@ -48,7 +48,7 @@ export class AddProjectController {
   }
 
   @Post()
-  public async poqr(@Body() projectDto: ProjectDTO, @Res() res: Response) {
+  public async post(@Body() projectDto: ProjectDTO, @Res() res: Response) {
     const { name, customerId, active } = projectDto;
 
     try {
