@@ -17,6 +17,10 @@
         {{ links.add(path('people_users_add'))}}
     </div>
 
-    {% table table %}
+    <h2>{{ 'users-active-title'|trans }}</h2>
+    {% table activeUsersTable %}
+
+    <h2 class="pc-m" style="--m: calc(4 * var(--w)) 0 0 0">{{ 'users-inactive-title'|trans }}</h2>
+    {% table inactiveUsersTable %}
 </div>
 {% endblock main %}

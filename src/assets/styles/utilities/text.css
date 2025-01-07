@@ -15,3 +15,7 @@
 .pc-text--small {
   font-size: var(--font-size-sm);
 }
+
+.pc-text--muted {
+  color: var(--text-muted);
+}

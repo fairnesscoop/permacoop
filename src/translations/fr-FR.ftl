@@ -1,3 +1,7 @@
+# NOTE : ces traductions sont écrites avec Fluent
+# Voir : https://projectfluent.org/
+# L'intégration à NestJS / Nunjucks est une implémentation custom (voir FluentTranslatorAdapter.ts et fichiers associés)
+
 common-form-save = Enregistrer
 common-form-update = Mettre à jour
 common-form-delete = Supprimer
@@ -237,6 +241,8 @@ meal-tickets-removal-date = Je ne souhaite pas recevoir de ticket restaurant pou
 
 
 users-title = Coopérateur·ices et salarié·es
+users-active-title = Actuellement salarié⋅e
+users-inactive-title = Précédemment salarié⋅e
 users-add-title = Ajouter un·e coopérateur·ice-salarié·e
 users-edit-title = Mise à jour des informations administratives de {$user}
 users-firstName = Prénom

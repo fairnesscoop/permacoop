@@ -13,8 +13,8 @@ export class UserTableFactory {
 
   public create(users: UserView[]): Table {
     const columns = [
-      'users-firstName',
       'users-lastName',
+      'users-firstName',
       'users-email',
       'users-role',
       'common-actions'
@@ -23,8 +23,8 @@ export class UserTableFactory {
     const rows = users.map(user =>
       this.rowFactory
         .createBuilder()
-        .value(user.firstName)
         .value(user.lastName)
+        .value(user.firstName)
         .value(user.email)
         .trans('users-role-value', { role: user.role })
         .actions({
