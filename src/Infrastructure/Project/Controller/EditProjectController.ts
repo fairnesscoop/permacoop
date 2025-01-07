@@ -45,7 +45,7 @@ export class EditProjectController {
     );
 
     const customers: Pagination<CustomerView> = await this.queryBus.execute(
-      new GetCustomersQuery(1)
+      new GetCustomersQuery(null)
     );
 
     return {
