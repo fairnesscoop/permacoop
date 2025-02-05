@@ -1,3 +1,26 @@
-<span class="pc-badge pc-bold" style="--badge-color: var(--event-{{ type }}-text); --badge-background: var(--event-{{ type }}-background)">
+{% import 'macros/icons.njk' as icons %}
+{% set hasDetails = details.length %}
+
+<div class="{{ 'tooltip' if hasDetails }}">
+  <span
+    class="pc-badge pc-bold"
+    style="--badge-color: var(--event-{{ type }}-text); --badge-background: var(--event-{{ type }}-background)">
     {{ 'faircalendar-overview-days'|trans({ days: days }) }}
-</span>
+
+    {% if hasDetails %}
+      &nbsp;{{ icons.eye() }}
+    {% endif %}
+  </span>
+
+  {% if hasDetails %}
+    <ul class="tooltip-content pc-raw-list"
+      style="--tooltip-color: var(--event-{{ type }}-text); --tooltip-background: var(--event-{{ type }}-background)">
+      {% for detail in details %}
+        <li>
+          <span>{{ detail.label }}</span>
+          <span class="pc-bold">{{ 'faircalendar-overview-days'|trans({ days: detail.days }) }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
