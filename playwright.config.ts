@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { config } from 'dotenv';
-import { type PlaywrightTestConfig, devices } from "@playwright/test";
+import { type PlaywrightTestConfig } from "@playwright/test";
 
 config({ path: path.resolve(process.cwd(), '.env.local') });
 config({ path: path.resolve(process.cwd(), '.env') });
@@ -22,7 +22,7 @@ const pwConfig: PlaywrightTestConfig = {
     { name: 'setup', testMatch: /.*\.setup\.js/ },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: { channel: 'chrome' },
       dependencies: ['setup'],
     },
   ],
