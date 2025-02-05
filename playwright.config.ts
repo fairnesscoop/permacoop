@@ -22,7 +22,7 @@ const pwConfig: PlaywrightTestConfig = {
     { name: 'setup', testMatch: /.*\.setup\.js/ },
     {
       name: 'firefox',
-      use: { channel: 'chrome' },
+      use: { channel: 'firefox' },
       dependencies: ['setup'],
     },
   ],
