@@ -22,6 +22,9 @@ install-dev: ## Install local development dependencies and services
 	make build
 	make database-test-init
 
+install-playwright-dependencies:
+	sudo npx playwright install-deps
+
 start: ## Start
 	make -j 2 start-server start-watch
 
@@ -100,6 +103,7 @@ ci: up ## Run CI checks
 	make install
 	make linter
 	make test-cov
+	make install-playwright-dependencies
 	make test-e2e CI=1 DATABASE_NAME=permacoop
 
 scalingo-postbuild:
