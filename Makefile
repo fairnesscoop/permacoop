@@ -23,7 +23,7 @@ install-dev: ## Install local development dependencies and services
 	make database-test-init
 
 install-playwright-dependencies:
-	sudo npx playwright install-deps
+	sudo apt-get install libdbus-glib-1-2
 
 start: ## Start
 	make -j 2 start-server start-watch
