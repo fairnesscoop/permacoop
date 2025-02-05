@@ -25,6 +25,10 @@ table.pc-table {
   text-align: left;
 }
 
+.pc-table-wrapper-overflow-visible {
+  overflow-x: visible;
+}
+
 .pc-table--center {
   text-align: center;
 }

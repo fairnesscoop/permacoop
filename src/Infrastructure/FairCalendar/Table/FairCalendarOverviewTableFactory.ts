@@ -26,7 +26,8 @@ export class FairCalendarOverviewTableFactory {
       );
       rowBuilder.template('pages/faircalendar/_overview_badge.njk', {
         type,
-        days: overview[type]
+        days: overview[type].days,
+        details: overview[type].details
       });
     }
 
