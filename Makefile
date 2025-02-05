@@ -24,6 +24,7 @@ install-dev: ## Install local development dependencies and services
 
 install-playwright-dependencies:
 	sudo apt-get install libdbus-glib-1-2
+	sudo npx playwright install-deps
 
 start: ## Start
 	make -j 2 start-server start-watch
