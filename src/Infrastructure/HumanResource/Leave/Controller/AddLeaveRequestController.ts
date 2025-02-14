@@ -17,7 +17,7 @@ import { LoggedUser } from '../../User/Decorator/LoggedUser';
 import { IsAuthenticatedGuard } from '../../User/Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
-import { Type } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
+import { getSelectableLeaveRequestTypes } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 
 @Controller('app/people/leave-requests/add')
@@ -33,10 +33,8 @@ export class AddLeaveRequestController {
   @WithName('people_leave_requests_add')
   @Render('pages/leave_requests/add.njk')
   public async get() {
-    const types = Object.values(Type);
-
     return {
-      types
+      types: getSelectableLeaveRequestTypes()
     };
   }
 

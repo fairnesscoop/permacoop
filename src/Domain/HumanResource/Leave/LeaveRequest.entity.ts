@@ -17,6 +17,12 @@ export enum Type {
   RELOCATION = 'relocation'
 }
 
+export function getSelectableLeaveRequestTypes() {
+  const types = Object.values(Type);
+
+  return types.filter(t => t !== Type.MEDICAL);
+}
+
 export interface ILeaveRequestModeration {
   getStatus(): string;
   getUserId(): string;
