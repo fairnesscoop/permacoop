@@ -18,6 +18,7 @@ import { IsAuthenticatedGuard } from '../../User/Security/IsAuthenticatedGuard';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import {
+  getSelectableLeaveRequestTypes,
   Status,
   Type
 } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
@@ -48,7 +49,7 @@ export class EditLeaveRequestController {
       new GetLeaveRequestByIdQuery(id, user)
     );
 
-    const types = Object.values(Type);
+    const types = getSelectableLeaveRequestTypes();
 
     return {
       leaveRequest,
