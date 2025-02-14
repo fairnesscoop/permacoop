@@ -98,12 +98,12 @@ describe('FairCalendarOverviewFactory', () => {
     );
 
     const expectedResult: ICalendarOverview = {
-      mission: 1.57,
-      dojo: 0.25,
-      formationConference: 1,
-      leave: 1,
-      support: 0.5,
-      other: 0.5
+      mission: { days: 1.57, details: [{ days: 1.57, label: 'RadioFrance' }] },
+      dojo: { days: 0.25 },
+      formationConference: { days: 1 },
+      leave: { days: 1 },
+      support: { days: 0.5 },
+      other: { days: 0.5 }
     };
 
     expect(
