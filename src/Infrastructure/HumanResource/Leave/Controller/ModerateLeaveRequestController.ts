@@ -19,7 +19,9 @@ import { IsAuthenticatedGuard } from '../../User/Security/IsAuthenticatedGuard';
 import { RefuseLeaveRequestCommand } from 'src/Application/HumanResource/Leave/Command/RefuseLeaveRequestCommand';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: Leave')
 @Controller('app/people/leave-requests/moderation')
 @UseGuards(IsAuthenticatedGuard)
 export class ModerateLeaveRequestController {

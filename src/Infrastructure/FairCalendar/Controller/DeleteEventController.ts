@@ -20,7 +20,9 @@ import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/Rou
 import { EventView } from 'src/Application/FairCalendar/View/EventView';
 import { GetEventByIdQuery } from 'src/Application/FairCalendar/Query/GetEventByIdQuery';
 import { makeMonthUrl } from '../Routing/urls';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Calendar')
 @Controller('app/faircalendar/events/delete')
 @UseGuards(IsAuthenticatedGuard)
 export class DeleteEventController {

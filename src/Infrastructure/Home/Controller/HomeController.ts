@@ -6,6 +6,7 @@ import {
   Res,
   UseGuards
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { GetPendingLeaveRequestsCountQuery } from 'src/Application/HumanResource/Leave/Query/GetPendingLeaveRequestsCountQuery';
 import { IQueryBus } from 'src/Application/IQueryBus';
@@ -13,6 +14,7 @@ import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/Rou
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Security/IsAuthenticatedGuard';
 
+@ApiTags('Home')
 @Controller()
 @UseGuards(IsAuthenticatedGuard)
 export class HomeController {

@@ -20,7 +20,9 @@ import { GetLeaveRequestsOverviewQuery } from 'src/Application/HumanResource/Lea
 import { UserView } from 'src/Application/HumanResource/User/View/UserView';
 import { GetUsersQuery } from 'src/Application/HumanResource/User/Query/GetUsersQuery';
 import { ListLeaveRequestsControllerDTO } from '../DTO/ListLeaveRequestsControllerDTO';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: Leave')
 @Controller('app/people/leave_requests')
 @UseGuards(IsAuthenticatedGuard)
 export class ListLeaveRequestsController {

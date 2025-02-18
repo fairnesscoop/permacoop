@@ -21,7 +21,9 @@ import { IQueryBus } from 'src/Application/IQueryBus';
 import { GetCustomersQuery } from 'src/Application/Customer/Query/GetCustomersQuery';
 import { Pagination } from 'src/Application/Common/Pagination';
 import { CustomerView } from 'src/Application/Customer/View/CustomerView';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Project')
 @Controller('app/projects/add')
 @UseGuards(IsAuthenticatedGuard)
 export class AddProjectController {

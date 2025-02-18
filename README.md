@@ -1,4 +1,4 @@
-<h1 align="center"><a href="https://fairness.coop"><img src="https://fairness.coop/image/fairness_logo.svg" alt="Fairness"></a></h1>
+<h1 align="center"><a href="https://fairness.coop"><img src="/src/public/images/logo.png" alt="Fairness"></a></h1>
 
 Permacoop is an open source and eco design ERP solution reserved for worker-owned business.
 

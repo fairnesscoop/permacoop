@@ -11,10 +11,7 @@ export class IsMaximumTimeSpentReached {
     private readonly leaveRepository: ILeaveRepository
   ) {}
 
-  public async isSatisfiedBy(
-    event: Event,
-    newTime: number = 0
-  ): Promise<boolean> {
+  public async isSatisfiedBy(event: Event, newTime = 0): Promise<boolean> {
     const user = event.getUser();
     const date = event.getDate();
 

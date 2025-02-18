@@ -57,7 +57,7 @@ export class UserRepository implements IUserRepository {
 
   public findUsers(
     withAccountant: boolean,
-    noLeavingDate: boolean = false
+    noLeavingDate = false
   ): Promise<User[]> {
     const query = this.repository
       .createQueryBuilder('user')

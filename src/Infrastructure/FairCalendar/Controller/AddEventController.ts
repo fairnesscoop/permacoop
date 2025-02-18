@@ -26,7 +26,9 @@ import { GetCooperativeQuery } from 'src/Application/Settings/Query/GetCooperati
 import { ArrayUtils } from 'src/Infrastructure/Common/Utils/ArrayUtils';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { makeMonthUrl } from '../Routing/urls';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Calendar')
 @Controller('app/faircalendar/events/add')
 @UseGuards(IsAuthenticatedGuard)
 export class AddEventController {
