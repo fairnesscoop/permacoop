@@ -1,0 +1,27 @@
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip .tooltip-content {
+  --tooltip-background: var(--background-default);
+  --tooltip-color: var(--text-default);
+
+  position: absolute;
+  top: calc(100% + var(--w));
+  left: 50%;
+  transform: translateX(-50%);
+  padding: calc(2 * var(--w));
+  border-radius: var(--badge-radius, calc(1 * var(--w)));
+  background: var(--tooltip-background);
+  color: var(--tooltip-color);
+  text-align: left;
+  z-index: 10;
+  display: none;
+}
+
+.tooltip:hover .tooltip-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--w);
+}
