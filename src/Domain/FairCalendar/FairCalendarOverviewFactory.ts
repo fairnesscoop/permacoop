@@ -43,24 +43,26 @@ export class FairCalendarOverviewFactory {
       const type = itemType.startsWith('leave_') ? 'leave' : itemType;
       const days = time / cooperative.getDayDuration();
 
-      overviewInDays[type].days =
-        Math.round((overviewInDays[type].days + days) * 100) / 100;
+      if (overviewInDays[type]) {
+        overviewInDays[type].days =
+          Math.round((overviewInDays[type].days + days) * 100) / 100;
 
-      if (type === EventType.MISSION) {
-        const missionDetail = overviewInDays[type].details.find(
-          ({ label }) => label === project.name
-        );
+        if (type === EventType.MISSION) {
+          const missionDetail = overviewInDays[type].details.find(
+            ({ label }) => label === project.name
+          );
 
-        if (missionDetail) {
-          missionDetail.days =
-            Math.round(
-              (missionDetail.days + Math.round(days * 100) / 100) * 100
-            ) / 100;
-        } else {
-          overviewInDays[type].details.push({
-            days,
-            label: project.name
-          });
+          if (missionDetail) {
+            missionDetail.days =
+              Math.round(
+                (missionDetail.days + Math.round(days * 100) / 100) * 100
+              ) / 100;
+          } else {
+            overviewInDays[type].details.push({
+              days,
+              label: project.name
+            });
+          }
         }
       }
     }
