@@ -13,6 +13,7 @@ export class UserAdministrativeView {
     public readonly joiningDate: string,
     public readonly leavingDate: string,
     public readonly transportFee: number,
-    public readonly sustainableMobilityFee: number
+    public readonly sustainableMobilityFee: number,
+    public readonly sportsPassFee: number
   ) {}
 }
