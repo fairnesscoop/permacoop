@@ -31,13 +31,18 @@ export class CustomerRepository implements ICustomerRepository {
       .getOne();
   }
 
-  public findCustomers(page: number): Promise<[Customer[], number]> {
-    return this.repository
+  public findCustomers(page: number | null): Promise<[Customer[], number]> {
+    let query = this.repository
       .createQueryBuilder('customer')
       .select(['customer.id', 'customer.name'])
-      .orderBy('customer.name', 'ASC')
-      .limit(MAX_ITEMS_PER_PAGE)
-      .offset((page - 1) * MAX_ITEMS_PER_PAGE)
-      .getManyAndCount();
+      .orderBy('customer.name', 'ASC');
+
+    if (typeof page === 'number') {
+      query = query
+        .limit(MAX_ITEMS_PER_PAGE)
+        .offset((page - 1) * MAX_ITEMS_PER_PAGE);
+    }
+
+    return query.getManyAndCount();
   }
 }
