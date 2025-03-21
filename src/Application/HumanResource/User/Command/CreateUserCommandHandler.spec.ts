@@ -35,7 +35,8 @@ describe('CreatUserCommandHandler', () => {
     joiningDate: '2018-04-09',
     leavingDate: null,
     transportFee: 75.2,
-    sustainableMobilityFee: 70
+    sustainableMobilityFee: 70,
+    sportsPassFee: 30
   };
   const userAdministrative = new UserAdministrative(
     5000000,
@@ -46,7 +47,8 @@ describe('CreatUserCommandHandler', () => {
     '2018-04-09',
     null,
     7520,
-    7000
+    7000,
+    3000
   );
 
   let userRepository: UserRepository;

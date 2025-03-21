@@ -76,7 +76,8 @@ export class CreateUserCommandHandler {
       joiningDate,
       leavingDate,
       transportFee,
-      sustainableMobilityFee
+      sustainableMobilityFee,
+      sportsPassFee
     } = userAdministrative;
 
     return await this.userAdministrativeRepository.save(
@@ -89,7 +90,8 @@ export class CreateUserCommandHandler {
         joiningDate,
         leavingDate ? leavingDate : null,
         transportFee ? Math.round(transportFee * 100) : 0,
-        sustainableMobilityFee ? Math.round(sustainableMobilityFee * 100) : 0
+        sustainableMobilityFee ? Math.round(sustainableMobilityFee * 100) : 0,
+        sportsPassFee ? Math.round(sportsPassFee * 100) : 0
       )
     );
   }
