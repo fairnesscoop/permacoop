@@ -24,7 +24,9 @@ import { InvoiceUnits } from 'src/Domain/Project/Project.entity';
 import { GetCustomersQuery } from 'src/Application/Customer/Query/GetCustomersQuery';
 import { Pagination } from 'src/Application/Common/Pagination';
 import { CustomerView } from 'src/Application/Customer/View/CustomerView';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Project')
 @Controller('app/projects/edit')
 @UseGuards(IsAuthenticatedGuard)
 export class EditProjectController {

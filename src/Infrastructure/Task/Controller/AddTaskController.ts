@@ -16,7 +16,9 @@ import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { CreateTaskCommand } from 'src/Application/Task/Command/CreateTaskCommand';
 import { TaskDTO } from '../DTO/TaskDTO';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Task')
 @Controller('app/tasks/add')
 @UseGuards(IsAuthenticatedGuard)
 export class AddTaskController {

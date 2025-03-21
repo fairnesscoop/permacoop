@@ -4,7 +4,9 @@ import { IsAuthenticatedGuard } from 'src/Infrastructure/HumanResource/User/Secu
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { GetUsersQuery } from 'src/Application/HumanResource/User/Query/GetUsersQuery';
 import { UserTableFactory } from '../Table/UserTableFactory';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: User')
 @Controller('app/people/users')
 @UseGuards(IsAuthenticatedGuard)
 export class ListUsersController {

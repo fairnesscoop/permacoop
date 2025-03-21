@@ -19,7 +19,9 @@ import { UpdateProfileCommand } from 'src/Application/HumanResource/User/Command
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { Response } from 'express';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: User')
 @Controller('app/profile/edit')
 @UseGuards(IsAuthenticatedGuard)
 export class EditProfileController {

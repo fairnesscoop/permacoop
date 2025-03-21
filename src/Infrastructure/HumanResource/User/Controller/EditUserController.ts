@@ -26,7 +26,9 @@ import {
   WorkingTimeType
 } from 'src/Domain/HumanResource/User/UserAdministrative.entity';
 import { GetUserAdministrativeByIdQuery } from 'src/Application/HumanResource/User/Query/GetUserAdministrativeByIdQuery';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: User')
 @Controller('app/people/users')
 @UseGuards(IsAuthenticatedGuard)
 export class EditUserController {

@@ -11,7 +11,9 @@ import { IQueryBus } from 'src/Application/IQueryBus';
 import { CalendarTokenGuard } from 'src/Infrastructure/HumanResource/User/Security/CalendarTokenGuard';
 import { GetLeavesCalendarQuery } from 'src/Application/HumanResource/Leave/Query/GetLeavesCalendarQuery';
 import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('HR :: Leave')
 @Controller('api/leaves/calendar.ics')
 @UseGuards(CalendarTokenGuard)
 export class ExportLeavesCalendarController {
