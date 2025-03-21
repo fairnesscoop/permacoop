@@ -46,7 +46,9 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
     } catch (e) {
       expect(e).toBeInstanceOf(CooperativeNotFoundException);
       expect(e.message).toBe('settings.errors.cooperative_not_found');
-      verify(userRepository.findUsers(anything(), anything())).never();
+      verify(
+        userRepository.findUsers(anything(), anything(), anything())
+      ).never();
       verify(mealTicketRemovalRepository.findByMonth(anything())).never();
       verify(
         eventRepository.findAllEventsByMonth(anything(), anything())
@@ -70,7 +72,7 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
     when(user2.getFirstName()).thenReturn('Hélène');
     when(user2.getLastName()).thenReturn('MARCHOIS');
 
-    when(userRepository.findUsers(false, true)).thenResolve([
+    when(userRepository.findUsers(false, true, false)).thenResolve([
       instance(user),
       instance(user2)
     ]);
@@ -119,7 +121,7 @@ describe('GetMealTicketsPerMonthQueryHandler', () => {
       )
     ]);
 
-    verify(userRepository.findUsers(false, true)).once();
+    verify(userRepository.findUsers(false, true, false)).once();
     verify(mealTicketRemovalRepository.findByMonth(date)).once();
     verify(eventRepository.findAllEventsByMonth(date, anything())).once();
   });
