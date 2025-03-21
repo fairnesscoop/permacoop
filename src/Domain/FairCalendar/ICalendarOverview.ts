@@ -1,8 +1,14 @@
 export interface ICalendarOverview {
-  mission: number;
-  dojo: number;
-  formationConference: number;
-  leave: number;
-  support: number;
-  other: number;
+  mission: {
+    days: number;
+    details: {
+      days: number;
+      label: string;
+    }[];
+  };
+  dojo: { days: number };
+  formationConference: { days: number };
+  leave: { days: number };
+  support: { days: number };
+  other: { days: number };
 }

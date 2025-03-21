@@ -3,6 +3,7 @@ import { FairCalendarView } from 'src/Application/FairCalendar/View/FairCalendar
 import { CooperativeNotFoundException } from '../Settings/Repository/CooperativeNotFoundException';
 import { ICooperativeRepository } from '../Settings/Repository/ICooperativeRepository';
 import { ICalendarOverview } from './ICalendarOverview';
+import { EventType } from './Event.entity';
 
 export class FairCalendarOverviewFactory {
   constructor(
@@ -17,20 +18,53 @@ export class FairCalendarOverviewFactory {
     }
 
     const overviewInDays: ICalendarOverview = {
-      mission: 0,
-      dojo: 0,
-      formationConference: 0,
-      leave: 0,
-      support: 0,
-      other: 0
+      mission: {
+        days: 0,
+        details: []
+      },
+      dojo: {
+        days: 0
+      },
+      formationConference: {
+        days: 0
+      },
+      leave: {
+        days: 0
+      },
+      support: {
+        days: 0
+      },
+      other: {
+        days: 0
+      }
     };
 
-    for (const { time, type: itemType } of items) {
+    for (const { time, type: itemType, project } of items) {
       const type = itemType.startsWith('leave_') ? 'leave' : itemType;
       const days = time / cooperative.getDayDuration();
 
-      overviewInDays[type] =
-        Math.round((overviewInDays[type] + days) * 100) / 100;
+      if (overviewInDays[type]) {
+        overviewInDays[type].days =
+          Math.round((overviewInDays[type].days + days) * 100) / 100;
+
+        if (type === EventType.MISSION) {
+          const missionDetail = overviewInDays[type].details.find(
+            ({ label }) => label === project.name
+          );
+
+          if (missionDetail) {
+            missionDetail.days =
+              Math.round(
+                (missionDetail.days + Math.round(days * 100) / 100) * 100
+              ) / 100;
+          } else {
+            overviewInDays[type].details.push({
+              days,
+              label: project.name
+            });
+          }
+        }
+      }
     }
 
     return overviewInDays;
