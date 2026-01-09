@@ -5,10 +5,6 @@ export interface IUserRepository {
   findOneByEmail(email: string): Promise<User | undefined>;
   findOneById(id: string): Promise<User | undefined>;
   save(user: User): Promise<User>;
-  findUsers(
-    withAccountant: boolean,
-    noLeavingDate: boolean,
-    withLeavingDate: boolean
-  ): Promise<User[]>;
+  findUsers(withAccountant: boolean): Promise<User[]>;
   findUsersWithPayslipInfo(): Promise<User[]>;
 }

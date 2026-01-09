@@ -17,8 +17,6 @@ import { LoggedUser } from '../../User/Decorator/LoggedUser';
 import { LeaveRequestTableFactory } from '../Table/LeaveRequestTableFactory';
 import { LeaveRequestsOverviewTableFactory } from '../Table/LeaveRequestOverviewTableFactory';
 import { GetLeaveRequestsOverviewQuery } from 'src/Application/HumanResource/Leave/Query/GetLeaveRequestsOverviewQuery';
-import { UserView } from 'src/Application/HumanResource/User/View/UserView';
-import { GetUsersQuery } from 'src/Application/HumanResource/User/Query/GetUsersQuery';
 import { ListLeaveRequestsControllerDTO } from '../DTO/ListLeaveRequestsControllerDTO';
 
 @Controller('app/people/leave_requests')

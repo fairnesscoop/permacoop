@@ -18,15 +18,10 @@ export class ListUsersController {
   @WithName('people_users_list')
   @Render('pages/users/list.njk')
   public async get() {
-    const activeUsers = await this.queryBus.execute(
-      new GetUsersQuery(false, true, false)
+    const users = await this.queryBus.execute(
+      new GetUsersQuery(false)
     );
-    const activeUsersTable = this.tableFactory.create(activeUsers);
-
-    const inactiveUsers = await this.queryBus.execute(
-      new GetUsersQuery(false, false, true)
-    );
-    const inactiveUsersTable = this.tableFactory.create(inactiveUsers);
+    const [ activeUsersTable, inactiveUsersTable ] = this.tableFactory.create(users);
 
     return { activeUsersTable, inactiveUsersTable };
   }

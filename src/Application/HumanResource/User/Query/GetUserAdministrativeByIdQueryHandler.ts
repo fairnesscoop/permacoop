@@ -48,6 +48,7 @@ export class GetUserAdministrativeByIdQueryHandler {
       user.getEmail(),
       user.getRole(),
       user.isAdministrativeEditable(),
+      user.isActive(),
       userAdministrativeView
     );
   }
