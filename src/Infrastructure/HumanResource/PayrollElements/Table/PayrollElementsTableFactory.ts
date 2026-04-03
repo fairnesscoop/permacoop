@@ -25,7 +25,8 @@ export class PayrollElementsTableFactory {
       'payroll-elements-medicalLeaves',
       'payroll-elements-specialLeaves',
       'payroll-elements-postponedWorkedFreeDayLeaves',
-      'payroll-elements-relocationLeaves'
+      'payroll-elements-relocationLeaves',
+      'payroll-elements-menstrualDayLeaves'
     ];
 
     const rows = [];
@@ -67,6 +68,9 @@ export class PayrollElementsTableFactory {
         })
         .template('pages/payroll_elements/_leaves.njk', {
           leaves: item.relocationLeaves
+        })
+        .template('pages/payroll_elements/_leaves.njk', {
+          leaves: item.menstrualDayLeaves
         })
         .build();
 
