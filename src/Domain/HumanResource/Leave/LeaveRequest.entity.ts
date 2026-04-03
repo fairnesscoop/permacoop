@@ -14,7 +14,8 @@ export enum Type {
   MEDICAL = 'medical',
   ILLIMITED = 'illimited',
   POSTPONED_WORKED_FREE_DAY = 'postponedWorkedFreeDay',
-  RELOCATION = 'relocation'
+  RELOCATION = 'relocation',
+  MENSTRUAL_DAY = 'menstrualDay'
 }
 
 export function getSelectableLeaveRequestTypes() {

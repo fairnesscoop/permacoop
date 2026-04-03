@@ -134,6 +134,7 @@ leaves-type-value = {$type ->
     [illimited] Congé illimité
     [postponedWorkedFreeDay] Congé jour férié glissant
     [relocation] Congé déménagement
+    [menstrualDay] Congé menstruel
     *[other] Autre
 }
 leaves-type-value-plural = {$type ->
@@ -144,6 +145,7 @@ leaves-type-value-plural = {$type ->
     [illimited] Congés illimités
     [postponedWorkedFreeDay] Congés jours fériés glissants
     [relocation] Congés déménagement
+    [menstrualDay] Congés menstruels
     *[other] Autre
 }
 leaves-startDate = Du
@@ -222,6 +224,7 @@ payroll-elements-medicalLeaves = Congés maladie
 payroll-elements-specialLeaves = Congés exceptionnels
 payroll-elements-postponedWorkedFreeDayLeaves = Congés jours fériés glissants
 payroll-elements-relocationLeaves = Congés déménagement
+payroll-elements-menstrualDayLeaves = Congés menstruel
 payroll-elements-download = Télécharger
 payroll-elements-filename = Fairness - Éléments de paie - {$date}.csv
 payroll-elements-wiki = Voir le Wiki
