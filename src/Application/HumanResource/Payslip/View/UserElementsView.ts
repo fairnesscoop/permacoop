@@ -19,6 +19,7 @@ export class UserElementsView {
     public readonly sickLeaves: UserLeavesView,
     public readonly exceptionalLeaves: UserLeavesView,
     public readonly postponedWorkedFreeDayLeaves: UserLeavesView,
-    public readonly relocationLeaves: UserLeavesView
+    public readonly relocationLeaves: UserLeavesView,
+    public readonly menstrualLeaves: UserLeavesView
   ) {}
 }

@@ -56,6 +56,9 @@
   --event-leave-background: rgb(253, 246, 178);
   --event-leave-border: rgb(253, 246, 178);
   --event-leave-text: rgb(142, 75, 16);
+  --event-generic-background: rgb(244, 245, 247);
+  --event-generic-border: rgb(244, 245, 247);
+  --event-generic-text: rgb(36, 38, 45);
   --event-holiday-background: rgb(237, 235, 254);
   --event-holiday-border: rgb(237, 235, 254);
   --event-holiday-text: rgb(108, 43, 217);

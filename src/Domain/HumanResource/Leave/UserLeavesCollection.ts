@@ -7,6 +7,7 @@ export class UserLeavesCollection {
   public medical: LeaveRequest[] = [];
   public postponedWorkedFreeDay: LeaveRequest[] = [];
   public relocation: LeaveRequest[] = [];
+  public menstrual: LeaveRequest[] = [];
 
   constructor(leaves: LeaveRequest[]) {
     this.distributeLeavesByType(leaves);
@@ -32,6 +33,9 @@ export class UserLeavesCollection {
           break;
         case Type.RELOCATION:
           this.relocation.push(leave);
+          break;
+        case Type.MENSTRUAL:
+          this.menstrual.push(leave);
           break;
       }
     }

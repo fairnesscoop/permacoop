@@ -42,3 +42,23 @@ export class JohnFactory extends Factory<User> {
     ).create();
   }
 }
+
+export class JaneFactory extends Factory<User> {
+  protected async entity(): Promise<User> {
+    const user = new User(
+      'jane',
+      'smith',
+      'jane@smith.com',
+      '$argon2i$v=19$m=4096,t=3,p=1$slHh/xhoh8SvIjApBHSZnA$hqsry11DeWbNYsFnzADPkYOP2WQrf0yqDXGC3xjSX9A',
+      '$argon2i$v=19$m=4096,t=3,p=1$slHh/xhoh8SvIjApBHSZnA$hqsry11DeWbNYsFnzADPkYOP2WQrf0yqDXGC3xjSX9A',
+      UserRole.COOPERATOR
+    );
+    return user;
+  }
+
+  protected async finalize(entity: User): Promise<void> {
+    entity.userAdministrative = await this.factory(
+      UserAdministrativeFactory
+    ).create();
+  }
+}

@@ -19,6 +19,8 @@ import { WithName } from 'src/Infrastructure/Common/ExtendedRouting/WithName';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { getSelectableLeaveRequestTypes } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
+import { MenstrualLeaveMonthlyQuotaExceededException } from 'src/Domain/HumanResource/Leave/Exception/MenstrualLeaveMonthlyQuotaExceededException';
+import { ITranslator } from 'src/Infrastructure/Translations/ITranslator';
 
 @Controller('app/people/leave-requests/add')
 @UseGuards(IsAuthenticatedGuard)
@@ -26,6 +28,8 @@ export class AddLeaveRequestController {
   constructor(
     @Inject('ICommandBus')
     private readonly commandBus: ICommandBus,
+    @Inject('ITranslator')
+    private readonly translator: ITranslator,
     private readonly resolver: RouteNameResolver
   ) {}
 
@@ -61,6 +65,13 @@ export class AddLeaveRequestController {
 
       res.redirect(303, this.resolver.resolve('people_leave_requests_list'));
     } catch (e) {
+      if (e instanceof MenstrualLeaveMonthlyQuotaExceededException) {
+        res.render('pages/leave_requests/add.njk', {
+          types: getSelectableLeaveRequestTypes(),
+          errorModal: true
+        });
+        return;
+      }
       throw new BadRequestException(e.message);
     }
   }

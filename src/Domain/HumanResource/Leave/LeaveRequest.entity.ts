@@ -14,7 +14,8 @@ export enum Type {
   MEDICAL = 'medical',
   ILLIMITED = 'illimited',
   POSTPONED_WORKED_FREE_DAY = 'postponedWorkedFreeDay',
-  RELOCATION = 'relocation'
+  RELOCATION = 'relocation',
+  MENSTRUAL = 'menstrual'
 }
 
 export function getSelectableLeaveRequestTypes() {
@@ -166,6 +167,11 @@ export class LeaveRequest implements ILeaveRequestModeration {
     this.moderator = moderator;
     this.moderateAt = date;
     this.moderationComment = moderationComment;
+  }
+
+  public autoAccept(date: string): void {
+    this.status = Status.ACCEPTED;
+    this.moderateAt = date;
   }
 
   public update(

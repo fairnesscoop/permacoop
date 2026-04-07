@@ -41,9 +41,14 @@ export class GetLeaveRequestByIdQueryHandler {
       );
     }
 
+    const leaveType = this.getMaskedLeaveType(
+      leaveRequest,
+      query.currentUser.getId()
+    );
+
     return new LeaveRequestDetailView(
       leaveRequest.getId(),
-      leaveRequest.getType(),
+      leaveType,
       leaveRequest.getStatus(),
       leaveRequest.getStartDate(),
       leaveRequest.isStartsAllDay(),
@@ -69,5 +74,18 @@ export class GetLeaveRequestByIdQueryHandler {
       leaveRequest.getModerateAt(),
       leaveRequest.getModerationComment()
     );
+  }
+
+  private getMaskedLeaveType(leaveRequest: any, viewerId: string): any {
+    const actualType = leaveRequest.getType();
+    const ownerId = leaveRequest.getUserId();
+
+    // Menstrual leave is private: only the owner can see the true type
+    if (actualType === 'menstrual' && viewerId !== ownerId) {
+      // Return paid leave to others
+      return 'paid';
+    }
+
+    return actualType;
   }
 }

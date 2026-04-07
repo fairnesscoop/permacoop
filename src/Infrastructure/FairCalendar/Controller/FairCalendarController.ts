@@ -55,14 +55,15 @@ export class FairCalendarController {
       date = new Date(dto.year, dto.month - 1, 15);
     }
 
-    const userId = dto.userId ? dto.userId : user['id'];
+    const userId = dto.userId ? dto.userId : user.getId();
+    const viewerId = user.getId();
 
     const users: UserView[] = await this.queryBus.execute(
       new GetUsersQuery(false, true)
     );
 
     const events: FairCalendarView[] = await this.queryBus.execute(
-      new GetMonthlyFairCalendarQuery(date, userId)
+      new GetMonthlyFairCalendarQuery(date, userId, viewerId)
     );
 
     const overview = await this.overviewFactory.create(events);

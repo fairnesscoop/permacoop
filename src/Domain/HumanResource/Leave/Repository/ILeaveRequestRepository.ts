@@ -16,5 +16,10 @@ export interface ILeaveRequestRepository {
   ): Promise<LeaveRequest | undefined>;
   findAcceptedLeaveRequests(): Promise<LeaveRequest[]>;
   findAcceptedLeaveRequestsByMonth(date: Date): Promise<LeaveRequest[]>;
+  findMenstrualLeaveRequestsByUserAndMonth(
+    userId: string,
+    year: number,
+    month: number
+  ): Promise<LeaveRequest[]>;
   getPendingCount(): Promise<number>;
 }

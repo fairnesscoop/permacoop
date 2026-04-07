@@ -33,6 +33,18 @@ export class Leave {
     return `leave_${this.leaveRequest.getType()}`;
   }
 
+  public getTypeForViewer(viewerId: string): string {
+    const actualType = this.leaveRequest.getType();
+    const ownerId = this.leaveRequest.getUserId();
+
+    // Menstrual leave is private: only the owner can see the true type
+    if (actualType === 'menstrual' && viewerId !== ownerId) {
+      return 'leave_paid'; // Display as paid leave to others
+    }
+
+    return `leave_${actualType}`;
+  }
+
   public getTime(): number {
     return this.time;
   }
