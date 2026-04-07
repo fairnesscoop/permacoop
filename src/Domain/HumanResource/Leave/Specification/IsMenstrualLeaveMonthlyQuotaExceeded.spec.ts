@@ -22,8 +22,7 @@ describe('IsMenstrualLeaveMonthlyQuotaExceeded', () => {
     when(user.getId()).thenReturn('user-123');
   });
 
-  it('testQuotaNotExceededWhenNoExistingRequests', async () => {
-    // No existing menstrual leave requests
+  it('testQuotaNotExceededWithHalfDay', async () => {
     when(
       leaveRequestRepository.findMenstrualLeaveRequestsByUserAndMonth(
         'user-123',
@@ -32,24 +31,22 @@ describe('IsMenstrualLeaveMonthlyQuotaExceeded', () => {
       )
     ).thenResolve([]);
 
-    // New request is 1 day (under quota of 2)
     when(
-      dateUtils.getLeaveDuration('2026-04-10', true, '2026-04-10', true)
-    ).thenReturn(1);
+      dateUtils.getLeaveDuration('2026-04-10', false, '2026-04-10', true)
+    ).thenReturn(0.5);
 
     const result = await specification.isSatisfiedBy(
       instance(user),
       '2026-04-10',
-      true,
+      false,
       '2026-04-10',
       true
     );
 
-    expect(result).toBe(false); // Not exceeded
+    expect(result).toBe(false);
   });
 
   it('testQuotaNotExceededAt2Days', async () => {
-    // 1 existing day of menstrual leave
     const existingLeave = mock(LeaveRequest);
     when(existingLeave.getStartDate()).thenReturn('2026-04-05');
     when(existingLeave.isStartsAllDay()).thenReturn(true);
@@ -64,12 +61,10 @@ describe('IsMenstrualLeaveMonthlyQuotaExceeded', () => {
       )
     ).thenResolve([instance(existingLeave)]);
 
-    // Existing request is 1 day
     when(
       dateUtils.getLeaveDuration('2026-04-05', true, '2026-04-05', true)
     ).thenReturn(1);
 
-    // New request is 1 day (total = 2, exactly at quota)
     when(
       dateUtils.getLeaveDuration('2026-04-10', true, '2026-04-10', true)
     ).thenReturn(1);
@@ -82,11 +77,10 @@ describe('IsMenstrualLeaveMonthlyQuotaExceeded', () => {
       true
     );
 
-    expect(result).toBe(false); // Not exceeded (2 = quota)
+    expect(result).toBe(false);
   });
 
-  it('testQuotaExceededWhenAddingMoreThan2Days', async () => {
-    // 1 existing day of menstrual leave
+  it('testQuotaExceededWith3Days', async () => {
     const existingLeave = mock(LeaveRequest);
     when(existingLeave.getStartDate()).thenReturn('2026-04-05');
     when(existingLeave.isStartsAllDay()).thenReturn(true);
@@ -101,12 +95,10 @@ describe('IsMenstrualLeaveMonthlyQuotaExceeded', () => {
       )
     ).thenResolve([instance(existingLeave)]);
 
-    // Existing request is 1 day
     when(
       dateUtils.getLeaveDuration('2026-04-05', true, '2026-04-05', true)
     ).thenReturn(1);
 
-    // New request is 2 days (total = 3, exceeds quota of 2)
     when(
       dateUtils.getLeaveDuration('2026-04-10', true, '2026-04-11', true)
     ).thenReturn(2);
@@ -119,11 +111,10 @@ describe('IsMenstrualLeaveMonthlyQuotaExceeded', () => {
       true
     );
 
-    expect(result).toBe(true); // Exceeded
+    expect(result).toBe(true);
   });
 
   it('testQuotaExceededWhenAlready2Days', async () => {
-    // 2 existing days of menstrual leave
     const existingLeave = mock(LeaveRequest);
     when(existingLeave.getStartDate()).thenReturn('2026-04-05');
     when(existingLeave.isStartsAllDay()).thenReturn(true);
@@ -138,12 +129,10 @@ describe('IsMenstrualLeaveMonthlyQuotaExceeded', () => {
       )
     ).thenResolve([instance(existingLeave)]);
 
-    // Existing request is 2 days
     when(
       dateUtils.getLeaveDuration('2026-04-05', true, '2026-04-06', true)
     ).thenReturn(2);
 
-    // New request is 1 day (total = 3, exceeds quota of 2)
     when(
       dateUtils.getLeaveDuration('2026-04-10', true, '2026-04-10', true)
     ).thenReturn(1);
@@ -156,12 +145,10 @@ describe('IsMenstrualLeaveMonthlyQuotaExceeded', () => {
       true
     );
 
-    expect(result).toBe(true); // Exceeded
+    expect(result).toBe(true);
   });
 
-  it('testQuotaChecksMultipleMonths', async () => {
-    // Request spans April and May
-    // Mock April having 1 existing day
+  it('testMultipleMonthsApril', async () => {
     when(
       leaveRequestRepository.findMenstrualLeaveRequestsByUserAndMonth(
         'user-123',
@@ -171,15 +158,50 @@ describe('IsMenstrualLeaveMonthlyQuotaExceeded', () => {
     ).thenResolve([]);
 
     when(
-      dateUtils.getLeaveDuration('2026-04-01', true, '2026-04-01', true)
+      dateUtils.getLeaveDuration('2026-04-10', true, '2026-04-10', true)
+    ).thenReturn(1);
+
+    when(
+      leaveRequestRepository.findMenstrualLeaveRequestsByUserAndMonth(
+        'user-123',
+        2026,
+        5
+      )
+    ).thenResolve([]);
+
+    when(
+      dateUtils.getLeaveDuration('2026-05-01', true, '2026-05-01', true)
     ).thenReturn(0);
 
-    // Mock May having 2 existing days (at quota)
+    const result = await specification.isSatisfiedBy(
+      instance(user),
+      '2026-04-10',
+      true,
+      '2026-05-01',
+      true
+    );
+
+    expect(result).toBe(false);
+  });
+
+  it('testMultipleMonthsExceeded', async () => {
     const mayLeave = mock(LeaveRequest);
     when(mayLeave.getStartDate()).thenReturn('2026-05-05');
     when(mayLeave.isStartsAllDay()).thenReturn(true);
     when(mayLeave.getEndDate()).thenReturn('2026-05-06');
     when(mayLeave.isEndsAllDay()).thenReturn(true);
+
+    when(
+      leaveRequestRepository.findMenstrualLeaveRequestsByUserAndMonth(
+        'user-123',
+        2026,
+        4
+      )
+    ).thenResolve([]);
+
+    when(
+      dateUtils.getLeaveDuration('2026-04-10', true, '2026-04-10', true)
+    ).thenReturn(0);
 
     when(
       leaveRequestRepository.findMenstrualLeaveRequestsByUserAndMonth(
@@ -193,7 +215,6 @@ describe('IsMenstrualLeaveMonthlyQuotaExceeded', () => {
       dateUtils.getLeaveDuration('2026-05-05', true, '2026-05-06', true)
     ).thenReturn(2);
 
-    // New request is 1 day in May (total May = 3, exceeds quota)
     when(
       dateUtils.getLeaveDuration('2026-05-10', true, '2026-05-10', true)
     ).thenReturn(1);
@@ -206,6 +227,6 @@ describe('IsMenstrualLeaveMonthlyQuotaExceeded', () => {
       true
     );
 
-    expect(result).toBe(true); // Exceeded for May
+    expect(result).toBe(true);
   });
 });

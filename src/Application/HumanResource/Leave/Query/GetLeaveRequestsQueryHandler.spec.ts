@@ -225,7 +225,9 @@ describe('GetLeaveRequestsQueryHandler', () => {
     when(loggedUser.getId()).thenReturn(viewerId);
 
     const menstrualLeave = mock(LeaveRequest);
-    when(menstrualLeave.getId()).thenReturn('d54f15d6-1a1d-47e8-8672-9f46018f9960');
+    when(menstrualLeave.getId()).thenReturn(
+      'd54f15d6-1a1d-47e8-8672-9f46018f9960'
+    );
     when(menstrualLeave.getType()).thenReturn(Type.MENSTRUAL);
     when(menstrualLeave.getUserId()).thenReturn(ownerId);
     when(menstrualLeave.getStatus()).thenReturn(Status.ACCEPTED);
@@ -247,9 +249,9 @@ describe('GetLeaveRequestsQueryHandler', () => {
       1
     ]);
 
-    when(
-      userRepository.findOneById(viewerId)
-    ).thenResolve(instance(loggedUser));
+    when(userRepository.findOneById(viewerId)).thenResolve(
+      instance(loggedUser)
+    );
 
     when(
       dateUtils.getLeaveDuration('2020-05-08', true, '2020-05-15', true)
@@ -263,9 +265,7 @@ describe('GetLeaveRequestsQueryHandler', () => {
     );
 
     expect(
-      await queryHandler.execute(
-        new GetLeaveRequestsQuery(viewerId, 1, null)
-      )
+      await queryHandler.execute(new GetLeaveRequestsQuery(viewerId, 1, null))
     ).toMatchObject(expectedResult);
   });
 });

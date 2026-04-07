@@ -236,7 +236,9 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
     when(viewer.getId()).thenReturn(viewerId);
 
     const menstrualLeave = mock(LeaveRequest);
-    when(menstrualLeave.getId()).thenReturn('204522d3-f077-4d21-b3ee-6e0d742fca44');
+    when(menstrualLeave.getId()).thenReturn(
+      '204522d3-f077-4d21-b3ee-6e0d742fca44'
+    );
     when(menstrualLeave.getType()).thenReturn(Type.MENSTRUAL);
     when(menstrualLeave.getUserId()).thenReturn(ownerId);
     when(menstrualLeave.getStatus()).thenReturn(Status.ACCEPTED);
@@ -249,7 +251,10 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
     when(menstrualLeave.getModerator()).thenReturn(null);
 
     when(
-      canLeaveRequestBeCancelled.isSatisfiedBy(instance(viewer), instance(menstrualLeave))
+      canLeaveRequestBeCancelled.isSatisfiedBy(
+        instance(viewer),
+        instance(menstrualLeave)
+      )
     ).thenReturn(false);
 
     when(
