@@ -37,7 +37,7 @@ export class UserRepository implements IUserRepository {
         'user.password',
         'user.role'
       ])
-      .where('user.email = :email', { email })
+      .where('LOWER(user.email) = LOWER(:email)', { email })
       .getOne();
   }
 

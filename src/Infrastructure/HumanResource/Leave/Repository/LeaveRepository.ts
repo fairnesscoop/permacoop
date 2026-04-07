@@ -24,12 +24,11 @@ export class LeaveRepository implements ILeaveRepository {
 
     return this.repository
       .createQueryBuilder('leave')
-      .select(['leave.time', 'leave.date', 'leaveRequest.type'])
+      .innerJoinAndSelect('leave.leaveRequest', 'leaveRequest')
+      .innerJoinAndSelect('leaveRequest.user', 'user')
       .where('user.id = :userId', { userId })
       .andWhere('extract(month FROM leave.date) = :month', { month })
       .andWhere('extract(year FROM leave.date) = :year', { year })
-      .innerJoin('leave.leaveRequest', 'leaveRequest')
-      .innerJoin('leaveRequest.user', 'user')
       .orderBy('leave.date', 'ASC')
       .getMany();
   }

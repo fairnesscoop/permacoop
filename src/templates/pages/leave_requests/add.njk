@@ -11,5 +11,23 @@
     <h1>{{ title }}</h1>
 
     {{ leave_request_form(null, types, attr={class: 'pc-card pc-box'}) }}
+
+    {% if errorModal %}
+    <dialog id="menstrual_quota_error">
+        <article>
+            <header>
+                <button aria-label="Close" onclick="this.closest('dialog').close()"></button>
+                <h3>{{ 'leave-requests-menstrual-quota-exceeded'|trans }}</h3>
+            </header>
+            <p>{{ 'leave-requests-menstrual-quota-exceeded-message'|trans }}</p>
+            <footer>
+                <button class="pc-btn" onclick="this.closest('dialog').close()">{{ 'common-ok'|trans }}</button>
+            </footer>
+        </article>
+    </dialog>
+    <script>
+        document.getElementById('menstrual_quota_error').showModal();
+    </script>
+    {% endif %}
 </div>
 {% endblock main %}

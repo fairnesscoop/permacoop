@@ -4,7 +4,8 @@ import { ILeaveRequestRepository } from 'src/Domain/HumanResource/Leave/Reposito
 import { MAX_ITEMS_PER_PAGE } from 'src/Application/Common/Pagination';
 import {
   LeaveRequest,
-  Status
+  Status,
+  Type
 } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity';
 import { User } from 'src/Domain/HumanResource/User/User.entity';
 import { IDateUtils } from 'src/Application/IDateUtils';
@@ -156,6 +157,43 @@ export class LeaveRequestRepository implements ILeaveRequestRepository {
       .addOrderBy('leaveRequest.startDate', 'ASC');
 
     return query.getMany();
+  }
+
+  public findMenstrualLeaveRequestsByUserAndMonth(
+    userId: string,
+    year: number,
+    month: number
+  ): Promise<LeaveRequest[]> {
+    const monthDate = new MonthDate(year, month);
+    const firstDay = monthDate.getFirstDay();
+    const lastDay = monthDate.getLastDay();
+
+    return this.repository
+      .createQueryBuilder('leaveRequest')
+      .innerJoin('leaveRequest.user', 'user')
+      .select([
+        'leaveRequest.id',
+        'leaveRequest.type',
+        'leaveRequest.startDate',
+        'leaveRequest.startsAllDay',
+        'leaveRequest.endDate',
+        'leaveRequest.endsAllDay'
+      ])
+      .where('user.id = :userId', { userId })
+      .andWhere('leaveRequest.type = :type', { type: Type.MENSTRUAL })
+      .andWhere(
+        '(leaveRequest.status = :accepted OR leaveRequest.status = :pending)',
+        {
+          accepted: Status.ACCEPTED,
+          pending: Status.PENDING
+        }
+      )
+      .andWhere('leaveRequest.startDate <= :lastDay')
+      .setParameter('lastDay', lastDay)
+      .andWhere('leaveRequest.endDate >= :firstDay')
+      .setParameter('firstDay', firstDay)
+      .addOrderBy('leaveRequest.startDate', 'ASC')
+      .getMany();
   }
 
   public getPendingCount(): Promise<number> {

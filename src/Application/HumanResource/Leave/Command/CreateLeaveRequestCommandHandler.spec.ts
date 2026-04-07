@@ -15,15 +15,19 @@ import { CommandBusAdapter } from 'src/Infrastructure/Adapter/CommandBusAdapter'
 import { FluentTranslatorAdapter } from 'src/Infrastructure/Adapter/FluentTranslatorAdapter';
 import { ConfigService } from '@nestjs/config';
 import { DateUtilsAdapter } from 'src/Infrastructure/Adapter/DateUtilsAdapter';
+import { EventBusAdapter } from 'src/Infrastructure/Adapter/EventBusAdapter';
+import { IsMenstrualLeaveMonthlyQuotaExceeded } from 'src/Domain/HumanResource/Leave/Specification/IsMenstrualLeaveMonthlyQuotaExceeded';
 
 describe('CreateLeaveRequestCommandHandler', () => {
   let leaveRequestRepository: LeaveRequestRepository;
   let doesLeaveRequestExistForPeriod: DoesLeaveRequestExistForPeriod;
   let doesLeaveExistForPeriod: DoesLeaveExistForPeriod;
   let commandBusAdapter: CommandBusAdapter;
+  let eventBusAdapter: EventBusAdapter;
   let fluentTranslatorAdapter: FluentTranslatorAdapter;
   let configService: ConfigService;
   let dateUtilsAdapter: DateUtilsAdapter;
+  let isMenstrualLeaveMonthlyQuotaExceeded: IsMenstrualLeaveMonthlyQuotaExceeded;
   let handler: CreateLeaveRequestCommandHandler;
 
   const user = mock(User);
@@ -42,15 +46,21 @@ describe('CreateLeaveRequestCommandHandler', () => {
     doesLeaveRequestExistForPeriod = mock(DoesLeaveRequestExistForPeriod);
     doesLeaveExistForPeriod = mock(DoesLeaveExistForPeriod);
     commandBusAdapter = mock(CommandBusAdapter);
+    eventBusAdapter = mock(EventBusAdapter);
     fluentTranslatorAdapter = mock(FluentTranslatorAdapter);
     configService = mock(ConfigService);
     dateUtilsAdapter = mock(DateUtilsAdapter);
+    isMenstrualLeaveMonthlyQuotaExceeded = mock(
+      IsMenstrualLeaveMonthlyQuotaExceeded
+    );
 
     handler = new CreateLeaveRequestCommandHandler(
       instance(leaveRequestRepository),
       instance(commandBusAdapter),
+      instance(eventBusAdapter),
       instance(doesLeaveRequestExistForPeriod),
       instance(doesLeaveExistForPeriod),
+      instance(isMenstrualLeaveMonthlyQuotaExceeded),
       instance(fluentTranslatorAdapter),
       instance(configService),
       instance(dateUtilsAdapter)

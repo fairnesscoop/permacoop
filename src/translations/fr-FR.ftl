@@ -134,6 +134,8 @@ leaves-type-value = {$type ->
     [illimited] Congé illimité
     [postponedWorkedFreeDay] Congé jour férié glissant
     [relocation] Congé déménagement
+    [menstrual] Congé menstruel
+    [generic] Congé
     *[other] Autre
 }
 leaves-type-value-plural = {$type ->
@@ -144,6 +146,8 @@ leaves-type-value-plural = {$type ->
     [illimited] Congés illimités
     [postponedWorkedFreeDay] Congés jours fériés glissants
     [relocation] Congés déménagement
+    [menstrual] Congés menstruels
+    [generic] Congés
     *[other] Autre
 }
 leaves-startDate = Du
@@ -222,6 +226,7 @@ payroll-elements-medicalLeaves = Congés maladie
 payroll-elements-specialLeaves = Congés exceptionnels
 payroll-elements-postponedWorkedFreeDayLeaves = Congés jours fériés glissants
 payroll-elements-relocationLeaves = Congés déménagement
+payroll-elements-menstrualLeaves = Congés menstruels
 payroll-elements-download = Télécharger
 payroll-elements-filename = Fairness - Éléments de paie - {$date}.csv
 payroll-elements-wiki = Voir le Wiki
@@ -275,3 +280,8 @@ users-leavingDate = Date de sortie
 clipboard-copy = Copier dans le presse papier
 
 theme-toggle = Alterner le thème
+
+common-ok = OK
+
+leave-requests-menstrual-quota-exceeded = Attention, vous dépassez le quota de congé menstruel
+leave-requests-menstrual-quota-exceeded-message = Votre action engendre un dépassement de quota. Le maximum autorisé par mois est de 2 jours. Veuillez vérifier vos jours pris ce mois-ci.

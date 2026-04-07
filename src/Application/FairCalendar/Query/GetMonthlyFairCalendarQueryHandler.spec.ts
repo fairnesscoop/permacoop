@@ -45,11 +45,17 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
 
     const leave = mock(Leave);
     when(leave.getType()).thenReturn('paid');
+    when(
+      leave.getTypeForViewer('00bef1e1-cb52-4914-8887-568b17d99964')
+    ).thenReturn('leave_paid');
     when(leave.getDate()).thenReturn('2019-12-13');
     when(leave.getTime()).thenReturn(420);
 
     const leave2 = mock(Leave);
     when(leave2.getType()).thenReturn('special');
+    when(
+      leave2.getTypeForViewer('00bef1e1-cb52-4914-8887-568b17d99964')
+    ).thenReturn('leave_special');
     when(leave2.getDate()).thenReturn('2019-12-14');
     when(leave2.getTime()).thenReturn(300);
 
@@ -94,6 +100,7 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
       await queryHandler.execute(
         new GetMonthlyFairCalendarQuery(
           new Date('2019-12-12T17:43:14.299Z'),
+          '00bef1e1-cb52-4914-8887-568b17d99964',
           '00bef1e1-cb52-4914-8887-568b17d99964'
         )
       )
@@ -116,8 +123,8 @@ describe('GetMonthlyFairCalendarQueryHandler', () => {
         null,
         null
       ),
-      new FairCalendarView('paid', 420, '2019-12-13'),
-      new FairCalendarView('special', 300, '2019-12-14'),
+      new FairCalendarView('leave_paid', 420, '2019-12-13'),
+      new FairCalendarView('leave_special', 300, '2019-12-14'),
       new FairCalendarView('holiday', 420, '2019-12-25')
     ]);
     verify(

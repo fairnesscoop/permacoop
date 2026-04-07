@@ -23,6 +23,7 @@ import { LeaveRequest } from 'src/Domain/HumanResource/Leave/LeaveRequest.entity
 import { LeaveRequestRepository } from './Leave/Repository/LeaveRequestRepository';
 import { CreateLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/CreateLeaveRequestCommandHandler';
 import { DoesLeaveRequestExistForPeriod } from 'src/Domain/HumanResource/Leave/Specification/DoesLeaveRequestExistForPeriod';
+import { IsMenstrualLeaveMonthlyQuotaExceeded } from 'src/Domain/HumanResource/Leave/Specification/IsMenstrualLeaveMonthlyQuotaExceeded';
 import { RefuseLeaveRequestCommandHandler } from 'src/Application/HumanResource/Leave/Command/RefuseLeaveRequestCommandHandler';
 import { CanLeaveRequestBeModerated } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeModerated';
 import { CanLeaveRequestBeCancelled } from 'src/Domain/HumanResource/Leave/Specification/CanLeaveRequestBeCancelled';
@@ -167,6 +168,7 @@ import { TemplatesModule } from '../Templates/templates.module';
     GetUsersElementsQueryHandler,
     CreateLeaveRequestCommandHandler,
     DoesLeaveRequestExistForPeriod,
+    IsMenstrualLeaveMonthlyQuotaExceeded,
     RefuseLeaveRequestCommandHandler,
     CanLeaveRequestBeModerated,
     CanLeaveRequestBeCancelled,

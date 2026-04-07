@@ -40,11 +40,12 @@ export class GetLeaveRequestsQueryHandler {
 
     for (const leaveRequest of leaveRequests) {
       const leaveUser = leaveRequest.getUser();
+      const leaveType = this.getMaskedLeaveType(leaveRequest, currentUserId);
 
       leaveRequestViews.push(
         new LeaveRequestView(
           leaveRequest.getId(),
-          leaveRequest.getType(),
+          leaveType,
           leaveRequest.getStatus(),
           leaveRequest.getStartDate(),
           leaveRequest.getEndDate(),
@@ -69,5 +70,18 @@ export class GetLeaveRequestsQueryHandler {
     }
 
     return new Pagination<LeaveRequestView>(leaveRequestViews, total);
+  }
+
+  private getMaskedLeaveType(leaveRequest: any, viewerId: string): any {
+    const actualType = leaveRequest.getType();
+    const ownerId = leaveRequest.getUserId();
+
+    // Menstrual leave is private: only the owner can see the true type
+    if (actualType === 'menstrual' && viewerId !== ownerId) {
+      // Return paid leave to others
+      return 'paid';
+    }
+
+    return actualType;
   }
 }

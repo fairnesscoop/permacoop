@@ -24,7 +24,7 @@ export class GetMonthlyFairCalendarQueryHandler {
   public async execute(
     query: GetMonthlyFairCalendarQuery
   ): Promise<FairCalendarView[]> {
-    const { date, userId } = query;
+    const { date, userId, viewerId } = query;
     const formatedDate = this.dateUtils.format(date, 'y-MM-dd');
 
     const [events, leaves] = await Promise.all([
@@ -34,7 +34,7 @@ export class GetMonthlyFairCalendarQueryHandler {
 
     return [
       ...this.buildEvents(events),
-      ...this.buildLeaves(leaves),
+      ...this.buildLeaves(leaves, viewerId),
       ...this.buildWorkedFreeDays(date)
     ];
   }
@@ -62,12 +62,16 @@ export class GetMonthlyFairCalendarQueryHandler {
     return result;
   }
 
-  private buildLeaves(leaves: Leave[]): FairCalendarView[] {
+  private buildLeaves(leaves: Leave[], viewerId: string): FairCalendarView[] {
     const result: FairCalendarView[] = [];
 
     for (const leave of leaves) {
       result.push(
-        new FairCalendarView(leave.getType(), leave.getTime(), leave.getDate())
+        new FairCalendarView(
+          leave.getTypeForViewer(viewerId),
+          leave.getTime(),
+          leave.getDate()
+        )
       );
     }
 

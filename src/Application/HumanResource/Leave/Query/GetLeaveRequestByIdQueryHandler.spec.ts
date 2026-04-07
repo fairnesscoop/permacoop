@@ -70,6 +70,7 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
     const leave = mock(LeaveRequest);
     when(leave.getId()).thenReturn('204522d3-f077-4d21-b3ee-6e0d742fca44');
     when(leave.getType()).thenReturn(Type.PAID);
+    when(leave.getUserId()).thenReturn('54bb15ad-56da-45f8-b594-3ca43f13d4c0');
     when(leave.getStatus()).thenReturn(Status.ACCEPTED);
     when(leave.getStartDate()).thenReturn('2020-05-05');
     when(leave.isStartsAllDay()).thenReturn(false);
@@ -165,6 +166,7 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
     const leave = mock(LeaveRequest);
     when(leave.getId()).thenReturn('a3753b9c-b711-4e0e-a535-e473161bd612');
     when(leave.getType()).thenReturn(Type.PAID);
+    when(leave.getUserId()).thenReturn('2402455a-4dc1-47c9-89a4-f9b859f02f5c');
     when(leave.getStatus()).thenReturn(Status.ACCEPTED);
     when(leave.getStartDate()).thenReturn('2020-05-05');
     when(leave.isStartsAllDay()).thenReturn(false);
@@ -201,6 +203,74 @@ describe('GetLeaveRequestByIdQueryHandler', () => {
     ).once();
     verify(
       leaveRequestRepository.findOneById('a3753b9c-b711-4e0e-a535-e473161bd612')
+    ).once();
+  });
+
+  it('testMenstrualLeaveIsMaskedForOtherUsers', async () => {
+    const ownerId = '54bb15ad-56da-45f8-b594-3ca43f13d4c0';
+    const viewerId = '2402455a-4dc1-47c9-89a4-f9b859f02f5c';
+
+    const expectedResult = new LeaveRequestDetailView(
+      '204522d3-f077-4d21-b3ee-6e0d742fca44',
+      Type.PAID, // Menstrual leave masked as paid for other user
+      Status.ACCEPTED,
+      '2020-05-05',
+      false,
+      '2020-05-15',
+      true,
+      7.5,
+      false,
+      'Personal',
+      new UserSummaryView(ownerId, 'Alan', 'TURING'),
+      null,
+      null,
+      null
+    );
+
+    const owner = mock(User);
+    when(owner.getId()).thenReturn(ownerId);
+    when(owner.getFirstName()).thenReturn('Alan');
+    when(owner.getLastName()).thenReturn('TURING');
+
+    const viewer = mock(User);
+    when(viewer.getId()).thenReturn(viewerId);
+
+    const menstrualLeave = mock(LeaveRequest);
+    when(menstrualLeave.getId()).thenReturn('204522d3-f077-4d21-b3ee-6e0d742fca44');
+    when(menstrualLeave.getType()).thenReturn(Type.MENSTRUAL);
+    when(menstrualLeave.getUserId()).thenReturn(ownerId);
+    when(menstrualLeave.getStatus()).thenReturn(Status.ACCEPTED);
+    when(menstrualLeave.getStartDate()).thenReturn('2020-05-05');
+    when(menstrualLeave.isStartsAllDay()).thenReturn(false);
+    when(menstrualLeave.getEndDate()).thenReturn('2020-05-15');
+    when(menstrualLeave.isEndsAllDay()).thenReturn(true);
+    when(menstrualLeave.getComment()).thenReturn('Personal');
+    when(menstrualLeave.getUser()).thenReturn(instance(owner));
+    when(menstrualLeave.getModerator()).thenReturn(null);
+
+    when(
+      canLeaveRequestBeCancelled.isSatisfiedBy(instance(viewer), instance(menstrualLeave))
+    ).thenReturn(false);
+
+    when(
+      leaveRequestRepository.findOneById('204522d3-f077-4d21-b3ee-6e0d742fca44')
+    ).thenResolve(instance(menstrualLeave));
+
+    when(
+      dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', true)
+    ).thenReturn(7.5);
+
+    expect(
+      await queryHandler.execute(
+        new GetLeaveRequestByIdQuery(
+          '204522d3-f077-4d21-b3ee-6e0d742fca44',
+          instance(viewer)
+        )
+      )
+    ).toMatchObject(expectedResult);
+
+    verify(
+      dateUtils.getLeaveDuration('2020-05-05', false, '2020-05-15', true)
     ).once();
   });
 });
