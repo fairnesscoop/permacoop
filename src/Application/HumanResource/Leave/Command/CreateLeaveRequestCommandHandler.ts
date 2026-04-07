@@ -106,6 +106,8 @@ export class CreateLeaveRequestCommandHandler {
       leaveRequest.autoAccept(this.dateUtils.getCurrentDateToISOString());
       await this.leaveRequestRepository.save(leaveRequest);
       this.eventBus.publish(new AcceptedLeaveRequestEvent(leaveRequest));
+
+      return leaveRequest.getId();
     }
 
     this.commandBus.execute(
