@@ -25,7 +25,7 @@ describe('GetUsersQueryHandler', () => {
     when(user2.getRole()).thenReturn(UserRole.COOPERATOR);
     when(user2.isAdministrativeEditable()).thenReturn(true);
 
-    when(userRepository.findUsers(true, false)).thenResolve([
+    when(userRepository.findUsers(true)).thenResolve([
       instance(user1),
       instance(user2)
     ]);
@@ -38,6 +38,7 @@ describe('GetUsersQueryHandler', () => {
         'MARCHOIS',
         'mathieu@fairness.coop',
         UserRole.COOPERATOR,
+        true,
         true
       ),
       new UserView(
@@ -46,40 +47,55 @@ describe('GetUsersQueryHandler', () => {
         'MARCHOIS',
         'helene@fairness.coop',
         UserRole.COOPERATOR,
-        true
+        true,
+        false
       )
     ];
 
-    expect(await handler.execute(new GetUsersQuery(true, false))).toMatchObject(
+    expect(await handler.execute(new GetUsersQuery(true))).toMatchObject(
       expectedResult
     );
-    verify(userRepository.findUsers(true, false)).once();
+    verify(userRepository.findUsers(true)).once();
   });
 
   it('testGetEmptyUsers', async () => {
     const userRepository = mock(UserRepository);
 
-    when(userRepository.findUsers(false, false)).thenResolve([]);
+    when(userRepository.findUsers(false)).thenResolve([]);
 
     const handler = new GetUsersQueryHandler(instance(userRepository));
 
     expect(
-      await handler.execute(new GetUsersQuery(false, false))
+      await handler.execute(new GetUsersQuery(false))
     ).toMatchObject([]);
-    verify(userRepository.findUsers(false, false)).once();
+    verify(userRepository.findUsers(false)).once();
   });
 
   it('testGetActiveUsers', async () => {
     const userRepository = mock(UserRepository);
 
-    when(userRepository.findUsers(true, true)).thenResolve([]);
+    when(userRepository.findUsers(true)).thenResolve([]);
 
     const handler = new GetUsersQueryHandler(instance(userRepository));
     const expectedResult = [];
 
-    expect(await handler.execute(new GetUsersQuery(true, true))).toMatchObject(
+    expect(await handler.execute(new GetUsersQuery(true))).toMatchObject(
       expectedResult
     );
-    verify(userRepository.findUsers(true, true)).once();
+    verify(userRepository.findUsers(true)).once();
+  });
+
+  it('testGetInactiveUsers', async () => {
+    const userRepository = mock(UserRepository);
+
+    when(userRepository.findUsers(true)).thenResolve([]);
+
+    const handler = new GetUsersQueryHandler(instance(userRepository));
+    const expectedResult = [];
+
+    expect(
+      await handler.execute(new GetUsersQuery(true))
+    ).toMatchObject(expectedResult);
+    verify(userRepository.findUsers(true)).once();
   });
 });

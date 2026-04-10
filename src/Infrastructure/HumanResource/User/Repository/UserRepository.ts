@@ -57,7 +57,6 @@ export class UserRepository implements IUserRepository {
 
   public findUsers(
     withAccountant: boolean,
-    noLeavingDate: boolean = false
   ): Promise<User[]> {
     const query = this.repository
       .createQueryBuilder('user')
@@ -66,17 +65,15 @@ export class UserRepository implements IUserRepository {
         'user.firstName',
         'user.lastName',
         'user.email',
-        'user.role'
+        'user.role',
+        'userAdministrative'
       ])
+      .innerJoin('user.userAdministrative', 'userAdministrative')
       .orderBy('user.lastName', 'ASC')
       .addOrderBy('user.firstName', 'ASC');
 
     if (false === withAccountant) {
       query.andWhere('user.role <> :role', { role: UserRole.ACCOUNTANT });
-    }
-    if (noLeavingDate) {
-      query.innerJoin('user.userAdministrative', 'userAdministrative');
-      query.andWhere('userAdministrative.leavingDate IS NULL');
     }
 
     return query.getMany();

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UserView } from 'src/Application/HumanResource/User/View/UserView';
 import { RouteNameResolver } from 'src/Infrastructure/Common/ExtendedRouting/RouteNameResolver';
 import { RowFactory } from 'src/Infrastructure/Tables/RowFactory';
-import { Table } from 'src/Infrastructure/Tables';
+import { ICell, Row, Table } from 'src/Infrastructure/Tables';
 
 @Injectable()
 export class UserTableFactory {
@@ -11,20 +11,20 @@ export class UserTableFactory {
     private readonly rowFactory: RowFactory
   ) {}
 
-  public create(users: UserView[]): Table {
+  public create(users: UserView[]): Table[] {
     const columns = [
-      'users-firstName',
       'users-lastName',
+      'users-firstName',
       'users-email',
       'users-role',
       'common-actions'
     ];
 
-    const rows = users.map(user =>
-      this.rowFactory
+    const rows = users.reduce((carry, user) => {
+      const row = this.rowFactory
         .createBuilder()
-        .value(user.firstName)
         .value(user.lastName)
+        .value(user.firstName)
         .value(user.email)
         .trans('users-role-value', { role: user.role })
         .actions({
@@ -34,9 +34,17 @@ export class UserTableFactory {
             })
           }
         })
-        .build()
-    );
+        .build();
 
-    return new Table(columns, rows);
+      if (user.isActive) {
+        carry[0].push(row);
+      } else {
+        carry[1].push(row);
+      }
+
+      return carry;
+    }, [[], []] as Array<Row[]>);
+
+    return [new Table(columns, rows[0]), new Table(columns, rows[1])];
   }
 }

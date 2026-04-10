@@ -23,6 +23,7 @@ describe('User.entity', () => {
     expect(user.getPassword()).toBe('hashPassword');
     expect(user.getApiToken()).toBe('hashToken');
     expect(user.getRole()).toBe(UserRole.COOPERATOR);
+    expect(user.isActive()).toBe(true);
     expect(user.getUserAdministrative()).toBe(instance(admin));
     expect(user.isAdministrativeEditable()).toBe(true);
   });

@@ -12,14 +12,8 @@ export class GetUsersQueryHandler {
   ) {}
 
   public async execute(query: GetUsersQuery): Promise<UserView[]> {
-    let noLeavingDate = false;
-    if (query.activeOnly) {
-      noLeavingDate = true;
-    }
-
     const users = await this.userRepository.findUsers(
       query.withAccountant,
-      noLeavingDate
     );
     const userViews: UserView[] = [];
 
@@ -31,7 +25,8 @@ export class GetUsersQueryHandler {
           user.getLastName(),
           user.getEmail(),
           user.getRole(),
-          user.isAdministrativeEditable()
+          user.isAdministrativeEditable(),
+          user.isActive(),
         )
       );
     }

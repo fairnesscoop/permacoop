@@ -99,6 +99,10 @@ export class User {
     return this.role !== UserRole.ACCOUNTANT;
   }
 
+  public isActive(): boolean {
+    return this.userAdministrative.getLeavingDate() === null;
+  }
+
   public getFullName(): string {
     return `${this.firstName} ${this.lastName}`;
   }

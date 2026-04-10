@@ -35,7 +35,7 @@ export class GetMealTicketsPerMonthQueryHandler {
 
     const { date } = query;
     const [users, mealTicketRemovals] = await Promise.all([
-      this.userRepository.findUsers(false, true),
+      this.userRepository.findUsers(false, true, false),
       this.mealTicketRemovalRepository.findByMonth(date)
     ]);
 

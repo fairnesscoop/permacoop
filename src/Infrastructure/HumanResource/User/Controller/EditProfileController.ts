@@ -39,7 +39,7 @@ export class EditProfileController {
       user.getLastName(),
       user.getEmail(),
       user.getRole(),
-      false
+      false,
     );
 
     return { user: me };
