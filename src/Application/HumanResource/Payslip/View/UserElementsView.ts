@@ -12,6 +12,7 @@ export class UserElementsView {
     public readonly workingTime: string,
     public readonly transportFee: number,
     public readonly sustainableMobilityFee: number,
+    public readonly sportsPassFee: number,
     public readonly mealTickets: number,
     public readonly healthInsurance: boolean,
     public readonly paidLeaves: UserLeavesView,
